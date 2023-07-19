@@ -1,11 +1,25 @@
-const fnfttypes = require('./ts/flux/indexer/fnft/query.ts');
+import * as fnfttypes from './ts/flux/fnft/v1beta1/query';
+import { grpc } from "@improbable-eng/grpc-web";
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
-async function loadProtoFile() {
+const main = async () => {
+  const host = 'http://localhost:9091';
+  const cc = new fnfttypes.GrpcWebImpl(host, {
+    transport: NodeHttpTransport(),
+  })
+  const client = new fnfttypes.QueryClientImpl(cc)
+
+  const req: fnfttypes.QueryNFTRequest = {
+    classId: "series",
+    id: "0",
+  };
+
   try {
-    console.log(fnfttypes)
-  } catch (error) {
-    console.error("Failed to load protobuf file:", error);
+    const res = await client.NFT(req)
+    console.log(res)
+  } catch(err) {
+    console.log(err)
   }
 }
 
-loadProtoFile();
+main()

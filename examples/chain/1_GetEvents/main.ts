@@ -1,4 +1,4 @@
-import * as fnfttypes from './ts/flux/fnft/v1beta1/query';
+import * as fnfttypes from '../../../chain/flux/fnft/v1beta1/query';
 import { grpc } from "@improbable-eng/grpc-web";
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 

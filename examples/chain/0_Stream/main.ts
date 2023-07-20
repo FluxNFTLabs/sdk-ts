@@ -1,22 +1,24 @@
-import * as fnfttypes from '../../../chain/flux/stream/v1beta1/query';
-import { grpc } from "@improbable-eng/grpc-web";
+import * as streamtypes from '../../../chain/flux/stream/v1beta1/query';
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
 const main = async () => {
   const host = 'http://localhost:9091';
-  const cc = new fnfttypes.GrpcWebImpl(host, {
+  const cc = new streamtypes.GrpcWebImpl(host, {
     transport: NodeHttpTransport(),
   })
-  const client = new fnfttypes.QueryClientImpl(cc)
+  const client = new streamtypes.ChainStreamClientImpl(cc)
 
-  const req: fnfttypes.QueryNFTRequest = {
-    classId: "series",
-    id: "0",
+  const req: streamtypes.EventsRequest = {
+    height: "1",
+    modules: ["fnft"],
+    tmQueries: ["block", "block_results"]
   };
 
   try {
-    const res = await client.NFT(req)
-    console.log(res)
+    const obs = await client.StreamEvents(req)
+    obs.subscribe(res => {
+      console.log(res)
+    })
   } catch(err) {
     console.log(err)
   }

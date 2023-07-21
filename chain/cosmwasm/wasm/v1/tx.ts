@@ -317,6 +317,40 @@ export interface MsgStoreAndInstantiateContractResponse {
   data: Uint8Array;
 }
 
+/**
+ * MsgAddCodeUploadParamsAddresses is the
+ * MsgAddCodeUploadParamsAddresses request type.
+ */
+export interface MsgAddCodeUploadParamsAddresses {
+  /** Authority is the address of the governance account. */
+  authority: string;
+  addresses: string[];
+}
+
+/**
+ * MsgAddCodeUploadParamsAddressesResponse defines the response
+ * structure for executing a MsgAddCodeUploadParamsAddresses message.
+ */
+export interface MsgAddCodeUploadParamsAddressesResponse {
+}
+
+/**
+ * MsgRemoveCodeUploadParamsAddresses is the
+ * MsgRemoveCodeUploadParamsAddresses request type.
+ */
+export interface MsgRemoveCodeUploadParamsAddresses {
+  /** Authority is the address of the governance account. */
+  authority: string;
+  addresses: string[];
+}
+
+/**
+ * MsgRemoveCodeUploadParamsAddressesResponse defines the response
+ * structure for executing a MsgRemoveCodeUploadParamsAddresses message.
+ */
+export interface MsgRemoveCodeUploadParamsAddressesResponse {
+}
+
 function createBaseMsgStoreCode(): MsgStoreCode {
   return { sender: "", wasmByteCode: new Uint8Array(0), instantiatePermission: undefined };
 }
@@ -2497,6 +2531,244 @@ export const MsgStoreAndInstantiateContractResponse = {
   },
 };
 
+function createBaseMsgAddCodeUploadParamsAddresses(): MsgAddCodeUploadParamsAddresses {
+  return { authority: "", addresses: [] };
+}
+
+export const MsgAddCodeUploadParamsAddresses = {
+  encode(message: MsgAddCodeUploadParamsAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    for (const v of message.addresses) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddCodeUploadParamsAddresses {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddCodeUploadParamsAddresses();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authority = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.addresses.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgAddCodeUploadParamsAddresses {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : [],
+    };
+  },
+
+  toJSON(message: MsgAddCodeUploadParamsAddresses): unknown {
+    const obj: any = {};
+    if (message.authority !== "") {
+      obj.authority = message.authority;
+    }
+    if (message.addresses?.length) {
+      obj.addresses = message.addresses;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgAddCodeUploadParamsAddresses>): MsgAddCodeUploadParamsAddresses {
+    return MsgAddCodeUploadParamsAddresses.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgAddCodeUploadParamsAddresses>): MsgAddCodeUploadParamsAddresses {
+    const message = createBaseMsgAddCodeUploadParamsAddresses();
+    message.authority = object.authority ?? "";
+    message.addresses = object.addresses?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseMsgAddCodeUploadParamsAddressesResponse(): MsgAddCodeUploadParamsAddressesResponse {
+  return {};
+}
+
+export const MsgAddCodeUploadParamsAddressesResponse = {
+  encode(_: MsgAddCodeUploadParamsAddressesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddCodeUploadParamsAddressesResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddCodeUploadParamsAddressesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgAddCodeUploadParamsAddressesResponse {
+    return {};
+  },
+
+  toJSON(_: MsgAddCodeUploadParamsAddressesResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgAddCodeUploadParamsAddressesResponse>): MsgAddCodeUploadParamsAddressesResponse {
+    return MsgAddCodeUploadParamsAddressesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgAddCodeUploadParamsAddressesResponse>): MsgAddCodeUploadParamsAddressesResponse {
+    const message = createBaseMsgAddCodeUploadParamsAddressesResponse();
+    return message;
+  },
+};
+
+function createBaseMsgRemoveCodeUploadParamsAddresses(): MsgRemoveCodeUploadParamsAddresses {
+  return { authority: "", addresses: [] };
+}
+
+export const MsgRemoveCodeUploadParamsAddresses = {
+  encode(message: MsgRemoveCodeUploadParamsAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    for (const v of message.addresses) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveCodeUploadParamsAddresses {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveCodeUploadParamsAddresses();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authority = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.addresses.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRemoveCodeUploadParamsAddresses {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : [],
+    };
+  },
+
+  toJSON(message: MsgRemoveCodeUploadParamsAddresses): unknown {
+    const obj: any = {};
+    if (message.authority !== "") {
+      obj.authority = message.authority;
+    }
+    if (message.addresses?.length) {
+      obj.addresses = message.addresses;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgRemoveCodeUploadParamsAddresses>): MsgRemoveCodeUploadParamsAddresses {
+    return MsgRemoveCodeUploadParamsAddresses.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgRemoveCodeUploadParamsAddresses>): MsgRemoveCodeUploadParamsAddresses {
+    const message = createBaseMsgRemoveCodeUploadParamsAddresses();
+    message.authority = object.authority ?? "";
+    message.addresses = object.addresses?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseMsgRemoveCodeUploadParamsAddressesResponse(): MsgRemoveCodeUploadParamsAddressesResponse {
+  return {};
+}
+
+export const MsgRemoveCodeUploadParamsAddressesResponse = {
+  encode(_: MsgRemoveCodeUploadParamsAddressesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveCodeUploadParamsAddressesResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveCodeUploadParamsAddressesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRemoveCodeUploadParamsAddressesResponse {
+    return {};
+  },
+
+  toJSON(_: MsgRemoveCodeUploadParamsAddressesResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgRemoveCodeUploadParamsAddressesResponse>): MsgRemoveCodeUploadParamsAddressesResponse {
+    return MsgRemoveCodeUploadParamsAddressesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgRemoveCodeUploadParamsAddressesResponse>): MsgRemoveCodeUploadParamsAddressesResponse {
+    const message = createBaseMsgRemoveCodeUploadParamsAddressesResponse();
+    return message;
+  },
+};
+
 /** Msg defines the wasm Msg service. */
 export interface Msg {
   /** StoreCode to submit Wasm code to the system */
@@ -2574,6 +2846,24 @@ export interface Msg {
     request: DeepPartial<MsgStoreAndInstantiateContract>,
     metadata?: grpc.Metadata,
   ): Promise<MsgStoreAndInstantiateContractResponse>;
+  /**
+   * RemoveCodeUploadParamsAddresses defines a governance operation for
+   * removing addresses from code upload params.
+   * The authority is defined in the keeper.
+   */
+  RemoveCodeUploadParamsAddresses(
+    request: DeepPartial<MsgRemoveCodeUploadParamsAddresses>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgRemoveCodeUploadParamsAddressesResponse>;
+  /**
+   * AddCodeUploadParamsAddresses defines a governance operation for
+   * adding addresses to code upload params.
+   * The authority is defined in the keeper.
+   */
+  AddCodeUploadParamsAddresses(
+    request: DeepPartial<MsgAddCodeUploadParamsAddresses>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgAddCodeUploadParamsAddressesResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -2594,6 +2884,8 @@ export class MsgClientImpl implements Msg {
     this.PinCodes = this.PinCodes.bind(this);
     this.UnpinCodes = this.UnpinCodes.bind(this);
     this.StoreAndInstantiateContract = this.StoreAndInstantiateContract.bind(this);
+    this.RemoveCodeUploadParamsAddresses = this.RemoveCodeUploadParamsAddresses.bind(this);
+    this.AddCodeUploadParamsAddresses = this.AddCodeUploadParamsAddresses.bind(this);
   }
 
   StoreCode(request: DeepPartial<MsgStoreCode>, metadata?: grpc.Metadata): Promise<MsgStoreCodeResponse> {
@@ -2666,6 +2958,28 @@ export class MsgClientImpl implements Msg {
     return this.rpc.unary(
       MsgStoreAndInstantiateContractDesc,
       MsgStoreAndInstantiateContract.fromPartial(request),
+      metadata,
+    );
+  }
+
+  RemoveCodeUploadParamsAddresses(
+    request: DeepPartial<MsgRemoveCodeUploadParamsAddresses>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgRemoveCodeUploadParamsAddressesResponse> {
+    return this.rpc.unary(
+      MsgRemoveCodeUploadParamsAddressesDesc,
+      MsgRemoveCodeUploadParamsAddresses.fromPartial(request),
+      metadata,
+    );
+  }
+
+  AddCodeUploadParamsAddresses(
+    request: DeepPartial<MsgAddCodeUploadParamsAddresses>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgAddCodeUploadParamsAddressesResponse> {
+    return this.rpc.unary(
+      MsgAddCodeUploadParamsAddressesDesc,
+      MsgAddCodeUploadParamsAddresses.fromPartial(request),
       metadata,
     );
   }
@@ -2962,6 +3276,52 @@ export const MsgStoreAndInstantiateContractDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = MsgStoreAndInstantiateContractResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgRemoveCodeUploadParamsAddressesDesc: UnaryMethodDefinitionish = {
+  methodName: "RemoveCodeUploadParamsAddresses",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgRemoveCodeUploadParamsAddresses.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgRemoveCodeUploadParamsAddressesResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgAddCodeUploadParamsAddressesDesc: UnaryMethodDefinitionish = {
+  methodName: "AddCodeUploadParamsAddresses",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgAddCodeUploadParamsAddresses.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgAddCodeUploadParamsAddressesResponse.decode(data);
       return {
         ...value,
         toObject() {

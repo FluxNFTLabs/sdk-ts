@@ -309,12 +309,12 @@ export const Events = {
   },
 };
 
-export interface ChainStream {
+export interface Query {
   GetEvents(request: DeepPartial<EventsRequest>, metadata?: grpc.Metadata): Promise<EventsResponse>;
   StreamEvents(request: DeepPartial<EventsRequest>, metadata?: grpc.Metadata): Observable<EventsResponse>;
 }
 
-export class ChainStreamClientImpl implements ChainStream {
+export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
@@ -324,19 +324,19 @@ export class ChainStreamClientImpl implements ChainStream {
   }
 
   GetEvents(request: DeepPartial<EventsRequest>, metadata?: grpc.Metadata): Promise<EventsResponse> {
-    return this.rpc.unary(ChainStreamGetEventsDesc, EventsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(QueryGetEventsDesc, EventsRequest.fromPartial(request), metadata);
   }
 
   StreamEvents(request: DeepPartial<EventsRequest>, metadata?: grpc.Metadata): Observable<EventsResponse> {
-    return this.rpc.invoke(ChainStreamStreamEventsDesc, EventsRequest.fromPartial(request), metadata);
+    return this.rpc.invoke(QueryStreamEventsDesc, EventsRequest.fromPartial(request), metadata);
   }
 }
 
-export const ChainStreamDesc = { serviceName: "flux.stream.v1beta1.ChainStream" };
+export const QueryDesc = { serviceName: "flux.stream.v1beta1.Query" };
 
-export const ChainStreamGetEventsDesc: UnaryMethodDefinitionish = {
+export const QueryGetEventsDesc: UnaryMethodDefinitionish = {
   methodName: "GetEvents",
-  service: ChainStreamDesc,
+  service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -357,9 +357,9 @@ export const ChainStreamGetEventsDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const ChainStreamStreamEventsDesc: UnaryMethodDefinitionish = {
+export const QueryStreamEventsDesc: UnaryMethodDefinitionish = {
   methodName: "StreamEvents",
-  service: ChainStreamDesc,
+  service: QueryDesc,
   requestStream: false,
   responseStream: true,
   requestType: {

@@ -21,7 +21,6 @@ export interface ProviderBlockResponse {
 
 export interface ProviderEventsRequest {
   height: string;
-  time: string;
   modules: string[];
 }
 
@@ -211,16 +210,13 @@ export const ProviderBlockResponse = {
 };
 
 function createBaseProviderEventsRequest(): ProviderEventsRequest {
-  return { height: "0", time: "0", modules: [] };
+  return { height: "0", modules: [] };
 }
 
 export const ProviderEventsRequest = {
   encode(message: ProviderEventsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
-    }
-    if (message.time !== "0") {
-      writer.uint32(16).uint64(message.time);
     }
     for (const v of message.modules) {
       writer.uint32(26).string(v!);
@@ -242,13 +238,6 @@ export const ProviderEventsRequest = {
 
           message.height = longToString(reader.uint64() as Long);
           continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.time = longToString(reader.uint64() as Long);
-          continue;
         case 3:
           if (tag !== 26) {
             break;
@@ -268,7 +257,6 @@ export const ProviderEventsRequest = {
   fromJSON(object: any): ProviderEventsRequest {
     return {
       height: isSet(object.height) ? String(object.height) : "0",
-      time: isSet(object.time) ? String(object.time) : "0",
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
     };
   },
@@ -277,9 +265,6 @@ export const ProviderEventsRequest = {
     const obj: any = {};
     if (message.height !== "0") {
       obj.height = message.height;
-    }
-    if (message.time !== "0") {
-      obj.time = message.time;
     }
     if (message.modules?.length) {
       obj.modules = message.modules;
@@ -294,7 +279,6 @@ export const ProviderEventsRequest = {
   fromPartial(object: DeepPartial<ProviderEventsRequest>): ProviderEventsRequest {
     const message = createBaseProviderEventsRequest();
     message.height = object.height ?? "0";
-    message.time = object.time ?? "0";
     message.modules = object.modules?.map((e) => e) || [];
     return message;
   },

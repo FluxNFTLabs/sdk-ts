@@ -6,7 +6,7 @@ const main = async () => {
   const cc = new streamtypes.GrpcWebImpl(host, {
     transport: NodeHttpTransport(),
   })
-  const client = new streamtypes.ChainStreamClientImpl(cc)
+  const client = new streamtypes.QueryClientImpl(cc)
 
   const req: streamtypes.EventsRequest = {
     height: "1",

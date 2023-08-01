@@ -14,6 +14,8 @@ function createBaseTxs(): Txs {
 }
 
 export const Txs = {
+  $type: "tendermint.mempool.Txs" as const,
+
   encode(message: Txs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       writer.uint32(10).bytes(v!);
@@ -59,7 +61,6 @@ export const Txs = {
   create(base?: DeepPartial<Txs>): Txs {
     return Txs.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Txs>): Txs {
     const message = createBaseTxs();
     message.txs = object.txs?.map((e) => e) || [];
@@ -72,6 +73,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.mempool.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txs !== undefined) {
       Txs.encode(message.txs, writer.uint32(10).fork()).ldelim();
@@ -117,7 +120,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.txs = (object.txs !== undefined && object.txs !== null) ? Txs.fromPartial(object.txs) : undefined;

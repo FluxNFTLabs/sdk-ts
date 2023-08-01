@@ -271,6 +271,8 @@ function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
 }
 
 export const QueryValidatorsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorsRequest" as const,
+
   encode(message: QueryValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
@@ -332,7 +334,6 @@ export const QueryValidatorsRequest = {
   create(base?: DeepPartial<QueryValidatorsRequest>): QueryValidatorsRequest {
     return QueryValidatorsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorsRequest>): QueryValidatorsRequest {
     const message = createBaseQueryValidatorsRequest();
     message.status = object.status ?? "";
@@ -348,6 +349,8 @@ function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
 }
 
 export const QueryValidatorsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorsResponse" as const,
+
   encode(message: QueryValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -409,7 +412,6 @@ export const QueryValidatorsResponse = {
   create(base?: DeepPartial<QueryValidatorsResponse>): QueryValidatorsResponse {
     return QueryValidatorsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorsResponse>): QueryValidatorsResponse {
     const message = createBaseQueryValidatorsResponse();
     message.validators = object.validators?.map((e) => Validator.fromPartial(e)) || [];
@@ -425,6 +427,8 @@ function createBaseQueryValidatorRequest(): QueryValidatorRequest {
 }
 
 export const QueryValidatorRequest = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorRequest" as const,
+
   encode(message: QueryValidatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -470,7 +474,6 @@ export const QueryValidatorRequest = {
   create(base?: DeepPartial<QueryValidatorRequest>): QueryValidatorRequest {
     return QueryValidatorRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorRequest>): QueryValidatorRequest {
     const message = createBaseQueryValidatorRequest();
     message.validatorAddr = object.validatorAddr ?? "";
@@ -483,6 +486,8 @@ function createBaseQueryValidatorResponse(): QueryValidatorResponse {
 }
 
 export const QueryValidatorResponse = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorResponse" as const,
+
   encode(message: QueryValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
@@ -528,7 +533,6 @@ export const QueryValidatorResponse = {
   create(base?: DeepPartial<QueryValidatorResponse>): QueryValidatorResponse {
     return QueryValidatorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorResponse>): QueryValidatorResponse {
     const message = createBaseQueryValidatorResponse();
     message.validator = (object.validator !== undefined && object.validator !== null)
@@ -543,6 +547,8 @@ function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegations
 }
 
 export const QueryValidatorDelegationsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorDelegationsRequest" as const,
+
   encode(message: QueryValidatorDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -604,7 +610,6 @@ export const QueryValidatorDelegationsRequest = {
   create(base?: DeepPartial<QueryValidatorDelegationsRequest>): QueryValidatorDelegationsRequest {
     return QueryValidatorDelegationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorDelegationsRequest>): QueryValidatorDelegationsRequest {
     const message = createBaseQueryValidatorDelegationsRequest();
     message.validatorAddr = object.validatorAddr ?? "";
@@ -620,6 +625,8 @@ function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegation
 }
 
 export const QueryValidatorDelegationsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorDelegationsResponse" as const,
+
   encode(message: QueryValidatorDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -683,7 +690,6 @@ export const QueryValidatorDelegationsResponse = {
   create(base?: DeepPartial<QueryValidatorDelegationsResponse>): QueryValidatorDelegationsResponse {
     return QueryValidatorDelegationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorDelegationsResponse>): QueryValidatorDelegationsResponse {
     const message = createBaseQueryValidatorDelegationsResponse();
     message.delegationResponses = object.delegationResponses?.map((e) => DelegationResponse.fromPartial(e)) || [];
@@ -699,6 +705,8 @@ function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUn
 }
 
 export const QueryValidatorUnbondingDelegationsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest" as const,
+
   encode(message: QueryValidatorUnbondingDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -760,7 +768,6 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   create(base?: DeepPartial<QueryValidatorUnbondingDelegationsRequest>): QueryValidatorUnbondingDelegationsRequest {
     return QueryValidatorUnbondingDelegationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryValidatorUnbondingDelegationsRequest>,
   ): QueryValidatorUnbondingDelegationsRequest {
@@ -778,6 +785,8 @@ function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorU
 }
 
 export const QueryValidatorUnbondingDelegationsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse" as const,
+
   encode(message: QueryValidatorUnbondingDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -841,7 +850,6 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   create(base?: DeepPartial<QueryValidatorUnbondingDelegationsResponse>): QueryValidatorUnbondingDelegationsResponse {
     return QueryValidatorUnbondingDelegationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryValidatorUnbondingDelegationsResponse>,
   ): QueryValidatorUnbondingDelegationsResponse {
@@ -859,6 +867,8 @@ function createBaseQueryDelegationRequest(): QueryDelegationRequest {
 }
 
 export const QueryDelegationRequest = {
+  $type: "cosmos.staking.v1beta1.QueryDelegationRequest" as const,
+
   encode(message: QueryDelegationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -920,7 +930,6 @@ export const QueryDelegationRequest = {
   create(base?: DeepPartial<QueryDelegationRequest>): QueryDelegationRequest {
     return QueryDelegationRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationRequest>): QueryDelegationRequest {
     const message = createBaseQueryDelegationRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -934,6 +943,8 @@ function createBaseQueryDelegationResponse(): QueryDelegationResponse {
 }
 
 export const QueryDelegationResponse = {
+  $type: "cosmos.staking.v1beta1.QueryDelegationResponse" as const,
+
   encode(message: QueryDelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegationResponse !== undefined) {
       DelegationResponse.encode(message.delegationResponse, writer.uint32(10).fork()).ldelim();
@@ -983,7 +994,6 @@ export const QueryDelegationResponse = {
   create(base?: DeepPartial<QueryDelegationResponse>): QueryDelegationResponse {
     return QueryDelegationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationResponse>): QueryDelegationResponse {
     const message = createBaseQueryDelegationResponse();
     message.delegationResponse = (object.delegationResponse !== undefined && object.delegationResponse !== null)
@@ -998,6 +1008,8 @@ function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRe
 }
 
 export const QueryUnbondingDelegationRequest = {
+  $type: "cosmos.staking.v1beta1.QueryUnbondingDelegationRequest" as const,
+
   encode(message: QueryUnbondingDelegationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1059,7 +1071,6 @@ export const QueryUnbondingDelegationRequest = {
   create(base?: DeepPartial<QueryUnbondingDelegationRequest>): QueryUnbondingDelegationRequest {
     return QueryUnbondingDelegationRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnbondingDelegationRequest>): QueryUnbondingDelegationRequest {
     const message = createBaseQueryUnbondingDelegationRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -1073,6 +1084,8 @@ function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationR
 }
 
 export const QueryUnbondingDelegationResponse = {
+  $type: "cosmos.staking.v1beta1.QueryUnbondingDelegationResponse" as const,
+
   encode(message: QueryUnbondingDelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbond !== undefined) {
       UnbondingDelegation.encode(message.unbond, writer.uint32(10).fork()).ldelim();
@@ -1118,7 +1131,6 @@ export const QueryUnbondingDelegationResponse = {
   create(base?: DeepPartial<QueryUnbondingDelegationResponse>): QueryUnbondingDelegationResponse {
     return QueryUnbondingDelegationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnbondingDelegationResponse>): QueryUnbondingDelegationResponse {
     const message = createBaseQueryUnbondingDelegationResponse();
     message.unbond = (object.unbond !== undefined && object.unbond !== null)
@@ -1133,6 +1145,8 @@ function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegations
 }
 
 export const QueryDelegatorDelegationsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest" as const,
+
   encode(message: QueryDelegatorDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1194,7 +1208,6 @@ export const QueryDelegatorDelegationsRequest = {
   create(base?: DeepPartial<QueryDelegatorDelegationsRequest>): QueryDelegatorDelegationsRequest {
     return QueryDelegatorDelegationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorDelegationsRequest>): QueryDelegatorDelegationsRequest {
     const message = createBaseQueryDelegatorDelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -1210,6 +1223,8 @@ function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegation
 }
 
 export const QueryDelegatorDelegationsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorDelegationsResponse" as const,
+
   encode(message: QueryDelegatorDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1273,7 +1288,6 @@ export const QueryDelegatorDelegationsResponse = {
   create(base?: DeepPartial<QueryDelegatorDelegationsResponse>): QueryDelegatorDelegationsResponse {
     return QueryDelegatorDelegationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorDelegationsResponse>): QueryDelegatorDelegationsResponse {
     const message = createBaseQueryDelegatorDelegationsResponse();
     message.delegationResponses = object.delegationResponses?.map((e) => DelegationResponse.fromPartial(e)) || [];
@@ -1289,6 +1303,8 @@ function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUn
 }
 
 export const QueryDelegatorUnbondingDelegationsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest" as const,
+
   encode(message: QueryDelegatorUnbondingDelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1350,7 +1366,6 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   create(base?: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>): QueryDelegatorUnbondingDelegationsRequest {
     return QueryDelegatorUnbondingDelegationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>,
   ): QueryDelegatorUnbondingDelegationsRequest {
@@ -1368,6 +1383,8 @@ function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorU
 }
 
 export const QueryDelegatorUnbondingDelegationsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse" as const,
+
   encode(message: QueryDelegatorUnbondingDelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1431,7 +1448,6 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   create(base?: DeepPartial<QueryDelegatorUnbondingDelegationsResponse>): QueryDelegatorUnbondingDelegationsResponse {
     return QueryDelegatorUnbondingDelegationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryDelegatorUnbondingDelegationsResponse>,
   ): QueryDelegatorUnbondingDelegationsResponse {
@@ -1449,6 +1465,8 @@ function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
 }
 
 export const QueryRedelegationsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryRedelegationsRequest" as const,
+
   encode(message: QueryRedelegationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1538,7 +1556,6 @@ export const QueryRedelegationsRequest = {
   create(base?: DeepPartial<QueryRedelegationsRequest>): QueryRedelegationsRequest {
     return QueryRedelegationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryRedelegationsRequest>): QueryRedelegationsRequest {
     const message = createBaseQueryRedelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -1556,6 +1573,8 @@ function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
 }
 
 export const QueryRedelegationsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryRedelegationsResponse" as const,
+
   encode(message: QueryRedelegationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.redelegationResponses) {
       RedelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1619,7 +1638,6 @@ export const QueryRedelegationsResponse = {
   create(base?: DeepPartial<QueryRedelegationsResponse>): QueryRedelegationsResponse {
     return QueryRedelegationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryRedelegationsResponse>): QueryRedelegationsResponse {
     const message = createBaseQueryRedelegationsResponse();
     message.redelegationResponses = object.redelegationResponses?.map((e) => RedelegationResponse.fromPartial(e)) || [];
@@ -1635,6 +1653,8 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 
 export const QueryDelegatorValidatorsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorValidatorsRequest" as const,
+
   encode(message: QueryDelegatorValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1696,7 +1716,6 @@ export const QueryDelegatorValidatorsRequest = {
   create(base?: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     return QueryDelegatorValidatorsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     const message = createBaseQueryDelegatorValidatorsRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -1712,6 +1731,8 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse" as const,
+
   encode(message: QueryDelegatorValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1773,7 +1794,6 @@ export const QueryDelegatorValidatorsResponse = {
   create(base?: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
     return QueryDelegatorValidatorsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators = object.validators?.map((e) => Validator.fromPartial(e)) || [];
@@ -1789,6 +1809,8 @@ function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequ
 }
 
 export const QueryDelegatorValidatorRequest = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorValidatorRequest" as const,
+
   encode(message: QueryDelegatorValidatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddr !== "") {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1850,7 +1872,6 @@ export const QueryDelegatorValidatorRequest = {
   create(base?: DeepPartial<QueryDelegatorValidatorRequest>): QueryDelegatorValidatorRequest {
     return QueryDelegatorValidatorRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorRequest>): QueryDelegatorValidatorRequest {
     const message = createBaseQueryDelegatorValidatorRequest();
     message.delegatorAddr = object.delegatorAddr ?? "";
@@ -1864,6 +1885,8 @@ function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorRes
 }
 
 export const QueryDelegatorValidatorResponse = {
+  $type: "cosmos.staking.v1beta1.QueryDelegatorValidatorResponse" as const,
+
   encode(message: QueryDelegatorValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
@@ -1909,7 +1932,6 @@ export const QueryDelegatorValidatorResponse = {
   create(base?: DeepPartial<QueryDelegatorValidatorResponse>): QueryDelegatorValidatorResponse {
     return QueryDelegatorValidatorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorResponse>): QueryDelegatorValidatorResponse {
     const message = createBaseQueryDelegatorValidatorResponse();
     message.validator = (object.validator !== undefined && object.validator !== null)
@@ -1924,6 +1946,8 @@ function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
 }
 
 export const QueryHistoricalInfoRequest = {
+  $type: "cosmos.staking.v1beta1.QueryHistoricalInfoRequest" as const,
+
   encode(message: QueryHistoricalInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -1969,7 +1993,6 @@ export const QueryHistoricalInfoRequest = {
   create(base?: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     return QueryHistoricalInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = createBaseQueryHistoricalInfoRequest();
     message.height = object.height ?? "0";
@@ -1982,6 +2005,8 @@ function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
 }
 
 export const QueryHistoricalInfoResponse = {
+  $type: "cosmos.staking.v1beta1.QueryHistoricalInfoResponse" as const,
+
   encode(message: QueryHistoricalInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hist !== undefined) {
       HistoricalInfo.encode(message.hist, writer.uint32(10).fork()).ldelim();
@@ -2027,7 +2052,6 @@ export const QueryHistoricalInfoResponse = {
   create(base?: DeepPartial<QueryHistoricalInfoResponse>): QueryHistoricalInfoResponse {
     return QueryHistoricalInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryHistoricalInfoResponse>): QueryHistoricalInfoResponse {
     const message = createBaseQueryHistoricalInfoResponse();
     message.hist = (object.hist !== undefined && object.hist !== null)
@@ -2042,6 +2066,8 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 }
 
 export const QueryPoolRequest = {
+  $type: "cosmos.staking.v1beta1.QueryPoolRequest" as const,
+
   encode(_: QueryPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2074,7 +2100,6 @@ export const QueryPoolRequest = {
   create(base?: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     return QueryPoolRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
     return message;
@@ -2086,6 +2111,8 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 }
 
 export const QueryPoolResponse = {
+  $type: "cosmos.staking.v1beta1.QueryPoolResponse" as const,
+
   encode(message: QueryPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pool !== undefined) {
       Pool.encode(message.pool, writer.uint32(10).fork()).ldelim();
@@ -2131,7 +2158,6 @@ export const QueryPoolResponse = {
   create(base?: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     return QueryPoolResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
     message.pool = (object.pool !== undefined && object.pool !== null) ? Pool.fromPartial(object.pool) : undefined;
@@ -2144,6 +2170,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.staking.v1beta1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2176,7 +2204,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -2188,6 +2215,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.staking.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -2233,7 +2262,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)

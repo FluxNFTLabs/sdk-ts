@@ -114,6 +114,8 @@ function createBaseTimestamp(): Timestamp {
 }
 
 export const Timestamp = {
+  $type: "google.protobuf.Timestamp" as const,
+
   encode(message: Timestamp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.seconds !== "0") {
       writer.uint32(8).int64(message.seconds);
@@ -175,7 +177,6 @@ export const Timestamp = {
   create(base?: DeepPartial<Timestamp>): Timestamp {
     return Timestamp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
     message.seconds = object.seconds ?? "0";

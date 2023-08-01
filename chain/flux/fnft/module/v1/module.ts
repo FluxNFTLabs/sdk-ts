@@ -10,6 +10,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "flux.fnft.module.v1.Module" as const,
+
   encode(_: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -42,7 +44,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;

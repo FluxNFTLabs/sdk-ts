@@ -36,6 +36,8 @@ function createBaseProviderBlockRequest(): ProviderBlockRequest {
 }
 
 export const ProviderBlockRequest = {
+  $type: "flux.indexer.provider.ProviderBlockRequest" as const,
+
   encode(message: ProviderBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -81,7 +83,6 @@ export const ProviderBlockRequest = {
   create(base?: DeepPartial<ProviderBlockRequest>): ProviderBlockRequest {
     return ProviderBlockRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProviderBlockRequest>): ProviderBlockRequest {
     const message = createBaseProviderBlockRequest();
     message.height = object.height ?? "0";
@@ -94,6 +95,8 @@ function createBaseProviderBlockResponse(): ProviderBlockResponse {
 }
 
 export const ProviderBlockResponse = {
+  $type: "flux.indexer.provider.ProviderBlockResponse" as const,
+
   encode(message: ProviderBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -197,7 +200,6 @@ export const ProviderBlockResponse = {
   create(base?: DeepPartial<ProviderBlockResponse>): ProviderBlockResponse {
     return ProviderBlockResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProviderBlockResponse>): ProviderBlockResponse {
     const message = createBaseProviderBlockResponse();
     message.height = object.height ?? "0";
@@ -214,6 +216,8 @@ function createBaseProviderEventsRequest(): ProviderEventsRequest {
 }
 
 export const ProviderEventsRequest = {
+  $type: "flux.indexer.provider.ProviderEventsRequest" as const,
+
   encode(message: ProviderEventsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -275,7 +279,6 @@ export const ProviderEventsRequest = {
   create(base?: DeepPartial<ProviderEventsRequest>): ProviderEventsRequest {
     return ProviderEventsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProviderEventsRequest>): ProviderEventsRequest {
     const message = createBaseProviderEventsRequest();
     message.height = object.height ?? "0";
@@ -289,6 +292,8 @@ function createBaseProviderEventsResponse(): ProviderEventsResponse {
 }
 
 export const ProviderEventsResponse = {
+  $type: "flux.indexer.provider.ProviderEventsResponse" as const,
+
   encode(message: ProviderEventsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -378,7 +383,6 @@ export const ProviderEventsResponse = {
   create(base?: DeepPartial<ProviderEventsResponse>): ProviderEventsResponse {
     return ProviderEventsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProviderEventsResponse>): ProviderEventsResponse {
     const message = createBaseProviderEventsResponse();
     message.height = object.height ?? "0";

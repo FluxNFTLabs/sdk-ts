@@ -20,6 +20,8 @@ function createBaseTxResponseGenericMessage(): TxResponseGenericMessage {
 }
 
 export const TxResponseGenericMessage = {
+  $type: "flux.types.v1beta1.TxResponseGenericMessage" as const,
+
   encode(message: TxResponseGenericMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== "") {
       writer.uint32(10).string(message.header);
@@ -81,7 +83,6 @@ export const TxResponseGenericMessage = {
   create(base?: DeepPartial<TxResponseGenericMessage>): TxResponseGenericMessage {
     return TxResponseGenericMessage.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxResponseGenericMessage>): TxResponseGenericMessage {
     const message = createBaseTxResponseGenericMessage();
     message.header = object.header ?? "";
@@ -95,6 +96,8 @@ function createBaseTxResponseData(): TxResponseData {
 }
 
 export const TxResponseData = {
+  $type: "flux.types.v1beta1.TxResponseData" as const,
+
   encode(message: TxResponseData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       TxResponseGenericMessage.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -144,7 +147,6 @@ export const TxResponseData = {
   create(base?: DeepPartial<TxResponseData>): TxResponseData {
     return TxResponseData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxResponseData>): TxResponseData {
     const message = createBaseTxResponseData();
     message.messages = object.messages?.map((e) => TxResponseGenericMessage.fromPartial(e)) || [];

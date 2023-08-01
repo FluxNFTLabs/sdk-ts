@@ -38,6 +38,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.gov.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.startingProposalId !== "0") {
       writer.uint32(8).uint64(message.startingProposalId);
@@ -169,7 +171,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.startingProposalId = object.startingProposalId ?? "0";

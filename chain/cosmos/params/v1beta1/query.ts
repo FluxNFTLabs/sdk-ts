@@ -53,6 +53,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.params.v1beta1.QueryParamsRequest" as const,
+
   encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
@@ -114,7 +116,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     message.subspace = object.subspace ?? "";
@@ -128,6 +129,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.params.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.param !== undefined) {
       ParamChange.encode(message.param, writer.uint32(10).fork()).ldelim();
@@ -173,7 +176,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.param = (object.param !== undefined && object.param !== null)
@@ -188,6 +190,8 @@ function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
 }
 
 export const QuerySubspacesRequest = {
+  $type: "cosmos.params.v1beta1.QuerySubspacesRequest" as const,
+
   encode(_: QuerySubspacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -220,7 +224,6 @@ export const QuerySubspacesRequest = {
   create(base?: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
     return QuerySubspacesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
     return message;
@@ -232,6 +235,8 @@ function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
 }
 
 export const QuerySubspacesResponse = {
+  $type: "cosmos.params.v1beta1.QuerySubspacesResponse" as const,
+
   encode(message: QuerySubspacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.subspaces) {
       Subspace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -279,7 +284,6 @@ export const QuerySubspacesResponse = {
   create(base?: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
     return QuerySubspacesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
     const message = createBaseQuerySubspacesResponse();
     message.subspaces = object.subspaces?.map((e) => Subspace.fromPartial(e)) || [];
@@ -292,6 +296,8 @@ function createBaseSubspace(): Subspace {
 }
 
 export const Subspace = {
+  $type: "cosmos.params.v1beta1.Subspace" as const,
+
   encode(message: Subspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
@@ -353,7 +359,6 @@ export const Subspace = {
   create(base?: DeepPartial<Subspace>): Subspace {
     return Subspace.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Subspace>): Subspace {
     const message = createBaseSubspace();
     message.subspace = object.subspace ?? "";

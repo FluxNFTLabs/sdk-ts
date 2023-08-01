@@ -114,6 +114,8 @@ function createBaseIdentifiedClientState(): IdentifiedClientState {
 }
 
 export const IdentifiedClientState = {
+  $type: "ibc.core.client.v1.IdentifiedClientState" as const,
+
   encode(message: IdentifiedClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -175,7 +177,6 @@ export const IdentifiedClientState = {
   create(base?: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     return IdentifiedClientState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
@@ -191,6 +192,8 @@ function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
 }
 
 export const ConsensusStateWithHeight = {
+  $type: "ibc.core.client.v1.ConsensusStateWithHeight" as const,
+
   encode(message: ConsensusStateWithHeight, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
@@ -252,7 +255,6 @@ export const ConsensusStateWithHeight = {
   create(base?: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
     message.height = (object.height !== undefined && object.height !== null)
@@ -270,6 +272,8 @@ function createBaseClientConsensusStates(): ClientConsensusStates {
 }
 
 export const ClientConsensusStates = {
+  $type: "ibc.core.client.v1.ClientConsensusStates" as const,
+
   encode(message: ClientConsensusStates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -333,7 +337,6 @@ export const ClientConsensusStates = {
   create(base?: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
     return ClientConsensusStates.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
     message.clientId = object.clientId ?? "";
@@ -347,6 +350,8 @@ function createBaseClientUpdateProposal(): ClientUpdateProposal {
 }
 
 export const ClientUpdateProposal = {
+  $type: "ibc.core.client.v1.ClientUpdateProposal" as const,
+
   encode(message: ClientUpdateProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -436,7 +441,6 @@ export const ClientUpdateProposal = {
   create(base?: DeepPartial<ClientUpdateProposal>): ClientUpdateProposal {
     return ClientUpdateProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientUpdateProposal>): ClientUpdateProposal {
     const message = createBaseClientUpdateProposal();
     message.title = object.title ?? "";
@@ -452,6 +456,8 @@ function createBaseUpgradeProposal(): UpgradeProposal {
 }
 
 export const UpgradeProposal = {
+  $type: "ibc.core.client.v1.UpgradeProposal" as const,
+
   encode(message: UpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -541,7 +547,6 @@ export const UpgradeProposal = {
   create(base?: DeepPartial<UpgradeProposal>): UpgradeProposal {
     return UpgradeProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpgradeProposal>): UpgradeProposal {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
@@ -559,6 +564,8 @@ function createBaseHeight(): Height {
 }
 
 export const Height = {
+  $type: "ibc.core.client.v1.Height" as const,
+
   encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.revisionNumber !== "0") {
       writer.uint32(8).uint64(message.revisionNumber);
@@ -620,7 +627,6 @@ export const Height = {
   create(base?: DeepPartial<Height>): Height {
     return Height.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
     message.revisionNumber = object.revisionNumber ?? "0";
@@ -634,6 +640,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "ibc.core.client.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowedClients) {
       writer.uint32(10).string(v!);
@@ -681,7 +689,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.allowedClients = object.allowedClients?.map((e) => e) || [];

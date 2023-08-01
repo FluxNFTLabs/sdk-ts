@@ -53,6 +53,8 @@ function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
 }
 
 export const QueryEvidenceRequest = {
+  $type: "cosmos.evidence.v1beta1.QueryEvidenceRequest" as const,
+
   encode(message: QueryEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidenceHash.length !== 0) {
       writer.uint32(10).bytes(message.evidenceHash);
@@ -114,7 +116,6 @@ export const QueryEvidenceRequest = {
   create(base?: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     return QueryEvidenceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array(0);
@@ -128,6 +129,8 @@ function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
 }
 
 export const QueryEvidenceResponse = {
+  $type: "cosmos.evidence.v1beta1.QueryEvidenceResponse" as const,
+
   encode(message: QueryEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.evidence !== undefined) {
       Any.encode(message.evidence, writer.uint32(10).fork()).ldelim();
@@ -173,7 +176,6 @@ export const QueryEvidenceResponse = {
   create(base?: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     return QueryEvidenceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
     message.evidence = (object.evidence !== undefined && object.evidence !== null)
@@ -188,6 +190,8 @@ function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
 }
 
 export const QueryAllEvidenceRequest = {
+  $type: "cosmos.evidence.v1beta1.QueryAllEvidenceRequest" as const,
+
   encode(message: QueryAllEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -233,7 +237,6 @@ export const QueryAllEvidenceRequest = {
   create(base?: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     return QueryAllEvidenceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -248,6 +251,8 @@ function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
 }
 
 export const QueryAllEvidenceResponse = {
+  $type: "cosmos.evidence.v1beta1.QueryAllEvidenceResponse" as const,
+
   encode(message: QueryAllEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.evidence) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -309,7 +314,6 @@ export const QueryAllEvidenceResponse = {
   create(base?: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     return QueryAllEvidenceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();
     message.evidence = object.evidence?.map((e) => Any.fromPartial(e)) || [];

@@ -19,6 +19,8 @@ function createBasePexRequest(): PexRequest {
 }
 
 export const PexRequest = {
+  $type: "tendermint.p2p.PexRequest" as const,
+
   encode(_: PexRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -51,7 +53,6 @@ export const PexRequest = {
   create(base?: DeepPartial<PexRequest>): PexRequest {
     return PexRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<PexRequest>): PexRequest {
     const message = createBasePexRequest();
     return message;
@@ -63,6 +64,8 @@ function createBasePexAddrs(): PexAddrs {
 }
 
 export const PexAddrs = {
+  $type: "tendermint.p2p.PexAddrs" as const,
+
   encode(message: PexAddrs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.addrs) {
       NetAddress.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -108,7 +111,6 @@ export const PexAddrs = {
   create(base?: DeepPartial<PexAddrs>): PexAddrs {
     return PexAddrs.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PexAddrs>): PexAddrs {
     const message = createBasePexAddrs();
     message.addrs = object.addrs?.map((e) => NetAddress.fromPartial(e)) || [];
@@ -121,6 +123,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.p2p.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pexRequest !== undefined) {
       PexRequest.encode(message.pexRequest, writer.uint32(10).fork()).ldelim();
@@ -182,7 +186,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.pexRequest = (object.pexRequest !== undefined && object.pexRequest !== null)

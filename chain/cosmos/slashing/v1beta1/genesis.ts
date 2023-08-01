@@ -53,6 +53,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.slashing.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -132,7 +134,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = (object.params !== undefined && object.params !== null)
@@ -149,6 +150,8 @@ function createBaseSigningInfo(): SigningInfo {
 }
 
 export const SigningInfo = {
+  $type: "cosmos.slashing.v1beta1.SigningInfo" as const,
+
   encode(message: SigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -212,7 +215,6 @@ export const SigningInfo = {
   create(base?: DeepPartial<SigningInfo>): SigningInfo {
     return SigningInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
@@ -228,6 +230,8 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
 }
 
 export const ValidatorMissedBlocks = {
+  $type: "cosmos.slashing.v1beta1.ValidatorMissedBlocks" as const,
+
   encode(message: ValidatorMissedBlocks, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -291,7 +295,6 @@ export const ValidatorMissedBlocks = {
   create(base?: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
     return ValidatorMissedBlocks.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
     const message = createBaseValidatorMissedBlocks();
     message.address = object.address ?? "";
@@ -305,6 +308,8 @@ function createBaseMissedBlock(): MissedBlock {
 }
 
 export const MissedBlock = {
+  $type: "cosmos.slashing.v1beta1.MissedBlock" as const,
+
   encode(message: MissedBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== "0") {
       writer.uint32(8).int64(message.index);
@@ -366,7 +371,6 @@ export const MissedBlock = {
   create(base?: DeepPartial<MissedBlock>): MissedBlock {
     return MissedBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
     message.index = object.index ?? "0";

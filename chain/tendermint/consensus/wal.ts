@@ -46,6 +46,8 @@ function createBaseMsgInfo(): MsgInfo {
 }
 
 export const MsgInfo = {
+  $type: "tendermint.consensus.MsgInfo" as const,
+
   encode(message: MsgInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msg !== undefined) {
       Message.encode(message.msg, writer.uint32(10).fork()).ldelim();
@@ -107,7 +109,6 @@ export const MsgInfo = {
   create(base?: DeepPartial<MsgInfo>): MsgInfo {
     return MsgInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgInfo>): MsgInfo {
     const message = createBaseMsgInfo();
     message.msg = (object.msg !== undefined && object.msg !== null) ? Message.fromPartial(object.msg) : undefined;
@@ -121,6 +122,8 @@ function createBaseTimeoutInfo(): TimeoutInfo {
 }
 
 export const TimeoutInfo = {
+  $type: "tendermint.consensus.TimeoutInfo" as const,
+
   encode(message: TimeoutInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(10).fork()).ldelim();
@@ -210,7 +213,6 @@ export const TimeoutInfo = {
   create(base?: DeepPartial<TimeoutInfo>): TimeoutInfo {
     return TimeoutInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TimeoutInfo>): TimeoutInfo {
     const message = createBaseTimeoutInfo();
     message.duration = (object.duration !== undefined && object.duration !== null)
@@ -228,6 +230,8 @@ function createBaseEndHeight(): EndHeight {
 }
 
 export const EndHeight = {
+  $type: "tendermint.consensus.EndHeight" as const,
+
   encode(message: EndHeight, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -273,7 +277,6 @@ export const EndHeight = {
   create(base?: DeepPartial<EndHeight>): EndHeight {
     return EndHeight.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EndHeight>): EndHeight {
     const message = createBaseEndHeight();
     message.height = object.height ?? "0";
@@ -286,6 +289,8 @@ function createBaseWALMessage(): WALMessage {
 }
 
 export const WALMessage = {
+  $type: "tendermint.consensus.WALMessage" as const,
+
   encode(message: WALMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.eventDataRoundState !== undefined) {
       EventDataRoundState.encode(message.eventDataRoundState, writer.uint32(10).fork()).ldelim();
@@ -377,7 +382,6 @@ export const WALMessage = {
   create(base?: DeepPartial<WALMessage>): WALMessage {
     return WALMessage.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<WALMessage>): WALMessage {
     const message = createBaseWALMessage();
     message.eventDataRoundState = (object.eventDataRoundState !== undefined && object.eventDataRoundState !== null)
@@ -401,6 +405,8 @@ function createBaseTimedWALMessage(): TimedWALMessage {
 }
 
 export const TimedWALMessage = {
+  $type: "tendermint.consensus.TimedWALMessage" as const,
+
   encode(message: TimedWALMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
@@ -462,7 +468,6 @@ export const TimedWALMessage = {
   create(base?: DeepPartial<TimedWALMessage>): TimedWALMessage {
     return TimedWALMessage.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TimedWALMessage>): TimedWALMessage {
     const message = createBaseTimedWALMessage();
     message.time = object.time ?? undefined;

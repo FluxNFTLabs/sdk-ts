@@ -32,6 +32,8 @@ function createBaseCapability(): Capability {
 }
 
 export const Capability = {
+  $type: "cosmos.capability.v1beta1.Capability" as const,
+
   encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== "0") {
       writer.uint32(8).uint64(message.index);
@@ -77,7 +79,6 @@ export const Capability = {
   create(base?: DeepPartial<Capability>): Capability {
     return Capability.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
     message.index = object.index ?? "0";
@@ -90,6 +91,8 @@ function createBaseOwner(): Owner {
 }
 
 export const Owner = {
+  $type: "cosmos.capability.v1beta1.Owner" as const,
+
   encode(message: Owner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.module !== "") {
       writer.uint32(10).string(message.module);
@@ -151,7 +154,6 @@ export const Owner = {
   create(base?: DeepPartial<Owner>): Owner {
     return Owner.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Owner>): Owner {
     const message = createBaseOwner();
     message.module = object.module ?? "";
@@ -165,6 +167,8 @@ function createBaseCapabilityOwners(): CapabilityOwners {
 }
 
 export const CapabilityOwners = {
+  $type: "cosmos.capability.v1beta1.CapabilityOwners" as const,
+
   encode(message: CapabilityOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -210,7 +214,6 @@ export const CapabilityOwners = {
   create(base?: DeepPartial<CapabilityOwners>): CapabilityOwners {
     return CapabilityOwners.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CapabilityOwners>): CapabilityOwners {
     const message = createBaseCapabilityOwners();
     message.owners = object.owners?.map((e) => Owner.fromPartial(e)) || [];

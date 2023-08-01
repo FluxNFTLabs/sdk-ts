@@ -38,6 +38,8 @@ function createBaseEventSend(): EventSend {
 }
 
 export const EventSend = {
+  $type: "cosmos.nft.v1beta1.EventSend" as const,
+
   encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -127,7 +129,6 @@ export const EventSend = {
   create(base?: DeepPartial<EventSend>): EventSend {
     return EventSend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventSend>): EventSend {
     const message = createBaseEventSend();
     message.classId = object.classId ?? "";
@@ -143,6 +144,8 @@ function createBaseEventMint(): EventMint {
 }
 
 export const EventMint = {
+  $type: "cosmos.nft.v1beta1.EventMint" as const,
+
   encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -218,7 +221,6 @@ export const EventMint = {
   create(base?: DeepPartial<EventMint>): EventMint {
     return EventMint.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
     message.classId = object.classId ?? "";
@@ -233,6 +235,8 @@ function createBaseEventBurn(): EventBurn {
 }
 
 export const EventBurn = {
+  $type: "cosmos.nft.v1beta1.EventBurn" as const,
+
   encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -308,7 +312,6 @@ export const EventBurn = {
   create(base?: DeepPartial<EventBurn>): EventBurn {
     return EventBurn.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventBurn>): EventBurn {
     const message = createBaseEventBurn();
     message.classId = object.classId ?? "";

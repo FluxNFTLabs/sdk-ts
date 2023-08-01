@@ -223,6 +223,8 @@ function createBaseMsgChannelOpenInit(): MsgChannelOpenInit {
 }
 
 export const MsgChannelOpenInit = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenInit" as const,
+
   encode(message: MsgChannelOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -298,7 +300,6 @@ export const MsgChannelOpenInit = {
   create(base?: DeepPartial<MsgChannelOpenInit>): MsgChannelOpenInit {
     return MsgChannelOpenInit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenInit>): MsgChannelOpenInit {
     const message = createBaseMsgChannelOpenInit();
     message.portId = object.portId ?? "";
@@ -315,6 +316,8 @@ function createBaseMsgChannelOpenInitResponse(): MsgChannelOpenInitResponse {
 }
 
 export const MsgChannelOpenInitResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenInitResponse" as const,
+
   encode(message: MsgChannelOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -376,7 +379,6 @@ export const MsgChannelOpenInitResponse = {
   create(base?: DeepPartial<MsgChannelOpenInitResponse>): MsgChannelOpenInitResponse {
     return MsgChannelOpenInitResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenInitResponse>): MsgChannelOpenInitResponse {
     const message = createBaseMsgChannelOpenInitResponse();
     message.channelId = object.channelId ?? "";
@@ -398,6 +400,8 @@ function createBaseMsgChannelOpenTry(): MsgChannelOpenTry {
 }
 
 export const MsgChannelOpenTry = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenTry" as const,
+
   encode(message: MsgChannelOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -529,7 +533,6 @@ export const MsgChannelOpenTry = {
   create(base?: DeepPartial<MsgChannelOpenTry>): MsgChannelOpenTry {
     return MsgChannelOpenTry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenTry>): MsgChannelOpenTry {
     const message = createBaseMsgChannelOpenTry();
     message.portId = object.portId ?? "";
@@ -552,6 +555,8 @@ function createBaseMsgChannelOpenTryResponse(): MsgChannelOpenTryResponse {
 }
 
 export const MsgChannelOpenTryResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenTryResponse" as const,
+
   encode(message: MsgChannelOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
@@ -613,7 +618,6 @@ export const MsgChannelOpenTryResponse = {
   create(base?: DeepPartial<MsgChannelOpenTryResponse>): MsgChannelOpenTryResponse {
     return MsgChannelOpenTryResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenTryResponse>): MsgChannelOpenTryResponse {
     const message = createBaseMsgChannelOpenTryResponse();
     message.version = object.version ?? "";
@@ -635,6 +639,8 @@ function createBaseMsgChannelOpenAck(): MsgChannelOpenAck {
 }
 
 export const MsgChannelOpenAck = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenAck" as const,
+
   encode(message: MsgChannelOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -766,7 +772,6 @@ export const MsgChannelOpenAck = {
   create(base?: DeepPartial<MsgChannelOpenAck>): MsgChannelOpenAck {
     return MsgChannelOpenAck.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenAck>): MsgChannelOpenAck {
     const message = createBaseMsgChannelOpenAck();
     message.portId = object.portId ?? "";
@@ -787,6 +792,8 @@ function createBaseMsgChannelOpenAckResponse(): MsgChannelOpenAckResponse {
 }
 
 export const MsgChannelOpenAckResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenAckResponse" as const,
+
   encode(_: MsgChannelOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -819,7 +826,6 @@ export const MsgChannelOpenAckResponse = {
   create(base?: DeepPartial<MsgChannelOpenAckResponse>): MsgChannelOpenAckResponse {
     return MsgChannelOpenAckResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenAckResponse>): MsgChannelOpenAckResponse {
     const message = createBaseMsgChannelOpenAckResponse();
     return message;
@@ -831,6 +837,8 @@ function createBaseMsgChannelOpenConfirm(): MsgChannelOpenConfirm {
 }
 
 export const MsgChannelOpenConfirm = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenConfirm" as const,
+
   encode(message: MsgChannelOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -934,7 +942,6 @@ export const MsgChannelOpenConfirm = {
   create(base?: DeepPartial<MsgChannelOpenConfirm>): MsgChannelOpenConfirm {
     return MsgChannelOpenConfirm.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelOpenConfirm>): MsgChannelOpenConfirm {
     const message = createBaseMsgChannelOpenConfirm();
     message.portId = object.portId ?? "";
@@ -953,6 +960,8 @@ function createBaseMsgChannelOpenConfirmResponse(): MsgChannelOpenConfirmRespons
 }
 
 export const MsgChannelOpenConfirmResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelOpenConfirmResponse" as const,
+
   encode(_: MsgChannelOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -985,7 +994,6 @@ export const MsgChannelOpenConfirmResponse = {
   create(base?: DeepPartial<MsgChannelOpenConfirmResponse>): MsgChannelOpenConfirmResponse {
     return MsgChannelOpenConfirmResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgChannelOpenConfirmResponse>): MsgChannelOpenConfirmResponse {
     const message = createBaseMsgChannelOpenConfirmResponse();
     return message;
@@ -997,6 +1005,8 @@ function createBaseMsgChannelCloseInit(): MsgChannelCloseInit {
 }
 
 export const MsgChannelCloseInit = {
+  $type: "ibc.core.channel.v1.MsgChannelCloseInit" as const,
+
   encode(message: MsgChannelCloseInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1072,7 +1082,6 @@ export const MsgChannelCloseInit = {
   create(base?: DeepPartial<MsgChannelCloseInit>): MsgChannelCloseInit {
     return MsgChannelCloseInit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelCloseInit>): MsgChannelCloseInit {
     const message = createBaseMsgChannelCloseInit();
     message.portId = object.portId ?? "";
@@ -1087,6 +1096,8 @@ function createBaseMsgChannelCloseInitResponse(): MsgChannelCloseInitResponse {
 }
 
 export const MsgChannelCloseInitResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelCloseInitResponse" as const,
+
   encode(_: MsgChannelCloseInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1119,7 +1130,6 @@ export const MsgChannelCloseInitResponse = {
   create(base?: DeepPartial<MsgChannelCloseInitResponse>): MsgChannelCloseInitResponse {
     return MsgChannelCloseInitResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgChannelCloseInitResponse>): MsgChannelCloseInitResponse {
     const message = createBaseMsgChannelCloseInitResponse();
     return message;
@@ -1131,6 +1141,8 @@ function createBaseMsgChannelCloseConfirm(): MsgChannelCloseConfirm {
 }
 
 export const MsgChannelCloseConfirm = {
+  $type: "ibc.core.channel.v1.MsgChannelCloseConfirm" as const,
+
   encode(message: MsgChannelCloseConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1234,7 +1246,6 @@ export const MsgChannelCloseConfirm = {
   create(base?: DeepPartial<MsgChannelCloseConfirm>): MsgChannelCloseConfirm {
     return MsgChannelCloseConfirm.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgChannelCloseConfirm>): MsgChannelCloseConfirm {
     const message = createBaseMsgChannelCloseConfirm();
     message.portId = object.portId ?? "";
@@ -1253,6 +1264,8 @@ function createBaseMsgChannelCloseConfirmResponse(): MsgChannelCloseConfirmRespo
 }
 
 export const MsgChannelCloseConfirmResponse = {
+  $type: "ibc.core.channel.v1.MsgChannelCloseConfirmResponse" as const,
+
   encode(_: MsgChannelCloseConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1285,7 +1298,6 @@ export const MsgChannelCloseConfirmResponse = {
   create(base?: DeepPartial<MsgChannelCloseConfirmResponse>): MsgChannelCloseConfirmResponse {
     return MsgChannelCloseConfirmResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgChannelCloseConfirmResponse>): MsgChannelCloseConfirmResponse {
     const message = createBaseMsgChannelCloseConfirmResponse();
     return message;
@@ -1297,6 +1309,8 @@ function createBaseMsgRecvPacket(): MsgRecvPacket {
 }
 
 export const MsgRecvPacket = {
+  $type: "ibc.core.channel.v1.MsgRecvPacket" as const,
+
   encode(message: MsgRecvPacket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -1386,7 +1400,6 @@ export const MsgRecvPacket = {
   create(base?: DeepPartial<MsgRecvPacket>): MsgRecvPacket {
     return MsgRecvPacket.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRecvPacket>): MsgRecvPacket {
     const message = createBaseMsgRecvPacket();
     message.packet = (object.packet !== undefined && object.packet !== null)
@@ -1406,6 +1419,8 @@ function createBaseMsgRecvPacketResponse(): MsgRecvPacketResponse {
 }
 
 export const MsgRecvPacketResponse = {
+  $type: "ibc.core.channel.v1.MsgRecvPacketResponse" as const,
+
   encode(message: MsgRecvPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -1451,7 +1466,6 @@ export const MsgRecvPacketResponse = {
   create(base?: DeepPartial<MsgRecvPacketResponse>): MsgRecvPacketResponse {
     return MsgRecvPacketResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRecvPacketResponse>): MsgRecvPacketResponse {
     const message = createBaseMsgRecvPacketResponse();
     message.result = object.result ?? 0;
@@ -1470,6 +1484,8 @@ function createBaseMsgTimeout(): MsgTimeout {
 }
 
 export const MsgTimeout = {
+  $type: "ibc.core.channel.v1.MsgTimeout" as const,
+
   encode(message: MsgTimeout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -1573,7 +1589,6 @@ export const MsgTimeout = {
   create(base?: DeepPartial<MsgTimeout>): MsgTimeout {
     return MsgTimeout.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTimeout>): MsgTimeout {
     const message = createBaseMsgTimeout();
     message.packet = (object.packet !== undefined && object.packet !== null)
@@ -1594,6 +1609,8 @@ function createBaseMsgTimeoutResponse(): MsgTimeoutResponse {
 }
 
 export const MsgTimeoutResponse = {
+  $type: "ibc.core.channel.v1.MsgTimeoutResponse" as const,
+
   encode(message: MsgTimeoutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -1639,7 +1656,6 @@ export const MsgTimeoutResponse = {
   create(base?: DeepPartial<MsgTimeoutResponse>): MsgTimeoutResponse {
     return MsgTimeoutResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTimeoutResponse>): MsgTimeoutResponse {
     const message = createBaseMsgTimeoutResponse();
     message.result = object.result ?? 0;
@@ -1659,6 +1675,8 @@ function createBaseMsgTimeoutOnClose(): MsgTimeoutOnClose {
 }
 
 export const MsgTimeoutOnClose = {
+  $type: "ibc.core.channel.v1.MsgTimeoutOnClose" as const,
+
   encode(message: MsgTimeoutOnClose, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -1776,7 +1794,6 @@ export const MsgTimeoutOnClose = {
   create(base?: DeepPartial<MsgTimeoutOnClose>): MsgTimeoutOnClose {
     return MsgTimeoutOnClose.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTimeoutOnClose>): MsgTimeoutOnClose {
     const message = createBaseMsgTimeoutOnClose();
     message.packet = (object.packet !== undefined && object.packet !== null)
@@ -1798,6 +1815,8 @@ function createBaseMsgTimeoutOnCloseResponse(): MsgTimeoutOnCloseResponse {
 }
 
 export const MsgTimeoutOnCloseResponse = {
+  $type: "ibc.core.channel.v1.MsgTimeoutOnCloseResponse" as const,
+
   encode(message: MsgTimeoutOnCloseResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -1843,7 +1862,6 @@ export const MsgTimeoutOnCloseResponse = {
   create(base?: DeepPartial<MsgTimeoutOnCloseResponse>): MsgTimeoutOnCloseResponse {
     return MsgTimeoutOnCloseResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTimeoutOnCloseResponse>): MsgTimeoutOnCloseResponse {
     const message = createBaseMsgTimeoutOnCloseResponse();
     message.result = object.result ?? 0;
@@ -1862,6 +1880,8 @@ function createBaseMsgAcknowledgement(): MsgAcknowledgement {
 }
 
 export const MsgAcknowledgement = {
+  $type: "ibc.core.channel.v1.MsgAcknowledgement" as const,
+
   encode(message: MsgAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packet !== undefined) {
       Packet.encode(message.packet, writer.uint32(10).fork()).ldelim();
@@ -1965,7 +1985,6 @@ export const MsgAcknowledgement = {
   create(base?: DeepPartial<MsgAcknowledgement>): MsgAcknowledgement {
     return MsgAcknowledgement.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgAcknowledgement>): MsgAcknowledgement {
     const message = createBaseMsgAcknowledgement();
     message.packet = (object.packet !== undefined && object.packet !== null)
@@ -1986,6 +2005,8 @@ function createBaseMsgAcknowledgementResponse(): MsgAcknowledgementResponse {
 }
 
 export const MsgAcknowledgementResponse = {
+  $type: "ibc.core.channel.v1.MsgAcknowledgementResponse" as const,
+
   encode(message: MsgAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -2031,7 +2052,6 @@ export const MsgAcknowledgementResponse = {
   create(base?: DeepPartial<MsgAcknowledgementResponse>): MsgAcknowledgementResponse {
     return MsgAcknowledgementResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgAcknowledgementResponse>): MsgAcknowledgementResponse {
     const message = createBaseMsgAcknowledgementResponse();
     message.result = object.result ?? 0;

@@ -19,6 +19,8 @@ function createBaseQueryConfigRequest(): QueryConfigRequest {
 }
 
 export const QueryConfigRequest = {
+  $type: "cosmos.app.v1alpha1.QueryConfigRequest" as const,
+
   encode(_: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -51,7 +53,6 @@ export const QueryConfigRequest = {
   create(base?: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     return QueryConfigRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
@@ -63,6 +64,8 @@ function createBaseQueryConfigResponse(): QueryConfigResponse {
 }
 
 export const QueryConfigResponse = {
+  $type: "cosmos.app.v1alpha1.QueryConfigResponse" as const,
+
   encode(message: QueryConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();
@@ -108,7 +111,6 @@ export const QueryConfigResponse = {
   create(base?: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     return QueryConfigResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
     message.config = (object.config !== undefined && object.config !== null)

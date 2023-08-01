@@ -200,6 +200,8 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
 }
 
 export const QueryClientStateRequest = {
+  $type: "ibc.core.client.v1.QueryClientStateRequest" as const,
+
   encode(message: QueryClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -245,7 +247,6 @@ export const QueryClientStateRequest = {
   create(base?: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
     return QueryClientStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
     message.clientId = object.clientId ?? "";
@@ -258,6 +259,8 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
 }
 
 export const QueryClientStateResponse = {
+  $type: "ibc.core.client.v1.QueryClientStateResponse" as const,
+
   encode(message: QueryClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -333,7 +336,6 @@ export const QueryClientStateResponse = {
   create(base?: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
     return QueryClientStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
     message.clientState = (object.clientState !== undefined && object.clientState !== null)
@@ -352,6 +354,8 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
 }
 
 export const QueryClientStatesRequest = {
+  $type: "ibc.core.client.v1.QueryClientStatesRequest" as const,
+
   encode(message: QueryClientStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -397,7 +401,6 @@ export const QueryClientStatesRequest = {
   create(base?: DeepPartial<QueryClientStatesRequest>): QueryClientStatesRequest {
     return QueryClientStatesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStatesRequest>): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -412,6 +415,8 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
 }
 
 export const QueryClientStatesResponse = {
+  $type: "ibc.core.client.v1.QueryClientStatesResponse" as const,
+
   encode(message: QueryClientStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -475,7 +480,6 @@ export const QueryClientStatesResponse = {
   create(base?: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
     return QueryClientStatesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
     message.clientStates = object.clientStates?.map((e) => IdentifiedClientState.fromPartial(e)) || [];
@@ -491,6 +495,8 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
 }
 
 export const QueryConsensusStateRequest = {
+  $type: "ibc.core.client.v1.QueryConsensusStateRequest" as const,
+
   encode(message: QueryConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -580,7 +586,6 @@ export const QueryConsensusStateRequest = {
   create(base?: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     return QueryConsensusStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
@@ -596,6 +601,8 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
 }
 
 export const QueryConsensusStateResponse = {
+  $type: "ibc.core.client.v1.QueryConsensusStateResponse" as const,
+
   encode(message: QueryConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -671,7 +678,6 @@ export const QueryConsensusStateResponse = {
   create(base?: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     return QueryConsensusStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
     message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
@@ -690,6 +696,8 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
 }
 
 export const QueryConsensusStatesRequest = {
+  $type: "ibc.core.client.v1.QueryConsensusStatesRequest" as const,
+
   encode(message: QueryConsensusStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -751,7 +759,6 @@ export const QueryConsensusStatesRequest = {
   create(base?: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     return QueryConsensusStatesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
     message.clientId = object.clientId ?? "";
@@ -767,6 +774,8 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
 }
 
 export const QueryConsensusStatesResponse = {
+  $type: "ibc.core.client.v1.QueryConsensusStatesResponse" as const,
+
   encode(message: QueryConsensusStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -830,7 +839,6 @@ export const QueryConsensusStatesResponse = {
   create(base?: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     return QueryConsensusStatesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
     message.consensusStates = object.consensusStates?.map((e) => ConsensusStateWithHeight.fromPartial(e)) || [];
@@ -846,6 +854,8 @@ function createBaseQueryConsensusStateHeightsRequest(): QueryConsensusStateHeigh
 }
 
 export const QueryConsensusStateHeightsRequest = {
+  $type: "ibc.core.client.v1.QueryConsensusStateHeightsRequest" as const,
+
   encode(message: QueryConsensusStateHeightsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -907,7 +917,6 @@ export const QueryConsensusStateHeightsRequest = {
   create(base?: DeepPartial<QueryConsensusStateHeightsRequest>): QueryConsensusStateHeightsRequest {
     return QueryConsensusStateHeightsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStateHeightsRequest>): QueryConsensusStateHeightsRequest {
     const message = createBaseQueryConsensusStateHeightsRequest();
     message.clientId = object.clientId ?? "";
@@ -923,6 +932,8 @@ function createBaseQueryConsensusStateHeightsResponse(): QueryConsensusStateHeig
 }
 
 export const QueryConsensusStateHeightsResponse = {
+  $type: "ibc.core.client.v1.QueryConsensusStateHeightsResponse" as const,
+
   encode(message: QueryConsensusStateHeightsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.consensusStateHeights) {
       Height.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -986,7 +997,6 @@ export const QueryConsensusStateHeightsResponse = {
   create(base?: DeepPartial<QueryConsensusStateHeightsResponse>): QueryConsensusStateHeightsResponse {
     return QueryConsensusStateHeightsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConsensusStateHeightsResponse>): QueryConsensusStateHeightsResponse {
     const message = createBaseQueryConsensusStateHeightsResponse();
     message.consensusStateHeights = object.consensusStateHeights?.map((e) => Height.fromPartial(e)) || [];
@@ -1002,6 +1012,8 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
 }
 
 export const QueryClientStatusRequest = {
+  $type: "ibc.core.client.v1.QueryClientStatusRequest" as const,
+
   encode(message: QueryClientStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -1047,7 +1059,6 @@ export const QueryClientStatusRequest = {
   create(base?: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
     return QueryClientStatusRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
     message.clientId = object.clientId ?? "";
@@ -1060,6 +1071,8 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
 }
 
 export const QueryClientStatusResponse = {
+  $type: "ibc.core.client.v1.QueryClientStatusResponse" as const,
+
   encode(message: QueryClientStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
@@ -1105,7 +1118,6 @@ export const QueryClientStatusResponse = {
   create(base?: DeepPartial<QueryClientStatusResponse>): QueryClientStatusResponse {
     return QueryClientStatusResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientStatusResponse>): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
     message.status = object.status ?? "";
@@ -1118,6 +1130,8 @@ function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
 }
 
 export const QueryClientParamsRequest = {
+  $type: "ibc.core.client.v1.QueryClientParamsRequest" as const,
+
   encode(_: QueryClientParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1150,7 +1164,6 @@ export const QueryClientParamsRequest = {
   create(base?: DeepPartial<QueryClientParamsRequest>): QueryClientParamsRequest {
     return QueryClientParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryClientParamsRequest>): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
@@ -1162,6 +1175,8 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
 }
 
 export const QueryClientParamsResponse = {
+  $type: "ibc.core.client.v1.QueryClientParamsResponse" as const,
+
   encode(message: QueryClientParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1207,7 +1222,6 @@ export const QueryClientParamsResponse = {
   create(base?: DeepPartial<QueryClientParamsResponse>): QueryClientParamsResponse {
     return QueryClientParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientParamsResponse>): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -1222,6 +1236,8 @@ function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRe
 }
 
 export const QueryUpgradedClientStateRequest = {
+  $type: "ibc.core.client.v1.QueryUpgradedClientStateRequest" as const,
+
   encode(_: QueryUpgradedClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1254,7 +1270,6 @@ export const QueryUpgradedClientStateRequest = {
   create(base?: DeepPartial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
     return QueryUpgradedClientStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
@@ -1266,6 +1281,8 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
 }
 
 export const QueryUpgradedClientStateResponse = {
+  $type: "ibc.core.client.v1.QueryUpgradedClientStateResponse" as const,
+
   encode(message: QueryUpgradedClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedClientState !== undefined) {
       Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
@@ -1313,7 +1330,6 @@ export const QueryUpgradedClientStateResponse = {
   create(base?: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     return QueryUpgradedClientStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
     message.upgradedClientState = (object.upgradedClientState !== undefined && object.upgradedClientState !== null)
@@ -1328,6 +1344,8 @@ function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusS
 }
 
 export const QueryUpgradedConsensusStateRequest = {
+  $type: "ibc.core.client.v1.QueryUpgradedConsensusStateRequest" as const,
+
   encode(_: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1360,7 +1378,6 @@ export const QueryUpgradedConsensusStateRequest = {
   create(base?: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
@@ -1372,6 +1389,8 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 }
 
 export const QueryUpgradedConsensusStateResponse = {
+  $type: "ibc.core.client.v1.QueryUpgradedConsensusStateResponse" as const,
+
   encode(message: QueryUpgradedConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
@@ -1421,7 +1440,6 @@ export const QueryUpgradedConsensusStateResponse = {
   create(base?: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState =

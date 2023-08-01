@@ -26,6 +26,8 @@ function createBaseValidatorSet(): ValidatorSet {
 }
 
 export const ValidatorSet = {
+  $type: "tendermint.types.ValidatorSet" as const,
+
   encode(message: ValidatorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -101,7 +103,6 @@ export const ValidatorSet = {
   create(base?: DeepPartial<ValidatorSet>): ValidatorSet {
     return ValidatorSet.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators = object.validators?.map((e) => Validator.fromPartial(e)) || [];
@@ -118,6 +119,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  $type: "tendermint.types.Validator" as const,
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
@@ -207,7 +210,6 @@ export const Validator = {
   create(base?: DeepPartial<Validator>): Validator {
     return Validator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array(0);
@@ -225,6 +227,8 @@ function createBaseSimpleValidator(): SimpleValidator {
 }
 
 export const SimpleValidator = {
+  $type: "tendermint.types.SimpleValidator" as const,
+
   encode(message: SimpleValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -286,7 +290,6 @@ export const SimpleValidator = {
   create(base?: DeepPartial<SimpleValidator>): SimpleValidator {
     return SimpleValidator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {
     const message = createBaseSimpleValidator();
     message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)

@@ -39,6 +39,8 @@ function createBaseClass(): Class {
 }
 
 export const Class = {
+  $type: "cosmos.nft.v1beta1.Class" as const,
+
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -170,7 +172,6 @@ export const Class = {
   create(base?: DeepPartial<Class>): Class {
     return Class.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
     message.id = object.id ?? "";
@@ -189,6 +190,8 @@ function createBaseNFT(): NFT {
 }
 
 export const NFT = {
+  $type: "cosmos.nft.v1beta1.NFT" as const,
+
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -292,7 +295,6 @@ export const NFT = {
   create(base?: DeepPartial<NFT>): NFT {
     return NFT.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
     message.classId = object.classId ?? "";

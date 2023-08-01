@@ -57,6 +57,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "ibc.core.client.v1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.clients) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -178,7 +180,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clients = object.clients?.map((e) => IdentifiedClientState.fromPartial(e)) || [];
@@ -198,6 +199,8 @@ function createBaseGenesisMetadata(): GenesisMetadata {
 }
 
 export const GenesisMetadata = {
+  $type: "ibc.core.client.v1.GenesisMetadata" as const,
+
   encode(message: GenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -259,7 +262,6 @@ export const GenesisMetadata = {
   create(base?: DeepPartial<GenesisMetadata>): GenesisMetadata {
     return GenesisMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisMetadata>): GenesisMetadata {
     const message = createBaseGenesisMetadata();
     message.key = object.key ?? new Uint8Array(0);
@@ -273,6 +275,8 @@ function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
 }
 
 export const IdentifiedGenesisMetadata = {
+  $type: "ibc.core.client.v1.IdentifiedGenesisMetadata" as const,
+
   encode(message: IdentifiedGenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -336,7 +340,6 @@ export const IdentifiedGenesisMetadata = {
   create(base?: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {
     return IdentifiedGenesisMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {
     const message = createBaseIdentifiedGenesisMetadata();
     message.clientId = object.clientId ?? "";

@@ -128,6 +128,8 @@ function createBaseMsgCreate(): MsgCreate {
 }
 
 export const MsgCreate = {
+  $type: "flux.fnft.v1beta1.MsgCreate" as const,
+
   encode(message: MsgCreate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -273,7 +275,6 @@ export const MsgCreate = {
   create(base?: DeepPartial<MsgCreate>): MsgCreate {
     return MsgCreate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreate>): MsgCreate {
     const message = createBaseMsgCreate();
     message.sender = object.sender ?? "";
@@ -293,6 +294,8 @@ function createBaseMsgCreateResponse(): MsgCreateResponse {
 }
 
 export const MsgCreateResponse = {
+  $type: "flux.fnft.v1beta1.MsgCreateResponse" as const,
+
   encode(_: MsgCreateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -325,7 +328,6 @@ export const MsgCreateResponse = {
   create(base?: DeepPartial<MsgCreateResponse>): MsgCreateResponse {
     return MsgCreateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreateResponse>): MsgCreateResponse {
     const message = createBaseMsgCreateResponse();
     return message;
@@ -337,6 +339,8 @@ function createBaseMsgPurchaseShares(): MsgPurchaseShares {
 }
 
 export const MsgPurchaseShares = {
+  $type: "flux.fnft.v1beta1.MsgPurchaseShares" as const,
+
   encode(message: MsgPurchaseShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -426,7 +430,6 @@ export const MsgPurchaseShares = {
   create(base?: DeepPartial<MsgPurchaseShares>): MsgPurchaseShares {
     return MsgPurchaseShares.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgPurchaseShares>): MsgPurchaseShares {
     const message = createBaseMsgPurchaseShares();
     message.sender = object.sender ?? "";
@@ -442,6 +445,8 @@ function createBaseMsgPurchaseSharesResponse(): MsgPurchaseSharesResponse {
 }
 
 export const MsgPurchaseSharesResponse = {
+  $type: "flux.fnft.v1beta1.MsgPurchaseSharesResponse" as const,
+
   encode(_: MsgPurchaseSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -474,7 +479,6 @@ export const MsgPurchaseSharesResponse = {
   create(base?: DeepPartial<MsgPurchaseSharesResponse>): MsgPurchaseSharesResponse {
     return MsgPurchaseSharesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgPurchaseSharesResponse>): MsgPurchaseSharesResponse {
     const message = createBaseMsgPurchaseSharesResponse();
     return message;
@@ -486,6 +490,8 @@ function createBaseMsgTransferShares(): MsgTransferShares {
 }
 
 export const MsgTransferShares = {
+  $type: "flux.fnft.v1beta1.MsgTransferShares" as const,
+
   encode(message: MsgTransferShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -589,7 +595,6 @@ export const MsgTransferShares = {
   create(base?: DeepPartial<MsgTransferShares>): MsgTransferShares {
     return MsgTransferShares.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTransferShares>): MsgTransferShares {
     const message = createBaseMsgTransferShares();
     message.classId = object.classId ?? "";
@@ -606,6 +611,8 @@ function createBaseMsgTransferSharesResponse(): MsgTransferSharesResponse {
 }
 
 export const MsgTransferSharesResponse = {
+  $type: "flux.fnft.v1beta1.MsgTransferSharesResponse" as const,
+
   encode(_: MsgTransferSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -638,7 +645,6 @@ export const MsgTransferSharesResponse = {
   create(base?: DeepPartial<MsgTransferSharesResponse>): MsgTransferSharesResponse {
     return MsgTransferSharesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgTransferSharesResponse>): MsgTransferSharesResponse {
     const message = createBaseMsgTransferSharesResponse();
     return message;
@@ -650,6 +656,8 @@ function createBaseMsgDepositShares(): MsgDepositShares {
 }
 
 export const MsgDepositShares = {
+  $type: "flux.fnft.v1beta1.MsgDepositShares" as const,
+
   encode(message: MsgDepositShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -739,7 +747,6 @@ export const MsgDepositShares = {
   create(base?: DeepPartial<MsgDepositShares>): MsgDepositShares {
     return MsgDepositShares.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgDepositShares>): MsgDepositShares {
     const message = createBaseMsgDepositShares();
     message.classId = object.classId ?? "";
@@ -755,6 +762,8 @@ function createBaseMsgDepositSharesResponse(): MsgDepositSharesResponse {
 }
 
 export const MsgDepositSharesResponse = {
+  $type: "flux.fnft.v1beta1.MsgDepositSharesResponse" as const,
+
   encode(_: MsgDepositSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -787,7 +796,6 @@ export const MsgDepositSharesResponse = {
   create(base?: DeepPartial<MsgDepositSharesResponse>): MsgDepositSharesResponse {
     return MsgDepositSharesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgDepositSharesResponse>): MsgDepositSharesResponse {
     const message = createBaseMsgDepositSharesResponse();
     return message;
@@ -799,6 +807,8 @@ function createBaseMsgWithdrawShares(): MsgWithdrawShares {
 }
 
 export const MsgWithdrawShares = {
+  $type: "flux.fnft.v1beta1.MsgWithdrawShares" as const,
+
   encode(message: MsgWithdrawShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -888,7 +898,6 @@ export const MsgWithdrawShares = {
   create(base?: DeepPartial<MsgWithdrawShares>): MsgWithdrawShares {
     return MsgWithdrawShares.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawShares>): MsgWithdrawShares {
     const message = createBaseMsgWithdrawShares();
     message.classId = object.classId ?? "";
@@ -904,6 +913,8 @@ function createBaseMsgWithdrawSharesResponse(): MsgWithdrawSharesResponse {
 }
 
 export const MsgWithdrawSharesResponse = {
+  $type: "flux.fnft.v1beta1.MsgWithdrawSharesResponse" as const,
+
   encode(_: MsgWithdrawSharesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -936,7 +947,6 @@ export const MsgWithdrawSharesResponse = {
   create(base?: DeepPartial<MsgWithdrawSharesResponse>): MsgWithdrawSharesResponse {
     return MsgWithdrawSharesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgWithdrawSharesResponse>): MsgWithdrawSharesResponse {
     const message = createBaseMsgWithdrawSharesResponse();
     return message;
@@ -948,6 +958,8 @@ function createBaseMsgSponsor(): MsgSponsor {
 }
 
 export const MsgSponsor = {
+  $type: "flux.fnft.v1beta1.MsgSponsor" as const,
+
   encode(message: MsgSponsor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1065,7 +1077,6 @@ export const MsgSponsor = {
   create(base?: DeepPartial<MsgSponsor>): MsgSponsor {
     return MsgSponsor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSponsor>): MsgSponsor {
     const message = createBaseMsgSponsor();
     message.sender = object.sender ?? "";
@@ -1083,6 +1094,8 @@ function createBaseMsgSponsorResponse(): MsgSponsorResponse {
 }
 
 export const MsgSponsorResponse = {
+  $type: "flux.fnft.v1beta1.MsgSponsorResponse" as const,
+
   encode(_: MsgSponsorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1115,7 +1128,6 @@ export const MsgSponsorResponse = {
   create(base?: DeepPartial<MsgSponsorResponse>): MsgSponsorResponse {
     return MsgSponsorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSponsorResponse>): MsgSponsorResponse {
     const message = createBaseMsgSponsorResponse();
     return message;

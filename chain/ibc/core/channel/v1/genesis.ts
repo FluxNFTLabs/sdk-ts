@@ -40,6 +40,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "ibc.core.channel.v1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -195,7 +197,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.channels = object.channels?.map((e) => IdentifiedChannel.fromPartial(e)) || [];
@@ -215,6 +216,8 @@ function createBasePacketSequence(): PacketSequence {
 }
 
 export const PacketSequence = {
+  $type: "ibc.core.channel.v1.PacketSequence" as const,
+
   encode(message: PacketSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -290,7 +293,6 @@ export const PacketSequence = {
   create(base?: DeepPartial<PacketSequence>): PacketSequence {
     return PacketSequence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketSequence>): PacketSequence {
     const message = createBasePacketSequence();
     message.portId = object.portId ?? "";

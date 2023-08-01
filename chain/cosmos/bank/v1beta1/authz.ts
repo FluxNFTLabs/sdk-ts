@@ -24,6 +24,8 @@ function createBaseSendAuthorization(): SendAuthorization {
 }
 
 export const SendAuthorization = {
+  $type: "cosmos.bank.v1beta1.SendAuthorization" as const,
+
   encode(message: SendAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -85,7 +87,6 @@ export const SendAuthorization = {
   create(base?: DeepPartial<SendAuthorization>): SendAuthorization {
     return SendAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SendAuthorization>): SendAuthorization {
     const message = createBaseSendAuthorization();
     message.spendLimit = object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];

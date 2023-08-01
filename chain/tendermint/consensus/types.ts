@@ -104,6 +104,8 @@ function createBaseNewRoundStep(): NewRoundStep {
 }
 
 export const NewRoundStep = {
+  $type: "tendermint.consensus.NewRoundStep" as const,
+
   encode(message: NewRoundStep, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -207,7 +209,6 @@ export const NewRoundStep = {
   create(base?: DeepPartial<NewRoundStep>): NewRoundStep {
     return NewRoundStep.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NewRoundStep>): NewRoundStep {
     const message = createBaseNewRoundStep();
     message.height = object.height ?? "0";
@@ -224,6 +225,8 @@ function createBaseNewValidBlock(): NewValidBlock {
 }
 
 export const NewValidBlock = {
+  $type: "tendermint.consensus.NewValidBlock" as const,
+
   encode(message: NewValidBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -329,7 +332,6 @@ export const NewValidBlock = {
   create(base?: DeepPartial<NewValidBlock>): NewValidBlock {
     return NewValidBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NewValidBlock>): NewValidBlock {
     const message = createBaseNewValidBlock();
     message.height = object.height ?? "0";
@@ -350,6 +352,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "tendermint.consensus.Proposal" as const,
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal1.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -395,7 +399,6 @@ export const Proposal = {
   create(base?: DeepPartial<Proposal>): Proposal {
     return Proposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
@@ -410,6 +413,8 @@ function createBaseProposalPOL(): ProposalPOL {
 }
 
 export const ProposalPOL = {
+  $type: "tendermint.consensus.ProposalPOL" as const,
+
   encode(message: ProposalPOL, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -485,7 +490,6 @@ export const ProposalPOL = {
   create(base?: DeepPartial<ProposalPOL>): ProposalPOL {
     return ProposalPOL.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProposalPOL>): ProposalPOL {
     const message = createBaseProposalPOL();
     message.height = object.height ?? "0";
@@ -502,6 +506,8 @@ function createBaseBlockPart(): BlockPart {
 }
 
 export const BlockPart = {
+  $type: "tendermint.consensus.BlockPart" as const,
+
   encode(message: BlockPart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -577,7 +583,6 @@ export const BlockPart = {
   create(base?: DeepPartial<BlockPart>): BlockPart {
     return BlockPart.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockPart>): BlockPart {
     const message = createBaseBlockPart();
     message.height = object.height ?? "0";
@@ -592,6 +597,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  $type: "tendermint.consensus.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote2.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -637,7 +644,6 @@ export const Vote = {
   create(base?: DeepPartial<Vote>): Vote {
     return Vote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote2.fromPartial(object.vote) : undefined;
@@ -650,6 +656,8 @@ function createBaseHasVote(): HasVote {
 }
 
 export const HasVote = {
+  $type: "tendermint.consensus.HasVote" as const,
+
   encode(message: HasVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -739,7 +747,6 @@ export const HasVote = {
   create(base?: DeepPartial<HasVote>): HasVote {
     return HasVote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<HasVote>): HasVote {
     const message = createBaseHasVote();
     message.height = object.height ?? "0";
@@ -755,6 +762,8 @@ function createBaseVoteSetMaj23(): VoteSetMaj23 {
 }
 
 export const VoteSetMaj23 = {
+  $type: "tendermint.consensus.VoteSetMaj23" as const,
+
   encode(message: VoteSetMaj23, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -844,7 +853,6 @@ export const VoteSetMaj23 = {
   create(base?: DeepPartial<VoteSetMaj23>): VoteSetMaj23 {
     return VoteSetMaj23.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VoteSetMaj23>): VoteSetMaj23 {
     const message = createBaseVoteSetMaj23();
     message.height = object.height ?? "0";
@@ -862,6 +870,8 @@ function createBaseVoteSetBits(): VoteSetBits {
 }
 
 export const VoteSetBits = {
+  $type: "tendermint.consensus.VoteSetBits" as const,
+
   encode(message: VoteSetBits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -965,7 +975,6 @@ export const VoteSetBits = {
   create(base?: DeepPartial<VoteSetBits>): VoteSetBits {
     return VoteSetBits.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VoteSetBits>): VoteSetBits {
     const message = createBaseVoteSetBits();
     message.height = object.height ?? "0";
@@ -996,6 +1005,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.consensus.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.newRoundStep !== undefined) {
       NewRoundStep.encode(message.newRoundStep, writer.uint32(10).fork()).ldelim();
@@ -1155,7 +1166,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.newRoundStep = (object.newRoundStep !== undefined && object.newRoundStep !== null)

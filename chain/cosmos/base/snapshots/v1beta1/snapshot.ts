@@ -109,6 +109,8 @@ function createBaseSnapshot(): Snapshot {
 }
 
 export const Snapshot = {
+  $type: "cosmos.base.snapshots.v1beta1.Snapshot" as const,
+
   encode(message: Snapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -212,7 +214,6 @@ export const Snapshot = {
   create(base?: DeepPartial<Snapshot>): Snapshot {
     return Snapshot.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
     message.height = object.height ?? "0";
@@ -231,6 +232,8 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata = {
+  $type: "cosmos.base.snapshots.v1beta1.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.chunkHashes) {
       writer.uint32(10).bytes(v!);
@@ -278,7 +281,6 @@ export const Metadata = {
   create(base?: DeepPartial<Metadata>): Metadata {
     return Metadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
     message.chunkHashes = object.chunkHashes?.map((e) => e) || [];
@@ -298,6 +300,8 @@ function createBaseSnapshotItem(): SnapshotItem {
 }
 
 export const SnapshotItem = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotItem" as const,
+
   encode(message: SnapshotItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.store !== undefined) {
       SnapshotStoreItem.encode(message.store, writer.uint32(10).fork()).ldelim();
@@ -417,7 +421,6 @@ export const SnapshotItem = {
   create(base?: DeepPartial<SnapshotItem>): SnapshotItem {
     return SnapshotItem.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotItem>): SnapshotItem {
     const message = createBaseSnapshotItem();
     message.store = (object.store !== undefined && object.store !== null)
@@ -445,6 +448,8 @@ function createBaseSnapshotStoreItem(): SnapshotStoreItem {
 }
 
 export const SnapshotStoreItem = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotStoreItem" as const,
+
   encode(message: SnapshotStoreItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -490,7 +495,6 @@ export const SnapshotStoreItem = {
   create(base?: DeepPartial<SnapshotStoreItem>): SnapshotStoreItem {
     return SnapshotStoreItem.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotStoreItem>): SnapshotStoreItem {
     const message = createBaseSnapshotStoreItem();
     message.name = object.name ?? "";
@@ -503,6 +507,8 @@ function createBaseSnapshotIAVLItem(): SnapshotIAVLItem {
 }
 
 export const SnapshotIAVLItem = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotIAVLItem" as const,
+
   encode(message: SnapshotIAVLItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -592,7 +598,6 @@ export const SnapshotIAVLItem = {
   create(base?: DeepPartial<SnapshotIAVLItem>): SnapshotIAVLItem {
     return SnapshotIAVLItem.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotIAVLItem>): SnapshotIAVLItem {
     const message = createBaseSnapshotIAVLItem();
     message.key = object.key ?? new Uint8Array(0);
@@ -608,6 +613,8 @@ function createBaseSnapshotExtensionMeta(): SnapshotExtensionMeta {
 }
 
 export const SnapshotExtensionMeta = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotExtensionMeta" as const,
+
   encode(message: SnapshotExtensionMeta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -669,7 +676,6 @@ export const SnapshotExtensionMeta = {
   create(base?: DeepPartial<SnapshotExtensionMeta>): SnapshotExtensionMeta {
     return SnapshotExtensionMeta.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotExtensionMeta>): SnapshotExtensionMeta {
     const message = createBaseSnapshotExtensionMeta();
     message.name = object.name ?? "";
@@ -683,6 +689,8 @@ function createBaseSnapshotExtensionPayload(): SnapshotExtensionPayload {
 }
 
 export const SnapshotExtensionPayload = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotExtensionPayload" as const,
+
   encode(message: SnapshotExtensionPayload, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payload.length !== 0) {
       writer.uint32(10).bytes(message.payload);
@@ -728,7 +736,6 @@ export const SnapshotExtensionPayload = {
   create(base?: DeepPartial<SnapshotExtensionPayload>): SnapshotExtensionPayload {
     return SnapshotExtensionPayload.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotExtensionPayload>): SnapshotExtensionPayload {
     const message = createBaseSnapshotExtensionPayload();
     message.payload = object.payload ?? new Uint8Array(0);
@@ -741,6 +748,8 @@ function createBaseSnapshotKVItem(): SnapshotKVItem {
 }
 
 export const SnapshotKVItem = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotKVItem" as const,
+
   encode(message: SnapshotKVItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -802,7 +811,6 @@ export const SnapshotKVItem = {
   create(base?: DeepPartial<SnapshotKVItem>): SnapshotKVItem {
     return SnapshotKVItem.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotKVItem>): SnapshotKVItem {
     const message = createBaseSnapshotKVItem();
     message.key = object.key ?? new Uint8Array(0);
@@ -816,6 +824,8 @@ function createBaseSnapshotSchema(): SnapshotSchema {
 }
 
 export const SnapshotSchema = {
+  $type: "cosmos.base.snapshots.v1beta1.SnapshotSchema" as const,
+
   encode(message: SnapshotSchema, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.keys) {
       writer.uint32(10).bytes(v!);
@@ -861,7 +871,6 @@ export const SnapshotSchema = {
   create(base?: DeepPartial<SnapshotSchema>): SnapshotSchema {
     return SnapshotSchema.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotSchema>): SnapshotSchema {
     const message = createBaseSnapshotSchema();
     message.keys = object.keys?.map((e) => e) || [];

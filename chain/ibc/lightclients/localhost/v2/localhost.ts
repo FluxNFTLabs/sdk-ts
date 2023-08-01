@@ -13,6 +13,8 @@ function createBaseClientState(): ClientState {
 }
 
 export const ClientState = {
+  $type: "ibc.lightclients.localhost.v2.ClientState" as const,
+
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.latestHeight !== undefined) {
       Height.encode(message.latestHeight, writer.uint32(10).fork()).ldelim();
@@ -58,7 +60,6 @@ export const ClientState = {
   create(base?: DeepPartial<ClientState>): ClientState {
     return ClientState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.latestHeight = (object.latestHeight !== undefined && object.latestHeight !== null)

@@ -262,6 +262,8 @@ function createBaseChannel(): Channel {
 }
 
 export const Channel = {
+  $type: "ibc.core.channel.v1.Channel" as const,
+
   encode(message: Channel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
@@ -365,7 +367,6 @@ export const Channel = {
   create(base?: DeepPartial<Channel>): Channel {
     return Channel.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
@@ -384,6 +385,8 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
 }
 
 export const IdentifiedChannel = {
+  $type: "ibc.core.channel.v1.IdentifiedChannel" as const,
+
   encode(message: IdentifiedChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
@@ -515,7 +518,6 @@ export const IdentifiedChannel = {
   create(base?: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     return IdentifiedChannel.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
@@ -536,6 +538,8 @@ function createBaseCounterparty(): Counterparty {
 }
 
 export const Counterparty = {
+  $type: "ibc.core.channel.v1.Counterparty" as const,
+
   encode(message: Counterparty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -597,7 +601,6 @@ export const Counterparty = {
   create(base?: DeepPartial<Counterparty>): Counterparty {
     return Counterparty.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.portId = object.portId ?? "";
@@ -620,6 +623,8 @@ function createBasePacket(): Packet {
 }
 
 export const Packet = {
+  $type: "ibc.core.channel.v1.Packet" as const,
+
   encode(message: Packet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -765,7 +770,6 @@ export const Packet = {
   create(base?: DeepPartial<Packet>): Packet {
     return Packet.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
     message.sequence = object.sequence ?? "0";
@@ -787,6 +791,8 @@ function createBasePacketState(): PacketState {
 }
 
 export const PacketState = {
+  $type: "ibc.core.channel.v1.PacketState" as const,
+
   encode(message: PacketState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -876,7 +882,6 @@ export const PacketState = {
   create(base?: DeepPartial<PacketState>): PacketState {
     return PacketState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
@@ -892,6 +897,8 @@ function createBasePacketId(): PacketId {
 }
 
 export const PacketId = {
+  $type: "ibc.core.channel.v1.PacketId" as const,
+
   encode(message: PacketId, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -967,7 +974,6 @@ export const PacketId = {
   create(base?: DeepPartial<PacketId>): PacketId {
     return PacketId.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketId>): PacketId {
     const message = createBasePacketId();
     message.portId = object.portId ?? "";
@@ -982,6 +988,8 @@ function createBaseAcknowledgement(): Acknowledgement {
 }
 
 export const Acknowledgement = {
+  $type: "ibc.core.channel.v1.Acknowledgement" as const,
+
   encode(message: Acknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       writer.uint32(170).bytes(message.result);
@@ -1043,7 +1051,6 @@ export const Acknowledgement = {
   create(base?: DeepPartial<Acknowledgement>): Acknowledgement {
     return Acknowledgement.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement {
     const message = createBaseAcknowledgement();
     message.result = object.result ?? undefined;
@@ -1057,6 +1064,8 @@ function createBaseTimeout(): Timeout {
 }
 
 export const Timeout = {
+  $type: "ibc.core.channel.v1.Timeout" as const,
+
   encode(message: Timeout, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
@@ -1118,7 +1127,6 @@ export const Timeout = {
   create(base?: DeepPartial<Timeout>): Timeout {
     return Timeout.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Timeout>): Timeout {
     const message = createBaseTimeout();
     message.height = (object.height !== undefined && object.height !== null)

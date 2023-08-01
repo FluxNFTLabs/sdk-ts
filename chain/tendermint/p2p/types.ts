@@ -35,6 +35,8 @@ function createBaseNetAddress(): NetAddress {
 }
 
 export const NetAddress = {
+  $type: "tendermint.p2p.NetAddress" as const,
+
   encode(message: NetAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -110,7 +112,6 @@ export const NetAddress = {
   create(base?: DeepPartial<NetAddress>): NetAddress {
     return NetAddress.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NetAddress>): NetAddress {
     const message = createBaseNetAddress();
     message.id = object.id ?? "";
@@ -125,6 +126,8 @@ function createBaseProtocolVersion(): ProtocolVersion {
 }
 
 export const ProtocolVersion = {
+  $type: "tendermint.p2p.ProtocolVersion" as const,
+
   encode(message: ProtocolVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.p2p !== "0") {
       writer.uint32(8).uint64(message.p2p);
@@ -200,7 +203,6 @@ export const ProtocolVersion = {
   create(base?: DeepPartial<ProtocolVersion>): ProtocolVersion {
     return ProtocolVersion.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
     message.p2p = object.p2p ?? "0";
@@ -224,6 +226,8 @@ function createBaseDefaultNodeInfo(): DefaultNodeInfo {
 }
 
 export const DefaultNodeInfo = {
+  $type: "tendermint.p2p.DefaultNodeInfo" as const,
+
   encode(message: DefaultNodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.protocolVersion !== undefined) {
       ProtocolVersion.encode(message.protocolVersion, writer.uint32(10).fork()).ldelim();
@@ -369,7 +373,6 @@ export const DefaultNodeInfo = {
   create(base?: DeepPartial<DefaultNodeInfo>): DefaultNodeInfo {
     return DefaultNodeInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DefaultNodeInfo>): DefaultNodeInfo {
     const message = createBaseDefaultNodeInfo();
     message.protocolVersion = (object.protocolVersion !== undefined && object.protocolVersion !== null)
@@ -393,6 +396,8 @@ function createBaseDefaultNodeInfoOther(): DefaultNodeInfoOther {
 }
 
 export const DefaultNodeInfoOther = {
+  $type: "tendermint.p2p.DefaultNodeInfoOther" as const,
+
   encode(message: DefaultNodeInfoOther, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txIndex !== "") {
       writer.uint32(10).string(message.txIndex);
@@ -454,7 +459,6 @@ export const DefaultNodeInfoOther = {
   create(base?: DeepPartial<DefaultNodeInfoOther>): DefaultNodeInfoOther {
     return DefaultNodeInfoOther.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DefaultNodeInfoOther>): DefaultNodeInfoOther {
     const message = createBaseDefaultNodeInfoOther();
     message.txIndex = object.txIndex ?? "";

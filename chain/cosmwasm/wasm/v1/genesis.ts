@@ -39,6 +39,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmwasm.wasm.v1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -128,7 +130,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = (object.params !== undefined && object.params !== null)
@@ -146,6 +147,8 @@ function createBaseCode(): Code {
 }
 
 export const Code = {
+  $type: "cosmwasm.wasm.v1.Code" as const,
+
   encode(message: Code, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -235,7 +238,6 @@ export const Code = {
   create(base?: DeepPartial<Code>): Code {
     return Code.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
     message.codeId = object.codeId ?? "0";
@@ -253,6 +255,8 @@ function createBaseContract(): Contract {
 }
 
 export const Contract = {
+  $type: "cosmwasm.wasm.v1.Contract" as const,
+
   encode(message: Contract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contractAddress !== "") {
       writer.uint32(10).string(message.contractAddress);
@@ -346,7 +350,6 @@ export const Contract = {
   create(base?: DeepPartial<Contract>): Contract {
     return Contract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? "";
@@ -364,6 +367,8 @@ function createBaseSequence(): Sequence {
 }
 
 export const Sequence = {
+  $type: "cosmwasm.wasm.v1.Sequence" as const,
+
   encode(message: Sequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
@@ -425,7 +430,6 @@ export const Sequence = {
   create(base?: DeepPartial<Sequence>): Sequence {
     return Sequence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array(0);

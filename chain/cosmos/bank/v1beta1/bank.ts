@@ -116,6 +116,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.bank.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sendEnabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -179,7 +181,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
@@ -193,6 +194,8 @@ function createBaseSendEnabled(): SendEnabled {
 }
 
 export const SendEnabled = {
+  $type: "cosmos.bank.v1beta1.SendEnabled" as const,
+
   encode(message: SendEnabled, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -254,7 +257,6 @@ export const SendEnabled = {
   create(base?: DeepPartial<SendEnabled>): SendEnabled {
     return SendEnabled.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SendEnabled>): SendEnabled {
     const message = createBaseSendEnabled();
     message.denom = object.denom ?? "";
@@ -268,6 +270,8 @@ function createBaseInput(): Input {
 }
 
 export const Input = {
+  $type: "cosmos.bank.v1beta1.Input" as const,
+
   encode(message: Input, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -329,7 +333,6 @@ export const Input = {
   create(base?: DeepPartial<Input>): Input {
     return Input.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Input>): Input {
     const message = createBaseInput();
     message.address = object.address ?? "";
@@ -343,6 +346,8 @@ function createBaseOutput(): Output {
 }
 
 export const Output = {
+  $type: "cosmos.bank.v1beta1.Output" as const,
+
   encode(message: Output, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -404,7 +409,6 @@ export const Output = {
   create(base?: DeepPartial<Output>): Output {
     return Output.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Output>): Output {
     const message = createBaseOutput();
     message.address = object.address ?? "";
@@ -418,6 +422,8 @@ function createBaseSupply(): Supply {
 }
 
 export const Supply = {
+  $type: "cosmos.bank.v1beta1.Supply" as const,
+
   encode(message: Supply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.total) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -463,7 +469,6 @@ export const Supply = {
   create(base?: DeepPartial<Supply>): Supply {
     return Supply.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Supply>): Supply {
     const message = createBaseSupply();
     message.total = object.total?.map((e) => Coin.fromPartial(e)) || [];
@@ -476,6 +481,8 @@ function createBaseDenomUnit(): DenomUnit {
 }
 
 export const DenomUnit = {
+  $type: "cosmos.bank.v1beta1.DenomUnit" as const,
+
   encode(message: DenomUnit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -551,7 +558,6 @@ export const DenomUnit = {
   create(base?: DeepPartial<DenomUnit>): DenomUnit {
     return DenomUnit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DenomUnit>): DenomUnit {
     const message = createBaseDenomUnit();
     message.denom = object.denom ?? "";
@@ -566,6 +572,8 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata = {
+  $type: "cosmos.bank.v1beta1.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
@@ -711,7 +719,6 @@ export const Metadata = {
   create(base?: DeepPartial<Metadata>): Metadata {
     return Metadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
     message.description = object.description ?? "";

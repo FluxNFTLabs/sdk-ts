@@ -67,6 +67,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "ibc.applications.fee.v1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.identifiedFees) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -182,7 +184,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.identifiedFees = object.identifiedFees?.map((e) => IdentifiedPacketFees.fromPartial(e)) || [];
@@ -200,6 +201,8 @@ function createBaseFeeEnabledChannel(): FeeEnabledChannel {
 }
 
 export const FeeEnabledChannel = {
+  $type: "ibc.applications.fee.v1.FeeEnabledChannel" as const,
+
   encode(message: FeeEnabledChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -261,7 +264,6 @@ export const FeeEnabledChannel = {
   create(base?: DeepPartial<FeeEnabledChannel>): FeeEnabledChannel {
     return FeeEnabledChannel.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FeeEnabledChannel>): FeeEnabledChannel {
     const message = createBaseFeeEnabledChannel();
     message.portId = object.portId ?? "";
@@ -275,6 +277,8 @@ function createBaseRegisteredPayee(): RegisteredPayee {
 }
 
 export const RegisteredPayee = {
+  $type: "ibc.applications.fee.v1.RegisteredPayee" as const,
+
   encode(message: RegisteredPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -350,7 +354,6 @@ export const RegisteredPayee = {
   create(base?: DeepPartial<RegisteredPayee>): RegisteredPayee {
     return RegisteredPayee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RegisteredPayee>): RegisteredPayee {
     const message = createBaseRegisteredPayee();
     message.channelId = object.channelId ?? "";
@@ -365,6 +368,8 @@ function createBaseRegisteredCounterpartyPayee(): RegisteredCounterpartyPayee {
 }
 
 export const RegisteredCounterpartyPayee = {
+  $type: "ibc.applications.fee.v1.RegisteredCounterpartyPayee" as const,
+
   encode(message: RegisteredCounterpartyPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -440,7 +445,6 @@ export const RegisteredCounterpartyPayee = {
   create(base?: DeepPartial<RegisteredCounterpartyPayee>): RegisteredCounterpartyPayee {
     return RegisteredCounterpartyPayee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RegisteredCounterpartyPayee>): RegisteredCounterpartyPayee {
     const message = createBaseRegisteredCounterpartyPayee();
     message.channelId = object.channelId ?? "";
@@ -455,6 +459,8 @@ function createBaseForwardRelayerAddress(): ForwardRelayerAddress {
 }
 
 export const ForwardRelayerAddress = {
+  $type: "ibc.applications.fee.v1.ForwardRelayerAddress" as const,
+
   encode(message: ForwardRelayerAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -516,7 +522,6 @@ export const ForwardRelayerAddress = {
   create(base?: DeepPartial<ForwardRelayerAddress>): ForwardRelayerAddress {
     return ForwardRelayerAddress.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ForwardRelayerAddress>): ForwardRelayerAddress {
     const message = createBaseForwardRelayerAddress();
     message.address = object.address ?? "";

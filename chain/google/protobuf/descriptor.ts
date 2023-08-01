@@ -1141,6 +1141,8 @@ function createBaseFileDescriptorSet(): FileDescriptorSet {
 }
 
 export const FileDescriptorSet = {
+  $type: "google.protobuf.FileDescriptorSet" as const,
+
   encode(message: FileDescriptorSet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.file) {
       FileDescriptorProto.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1186,7 +1188,6 @@ export const FileDescriptorSet = {
   create(base?: DeepPartial<FileDescriptorSet>): FileDescriptorSet {
     return FileDescriptorSet.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FileDescriptorSet>): FileDescriptorSet {
     const message = createBaseFileDescriptorSet();
     message.file = object.file?.map((e) => FileDescriptorProto.fromPartial(e)) || [];
@@ -1212,6 +1213,8 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
 }
 
 export const FileDescriptorProto = {
+  $type: "google.protobuf.FileDescriptorProto" as const,
+
   encode(message: FileDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1443,7 +1446,6 @@ export const FileDescriptorProto = {
   create(base?: DeepPartial<FileDescriptorProto>): FileDescriptorProto {
     return FileDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FileDescriptorProto>): FileDescriptorProto {
     const message = createBaseFileDescriptorProto();
     message.name = object.name ?? "";
@@ -1482,6 +1484,8 @@ function createBaseDescriptorProto(): DescriptorProto {
 }
 
 export const DescriptorProto = {
+  $type: "google.protobuf.DescriptorProto" as const,
+
   encode(message: DescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1665,7 +1669,6 @@ export const DescriptorProto = {
   create(base?: DeepPartial<DescriptorProto>): DescriptorProto {
     return DescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DescriptorProto>): DescriptorProto {
     const message = createBaseDescriptorProto();
     message.name = object.name ?? "";
@@ -1689,6 +1692,8 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
 }
 
 export const DescriptorProto_ExtensionRange = {
+  $type: "google.protobuf.DescriptorProto.ExtensionRange" as const,
+
   encode(message: DescriptorProto_ExtensionRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
@@ -1764,7 +1769,6 @@ export const DescriptorProto_ExtensionRange = {
   create(base?: DeepPartial<DescriptorProto_ExtensionRange>): DescriptorProto_ExtensionRange {
     return DescriptorProto_ExtensionRange.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DescriptorProto_ExtensionRange>): DescriptorProto_ExtensionRange {
     const message = createBaseDescriptorProto_ExtensionRange();
     message.start = object.start ?? 0;
@@ -1781,6 +1785,8 @@ function createBaseDescriptorProto_ReservedRange(): DescriptorProto_ReservedRang
 }
 
 export const DescriptorProto_ReservedRange = {
+  $type: "google.protobuf.DescriptorProto.ReservedRange" as const,
+
   encode(message: DescriptorProto_ReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
@@ -1839,7 +1845,6 @@ export const DescriptorProto_ReservedRange = {
   create(base?: DeepPartial<DescriptorProto_ReservedRange>): DescriptorProto_ReservedRange {
     return DescriptorProto_ReservedRange.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DescriptorProto_ReservedRange>): DescriptorProto_ReservedRange {
     const message = createBaseDescriptorProto_ReservedRange();
     message.start = object.start ?? 0;
@@ -1853,6 +1858,8 @@ function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
 }
 
 export const ExtensionRangeOptions = {
+  $type: "google.protobuf.ExtensionRangeOptions" as const,
+
   encode(message: ExtensionRangeOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -1902,7 +1909,6 @@ export const ExtensionRangeOptions = {
   create(base?: DeepPartial<ExtensionRangeOptions>): ExtensionRangeOptions {
     return ExtensionRangeOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ExtensionRangeOptions>): ExtensionRangeOptions {
     const message = createBaseExtensionRangeOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
@@ -1927,6 +1933,8 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
 }
 
 export const FieldDescriptorProto = {
+  $type: "google.protobuf.FieldDescriptorProto" as const,
+
   encode(message: FieldDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2114,7 +2122,6 @@ export const FieldDescriptorProto = {
   create(base?: DeepPartial<FieldDescriptorProto>): FieldDescriptorProto {
     return FieldDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FieldDescriptorProto>): FieldDescriptorProto {
     const message = createBaseFieldDescriptorProto();
     message.name = object.name ?? "";
@@ -2139,6 +2146,8 @@ function createBaseOneofDescriptorProto(): OneofDescriptorProto {
 }
 
 export const OneofDescriptorProto = {
+  $type: "google.protobuf.OneofDescriptorProto" as const,
+
   encode(message: OneofDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2200,7 +2209,6 @@ export const OneofDescriptorProto = {
   create(base?: DeepPartial<OneofDescriptorProto>): OneofDescriptorProto {
     return OneofDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<OneofDescriptorProto>): OneofDescriptorProto {
     const message = createBaseOneofDescriptorProto();
     message.name = object.name ?? "";
@@ -2216,6 +2224,8 @@ function createBaseEnumDescriptorProto(): EnumDescriptorProto {
 }
 
 export const EnumDescriptorProto = {
+  $type: "google.protobuf.EnumDescriptorProto" as const,
+
   encode(message: EnumDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2321,7 +2331,6 @@ export const EnumDescriptorProto = {
   create(base?: DeepPartial<EnumDescriptorProto>): EnumDescriptorProto {
     return EnumDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EnumDescriptorProto>): EnumDescriptorProto {
     const message = createBaseEnumDescriptorProto();
     message.name = object.name ?? "";
@@ -2341,6 +2350,8 @@ function createBaseEnumDescriptorProto_EnumReservedRange(): EnumDescriptorProto_
 }
 
 export const EnumDescriptorProto_EnumReservedRange = {
+  $type: "google.protobuf.EnumDescriptorProto.EnumReservedRange" as const,
+
   encode(message: EnumDescriptorProto_EnumReservedRange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.start !== 0) {
       writer.uint32(8).int32(message.start);
@@ -2399,7 +2410,6 @@ export const EnumDescriptorProto_EnumReservedRange = {
   create(base?: DeepPartial<EnumDescriptorProto_EnumReservedRange>): EnumDescriptorProto_EnumReservedRange {
     return EnumDescriptorProto_EnumReservedRange.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EnumDescriptorProto_EnumReservedRange>): EnumDescriptorProto_EnumReservedRange {
     const message = createBaseEnumDescriptorProto_EnumReservedRange();
     message.start = object.start ?? 0;
@@ -2413,6 +2423,8 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
 }
 
 export const EnumValueDescriptorProto = {
+  $type: "google.protobuf.EnumValueDescriptorProto" as const,
+
   encode(message: EnumValueDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2488,7 +2500,6 @@ export const EnumValueDescriptorProto = {
   create(base?: DeepPartial<EnumValueDescriptorProto>): EnumValueDescriptorProto {
     return EnumValueDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EnumValueDescriptorProto>): EnumValueDescriptorProto {
     const message = createBaseEnumValueDescriptorProto();
     message.name = object.name ?? "";
@@ -2505,6 +2516,8 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
 }
 
 export const ServiceDescriptorProto = {
+  $type: "google.protobuf.ServiceDescriptorProto" as const,
+
   encode(message: ServiceDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2580,7 +2593,6 @@ export const ServiceDescriptorProto = {
   create(base?: DeepPartial<ServiceDescriptorProto>): ServiceDescriptorProto {
     return ServiceDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ServiceDescriptorProto>): ServiceDescriptorProto {
     const message = createBaseServiceDescriptorProto();
     message.name = object.name ?? "";
@@ -2604,6 +2616,8 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
 }
 
 export const MethodDescriptorProto = {
+  $type: "google.protobuf.MethodDescriptorProto" as const,
+
   encode(message: MethodDescriptorProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -2721,7 +2735,6 @@ export const MethodDescriptorProto = {
   create(base?: DeepPartial<MethodDescriptorProto>): MethodDescriptorProto {
     return MethodDescriptorProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MethodDescriptorProto>): MethodDescriptorProto {
     const message = createBaseMethodDescriptorProto();
     message.name = object.name ?? "";
@@ -2763,6 +2776,8 @@ function createBaseFileOptions(): FileOptions {
 }
 
 export const FileOptions = {
+  $type: "google.protobuf.FileOptions" as const,
+
   encode(message: FileOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.javaPackage !== "") {
       writer.uint32(10).string(message.javaPackage);
@@ -3094,7 +3109,6 @@ export const FileOptions = {
   create(base?: DeepPartial<FileOptions>): FileOptions {
     return FileOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FileOptions>): FileOptions {
     const message = createBaseFileOptions();
     message.javaPackage = object.javaPackage ?? "";
@@ -3133,6 +3147,8 @@ function createBaseMessageOptions(): MessageOptions {
 }
 
 export const MessageOptions = {
+  $type: "google.protobuf.MessageOptions" as const,
+
   encode(message: MessageOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageSetWireFormat === true) {
       writer.uint32(8).bool(message.messageSetWireFormat);
@@ -3240,7 +3256,6 @@ export const MessageOptions = {
   create(base?: DeepPartial<MessageOptions>): MessageOptions {
     return MessageOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MessageOptions>): MessageOptions {
     const message = createBaseMessageOptions();
     message.messageSetWireFormat = object.messageSetWireFormat ?? false;
@@ -3266,6 +3281,8 @@ function createBaseFieldOptions(): FieldOptions {
 }
 
 export const FieldOptions = {
+  $type: "google.protobuf.FieldOptions" as const,
+
   encode(message: FieldOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.ctype !== 0) {
       writer.uint32(8).int32(message.ctype);
@@ -3413,7 +3430,6 @@ export const FieldOptions = {
   create(base?: DeepPartial<FieldOptions>): FieldOptions {
     return FieldOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FieldOptions>): FieldOptions {
     const message = createBaseFieldOptions();
     message.ctype = object.ctype ?? 0;
@@ -3433,6 +3449,8 @@ function createBaseOneofOptions(): OneofOptions {
 }
 
 export const OneofOptions = {
+  $type: "google.protobuf.OneofOptions" as const,
+
   encode(message: OneofOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.uninterpretedOption) {
       UninterpretedOption.encode(v!, writer.uint32(7994).fork()).ldelim();
@@ -3482,7 +3500,6 @@ export const OneofOptions = {
   create(base?: DeepPartial<OneofOptions>): OneofOptions {
     return OneofOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<OneofOptions>): OneofOptions {
     const message = createBaseOneofOptions();
     message.uninterpretedOption = object.uninterpretedOption?.map((e) => UninterpretedOption.fromPartial(e)) || [];
@@ -3495,6 +3512,8 @@ function createBaseEnumOptions(): EnumOptions {
 }
 
 export const EnumOptions = {
+  $type: "google.protobuf.EnumOptions" as const,
+
   encode(message: EnumOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowAlias === true) {
       writer.uint32(16).bool(message.allowAlias);
@@ -3572,7 +3591,6 @@ export const EnumOptions = {
   create(base?: DeepPartial<EnumOptions>): EnumOptions {
     return EnumOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EnumOptions>): EnumOptions {
     const message = createBaseEnumOptions();
     message.allowAlias = object.allowAlias ?? false;
@@ -3587,6 +3605,8 @@ function createBaseEnumValueOptions(): EnumValueOptions {
 }
 
 export const EnumValueOptions = {
+  $type: "google.protobuf.EnumValueOptions" as const,
+
   encode(message: EnumValueOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(8).bool(message.deprecated);
@@ -3650,7 +3670,6 @@ export const EnumValueOptions = {
   create(base?: DeepPartial<EnumValueOptions>): EnumValueOptions {
     return EnumValueOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EnumValueOptions>): EnumValueOptions {
     const message = createBaseEnumValueOptions();
     message.deprecated = object.deprecated ?? false;
@@ -3664,6 +3683,8 @@ function createBaseServiceOptions(): ServiceOptions {
 }
 
 export const ServiceOptions = {
+  $type: "google.protobuf.ServiceOptions" as const,
+
   encode(message: ServiceOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
@@ -3727,7 +3748,6 @@ export const ServiceOptions = {
   create(base?: DeepPartial<ServiceOptions>): ServiceOptions {
     return ServiceOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ServiceOptions>): ServiceOptions {
     const message = createBaseServiceOptions();
     message.deprecated = object.deprecated ?? false;
@@ -3741,6 +3761,8 @@ function createBaseMethodOptions(): MethodOptions {
 }
 
 export const MethodOptions = {
+  $type: "google.protobuf.MethodOptions" as const,
+
   encode(message: MethodOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deprecated === true) {
       writer.uint32(264).bool(message.deprecated);
@@ -3820,7 +3842,6 @@ export const MethodOptions = {
   create(base?: DeepPartial<MethodOptions>): MethodOptions {
     return MethodOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MethodOptions>): MethodOptions {
     const message = createBaseMethodOptions();
     message.deprecated = object.deprecated ?? false;
@@ -3843,6 +3864,8 @@ function createBaseUninterpretedOption(): UninterpretedOption {
 }
 
 export const UninterpretedOption = {
+  $type: "google.protobuf.UninterpretedOption" as const,
+
   encode(message: UninterpretedOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.name) {
       UninterpretedOption_NamePart.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -3974,7 +3997,6 @@ export const UninterpretedOption = {
   create(base?: DeepPartial<UninterpretedOption>): UninterpretedOption {
     return UninterpretedOption.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UninterpretedOption>): UninterpretedOption {
     const message = createBaseUninterpretedOption();
     message.name = object.name?.map((e) => UninterpretedOption_NamePart.fromPartial(e)) || [];
@@ -3993,6 +4015,8 @@ function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart 
 }
 
 export const UninterpretedOption_NamePart = {
+  $type: "google.protobuf.UninterpretedOption.NamePart" as const,
+
   encode(message: UninterpretedOption_NamePart, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.namePart !== "") {
       writer.uint32(10).string(message.namePart);
@@ -4054,7 +4078,6 @@ export const UninterpretedOption_NamePart = {
   create(base?: DeepPartial<UninterpretedOption_NamePart>): UninterpretedOption_NamePart {
     return UninterpretedOption_NamePart.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UninterpretedOption_NamePart>): UninterpretedOption_NamePart {
     const message = createBaseUninterpretedOption_NamePart();
     message.namePart = object.namePart ?? "";
@@ -4068,6 +4091,8 @@ function createBaseSourceCodeInfo(): SourceCodeInfo {
 }
 
 export const SourceCodeInfo = {
+  $type: "google.protobuf.SourceCodeInfo" as const,
+
   encode(message: SourceCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.location) {
       SourceCodeInfo_Location.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4117,7 +4142,6 @@ export const SourceCodeInfo = {
   create(base?: DeepPartial<SourceCodeInfo>): SourceCodeInfo {
     return SourceCodeInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SourceCodeInfo>): SourceCodeInfo {
     const message = createBaseSourceCodeInfo();
     message.location = object.location?.map((e) => SourceCodeInfo_Location.fromPartial(e)) || [];
@@ -4130,6 +4154,8 @@ function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
 }
 
 export const SourceCodeInfo_Location = {
+  $type: "google.protobuf.SourceCodeInfo.Location" as const,
+
   encode(message: SourceCodeInfo_Location, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.path) {
@@ -4259,7 +4285,6 @@ export const SourceCodeInfo_Location = {
   create(base?: DeepPartial<SourceCodeInfo_Location>): SourceCodeInfo_Location {
     return SourceCodeInfo_Location.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SourceCodeInfo_Location>): SourceCodeInfo_Location {
     const message = createBaseSourceCodeInfo_Location();
     message.path = object.path?.map((e) => e) || [];
@@ -4276,6 +4301,8 @@ function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
 }
 
 export const GeneratedCodeInfo = {
+  $type: "google.protobuf.GeneratedCodeInfo" as const,
+
   encode(message: GeneratedCodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.annotation) {
       GeneratedCodeInfo_Annotation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -4325,7 +4352,6 @@ export const GeneratedCodeInfo = {
   create(base?: DeepPartial<GeneratedCodeInfo>): GeneratedCodeInfo {
     return GeneratedCodeInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GeneratedCodeInfo>): GeneratedCodeInfo {
     const message = createBaseGeneratedCodeInfo();
     message.annotation = object.annotation?.map((e) => GeneratedCodeInfo_Annotation.fromPartial(e)) || [];
@@ -4338,6 +4364,8 @@ function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation 
 }
 
 export const GeneratedCodeInfo_Annotation = {
+  $type: "google.protobuf.GeneratedCodeInfo.Annotation" as const,
+
   encode(message: GeneratedCodeInfo_Annotation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.path) {
@@ -4439,7 +4467,6 @@ export const GeneratedCodeInfo_Annotation = {
   create(base?: DeepPartial<GeneratedCodeInfo_Annotation>): GeneratedCodeInfo_Annotation {
     return GeneratedCodeInfo_Annotation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GeneratedCodeInfo_Annotation>): GeneratedCodeInfo_Annotation {
     const message = createBaseGeneratedCodeInfo_Annotation();
     message.path = object.path?.map((e) => e) || [];

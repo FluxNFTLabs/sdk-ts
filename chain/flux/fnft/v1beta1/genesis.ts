@@ -23,6 +23,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "flux.fnft.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -84,7 +86,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.classes = object.classes?.map((e) => Class.fromPartial(e)) || [];
@@ -98,6 +99,8 @@ function createBaseEntry(): Entry {
 }
 
 export const Entry = {
+  $type: "flux.fnft.v1beta1.Entry" as const,
+
   encode(message: Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -159,7 +162,6 @@ export const Entry = {
   create(base?: DeepPartial<Entry>): Entry {
     return Entry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.owner = object.owner ?? "";

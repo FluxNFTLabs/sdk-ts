@@ -15,6 +15,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.capability.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sealKeeper === true) {
       writer.uint32(8).bool(message.sealKeeper);
@@ -60,7 +62,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.sealKeeper = object.sealKeeper ?? false;

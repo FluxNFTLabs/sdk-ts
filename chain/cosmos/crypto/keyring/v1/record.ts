@@ -55,6 +55,8 @@ function createBaseRecord(): Record {
 }
 
 export const Record = {
+  $type: "cosmos.crypto.keyring.v1.Record" as const,
+
   encode(message: Record, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -172,7 +174,6 @@ export const Record = {
   create(base?: DeepPartial<Record>): Record {
     return Record.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Record>): Record {
     const message = createBaseRecord();
     message.name = object.name ?? "";
@@ -200,6 +201,8 @@ function createBaseRecord_Local(): Record_Local {
 }
 
 export const Record_Local = {
+  $type: "cosmos.crypto.keyring.v1.Record.Local" as const,
+
   encode(message: Record_Local, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.privKey !== undefined) {
       Any.encode(message.privKey, writer.uint32(10).fork()).ldelim();
@@ -245,7 +248,6 @@ export const Record_Local = {
   create(base?: DeepPartial<Record_Local>): Record_Local {
     return Record_Local.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Record_Local>): Record_Local {
     const message = createBaseRecord_Local();
     message.privKey = (object.privKey !== undefined && object.privKey !== null)
@@ -260,6 +262,8 @@ function createBaseRecord_Ledger(): Record_Ledger {
 }
 
 export const Record_Ledger = {
+  $type: "cosmos.crypto.keyring.v1.Record.Ledger" as const,
+
   encode(message: Record_Ledger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== undefined) {
       BIP44Params.encode(message.path, writer.uint32(10).fork()).ldelim();
@@ -305,7 +309,6 @@ export const Record_Ledger = {
   create(base?: DeepPartial<Record_Ledger>): Record_Ledger {
     return Record_Ledger.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Record_Ledger>): Record_Ledger {
     const message = createBaseRecord_Ledger();
     message.path = (object.path !== undefined && object.path !== null)
@@ -320,6 +323,8 @@ function createBaseRecord_Multi(): Record_Multi {
 }
 
 export const Record_Multi = {
+  $type: "cosmos.crypto.keyring.v1.Record.Multi" as const,
+
   encode(_: Record_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -352,7 +357,6 @@ export const Record_Multi = {
   create(base?: DeepPartial<Record_Multi>): Record_Multi {
     return Record_Multi.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<Record_Multi>): Record_Multi {
     const message = createBaseRecord_Multi();
     return message;
@@ -364,6 +368,8 @@ function createBaseRecord_Offline(): Record_Offline {
 }
 
 export const Record_Offline = {
+  $type: "cosmos.crypto.keyring.v1.Record.Offline" as const,
+
   encode(_: Record_Offline, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -396,7 +402,6 @@ export const Record_Offline = {
   create(base?: DeepPartial<Record_Offline>): Record_Offline {
     return Record_Offline.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<Record_Offline>): Record_Offline {
     const message = createBaseRecord_Offline();
     return message;

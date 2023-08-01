@@ -65,6 +65,8 @@ function createBaseConfig(): Config {
 }
 
 export const Config = {
+  $type: "cosmos.app.v1alpha1.Config" as const,
+
   encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -128,7 +130,6 @@ export const Config = {
   create(base?: DeepPartial<Config>): Config {
     return Config.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Config>): Config {
     const message = createBaseConfig();
     message.modules = object.modules?.map((e) => ModuleConfig.fromPartial(e)) || [];
@@ -142,6 +143,8 @@ function createBaseModuleConfig(): ModuleConfig {
 }
 
 export const ModuleConfig = {
+  $type: "cosmos.app.v1alpha1.ModuleConfig" as const,
+
   encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -219,7 +222,6 @@ export const ModuleConfig = {
   create(base?: DeepPartial<ModuleConfig>): ModuleConfig {
     return ModuleConfig.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
@@ -236,6 +238,8 @@ function createBaseGolangBinding(): GolangBinding {
 }
 
 export const GolangBinding = {
+  $type: "cosmos.app.v1alpha1.GolangBinding" as const,
+
   encode(message: GolangBinding, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.interfaceType !== "") {
       writer.uint32(10).string(message.interfaceType);
@@ -297,7 +301,6 @@ export const GolangBinding = {
   create(base?: DeepPartial<GolangBinding>): GolangBinding {
     return GolangBinding.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GolangBinding>): GolangBinding {
     const message = createBaseGolangBinding();
     message.interfaceType = object.interfaceType ?? "";

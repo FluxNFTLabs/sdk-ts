@@ -90,6 +90,8 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
+  $type: "tendermint.types.ConsensusParams" as const,
+
   encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
@@ -179,7 +181,6 @@ export const ConsensusParams = {
   create(base?: DeepPartial<ConsensusParams>): ConsensusParams {
     return ConsensusParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
     message.block = (object.block !== undefined && object.block !== null)
@@ -203,6 +204,8 @@ function createBaseBlockParams(): BlockParams {
 }
 
 export const BlockParams = {
+  $type: "tendermint.types.BlockParams" as const,
+
   encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxBytes !== "0") {
       writer.uint32(8).int64(message.maxBytes);
@@ -278,7 +281,6 @@ export const BlockParams = {
   create(base?: DeepPartial<BlockParams>): BlockParams {
     return BlockParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
     message.maxBytes = object.maxBytes ?? "0";
@@ -293,6 +295,8 @@ function createBaseEvidenceParams(): EvidenceParams {
 }
 
 export const EvidenceParams = {
+  $type: "tendermint.types.EvidenceParams" as const,
+
   encode(message: EvidenceParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxAgeNumBlocks !== "0") {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
@@ -368,7 +372,6 @@ export const EvidenceParams = {
   create(base?: DeepPartial<EvidenceParams>): EvidenceParams {
     return EvidenceParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams {
     const message = createBaseEvidenceParams();
     message.maxAgeNumBlocks = object.maxAgeNumBlocks ?? "0";
@@ -385,6 +388,8 @@ function createBaseValidatorParams(): ValidatorParams {
 }
 
 export const ValidatorParams = {
+  $type: "tendermint.types.ValidatorParams" as const,
+
   encode(message: ValidatorParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
@@ -430,7 +435,6 @@ export const ValidatorParams = {
   create(base?: DeepPartial<ValidatorParams>): ValidatorParams {
     return ValidatorParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorParams>): ValidatorParams {
     const message = createBaseValidatorParams();
     message.pubKeyTypes = object.pubKeyTypes?.map((e) => e) || [];
@@ -443,6 +447,8 @@ function createBaseVersionParams(): VersionParams {
 }
 
 export const VersionParams = {
+  $type: "tendermint.types.VersionParams" as const,
+
   encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.appVersion !== "0") {
       writer.uint32(8).uint64(message.appVersion);
@@ -488,7 +494,6 @@ export const VersionParams = {
   create(base?: DeepPartial<VersionParams>): VersionParams {
     return VersionParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = createBaseVersionParams();
     message.appVersion = object.appVersion ?? "0";
@@ -501,6 +506,8 @@ function createBaseHashedParams(): HashedParams {
 }
 
 export const HashedParams = {
+  $type: "tendermint.types.HashedParams" as const,
+
   encode(message: HashedParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockMaxBytes !== "0") {
       writer.uint32(8).int64(message.blockMaxBytes);
@@ -562,7 +569,6 @@ export const HashedParams = {
   create(base?: DeepPartial<HashedParams>): HashedParams {
     return HashedParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<HashedParams>): HashedParams {
     const message = createBaseHashedParams();
     message.blockMaxBytes = object.blockMaxBytes ?? "0";

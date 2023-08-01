@@ -24,6 +24,8 @@ function createBaseAppOptionsRequest(): AppOptionsRequest {
 }
 
 export const AppOptionsRequest = {
+  $type: "cosmos.autocli.v1.AppOptionsRequest" as const,
+
   encode(_: AppOptionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -56,7 +58,6 @@ export const AppOptionsRequest = {
   create(base?: DeepPartial<AppOptionsRequest>): AppOptionsRequest {
     return AppOptionsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<AppOptionsRequest>): AppOptionsRequest {
     const message = createBaseAppOptionsRequest();
     return message;
@@ -68,6 +69,8 @@ function createBaseAppOptionsResponse(): AppOptionsResponse {
 }
 
 export const AppOptionsResponse = {
+  $type: "cosmos.autocli.v1.AppOptionsResponse" as const,
+
   encode(message: AppOptionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.moduleOptions).forEach(([key, value]) => {
       AppOptionsResponse_ModuleOptionsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
@@ -129,7 +132,6 @@ export const AppOptionsResponse = {
   create(base?: DeepPartial<AppOptionsResponse>): AppOptionsResponse {
     return AppOptionsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AppOptionsResponse>): AppOptionsResponse {
     const message = createBaseAppOptionsResponse();
     message.moduleOptions = Object.entries(object.moduleOptions ?? {}).reduce<{ [key: string]: ModuleOptions }>(
@@ -150,6 +152,8 @@ function createBaseAppOptionsResponse_ModuleOptionsEntry(): AppOptionsResponse_M
 }
 
 export const AppOptionsResponse_ModuleOptionsEntry = {
+  $type: "cosmos.autocli.v1.AppOptionsResponse.ModuleOptionsEntry" as const,
+
   encode(message: AppOptionsResponse_ModuleOptionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -211,7 +215,6 @@ export const AppOptionsResponse_ModuleOptionsEntry = {
   create(base?: DeepPartial<AppOptionsResponse_ModuleOptionsEntry>): AppOptionsResponse_ModuleOptionsEntry {
     return AppOptionsResponse_ModuleOptionsEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AppOptionsResponse_ModuleOptionsEntry>): AppOptionsResponse_ModuleOptionsEntry {
     const message = createBaseAppOptionsResponse_ModuleOptionsEntry();
     message.key = object.key ?? "";

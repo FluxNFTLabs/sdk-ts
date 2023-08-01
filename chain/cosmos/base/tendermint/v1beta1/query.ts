@@ -179,6 +179,8 @@ function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequ
 }
 
 export const GetValidatorSetByHeightRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest" as const,
+
   encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -240,7 +242,6 @@ export const GetValidatorSetByHeightRequest = {
   create(base?: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     return GetValidatorSetByHeightRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
     message.height = object.height ?? "0";
@@ -256,6 +257,8 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 }
 
 export const GetValidatorSetByHeightResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse" as const,
+
   encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockHeight !== "0") {
       writer.uint32(8).int64(message.blockHeight);
@@ -331,7 +334,6 @@ export const GetValidatorSetByHeightResponse = {
   create(base?: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     return GetValidatorSetByHeightResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
     message.blockHeight = object.blockHeight ?? "0";
@@ -348,6 +350,8 @@ function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest 
 }
 
 export const GetLatestValidatorSetRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest" as const,
+
   encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -393,7 +397,6 @@ export const GetLatestValidatorSetRequest = {
   create(base?: DeepPartial<GetLatestValidatorSetRequest>): GetLatestValidatorSetRequest {
     return GetLatestValidatorSetRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetLatestValidatorSetRequest>): GetLatestValidatorSetRequest {
     const message = createBaseGetLatestValidatorSetRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -408,6 +411,8 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 }
 
 export const GetLatestValidatorSetResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse" as const,
+
   encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockHeight !== "0") {
       writer.uint32(8).int64(message.blockHeight);
@@ -483,7 +488,6 @@ export const GetLatestValidatorSetResponse = {
   create(base?: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     return GetLatestValidatorSetResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
     message.blockHeight = object.blockHeight ?? "0";
@@ -500,6 +504,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  $type: "cosmos.base.tendermint.v1beta1.Validator" as const,
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -589,7 +595,6 @@ export const Validator = {
   create(base?: DeepPartial<Validator>): Validator {
     return Validator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? "";
@@ -607,6 +612,8 @@ function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
 }
 
 export const GetBlockByHeightRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest" as const,
+
   encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -652,7 +659,6 @@ export const GetBlockByHeightRequest = {
   create(base?: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     return GetBlockByHeightRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
     message.height = object.height ?? "0";
@@ -665,6 +671,8 @@ function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
 }
 
 export const GetBlockByHeightResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse" as const,
+
   encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -740,7 +748,6 @@ export const GetBlockByHeightResponse = {
   create(base?: DeepPartial<GetBlockByHeightResponse>): GetBlockByHeightResponse {
     return GetBlockByHeightResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetBlockByHeightResponse>): GetBlockByHeightResponse {
     const message = createBaseGetBlockByHeightResponse();
     message.blockId = (object.blockId !== undefined && object.blockId !== null)
@@ -759,6 +766,8 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
 }
 
 export const GetLatestBlockRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockRequest" as const,
+
   encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -791,7 +800,6 @@ export const GetLatestBlockRequest = {
   create(base?: DeepPartial<GetLatestBlockRequest>): GetLatestBlockRequest {
     return GetLatestBlockRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<GetLatestBlockRequest>): GetLatestBlockRequest {
     const message = createBaseGetLatestBlockRequest();
     return message;
@@ -803,6 +811,8 @@ function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
 }
 
 export const GetLatestBlockResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetLatestBlockResponse" as const,
+
   encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -878,7 +888,6 @@ export const GetLatestBlockResponse = {
   create(base?: DeepPartial<GetLatestBlockResponse>): GetLatestBlockResponse {
     return GetLatestBlockResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetLatestBlockResponse>): GetLatestBlockResponse {
     const message = createBaseGetLatestBlockResponse();
     message.blockId = (object.blockId !== undefined && object.blockId !== null)
@@ -897,6 +906,8 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
 }
 
 export const GetSyncingRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingRequest" as const,
+
   encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -929,7 +940,6 @@ export const GetSyncingRequest = {
   create(base?: DeepPartial<GetSyncingRequest>): GetSyncingRequest {
     return GetSyncingRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<GetSyncingRequest>): GetSyncingRequest {
     const message = createBaseGetSyncingRequest();
     return message;
@@ -941,6 +951,8 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
 }
 
 export const GetSyncingResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetSyncingResponse" as const,
+
   encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
@@ -986,7 +998,6 @@ export const GetSyncingResponse = {
   create(base?: DeepPartial<GetSyncingResponse>): GetSyncingResponse {
     return GetSyncingResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetSyncingResponse>): GetSyncingResponse {
     const message = createBaseGetSyncingResponse();
     message.syncing = object.syncing ?? false;
@@ -999,6 +1010,8 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
 }
 
 export const GetNodeInfoRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoRequest" as const,
+
   encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1031,7 +1044,6 @@ export const GetNodeInfoRequest = {
   create(base?: DeepPartial<GetNodeInfoRequest>): GetNodeInfoRequest {
     return GetNodeInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<GetNodeInfoRequest>): GetNodeInfoRequest {
     const message = createBaseGetNodeInfoRequest();
     return message;
@@ -1043,6 +1055,8 @@ function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
 }
 
 export const GetNodeInfoResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.GetNodeInfoResponse" as const,
+
   encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.defaultNodeInfo !== undefined) {
       DefaultNodeInfo.encode(message.defaultNodeInfo, writer.uint32(10).fork()).ldelim();
@@ -1106,7 +1120,6 @@ export const GetNodeInfoResponse = {
   create(base?: DeepPartial<GetNodeInfoResponse>): GetNodeInfoResponse {
     return GetNodeInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetNodeInfoResponse>): GetNodeInfoResponse {
     const message = createBaseGetNodeInfoResponse();
     message.defaultNodeInfo = (object.defaultNodeInfo !== undefined && object.defaultNodeInfo !== null)
@@ -1133,6 +1146,8 @@ function createBaseVersionInfo(): VersionInfo {
 }
 
 export const VersionInfo = {
+  $type: "cosmos.base.tendermint.v1beta1.VersionInfo" as const,
+
   encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -1278,7 +1293,6 @@ export const VersionInfo = {
   create(base?: DeepPartial<VersionInfo>): VersionInfo {
     return VersionInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VersionInfo>): VersionInfo {
     const message = createBaseVersionInfo();
     message.name = object.name ?? "";
@@ -1298,6 +1312,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.base.tendermint.v1beta1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
@@ -1373,7 +1389,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.path = object.path ?? "";
@@ -1388,6 +1403,8 @@ function createBaseABCIQueryRequest(): ABCIQueryRequest {
 }
 
 export const ABCIQueryRequest = {
+  $type: "cosmos.base.tendermint.v1beta1.ABCIQueryRequest" as const,
+
   encode(message: ABCIQueryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1477,7 +1494,6 @@ export const ABCIQueryRequest = {
   create(base?: DeepPartial<ABCIQueryRequest>): ABCIQueryRequest {
     return ABCIQueryRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ABCIQueryRequest>): ABCIQueryRequest {
     const message = createBaseABCIQueryRequest();
     message.data = object.data ?? new Uint8Array(0);
@@ -1503,6 +1519,8 @@ function createBaseABCIQueryResponse(): ABCIQueryResponse {
 }
 
 export const ABCIQueryResponse = {
+  $type: "cosmos.base.tendermint.v1beta1.ABCIQueryResponse" as const,
+
   encode(message: ABCIQueryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
@@ -1662,7 +1680,6 @@ export const ABCIQueryResponse = {
   create(base?: DeepPartial<ABCIQueryResponse>): ABCIQueryResponse {
     return ABCIQueryResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ABCIQueryResponse>): ABCIQueryResponse {
     const message = createBaseABCIQueryResponse();
     message.code = object.code ?? 0;
@@ -1685,6 +1702,8 @@ function createBaseProofOp(): ProofOp {
 }
 
 export const ProofOp = {
+  $type: "cosmos.base.tendermint.v1beta1.ProofOp" as const,
+
   encode(message: ProofOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -1760,7 +1779,6 @@ export const ProofOp = {
   create(base?: DeepPartial<ProofOp>): ProofOp {
     return ProofOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProofOp>): ProofOp {
     const message = createBaseProofOp();
     message.type = object.type ?? "";
@@ -1775,6 +1793,8 @@ function createBaseProofOps(): ProofOps {
 }
 
 export const ProofOps = {
+  $type: "cosmos.base.tendermint.v1beta1.ProofOps" as const,
+
   encode(message: ProofOps, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.ops) {
       ProofOp.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1820,7 +1840,6 @@ export const ProofOps = {
   create(base?: DeepPartial<ProofOps>): ProofOps {
     return ProofOps.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProofOps>): ProofOps {
     const message = createBaseProofOps();
     message.ops = object.ops?.map((e) => ProofOp.fromPartial(e)) || [];

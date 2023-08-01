@@ -31,6 +31,8 @@ function createBaseMinter(): Minter {
 }
 
 export const Minter = {
+  $type: "cosmos.mint.v1beta1.Minter" as const,
+
   encode(message: Minter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflation !== "") {
       writer.uint32(10).string(message.inflation);
@@ -92,7 +94,6 @@ export const Minter = {
   create(base?: DeepPartial<Minter>): Minter {
     return Minter.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.inflation = object.inflation ?? "";
@@ -113,6 +114,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.mint.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mintDenom !== "") {
       writer.uint32(10).string(message.mintDenom);
@@ -230,7 +233,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintDenom = object.mintDenom ?? "";

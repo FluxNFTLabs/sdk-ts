@@ -122,6 +122,8 @@ function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
 }
 
 export const MsgSetWithdrawAddress = {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddress" as const,
+
   encode(message: MsgSetWithdrawAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -183,7 +185,6 @@ export const MsgSetWithdrawAddress = {
   create(base?: DeepPartial<MsgSetWithdrawAddress>): MsgSetWithdrawAddress {
     return MsgSetWithdrawAddress.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSetWithdrawAddress>): MsgSetWithdrawAddress {
     const message = createBaseMsgSetWithdrawAddress();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -197,6 +198,8 @@ function createBaseMsgSetWithdrawAddressResponse(): MsgSetWithdrawAddressRespons
 }
 
 export const MsgSetWithdrawAddressResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddressResponse" as const,
+
   encode(_: MsgSetWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -229,7 +232,6 @@ export const MsgSetWithdrawAddressResponse = {
   create(base?: DeepPartial<MsgSetWithdrawAddressResponse>): MsgSetWithdrawAddressResponse {
     return MsgSetWithdrawAddressResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSetWithdrawAddressResponse>): MsgSetWithdrawAddressResponse {
     const message = createBaseMsgSetWithdrawAddressResponse();
     return message;
@@ -241,6 +243,8 @@ function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
 }
 
 export const MsgWithdrawDelegatorReward = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward" as const,
+
   encode(message: MsgWithdrawDelegatorReward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -302,7 +306,6 @@ export const MsgWithdrawDelegatorReward = {
   create(base?: DeepPartial<MsgWithdrawDelegatorReward>): MsgWithdrawDelegatorReward {
     return MsgWithdrawDelegatorReward.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorReward>): MsgWithdrawDelegatorReward {
     const message = createBaseMsgWithdrawDelegatorReward();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -316,6 +319,8 @@ function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRew
 }
 
 export const MsgWithdrawDelegatorRewardResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse" as const,
+
   encode(message: MsgWithdrawDelegatorRewardResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -361,7 +366,6 @@ export const MsgWithdrawDelegatorRewardResponse = {
   create(base?: DeepPartial<MsgWithdrawDelegatorRewardResponse>): MsgWithdrawDelegatorRewardResponse {
     return MsgWithdrawDelegatorRewardResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorRewardResponse>): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
@@ -374,6 +378,8 @@ function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommiss
 }
 
 export const MsgWithdrawValidatorCommission = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission" as const,
+
   encode(message: MsgWithdrawValidatorCommission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -419,7 +425,6 @@ export const MsgWithdrawValidatorCommission = {
   create(base?: DeepPartial<MsgWithdrawValidatorCommission>): MsgWithdrawValidatorCommission {
     return MsgWithdrawValidatorCommission.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommission>): MsgWithdrawValidatorCommission {
     const message = createBaseMsgWithdrawValidatorCommission();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -432,6 +437,8 @@ function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidato
 }
 
 export const MsgWithdrawValidatorCommissionResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse" as const,
+
   encode(message: MsgWithdrawValidatorCommissionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -477,7 +484,6 @@ export const MsgWithdrawValidatorCommissionResponse = {
   create(base?: DeepPartial<MsgWithdrawValidatorCommissionResponse>): MsgWithdrawValidatorCommissionResponse {
     return MsgWithdrawValidatorCommissionResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommissionResponse>): MsgWithdrawValidatorCommissionResponse {
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
@@ -490,6 +496,8 @@ function createBaseMsgFundCommunityPool(): MsgFundCommunityPool {
 }
 
 export const MsgFundCommunityPool = {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPool" as const,
+
   encode(message: MsgFundCommunityPool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -551,7 +559,6 @@ export const MsgFundCommunityPool = {
   create(base?: DeepPartial<MsgFundCommunityPool>): MsgFundCommunityPool {
     return MsgFundCommunityPool.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgFundCommunityPool>): MsgFundCommunityPool {
     const message = createBaseMsgFundCommunityPool();
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
@@ -565,6 +572,8 @@ function createBaseMsgFundCommunityPoolResponse(): MsgFundCommunityPoolResponse 
 }
 
 export const MsgFundCommunityPoolResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgFundCommunityPoolResponse" as const,
+
   encode(_: MsgFundCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -597,7 +606,6 @@ export const MsgFundCommunityPoolResponse = {
   create(base?: DeepPartial<MsgFundCommunityPoolResponse>): MsgFundCommunityPoolResponse {
     return MsgFundCommunityPoolResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgFundCommunityPoolResponse>): MsgFundCommunityPoolResponse {
     const message = createBaseMsgFundCommunityPoolResponse();
     return message;
@@ -609,6 +617,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.distribution.v1beta1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -670,7 +680,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -686,6 +695,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -718,7 +729,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -730,6 +740,8 @@ function createBaseMsgCommunityPoolSpend(): MsgCommunityPoolSpend {
 }
 
 export const MsgCommunityPoolSpend = {
+  $type: "cosmos.distribution.v1beta1.MsgCommunityPoolSpend" as const,
+
   encode(message: MsgCommunityPoolSpend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -805,7 +817,6 @@ export const MsgCommunityPoolSpend = {
   create(base?: DeepPartial<MsgCommunityPoolSpend>): MsgCommunityPoolSpend {
     return MsgCommunityPoolSpend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCommunityPoolSpend>): MsgCommunityPoolSpend {
     const message = createBaseMsgCommunityPoolSpend();
     message.authority = object.authority ?? "";
@@ -820,6 +831,8 @@ function createBaseMsgCommunityPoolSpendResponse(): MsgCommunityPoolSpendRespons
 }
 
 export const MsgCommunityPoolSpendResponse = {
+  $type: "cosmos.distribution.v1beta1.MsgCommunityPoolSpendResponse" as const,
+
   encode(_: MsgCommunityPoolSpendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -852,7 +865,6 @@ export const MsgCommunityPoolSpendResponse = {
   create(base?: DeepPartial<MsgCommunityPoolSpendResponse>): MsgCommunityPoolSpendResponse {
     return MsgCommunityPoolSpendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCommunityPoolSpendResponse>): MsgCommunityPoolSpendResponse {
     const message = createBaseMsgCommunityPoolSpendResponse();
     return message;

@@ -13,6 +13,8 @@ function createBaseInterchainAccount(): InterchainAccount {
 }
 
 export const InterchainAccount = {
+  $type: "ibc.applications.interchain_accounts.v1.InterchainAccount" as const,
+
   encode(message: InterchainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
@@ -74,7 +76,6 @@ export const InterchainAccount = {
   create(base?: DeepPartial<InterchainAccount>): InterchainAccount {
     return InterchainAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InterchainAccount>): InterchainAccount {
     const message = createBaseInterchainAccount();
     message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)

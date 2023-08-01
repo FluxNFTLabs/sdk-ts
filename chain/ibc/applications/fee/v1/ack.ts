@@ -16,6 +16,8 @@ function createBaseIncentivizedAcknowledgement(): IncentivizedAcknowledgement {
 }
 
 export const IncentivizedAcknowledgement = {
+  $type: "ibc.applications.fee.v1.IncentivizedAcknowledgement" as const,
+
   encode(message: IncentivizedAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.appAcknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.appAcknowledgement);
@@ -93,7 +95,6 @@ export const IncentivizedAcknowledgement = {
   create(base?: DeepPartial<IncentivizedAcknowledgement>): IncentivizedAcknowledgement {
     return IncentivizedAcknowledgement.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IncentivizedAcknowledgement>): IncentivizedAcknowledgement {
     const message = createBaseIncentivizedAcknowledgement();
     message.appAcknowledgement = object.appAcknowledgement ?? new Uint8Array(0);

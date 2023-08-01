@@ -17,6 +17,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "ibc.applications.interchain_accounts.host.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hostEnabled === true) {
       writer.uint32(8).bool(message.hostEnabled);
@@ -78,7 +80,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.hostEnabled = object.hostEnabled ?? false;

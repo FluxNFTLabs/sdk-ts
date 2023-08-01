@@ -52,6 +52,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.app.runtime.v1alpha1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.appName !== "") {
       writer.uint32(10).string(message.appName);
@@ -171,7 +173,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.appName = object.appName ?? "";
@@ -189,6 +190,8 @@ function createBaseStoreKeyConfig(): StoreKeyConfig {
 }
 
 export const StoreKeyConfig = {
+  $type: "cosmos.app.runtime.v1alpha1.StoreKeyConfig" as const,
+
   encode(message: StoreKeyConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moduleName !== "") {
       writer.uint32(10).string(message.moduleName);
@@ -250,7 +253,6 @@ export const StoreKeyConfig = {
   create(base?: DeepPartial<StoreKeyConfig>): StoreKeyConfig {
     return StoreKeyConfig.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StoreKeyConfig>): StoreKeyConfig {
     const message = createBaseStoreKeyConfig();
     message.moduleName = object.moduleName ?? "";

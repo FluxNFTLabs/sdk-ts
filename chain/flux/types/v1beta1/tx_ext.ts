@@ -25,6 +25,8 @@ function createBaseExtensionOptionsWeb3Tx(): ExtensionOptionsWeb3Tx {
 }
 
 export const ExtensionOptionsWeb3Tx = {
+  $type: "flux.types.v1beta1.ExtensionOptionsWeb3Tx" as const,
+
   encode(message: ExtensionOptionsWeb3Tx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.typedDataChainID !== "0") {
       writer.uint32(8).uint64(message.typedDataChainID);
@@ -100,7 +102,6 @@ export const ExtensionOptionsWeb3Tx = {
   create(base?: DeepPartial<ExtensionOptionsWeb3Tx>): ExtensionOptionsWeb3Tx {
     return ExtensionOptionsWeb3Tx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ExtensionOptionsWeb3Tx>): ExtensionOptionsWeb3Tx {
     const message = createBaseExtensionOptionsWeb3Tx();
     message.typedDataChainID = object.typedDataChainID ?? "0";

@@ -39,6 +39,8 @@ function createBaseMsgIBCSend(): MsgIBCSend {
 }
 
 export const MsgIBCSend = {
+  $type: "cosmwasm.wasm.v1.MsgIBCSend" as const,
+
   encode(message: MsgIBCSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== "") {
       writer.uint32(18).string(message.channel);
@@ -128,7 +130,6 @@ export const MsgIBCSend = {
   create(base?: DeepPartial<MsgIBCSend>): MsgIBCSend {
     return MsgIBCSend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
@@ -144,6 +145,8 @@ function createBaseMsgIBCSendResponse(): MsgIBCSendResponse {
 }
 
 export const MsgIBCSendResponse = {
+  $type: "cosmwasm.wasm.v1.MsgIBCSendResponse" as const,
+
   encode(message: MsgIBCSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -189,7 +192,6 @@ export const MsgIBCSendResponse = {
   create(base?: DeepPartial<MsgIBCSendResponse>): MsgIBCSendResponse {
     return MsgIBCSendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgIBCSendResponse>): MsgIBCSendResponse {
     const message = createBaseMsgIBCSendResponse();
     message.sequence = object.sequence ?? "0";
@@ -202,6 +204,8 @@ function createBaseMsgIBCCloseChannel(): MsgIBCCloseChannel {
 }
 
 export const MsgIBCCloseChannel = {
+  $type: "cosmwasm.wasm.v1.MsgIBCCloseChannel" as const,
+
   encode(message: MsgIBCCloseChannel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== "") {
       writer.uint32(18).string(message.channel);
@@ -247,7 +251,6 @@ export const MsgIBCCloseChannel = {
   create(base?: DeepPartial<MsgIBCCloseChannel>): MsgIBCCloseChannel {
     return MsgIBCCloseChannel.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgIBCCloseChannel>): MsgIBCCloseChannel {
     const message = createBaseMsgIBCCloseChannel();
     message.channel = object.channel ?? "";

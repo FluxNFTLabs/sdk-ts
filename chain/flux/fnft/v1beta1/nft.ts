@@ -75,6 +75,8 @@ function createBaseClass(): Class {
 }
 
 export const Class = {
+  $type: "flux.fnft.v1beta1.Class" as const,
+
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -206,7 +208,6 @@ export const Class = {
   create(base?: DeepPartial<Class>): Class {
     return Class.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
     message.id = object.id ?? "";
@@ -242,6 +243,8 @@ function createBaseNFT(): NFT {
 }
 
 export const NFT = {
+  $type: "flux.fnft.v1beta1.NFT" as const,
+
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -501,7 +504,6 @@ export const NFT = {
   create(base?: DeepPartial<NFT>): NFT {
     return NFT.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
     message.classId = object.classId ?? "";
@@ -531,6 +533,8 @@ function createBaseSponsorship(): Sponsorship {
 }
 
 export const Sponsorship = {
+  $type: "flux.fnft.v1beta1.Sponsorship" as const,
+
   encode(message: Sponsorship, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
@@ -592,7 +596,6 @@ export const Sponsorship = {
   create(base?: DeepPartial<Sponsorship>): Sponsorship {
     return Sponsorship.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Sponsorship>): Sponsorship {
     const message = createBaseSponsorship();
     message.description = object.description ?? "";
@@ -606,6 +609,8 @@ function createBaseHolder(): Holder {
 }
 
 export const Holder = {
+  $type: "flux.fnft.v1beta1.Holder" as const,
+
   encode(message: Holder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -667,7 +672,6 @@ export const Holder = {
   create(base?: DeepPartial<Holder>): Holder {
     return Holder.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Holder>): Holder {
     const message = createBaseHolder();
     message.address = object.address ?? "";

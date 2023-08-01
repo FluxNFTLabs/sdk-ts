@@ -121,6 +121,8 @@ function createBaseMsgCreateClient(): MsgCreateClient {
 }
 
 export const MsgCreateClient = {
+  $type: "ibc.core.client.v1.MsgCreateClient" as const,
+
   encode(message: MsgCreateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -196,7 +198,6 @@ export const MsgCreateClient = {
   create(base?: DeepPartial<MsgCreateClient>): MsgCreateClient {
     return MsgCreateClient.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
     const message = createBaseMsgCreateClient();
     message.clientState = (object.clientState !== undefined && object.clientState !== null)
@@ -215,6 +216,8 @@ function createBaseMsgCreateClientResponse(): MsgCreateClientResponse {
 }
 
 export const MsgCreateClientResponse = {
+  $type: "ibc.core.client.v1.MsgCreateClientResponse" as const,
+
   encode(_: MsgCreateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -247,7 +250,6 @@ export const MsgCreateClientResponse = {
   create(base?: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
     return MsgCreateClientResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
@@ -259,6 +261,8 @@ function createBaseMsgUpdateClient(): MsgUpdateClient {
 }
 
 export const MsgUpdateClient = {
+  $type: "ibc.core.client.v1.MsgUpdateClient" as const,
+
   encode(message: MsgUpdateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -334,7 +338,6 @@ export const MsgUpdateClient = {
   create(base?: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     return MsgUpdateClient.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
     message.clientId = object.clientId ?? "";
@@ -351,6 +354,8 @@ function createBaseMsgUpdateClientResponse(): MsgUpdateClientResponse {
 }
 
 export const MsgUpdateClientResponse = {
+  $type: "ibc.core.client.v1.MsgUpdateClientResponse" as const,
+
   encode(_: MsgUpdateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -383,7 +388,6 @@ export const MsgUpdateClientResponse = {
   create(base?: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
@@ -402,6 +406,8 @@ function createBaseMsgUpgradeClient(): MsgUpgradeClient {
 }
 
 export const MsgUpgradeClient = {
+  $type: "ibc.core.client.v1.MsgUpgradeClient" as const,
+
   encode(message: MsgUpgradeClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -523,7 +529,6 @@ export const MsgUpgradeClient = {
   create(base?: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     return MsgUpgradeClient.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
     message.clientId = object.clientId ?? "";
@@ -545,6 +550,8 @@ function createBaseMsgUpgradeClientResponse(): MsgUpgradeClientResponse {
 }
 
 export const MsgUpgradeClientResponse = {
+  $type: "ibc.core.client.v1.MsgUpgradeClientResponse" as const,
+
   encode(_: MsgUpgradeClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -577,7 +584,6 @@ export const MsgUpgradeClientResponse = {
   create(base?: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
@@ -589,6 +595,8 @@ function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
 }
 
 export const MsgSubmitMisbehaviour = {
+  $type: "ibc.core.client.v1.MsgSubmitMisbehaviour" as const,
+
   encode(message: MsgSubmitMisbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -664,7 +672,6 @@ export const MsgSubmitMisbehaviour = {
   create(base?: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     return MsgSubmitMisbehaviour.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -681,6 +688,8 @@ function createBaseMsgSubmitMisbehaviourResponse(): MsgSubmitMisbehaviourRespons
 }
 
 export const MsgSubmitMisbehaviourResponse = {
+  $type: "ibc.core.client.v1.MsgSubmitMisbehaviourResponse" as const,
+
   encode(_: MsgSubmitMisbehaviourResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -713,7 +722,6 @@ export const MsgSubmitMisbehaviourResponse = {
   create(base?: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
@@ -725,6 +733,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "ibc.core.client.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -786,7 +796,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -802,6 +811,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "ibc.core.client.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -834,7 +845,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

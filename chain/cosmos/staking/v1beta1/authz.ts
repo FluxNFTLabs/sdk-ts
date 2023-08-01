@@ -94,6 +94,8 @@ function createBaseStakeAuthorization(): StakeAuthorization {
 }
 
 export const StakeAuthorization = {
+  $type: "cosmos.staking.v1beta1.StakeAuthorization" as const,
+
   encode(message: StakeAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxTokens !== undefined) {
       Coin.encode(message.maxTokens, writer.uint32(10).fork()).ldelim();
@@ -183,7 +185,6 @@ export const StakeAuthorization = {
   create(base?: DeepPartial<StakeAuthorization>): StakeAuthorization {
     return StakeAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StakeAuthorization>): StakeAuthorization {
     const message = createBaseStakeAuthorization();
     message.maxTokens = (object.maxTokens !== undefined && object.maxTokens !== null)
@@ -205,6 +206,8 @@ function createBaseStakeAuthorization_Validators(): StakeAuthorization_Validator
 }
 
 export const StakeAuthorization_Validators = {
+  $type: "cosmos.staking.v1beta1.StakeAuthorization.Validators" as const,
+
   encode(message: StakeAuthorization_Validators, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.address) {
       writer.uint32(10).string(v!);
@@ -250,7 +253,6 @@ export const StakeAuthorization_Validators = {
   create(base?: DeepPartial<StakeAuthorization_Validators>): StakeAuthorization_Validators {
     return StakeAuthorization_Validators.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StakeAuthorization_Validators>): StakeAuthorization_Validators {
     const message = createBaseStakeAuthorization_Validators();
     message.address = object.address?.map((e) => e) || [];

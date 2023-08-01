@@ -96,6 +96,8 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 }
 
 export const InterfaceDescriptor = {
+  $type: "cosmos_proto.InterfaceDescriptor" as const,
+
   encode(message: InterfaceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -157,7 +159,6 @@ export const InterfaceDescriptor = {
   create(base?: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
     return InterfaceDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
     message.name = object.name ?? "";
@@ -171,6 +172,8 @@ function createBaseScalarDescriptor(): ScalarDescriptor {
 }
 
 export const ScalarDescriptor = {
+  $type: "cosmos_proto.ScalarDescriptor" as const,
+
   encode(message: ScalarDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -258,7 +261,6 @@ export const ScalarDescriptor = {
   create(base?: DeepPartial<ScalarDescriptor>): ScalarDescriptor {
     return ScalarDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ScalarDescriptor>): ScalarDescriptor {
     const message = createBaseScalarDescriptor();
     message.name = object.name ?? "";

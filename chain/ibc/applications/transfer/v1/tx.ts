@@ -80,6 +80,8 @@ function createBaseMsgTransfer(): MsgTransfer {
 }
 
 export const MsgTransfer = {
+  $type: "ibc.applications.transfer.v1.MsgTransfer" as const,
+
   encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
@@ -225,7 +227,6 @@ export const MsgTransfer = {
   create(base?: DeepPartial<MsgTransfer>): MsgTransfer {
     return MsgTransfer.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
     const message = createBaseMsgTransfer();
     message.sourcePort = object.sourcePort ?? "";
@@ -247,6 +248,8 @@ function createBaseMsgTransferResponse(): MsgTransferResponse {
 }
 
 export const MsgTransferResponse = {
+  $type: "ibc.applications.transfer.v1.MsgTransferResponse" as const,
+
   encode(message: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -292,7 +295,6 @@ export const MsgTransferResponse = {
   create(base?: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     return MsgTransferResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     message.sequence = object.sequence ?? "0";
@@ -305,6 +307,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "ibc.applications.transfer.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -366,7 +370,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -382,6 +385,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "ibc.applications.transfer.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -414,7 +419,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

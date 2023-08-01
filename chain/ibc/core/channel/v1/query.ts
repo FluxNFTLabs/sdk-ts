@@ -374,6 +374,8 @@ function createBaseQueryChannelRequest(): QueryChannelRequest {
 }
 
 export const QueryChannelRequest = {
+  $type: "ibc.core.channel.v1.QueryChannelRequest" as const,
+
   encode(message: QueryChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -435,7 +437,6 @@ export const QueryChannelRequest = {
   create(base?: DeepPartial<QueryChannelRequest>): QueryChannelRequest {
     return QueryChannelRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelRequest>): QueryChannelRequest {
     const message = createBaseQueryChannelRequest();
     message.portId = object.portId ?? "";
@@ -449,6 +450,8 @@ function createBaseQueryChannelResponse(): QueryChannelResponse {
 }
 
 export const QueryChannelResponse = {
+  $type: "ibc.core.channel.v1.QueryChannelResponse" as const,
+
   encode(message: QueryChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(10).fork()).ldelim();
@@ -524,7 +527,6 @@ export const QueryChannelResponse = {
   create(base?: DeepPartial<QueryChannelResponse>): QueryChannelResponse {
     return QueryChannelResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelResponse>): QueryChannelResponse {
     const message = createBaseQueryChannelResponse();
     message.channel = (object.channel !== undefined && object.channel !== null)
@@ -543,6 +545,8 @@ function createBaseQueryChannelsRequest(): QueryChannelsRequest {
 }
 
 export const QueryChannelsRequest = {
+  $type: "ibc.core.channel.v1.QueryChannelsRequest" as const,
+
   encode(message: QueryChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -588,7 +592,6 @@ export const QueryChannelsRequest = {
   create(base?: DeepPartial<QueryChannelsRequest>): QueryChannelsRequest {
     return QueryChannelsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelsRequest>): QueryChannelsRequest {
     const message = createBaseQueryChannelsRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -603,6 +606,8 @@ function createBaseQueryChannelsResponse(): QueryChannelsResponse {
 }
 
 export const QueryChannelsResponse = {
+  $type: "ibc.core.channel.v1.QueryChannelsResponse" as const,
+
   encode(message: QueryChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -678,7 +683,6 @@ export const QueryChannelsResponse = {
   create(base?: DeepPartial<QueryChannelsResponse>): QueryChannelsResponse {
     return QueryChannelsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelsResponse>): QueryChannelsResponse {
     const message = createBaseQueryChannelsResponse();
     message.channels = object.channels?.map((e) => IdentifiedChannel.fromPartial(e)) || [];
@@ -697,6 +701,8 @@ function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequ
 }
 
 export const QueryConnectionChannelsRequest = {
+  $type: "ibc.core.channel.v1.QueryConnectionChannelsRequest" as const,
+
   encode(message: QueryConnectionChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== "") {
       writer.uint32(10).string(message.connection);
@@ -758,7 +764,6 @@ export const QueryConnectionChannelsRequest = {
   create(base?: DeepPartial<QueryConnectionChannelsRequest>): QueryConnectionChannelsRequest {
     return QueryConnectionChannelsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionChannelsRequest>): QueryConnectionChannelsRequest {
     const message = createBaseQueryConnectionChannelsRequest();
     message.connection = object.connection ?? "";
@@ -774,6 +779,8 @@ function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsRes
 }
 
 export const QueryConnectionChannelsResponse = {
+  $type: "ibc.core.channel.v1.QueryConnectionChannelsResponse" as const,
+
   encode(message: QueryConnectionChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -849,7 +856,6 @@ export const QueryConnectionChannelsResponse = {
   create(base?: DeepPartial<QueryConnectionChannelsResponse>): QueryConnectionChannelsResponse {
     return QueryConnectionChannelsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionChannelsResponse>): QueryConnectionChannelsResponse {
     const message = createBaseQueryConnectionChannelsResponse();
     message.channels = object.channels?.map((e) => IdentifiedChannel.fromPartial(e)) || [];
@@ -868,6 +874,8 @@ function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequ
 }
 
 export const QueryChannelClientStateRequest = {
+  $type: "ibc.core.channel.v1.QueryChannelClientStateRequest" as const,
+
   encode(message: QueryChannelClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -929,7 +937,6 @@ export const QueryChannelClientStateRequest = {
   create(base?: DeepPartial<QueryChannelClientStateRequest>): QueryChannelClientStateRequest {
     return QueryChannelClientStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelClientStateRequest>): QueryChannelClientStateRequest {
     const message = createBaseQueryChannelClientStateRequest();
     message.portId = object.portId ?? "";
@@ -943,6 +950,8 @@ function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateRes
 }
 
 export const QueryChannelClientStateResponse = {
+  $type: "ibc.core.channel.v1.QueryChannelClientStateResponse" as const,
+
   encode(message: QueryChannelClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
@@ -1020,7 +1029,6 @@ export const QueryChannelClientStateResponse = {
   create(base?: DeepPartial<QueryChannelClientStateResponse>): QueryChannelClientStateResponse {
     return QueryChannelClientStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelClientStateResponse>): QueryChannelClientStateResponse {
     const message = createBaseQueryChannelClientStateResponse();
     message.identifiedClientState =
@@ -1040,6 +1048,8 @@ function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusSta
 }
 
 export const QueryChannelConsensusStateRequest = {
+  $type: "ibc.core.channel.v1.QueryChannelConsensusStateRequest" as const,
+
   encode(message: QueryChannelConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1129,7 +1139,6 @@ export const QueryChannelConsensusStateRequest = {
   create(base?: DeepPartial<QueryChannelConsensusStateRequest>): QueryChannelConsensusStateRequest {
     return QueryChannelConsensusStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelConsensusStateRequest>): QueryChannelConsensusStateRequest {
     const message = createBaseQueryChannelConsensusStateRequest();
     message.portId = object.portId ?? "";
@@ -1145,6 +1154,8 @@ function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusSt
 }
 
 export const QueryChannelConsensusStateResponse = {
+  $type: "ibc.core.channel.v1.QueryChannelConsensusStateResponse" as const,
+
   encode(message: QueryChannelConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -1234,7 +1245,6 @@ export const QueryChannelConsensusStateResponse = {
   create(base?: DeepPartial<QueryChannelConsensusStateResponse>): QueryChannelConsensusStateResponse {
     return QueryChannelConsensusStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryChannelConsensusStateResponse>): QueryChannelConsensusStateResponse {
     const message = createBaseQueryChannelConsensusStateResponse();
     message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
@@ -1254,6 +1264,8 @@ function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest 
 }
 
 export const QueryPacketCommitmentRequest = {
+  $type: "ibc.core.channel.v1.QueryPacketCommitmentRequest" as const,
+
   encode(message: QueryPacketCommitmentRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1329,7 +1341,6 @@ export const QueryPacketCommitmentRequest = {
   create(base?: DeepPartial<QueryPacketCommitmentRequest>): QueryPacketCommitmentRequest {
     return QueryPacketCommitmentRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketCommitmentRequest>): QueryPacketCommitmentRequest {
     const message = createBaseQueryPacketCommitmentRequest();
     message.portId = object.portId ?? "";
@@ -1344,6 +1355,8 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
 }
 
 export const QueryPacketCommitmentResponse = {
+  $type: "ibc.core.channel.v1.QueryPacketCommitmentResponse" as const,
+
   encode(message: QueryPacketCommitmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commitment.length !== 0) {
       writer.uint32(10).bytes(message.commitment);
@@ -1419,7 +1432,6 @@ export const QueryPacketCommitmentResponse = {
   create(base?: DeepPartial<QueryPacketCommitmentResponse>): QueryPacketCommitmentResponse {
     return QueryPacketCommitmentResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketCommitmentResponse>): QueryPacketCommitmentResponse {
     const message = createBaseQueryPacketCommitmentResponse();
     message.commitment = object.commitment ?? new Uint8Array(0);
@@ -1436,6 +1448,8 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
 }
 
 export const QueryPacketCommitmentsRequest = {
+  $type: "ibc.core.channel.v1.QueryPacketCommitmentsRequest" as const,
+
   encode(message: QueryPacketCommitmentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1511,7 +1525,6 @@ export const QueryPacketCommitmentsRequest = {
   create(base?: DeepPartial<QueryPacketCommitmentsRequest>): QueryPacketCommitmentsRequest {
     return QueryPacketCommitmentsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketCommitmentsRequest>): QueryPacketCommitmentsRequest {
     const message = createBaseQueryPacketCommitmentsRequest();
     message.portId = object.portId ?? "";
@@ -1528,6 +1541,8 @@ function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsRespo
 }
 
 export const QueryPacketCommitmentsResponse = {
+  $type: "ibc.core.channel.v1.QueryPacketCommitmentsResponse" as const,
+
   encode(message: QueryPacketCommitmentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commitments) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1605,7 +1620,6 @@ export const QueryPacketCommitmentsResponse = {
   create(base?: DeepPartial<QueryPacketCommitmentsResponse>): QueryPacketCommitmentsResponse {
     return QueryPacketCommitmentsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketCommitmentsResponse>): QueryPacketCommitmentsResponse {
     const message = createBaseQueryPacketCommitmentsResponse();
     message.commitments = object.commitments?.map((e) => PacketState.fromPartial(e)) || [];
@@ -1624,6 +1638,8 @@ function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
 }
 
 export const QueryPacketReceiptRequest = {
+  $type: "ibc.core.channel.v1.QueryPacketReceiptRequest" as const,
+
   encode(message: QueryPacketReceiptRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1699,7 +1715,6 @@ export const QueryPacketReceiptRequest = {
   create(base?: DeepPartial<QueryPacketReceiptRequest>): QueryPacketReceiptRequest {
     return QueryPacketReceiptRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketReceiptRequest>): QueryPacketReceiptRequest {
     const message = createBaseQueryPacketReceiptRequest();
     message.portId = object.portId ?? "";
@@ -1714,6 +1729,8 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
 }
 
 export const QueryPacketReceiptResponse = {
+  $type: "ibc.core.channel.v1.QueryPacketReceiptResponse" as const,
+
   encode(message: QueryPacketReceiptResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.received === true) {
       writer.uint32(16).bool(message.received);
@@ -1789,7 +1806,6 @@ export const QueryPacketReceiptResponse = {
   create(base?: DeepPartial<QueryPacketReceiptResponse>): QueryPacketReceiptResponse {
     return QueryPacketReceiptResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketReceiptResponse>): QueryPacketReceiptResponse {
     const message = createBaseQueryPacketReceiptResponse();
     message.received = object.received ?? false;
@@ -1806,6 +1822,8 @@ function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgeme
 }
 
 export const QueryPacketAcknowledgementRequest = {
+  $type: "ibc.core.channel.v1.QueryPacketAcknowledgementRequest" as const,
+
   encode(message: QueryPacketAcknowledgementRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1881,7 +1899,6 @@ export const QueryPacketAcknowledgementRequest = {
   create(base?: DeepPartial<QueryPacketAcknowledgementRequest>): QueryPacketAcknowledgementRequest {
     return QueryPacketAcknowledgementRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketAcknowledgementRequest>): QueryPacketAcknowledgementRequest {
     const message = createBaseQueryPacketAcknowledgementRequest();
     message.portId = object.portId ?? "";
@@ -1896,6 +1913,8 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementResponse = {
+  $type: "ibc.core.channel.v1.QueryPacketAcknowledgementResponse" as const,
+
   encode(message: QueryPacketAcknowledgementResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.acknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.acknowledgement);
@@ -1971,7 +1990,6 @@ export const QueryPacketAcknowledgementResponse = {
   create(base?: DeepPartial<QueryPacketAcknowledgementResponse>): QueryPacketAcknowledgementResponse {
     return QueryPacketAcknowledgementResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketAcknowledgementResponse>): QueryPacketAcknowledgementResponse {
     const message = createBaseQueryPacketAcknowledgementResponse();
     message.acknowledgement = object.acknowledgement ?? new Uint8Array(0);
@@ -1988,6 +2006,8 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
 }
 
 export const QueryPacketAcknowledgementsRequest = {
+  $type: "ibc.core.channel.v1.QueryPacketAcknowledgementsRequest" as const,
+
   encode(message: QueryPacketAcknowledgementsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2091,7 +2111,6 @@ export const QueryPacketAcknowledgementsRequest = {
   create(base?: DeepPartial<QueryPacketAcknowledgementsRequest>): QueryPacketAcknowledgementsRequest {
     return QueryPacketAcknowledgementsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketAcknowledgementsRequest>): QueryPacketAcknowledgementsRequest {
     const message = createBaseQueryPacketAcknowledgementsRequest();
     message.portId = object.portId ?? "";
@@ -2109,6 +2128,8 @@ function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledge
 }
 
 export const QueryPacketAcknowledgementsResponse = {
+  $type: "ibc.core.channel.v1.QueryPacketAcknowledgementsResponse" as const,
+
   encode(message: QueryPacketAcknowledgementsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.acknowledgements) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2186,7 +2207,6 @@ export const QueryPacketAcknowledgementsResponse = {
   create(base?: DeepPartial<QueryPacketAcknowledgementsResponse>): QueryPacketAcknowledgementsResponse {
     return QueryPacketAcknowledgementsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPacketAcknowledgementsResponse>): QueryPacketAcknowledgementsResponse {
     const message = createBaseQueryPacketAcknowledgementsResponse();
     message.acknowledgements = object.acknowledgements?.map((e) => PacketState.fromPartial(e)) || [];
@@ -2205,6 +2225,8 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
 }
 
 export const QueryUnreceivedPacketsRequest = {
+  $type: "ibc.core.channel.v1.QueryUnreceivedPacketsRequest" as const,
+
   encode(message: QueryUnreceivedPacketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2294,7 +2316,6 @@ export const QueryUnreceivedPacketsRequest = {
   create(base?: DeepPartial<QueryUnreceivedPacketsRequest>): QueryUnreceivedPacketsRequest {
     return QueryUnreceivedPacketsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnreceivedPacketsRequest>): QueryUnreceivedPacketsRequest {
     const message = createBaseQueryUnreceivedPacketsRequest();
     message.portId = object.portId ?? "";
@@ -2309,6 +2330,8 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 }
 
 export const QueryUnreceivedPacketsResponse = {
+  $type: "ibc.core.channel.v1.QueryUnreceivedPacketsResponse" as const,
+
   encode(message: QueryUnreceivedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.sequences) {
@@ -2382,7 +2405,6 @@ export const QueryUnreceivedPacketsResponse = {
   create(base?: DeepPartial<QueryUnreceivedPacketsResponse>): QueryUnreceivedPacketsResponse {
     return QueryUnreceivedPacketsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnreceivedPacketsResponse>): QueryUnreceivedPacketsResponse {
     const message = createBaseQueryUnreceivedPacketsResponse();
     message.sequences = object.sequences?.map((e) => e) || [];
@@ -2398,6 +2420,8 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
 }
 
 export const QueryUnreceivedAcksRequest = {
+  $type: "ibc.core.channel.v1.QueryUnreceivedAcksRequest" as const,
+
   encode(message: QueryUnreceivedAcksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2487,7 +2511,6 @@ export const QueryUnreceivedAcksRequest = {
   create(base?: DeepPartial<QueryUnreceivedAcksRequest>): QueryUnreceivedAcksRequest {
     return QueryUnreceivedAcksRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnreceivedAcksRequest>): QueryUnreceivedAcksRequest {
     const message = createBaseQueryUnreceivedAcksRequest();
     message.portId = object.portId ?? "";
@@ -2502,6 +2525,8 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 }
 
 export const QueryUnreceivedAcksResponse = {
+  $type: "ibc.core.channel.v1.QueryUnreceivedAcksResponse" as const,
+
   encode(message: QueryUnreceivedAcksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.sequences) {
@@ -2575,7 +2600,6 @@ export const QueryUnreceivedAcksResponse = {
   create(base?: DeepPartial<QueryUnreceivedAcksResponse>): QueryUnreceivedAcksResponse {
     return QueryUnreceivedAcksResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUnreceivedAcksResponse>): QueryUnreceivedAcksResponse {
     const message = createBaseQueryUnreceivedAcksResponse();
     message.sequences = object.sequences?.map((e) => e) || [];
@@ -2591,6 +2615,8 @@ function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRe
 }
 
 export const QueryNextSequenceReceiveRequest = {
+  $type: "ibc.core.channel.v1.QueryNextSequenceReceiveRequest" as const,
+
   encode(message: QueryNextSequenceReceiveRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2652,7 +2678,6 @@ export const QueryNextSequenceReceiveRequest = {
   create(base?: DeepPartial<QueryNextSequenceReceiveRequest>): QueryNextSequenceReceiveRequest {
     return QueryNextSequenceReceiveRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNextSequenceReceiveRequest>): QueryNextSequenceReceiveRequest {
     const message = createBaseQueryNextSequenceReceiveRequest();
     message.portId = object.portId ?? "";
@@ -2666,6 +2691,8 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
 }
 
 export const QueryNextSequenceReceiveResponse = {
+  $type: "ibc.core.channel.v1.QueryNextSequenceReceiveResponse" as const,
+
   encode(message: QueryNextSequenceReceiveResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nextSequenceReceive !== "0") {
       writer.uint32(8).uint64(message.nextSequenceReceive);
@@ -2741,7 +2768,6 @@ export const QueryNextSequenceReceiveResponse = {
   create(base?: DeepPartial<QueryNextSequenceReceiveResponse>): QueryNextSequenceReceiveResponse {
     return QueryNextSequenceReceiveResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNextSequenceReceiveResponse>): QueryNextSequenceReceiveResponse {
     const message = createBaseQueryNextSequenceReceiveResponse();
     message.nextSequenceReceive = object.nextSequenceReceive ?? "0";
@@ -2758,6 +2784,8 @@ function createBaseQueryNextSequenceSendRequest(): QueryNextSequenceSendRequest 
 }
 
 export const QueryNextSequenceSendRequest = {
+  $type: "ibc.core.channel.v1.QueryNextSequenceSendRequest" as const,
+
   encode(message: QueryNextSequenceSendRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -2819,7 +2847,6 @@ export const QueryNextSequenceSendRequest = {
   create(base?: DeepPartial<QueryNextSequenceSendRequest>): QueryNextSequenceSendRequest {
     return QueryNextSequenceSendRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNextSequenceSendRequest>): QueryNextSequenceSendRequest {
     const message = createBaseQueryNextSequenceSendRequest();
     message.portId = object.portId ?? "";
@@ -2833,6 +2860,8 @@ function createBaseQueryNextSequenceSendResponse(): QueryNextSequenceSendRespons
 }
 
 export const QueryNextSequenceSendResponse = {
+  $type: "ibc.core.channel.v1.QueryNextSequenceSendResponse" as const,
+
   encode(message: QueryNextSequenceSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nextSequenceSend !== "0") {
       writer.uint32(8).uint64(message.nextSequenceSend);
@@ -2908,7 +2937,6 @@ export const QueryNextSequenceSendResponse = {
   create(base?: DeepPartial<QueryNextSequenceSendResponse>): QueryNextSequenceSendResponse {
     return QueryNextSequenceSendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNextSequenceSendResponse>): QueryNextSequenceSendResponse {
     const message = createBaseQueryNextSequenceSendResponse();
     message.nextSequenceSend = object.nextSequenceSend ?? "0";

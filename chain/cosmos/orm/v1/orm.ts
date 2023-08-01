@@ -99,6 +99,8 @@ function createBaseTableDescriptor(): TableDescriptor {
 }
 
 export const TableDescriptor = {
+  $type: "cosmos.orm.v1.TableDescriptor" as const,
+
   encode(message: TableDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.primaryKey !== undefined) {
       PrimaryKeyDescriptor.encode(message.primaryKey, writer.uint32(10).fork()).ldelim();
@@ -174,7 +176,6 @@ export const TableDescriptor = {
   create(base?: DeepPartial<TableDescriptor>): TableDescriptor {
     return TableDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
     const message = createBaseTableDescriptor();
     message.primaryKey = (object.primaryKey !== undefined && object.primaryKey !== null)
@@ -191,6 +192,8 @@ function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
 }
 
 export const PrimaryKeyDescriptor = {
+  $type: "cosmos.orm.v1.PrimaryKeyDescriptor" as const,
+
   encode(message: PrimaryKeyDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
@@ -252,7 +255,6 @@ export const PrimaryKeyDescriptor = {
   create(base?: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
     return PrimaryKeyDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
     const message = createBasePrimaryKeyDescriptor();
     message.fields = object.fields ?? "";
@@ -266,6 +268,8 @@ function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
 }
 
 export const SecondaryIndexDescriptor = {
+  $type: "cosmos.orm.v1.SecondaryIndexDescriptor" as const,
+
   encode(message: SecondaryIndexDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
@@ -341,7 +345,6 @@ export const SecondaryIndexDescriptor = {
   create(base?: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor {
     return SecondaryIndexDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor {
     const message = createBaseSecondaryIndexDescriptor();
     message.fields = object.fields ?? "";
@@ -356,6 +359,8 @@ function createBaseSingletonDescriptor(): SingletonDescriptor {
 }
 
 export const SingletonDescriptor = {
+  $type: "cosmos.orm.v1.SingletonDescriptor" as const,
+
   encode(message: SingletonDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
@@ -401,7 +406,6 @@ export const SingletonDescriptor = {
   create(base?: DeepPartial<SingletonDescriptor>): SingletonDescriptor {
     return SingletonDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SingletonDescriptor>): SingletonDescriptor {
     const message = createBaseSingletonDescriptor();
     message.id = object.id ?? 0;

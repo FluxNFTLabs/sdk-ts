@@ -44,6 +44,8 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
 }
 
 export const MsgVerifyInvariant = {
+  $type: "cosmos.crisis.v1beta1.MsgVerifyInvariant" as const,
+
   encode(message: MsgVerifyInvariant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -119,7 +121,6 @@ export const MsgVerifyInvariant = {
   create(base?: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
     return MsgVerifyInvariant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
     const message = createBaseMsgVerifyInvariant();
     message.sender = object.sender ?? "";
@@ -134,6 +135,8 @@ function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
 }
 
 export const MsgVerifyInvariantResponse = {
+  $type: "cosmos.crisis.v1beta1.MsgVerifyInvariantResponse" as const,
+
   encode(_: MsgVerifyInvariantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -166,7 +169,6 @@ export const MsgVerifyInvariantResponse = {
   create(base?: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     return MsgVerifyInvariantResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
     const message = createBaseMsgVerifyInvariantResponse();
     return message;
@@ -178,6 +180,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.crisis.v1beta1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -239,7 +243,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -255,6 +258,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.crisis.v1beta1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -287,7 +292,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

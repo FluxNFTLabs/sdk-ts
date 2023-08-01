@@ -19,6 +19,8 @@ function createBaseGetNFTsRequest(): GetNFTsRequest {
 }
 
 export const GetNFTsRequest = {
+  $type: "flux.indexer.fnft.GetNFTsRequest" as const,
+
   encode(message: GetNFTsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -94,7 +96,6 @@ export const GetNFTsRequest = {
   create(base?: DeepPartial<GetNFTsRequest>): GetNFTsRequest {
     return GetNFTsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetNFTsRequest>): GetNFTsRequest {
     const message = createBaseGetNFTsRequest();
     message.classId = object.classId ?? "";
@@ -109,6 +110,8 @@ function createBaseGetNFTsResponse(): GetNFTsResponse {
 }
 
 export const GetNFTsResponse = {
+  $type: "flux.indexer.fnft.GetNFTsResponse" as const,
+
   encode(message: GetNFTsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.nft) {
       NFT.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -154,7 +157,6 @@ export const GetNFTsResponse = {
   create(base?: DeepPartial<GetNFTsResponse>): GetNFTsResponse {
     return GetNFTsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetNFTsResponse>): GetNFTsResponse {
     const message = createBaseGetNFTsResponse();
     message.nft = object.nft?.map((e) => NFT.fromPartial(e)) || [];

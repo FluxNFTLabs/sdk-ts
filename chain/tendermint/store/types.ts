@@ -12,6 +12,8 @@ function createBaseBlockStoreState(): BlockStoreState {
 }
 
 export const BlockStoreState = {
+  $type: "tendermint.store.BlockStoreState" as const,
+
   encode(message: BlockStoreState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.base !== "0") {
       writer.uint32(8).int64(message.base);
@@ -73,7 +75,6 @@ export const BlockStoreState = {
   create(base?: DeepPartial<BlockStoreState>): BlockStoreState {
     return BlockStoreState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockStoreState>): BlockStoreState {
     const message = createBaseBlockStoreState();
     message.base = object.base ?? "0";

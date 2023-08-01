@@ -135,6 +135,8 @@ function createBaseGetRequest(): GetRequest {
 }
 
 export const GetRequest = {
+  $type: "cosmos.orm.query.v1alpha1.GetRequest" as const,
+
   encode(message: GetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
@@ -210,7 +212,6 @@ export const GetRequest = {
   create(base?: DeepPartial<GetRequest>): GetRequest {
     return GetRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetRequest>): GetRequest {
     const message = createBaseGetRequest();
     message.messageName = object.messageName ?? "";
@@ -225,6 +226,8 @@ function createBaseGetResponse(): GetResponse {
 }
 
 export const GetResponse = {
+  $type: "cosmos.orm.query.v1alpha1.GetResponse" as const,
+
   encode(message: GetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== undefined) {
       Any.encode(message.result, writer.uint32(10).fork()).ldelim();
@@ -270,7 +273,6 @@ export const GetResponse = {
   create(base?: DeepPartial<GetResponse>): GetResponse {
     return GetResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetResponse>): GetResponse {
     const message = createBaseGetResponse();
     message.result = (object.result !== undefined && object.result !== null)
@@ -285,6 +287,8 @@ function createBaseListRequest(): ListRequest {
 }
 
 export const ListRequest = {
+  $type: "cosmos.orm.query.v1alpha1.ListRequest" as const,
+
   encode(message: ListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.messageName !== "") {
       writer.uint32(10).string(message.messageName);
@@ -388,7 +392,6 @@ export const ListRequest = {
   create(base?: DeepPartial<ListRequest>): ListRequest {
     return ListRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListRequest>): ListRequest {
     const message = createBaseListRequest();
     message.messageName = object.messageName ?? "";
@@ -411,6 +414,8 @@ function createBaseListRequest_Prefix(): ListRequest_Prefix {
 }
 
 export const ListRequest_Prefix = {
+  $type: "cosmos.orm.query.v1alpha1.ListRequest.Prefix" as const,
+
   encode(message: ListRequest_Prefix, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.values) {
       IndexValue.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -456,7 +461,6 @@ export const ListRequest_Prefix = {
   create(base?: DeepPartial<ListRequest_Prefix>): ListRequest_Prefix {
     return ListRequest_Prefix.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListRequest_Prefix>): ListRequest_Prefix {
     const message = createBaseListRequest_Prefix();
     message.values = object.values?.map((e) => IndexValue.fromPartial(e)) || [];
@@ -469,6 +473,8 @@ function createBaseListRequest_Range(): ListRequest_Range {
 }
 
 export const ListRequest_Range = {
+  $type: "cosmos.orm.query.v1alpha1.ListRequest.Range" as const,
+
   encode(message: ListRequest_Range, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.start) {
       IndexValue.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -530,7 +536,6 @@ export const ListRequest_Range = {
   create(base?: DeepPartial<ListRequest_Range>): ListRequest_Range {
     return ListRequest_Range.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListRequest_Range>): ListRequest_Range {
     const message = createBaseListRequest_Range();
     message.start = object.start?.map((e) => IndexValue.fromPartial(e)) || [];
@@ -544,6 +549,8 @@ function createBaseListResponse(): ListResponse {
 }
 
 export const ListResponse = {
+  $type: "cosmos.orm.query.v1alpha1.ListResponse" as const,
+
   encode(message: ListResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.results) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -605,7 +612,6 @@ export const ListResponse = {
   create(base?: DeepPartial<ListResponse>): ListResponse {
     return ListResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListResponse>): ListResponse {
     const message = createBaseListResponse();
     message.results = object.results?.map((e) => Any.fromPartial(e)) || [];
@@ -630,6 +636,8 @@ function createBaseIndexValue(): IndexValue {
 }
 
 export const IndexValue = {
+  $type: "cosmos.orm.query.v1alpha1.IndexValue" as const,
+
   encode(message: IndexValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.uint !== undefined) {
       writer.uint32(8).uint64(message.uint);
@@ -775,7 +783,6 @@ export const IndexValue = {
   create(base?: DeepPartial<IndexValue>): IndexValue {
     return IndexValue.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IndexValue>): IndexValue {
     const message = createBaseIndexValue();
     message.uint = object.uint ?? undefined;

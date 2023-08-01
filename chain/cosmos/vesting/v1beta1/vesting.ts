@@ -66,6 +66,8 @@ function createBaseBaseVestingAccount(): BaseVestingAccount {
 }
 
 export const BaseVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.BaseVestingAccount" as const,
+
   encode(message: BaseVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
@@ -173,7 +175,6 @@ export const BaseVestingAccount = {
   create(base?: DeepPartial<BaseVestingAccount>): BaseVestingAccount {
     return BaseVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BaseVestingAccount>): BaseVestingAccount {
     const message = createBaseBaseVestingAccount();
     message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)
@@ -192,6 +193,8 @@ function createBaseContinuousVestingAccount(): ContinuousVestingAccount {
 }
 
 export const ContinuousVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.ContinuousVestingAccount" as const,
+
   encode(message: ContinuousVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
@@ -255,7 +258,6 @@ export const ContinuousVestingAccount = {
   create(base?: DeepPartial<ContinuousVestingAccount>): ContinuousVestingAccount {
     return ContinuousVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContinuousVestingAccount>): ContinuousVestingAccount {
     const message = createBaseContinuousVestingAccount();
     message.baseVestingAccount = (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null)
@@ -271,6 +273,8 @@ function createBaseDelayedVestingAccount(): DelayedVestingAccount {
 }
 
 export const DelayedVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.DelayedVestingAccount" as const,
+
   encode(message: DelayedVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
@@ -320,7 +324,6 @@ export const DelayedVestingAccount = {
   create(base?: DeepPartial<DelayedVestingAccount>): DelayedVestingAccount {
     return DelayedVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelayedVestingAccount>): DelayedVestingAccount {
     const message = createBaseDelayedVestingAccount();
     message.baseVestingAccount = (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null)
@@ -335,6 +338,8 @@ function createBasePeriod(): Period {
 }
 
 export const Period = {
+  $type: "cosmos.vesting.v1beta1.Period" as const,
+
   encode(message: Period, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.length !== "0") {
       writer.uint32(8).int64(message.length);
@@ -396,7 +401,6 @@ export const Period = {
   create(base?: DeepPartial<Period>): Period {
     return Period.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Period>): Period {
     const message = createBasePeriod();
     message.length = object.length ?? "0";
@@ -410,6 +414,8 @@ function createBasePeriodicVestingAccount(): PeriodicVestingAccount {
 }
 
 export const PeriodicVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.PeriodicVestingAccount" as const,
+
   encode(message: PeriodicVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
@@ -489,7 +495,6 @@ export const PeriodicVestingAccount = {
   create(base?: DeepPartial<PeriodicVestingAccount>): PeriodicVestingAccount {
     return PeriodicVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PeriodicVestingAccount>): PeriodicVestingAccount {
     const message = createBasePeriodicVestingAccount();
     message.baseVestingAccount = (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null)
@@ -506,6 +511,8 @@ function createBasePermanentLockedAccount(): PermanentLockedAccount {
 }
 
 export const PermanentLockedAccount = {
+  $type: "cosmos.vesting.v1beta1.PermanentLockedAccount" as const,
+
   encode(message: PermanentLockedAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
@@ -555,7 +562,6 @@ export const PermanentLockedAccount = {
   create(base?: DeepPartial<PermanentLockedAccount>): PermanentLockedAccount {
     return PermanentLockedAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PermanentLockedAccount>): PermanentLockedAccount {
     const message = createBasePermanentLockedAccount();
     message.baseVestingAccount = (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null)

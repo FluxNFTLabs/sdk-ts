@@ -17,6 +17,8 @@ function createBaseLegacyAminoPubKey(): LegacyAminoPubKey {
 }
 
 export const LegacyAminoPubKey = {
+  $type: "cosmos.crypto.multisig.LegacyAminoPubKey" as const,
+
   encode(message: LegacyAminoPubKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.threshold !== 0) {
       writer.uint32(8).uint32(message.threshold);
@@ -78,7 +80,6 @@ export const LegacyAminoPubKey = {
   create(base?: DeepPartial<LegacyAminoPubKey>): LegacyAminoPubKey {
     return LegacyAminoPubKey.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LegacyAminoPubKey>): LegacyAminoPubKey {
     const message = createBaseLegacyAminoPubKey();
     message.threshold = object.threshold ?? 0;

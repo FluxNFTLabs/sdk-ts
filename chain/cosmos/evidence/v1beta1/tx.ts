@@ -26,6 +26,8 @@ function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
 }
 
 export const MsgSubmitEvidence = {
+  $type: "cosmos.evidence.v1beta1.MsgSubmitEvidence" as const,
+
   encode(message: MsgSubmitEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.submitter !== "") {
       writer.uint32(10).string(message.submitter);
@@ -87,7 +89,6 @@ export const MsgSubmitEvidence = {
   create(base?: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
     return MsgSubmitEvidence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitEvidence>): MsgSubmitEvidence {
     const message = createBaseMsgSubmitEvidence();
     message.submitter = object.submitter ?? "";
@@ -103,6 +104,8 @@ function createBaseMsgSubmitEvidenceResponse(): MsgSubmitEvidenceResponse {
 }
 
 export const MsgSubmitEvidenceResponse = {
+  $type: "cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse" as const,
+
   encode(message: MsgSubmitEvidenceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(34).bytes(message.hash);
@@ -148,7 +151,6 @@ export const MsgSubmitEvidenceResponse = {
   create(base?: DeepPartial<MsgSubmitEvidenceResponse>): MsgSubmitEvidenceResponse {
     return MsgSubmitEvidenceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitEvidenceResponse>): MsgSubmitEvidenceResponse {
     const message = createBaseMsgSubmitEvidenceResponse();
     message.hash = object.hash ?? new Uint8Array(0);

@@ -52,6 +52,8 @@ function createBaseGenericAuthorization(): GenericAuthorization {
 }
 
 export const GenericAuthorization = {
+  $type: "cosmos.authz.v1beta1.GenericAuthorization" as const,
+
   encode(message: GenericAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msg !== "") {
       writer.uint32(10).string(message.msg);
@@ -97,7 +99,6 @@ export const GenericAuthorization = {
   create(base?: DeepPartial<GenericAuthorization>): GenericAuthorization {
     return GenericAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenericAuthorization>): GenericAuthorization {
     const message = createBaseGenericAuthorization();
     message.msg = object.msg ?? "";
@@ -110,6 +111,8 @@ function createBaseGrant(): Grant {
 }
 
 export const Grant = {
+  $type: "cosmos.authz.v1beta1.Grant" as const,
+
   encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authorization !== undefined) {
       Any.encode(message.authorization, writer.uint32(10).fork()).ldelim();
@@ -171,7 +174,6 @@ export const Grant = {
   create(base?: DeepPartial<Grant>): Grant {
     return Grant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.authorization = (object.authorization !== undefined && object.authorization !== null)
@@ -187,6 +189,8 @@ function createBaseGrantAuthorization(): GrantAuthorization {
 }
 
 export const GrantAuthorization = {
+  $type: "cosmos.authz.v1beta1.GrantAuthorization" as const,
+
   encode(message: GrantAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -276,7 +280,6 @@ export const GrantAuthorization = {
   create(base?: DeepPartial<GrantAuthorization>): GrantAuthorization {
     return GrantAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GrantAuthorization>): GrantAuthorization {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
@@ -294,6 +297,8 @@ function createBaseGrantQueueItem(): GrantQueueItem {
 }
 
 export const GrantQueueItem = {
+  $type: "cosmos.authz.v1beta1.GrantQueueItem" as const,
+
   encode(message: GrantQueueItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.msgTypeUrls) {
       writer.uint32(10).string(v!);
@@ -339,7 +344,6 @@ export const GrantQueueItem = {
   create(base?: DeepPartial<GrantQueueItem>): GrantQueueItem {
     return GrantQueueItem.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GrantQueueItem>): GrantQueueItem {
     const message = createBaseGrantQueueItem();
     message.msgTypeUrls = object.msgTypeUrls?.map((e) => e) || [];

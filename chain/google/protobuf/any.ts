@@ -124,6 +124,8 @@ function createBaseAny(): Any {
 }
 
 export const Any = {
+  $type: "google.protobuf.Any" as const,
+
   encode(message: Any, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.typeUrl !== "") {
       writer.uint32(10).string(message.typeUrl);
@@ -185,7 +187,6 @@ export const Any = {
   create(base?: DeepPartial<Any>): Any {
     return Any.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Any>): Any {
     const message = createBaseAny();
     message.typeUrl = object.typeUrl ?? "";

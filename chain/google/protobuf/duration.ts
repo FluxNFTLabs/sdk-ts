@@ -85,6 +85,8 @@ function createBaseDuration(): Duration {
 }
 
 export const Duration = {
+  $type: "google.protobuf.Duration" as const,
+
   encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.seconds !== "0") {
       writer.uint32(8).int64(message.seconds);
@@ -146,7 +148,6 @@ export const Duration = {
   create(base?: DeepPartial<Duration>): Duration {
     return Duration.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
     message.seconds = object.seconds ?? "0";

@@ -38,6 +38,8 @@ function createBaseCoin(): Coin {
 }
 
 export const Coin = {
+  $type: "cosmos.base.v1beta1.Coin" as const,
+
   encode(message: Coin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -99,7 +101,6 @@ export const Coin = {
   create(base?: DeepPartial<Coin>): Coin {
     return Coin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Coin>): Coin {
     const message = createBaseCoin();
     message.denom = object.denom ?? "";
@@ -113,6 +114,8 @@ function createBaseDecCoin(): DecCoin {
 }
 
 export const DecCoin = {
+  $type: "cosmos.base.v1beta1.DecCoin" as const,
+
   encode(message: DecCoin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -174,7 +177,6 @@ export const DecCoin = {
   create(base?: DeepPartial<DecCoin>): DecCoin {
     return DecCoin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DecCoin>): DecCoin {
     const message = createBaseDecCoin();
     message.denom = object.denom ?? "";
@@ -188,6 +190,8 @@ function createBaseIntProto(): IntProto {
 }
 
 export const IntProto = {
+  $type: "cosmos.base.v1beta1.IntProto" as const,
+
   encode(message: IntProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.int !== "") {
       writer.uint32(10).string(message.int);
@@ -233,7 +237,6 @@ export const IntProto = {
   create(base?: DeepPartial<IntProto>): IntProto {
     return IntProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IntProto>): IntProto {
     const message = createBaseIntProto();
     message.int = object.int ?? "";
@@ -246,6 +249,8 @@ function createBaseDecProto(): DecProto {
 }
 
 export const DecProto = {
+  $type: "cosmos.base.v1beta1.DecProto" as const,
+
   encode(message: DecProto, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dec !== "") {
       writer.uint32(10).string(message.dec);
@@ -291,7 +296,6 @@ export const DecProto = {
   create(base?: DeepPartial<DecProto>): DecProto {
     return DecProto.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DecProto>): DecProto {
     const message = createBaseDecProto();
     message.dec = object.dec ?? "";

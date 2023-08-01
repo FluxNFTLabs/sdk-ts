@@ -37,6 +37,8 @@ function createBaseGetMetaDataRequest(): GetMetaDataRequest {
 }
 
 export const GetMetaDataRequest = {
+  $type: "flux.indexer.web3gw.GetMetaDataRequest" as const,
+
   encode(_: GetMetaDataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -69,7 +71,6 @@ export const GetMetaDataRequest = {
   create(base?: DeepPartial<GetMetaDataRequest>): GetMetaDataRequest {
     return GetMetaDataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<GetMetaDataRequest>): GetMetaDataRequest {
     const message = createBaseGetMetaDataRequest();
     return message;
@@ -81,6 +82,8 @@ function createBaseGetMetaDataResponse(): GetMetaDataResponse {
 }
 
 export const GetMetaDataResponse = {
+  $type: "flux.indexer.web3gw.GetMetaDataResponse" as const,
+
   encode(message: GetMetaDataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -170,7 +173,6 @@ export const GetMetaDataResponse = {
   create(base?: DeepPartial<GetMetaDataResponse>): GetMetaDataResponse {
     return GetMetaDataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetMetaDataResponse>): GetMetaDataResponse {
     const message = createBaseGetMetaDataResponse();
     message.address = object.address ?? "";
@@ -186,6 +188,8 @@ function createBaseSignProtoRequest(): SignProtoRequest {
 }
 
 export const SignProtoRequest = {
+  $type: "flux.indexer.web3gw.SignProtoRequest" as const,
+
   encode(message: SignProtoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -231,7 +235,6 @@ export const SignProtoRequest = {
   create(base?: DeepPartial<SignProtoRequest>): SignProtoRequest {
     return SignProtoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignProtoRequest>): SignProtoRequest {
     const message = createBaseSignProtoRequest();
     message.data = object.data ?? new Uint8Array(0);
@@ -244,6 +247,8 @@ function createBaseSignProtoResponse(): SignProtoResponse {
 }
 
 export const SignProtoResponse = {
+  $type: "flux.indexer.web3gw.SignProtoResponse" as const,
+
   encode(message: SignProtoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -305,7 +310,6 @@ export const SignProtoResponse = {
   create(base?: DeepPartial<SignProtoResponse>): SignProtoResponse {
     return SignProtoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignProtoResponse>): SignProtoResponse {
     const message = createBaseSignProtoResponse();
     message.hash = object.hash ?? new Uint8Array(0);
@@ -319,6 +323,8 @@ function createBaseSignJSONRequest(): SignJSONRequest {
 }
 
 export const SignJSONRequest = {
+  $type: "flux.indexer.web3gw.SignJSONRequest" as const,
+
   encode(message: SignJSONRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -364,7 +370,6 @@ export const SignJSONRequest = {
   create(base?: DeepPartial<SignJSONRequest>): SignJSONRequest {
     return SignJSONRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignJSONRequest>): SignJSONRequest {
     const message = createBaseSignJSONRequest();
     message.data = object.data ?? new Uint8Array(0);
@@ -377,6 +382,8 @@ function createBaseSignJSONResponse(): SignJSONResponse {
 }
 
 export const SignJSONResponse = {
+  $type: "flux.indexer.web3gw.SignJSONResponse" as const,
+
   encode(message: SignJSONResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -438,7 +445,6 @@ export const SignJSONResponse = {
   create(base?: DeepPartial<SignJSONResponse>): SignJSONResponse {
     return SignJSONResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignJSONResponse>): SignJSONResponse {
     const message = createBaseSignJSONResponse();
     message.hash = object.hash ?? new Uint8Array(0);

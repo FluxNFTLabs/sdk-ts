@@ -23,6 +23,8 @@ function createBaseParameterChangeProposal(): ParameterChangeProposal {
 }
 
 export const ParameterChangeProposal = {
+  $type: "cosmos.params.v1beta1.ParameterChangeProposal" as const,
+
   encode(message: ParameterChangeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -98,7 +100,6 @@ export const ParameterChangeProposal = {
   create(base?: DeepPartial<ParameterChangeProposal>): ParameterChangeProposal {
     return ParameterChangeProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ParameterChangeProposal>): ParameterChangeProposal {
     const message = createBaseParameterChangeProposal();
     message.title = object.title ?? "";
@@ -113,6 +114,8 @@ function createBaseParamChange(): ParamChange {
 }
 
 export const ParamChange = {
+  $type: "cosmos.params.v1beta1.ParamChange" as const,
+
   encode(message: ParamChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
@@ -188,7 +191,6 @@ export const ParamChange = {
   create(base?: DeepPartial<ParamChange>): ParamChange {
     return ParamChange.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ParamChange>): ParamChange {
     const message = createBaseParamChange();
     message.subspace = object.subspace ?? "";

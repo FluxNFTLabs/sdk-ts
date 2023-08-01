@@ -69,6 +69,8 @@ function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
 }
 
 export const MsgCreateVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccount" as const,
+
   encode(message: MsgCreateVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -172,7 +174,6 @@ export const MsgCreateVestingAccount = {
   create(base?: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     return MsgCreateVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     const message = createBaseMsgCreateVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
@@ -189,6 +190,8 @@ function createBaseMsgCreateVestingAccountResponse(): MsgCreateVestingAccountRes
 }
 
 export const MsgCreateVestingAccountResponse = {
+  $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccountResponse" as const,
+
   encode(_: MsgCreateVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -221,7 +224,6 @@ export const MsgCreateVestingAccountResponse = {
   create(base?: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     return MsgCreateVestingAccountResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
@@ -233,6 +235,8 @@ function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAc
 }
 
 export const MsgCreatePermanentLockedAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount" as const,
+
   encode(message: MsgCreatePermanentLockedAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -308,7 +312,6 @@ export const MsgCreatePermanentLockedAccount = {
   create(base?: DeepPartial<MsgCreatePermanentLockedAccount>): MsgCreatePermanentLockedAccount {
     return MsgCreatePermanentLockedAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreatePermanentLockedAccount>): MsgCreatePermanentLockedAccount {
     const message = createBaseMsgCreatePermanentLockedAccount();
     message.fromAddress = object.fromAddress ?? "";
@@ -323,6 +326,8 @@ function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanent
 }
 
 export const MsgCreatePermanentLockedAccountResponse = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse" as const,
+
   encode(_: MsgCreatePermanentLockedAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -355,7 +360,6 @@ export const MsgCreatePermanentLockedAccountResponse = {
   create(base?: DeepPartial<MsgCreatePermanentLockedAccountResponse>): MsgCreatePermanentLockedAccountResponse {
     return MsgCreatePermanentLockedAccountResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreatePermanentLockedAccountResponse>): MsgCreatePermanentLockedAccountResponse {
     const message = createBaseMsgCreatePermanentLockedAccountResponse();
     return message;
@@ -367,6 +371,8 @@ function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAc
 }
 
 export const MsgCreatePeriodicVestingAccount = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount" as const,
+
   encode(message: MsgCreatePeriodicVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -458,7 +464,6 @@ export const MsgCreatePeriodicVestingAccount = {
   create(base?: DeepPartial<MsgCreatePeriodicVestingAccount>): MsgCreatePeriodicVestingAccount {
     return MsgCreatePeriodicVestingAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreatePeriodicVestingAccount>): MsgCreatePeriodicVestingAccount {
     const message = createBaseMsgCreatePeriodicVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
@@ -474,6 +479,8 @@ function createBaseMsgCreatePeriodicVestingAccountResponse(): MsgCreatePeriodicV
 }
 
 export const MsgCreatePeriodicVestingAccountResponse = {
+  $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccountResponse" as const,
+
   encode(_: MsgCreatePeriodicVestingAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -506,7 +513,6 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   create(base?: DeepPartial<MsgCreatePeriodicVestingAccountResponse>): MsgCreatePeriodicVestingAccountResponse {
     return MsgCreatePeriodicVestingAccountResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreatePeriodicVestingAccountResponse>): MsgCreatePeriodicVestingAccountResponse {
     const message = createBaseMsgCreatePeriodicVestingAccountResponse();
     return message;

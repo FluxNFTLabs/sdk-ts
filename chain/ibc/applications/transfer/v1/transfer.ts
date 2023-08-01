@@ -39,6 +39,8 @@ function createBaseDenomTrace(): DenomTrace {
 }
 
 export const DenomTrace = {
+  $type: "ibc.applications.transfer.v1.DenomTrace" as const,
+
   encode(message: DenomTrace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
@@ -100,7 +102,6 @@ export const DenomTrace = {
   create(base?: DeepPartial<DenomTrace>): DenomTrace {
     return DenomTrace.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DenomTrace>): DenomTrace {
     const message = createBaseDenomTrace();
     message.path = object.path ?? "";
@@ -114,6 +115,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "ibc.applications.transfer.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sendEnabled === true) {
       writer.uint32(8).bool(message.sendEnabled);
@@ -175,7 +178,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.sendEnabled = object.sendEnabled ?? false;

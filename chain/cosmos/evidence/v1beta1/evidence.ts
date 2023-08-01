@@ -25,6 +25,8 @@ function createBaseEquivocation(): Equivocation {
 }
 
 export const Equivocation = {
+  $type: "cosmos.evidence.v1beta1.Equivocation" as const,
+
   encode(message: Equivocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -114,7 +116,6 @@ export const Equivocation = {
   create(base?: DeepPartial<Equivocation>): Equivocation {
     return Equivocation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
     message.height = object.height ?? "0";

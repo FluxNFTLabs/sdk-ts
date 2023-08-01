@@ -78,6 +78,8 @@ function createBaseBasicAllowance(): BasicAllowance {
 }
 
 export const BasicAllowance = {
+  $type: "cosmos.feegrant.v1beta1.BasicAllowance" as const,
+
   encode(message: BasicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.spendLimit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -139,7 +141,6 @@ export const BasicAllowance = {
   create(base?: DeepPartial<BasicAllowance>): BasicAllowance {
     return BasicAllowance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BasicAllowance>): BasicAllowance {
     const message = createBaseBasicAllowance();
     message.spendLimit = object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];
@@ -153,6 +154,8 @@ function createBasePeriodicAllowance(): PeriodicAllowance {
 }
 
 export const PeriodicAllowance = {
+  $type: "cosmos.feegrant.v1beta1.PeriodicAllowance" as const,
+
   encode(message: PeriodicAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.basic !== undefined) {
       BasicAllowance.encode(message.basic, writer.uint32(10).fork()).ldelim();
@@ -260,7 +263,6 @@ export const PeriodicAllowance = {
   create(base?: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
     return PeriodicAllowance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
     const message = createBasePeriodicAllowance();
     message.basic = (object.basic !== undefined && object.basic !== null)
@@ -281,6 +283,8 @@ function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
 }
 
 export const AllowedMsgAllowance = {
+  $type: "cosmos.feegrant.v1beta1.AllowedMsgAllowance" as const,
+
   encode(message: AllowedMsgAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Any.encode(message.allowance, writer.uint32(10).fork()).ldelim();
@@ -342,7 +346,6 @@ export const AllowedMsgAllowance = {
   create(base?: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     return AllowedMsgAllowance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     const message = createBaseAllowedMsgAllowance();
     message.allowance = (object.allowance !== undefined && object.allowance !== null)
@@ -358,6 +361,8 @@ function createBaseGrant(): Grant {
 }
 
 export const Grant = {
+  $type: "cosmos.feegrant.v1beta1.Grant" as const,
+
   encode(message: Grant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -433,7 +438,6 @@ export const Grant = {
   create(base?: DeepPartial<Grant>): Grant {
     return Grant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Grant>): Grant {
     const message = createBaseGrant();
     message.granter = object.granter ?? "";

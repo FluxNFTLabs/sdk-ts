@@ -48,6 +48,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.mint.v1beta1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -80,7 +82,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -92,6 +93,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.mint.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -137,7 +140,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -152,6 +154,8 @@ function createBaseQueryInflationRequest(): QueryInflationRequest {
 }
 
 export const QueryInflationRequest = {
+  $type: "cosmos.mint.v1beta1.QueryInflationRequest" as const,
+
   encode(_: QueryInflationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -184,7 +188,6 @@ export const QueryInflationRequest = {
   create(base?: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     return QueryInflationRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
@@ -196,6 +199,8 @@ function createBaseQueryInflationResponse(): QueryInflationResponse {
 }
 
 export const QueryInflationResponse = {
+  $type: "cosmos.mint.v1beta1.QueryInflationResponse" as const,
+
   encode(message: QueryInflationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.inflation.length !== 0) {
       writer.uint32(10).bytes(message.inflation);
@@ -241,7 +246,6 @@ export const QueryInflationResponse = {
   create(base?: DeepPartial<QueryInflationResponse>): QueryInflationResponse {
     return QueryInflationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryInflationResponse>): QueryInflationResponse {
     const message = createBaseQueryInflationResponse();
     message.inflation = object.inflation ?? new Uint8Array(0);
@@ -254,6 +258,8 @@ function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest 
 }
 
 export const QueryAnnualProvisionsRequest = {
+  $type: "cosmos.mint.v1beta1.QueryAnnualProvisionsRequest" as const,
+
   encode(_: QueryAnnualProvisionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -286,7 +292,6 @@ export const QueryAnnualProvisionsRequest = {
   create(base?: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     return QueryAnnualProvisionsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
@@ -298,6 +303,8 @@ function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsRespons
 }
 
 export const QueryAnnualProvisionsResponse = {
+  $type: "cosmos.mint.v1beta1.QueryAnnualProvisionsResponse" as const,
+
   encode(message: QueryAnnualProvisionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.annualProvisions.length !== 0) {
       writer.uint32(10).bytes(message.annualProvisions);
@@ -345,7 +352,6 @@ export const QueryAnnualProvisionsResponse = {
   create(base?: DeepPartial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {
     return QueryAnnualProvisionsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {
     const message = createBaseQueryAnnualProvisionsResponse();
     message.annualProvisions = object.annualProvisions ?? new Uint8Array(0);

@@ -101,6 +101,8 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
 }
 
 export const QueryDenomTraceRequest = {
+  $type: "ibc.applications.transfer.v1.QueryDenomTraceRequest" as const,
+
   encode(message: QueryDenomTraceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -146,7 +148,6 @@ export const QueryDenomTraceRequest = {
   create(base?: DeepPartial<QueryDenomTraceRequest>): QueryDenomTraceRequest {
     return QueryDenomTraceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomTraceRequest>): QueryDenomTraceRequest {
     const message = createBaseQueryDenomTraceRequest();
     message.hash = object.hash ?? "";
@@ -159,6 +160,8 @@ function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
 }
 
 export const QueryDenomTraceResponse = {
+  $type: "ibc.applications.transfer.v1.QueryDenomTraceResponse" as const,
+
   encode(message: QueryDenomTraceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denomTrace !== undefined) {
       DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
@@ -204,7 +207,6 @@ export const QueryDenomTraceResponse = {
   create(base?: DeepPartial<QueryDenomTraceResponse>): QueryDenomTraceResponse {
     return QueryDenomTraceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomTraceResponse>): QueryDenomTraceResponse {
     const message = createBaseQueryDenomTraceResponse();
     message.denomTrace = (object.denomTrace !== undefined && object.denomTrace !== null)
@@ -219,6 +221,8 @@ function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
 }
 
 export const QueryDenomTracesRequest = {
+  $type: "ibc.applications.transfer.v1.QueryDenomTracesRequest" as const,
+
   encode(message: QueryDenomTracesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -264,7 +268,6 @@ export const QueryDenomTracesRequest = {
   create(base?: DeepPartial<QueryDenomTracesRequest>): QueryDenomTracesRequest {
     return QueryDenomTracesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomTracesRequest>): QueryDenomTracesRequest {
     const message = createBaseQueryDenomTracesRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -279,6 +282,8 @@ function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
 }
 
 export const QueryDenomTracesResponse = {
+  $type: "ibc.applications.transfer.v1.QueryDenomTracesResponse" as const,
+
   encode(message: QueryDenomTracesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denomTraces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -340,7 +345,6 @@ export const QueryDenomTracesResponse = {
   create(base?: DeepPartial<QueryDenomTracesResponse>): QueryDenomTracesResponse {
     return QueryDenomTracesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomTracesResponse>): QueryDenomTracesResponse {
     const message = createBaseQueryDenomTracesResponse();
     message.denomTraces = object.denomTraces?.map((e) => DenomTrace.fromPartial(e)) || [];
@@ -356,6 +360,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "ibc.applications.transfer.v1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -388,7 +394,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -400,6 +405,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "ibc.applications.transfer.v1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -445,7 +452,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -460,6 +466,8 @@ function createBaseQueryDenomHashRequest(): QueryDenomHashRequest {
 }
 
 export const QueryDenomHashRequest = {
+  $type: "ibc.applications.transfer.v1.QueryDenomHashRequest" as const,
+
   encode(message: QueryDenomHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.trace !== "") {
       writer.uint32(10).string(message.trace);
@@ -505,7 +513,6 @@ export const QueryDenomHashRequest = {
   create(base?: DeepPartial<QueryDenomHashRequest>): QueryDenomHashRequest {
     return QueryDenomHashRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomHashRequest>): QueryDenomHashRequest {
     const message = createBaseQueryDenomHashRequest();
     message.trace = object.trace ?? "";
@@ -518,6 +525,8 @@ function createBaseQueryDenomHashResponse(): QueryDenomHashResponse {
 }
 
 export const QueryDenomHashResponse = {
+  $type: "ibc.applications.transfer.v1.QueryDenomHashResponse" as const,
+
   encode(message: QueryDenomHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -563,7 +572,6 @@ export const QueryDenomHashResponse = {
   create(base?: DeepPartial<QueryDenomHashResponse>): QueryDenomHashResponse {
     return QueryDenomHashResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomHashResponse>): QueryDenomHashResponse {
     const message = createBaseQueryDenomHashResponse();
     message.hash = object.hash ?? "";
@@ -576,6 +584,8 @@ function createBaseQueryEscrowAddressRequest(): QueryEscrowAddressRequest {
 }
 
 export const QueryEscrowAddressRequest = {
+  $type: "ibc.applications.transfer.v1.QueryEscrowAddressRequest" as const,
+
   encode(message: QueryEscrowAddressRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -637,7 +647,6 @@ export const QueryEscrowAddressRequest = {
   create(base?: DeepPartial<QueryEscrowAddressRequest>): QueryEscrowAddressRequest {
     return QueryEscrowAddressRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryEscrowAddressRequest>): QueryEscrowAddressRequest {
     const message = createBaseQueryEscrowAddressRequest();
     message.portId = object.portId ?? "";
@@ -651,6 +660,8 @@ function createBaseQueryEscrowAddressResponse(): QueryEscrowAddressResponse {
 }
 
 export const QueryEscrowAddressResponse = {
+  $type: "ibc.applications.transfer.v1.QueryEscrowAddressResponse" as const,
+
   encode(message: QueryEscrowAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.escrowAddress !== "") {
       writer.uint32(10).string(message.escrowAddress);
@@ -696,7 +707,6 @@ export const QueryEscrowAddressResponse = {
   create(base?: DeepPartial<QueryEscrowAddressResponse>): QueryEscrowAddressResponse {
     return QueryEscrowAddressResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryEscrowAddressResponse>): QueryEscrowAddressResponse {
     const message = createBaseQueryEscrowAddressResponse();
     message.escrowAddress = object.escrowAddress ?? "";
@@ -709,6 +719,8 @@ function createBaseQueryTotalEscrowForDenomRequest(): QueryTotalEscrowForDenomRe
 }
 
 export const QueryTotalEscrowForDenomRequest = {
+  $type: "ibc.applications.transfer.v1.QueryTotalEscrowForDenomRequest" as const,
+
   encode(message: QueryTotalEscrowForDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -754,7 +766,6 @@ export const QueryTotalEscrowForDenomRequest = {
   create(base?: DeepPartial<QueryTotalEscrowForDenomRequest>): QueryTotalEscrowForDenomRequest {
     return QueryTotalEscrowForDenomRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalEscrowForDenomRequest>): QueryTotalEscrowForDenomRequest {
     const message = createBaseQueryTotalEscrowForDenomRequest();
     message.denom = object.denom ?? "";
@@ -767,6 +778,8 @@ function createBaseQueryTotalEscrowForDenomResponse(): QueryTotalEscrowForDenomR
 }
 
 export const QueryTotalEscrowForDenomResponse = {
+  $type: "ibc.applications.transfer.v1.QueryTotalEscrowForDenomResponse" as const,
+
   encode(message: QueryTotalEscrowForDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.amount !== undefined) {
       Coin.encode(message.amount, writer.uint32(10).fork()).ldelim();
@@ -812,7 +825,6 @@ export const QueryTotalEscrowForDenomResponse = {
   create(base?: DeepPartial<QueryTotalEscrowForDenomResponse>): QueryTotalEscrowForDenomResponse {
     return QueryTotalEscrowForDenomResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalEscrowForDenomResponse>): QueryTotalEscrowForDenomResponse {
     const message = createBaseQueryTotalEscrowForDenomResponse();
     message.amount = (object.amount !== undefined && object.amount !== null)

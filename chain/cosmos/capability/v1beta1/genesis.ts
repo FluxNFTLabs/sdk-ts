@@ -27,6 +27,8 @@ function createBaseGenesisOwners(): GenesisOwners {
 }
 
 export const GenesisOwners = {
+  $type: "cosmos.capability.v1beta1.GenesisOwners" as const,
+
   encode(message: GenesisOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== "0") {
       writer.uint32(8).uint64(message.index);
@@ -88,7 +90,6 @@ export const GenesisOwners = {
   create(base?: DeepPartial<GenesisOwners>): GenesisOwners {
     return GenesisOwners.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
     message.index = object.index ?? "0";
@@ -104,6 +105,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.capability.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== "0") {
       writer.uint32(8).uint64(message.index);
@@ -165,7 +168,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.index = object.index ?? "0";

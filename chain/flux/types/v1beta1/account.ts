@@ -16,6 +16,8 @@ function createBaseEthAccount(): EthAccount {
 }
 
 export const EthAccount = {
+  $type: "flux.types.v1beta1.EthAccount" as const,
+
   encode(message: EthAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
@@ -77,7 +79,6 @@ export const EthAccount = {
   create(base?: DeepPartial<EthAccount>): EthAccount {
     return EthAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EthAccount>): EthAccount {
     const message = createBaseEthAccount();
     message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)

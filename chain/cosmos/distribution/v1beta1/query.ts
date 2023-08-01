@@ -197,6 +197,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -229,7 +231,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -241,6 +242,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -286,7 +289,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -301,6 +303,8 @@ function createBaseQueryValidatorDistributionInfoRequest(): QueryValidatorDistri
 }
 
 export const QueryValidatorDistributionInfoRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorDistributionInfoRequest" as const,
+
   encode(message: QueryValidatorDistributionInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -346,7 +350,6 @@ export const QueryValidatorDistributionInfoRequest = {
   create(base?: DeepPartial<QueryValidatorDistributionInfoRequest>): QueryValidatorDistributionInfoRequest {
     return QueryValidatorDistributionInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorDistributionInfoRequest>): QueryValidatorDistributionInfoRequest {
     const message = createBaseQueryValidatorDistributionInfoRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -359,6 +362,8 @@ function createBaseQueryValidatorDistributionInfoResponse(): QueryValidatorDistr
 }
 
 export const QueryValidatorDistributionInfoResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorDistributionInfoResponse" as const,
+
   encode(message: QueryValidatorDistributionInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operatorAddress !== "") {
       writer.uint32(10).string(message.operatorAddress);
@@ -436,7 +441,6 @@ export const QueryValidatorDistributionInfoResponse = {
   create(base?: DeepPartial<QueryValidatorDistributionInfoResponse>): QueryValidatorDistributionInfoResponse {
     return QueryValidatorDistributionInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorDistributionInfoResponse>): QueryValidatorDistributionInfoResponse {
     const message = createBaseQueryValidatorDistributionInfoResponse();
     message.operatorAddress = object.operatorAddress ?? "";
@@ -451,6 +455,8 @@ function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOuts
 }
 
 export const QueryValidatorOutstandingRewardsRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsRequest" as const,
+
   encode(message: QueryValidatorOutstandingRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -496,7 +502,6 @@ export const QueryValidatorOutstandingRewardsRequest = {
   create(base?: DeepPartial<QueryValidatorOutstandingRewardsRequest>): QueryValidatorOutstandingRewardsRequest {
     return QueryValidatorOutstandingRewardsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorOutstandingRewardsRequest>): QueryValidatorOutstandingRewardsRequest {
     const message = createBaseQueryValidatorOutstandingRewardsRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -509,6 +514,8 @@ function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOut
 }
 
 export const QueryValidatorOutstandingRewardsResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsResponse" as const,
+
   encode(message: QueryValidatorOutstandingRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rewards !== undefined) {
       ValidatorOutstandingRewards.encode(message.rewards, writer.uint32(10).fork()).ldelim();
@@ -554,7 +561,6 @@ export const QueryValidatorOutstandingRewardsResponse = {
   create(base?: DeepPartial<QueryValidatorOutstandingRewardsResponse>): QueryValidatorOutstandingRewardsResponse {
     return QueryValidatorOutstandingRewardsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorOutstandingRewardsResponse>): QueryValidatorOutstandingRewardsResponse {
     const message = createBaseQueryValidatorOutstandingRewardsResponse();
     message.rewards = (object.rewards !== undefined && object.rewards !== null)
@@ -569,6 +575,8 @@ function createBaseQueryValidatorCommissionRequest(): QueryValidatorCommissionRe
 }
 
 export const QueryValidatorCommissionRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorCommissionRequest" as const,
+
   encode(message: QueryValidatorCommissionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -614,7 +622,6 @@ export const QueryValidatorCommissionRequest = {
   create(base?: DeepPartial<QueryValidatorCommissionRequest>): QueryValidatorCommissionRequest {
     return QueryValidatorCommissionRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorCommissionRequest>): QueryValidatorCommissionRequest {
     const message = createBaseQueryValidatorCommissionRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -627,6 +634,8 @@ function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionR
 }
 
 export const QueryValidatorCommissionResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorCommissionResponse" as const,
+
   encode(message: QueryValidatorCommissionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commission !== undefined) {
       ValidatorAccumulatedCommission.encode(message.commission, writer.uint32(10).fork()).ldelim();
@@ -674,7 +683,6 @@ export const QueryValidatorCommissionResponse = {
   create(base?: DeepPartial<QueryValidatorCommissionResponse>): QueryValidatorCommissionResponse {
     return QueryValidatorCommissionResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorCommissionResponse>): QueryValidatorCommissionResponse {
     const message = createBaseQueryValidatorCommissionResponse();
     message.commission = (object.commission !== undefined && object.commission !== null)
@@ -689,6 +697,8 @@ function createBaseQueryValidatorSlashesRequest(): QueryValidatorSlashesRequest 
 }
 
 export const QueryValidatorSlashesRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorSlashesRequest" as const,
+
   encode(message: QueryValidatorSlashesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -778,7 +788,6 @@ export const QueryValidatorSlashesRequest = {
   create(base?: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
     return QueryValidatorSlashesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
     const message = createBaseQueryValidatorSlashesRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -796,6 +805,8 @@ function createBaseQueryValidatorSlashesResponse(): QueryValidatorSlashesRespons
 }
 
 export const QueryValidatorSlashesResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryValidatorSlashesResponse" as const,
+
   encode(message: QueryValidatorSlashesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.slashes) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -857,7 +868,6 @@ export const QueryValidatorSlashesResponse = {
   create(base?: DeepPartial<QueryValidatorSlashesResponse>): QueryValidatorSlashesResponse {
     return QueryValidatorSlashesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryValidatorSlashesResponse>): QueryValidatorSlashesResponse {
     const message = createBaseQueryValidatorSlashesResponse();
     message.slashes = object.slashes?.map((e) => ValidatorSlashEvent.fromPartial(e)) || [];
@@ -873,6 +883,8 @@ function createBaseQueryDelegationRewardsRequest(): QueryDelegationRewardsReques
 }
 
 export const QueryDelegationRewardsRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegationRewardsRequest" as const,
+
   encode(message: QueryDelegationRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -934,7 +946,6 @@ export const QueryDelegationRewardsRequest = {
   create(base?: DeepPartial<QueryDelegationRewardsRequest>): QueryDelegationRewardsRequest {
     return QueryDelegationRewardsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationRewardsRequest>): QueryDelegationRewardsRequest {
     const message = createBaseQueryDelegationRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -948,6 +959,8 @@ function createBaseQueryDelegationRewardsResponse(): QueryDelegationRewardsRespo
 }
 
 export const QueryDelegationRewardsResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegationRewardsResponse" as const,
+
   encode(message: QueryDelegationRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -993,7 +1006,6 @@ export const QueryDelegationRewardsResponse = {
   create(base?: DeepPartial<QueryDelegationRewardsResponse>): QueryDelegationRewardsResponse {
     return QueryDelegationRewardsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationRewardsResponse>): QueryDelegationRewardsResponse {
     const message = createBaseQueryDelegationRewardsResponse();
     message.rewards = object.rewards?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -1006,6 +1018,8 @@ function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRew
 }
 
 export const QueryDelegationTotalRewardsRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegationTotalRewardsRequest" as const,
+
   encode(message: QueryDelegationTotalRewardsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1051,7 +1065,6 @@ export const QueryDelegationTotalRewardsRequest = {
   create(base?: DeepPartial<QueryDelegationTotalRewardsRequest>): QueryDelegationTotalRewardsRequest {
     return QueryDelegationTotalRewardsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationTotalRewardsRequest>): QueryDelegationTotalRewardsRequest {
     const message = createBaseQueryDelegationTotalRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1064,6 +1077,8 @@ function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRe
 }
 
 export const QueryDelegationTotalRewardsResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegationTotalRewardsResponse" as const,
+
   encode(message: QueryDelegationTotalRewardsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DelegationDelegatorReward.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1127,7 +1142,6 @@ export const QueryDelegationTotalRewardsResponse = {
   create(base?: DeepPartial<QueryDelegationTotalRewardsResponse>): QueryDelegationTotalRewardsResponse {
     return QueryDelegationTotalRewardsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegationTotalRewardsResponse>): QueryDelegationTotalRewardsResponse {
     const message = createBaseQueryDelegationTotalRewardsResponse();
     message.rewards = object.rewards?.map((e) => DelegationDelegatorReward.fromPartial(e)) || [];
@@ -1141,6 +1155,8 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 
 export const QueryDelegatorValidatorsRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegatorValidatorsRequest" as const,
+
   encode(message: QueryDelegatorValidatorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1186,7 +1202,6 @@ export const QueryDelegatorValidatorsRequest = {
   create(base?: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     return QueryDelegatorValidatorsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     const message = createBaseQueryDelegatorValidatorsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1199,6 +1214,8 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegatorValidatorsResponse" as const,
+
   encode(message: QueryDelegatorValidatorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validators) {
       writer.uint32(10).string(v!);
@@ -1244,7 +1261,6 @@ export const QueryDelegatorValidatorsResponse = {
   create(base?: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
     return QueryDelegatorValidatorsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators = object.validators?.map((e) => e) || [];
@@ -1257,6 +1273,8 @@ function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdra
 }
 
 export const QueryDelegatorWithdrawAddressRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressRequest" as const,
+
   encode(message: QueryDelegatorWithdrawAddressRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1302,7 +1320,6 @@ export const QueryDelegatorWithdrawAddressRequest = {
   create(base?: DeepPartial<QueryDelegatorWithdrawAddressRequest>): QueryDelegatorWithdrawAddressRequest {
     return QueryDelegatorWithdrawAddressRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorWithdrawAddressRequest>): QueryDelegatorWithdrawAddressRequest {
     const message = createBaseQueryDelegatorWithdrawAddressRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1315,6 +1332,8 @@ function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdr
 }
 
 export const QueryDelegatorWithdrawAddressResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressResponse" as const,
+
   encode(message: QueryDelegatorWithdrawAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.withdrawAddress !== "") {
       writer.uint32(10).string(message.withdrawAddress);
@@ -1360,7 +1379,6 @@ export const QueryDelegatorWithdrawAddressResponse = {
   create(base?: DeepPartial<QueryDelegatorWithdrawAddressResponse>): QueryDelegatorWithdrawAddressResponse {
     return QueryDelegatorWithdrawAddressResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDelegatorWithdrawAddressResponse>): QueryDelegatorWithdrawAddressResponse {
     const message = createBaseQueryDelegatorWithdrawAddressResponse();
     message.withdrawAddress = object.withdrawAddress ?? "";
@@ -1373,6 +1391,8 @@ function createBaseQueryCommunityPoolRequest(): QueryCommunityPoolRequest {
 }
 
 export const QueryCommunityPoolRequest = {
+  $type: "cosmos.distribution.v1beta1.QueryCommunityPoolRequest" as const,
+
   encode(_: QueryCommunityPoolRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1405,7 +1425,6 @@ export const QueryCommunityPoolRequest = {
   create(base?: DeepPartial<QueryCommunityPoolRequest>): QueryCommunityPoolRequest {
     return QueryCommunityPoolRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryCommunityPoolRequest>): QueryCommunityPoolRequest {
     const message = createBaseQueryCommunityPoolRequest();
     return message;
@@ -1417,6 +1436,8 @@ function createBaseQueryCommunityPoolResponse(): QueryCommunityPoolResponse {
 }
 
 export const QueryCommunityPoolResponse = {
+  $type: "cosmos.distribution.v1beta1.QueryCommunityPoolResponse" as const,
+
   encode(message: QueryCommunityPoolResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1462,7 +1483,6 @@ export const QueryCommunityPoolResponse = {
   create(base?: DeepPartial<QueryCommunityPoolResponse>): QueryCommunityPoolResponse {
     return QueryCommunityPoolResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCommunityPoolResponse>): QueryCommunityPoolResponse {
     const message = createBaseQueryCommunityPoolResponse();
     message.pool = object.pool?.map((e) => DecCoin.fromPartial(e)) || [];

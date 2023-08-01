@@ -27,6 +27,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.auth.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bech32Prefix !== "") {
       writer.uint32(10).string(message.bech32Prefix);
@@ -104,7 +106,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.bech32Prefix = object.bech32Prefix ?? "";
@@ -120,6 +121,8 @@ function createBaseModuleAccountPermission(): ModuleAccountPermission {
 }
 
 export const ModuleAccountPermission = {
+  $type: "cosmos.auth.module.v1.ModuleAccountPermission" as const,
+
   encode(message: ModuleAccountPermission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
@@ -181,7 +184,6 @@ export const ModuleAccountPermission = {
   create(base?: DeepPartial<ModuleAccountPermission>): ModuleAccountPermission {
     return ModuleAccountPermission.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleAccountPermission>): ModuleAccountPermission {
     const message = createBaseModuleAccountPermission();
     message.account = object.account ?? "";

@@ -119,6 +119,8 @@ function createBaseDelegatorWithdrawInfo(): DelegatorWithdrawInfo {
 }
 
 export const DelegatorWithdrawInfo = {
+  $type: "cosmos.distribution.v1beta1.DelegatorWithdrawInfo" as const,
+
   encode(message: DelegatorWithdrawInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -180,7 +182,6 @@ export const DelegatorWithdrawInfo = {
   create(base?: DeepPartial<DelegatorWithdrawInfo>): DelegatorWithdrawInfo {
     return DelegatorWithdrawInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelegatorWithdrawInfo>): DelegatorWithdrawInfo {
     const message = createBaseDelegatorWithdrawInfo();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -194,6 +195,8 @@ function createBaseValidatorOutstandingRewardsRecord(): ValidatorOutstandingRewa
 }
 
 export const ValidatorOutstandingRewardsRecord = {
+  $type: "cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord" as const,
+
   encode(message: ValidatorOutstandingRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -257,7 +260,6 @@ export const ValidatorOutstandingRewardsRecord = {
   create(base?: DeepPartial<ValidatorOutstandingRewardsRecord>): ValidatorOutstandingRewardsRecord {
     return ValidatorOutstandingRewardsRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorOutstandingRewardsRecord>): ValidatorOutstandingRewardsRecord {
     const message = createBaseValidatorOutstandingRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -271,6 +273,8 @@ function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedC
 }
 
 export const ValidatorAccumulatedCommissionRecord = {
+  $type: "cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord" as const,
+
   encode(message: ValidatorAccumulatedCommissionRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -332,7 +336,6 @@ export const ValidatorAccumulatedCommissionRecord = {
   create(base?: DeepPartial<ValidatorAccumulatedCommissionRecord>): ValidatorAccumulatedCommissionRecord {
     return ValidatorAccumulatedCommissionRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorAccumulatedCommissionRecord>): ValidatorAccumulatedCommissionRecord {
     const message = createBaseValidatorAccumulatedCommissionRecord();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -348,6 +351,8 @@ function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalReward
 }
 
 export const ValidatorHistoricalRewardsRecord = {
+  $type: "cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord" as const,
+
   encode(message: ValidatorHistoricalRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -423,7 +428,6 @@ export const ValidatorHistoricalRewardsRecord = {
   create(base?: DeepPartial<ValidatorHistoricalRewardsRecord>): ValidatorHistoricalRewardsRecord {
     return ValidatorHistoricalRewardsRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorHistoricalRewardsRecord>): ValidatorHistoricalRewardsRecord {
     const message = createBaseValidatorHistoricalRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -440,6 +444,8 @@ function createBaseValidatorCurrentRewardsRecord(): ValidatorCurrentRewardsRecor
 }
 
 export const ValidatorCurrentRewardsRecord = {
+  $type: "cosmos.distribution.v1beta1.ValidatorCurrentRewardsRecord" as const,
+
   encode(message: ValidatorCurrentRewardsRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -501,7 +507,6 @@ export const ValidatorCurrentRewardsRecord = {
   create(base?: DeepPartial<ValidatorCurrentRewardsRecord>): ValidatorCurrentRewardsRecord {
     return ValidatorCurrentRewardsRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorCurrentRewardsRecord>): ValidatorCurrentRewardsRecord {
     const message = createBaseValidatorCurrentRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -517,6 +522,8 @@ function createBaseDelegatorStartingInfoRecord(): DelegatorStartingInfoRecord {
 }
 
 export const DelegatorStartingInfoRecord = {
+  $type: "cosmos.distribution.v1beta1.DelegatorStartingInfoRecord" as const,
+
   encode(message: DelegatorStartingInfoRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -592,7 +599,6 @@ export const DelegatorStartingInfoRecord = {
   create(base?: DeepPartial<DelegatorStartingInfoRecord>): DelegatorStartingInfoRecord {
     return DelegatorStartingInfoRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelegatorStartingInfoRecord>): DelegatorStartingInfoRecord {
     const message = createBaseDelegatorStartingInfoRecord();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -609,6 +615,8 @@ function createBaseValidatorSlashEventRecord(): ValidatorSlashEventRecord {
 }
 
 export const ValidatorSlashEventRecord = {
+  $type: "cosmos.distribution.v1beta1.ValidatorSlashEventRecord" as const,
+
   encode(message: ValidatorSlashEventRecord, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -700,7 +708,6 @@ export const ValidatorSlashEventRecord = {
   create(base?: DeepPartial<ValidatorSlashEventRecord>): ValidatorSlashEventRecord {
     return ValidatorSlashEventRecord.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorSlashEventRecord>): ValidatorSlashEventRecord {
     const message = createBaseValidatorSlashEventRecord();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -729,6 +736,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.distribution.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -922,7 +931,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = (object.params !== undefined && object.params !== null)

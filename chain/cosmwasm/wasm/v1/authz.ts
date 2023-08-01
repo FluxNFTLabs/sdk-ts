@@ -107,6 +107,8 @@ function createBaseContractExecutionAuthorization(): ContractExecutionAuthorizat
 }
 
 export const ContractExecutionAuthorization = {
+  $type: "cosmwasm.wasm.v1.ContractExecutionAuthorization" as const,
+
   encode(message: ContractExecutionAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       ContractGrant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -152,7 +154,6 @@ export const ContractExecutionAuthorization = {
   create(base?: DeepPartial<ContractExecutionAuthorization>): ContractExecutionAuthorization {
     return ContractExecutionAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContractExecutionAuthorization>): ContractExecutionAuthorization {
     const message = createBaseContractExecutionAuthorization();
     message.grants = object.grants?.map((e) => ContractGrant.fromPartial(e)) || [];
@@ -165,6 +166,8 @@ function createBaseContractMigrationAuthorization(): ContractMigrationAuthorizat
 }
 
 export const ContractMigrationAuthorization = {
+  $type: "cosmwasm.wasm.v1.ContractMigrationAuthorization" as const,
+
   encode(message: ContractMigrationAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       ContractGrant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -210,7 +213,6 @@ export const ContractMigrationAuthorization = {
   create(base?: DeepPartial<ContractMigrationAuthorization>): ContractMigrationAuthorization {
     return ContractMigrationAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContractMigrationAuthorization>): ContractMigrationAuthorization {
     const message = createBaseContractMigrationAuthorization();
     message.grants = object.grants?.map((e) => ContractGrant.fromPartial(e)) || [];
@@ -223,6 +225,8 @@ function createBaseContractGrant(): ContractGrant {
 }
 
 export const ContractGrant = {
+  $type: "cosmwasm.wasm.v1.ContractGrant" as const,
+
   encode(message: ContractGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
@@ -298,7 +302,6 @@ export const ContractGrant = {
   create(base?: DeepPartial<ContractGrant>): ContractGrant {
     return ContractGrant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContractGrant>): ContractGrant {
     const message = createBaseContractGrant();
     message.contract = object.contract ?? "";
@@ -315,6 +318,8 @@ function createBaseMaxCallsLimit(): MaxCallsLimit {
 }
 
 export const MaxCallsLimit = {
+  $type: "cosmwasm.wasm.v1.MaxCallsLimit" as const,
+
   encode(message: MaxCallsLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.remaining !== "0") {
       writer.uint32(8).uint64(message.remaining);
@@ -360,7 +365,6 @@ export const MaxCallsLimit = {
   create(base?: DeepPartial<MaxCallsLimit>): MaxCallsLimit {
     return MaxCallsLimit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MaxCallsLimit>): MaxCallsLimit {
     const message = createBaseMaxCallsLimit();
     message.remaining = object.remaining ?? "0";
@@ -373,6 +377,8 @@ function createBaseMaxFundsLimit(): MaxFundsLimit {
 }
 
 export const MaxFundsLimit = {
+  $type: "cosmwasm.wasm.v1.MaxFundsLimit" as const,
+
   encode(message: MaxFundsLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amounts) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -418,7 +424,6 @@ export const MaxFundsLimit = {
   create(base?: DeepPartial<MaxFundsLimit>): MaxFundsLimit {
     return MaxFundsLimit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MaxFundsLimit>): MaxFundsLimit {
     const message = createBaseMaxFundsLimit();
     message.amounts = object.amounts?.map((e) => Coin.fromPartial(e)) || [];
@@ -431,6 +436,8 @@ function createBaseCombinedLimit(): CombinedLimit {
 }
 
 export const CombinedLimit = {
+  $type: "cosmwasm.wasm.v1.CombinedLimit" as const,
+
   encode(message: CombinedLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.callsRemaining !== "0") {
       writer.uint32(8).uint64(message.callsRemaining);
@@ -492,7 +499,6 @@ export const CombinedLimit = {
   create(base?: DeepPartial<CombinedLimit>): CombinedLimit {
     return CombinedLimit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CombinedLimit>): CombinedLimit {
     const message = createBaseCombinedLimit();
     message.callsRemaining = object.callsRemaining ?? "0";
@@ -506,6 +512,8 @@ function createBaseAllowAllMessagesFilter(): AllowAllMessagesFilter {
 }
 
 export const AllowAllMessagesFilter = {
+  $type: "cosmwasm.wasm.v1.AllowAllMessagesFilter" as const,
+
   encode(_: AllowAllMessagesFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -538,7 +546,6 @@ export const AllowAllMessagesFilter = {
   create(base?: DeepPartial<AllowAllMessagesFilter>): AllowAllMessagesFilter {
     return AllowAllMessagesFilter.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<AllowAllMessagesFilter>): AllowAllMessagesFilter {
     const message = createBaseAllowAllMessagesFilter();
     return message;
@@ -550,6 +557,8 @@ function createBaseAcceptedMessageKeysFilter(): AcceptedMessageKeysFilter {
 }
 
 export const AcceptedMessageKeysFilter = {
+  $type: "cosmwasm.wasm.v1.AcceptedMessageKeysFilter" as const,
+
   encode(message: AcceptedMessageKeysFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.keys) {
       writer.uint32(10).string(v!);
@@ -595,7 +604,6 @@ export const AcceptedMessageKeysFilter = {
   create(base?: DeepPartial<AcceptedMessageKeysFilter>): AcceptedMessageKeysFilter {
     return AcceptedMessageKeysFilter.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AcceptedMessageKeysFilter>): AcceptedMessageKeysFilter {
     const message = createBaseAcceptedMessageKeysFilter();
     message.keys = object.keys?.map((e) => e) || [];
@@ -608,6 +616,8 @@ function createBaseAcceptedMessagesFilter(): AcceptedMessagesFilter {
 }
 
 export const AcceptedMessagesFilter = {
+  $type: "cosmwasm.wasm.v1.AcceptedMessagesFilter" as const,
+
   encode(message: AcceptedMessagesFilter, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       writer.uint32(10).bytes(v!);
@@ -653,7 +663,6 @@ export const AcceptedMessagesFilter = {
   create(base?: DeepPartial<AcceptedMessagesFilter>): AcceptedMessagesFilter {
     return AcceptedMessagesFilter.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AcceptedMessagesFilter>): AcceptedMessagesFilter {
     const message = createBaseAcceptedMessagesFilter();
     message.messages = object.messages?.map((e) => e) || [];

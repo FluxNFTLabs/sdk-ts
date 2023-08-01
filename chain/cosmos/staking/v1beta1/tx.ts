@@ -148,6 +148,8 @@ function createBaseMsgCreateValidator(): MsgCreateValidator {
 }
 
 export const MsgCreateValidator = {
+  $type: "cosmos.staking.v1beta1.MsgCreateValidator" as const,
+
   encode(message: MsgCreateValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(10).fork()).ldelim();
@@ -279,7 +281,6 @@ export const MsgCreateValidator = {
   create(base?: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
     return MsgCreateValidator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
     message.description = (object.description !== undefined && object.description !== null)
@@ -304,6 +305,8 @@ function createBaseMsgCreateValidatorResponse(): MsgCreateValidatorResponse {
 }
 
 export const MsgCreateValidatorResponse = {
+  $type: "cosmos.staking.v1beta1.MsgCreateValidatorResponse" as const,
+
   encode(_: MsgCreateValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -336,7 +339,6 @@ export const MsgCreateValidatorResponse = {
   create(base?: DeepPartial<MsgCreateValidatorResponse>): MsgCreateValidatorResponse {
     return MsgCreateValidatorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCreateValidatorResponse>): MsgCreateValidatorResponse {
     const message = createBaseMsgCreateValidatorResponse();
     return message;
@@ -348,6 +350,8 @@ function createBaseMsgEditValidator(): MsgEditValidator {
 }
 
 export const MsgEditValidator = {
+  $type: "cosmos.staking.v1beta1.MsgEditValidator" as const,
+
   encode(message: MsgEditValidator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(10).fork()).ldelim();
@@ -437,7 +441,6 @@ export const MsgEditValidator = {
   create(base?: DeepPartial<MsgEditValidator>): MsgEditValidator {
     return MsgEditValidator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgEditValidator>): MsgEditValidator {
     const message = createBaseMsgEditValidator();
     message.description = (object.description !== undefined && object.description !== null)
@@ -455,6 +458,8 @@ function createBaseMsgEditValidatorResponse(): MsgEditValidatorResponse {
 }
 
 export const MsgEditValidatorResponse = {
+  $type: "cosmos.staking.v1beta1.MsgEditValidatorResponse" as const,
+
   encode(_: MsgEditValidatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -487,7 +492,6 @@ export const MsgEditValidatorResponse = {
   create(base?: DeepPartial<MsgEditValidatorResponse>): MsgEditValidatorResponse {
     return MsgEditValidatorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgEditValidatorResponse>): MsgEditValidatorResponse {
     const message = createBaseMsgEditValidatorResponse();
     return message;
@@ -499,6 +503,8 @@ function createBaseMsgDelegate(): MsgDelegate {
 }
 
 export const MsgDelegate = {
+  $type: "cosmos.staking.v1beta1.MsgDelegate" as const,
+
   encode(message: MsgDelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -574,7 +580,6 @@ export const MsgDelegate = {
   create(base?: DeepPartial<MsgDelegate>): MsgDelegate {
     return MsgDelegate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgDelegate>): MsgDelegate {
     const message = createBaseMsgDelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -591,6 +596,8 @@ function createBaseMsgDelegateResponse(): MsgDelegateResponse {
 }
 
 export const MsgDelegateResponse = {
+  $type: "cosmos.staking.v1beta1.MsgDelegateResponse" as const,
+
   encode(_: MsgDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -623,7 +630,6 @@ export const MsgDelegateResponse = {
   create(base?: DeepPartial<MsgDelegateResponse>): MsgDelegateResponse {
     return MsgDelegateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgDelegateResponse>): MsgDelegateResponse {
     const message = createBaseMsgDelegateResponse();
     return message;
@@ -635,6 +641,8 @@ function createBaseMsgBeginRedelegate(): MsgBeginRedelegate {
 }
 
 export const MsgBeginRedelegate = {
+  $type: "cosmos.staking.v1beta1.MsgBeginRedelegate" as const,
+
   encode(message: MsgBeginRedelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -724,7 +732,6 @@ export const MsgBeginRedelegate = {
   create(base?: DeepPartial<MsgBeginRedelegate>): MsgBeginRedelegate {
     return MsgBeginRedelegate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgBeginRedelegate>): MsgBeginRedelegate {
     const message = createBaseMsgBeginRedelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -742,6 +749,8 @@ function createBaseMsgBeginRedelegateResponse(): MsgBeginRedelegateResponse {
 }
 
 export const MsgBeginRedelegateResponse = {
+  $type: "cosmos.staking.v1beta1.MsgBeginRedelegateResponse" as const,
+
   encode(message: MsgBeginRedelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.completionTime !== undefined) {
       Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
@@ -787,7 +796,6 @@ export const MsgBeginRedelegateResponse = {
   create(base?: DeepPartial<MsgBeginRedelegateResponse>): MsgBeginRedelegateResponse {
     return MsgBeginRedelegateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgBeginRedelegateResponse>): MsgBeginRedelegateResponse {
     const message = createBaseMsgBeginRedelegateResponse();
     message.completionTime = object.completionTime ?? undefined;
@@ -800,6 +808,8 @@ function createBaseMsgUndelegate(): MsgUndelegate {
 }
 
 export const MsgUndelegate = {
+  $type: "cosmos.staking.v1beta1.MsgUndelegate" as const,
+
   encode(message: MsgUndelegate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -875,7 +885,6 @@ export const MsgUndelegate = {
   create(base?: DeepPartial<MsgUndelegate>): MsgUndelegate {
     return MsgUndelegate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUndelegate>): MsgUndelegate {
     const message = createBaseMsgUndelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -892,6 +901,8 @@ function createBaseMsgUndelegateResponse(): MsgUndelegateResponse {
 }
 
 export const MsgUndelegateResponse = {
+  $type: "cosmos.staking.v1beta1.MsgUndelegateResponse" as const,
+
   encode(message: MsgUndelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.completionTime !== undefined) {
       Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(10).fork()).ldelim();
@@ -937,7 +948,6 @@ export const MsgUndelegateResponse = {
   create(base?: DeepPartial<MsgUndelegateResponse>): MsgUndelegateResponse {
     return MsgUndelegateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUndelegateResponse>): MsgUndelegateResponse {
     const message = createBaseMsgUndelegateResponse();
     message.completionTime = object.completionTime ?? undefined;
@@ -950,6 +960,8 @@ function createBaseMsgCancelUnbondingDelegation(): MsgCancelUnbondingDelegation 
 }
 
 export const MsgCancelUnbondingDelegation = {
+  $type: "cosmos.staking.v1beta1.MsgCancelUnbondingDelegation" as const,
+
   encode(message: MsgCancelUnbondingDelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1039,7 +1051,6 @@ export const MsgCancelUnbondingDelegation = {
   create(base?: DeepPartial<MsgCancelUnbondingDelegation>): MsgCancelUnbondingDelegation {
     return MsgCancelUnbondingDelegation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCancelUnbondingDelegation>): MsgCancelUnbondingDelegation {
     const message = createBaseMsgCancelUnbondingDelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1057,6 +1068,8 @@ function createBaseMsgCancelUnbondingDelegationResponse(): MsgCancelUnbondingDel
 }
 
 export const MsgCancelUnbondingDelegationResponse = {
+  $type: "cosmos.staking.v1beta1.MsgCancelUnbondingDelegationResponse" as const,
+
   encode(_: MsgCancelUnbondingDelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1089,7 +1102,6 @@ export const MsgCancelUnbondingDelegationResponse = {
   create(base?: DeepPartial<MsgCancelUnbondingDelegationResponse>): MsgCancelUnbondingDelegationResponse {
     return MsgCancelUnbondingDelegationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCancelUnbondingDelegationResponse>): MsgCancelUnbondingDelegationResponse {
     const message = createBaseMsgCancelUnbondingDelegationResponse();
     return message;
@@ -1101,6 +1113,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.staking.v1beta1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1162,7 +1176,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -1178,6 +1191,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.staking.v1beta1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1210,7 +1225,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

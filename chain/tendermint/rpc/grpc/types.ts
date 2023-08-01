@@ -24,6 +24,8 @@ function createBaseRequestPing(): RequestPing {
 }
 
 export const RequestPing = {
+  $type: "tendermint.rpc.grpc.RequestPing" as const,
+
   encode(_: RequestPing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -56,7 +58,6 @@ export const RequestPing = {
   create(base?: DeepPartial<RequestPing>): RequestPing {
     return RequestPing.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<RequestPing>): RequestPing {
     const message = createBaseRequestPing();
     return message;
@@ -68,6 +69,8 @@ function createBaseRequestBroadcastTx(): RequestBroadcastTx {
 }
 
 export const RequestBroadcastTx = {
+  $type: "tendermint.rpc.grpc.RequestBroadcastTx" as const,
+
   encode(message: RequestBroadcastTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
@@ -113,7 +116,6 @@ export const RequestBroadcastTx = {
   create(base?: DeepPartial<RequestBroadcastTx>): RequestBroadcastTx {
     return RequestBroadcastTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestBroadcastTx>): RequestBroadcastTx {
     const message = createBaseRequestBroadcastTx();
     message.tx = object.tx ?? new Uint8Array(0);
@@ -126,6 +128,8 @@ function createBaseResponsePing(): ResponsePing {
 }
 
 export const ResponsePing = {
+  $type: "tendermint.rpc.grpc.ResponsePing" as const,
+
   encode(_: ResponsePing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -158,7 +162,6 @@ export const ResponsePing = {
   create(base?: DeepPartial<ResponsePing>): ResponsePing {
     return ResponsePing.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<ResponsePing>): ResponsePing {
     const message = createBaseResponsePing();
     return message;
@@ -170,6 +173,8 @@ function createBaseResponseBroadcastTx(): ResponseBroadcastTx {
 }
 
 export const ResponseBroadcastTx = {
+  $type: "tendermint.rpc.grpc.ResponseBroadcastTx" as const,
+
   encode(message: ResponseBroadcastTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.checkTx !== undefined) {
       ResponseCheckTx.encode(message.checkTx, writer.uint32(10).fork()).ldelim();
@@ -231,7 +236,6 @@ export const ResponseBroadcastTx = {
   create(base?: DeepPartial<ResponseBroadcastTx>): ResponseBroadcastTx {
     return ResponseBroadcastTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseBroadcastTx>): ResponseBroadcastTx {
     const message = createBaseResponseBroadcastTx();
     message.checkTx = (object.checkTx !== undefined && object.checkTx !== null)

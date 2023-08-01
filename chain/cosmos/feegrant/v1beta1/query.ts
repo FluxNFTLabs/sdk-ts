@@ -64,6 +64,8 @@ function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
 }
 
 export const QueryAllowanceRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest" as const,
+
   encode(message: QueryAllowanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -125,7 +127,6 @@ export const QueryAllowanceRequest = {
   create(base?: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
     return QueryAllowanceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
     const message = createBaseQueryAllowanceRequest();
     message.granter = object.granter ?? "";
@@ -139,6 +140,8 @@ function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
 }
 
 export const QueryAllowanceResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse" as const,
+
   encode(message: QueryAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Grant.encode(message.allowance, writer.uint32(10).fork()).ldelim();
@@ -184,7 +187,6 @@ export const QueryAllowanceResponse = {
   create(base?: DeepPartial<QueryAllowanceResponse>): QueryAllowanceResponse {
     return QueryAllowanceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowanceResponse>): QueryAllowanceResponse {
     const message = createBaseQueryAllowanceResponse();
     message.allowance = (object.allowance !== undefined && object.allowance !== null)
@@ -199,6 +201,8 @@ function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
 }
 
 export const QueryAllowancesRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest" as const,
+
   encode(message: QueryAllowancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
@@ -260,7 +264,6 @@ export const QueryAllowancesRequest = {
   create(base?: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
     return QueryAllowancesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
     const message = createBaseQueryAllowancesRequest();
     message.grantee = object.grantee ?? "";
@@ -276,6 +279,8 @@ function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
 }
 
 export const QueryAllowancesResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse" as const,
+
   encode(message: QueryAllowancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -337,7 +342,6 @@ export const QueryAllowancesResponse = {
   create(base?: DeepPartial<QueryAllowancesResponse>): QueryAllowancesResponse {
     return QueryAllowancesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowancesResponse>): QueryAllowancesResponse {
     const message = createBaseQueryAllowancesResponse();
     message.allowances = object.allowances?.map((e) => Grant.fromPartial(e)) || [];
@@ -353,6 +357,8 @@ function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRe
 }
 
 export const QueryAllowancesByGranterRequest = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest" as const,
+
   encode(message: QueryAllowancesByGranterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -414,7 +420,6 @@ export const QueryAllowancesByGranterRequest = {
   create(base?: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
     return QueryAllowancesByGranterRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
     const message = createBaseQueryAllowancesByGranterRequest();
     message.granter = object.granter ?? "";
@@ -430,6 +435,8 @@ function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterR
 }
 
 export const QueryAllowancesByGranterResponse = {
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse" as const,
+
   encode(message: QueryAllowancesByGranterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -491,7 +498,6 @@ export const QueryAllowancesByGranterResponse = {
   create(base?: DeepPartial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse {
     return QueryAllowancesByGranterResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse {
     const message = createBaseQueryAllowancesByGranterResponse();
     message.allowances = object.allowances?.map((e) => Grant.fromPartial(e)) || [];

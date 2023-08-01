@@ -13,6 +13,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.distribution.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.feeCollectorName !== "") {
       writer.uint32(10).string(message.feeCollectorName);
@@ -74,7 +76,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.feeCollectorName = object.feeCollectorName ?? "";

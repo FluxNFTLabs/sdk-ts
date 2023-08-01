@@ -135,6 +135,8 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
+  $type: "cosmos.gov.v1.MsgSubmitProposal" as const,
+
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -254,7 +256,6 @@ export const MsgSubmitProposal = {
   create(base?: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     return MsgSubmitProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];
@@ -272,6 +273,8 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
+  $type: "cosmos.gov.v1.MsgSubmitProposalResponse" as const,
+
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -317,7 +320,6 @@ export const MsgSubmitProposalResponse = {
   create(base?: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId ?? "0";
@@ -330,6 +332,8 @@ function createBaseMsgExecLegacyContent(): MsgExecLegacyContent {
 }
 
 export const MsgExecLegacyContent = {
+  $type: "cosmos.gov.v1.MsgExecLegacyContent" as const,
+
   encode(message: MsgExecLegacyContent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(10).fork()).ldelim();
@@ -391,7 +395,6 @@ export const MsgExecLegacyContent = {
   create(base?: DeepPartial<MsgExecLegacyContent>): MsgExecLegacyContent {
     return MsgExecLegacyContent.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExecLegacyContent>): MsgExecLegacyContent {
     const message = createBaseMsgExecLegacyContent();
     message.content = (object.content !== undefined && object.content !== null)
@@ -407,6 +410,8 @@ function createBaseMsgExecLegacyContentResponse(): MsgExecLegacyContentResponse 
 }
 
 export const MsgExecLegacyContentResponse = {
+  $type: "cosmos.gov.v1.MsgExecLegacyContentResponse" as const,
+
   encode(_: MsgExecLegacyContentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -439,7 +444,6 @@ export const MsgExecLegacyContentResponse = {
   create(base?: DeepPartial<MsgExecLegacyContentResponse>): MsgExecLegacyContentResponse {
     return MsgExecLegacyContentResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgExecLegacyContentResponse>): MsgExecLegacyContentResponse {
     const message = createBaseMsgExecLegacyContentResponse();
     return message;
@@ -451,6 +455,8 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  $type: "cosmos.gov.v1.MsgVote" as const,
+
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -540,7 +546,6 @@ export const MsgVote = {
   create(base?: DeepPartial<MsgVote>): MsgVote {
     return MsgVote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId ?? "0";
@@ -556,6 +561,8 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
+  $type: "cosmos.gov.v1.MsgVoteResponse" as const,
+
   encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -588,7 +595,6 @@ export const MsgVoteResponse = {
   create(base?: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     return MsgVoteResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
@@ -600,6 +606,8 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
 }
 
 export const MsgVoteWeighted = {
+  $type: "cosmos.gov.v1.MsgVoteWeighted" as const,
+
   encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -689,7 +697,6 @@ export const MsgVoteWeighted = {
   create(base?: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     return MsgVoteWeighted.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
     message.proposalId = object.proposalId ?? "0";
@@ -705,6 +712,8 @@ function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
 }
 
 export const MsgVoteWeightedResponse = {
+  $type: "cosmos.gov.v1.MsgVoteWeightedResponse" as const,
+
   encode(_: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -737,7 +746,6 @@ export const MsgVoteWeightedResponse = {
   create(base?: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
@@ -749,6 +757,8 @@ function createBaseMsgDeposit(): MsgDeposit {
 }
 
 export const MsgDeposit = {
+  $type: "cosmos.gov.v1.MsgDeposit" as const,
+
   encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -824,7 +834,6 @@ export const MsgDeposit = {
   create(base?: DeepPartial<MsgDeposit>): MsgDeposit {
     return MsgDeposit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
     const message = createBaseMsgDeposit();
     message.proposalId = object.proposalId ?? "0";
@@ -839,6 +848,8 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 }
 
 export const MsgDepositResponse = {
+  $type: "cosmos.gov.v1.MsgDepositResponse" as const,
+
   encode(_: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -871,7 +882,6 @@ export const MsgDepositResponse = {
   create(base?: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     return MsgDepositResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
@@ -883,6 +893,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.gov.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -944,7 +956,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -960,6 +971,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.gov.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -992,7 +1005,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

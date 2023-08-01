@@ -37,6 +37,8 @@ function createBaseEvidence(): Evidence {
 }
 
 export const Evidence = {
+  $type: "tendermint.types.Evidence" as const,
+
   encode(message: Evidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.duplicateVoteEvidence !== undefined) {
       DuplicateVoteEvidence.encode(message.duplicateVoteEvidence, writer.uint32(10).fork()).ldelim();
@@ -102,7 +104,6 @@ export const Evidence = {
   create(base?: DeepPartial<Evidence>): Evidence {
     return Evidence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
     message.duplicateVoteEvidence =
@@ -122,6 +123,8 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
 }
 
 export const DuplicateVoteEvidence = {
+  $type: "tendermint.types.DuplicateVoteEvidence" as const,
+
   encode(message: DuplicateVoteEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.voteA !== undefined) {
       Vote.encode(message.voteA, writer.uint32(10).fork()).ldelim();
@@ -225,7 +228,6 @@ export const DuplicateVoteEvidence = {
   create(base?: DeepPartial<DuplicateVoteEvidence>): DuplicateVoteEvidence {
     return DuplicateVoteEvidence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DuplicateVoteEvidence>): DuplicateVoteEvidence {
     const message = createBaseDuplicateVoteEvidence();
     message.voteA = (object.voteA !== undefined && object.voteA !== null) ? Vote.fromPartial(object.voteA) : undefined;
@@ -248,6 +250,8 @@ function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
 }
 
 export const LightClientAttackEvidence = {
+  $type: "tendermint.types.LightClientAttackEvidence" as const,
+
   encode(message: LightClientAttackEvidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.conflictingBlock !== undefined) {
       LightBlock.encode(message.conflictingBlock, writer.uint32(10).fork()).ldelim();
@@ -353,7 +357,6 @@ export const LightClientAttackEvidence = {
   create(base?: DeepPartial<LightClientAttackEvidence>): LightClientAttackEvidence {
     return LightClientAttackEvidence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LightClientAttackEvidence>): LightClientAttackEvidence {
     const message = createBaseLightClientAttackEvidence();
     message.conflictingBlock = (object.conflictingBlock !== undefined && object.conflictingBlock !== null)
@@ -372,6 +375,8 @@ function createBaseEvidenceList(): EvidenceList {
 }
 
 export const EvidenceList = {
+  $type: "tendermint.types.EvidenceList" as const,
+
   encode(message: EvidenceList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.evidence) {
       Evidence.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -417,7 +422,6 @@ export const EvidenceList = {
   create(base?: DeepPartial<EvidenceList>): EvidenceList {
     return EvidenceList.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EvidenceList>): EvidenceList {
     const message = createBaseEvidenceList();
     message.evidence = object.evidence?.map((e) => Evidence.fromPartial(e)) || [];

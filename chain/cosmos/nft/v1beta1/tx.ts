@@ -24,6 +24,8 @@ function createBaseMsgSend(): MsgSend {
 }
 
 export const MsgSend = {
+  $type: "cosmos.nft.v1beta1.MsgSend" as const,
+
   encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -113,7 +115,6 @@ export const MsgSend = {
   create(base?: DeepPartial<MsgSend>): MsgSend {
     return MsgSend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.classId = object.classId ?? "";
@@ -129,6 +130,8 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 
 export const MsgSendResponse = {
+  $type: "cosmos.nft.v1beta1.MsgSendResponse" as const,
+
   encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -161,7 +164,6 @@ export const MsgSendResponse = {
   create(base?: DeepPartial<MsgSendResponse>): MsgSendResponse {
     return MsgSendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;

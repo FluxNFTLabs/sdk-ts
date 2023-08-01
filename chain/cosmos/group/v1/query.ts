@@ -203,6 +203,8 @@ function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
 }
 
 export const QueryGroupInfoRequest = {
+  $type: "cosmos.group.v1.QueryGroupInfoRequest" as const,
+
   encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -248,7 +250,6 @@ export const QueryGroupInfoRequest = {
   create(base?: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     return QueryGroupInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
     message.groupId = object.groupId ?? "0";
@@ -261,6 +262,8 @@ function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
 }
 
 export const QueryGroupInfoResponse = {
+  $type: "cosmos.group.v1.QueryGroupInfoResponse" as const,
+
   encode(message: QueryGroupInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
@@ -306,7 +309,6 @@ export const QueryGroupInfoResponse = {
   create(base?: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
     return QueryGroupInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
     const message = createBaseQueryGroupInfoResponse();
     message.info = (object.info !== undefined && object.info !== null) ? GroupInfo.fromPartial(object.info) : undefined;
@@ -319,6 +321,8 @@ function createBaseQueryGroupPolicyInfoRequest(): QueryGroupPolicyInfoRequest {
 }
 
 export const QueryGroupPolicyInfoRequest = {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoRequest" as const,
+
   encode(message: QueryGroupPolicyInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -364,7 +368,6 @@ export const QueryGroupPolicyInfoRequest = {
   create(base?: DeepPartial<QueryGroupPolicyInfoRequest>): QueryGroupPolicyInfoRequest {
     return QueryGroupPolicyInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoRequest>): QueryGroupPolicyInfoRequest {
     const message = createBaseQueryGroupPolicyInfoRequest();
     message.address = object.address ?? "";
@@ -377,6 +380,8 @@ function createBaseQueryGroupPolicyInfoResponse(): QueryGroupPolicyInfoResponse 
 }
 
 export const QueryGroupPolicyInfoResponse = {
+  $type: "cosmos.group.v1.QueryGroupPolicyInfoResponse" as const,
+
   encode(message: QueryGroupPolicyInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupPolicyInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
@@ -422,7 +427,6 @@ export const QueryGroupPolicyInfoResponse = {
   create(base?: DeepPartial<QueryGroupPolicyInfoResponse>): QueryGroupPolicyInfoResponse {
     return QueryGroupPolicyInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoResponse>): QueryGroupPolicyInfoResponse {
     const message = createBaseQueryGroupPolicyInfoResponse();
     message.info = (object.info !== undefined && object.info !== null)
@@ -437,6 +441,8 @@ function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
 }
 
 export const QueryGroupMembersRequest = {
+  $type: "cosmos.group.v1.QueryGroupMembersRequest" as const,
+
   encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -498,7 +504,6 @@ export const QueryGroupMembersRequest = {
   create(base?: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     return QueryGroupMembersRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
     message.groupId = object.groupId ?? "0";
@@ -514,6 +519,8 @@ function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
 }
 
 export const QueryGroupMembersResponse = {
+  $type: "cosmos.group.v1.QueryGroupMembersResponse" as const,
+
   encode(message: QueryGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.members) {
       GroupMember.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -575,7 +582,6 @@ export const QueryGroupMembersResponse = {
   create(base?: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
     return QueryGroupMembersResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
     const message = createBaseQueryGroupMembersResponse();
     message.members = object.members?.map((e) => GroupMember.fromPartial(e)) || [];
@@ -591,6 +597,8 @@ function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
 }
 
 export const QueryGroupsByAdminRequest = {
+  $type: "cosmos.group.v1.QueryGroupsByAdminRequest" as const,
+
   encode(message: QueryGroupsByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -652,7 +660,6 @@ export const QueryGroupsByAdminRequest = {
   create(base?: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     return QueryGroupsByAdminRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     const message = createBaseQueryGroupsByAdminRequest();
     message.admin = object.admin ?? "";
@@ -668,6 +675,8 @@ function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
 }
 
 export const QueryGroupsByAdminResponse = {
+  $type: "cosmos.group.v1.QueryGroupsByAdminResponse" as const,
+
   encode(message: QueryGroupsByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -729,7 +738,6 @@ export const QueryGroupsByAdminResponse = {
   create(base?: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
     return QueryGroupsByAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
     const message = createBaseQueryGroupsByAdminResponse();
     message.groups = object.groups?.map((e) => GroupInfo.fromPartial(e)) || [];
@@ -745,6 +753,8 @@ function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroup
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupRequest" as const,
+
   encode(message: QueryGroupPoliciesByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -806,7 +816,6 @@ export const QueryGroupPoliciesByGroupRequest = {
   create(base?: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     return QueryGroupPoliciesByGroupRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
     message.groupId = object.groupId ?? "0";
@@ -822,6 +831,8 @@ function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGrou
 }
 
 export const QueryGroupPoliciesByGroupResponse = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByGroupResponse" as const,
+
   encode(message: QueryGroupPoliciesByGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -885,7 +896,6 @@ export const QueryGroupPoliciesByGroupResponse = {
   create(base?: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
     return QueryGroupPoliciesByGroupResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
     const message = createBaseQueryGroupPoliciesByGroupResponse();
     message.groupPolicies = object.groupPolicies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
@@ -901,6 +911,8 @@ function createBaseQueryGroupPoliciesByAdminRequest(): QueryGroupPoliciesByAdmin
 }
 
 export const QueryGroupPoliciesByAdminRequest = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminRequest" as const,
+
   encode(message: QueryGroupPoliciesByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -962,7 +974,6 @@ export const QueryGroupPoliciesByAdminRequest = {
   create(base?: DeepPartial<QueryGroupPoliciesByAdminRequest>): QueryGroupPoliciesByAdminRequest {
     return QueryGroupPoliciesByAdminRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminRequest>): QueryGroupPoliciesByAdminRequest {
     const message = createBaseQueryGroupPoliciesByAdminRequest();
     message.admin = object.admin ?? "";
@@ -978,6 +989,8 @@ function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdmi
 }
 
 export const QueryGroupPoliciesByAdminResponse = {
+  $type: "cosmos.group.v1.QueryGroupPoliciesByAdminResponse" as const,
+
   encode(message: QueryGroupPoliciesByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1041,7 +1054,6 @@ export const QueryGroupPoliciesByAdminResponse = {
   create(base?: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     return QueryGroupPoliciesByAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     const message = createBaseQueryGroupPoliciesByAdminResponse();
     message.groupPolicies = object.groupPolicies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
@@ -1057,6 +1069,8 @@ function createBaseQueryProposalRequest(): QueryProposalRequest {
 }
 
 export const QueryProposalRequest = {
+  $type: "cosmos.group.v1.QueryProposalRequest" as const,
+
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1102,7 +1116,6 @@ export const QueryProposalRequest = {
   create(base?: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     return QueryProposalRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1115,6 +1128,8 @@ function createBaseQueryProposalResponse(): QueryProposalResponse {
 }
 
 export const QueryProposalResponse = {
+  $type: "cosmos.group.v1.QueryProposalResponse" as const,
+
   encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -1160,7 +1175,6 @@ export const QueryProposalResponse = {
   create(base?: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     return QueryProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
@@ -1175,6 +1189,8 @@ function createBaseQueryProposalsByGroupPolicyRequest(): QueryProposalsByGroupPo
 }
 
 export const QueryProposalsByGroupPolicyRequest = {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyRequest" as const,
+
   encode(message: QueryProposalsByGroupPolicyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1236,7 +1252,6 @@ export const QueryProposalsByGroupPolicyRequest = {
   create(base?: DeepPartial<QueryProposalsByGroupPolicyRequest>): QueryProposalsByGroupPolicyRequest {
     return QueryProposalsByGroupPolicyRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyRequest>): QueryProposalsByGroupPolicyRequest {
     const message = createBaseQueryProposalsByGroupPolicyRequest();
     message.address = object.address ?? "";
@@ -1252,6 +1267,8 @@ function createBaseQueryProposalsByGroupPolicyResponse(): QueryProposalsByGroupP
 }
 
 export const QueryProposalsByGroupPolicyResponse = {
+  $type: "cosmos.group.v1.QueryProposalsByGroupPolicyResponse" as const,
+
   encode(message: QueryProposalsByGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1313,7 +1330,6 @@ export const QueryProposalsByGroupPolicyResponse = {
   create(base?: DeepPartial<QueryProposalsByGroupPolicyResponse>): QueryProposalsByGroupPolicyResponse {
     return QueryProposalsByGroupPolicyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyResponse>): QueryProposalsByGroupPolicyResponse {
     const message = createBaseQueryProposalsByGroupPolicyResponse();
     message.proposals = object.proposals?.map((e) => Proposal.fromPartial(e)) || [];
@@ -1329,6 +1345,8 @@ function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRe
 }
 
 export const QueryVoteByProposalVoterRequest = {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterRequest" as const,
+
   encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1390,7 +1408,6 @@ export const QueryVoteByProposalVoterRequest = {
   create(base?: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     return QueryVoteByProposalVoterRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1404,6 +1421,8 @@ function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterR
 }
 
 export const QueryVoteByProposalVoterResponse = {
+  $type: "cosmos.group.v1.QueryVoteByProposalVoterResponse" as const,
+
   encode(message: QueryVoteByProposalVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -1449,7 +1468,6 @@ export const QueryVoteByProposalVoterResponse = {
   create(base?: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
     return QueryVoteByProposalVoterResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
     const message = createBaseQueryVoteByProposalVoterResponse();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
@@ -1462,6 +1480,8 @@ function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
 }
 
 export const QueryVotesByProposalRequest = {
+  $type: "cosmos.group.v1.QueryVotesByProposalRequest" as const,
+
   encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1523,7 +1543,6 @@ export const QueryVotesByProposalRequest = {
   create(base?: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     return QueryVotesByProposalRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1539,6 +1558,8 @@ function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse 
 }
 
 export const QueryVotesByProposalResponse = {
+  $type: "cosmos.group.v1.QueryVotesByProposalResponse" as const,
+
   encode(message: QueryVotesByProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1600,7 +1621,6 @@ export const QueryVotesByProposalResponse = {
   create(base?: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
     return QueryVotesByProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
     const message = createBaseQueryVotesByProposalResponse();
     message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
@@ -1616,6 +1636,8 @@ function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
 }
 
 export const QueryVotesByVoterRequest = {
+  $type: "cosmos.group.v1.QueryVotesByVoterRequest" as const,
+
   encode(message: QueryVotesByVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.voter !== "") {
       writer.uint32(10).string(message.voter);
@@ -1677,7 +1699,6 @@ export const QueryVotesByVoterRequest = {
   create(base?: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     return QueryVotesByVoterRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     const message = createBaseQueryVotesByVoterRequest();
     message.voter = object.voter ?? "";
@@ -1693,6 +1714,8 @@ function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
 }
 
 export const QueryVotesByVoterResponse = {
+  $type: "cosmos.group.v1.QueryVotesByVoterResponse" as const,
+
   encode(message: QueryVotesByVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1754,7 +1777,6 @@ export const QueryVotesByVoterResponse = {
   create(base?: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
     return QueryVotesByVoterResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
     const message = createBaseQueryVotesByVoterResponse();
     message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
@@ -1770,6 +1792,8 @@ function createBaseQueryGroupsByMemberRequest(): QueryGroupsByMemberRequest {
 }
 
 export const QueryGroupsByMemberRequest = {
+  $type: "cosmos.group.v1.QueryGroupsByMemberRequest" as const,
+
   encode(message: QueryGroupsByMemberRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1831,7 +1855,6 @@ export const QueryGroupsByMemberRequest = {
   create(base?: DeepPartial<QueryGroupsByMemberRequest>): QueryGroupsByMemberRequest {
     return QueryGroupsByMemberRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupsByMemberRequest>): QueryGroupsByMemberRequest {
     const message = createBaseQueryGroupsByMemberRequest();
     message.address = object.address ?? "";
@@ -1847,6 +1870,8 @@ function createBaseQueryGroupsByMemberResponse(): QueryGroupsByMemberResponse {
 }
 
 export const QueryGroupsByMemberResponse = {
+  $type: "cosmos.group.v1.QueryGroupsByMemberResponse" as const,
+
   encode(message: QueryGroupsByMemberResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1908,7 +1933,6 @@ export const QueryGroupsByMemberResponse = {
   create(base?: DeepPartial<QueryGroupsByMemberResponse>): QueryGroupsByMemberResponse {
     return QueryGroupsByMemberResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGroupsByMemberResponse>): QueryGroupsByMemberResponse {
     const message = createBaseQueryGroupsByMemberResponse();
     message.groups = object.groups?.map((e) => GroupInfo.fromPartial(e)) || [];
@@ -1924,6 +1948,8 @@ function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
 }
 
 export const QueryTallyResultRequest = {
+  $type: "cosmos.group.v1.QueryTallyResultRequest" as const,
+
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1969,7 +1995,6 @@ export const QueryTallyResultRequest = {
   create(base?: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     return QueryTallyResultRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1982,6 +2007,8 @@ function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
 }
 
 export const QueryTallyResultResponse = {
+  $type: "cosmos.group.v1.QueryTallyResultResponse" as const,
+
   encode(message: QueryTallyResultResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tally !== undefined) {
       TallyResult.encode(message.tally, writer.uint32(10).fork()).ldelim();
@@ -2027,7 +2054,6 @@ export const QueryTallyResultResponse = {
   create(base?: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     return QueryTallyResultResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
     message.tally = (object.tally !== undefined && object.tally !== null)

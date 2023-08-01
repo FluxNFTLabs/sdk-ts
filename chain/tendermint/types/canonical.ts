@@ -44,6 +44,8 @@ function createBaseCanonicalBlockID(): CanonicalBlockID {
 }
 
 export const CanonicalBlockID = {
+  $type: "tendermint.types.CanonicalBlockID" as const,
+
   encode(message: CanonicalBlockID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -105,7 +107,6 @@ export const CanonicalBlockID = {
   create(base?: DeepPartial<CanonicalBlockID>): CanonicalBlockID {
     return CanonicalBlockID.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CanonicalBlockID>): CanonicalBlockID {
     const message = createBaseCanonicalBlockID();
     message.hash = object.hash ?? new Uint8Array(0);
@@ -121,6 +122,8 @@ function createBaseCanonicalPartSetHeader(): CanonicalPartSetHeader {
 }
 
 export const CanonicalPartSetHeader = {
+  $type: "tendermint.types.CanonicalPartSetHeader" as const,
+
   encode(message: CanonicalPartSetHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.total !== 0) {
       writer.uint32(8).uint32(message.total);
@@ -182,7 +185,6 @@ export const CanonicalPartSetHeader = {
   create(base?: DeepPartial<CanonicalPartSetHeader>): CanonicalPartSetHeader {
     return CanonicalPartSetHeader.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CanonicalPartSetHeader>): CanonicalPartSetHeader {
     const message = createBaseCanonicalPartSetHeader();
     message.total = object.total ?? 0;
@@ -196,6 +198,8 @@ function createBaseCanonicalProposal(): CanonicalProposal {
 }
 
 export const CanonicalProposal = {
+  $type: "tendermint.types.CanonicalProposal" as const,
+
   encode(message: CanonicalProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -327,7 +331,6 @@ export const CanonicalProposal = {
   create(base?: DeepPartial<CanonicalProposal>): CanonicalProposal {
     return CanonicalProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CanonicalProposal>): CanonicalProposal {
     const message = createBaseCanonicalProposal();
     message.type = object.type ?? 0;
@@ -348,6 +351,8 @@ function createBaseCanonicalVote(): CanonicalVote {
 }
 
 export const CanonicalVote = {
+  $type: "tendermint.types.CanonicalVote" as const,
+
   encode(message: CanonicalVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -465,7 +470,6 @@ export const CanonicalVote = {
   create(base?: DeepPartial<CanonicalVote>): CanonicalVote {
     return CanonicalVote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CanonicalVote>): CanonicalVote {
     const message = createBaseCanonicalVote();
     message.type = object.type ?? 0;

@@ -311,6 +311,8 @@ function createBaseMsgCreateGroup(): MsgCreateGroup {
 }
 
 export const MsgCreateGroup = {
+  $type: "cosmos.group.v1.MsgCreateGroup" as const,
+
   encode(message: MsgCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -386,7 +388,6 @@ export const MsgCreateGroup = {
   create(base?: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
     return MsgCreateGroup.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
     const message = createBaseMsgCreateGroup();
     message.admin = object.admin ?? "";
@@ -401,6 +402,8 @@ function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
 }
 
 export const MsgCreateGroupResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupResponse" as const,
+
   encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -446,7 +449,6 @@ export const MsgCreateGroupResponse = {
   create(base?: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     return MsgCreateGroupResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
     message.groupId = object.groupId ?? "0";
@@ -459,6 +461,8 @@ function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
 }
 
 export const MsgUpdateGroupMembers = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembers" as const,
+
   encode(message: MsgUpdateGroupMembers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -536,7 +540,6 @@ export const MsgUpdateGroupMembers = {
   create(base?: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     return MsgUpdateGroupMembers.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
@@ -551,6 +554,8 @@ function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersRespons
 }
 
 export const MsgUpdateGroupMembersResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse" as const,
+
   encode(_: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -583,7 +588,6 @@ export const MsgUpdateGroupMembersResponse = {
   create(base?: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     return MsgUpdateGroupMembersResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
@@ -595,6 +599,8 @@ function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
 }
 
 export const MsgUpdateGroupAdmin = {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdmin" as const,
+
   encode(message: MsgUpdateGroupAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -670,7 +676,6 @@ export const MsgUpdateGroupAdmin = {
   create(base?: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     return MsgUpdateGroupAdmin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
@@ -685,6 +690,8 @@ function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
 }
 
 export const MsgUpdateGroupAdminResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse" as const,
+
   encode(_: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -717,7 +724,6 @@ export const MsgUpdateGroupAdminResponse = {
   create(base?: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
     return MsgUpdateGroupAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
     const message = createBaseMsgUpdateGroupAdminResponse();
     return message;
@@ -729,6 +735,8 @@ function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
 }
 
 export const MsgUpdateGroupMetadata = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadata" as const,
+
   encode(message: MsgUpdateGroupMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -804,7 +812,6 @@ export const MsgUpdateGroupMetadata = {
   create(base?: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     return MsgUpdateGroupMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
@@ -819,6 +826,8 @@ function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataRespo
 }
 
 export const MsgUpdateGroupMetadataResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse" as const,
+
   encode(_: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -851,7 +860,6 @@ export const MsgUpdateGroupMetadataResponse = {
   create(base?: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
     return MsgUpdateGroupMetadataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
     const message = createBaseMsgUpdateGroupMetadataResponse();
     return message;
@@ -863,6 +871,8 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
 }
 
 export const MsgCreateGroupPolicy = {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicy" as const,
+
   encode(message: MsgCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -952,7 +962,6 @@ export const MsgCreateGroupPolicy = {
   create(base?: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     return MsgCreateGroupPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
     message.admin = object.admin ?? "";
@@ -970,6 +979,8 @@ function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse 
 }
 
 export const MsgCreateGroupPolicyResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse" as const,
+
   encode(message: MsgCreateGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1015,7 +1026,6 @@ export const MsgCreateGroupPolicyResponse = {
   create(base?: DeepPartial<MsgCreateGroupPolicyResponse>): MsgCreateGroupPolicyResponse {
     return MsgCreateGroupPolicyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroupPolicyResponse>): MsgCreateGroupPolicyResponse {
     const message = createBaseMsgCreateGroupPolicyResponse();
     message.address = object.address ?? "";
@@ -1028,6 +1038,8 @@ function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
 }
 
 export const MsgUpdateGroupPolicyAdmin = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin" as const,
+
   encode(message: MsgUpdateGroupPolicyAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1103,7 +1115,6 @@ export const MsgUpdateGroupPolicyAdmin = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyAdmin>): MsgUpdateGroupPolicyAdmin {
     return MsgUpdateGroupPolicyAdmin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyAdmin>): MsgUpdateGroupPolicyAdmin {
     const message = createBaseMsgUpdateGroupPolicyAdmin();
     message.admin = object.admin ?? "";
@@ -1118,6 +1129,8 @@ function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdmi
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse" as const,
+
   encode(_: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1150,7 +1163,6 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
     return MsgUpdateGroupPolicyAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
     return message;
@@ -1169,6 +1181,8 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
 }
 
 export const MsgCreateGroupWithPolicy = {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicy" as const,
+
   encode(message: MsgCreateGroupWithPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1286,7 +1300,6 @@ export const MsgCreateGroupWithPolicy = {
   create(base?: DeepPartial<MsgCreateGroupWithPolicy>): MsgCreateGroupWithPolicy {
     return MsgCreateGroupWithPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicy>): MsgCreateGroupWithPolicy {
     const message = createBaseMsgCreateGroupWithPolicy();
     message.admin = object.admin ?? "";
@@ -1306,6 +1319,8 @@ function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyR
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse" as const,
+
   encode(message: MsgCreateGroupWithPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -1367,7 +1382,6 @@ export const MsgCreateGroupWithPolicyResponse = {
   create(base?: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     return MsgCreateGroupWithPolicyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
     message.groupId = object.groupId ?? "0";
@@ -1381,6 +1395,8 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicy = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy" as const,
+
   encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1456,7 +1472,6 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>): MsgUpdateGroupPolicyDecisionPolicy {
     return MsgUpdateGroupPolicyDecisionPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>): MsgUpdateGroupPolicyDecisionPolicy {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
@@ -1473,6 +1488,8 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupP
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse" as const,
+
   encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1505,7 +1522,6 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
     return MsgUpdateGroupPolicyDecisionPolicyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
     return message;
@@ -1517,6 +1533,8 @@ function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata 
 }
 
 export const MsgUpdateGroupPolicyMetadata = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata" as const,
+
   encode(message: MsgUpdateGroupPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
@@ -1592,7 +1610,6 @@ export const MsgUpdateGroupPolicyMetadata = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyMetadata>): MsgUpdateGroupPolicyMetadata {
     return MsgUpdateGroupPolicyMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyMetadata>): MsgUpdateGroupPolicyMetadata {
     const message = createBaseMsgUpdateGroupPolicyMetadata();
     message.admin = object.admin ?? "";
@@ -1607,6 +1624,8 @@ function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyM
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse" as const,
+
   encode(_: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1639,7 +1658,6 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   create(base?: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
     return MsgUpdateGroupPolicyMetadataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
     return message;
@@ -1651,6 +1669,8 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 }
 
 export const MsgSubmitProposal = {
+  $type: "cosmos.group.v1.MsgSubmitProposal" as const,
+
   encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupPolicyAddress !== "") {
       writer.uint32(10).string(message.groupPolicyAddress);
@@ -1782,7 +1802,6 @@ export const MsgSubmitProposal = {
   create(base?: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     return MsgSubmitProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
@@ -1801,6 +1820,8 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 }
 
 export const MsgSubmitProposalResponse = {
+  $type: "cosmos.group.v1.MsgSubmitProposalResponse" as const,
+
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1846,7 +1867,6 @@ export const MsgSubmitProposalResponse = {
   create(base?: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId = object.proposalId ?? "0";
@@ -1859,6 +1879,8 @@ function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
 }
 
 export const MsgWithdrawProposal = {
+  $type: "cosmos.group.v1.MsgWithdrawProposal" as const,
+
   encode(message: MsgWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1920,7 +1942,6 @@ export const MsgWithdrawProposal = {
   create(base?: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     return MsgWithdrawProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
     message.proposalId = object.proposalId ?? "0";
@@ -1934,6 +1955,8 @@ function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
 }
 
 export const MsgWithdrawProposalResponse = {
+  $type: "cosmos.group.v1.MsgWithdrawProposalResponse" as const,
+
   encode(_: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1966,7 +1989,6 @@ export const MsgWithdrawProposalResponse = {
   create(base?: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
     return MsgWithdrawProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
     const message = createBaseMsgWithdrawProposalResponse();
     return message;
@@ -1978,6 +2000,8 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
+  $type: "cosmos.group.v1.MsgVote" as const,
+
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -2081,7 +2105,6 @@ export const MsgVote = {
   create(base?: DeepPartial<MsgVote>): MsgVote {
     return MsgVote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
     message.proposalId = object.proposalId ?? "0";
@@ -2098,6 +2121,8 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 }
 
 export const MsgVoteResponse = {
+  $type: "cosmos.group.v1.MsgVoteResponse" as const,
+
   encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2130,7 +2155,6 @@ export const MsgVoteResponse = {
   create(base?: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     return MsgVoteResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
@@ -2142,6 +2166,8 @@ function createBaseMsgExec(): MsgExec {
 }
 
 export const MsgExec = {
+  $type: "cosmos.group.v1.MsgExec" as const,
+
   encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -2203,7 +2229,6 @@ export const MsgExec = {
   create(base?: DeepPartial<MsgExec>): MsgExec {
     return MsgExec.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
     message.proposalId = object.proposalId ?? "0";
@@ -2217,6 +2242,8 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 }
 
 export const MsgExecResponse = {
+  $type: "cosmos.group.v1.MsgExecResponse" as const,
+
   encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(16).int32(message.result);
@@ -2262,7 +2289,6 @@ export const MsgExecResponse = {
   create(base?: DeepPartial<MsgExecResponse>): MsgExecResponse {
     return MsgExecResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     message.result = object.result ?? 0;
@@ -2275,6 +2301,8 @@ function createBaseMsgLeaveGroup(): MsgLeaveGroup {
 }
 
 export const MsgLeaveGroup = {
+  $type: "cosmos.group.v1.MsgLeaveGroup" as const,
+
   encode(message: MsgLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -2336,7 +2364,6 @@ export const MsgLeaveGroup = {
   create(base?: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     return MsgLeaveGroup.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
@@ -2350,6 +2377,8 @@ function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
 }
 
 export const MsgLeaveGroupResponse = {
+  $type: "cosmos.group.v1.MsgLeaveGroupResponse" as const,
+
   encode(_: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2382,7 +2411,6 @@ export const MsgLeaveGroupResponse = {
   create(base?: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {
     return MsgLeaveGroupResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {
     const message = createBaseMsgLeaveGroupResponse();
     return message;

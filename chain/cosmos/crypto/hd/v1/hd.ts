@@ -25,6 +25,8 @@ function createBaseBIP44Params(): BIP44Params {
 }
 
 export const BIP44Params = {
+  $type: "cosmos.crypto.hd.v1.BIP44Params" as const,
+
   encode(message: BIP44Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.purpose !== 0) {
       writer.uint32(8).uint32(message.purpose);
@@ -128,7 +130,6 @@ export const BIP44Params = {
   create(base?: DeepPartial<BIP44Params>): BIP44Params {
     return BIP44Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BIP44Params>): BIP44Params {
     const message = createBaseBIP44Params();
     message.purpose = object.purpose ?? 0;

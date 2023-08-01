@@ -49,6 +49,8 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
 }
 
 export const MsgSoftwareUpgrade = {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade" as const,
+
   encode(message: MsgSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -110,7 +112,6 @@ export const MsgSoftwareUpgrade = {
   create(base?: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     return MsgSoftwareUpgrade.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
@@ -124,6 +125,8 @@ function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
 }
 
 export const MsgSoftwareUpgradeResponse = {
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse" as const,
+
   encode(_: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -156,7 +159,6 @@ export const MsgSoftwareUpgradeResponse = {
   create(base?: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
@@ -168,6 +170,8 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
 }
 
 export const MsgCancelUpgrade = {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade" as const,
+
   encode(message: MsgCancelUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -213,7 +217,6 @@ export const MsgCancelUpgrade = {
   create(base?: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     return MsgCancelUpgrade.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
@@ -226,6 +229,8 @@ function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
 }
 
 export const MsgCancelUpgradeResponse = {
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse" as const,
+
   encode(_: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -258,7 +263,6 @@ export const MsgCancelUpgradeResponse = {
   create(base?: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;

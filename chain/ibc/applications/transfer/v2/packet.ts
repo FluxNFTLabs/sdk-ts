@@ -24,6 +24,8 @@ function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
 }
 
 export const FungibleTokenPacketData = {
+  $type: "ibc.applications.transfer.v2.FungibleTokenPacketData" as const,
+
   encode(message: FungibleTokenPacketData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -127,7 +129,6 @@ export const FungibleTokenPacketData = {
   create(base?: DeepPartial<FungibleTokenPacketData>): FungibleTokenPacketData {
     return FungibleTokenPacketData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FungibleTokenPacketData>): FungibleTokenPacketData {
     const message = createBaseFungibleTokenPacketData();
     message.denom = object.denom ?? "";

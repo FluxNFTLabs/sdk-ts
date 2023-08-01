@@ -60,6 +60,8 @@ function createBaseMsgGrant(): MsgGrant {
 }
 
 export const MsgGrant = {
+  $type: "cosmos.authz.v1beta1.MsgGrant" as const,
+
   encode(message: MsgGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -135,7 +137,6 @@ export const MsgGrant = {
   create(base?: DeepPartial<MsgGrant>): MsgGrant {
     return MsgGrant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgGrant>): MsgGrant {
     const message = createBaseMsgGrant();
     message.granter = object.granter ?? "";
@@ -150,6 +151,8 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 }
 
 export const MsgExecResponse = {
+  $type: "cosmos.authz.v1beta1.MsgExecResponse" as const,
+
   encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.results) {
       writer.uint32(10).bytes(v!);
@@ -195,7 +198,6 @@ export const MsgExecResponse = {
   create(base?: DeepPartial<MsgExecResponse>): MsgExecResponse {
     return MsgExecResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     message.results = object.results?.map((e) => e) || [];
@@ -208,6 +210,8 @@ function createBaseMsgExec(): MsgExec {
 }
 
 export const MsgExec = {
+  $type: "cosmos.authz.v1beta1.MsgExec" as const,
+
   encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
@@ -269,7 +273,6 @@ export const MsgExec = {
   create(base?: DeepPartial<MsgExec>): MsgExec {
     return MsgExec.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
     message.grantee = object.grantee ?? "";
@@ -283,6 +286,8 @@ function createBaseMsgGrantResponse(): MsgGrantResponse {
 }
 
 export const MsgGrantResponse = {
+  $type: "cosmos.authz.v1beta1.MsgGrantResponse" as const,
+
   encode(_: MsgGrantResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -315,7 +320,6 @@ export const MsgGrantResponse = {
   create(base?: DeepPartial<MsgGrantResponse>): MsgGrantResponse {
     return MsgGrantResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgGrantResponse>): MsgGrantResponse {
     const message = createBaseMsgGrantResponse();
     return message;
@@ -327,6 +331,8 @@ function createBaseMsgRevoke(): MsgRevoke {
 }
 
 export const MsgRevoke = {
+  $type: "cosmos.authz.v1beta1.MsgRevoke" as const,
+
   encode(message: MsgRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -402,7 +408,6 @@ export const MsgRevoke = {
   create(base?: DeepPartial<MsgRevoke>): MsgRevoke {
     return MsgRevoke.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRevoke>): MsgRevoke {
     const message = createBaseMsgRevoke();
     message.granter = object.granter ?? "";
@@ -417,6 +422,8 @@ function createBaseMsgRevokeResponse(): MsgRevokeResponse {
 }
 
 export const MsgRevokeResponse = {
+  $type: "cosmos.authz.v1beta1.MsgRevokeResponse" as const,
+
   encode(_: MsgRevokeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -449,7 +456,6 @@ export const MsgRevokeResponse = {
   create(base?: DeepPartial<MsgRevokeResponse>): MsgRevokeResponse {
     return MsgRevokeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgRevokeResponse>): MsgRevokeResponse {
     const message = createBaseMsgRevokeResponse();
     return message;

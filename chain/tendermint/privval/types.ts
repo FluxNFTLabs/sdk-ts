@@ -124,6 +124,8 @@ function createBaseRemoteSignerError(): RemoteSignerError {
 }
 
 export const RemoteSignerError = {
+  $type: "tendermint.privval.RemoteSignerError" as const,
+
   encode(message: RemoteSignerError, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
@@ -185,7 +187,6 @@ export const RemoteSignerError = {
   create(base?: DeepPartial<RemoteSignerError>): RemoteSignerError {
     return RemoteSignerError.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RemoteSignerError>): RemoteSignerError {
     const message = createBaseRemoteSignerError();
     message.code = object.code ?? 0;
@@ -199,6 +200,8 @@ function createBasePubKeyRequest(): PubKeyRequest {
 }
 
 export const PubKeyRequest = {
+  $type: "tendermint.privval.PubKeyRequest" as const,
+
   encode(message: PubKeyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
@@ -244,7 +247,6 @@ export const PubKeyRequest = {
   create(base?: DeepPartial<PubKeyRequest>): PubKeyRequest {
     return PubKeyRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PubKeyRequest>): PubKeyRequest {
     const message = createBasePubKeyRequest();
     message.chainId = object.chainId ?? "";
@@ -257,6 +259,8 @@ function createBasePubKeyResponse(): PubKeyResponse {
 }
 
 export const PubKeyResponse = {
+  $type: "tendermint.privval.PubKeyResponse" as const,
+
   encode(message: PubKeyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -318,7 +322,6 @@ export const PubKeyResponse = {
   create(base?: DeepPartial<PubKeyResponse>): PubKeyResponse {
     return PubKeyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PubKeyResponse>): PubKeyResponse {
     const message = createBasePubKeyResponse();
     message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
@@ -336,6 +339,8 @@ function createBaseSignVoteRequest(): SignVoteRequest {
 }
 
 export const SignVoteRequest = {
+  $type: "tendermint.privval.SignVoteRequest" as const,
+
   encode(message: SignVoteRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -397,7 +402,6 @@ export const SignVoteRequest = {
   create(base?: DeepPartial<SignVoteRequest>): SignVoteRequest {
     return SignVoteRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignVoteRequest>): SignVoteRequest {
     const message = createBaseSignVoteRequest();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
@@ -411,6 +415,8 @@ function createBaseSignedVoteResponse(): SignedVoteResponse {
 }
 
 export const SignedVoteResponse = {
+  $type: "tendermint.privval.SignedVoteResponse" as const,
+
   encode(message: SignedVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -472,7 +478,6 @@ export const SignedVoteResponse = {
   create(base?: DeepPartial<SignedVoteResponse>): SignedVoteResponse {
     return SignedVoteResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignedVoteResponse>): SignedVoteResponse {
     const message = createBaseSignedVoteResponse();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
@@ -488,6 +493,8 @@ function createBaseSignProposalRequest(): SignProposalRequest {
 }
 
 export const SignProposalRequest = {
+  $type: "tendermint.privval.SignProposalRequest" as const,
+
   encode(message: SignProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -549,7 +556,6 @@ export const SignProposalRequest = {
   create(base?: DeepPartial<SignProposalRequest>): SignProposalRequest {
     return SignProposalRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignProposalRequest>): SignProposalRequest {
     const message = createBaseSignProposalRequest();
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
@@ -565,6 +571,8 @@ function createBaseSignedProposalResponse(): SignedProposalResponse {
 }
 
 export const SignedProposalResponse = {
+  $type: "tendermint.privval.SignedProposalResponse" as const,
+
   encode(message: SignedProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -626,7 +634,6 @@ export const SignedProposalResponse = {
   create(base?: DeepPartial<SignedProposalResponse>): SignedProposalResponse {
     return SignedProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignedProposalResponse>): SignedProposalResponse {
     const message = createBaseSignedProposalResponse();
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
@@ -644,6 +651,8 @@ function createBasePingRequest(): PingRequest {
 }
 
 export const PingRequest = {
+  $type: "tendermint.privval.PingRequest" as const,
+
   encode(_: PingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -676,7 +685,6 @@ export const PingRequest = {
   create(base?: DeepPartial<PingRequest>): PingRequest {
     return PingRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<PingRequest>): PingRequest {
     const message = createBasePingRequest();
     return message;
@@ -688,6 +696,8 @@ function createBasePingResponse(): PingResponse {
 }
 
 export const PingResponse = {
+  $type: "tendermint.privval.PingResponse" as const,
+
   encode(_: PingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -720,7 +730,6 @@ export const PingResponse = {
   create(base?: DeepPartial<PingResponse>): PingResponse {
     return PingResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<PingResponse>): PingResponse {
     const message = createBasePingResponse();
     return message;
@@ -741,6 +750,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.privval.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKeyRequest !== undefined) {
       PubKeyRequest.encode(message.pubKeyRequest, writer.uint32(10).fork()).ldelim();
@@ -892,7 +903,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.pubKeyRequest = (object.pubKeyRequest !== undefined && object.pubKeyRequest !== null)

@@ -58,6 +58,8 @@ function createBaseInterchainAccountPacketData(): InterchainAccountPacketData {
 }
 
 export const InterchainAccountPacketData = {
+  $type: "ibc.applications.interchain_accounts.v1.InterchainAccountPacketData" as const,
+
   encode(message: InterchainAccountPacketData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -133,7 +135,6 @@ export const InterchainAccountPacketData = {
   create(base?: DeepPartial<InterchainAccountPacketData>): InterchainAccountPacketData {
     return InterchainAccountPacketData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InterchainAccountPacketData>): InterchainAccountPacketData {
     const message = createBaseInterchainAccountPacketData();
     message.type = object.type ?? 0;
@@ -148,6 +149,8 @@ function createBaseCosmosTx(): CosmosTx {
 }
 
 export const CosmosTx = {
+  $type: "ibc.applications.interchain_accounts.v1.CosmosTx" as const,
+
   encode(message: CosmosTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -193,7 +196,6 @@ export const CosmosTx = {
   create(base?: DeepPartial<CosmosTx>): CosmosTx {
     return CosmosTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CosmosTx>): CosmosTx {
     const message = createBaseCosmosTx();
     message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];

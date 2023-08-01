@@ -218,6 +218,8 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
 }
 
 export const QueryContractInfoRequest = {
+  $type: "cosmwasm.wasm.v1.QueryContractInfoRequest" as const,
+
   encode(message: QueryContractInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -263,7 +265,6 @@ export const QueryContractInfoRequest = {
   create(base?: DeepPartial<QueryContractInfoRequest>): QueryContractInfoRequest {
     return QueryContractInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractInfoRequest>): QueryContractInfoRequest {
     const message = createBaseQueryContractInfoRequest();
     message.address = object.address ?? "";
@@ -276,6 +277,8 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
 }
 
 export const QueryContractInfoResponse = {
+  $type: "cosmwasm.wasm.v1.QueryContractInfoResponse" as const,
+
   encode(message: QueryContractInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -337,7 +340,6 @@ export const QueryContractInfoResponse = {
   create(base?: DeepPartial<QueryContractInfoResponse>): QueryContractInfoResponse {
     return QueryContractInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractInfoResponse>): QueryContractInfoResponse {
     const message = createBaseQueryContractInfoResponse();
     message.address = object.address ?? "";
@@ -353,6 +355,8 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
 }
 
 export const QueryContractHistoryRequest = {
+  $type: "cosmwasm.wasm.v1.QueryContractHistoryRequest" as const,
+
   encode(message: QueryContractHistoryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -414,7 +418,6 @@ export const QueryContractHistoryRequest = {
   create(base?: DeepPartial<QueryContractHistoryRequest>): QueryContractHistoryRequest {
     return QueryContractHistoryRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractHistoryRequest>): QueryContractHistoryRequest {
     const message = createBaseQueryContractHistoryRequest();
     message.address = object.address ?? "";
@@ -430,6 +433,8 @@ function createBaseQueryContractHistoryResponse(): QueryContractHistoryResponse 
 }
 
 export const QueryContractHistoryResponse = {
+  $type: "cosmwasm.wasm.v1.QueryContractHistoryResponse" as const,
+
   encode(message: QueryContractHistoryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       ContractCodeHistoryEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -493,7 +498,6 @@ export const QueryContractHistoryResponse = {
   create(base?: DeepPartial<QueryContractHistoryResponse>): QueryContractHistoryResponse {
     return QueryContractHistoryResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractHistoryResponse>): QueryContractHistoryResponse {
     const message = createBaseQueryContractHistoryResponse();
     message.entries = object.entries?.map((e) => ContractCodeHistoryEntry.fromPartial(e)) || [];
@@ -509,6 +513,8 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
 }
 
 export const QueryContractsByCodeRequest = {
+  $type: "cosmwasm.wasm.v1.QueryContractsByCodeRequest" as const,
+
   encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -570,7 +576,6 @@ export const QueryContractsByCodeRequest = {
   create(base?: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     return QueryContractsByCodeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
     message.codeId = object.codeId ?? "0";
@@ -586,6 +591,8 @@ function createBaseQueryContractsByCodeResponse(): QueryContractsByCodeResponse 
 }
 
 export const QueryContractsByCodeResponse = {
+  $type: "cosmwasm.wasm.v1.QueryContractsByCodeResponse" as const,
+
   encode(message: QueryContractsByCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contracts) {
       writer.uint32(10).string(v!);
@@ -647,7 +654,6 @@ export const QueryContractsByCodeResponse = {
   create(base?: DeepPartial<QueryContractsByCodeResponse>): QueryContractsByCodeResponse {
     return QueryContractsByCodeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractsByCodeResponse>): QueryContractsByCodeResponse {
     const message = createBaseQueryContractsByCodeResponse();
     message.contracts = object.contracts?.map((e) => e) || [];
@@ -663,6 +669,8 @@ function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest 
 }
 
 export const QueryAllContractStateRequest = {
+  $type: "cosmwasm.wasm.v1.QueryAllContractStateRequest" as const,
+
   encode(message: QueryAllContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -724,7 +732,6 @@ export const QueryAllContractStateRequest = {
   create(base?: DeepPartial<QueryAllContractStateRequest>): QueryAllContractStateRequest {
     return QueryAllContractStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllContractStateRequest>): QueryAllContractStateRequest {
     const message = createBaseQueryAllContractStateRequest();
     message.address = object.address ?? "";
@@ -740,6 +747,8 @@ function createBaseQueryAllContractStateResponse(): QueryAllContractStateRespons
 }
 
 export const QueryAllContractStateResponse = {
+  $type: "cosmwasm.wasm.v1.QueryAllContractStateResponse" as const,
+
   encode(message: QueryAllContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.models) {
       Model.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -801,7 +810,6 @@ export const QueryAllContractStateResponse = {
   create(base?: DeepPartial<QueryAllContractStateResponse>): QueryAllContractStateResponse {
     return QueryAllContractStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllContractStateResponse>): QueryAllContractStateResponse {
     const message = createBaseQueryAllContractStateResponse();
     message.models = object.models?.map((e) => Model.fromPartial(e)) || [];
@@ -817,6 +825,8 @@ function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest 
 }
 
 export const QueryRawContractStateRequest = {
+  $type: "cosmwasm.wasm.v1.QueryRawContractStateRequest" as const,
+
   encode(message: QueryRawContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -878,7 +888,6 @@ export const QueryRawContractStateRequest = {
   create(base?: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     return QueryRawContractStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? "";
@@ -892,6 +901,8 @@ function createBaseQueryRawContractStateResponse(): QueryRawContractStateRespons
 }
 
 export const QueryRawContractStateResponse = {
+  $type: "cosmwasm.wasm.v1.QueryRawContractStateResponse" as const,
+
   encode(message: QueryRawContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -937,7 +948,6 @@ export const QueryRawContractStateResponse = {
   create(base?: DeepPartial<QueryRawContractStateResponse>): QueryRawContractStateResponse {
     return QueryRawContractStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryRawContractStateResponse>): QueryRawContractStateResponse {
     const message = createBaseQueryRawContractStateResponse();
     message.data = object.data ?? new Uint8Array(0);
@@ -950,6 +960,8 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
 }
 
 export const QuerySmartContractStateRequest = {
+  $type: "cosmwasm.wasm.v1.QuerySmartContractStateRequest" as const,
+
   encode(message: QuerySmartContractStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1011,7 +1023,6 @@ export const QuerySmartContractStateRequest = {
   create(base?: DeepPartial<QuerySmartContractStateRequest>): QuerySmartContractStateRequest {
     return QuerySmartContractStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySmartContractStateRequest>): QuerySmartContractStateRequest {
     const message = createBaseQuerySmartContractStateRequest();
     message.address = object.address ?? "";
@@ -1025,6 +1036,8 @@ function createBaseQuerySmartContractStateResponse(): QuerySmartContractStateRes
 }
 
 export const QuerySmartContractStateResponse = {
+  $type: "cosmwasm.wasm.v1.QuerySmartContractStateResponse" as const,
+
   encode(message: QuerySmartContractStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1070,7 +1083,6 @@ export const QuerySmartContractStateResponse = {
   create(base?: DeepPartial<QuerySmartContractStateResponse>): QuerySmartContractStateResponse {
     return QuerySmartContractStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySmartContractStateResponse>): QuerySmartContractStateResponse {
     const message = createBaseQuerySmartContractStateResponse();
     message.data = object.data ?? new Uint8Array(0);
@@ -1083,6 +1095,8 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
 }
 
 export const QueryCodeRequest = {
+  $type: "cosmwasm.wasm.v1.QueryCodeRequest" as const,
+
   encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -1128,7 +1142,6 @@ export const QueryCodeRequest = {
   create(base?: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
     return QueryCodeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
     const message = createBaseQueryCodeRequest();
     message.codeId = object.codeId ?? "0";
@@ -1141,6 +1154,8 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 }
 
 export const CodeInfoResponse = {
+  $type: "cosmwasm.wasm.v1.CodeInfoResponse" as const,
+
   encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -1232,7 +1247,6 @@ export const CodeInfoResponse = {
   create(base?: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
     return CodeInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
     const message = createBaseCodeInfoResponse();
     message.codeId = object.codeId ?? "0";
@@ -1251,6 +1265,8 @@ function createBaseQueryCodeResponse(): QueryCodeResponse {
 }
 
 export const QueryCodeResponse = {
+  $type: "cosmwasm.wasm.v1.QueryCodeResponse" as const,
+
   encode(message: QueryCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeInfo !== undefined) {
       CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
@@ -1312,7 +1328,6 @@ export const QueryCodeResponse = {
   create(base?: DeepPartial<QueryCodeResponse>): QueryCodeResponse {
     return QueryCodeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCodeResponse>): QueryCodeResponse {
     const message = createBaseQueryCodeResponse();
     message.codeInfo = (object.codeInfo !== undefined && object.codeInfo !== null)
@@ -1328,6 +1343,8 @@ function createBaseQueryCodesRequest(): QueryCodesRequest {
 }
 
 export const QueryCodesRequest = {
+  $type: "cosmwasm.wasm.v1.QueryCodesRequest" as const,
+
   encode(message: QueryCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1373,7 +1390,6 @@ export const QueryCodesRequest = {
   create(base?: DeepPartial<QueryCodesRequest>): QueryCodesRequest {
     return QueryCodesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCodesRequest>): QueryCodesRequest {
     const message = createBaseQueryCodesRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -1388,6 +1404,8 @@ function createBaseQueryCodesResponse(): QueryCodesResponse {
 }
 
 export const QueryCodesResponse = {
+  $type: "cosmwasm.wasm.v1.QueryCodesResponse" as const,
+
   encode(message: QueryCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.codeInfos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1449,7 +1467,6 @@ export const QueryCodesResponse = {
   create(base?: DeepPartial<QueryCodesResponse>): QueryCodesResponse {
     return QueryCodesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCodesResponse>): QueryCodesResponse {
     const message = createBaseQueryCodesResponse();
     message.codeInfos = object.codeInfos?.map((e) => CodeInfoResponse.fromPartial(e)) || [];
@@ -1465,6 +1482,8 @@ function createBaseQueryPinnedCodesRequest(): QueryPinnedCodesRequest {
 }
 
 export const QueryPinnedCodesRequest = {
+  $type: "cosmwasm.wasm.v1.QueryPinnedCodesRequest" as const,
+
   encode(message: QueryPinnedCodesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -1510,7 +1529,6 @@ export const QueryPinnedCodesRequest = {
   create(base?: DeepPartial<QueryPinnedCodesRequest>): QueryPinnedCodesRequest {
     return QueryPinnedCodesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPinnedCodesRequest>): QueryPinnedCodesRequest {
     const message = createBaseQueryPinnedCodesRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -1525,6 +1543,8 @@ function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
 }
 
 export const QueryPinnedCodesResponse = {
+  $type: "cosmwasm.wasm.v1.QueryPinnedCodesResponse" as const,
+
   encode(message: QueryPinnedCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.codeIds) {
@@ -1598,7 +1618,6 @@ export const QueryPinnedCodesResponse = {
   create(base?: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {
     return QueryPinnedCodesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {
     const message = createBaseQueryPinnedCodesResponse();
     message.codeIds = object.codeIds?.map((e) => e) || [];
@@ -1614,6 +1633,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmwasm.wasm.v1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1646,7 +1667,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -1658,6 +1678,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmwasm.wasm.v1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1703,7 +1725,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -1718,6 +1739,8 @@ function createBaseQueryContractsByCreatorRequest(): QueryContractsByCreatorRequ
 }
 
 export const QueryContractsByCreatorRequest = {
+  $type: "cosmwasm.wasm.v1.QueryContractsByCreatorRequest" as const,
+
   encode(message: QueryContractsByCreatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creatorAddress !== "") {
       writer.uint32(10).string(message.creatorAddress);
@@ -1779,7 +1802,6 @@ export const QueryContractsByCreatorRequest = {
   create(base?: DeepPartial<QueryContractsByCreatorRequest>): QueryContractsByCreatorRequest {
     return QueryContractsByCreatorRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractsByCreatorRequest>): QueryContractsByCreatorRequest {
     const message = createBaseQueryContractsByCreatorRequest();
     message.creatorAddress = object.creatorAddress ?? "";
@@ -1795,6 +1817,8 @@ function createBaseQueryContractsByCreatorResponse(): QueryContractsByCreatorRes
 }
 
 export const QueryContractsByCreatorResponse = {
+  $type: "cosmwasm.wasm.v1.QueryContractsByCreatorResponse" as const,
+
   encode(message: QueryContractsByCreatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contractAddresses) {
       writer.uint32(10).string(v!);
@@ -1858,7 +1882,6 @@ export const QueryContractsByCreatorResponse = {
   create(base?: DeepPartial<QueryContractsByCreatorResponse>): QueryContractsByCreatorResponse {
     return QueryContractsByCreatorResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryContractsByCreatorResponse>): QueryContractsByCreatorResponse {
     const message = createBaseQueryContractsByCreatorResponse();
     message.contractAddresses = object.contractAddresses?.map((e) => e) || [];

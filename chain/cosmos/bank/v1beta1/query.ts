@@ -241,6 +241,8 @@ function createBaseQueryBalanceRequest(): QueryBalanceRequest {
 }
 
 export const QueryBalanceRequest = {
+  $type: "cosmos.bank.v1beta1.QueryBalanceRequest" as const,
+
   encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -302,7 +304,6 @@ export const QueryBalanceRequest = {
   create(base?: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     return QueryBalanceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     const message = createBaseQueryBalanceRequest();
     message.address = object.address ?? "";
@@ -316,6 +317,8 @@ function createBaseQueryBalanceResponse(): QueryBalanceResponse {
 }
 
 export const QueryBalanceResponse = {
+  $type: "cosmos.bank.v1beta1.QueryBalanceResponse" as const,
+
   encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.balance !== undefined) {
       Coin.encode(message.balance, writer.uint32(10).fork()).ldelim();
@@ -361,7 +364,6 @@ export const QueryBalanceResponse = {
   create(base?: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     return QueryBalanceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
     message.balance = (object.balance !== undefined && object.balance !== null)
@@ -376,6 +378,8 @@ function createBaseQueryAllBalancesRequest(): QueryAllBalancesRequest {
 }
 
 export const QueryAllBalancesRequest = {
+  $type: "cosmos.bank.v1beta1.QueryAllBalancesRequest" as const,
+
   encode(message: QueryAllBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -437,7 +441,6 @@ export const QueryAllBalancesRequest = {
   create(base?: DeepPartial<QueryAllBalancesRequest>): QueryAllBalancesRequest {
     return QueryAllBalancesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllBalancesRequest>): QueryAllBalancesRequest {
     const message = createBaseQueryAllBalancesRequest();
     message.address = object.address ?? "";
@@ -453,6 +456,8 @@ function createBaseQueryAllBalancesResponse(): QueryAllBalancesResponse {
 }
 
 export const QueryAllBalancesResponse = {
+  $type: "cosmos.bank.v1beta1.QueryAllBalancesResponse" as const,
+
   encode(message: QueryAllBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.balances) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -514,7 +519,6 @@ export const QueryAllBalancesResponse = {
   create(base?: DeepPartial<QueryAllBalancesResponse>): QueryAllBalancesResponse {
     return QueryAllBalancesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAllBalancesResponse>): QueryAllBalancesResponse {
     const message = createBaseQueryAllBalancesResponse();
     message.balances = object.balances?.map((e) => Coin.fromPartial(e)) || [];
@@ -530,6 +534,8 @@ function createBaseQuerySpendableBalancesRequest(): QuerySpendableBalancesReques
 }
 
 export const QuerySpendableBalancesRequest = {
+  $type: "cosmos.bank.v1beta1.QuerySpendableBalancesRequest" as const,
+
   encode(message: QuerySpendableBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -591,7 +597,6 @@ export const QuerySpendableBalancesRequest = {
   create(base?: DeepPartial<QuerySpendableBalancesRequest>): QuerySpendableBalancesRequest {
     return QuerySpendableBalancesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySpendableBalancesRequest>): QuerySpendableBalancesRequest {
     const message = createBaseQuerySpendableBalancesRequest();
     message.address = object.address ?? "";
@@ -607,6 +612,8 @@ function createBaseQuerySpendableBalancesResponse(): QuerySpendableBalancesRespo
 }
 
 export const QuerySpendableBalancesResponse = {
+  $type: "cosmos.bank.v1beta1.QuerySpendableBalancesResponse" as const,
+
   encode(message: QuerySpendableBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.balances) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -668,7 +675,6 @@ export const QuerySpendableBalancesResponse = {
   create(base?: DeepPartial<QuerySpendableBalancesResponse>): QuerySpendableBalancesResponse {
     return QuerySpendableBalancesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySpendableBalancesResponse>): QuerySpendableBalancesResponse {
     const message = createBaseQuerySpendableBalancesResponse();
     message.balances = object.balances?.map((e) => Coin.fromPartial(e)) || [];
@@ -684,6 +690,8 @@ function createBaseQuerySpendableBalanceByDenomRequest(): QuerySpendableBalanceB
 }
 
 export const QuerySpendableBalanceByDenomRequest = {
+  $type: "cosmos.bank.v1beta1.QuerySpendableBalanceByDenomRequest" as const,
+
   encode(message: QuerySpendableBalanceByDenomRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -745,7 +753,6 @@ export const QuerySpendableBalanceByDenomRequest = {
   create(base?: DeepPartial<QuerySpendableBalanceByDenomRequest>): QuerySpendableBalanceByDenomRequest {
     return QuerySpendableBalanceByDenomRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySpendableBalanceByDenomRequest>): QuerySpendableBalanceByDenomRequest {
     const message = createBaseQuerySpendableBalanceByDenomRequest();
     message.address = object.address ?? "";
@@ -759,6 +766,8 @@ function createBaseQuerySpendableBalanceByDenomResponse(): QuerySpendableBalance
 }
 
 export const QuerySpendableBalanceByDenomResponse = {
+  $type: "cosmos.bank.v1beta1.QuerySpendableBalanceByDenomResponse" as const,
+
   encode(message: QuerySpendableBalanceByDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.balance !== undefined) {
       Coin.encode(message.balance, writer.uint32(10).fork()).ldelim();
@@ -804,7 +813,6 @@ export const QuerySpendableBalanceByDenomResponse = {
   create(base?: DeepPartial<QuerySpendableBalanceByDenomResponse>): QuerySpendableBalanceByDenomResponse {
     return QuerySpendableBalanceByDenomResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySpendableBalanceByDenomResponse>): QuerySpendableBalanceByDenomResponse {
     const message = createBaseQuerySpendableBalanceByDenomResponse();
     message.balance = (object.balance !== undefined && object.balance !== null)
@@ -819,6 +827,8 @@ function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
 }
 
 export const QueryTotalSupplyRequest = {
+  $type: "cosmos.bank.v1beta1.QueryTotalSupplyRequest" as const,
+
   encode(message: QueryTotalSupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -864,7 +874,6 @@ export const QueryTotalSupplyRequest = {
   create(base?: DeepPartial<QueryTotalSupplyRequest>): QueryTotalSupplyRequest {
     return QueryTotalSupplyRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalSupplyRequest>): QueryTotalSupplyRequest {
     const message = createBaseQueryTotalSupplyRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -879,6 +888,8 @@ function createBaseQueryTotalSupplyResponse(): QueryTotalSupplyResponse {
 }
 
 export const QueryTotalSupplyResponse = {
+  $type: "cosmos.bank.v1beta1.QueryTotalSupplyResponse" as const,
+
   encode(message: QueryTotalSupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.supply) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -940,7 +951,6 @@ export const QueryTotalSupplyResponse = {
   create(base?: DeepPartial<QueryTotalSupplyResponse>): QueryTotalSupplyResponse {
     return QueryTotalSupplyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalSupplyResponse>): QueryTotalSupplyResponse {
     const message = createBaseQueryTotalSupplyResponse();
     message.supply = object.supply?.map((e) => Coin.fromPartial(e)) || [];
@@ -956,6 +966,8 @@ function createBaseQuerySupplyOfRequest(): QuerySupplyOfRequest {
 }
 
 export const QuerySupplyOfRequest = {
+  $type: "cosmos.bank.v1beta1.QuerySupplyOfRequest" as const,
+
   encode(message: QuerySupplyOfRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -1001,7 +1013,6 @@ export const QuerySupplyOfRequest = {
   create(base?: DeepPartial<QuerySupplyOfRequest>): QuerySupplyOfRequest {
     return QuerySupplyOfRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySupplyOfRequest>): QuerySupplyOfRequest {
     const message = createBaseQuerySupplyOfRequest();
     message.denom = object.denom ?? "";
@@ -1014,6 +1025,8 @@ function createBaseQuerySupplyOfResponse(): QuerySupplyOfResponse {
 }
 
 export const QuerySupplyOfResponse = {
+  $type: "cosmos.bank.v1beta1.QuerySupplyOfResponse" as const,
+
   encode(message: QuerySupplyOfResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.amount !== undefined) {
       Coin.encode(message.amount, writer.uint32(10).fork()).ldelim();
@@ -1059,7 +1072,6 @@ export const QuerySupplyOfResponse = {
   create(base?: DeepPartial<QuerySupplyOfResponse>): QuerySupplyOfResponse {
     return QuerySupplyOfResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySupplyOfResponse>): QuerySupplyOfResponse {
     const message = createBaseQuerySupplyOfResponse();
     message.amount = (object.amount !== undefined && object.amount !== null)
@@ -1074,6 +1086,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.bank.v1beta1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1106,7 +1120,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -1118,6 +1131,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.bank.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1163,7 +1178,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -1178,6 +1192,8 @@ function createBaseQueryDenomsMetadataRequest(): QueryDenomsMetadataRequest {
 }
 
 export const QueryDenomsMetadataRequest = {
+  $type: "cosmos.bank.v1beta1.QueryDenomsMetadataRequest" as const,
+
   encode(message: QueryDenomsMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1223,7 +1239,6 @@ export const QueryDenomsMetadataRequest = {
   create(base?: DeepPartial<QueryDenomsMetadataRequest>): QueryDenomsMetadataRequest {
     return QueryDenomsMetadataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomsMetadataRequest>): QueryDenomsMetadataRequest {
     const message = createBaseQueryDenomsMetadataRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -1238,6 +1253,8 @@ function createBaseQueryDenomsMetadataResponse(): QueryDenomsMetadataResponse {
 }
 
 export const QueryDenomsMetadataResponse = {
+  $type: "cosmos.bank.v1beta1.QueryDenomsMetadataResponse" as const,
+
   encode(message: QueryDenomsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.metadatas) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1299,7 +1316,6 @@ export const QueryDenomsMetadataResponse = {
   create(base?: DeepPartial<QueryDenomsMetadataResponse>): QueryDenomsMetadataResponse {
     return QueryDenomsMetadataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomsMetadataResponse>): QueryDenomsMetadataResponse {
     const message = createBaseQueryDenomsMetadataResponse();
     message.metadatas = object.metadatas?.map((e) => Metadata.fromPartial(e)) || [];
@@ -1315,6 +1331,8 @@ function createBaseQueryDenomMetadataRequest(): QueryDenomMetadataRequest {
 }
 
 export const QueryDenomMetadataRequest = {
+  $type: "cosmos.bank.v1beta1.QueryDenomMetadataRequest" as const,
+
   encode(message: QueryDenomMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -1360,7 +1378,6 @@ export const QueryDenomMetadataRequest = {
   create(base?: DeepPartial<QueryDenomMetadataRequest>): QueryDenomMetadataRequest {
     return QueryDenomMetadataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomMetadataRequest>): QueryDenomMetadataRequest {
     const message = createBaseQueryDenomMetadataRequest();
     message.denom = object.denom ?? "";
@@ -1373,6 +1390,8 @@ function createBaseQueryDenomMetadataResponse(): QueryDenomMetadataResponse {
 }
 
 export const QueryDenomMetadataResponse = {
+  $type: "cosmos.bank.v1beta1.QueryDenomMetadataResponse" as const,
+
   encode(message: QueryDenomMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.metadata !== undefined) {
       Metadata.encode(message.metadata, writer.uint32(10).fork()).ldelim();
@@ -1418,7 +1437,6 @@ export const QueryDenomMetadataResponse = {
   create(base?: DeepPartial<QueryDenomMetadataResponse>): QueryDenomMetadataResponse {
     return QueryDenomMetadataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomMetadataResponse>): QueryDenomMetadataResponse {
     const message = createBaseQueryDenomMetadataResponse();
     message.metadata = (object.metadata !== undefined && object.metadata !== null)
@@ -1433,6 +1451,8 @@ function createBaseQueryDenomOwnersRequest(): QueryDenomOwnersRequest {
 }
 
 export const QueryDenomOwnersRequest = {
+  $type: "cosmos.bank.v1beta1.QueryDenomOwnersRequest" as const,
+
   encode(message: QueryDenomOwnersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -1494,7 +1514,6 @@ export const QueryDenomOwnersRequest = {
   create(base?: DeepPartial<QueryDenomOwnersRequest>): QueryDenomOwnersRequest {
     return QueryDenomOwnersRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomOwnersRequest>): QueryDenomOwnersRequest {
     const message = createBaseQueryDenomOwnersRequest();
     message.denom = object.denom ?? "";
@@ -1510,6 +1529,8 @@ function createBaseDenomOwner(): DenomOwner {
 }
 
 export const DenomOwner = {
+  $type: "cosmos.bank.v1beta1.DenomOwner" as const,
+
   encode(message: DenomOwner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1571,7 +1592,6 @@ export const DenomOwner = {
   create(base?: DeepPartial<DenomOwner>): DenomOwner {
     return DenomOwner.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DenomOwner>): DenomOwner {
     const message = createBaseDenomOwner();
     message.address = object.address ?? "";
@@ -1587,6 +1607,8 @@ function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
 }
 
 export const QueryDenomOwnersResponse = {
+  $type: "cosmos.bank.v1beta1.QueryDenomOwnersResponse" as const,
+
   encode(message: QueryDenomOwnersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denomOwners) {
       DenomOwner.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1648,7 +1670,6 @@ export const QueryDenomOwnersResponse = {
   create(base?: DeepPartial<QueryDenomOwnersResponse>): QueryDenomOwnersResponse {
     return QueryDenomOwnersResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDenomOwnersResponse>): QueryDenomOwnersResponse {
     const message = createBaseQueryDenomOwnersResponse();
     message.denomOwners = object.denomOwners?.map((e) => DenomOwner.fromPartial(e)) || [];
@@ -1664,6 +1685,8 @@ function createBaseQuerySendEnabledRequest(): QuerySendEnabledRequest {
 }
 
 export const QuerySendEnabledRequest = {
+  $type: "cosmos.bank.v1beta1.QuerySendEnabledRequest" as const,
+
   encode(message: QuerySendEnabledRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.denoms) {
       writer.uint32(10).string(v!);
@@ -1725,7 +1748,6 @@ export const QuerySendEnabledRequest = {
   create(base?: DeepPartial<QuerySendEnabledRequest>): QuerySendEnabledRequest {
     return QuerySendEnabledRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySendEnabledRequest>): QuerySendEnabledRequest {
     const message = createBaseQuerySendEnabledRequest();
     message.denoms = object.denoms?.map((e) => e) || [];
@@ -1741,6 +1763,8 @@ function createBaseQuerySendEnabledResponse(): QuerySendEnabledResponse {
 }
 
 export const QuerySendEnabledResponse = {
+  $type: "cosmos.bank.v1beta1.QuerySendEnabledResponse" as const,
+
   encode(message: QuerySendEnabledResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.sendEnabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1804,7 +1828,6 @@ export const QuerySendEnabledResponse = {
   create(base?: DeepPartial<QuerySendEnabledResponse>): QuerySendEnabledResponse {
     return QuerySendEnabledResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySendEnabledResponse>): QuerySendEnabledResponse {
     const message = createBaseQuerySendEnabledResponse();
     message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];

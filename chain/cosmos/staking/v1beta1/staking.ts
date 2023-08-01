@@ -384,6 +384,8 @@ function createBaseHistoricalInfo(): HistoricalInfo {
 }
 
 export const HistoricalInfo = {
+  $type: "cosmos.staking.v1beta1.HistoricalInfo" as const,
+
   encode(message: HistoricalInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -445,7 +447,6 @@ export const HistoricalInfo = {
   create(base?: DeepPartial<HistoricalInfo>): HistoricalInfo {
     return HistoricalInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo {
     const message = createBaseHistoricalInfo();
     message.header = (object.header !== undefined && object.header !== null)
@@ -461,6 +462,8 @@ function createBaseCommissionRates(): CommissionRates {
 }
 
 export const CommissionRates = {
+  $type: "cosmos.staking.v1beta1.CommissionRates" as const,
+
   encode(message: CommissionRates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rate !== "") {
       writer.uint32(10).string(message.rate);
@@ -536,7 +539,6 @@ export const CommissionRates = {
   create(base?: DeepPartial<CommissionRates>): CommissionRates {
     return CommissionRates.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommissionRates>): CommissionRates {
     const message = createBaseCommissionRates();
     message.rate = object.rate ?? "";
@@ -551,6 +553,8 @@ function createBaseCommission(): Commission {
 }
 
 export const Commission = {
+  $type: "cosmos.staking.v1beta1.Commission" as const,
+
   encode(message: Commission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.commissionRates !== undefined) {
       CommissionRates.encode(message.commissionRates, writer.uint32(10).fork()).ldelim();
@@ -612,7 +616,6 @@ export const Commission = {
   create(base?: DeepPartial<Commission>): Commission {
     return Commission.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Commission>): Commission {
     const message = createBaseCommission();
     message.commissionRates = (object.commissionRates !== undefined && object.commissionRates !== null)
@@ -628,6 +631,8 @@ function createBaseDescription(): Description {
 }
 
 export const Description = {
+  $type: "cosmos.staking.v1beta1.Description" as const,
+
   encode(message: Description, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moniker !== "") {
       writer.uint32(10).string(message.moniker);
@@ -731,7 +736,6 @@ export const Description = {
   create(base?: DeepPartial<Description>): Description {
     return Description.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Description>): Description {
     const message = createBaseDescription();
     message.moniker = object.moniker ?? "";
@@ -762,6 +766,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  $type: "cosmos.staking.v1beta1.Validator" as const,
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operatorAddress !== "") {
       writer.uint32(10).string(message.operatorAddress);
@@ -989,7 +995,6 @@ export const Validator = {
   create(base?: DeepPartial<Validator>): Validator {
     return Validator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.operatorAddress = object.operatorAddress ?? "";
@@ -1020,6 +1025,8 @@ function createBaseValAddresses(): ValAddresses {
 }
 
 export const ValAddresses = {
+  $type: "cosmos.staking.v1beta1.ValAddresses" as const,
+
   encode(message: ValAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.addresses) {
       writer.uint32(10).string(v!);
@@ -1065,7 +1072,6 @@ export const ValAddresses = {
   create(base?: DeepPartial<ValAddresses>): ValAddresses {
     return ValAddresses.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValAddresses>): ValAddresses {
     const message = createBaseValAddresses();
     message.addresses = object.addresses?.map((e) => e) || [];
@@ -1078,6 +1084,8 @@ function createBaseDVPair(): DVPair {
 }
 
 export const DVPair = {
+  $type: "cosmos.staking.v1beta1.DVPair" as const,
+
   encode(message: DVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1139,7 +1147,6 @@ export const DVPair = {
   create(base?: DeepPartial<DVPair>): DVPair {
     return DVPair.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DVPair>): DVPair {
     const message = createBaseDVPair();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1153,6 +1160,8 @@ function createBaseDVPairs(): DVPairs {
 }
 
 export const DVPairs = {
+  $type: "cosmos.staking.v1beta1.DVPairs" as const,
+
   encode(message: DVPairs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pairs) {
       DVPair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1198,7 +1207,6 @@ export const DVPairs = {
   create(base?: DeepPartial<DVPairs>): DVPairs {
     return DVPairs.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DVPairs>): DVPairs {
     const message = createBaseDVPairs();
     message.pairs = object.pairs?.map((e) => DVPair.fromPartial(e)) || [];
@@ -1211,6 +1219,8 @@ function createBaseDVVTriplet(): DVVTriplet {
 }
 
 export const DVVTriplet = {
+  $type: "cosmos.staking.v1beta1.DVVTriplet" as const,
+
   encode(message: DVVTriplet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1286,7 +1296,6 @@ export const DVVTriplet = {
   create(base?: DeepPartial<DVVTriplet>): DVVTriplet {
     return DVVTriplet.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet {
     const message = createBaseDVVTriplet();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1301,6 +1310,8 @@ function createBaseDVVTriplets(): DVVTriplets {
 }
 
 export const DVVTriplets = {
+  $type: "cosmos.staking.v1beta1.DVVTriplets" as const,
+
   encode(message: DVVTriplets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.triplets) {
       DVVTriplet.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1346,7 +1357,6 @@ export const DVVTriplets = {
   create(base?: DeepPartial<DVVTriplets>): DVVTriplets {
     return DVVTriplets.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DVVTriplets>): DVVTriplets {
     const message = createBaseDVVTriplets();
     message.triplets = object.triplets?.map((e) => DVVTriplet.fromPartial(e)) || [];
@@ -1359,6 +1369,8 @@ function createBaseDelegation(): Delegation {
 }
 
 export const Delegation = {
+  $type: "cosmos.staking.v1beta1.Delegation" as const,
+
   encode(message: Delegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1434,7 +1446,6 @@ export const Delegation = {
   create(base?: DeepPartial<Delegation>): Delegation {
     return Delegation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Delegation>): Delegation {
     const message = createBaseDelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1449,6 +1460,8 @@ function createBaseUnbondingDelegation(): UnbondingDelegation {
 }
 
 export const UnbondingDelegation = {
+  $type: "cosmos.staking.v1beta1.UnbondingDelegation" as const,
+
   encode(message: UnbondingDelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1526,7 +1539,6 @@ export const UnbondingDelegation = {
   create(base?: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
     return UnbondingDelegation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
     const message = createBaseUnbondingDelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1548,6 +1560,8 @@ function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
 }
 
 export const UnbondingDelegationEntry = {
+  $type: "cosmos.staking.v1beta1.UnbondingDelegationEntry" as const,
+
   encode(message: UnbondingDelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creationHeight !== "0") {
       writer.uint32(8).int64(message.creationHeight);
@@ -1665,7 +1679,6 @@ export const UnbondingDelegationEntry = {
   create(base?: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     return UnbondingDelegationEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
     message.creationHeight = object.creationHeight ?? "0";
@@ -1690,6 +1703,8 @@ function createBaseRedelegationEntry(): RedelegationEntry {
 }
 
 export const RedelegationEntry = {
+  $type: "cosmos.staking.v1beta1.RedelegationEntry" as const,
+
   encode(message: RedelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creationHeight !== "0") {
       writer.uint32(8).int64(message.creationHeight);
@@ -1807,7 +1822,6 @@ export const RedelegationEntry = {
   create(base?: DeepPartial<RedelegationEntry>): RedelegationEntry {
     return RedelegationEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
     message.creationHeight = object.creationHeight ?? "0";
@@ -1825,6 +1839,8 @@ function createBaseRedelegation(): Redelegation {
 }
 
 export const Redelegation = {
+  $type: "cosmos.staking.v1beta1.Redelegation" as const,
+
   encode(message: Redelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
@@ -1914,7 +1930,6 @@ export const Redelegation = {
   create(base?: DeepPartial<Redelegation>): Redelegation {
     return Redelegation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Redelegation>): Redelegation {
     const message = createBaseRedelegation();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1937,6 +1952,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.staking.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.unbondingTime !== undefined) {
       Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
@@ -2054,7 +2071,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.unbondingTime = (object.unbondingTime !== undefined && object.unbondingTime !== null)
@@ -2074,6 +2090,8 @@ function createBaseDelegationResponse(): DelegationResponse {
 }
 
 export const DelegationResponse = {
+  $type: "cosmos.staking.v1beta1.DelegationResponse" as const,
+
   encode(message: DelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.delegation !== undefined) {
       Delegation.encode(message.delegation, writer.uint32(10).fork()).ldelim();
@@ -2135,7 +2153,6 @@ export const DelegationResponse = {
   create(base?: DeepPartial<DelegationResponse>): DelegationResponse {
     return DelegationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse {
     const message = createBaseDelegationResponse();
     message.delegation = (object.delegation !== undefined && object.delegation !== null)
@@ -2153,6 +2170,8 @@ function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
 }
 
 export const RedelegationEntryResponse = {
+  $type: "cosmos.staking.v1beta1.RedelegationEntryResponse" as const,
+
   encode(message: RedelegationEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.redelegationEntry !== undefined) {
       RedelegationEntry.encode(message.redelegationEntry, writer.uint32(10).fork()).ldelim();
@@ -2216,7 +2235,6 @@ export const RedelegationEntryResponse = {
   create(base?: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     return RedelegationEntryResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     const message = createBaseRedelegationEntryResponse();
     message.redelegationEntry = (object.redelegationEntry !== undefined && object.redelegationEntry !== null)
@@ -2232,6 +2250,8 @@ function createBaseRedelegationResponse(): RedelegationResponse {
 }
 
 export const RedelegationResponse = {
+  $type: "cosmos.staking.v1beta1.RedelegationResponse" as const,
+
   encode(message: RedelegationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.redelegation !== undefined) {
       Redelegation.encode(message.redelegation, writer.uint32(10).fork()).ldelim();
@@ -2295,7 +2315,6 @@ export const RedelegationResponse = {
   create(base?: DeepPartial<RedelegationResponse>): RedelegationResponse {
     return RedelegationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse {
     const message = createBaseRedelegationResponse();
     message.redelegation = (object.redelegation !== undefined && object.redelegation !== null)
@@ -2311,6 +2330,8 @@ function createBasePool(): Pool {
 }
 
 export const Pool = {
+  $type: "cosmos.staking.v1beta1.Pool" as const,
+
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.notBondedTokens !== "") {
       writer.uint32(10).string(message.notBondedTokens);
@@ -2372,7 +2393,6 @@ export const Pool = {
   create(base?: DeepPartial<Pool>): Pool {
     return Pool.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.notBondedTokens = object.notBondedTokens ?? "";
@@ -2386,6 +2406,8 @@ function createBaseValidatorUpdates(): ValidatorUpdates {
 }
 
 export const ValidatorUpdates = {
+  $type: "cosmos.staking.v1beta1.ValidatorUpdates" as const,
+
   encode(message: ValidatorUpdates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.updates) {
       ValidatorUpdate.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2433,7 +2455,6 @@ export const ValidatorUpdates = {
   create(base?: DeepPartial<ValidatorUpdates>): ValidatorUpdates {
     return ValidatorUpdates.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorUpdates>): ValidatorUpdates {
     const message = createBaseValidatorUpdates();
     message.updates = object.updates?.map((e) => ValidatorUpdate.fromPartial(e)) || [];

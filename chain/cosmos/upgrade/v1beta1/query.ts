@@ -112,6 +112,8 @@ function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
 }
 
 export const QueryCurrentPlanRequest = {
+  $type: "cosmos.upgrade.v1beta1.QueryCurrentPlanRequest" as const,
+
   encode(_: QueryCurrentPlanRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -144,7 +146,6 @@ export const QueryCurrentPlanRequest = {
   create(base?: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     return QueryCurrentPlanRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
@@ -156,6 +157,8 @@ function createBaseQueryCurrentPlanResponse(): QueryCurrentPlanResponse {
 }
 
 export const QueryCurrentPlanResponse = {
+  $type: "cosmos.upgrade.v1beta1.QueryCurrentPlanResponse" as const,
+
   encode(message: QueryCurrentPlanResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.plan !== undefined) {
       Plan.encode(message.plan, writer.uint32(10).fork()).ldelim();
@@ -201,7 +204,6 @@ export const QueryCurrentPlanResponse = {
   create(base?: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     return QueryCurrentPlanResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
     const message = createBaseQueryCurrentPlanResponse();
     message.plan = (object.plan !== undefined && object.plan !== null) ? Plan.fromPartial(object.plan) : undefined;
@@ -214,6 +216,8 @@ function createBaseQueryAppliedPlanRequest(): QueryAppliedPlanRequest {
 }
 
 export const QueryAppliedPlanRequest = {
+  $type: "cosmos.upgrade.v1beta1.QueryAppliedPlanRequest" as const,
+
   encode(message: QueryAppliedPlanRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -259,7 +263,6 @@ export const QueryAppliedPlanRequest = {
   create(base?: DeepPartial<QueryAppliedPlanRequest>): QueryAppliedPlanRequest {
     return QueryAppliedPlanRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAppliedPlanRequest>): QueryAppliedPlanRequest {
     const message = createBaseQueryAppliedPlanRequest();
     message.name = object.name ?? "";
@@ -272,6 +275,8 @@ function createBaseQueryAppliedPlanResponse(): QueryAppliedPlanResponse {
 }
 
 export const QueryAppliedPlanResponse = {
+  $type: "cosmos.upgrade.v1beta1.QueryAppliedPlanResponse" as const,
+
   encode(message: QueryAppliedPlanResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -317,7 +322,6 @@ export const QueryAppliedPlanResponse = {
   create(base?: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     return QueryAppliedPlanResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = createBaseQueryAppliedPlanResponse();
     message.height = object.height ?? "0";
@@ -330,6 +334,8 @@ function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusS
 }
 
 export const QueryUpgradedConsensusStateRequest = {
+  $type: "cosmos.upgrade.v1beta1.QueryUpgradedConsensusStateRequest" as const,
+
   encode(message: QueryUpgradedConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.lastHeight !== "0") {
       writer.uint32(8).int64(message.lastHeight);
@@ -375,7 +381,6 @@ export const QueryUpgradedConsensusStateRequest = {
   create(base?: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     message.lastHeight = object.lastHeight ?? "0";
@@ -388,6 +393,8 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 }
 
 export const QueryUpgradedConsensusStateResponse = {
+  $type: "cosmos.upgrade.v1beta1.QueryUpgradedConsensusStateResponse" as const,
+
   encode(message: QueryUpgradedConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.upgradedConsensusState.length !== 0) {
       writer.uint32(18).bytes(message.upgradedConsensusState);
@@ -437,7 +444,6 @@ export const QueryUpgradedConsensusStateResponse = {
   create(base?: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState ?? new Uint8Array(0);
@@ -450,6 +456,8 @@ function createBaseQueryModuleVersionsRequest(): QueryModuleVersionsRequest {
 }
 
 export const QueryModuleVersionsRequest = {
+  $type: "cosmos.upgrade.v1beta1.QueryModuleVersionsRequest" as const,
+
   encode(message: QueryModuleVersionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moduleName !== "") {
       writer.uint32(10).string(message.moduleName);
@@ -495,7 +503,6 @@ export const QueryModuleVersionsRequest = {
   create(base?: DeepPartial<QueryModuleVersionsRequest>): QueryModuleVersionsRequest {
     return QueryModuleVersionsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryModuleVersionsRequest>): QueryModuleVersionsRequest {
     const message = createBaseQueryModuleVersionsRequest();
     message.moduleName = object.moduleName ?? "";
@@ -508,6 +515,8 @@ function createBaseQueryModuleVersionsResponse(): QueryModuleVersionsResponse {
 }
 
 export const QueryModuleVersionsResponse = {
+  $type: "cosmos.upgrade.v1beta1.QueryModuleVersionsResponse" as const,
+
   encode(message: QueryModuleVersionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.moduleVersions) {
       ModuleVersion.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -557,7 +566,6 @@ export const QueryModuleVersionsResponse = {
   create(base?: DeepPartial<QueryModuleVersionsResponse>): QueryModuleVersionsResponse {
     return QueryModuleVersionsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryModuleVersionsResponse>): QueryModuleVersionsResponse {
     const message = createBaseQueryModuleVersionsResponse();
     message.moduleVersions = object.moduleVersions?.map((e) => ModuleVersion.fromPartial(e)) || [];
@@ -570,6 +578,8 @@ function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
 }
 
 export const QueryAuthorityRequest = {
+  $type: "cosmos.upgrade.v1beta1.QueryAuthorityRequest" as const,
+
   encode(_: QueryAuthorityRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -602,7 +612,6 @@ export const QueryAuthorityRequest = {
   create(base?: DeepPartial<QueryAuthorityRequest>): QueryAuthorityRequest {
     return QueryAuthorityRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryAuthorityRequest>): QueryAuthorityRequest {
     const message = createBaseQueryAuthorityRequest();
     return message;
@@ -614,6 +623,8 @@ function createBaseQueryAuthorityResponse(): QueryAuthorityResponse {
 }
 
 export const QueryAuthorityResponse = {
+  $type: "cosmos.upgrade.v1beta1.QueryAuthorityResponse" as const,
+
   encode(message: QueryAuthorityResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -659,7 +670,6 @@ export const QueryAuthorityResponse = {
   create(base?: DeepPartial<QueryAuthorityResponse>): QueryAuthorityResponse {
     return QueryAuthorityResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAuthorityResponse>): QueryAuthorityResponse {
     const message = createBaseQueryAuthorityResponse();
     message.address = object.address ?? "";

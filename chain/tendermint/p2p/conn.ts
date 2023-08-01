@@ -30,6 +30,8 @@ function createBasePacketPing(): PacketPing {
 }
 
 export const PacketPing = {
+  $type: "tendermint.p2p.PacketPing" as const,
+
   encode(_: PacketPing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -62,7 +64,6 @@ export const PacketPing = {
   create(base?: DeepPartial<PacketPing>): PacketPing {
     return PacketPing.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<PacketPing>): PacketPing {
     const message = createBasePacketPing();
     return message;
@@ -74,6 +75,8 @@ function createBasePacketPong(): PacketPong {
 }
 
 export const PacketPong = {
+  $type: "tendermint.p2p.PacketPong" as const,
+
   encode(_: PacketPong, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -106,7 +109,6 @@ export const PacketPong = {
   create(base?: DeepPartial<PacketPong>): PacketPong {
     return PacketPong.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<PacketPong>): PacketPong {
     const message = createBasePacketPong();
     return message;
@@ -118,6 +120,8 @@ function createBasePacketMsg(): PacketMsg {
 }
 
 export const PacketMsg = {
+  $type: "tendermint.p2p.PacketMsg" as const,
+
   encode(message: PacketMsg, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== 0) {
       writer.uint32(8).int32(message.channelId);
@@ -193,7 +197,6 @@ export const PacketMsg = {
   create(base?: DeepPartial<PacketMsg>): PacketMsg {
     return PacketMsg.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketMsg>): PacketMsg {
     const message = createBasePacketMsg();
     message.channelId = object.channelId ?? 0;
@@ -208,6 +211,8 @@ function createBasePacket(): Packet {
 }
 
 export const Packet = {
+  $type: "tendermint.p2p.Packet" as const,
+
   encode(message: Packet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetPing !== undefined) {
       PacketPing.encode(message.packetPing, writer.uint32(10).fork()).ldelim();
@@ -283,7 +288,6 @@ export const Packet = {
   create(base?: DeepPartial<Packet>): Packet {
     return Packet.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
     message.packetPing = (object.packetPing !== undefined && object.packetPing !== null)
@@ -304,6 +308,8 @@ function createBaseAuthSigMessage(): AuthSigMessage {
 }
 
 export const AuthSigMessage = {
+  $type: "tendermint.p2p.AuthSigMessage" as const,
+
   encode(message: AuthSigMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -365,7 +371,6 @@ export const AuthSigMessage = {
   create(base?: DeepPartial<AuthSigMessage>): AuthSigMessage {
     return AuthSigMessage.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AuthSigMessage>): AuthSigMessage {
     const message = createBaseAuthSigMessage();
     message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)

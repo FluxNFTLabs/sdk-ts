@@ -20,6 +20,8 @@ function createBaseConfig(): Config {
 }
 
 export const Config = {
+  $type: "cosmos.tx.config.v1.Config" as const,
+
   encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.skipAnteHandler === true) {
       writer.uint32(8).bool(message.skipAnteHandler);
@@ -81,7 +83,6 @@ export const Config = {
   create(base?: DeepPartial<Config>): Config {
     return Config.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Config>): Config {
     const message = createBaseConfig();
     message.skipAnteHandler = object.skipAnteHandler ?? false;

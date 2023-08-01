@@ -59,6 +59,8 @@ function createBaseMsgRegisterInterchainAccount(): MsgRegisterInterchainAccount 
 }
 
 export const MsgRegisterInterchainAccount = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount" as const,
+
   encode(message: MsgRegisterInterchainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -134,7 +136,6 @@ export const MsgRegisterInterchainAccount = {
   create(base?: DeepPartial<MsgRegisterInterchainAccount>): MsgRegisterInterchainAccount {
     return MsgRegisterInterchainAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRegisterInterchainAccount>): MsgRegisterInterchainAccount {
     const message = createBaseMsgRegisterInterchainAccount();
     message.owner = object.owner ?? "";
@@ -149,6 +150,8 @@ function createBaseMsgRegisterInterchainAccountResponse(): MsgRegisterInterchain
 }
 
 export const MsgRegisterInterchainAccountResponse = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse" as const,
+
   encode(message: MsgRegisterInterchainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -210,7 +213,6 @@ export const MsgRegisterInterchainAccountResponse = {
   create(base?: DeepPartial<MsgRegisterInterchainAccountResponse>): MsgRegisterInterchainAccountResponse {
     return MsgRegisterInterchainAccountResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRegisterInterchainAccountResponse>): MsgRegisterInterchainAccountResponse {
     const message = createBaseMsgRegisterInterchainAccountResponse();
     message.channelId = object.channelId ?? "";
@@ -224,6 +226,8 @@ function createBaseMsgSendTx(): MsgSendTx {
 }
 
 export const MsgSendTx = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgSendTx" as const,
+
   encode(message: MsgSendTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -313,7 +317,6 @@ export const MsgSendTx = {
   create(base?: DeepPartial<MsgSendTx>): MsgSendTx {
     return MsgSendTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSendTx>): MsgSendTx {
     const message = createBaseMsgSendTx();
     message.owner = object.owner ?? "";
@@ -331,6 +334,8 @@ function createBaseMsgSendTxResponse(): MsgSendTxResponse {
 }
 
 export const MsgSendTxResponse = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgSendTxResponse" as const,
+
   encode(message: MsgSendTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -376,7 +381,6 @@ export const MsgSendTxResponse = {
   create(base?: DeepPartial<MsgSendTxResponse>): MsgSendTxResponse {
     return MsgSendTxResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSendTxResponse>): MsgSendTxResponse {
     const message = createBaseMsgSendTxResponse();
     message.sequence = object.sequence ?? "0";
@@ -389,6 +393,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -450,7 +456,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -466,6 +471,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -498,7 +505,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

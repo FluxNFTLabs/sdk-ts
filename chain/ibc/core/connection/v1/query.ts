@@ -145,6 +145,8 @@ function createBaseQueryConnectionRequest(): QueryConnectionRequest {
 }
 
 export const QueryConnectionRequest = {
+  $type: "ibc.core.connection.v1.QueryConnectionRequest" as const,
+
   encode(message: QueryConnectionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
@@ -190,7 +192,6 @@ export const QueryConnectionRequest = {
   create(base?: DeepPartial<QueryConnectionRequest>): QueryConnectionRequest {
     return QueryConnectionRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionRequest>): QueryConnectionRequest {
     const message = createBaseQueryConnectionRequest();
     message.connectionId = object.connectionId ?? "";
@@ -203,6 +204,8 @@ function createBaseQueryConnectionResponse(): QueryConnectionResponse {
 }
 
 export const QueryConnectionResponse = {
+  $type: "ibc.core.connection.v1.QueryConnectionResponse" as const,
+
   encode(message: QueryConnectionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connection !== undefined) {
       ConnectionEnd.encode(message.connection, writer.uint32(10).fork()).ldelim();
@@ -278,7 +281,6 @@ export const QueryConnectionResponse = {
   create(base?: DeepPartial<QueryConnectionResponse>): QueryConnectionResponse {
     return QueryConnectionResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionResponse>): QueryConnectionResponse {
     const message = createBaseQueryConnectionResponse();
     message.connection = (object.connection !== undefined && object.connection !== null)
@@ -297,6 +299,8 @@ function createBaseQueryConnectionsRequest(): QueryConnectionsRequest {
 }
 
 export const QueryConnectionsRequest = {
+  $type: "ibc.core.connection.v1.QueryConnectionsRequest" as const,
+
   encode(message: QueryConnectionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -342,7 +346,6 @@ export const QueryConnectionsRequest = {
   create(base?: DeepPartial<QueryConnectionsRequest>): QueryConnectionsRequest {
     return QueryConnectionsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionsRequest>): QueryConnectionsRequest {
     const message = createBaseQueryConnectionsRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -357,6 +360,8 @@ function createBaseQueryConnectionsResponse(): QueryConnectionsResponse {
 }
 
 export const QueryConnectionsResponse = {
+  $type: "ibc.core.connection.v1.QueryConnectionsResponse" as const,
+
   encode(message: QueryConnectionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.connections) {
       IdentifiedConnection.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -434,7 +439,6 @@ export const QueryConnectionsResponse = {
   create(base?: DeepPartial<QueryConnectionsResponse>): QueryConnectionsResponse {
     return QueryConnectionsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionsResponse>): QueryConnectionsResponse {
     const message = createBaseQueryConnectionsResponse();
     message.connections = object.connections?.map((e) => IdentifiedConnection.fromPartial(e)) || [];
@@ -453,6 +457,8 @@ function createBaseQueryClientConnectionsRequest(): QueryClientConnectionsReques
 }
 
 export const QueryClientConnectionsRequest = {
+  $type: "ibc.core.connection.v1.QueryClientConnectionsRequest" as const,
+
   encode(message: QueryClientConnectionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -498,7 +504,6 @@ export const QueryClientConnectionsRequest = {
   create(base?: DeepPartial<QueryClientConnectionsRequest>): QueryClientConnectionsRequest {
     return QueryClientConnectionsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientConnectionsRequest>): QueryClientConnectionsRequest {
     const message = createBaseQueryClientConnectionsRequest();
     message.clientId = object.clientId ?? "";
@@ -511,6 +516,8 @@ function createBaseQueryClientConnectionsResponse(): QueryClientConnectionsRespo
 }
 
 export const QueryClientConnectionsResponse = {
+  $type: "ibc.core.connection.v1.QueryClientConnectionsResponse" as const,
+
   encode(message: QueryClientConnectionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.connectionPaths) {
       writer.uint32(10).string(v!);
@@ -586,7 +593,6 @@ export const QueryClientConnectionsResponse = {
   create(base?: DeepPartial<QueryClientConnectionsResponse>): QueryClientConnectionsResponse {
     return QueryClientConnectionsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClientConnectionsResponse>): QueryClientConnectionsResponse {
     const message = createBaseQueryClientConnectionsResponse();
     message.connectionPaths = object.connectionPaths?.map((e) => e) || [];
@@ -603,6 +609,8 @@ function createBaseQueryConnectionClientStateRequest(): QueryConnectionClientSta
 }
 
 export const QueryConnectionClientStateRequest = {
+  $type: "ibc.core.connection.v1.QueryConnectionClientStateRequest" as const,
+
   encode(message: QueryConnectionClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
@@ -648,7 +656,6 @@ export const QueryConnectionClientStateRequest = {
   create(base?: DeepPartial<QueryConnectionClientStateRequest>): QueryConnectionClientStateRequest {
     return QueryConnectionClientStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionClientStateRequest>): QueryConnectionClientStateRequest {
     const message = createBaseQueryConnectionClientStateRequest();
     message.connectionId = object.connectionId ?? "";
@@ -661,6 +668,8 @@ function createBaseQueryConnectionClientStateResponse(): QueryConnectionClientSt
 }
 
 export const QueryConnectionClientStateResponse = {
+  $type: "ibc.core.connection.v1.QueryConnectionClientStateResponse" as const,
+
   encode(message: QueryConnectionClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
@@ -738,7 +747,6 @@ export const QueryConnectionClientStateResponse = {
   create(base?: DeepPartial<QueryConnectionClientStateResponse>): QueryConnectionClientStateResponse {
     return QueryConnectionClientStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionClientStateResponse>): QueryConnectionClientStateResponse {
     const message = createBaseQueryConnectionClientStateResponse();
     message.identifiedClientState =
@@ -758,6 +766,8 @@ function createBaseQueryConnectionConsensusStateRequest(): QueryConnectionConsen
 }
 
 export const QueryConnectionConsensusStateRequest = {
+  $type: "ibc.core.connection.v1.QueryConnectionConsensusStateRequest" as const,
+
   encode(message: QueryConnectionConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
@@ -833,7 +843,6 @@ export const QueryConnectionConsensusStateRequest = {
   create(base?: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
     return QueryConnectionConsensusStateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionConsensusStateRequest>): QueryConnectionConsensusStateRequest {
     const message = createBaseQueryConnectionConsensusStateRequest();
     message.connectionId = object.connectionId ?? "";
@@ -848,6 +857,8 @@ function createBaseQueryConnectionConsensusStateResponse(): QueryConnectionConse
 }
 
 export const QueryConnectionConsensusStateResponse = {
+  $type: "ibc.core.connection.v1.QueryConnectionConsensusStateResponse" as const,
+
   encode(message: QueryConnectionConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -937,7 +948,6 @@ export const QueryConnectionConsensusStateResponse = {
   create(base?: DeepPartial<QueryConnectionConsensusStateResponse>): QueryConnectionConsensusStateResponse {
     return QueryConnectionConsensusStateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionConsensusStateResponse>): QueryConnectionConsensusStateResponse {
     const message = createBaseQueryConnectionConsensusStateResponse();
     message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
@@ -957,6 +967,8 @@ function createBaseQueryConnectionParamsRequest(): QueryConnectionParamsRequest 
 }
 
 export const QueryConnectionParamsRequest = {
+  $type: "ibc.core.connection.v1.QueryConnectionParamsRequest" as const,
+
   encode(_: QueryConnectionParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -989,7 +1001,6 @@ export const QueryConnectionParamsRequest = {
   create(base?: DeepPartial<QueryConnectionParamsRequest>): QueryConnectionParamsRequest {
     return QueryConnectionParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryConnectionParamsRequest>): QueryConnectionParamsRequest {
     const message = createBaseQueryConnectionParamsRequest();
     return message;
@@ -1001,6 +1012,8 @@ function createBaseQueryConnectionParamsResponse(): QueryConnectionParamsRespons
 }
 
 export const QueryConnectionParamsResponse = {
+  $type: "ibc.core.connection.v1.QueryConnectionParamsResponse" as const,
+
   encode(message: QueryConnectionParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1046,7 +1059,6 @@ export const QueryConnectionParamsResponse = {
   create(base?: DeepPartial<QueryConnectionParamsResponse>): QueryConnectionParamsResponse {
     return QueryConnectionParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryConnectionParamsResponse>): QueryConnectionParamsResponse {
     const message = createBaseQueryConnectionParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)

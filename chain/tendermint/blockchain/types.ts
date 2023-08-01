@@ -41,6 +41,8 @@ function createBaseBlockRequest(): BlockRequest {
 }
 
 export const BlockRequest = {
+  $type: "tendermint.blockchain.BlockRequest" as const,
+
   encode(message: BlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -86,7 +88,6 @@ export const BlockRequest = {
   create(base?: DeepPartial<BlockRequest>): BlockRequest {
     return BlockRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockRequest>): BlockRequest {
     const message = createBaseBlockRequest();
     message.height = object.height ?? "0";
@@ -99,6 +100,8 @@ function createBaseNoBlockResponse(): NoBlockResponse {
 }
 
 export const NoBlockResponse = {
+  $type: "tendermint.blockchain.NoBlockResponse" as const,
+
   encode(message: NoBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -144,7 +147,6 @@ export const NoBlockResponse = {
   create(base?: DeepPartial<NoBlockResponse>): NoBlockResponse {
     return NoBlockResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NoBlockResponse>): NoBlockResponse {
     const message = createBaseNoBlockResponse();
     message.height = object.height ?? "0";
@@ -157,6 +159,8 @@ function createBaseBlockResponse(): BlockResponse {
 }
 
 export const BlockResponse = {
+  $type: "tendermint.blockchain.BlockResponse" as const,
+
   encode(message: BlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       Block.encode(message.block, writer.uint32(10).fork()).ldelim();
@@ -202,7 +206,6 @@ export const BlockResponse = {
   create(base?: DeepPartial<BlockResponse>): BlockResponse {
     return BlockResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockResponse>): BlockResponse {
     const message = createBaseBlockResponse();
     message.block = (object.block !== undefined && object.block !== null) ? Block.fromPartial(object.block) : undefined;
@@ -215,6 +218,8 @@ function createBaseStatusRequest(): StatusRequest {
 }
 
 export const StatusRequest = {
+  $type: "tendermint.blockchain.StatusRequest" as const,
+
   encode(_: StatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -247,7 +252,6 @@ export const StatusRequest = {
   create(base?: DeepPartial<StatusRequest>): StatusRequest {
     return StatusRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<StatusRequest>): StatusRequest {
     const message = createBaseStatusRequest();
     return message;
@@ -259,6 +263,8 @@ function createBaseStatusResponse(): StatusResponse {
 }
 
 export const StatusResponse = {
+  $type: "tendermint.blockchain.StatusResponse" as const,
+
   encode(message: StatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -320,7 +326,6 @@ export const StatusResponse = {
   create(base?: DeepPartial<StatusResponse>): StatusResponse {
     return StatusResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StatusResponse>): StatusResponse {
     const message = createBaseStatusResponse();
     message.height = object.height ?? "0";
@@ -340,6 +345,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.blockchain.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockRequest !== undefined) {
       BlockRequest.encode(message.blockRequest, writer.uint32(10).fork()).ldelim();
@@ -443,7 +450,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.blockRequest = (object.blockRequest !== undefined && object.blockRequest !== null)

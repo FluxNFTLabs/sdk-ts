@@ -28,6 +28,8 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata = {
+  $type: "ibc.applications.interchain_accounts.v1.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
@@ -145,7 +147,6 @@ export const Metadata = {
   create(base?: DeepPartial<Metadata>): Metadata {
     return Metadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
     message.version = object.version ?? "";

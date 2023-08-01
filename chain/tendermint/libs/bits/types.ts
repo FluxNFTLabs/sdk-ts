@@ -12,6 +12,8 @@ function createBaseBitArray(): BitArray {
 }
 
 export const BitArray = {
+  $type: "tendermint.libs.bits.BitArray" as const,
+
   encode(message: BitArray, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bits !== "0") {
       writer.uint32(8).int64(message.bits);
@@ -85,7 +87,6 @@ export const BitArray = {
   create(base?: DeepPartial<BitArray>): BitArray {
     return BitArray.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
     message.bits = object.bits ?? "0";

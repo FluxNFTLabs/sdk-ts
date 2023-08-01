@@ -92,6 +92,8 @@ function createBasePlan(): Plan {
 }
 
 export const Plan = {
+  $type: "cosmos.upgrade.v1beta1.Plan" as const,
+
   encode(message: Plan, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -195,7 +197,6 @@ export const Plan = {
   create(base?: DeepPartial<Plan>): Plan {
     return Plan.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Plan>): Plan {
     const message = createBasePlan();
     message.name = object.name ?? "";
@@ -214,6 +215,8 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
 }
 
 export const SoftwareUpgradeProposal = {
+  $type: "cosmos.upgrade.v1beta1.SoftwareUpgradeProposal" as const,
+
   encode(message: SoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -289,7 +292,6 @@ export const SoftwareUpgradeProposal = {
   create(base?: DeepPartial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal {
     return SoftwareUpgradeProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal {
     const message = createBaseSoftwareUpgradeProposal();
     message.title = object.title ?? "";
@@ -304,6 +306,8 @@ function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposa
 }
 
 export const CancelSoftwareUpgradeProposal = {
+  $type: "cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal" as const,
+
   encode(message: CancelSoftwareUpgradeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -365,7 +369,6 @@ export const CancelSoftwareUpgradeProposal = {
   create(base?: DeepPartial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal {
     return CancelSoftwareUpgradeProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal {
     const message = createBaseCancelSoftwareUpgradeProposal();
     message.title = object.title ?? "";
@@ -379,6 +382,8 @@ function createBaseModuleVersion(): ModuleVersion {
 }
 
 export const ModuleVersion = {
+  $type: "cosmos.upgrade.v1beta1.ModuleVersion" as const,
+
   encode(message: ModuleVersion, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -440,7 +445,6 @@ export const ModuleVersion = {
   create(base?: DeepPartial<ModuleVersion>): ModuleVersion {
     return ModuleVersion.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleVersion>): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";

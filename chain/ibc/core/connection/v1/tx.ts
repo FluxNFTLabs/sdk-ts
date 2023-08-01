@@ -135,6 +135,8 @@ function createBaseMsgConnectionOpenInit(): MsgConnectionOpenInit {
 }
 
 export const MsgConnectionOpenInit = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenInit" as const,
+
   encode(message: MsgConnectionOpenInit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -238,7 +240,6 @@ export const MsgConnectionOpenInit = {
   create(base?: DeepPartial<MsgConnectionOpenInit>): MsgConnectionOpenInit {
     return MsgConnectionOpenInit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgConnectionOpenInit>): MsgConnectionOpenInit {
     const message = createBaseMsgConnectionOpenInit();
     message.clientId = object.clientId ?? "";
@@ -259,6 +260,8 @@ function createBaseMsgConnectionOpenInitResponse(): MsgConnectionOpenInitRespons
 }
 
 export const MsgConnectionOpenInitResponse = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenInitResponse" as const,
+
   encode(_: MsgConnectionOpenInitResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -291,7 +294,6 @@ export const MsgConnectionOpenInitResponse = {
   create(base?: DeepPartial<MsgConnectionOpenInitResponse>): MsgConnectionOpenInitResponse {
     return MsgConnectionOpenInitResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgConnectionOpenInitResponse>): MsgConnectionOpenInitResponse {
     const message = createBaseMsgConnectionOpenInitResponse();
     return message;
@@ -317,6 +319,8 @@ function createBaseMsgConnectionOpenTry(): MsgConnectionOpenTry {
 }
 
 export const MsgConnectionOpenTry = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenTry" as const,
+
   encode(message: MsgConnectionOpenTry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -536,7 +540,6 @@ export const MsgConnectionOpenTry = {
   create(base?: DeepPartial<MsgConnectionOpenTry>): MsgConnectionOpenTry {
     return MsgConnectionOpenTry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgConnectionOpenTry>): MsgConnectionOpenTry {
     const message = createBaseMsgConnectionOpenTry();
     message.clientId = object.clientId ?? "";
@@ -569,6 +572,8 @@ function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse 
 }
 
 export const MsgConnectionOpenTryResponse = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenTryResponse" as const,
+
   encode(_: MsgConnectionOpenTryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -601,7 +606,6 @@ export const MsgConnectionOpenTryResponse = {
   create(base?: DeepPartial<MsgConnectionOpenTryResponse>): MsgConnectionOpenTryResponse {
     return MsgConnectionOpenTryResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgConnectionOpenTryResponse>): MsgConnectionOpenTryResponse {
     const message = createBaseMsgConnectionOpenTryResponse();
     return message;
@@ -625,6 +629,8 @@ function createBaseMsgConnectionOpenAck(): MsgConnectionOpenAck {
 }
 
 export const MsgConnectionOpenAck = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenAck" as const,
+
   encode(message: MsgConnectionOpenAck, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
@@ -814,7 +820,6 @@ export const MsgConnectionOpenAck = {
   create(base?: DeepPartial<MsgConnectionOpenAck>): MsgConnectionOpenAck {
     return MsgConnectionOpenAck.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgConnectionOpenAck>): MsgConnectionOpenAck {
     const message = createBaseMsgConnectionOpenAck();
     message.connectionId = object.connectionId ?? "";
@@ -845,6 +850,8 @@ function createBaseMsgConnectionOpenAckResponse(): MsgConnectionOpenAckResponse 
 }
 
 export const MsgConnectionOpenAckResponse = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenAckResponse" as const,
+
   encode(_: MsgConnectionOpenAckResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -877,7 +884,6 @@ export const MsgConnectionOpenAckResponse = {
   create(base?: DeepPartial<MsgConnectionOpenAckResponse>): MsgConnectionOpenAckResponse {
     return MsgConnectionOpenAckResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgConnectionOpenAckResponse>): MsgConnectionOpenAckResponse {
     const message = createBaseMsgConnectionOpenAckResponse();
     return message;
@@ -889,6 +895,8 @@ function createBaseMsgConnectionOpenConfirm(): MsgConnectionOpenConfirm {
 }
 
 export const MsgConnectionOpenConfirm = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenConfirm" as const,
+
   encode(message: MsgConnectionOpenConfirm, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.connectionId !== "") {
       writer.uint32(10).string(message.connectionId);
@@ -978,7 +986,6 @@ export const MsgConnectionOpenConfirm = {
   create(base?: DeepPartial<MsgConnectionOpenConfirm>): MsgConnectionOpenConfirm {
     return MsgConnectionOpenConfirm.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgConnectionOpenConfirm>): MsgConnectionOpenConfirm {
     const message = createBaseMsgConnectionOpenConfirm();
     message.connectionId = object.connectionId ?? "";
@@ -996,6 +1003,8 @@ function createBaseMsgConnectionOpenConfirmResponse(): MsgConnectionOpenConfirmR
 }
 
 export const MsgConnectionOpenConfirmResponse = {
+  $type: "ibc.core.connection.v1.MsgConnectionOpenConfirmResponse" as const,
+
   encode(_: MsgConnectionOpenConfirmResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1028,7 +1037,6 @@ export const MsgConnectionOpenConfirmResponse = {
   create(base?: DeepPartial<MsgConnectionOpenConfirmResponse>): MsgConnectionOpenConfirmResponse {
     return MsgConnectionOpenConfirmResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgConnectionOpenConfirmResponse>): MsgConnectionOpenConfirmResponse {
     const message = createBaseMsgConnectionOpenConfirmResponse();
     return message;
@@ -1040,6 +1048,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "ibc.core.connection.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1101,7 +1111,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -1117,6 +1126,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "ibc.core.connection.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1149,7 +1160,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

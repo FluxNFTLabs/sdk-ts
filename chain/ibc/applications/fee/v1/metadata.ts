@@ -17,6 +17,8 @@ function createBaseMetadata(): Metadata {
 }
 
 export const Metadata = {
+  $type: "ibc.applications.fee.v1.Metadata" as const,
+
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.feeVersion !== "") {
       writer.uint32(10).string(message.feeVersion);
@@ -78,7 +80,6 @@ export const Metadata = {
   create(base?: DeepPartial<Metadata>): Metadata {
     return Metadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
     message.feeVersion = object.feeVersion ?? "";

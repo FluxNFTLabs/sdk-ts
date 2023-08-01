@@ -165,6 +165,8 @@ function createBaseQueryIncentivizedPacketsRequest(): QueryIncentivizedPacketsRe
 }
 
 export const QueryIncentivizedPacketsRequest = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketsRequest" as const,
+
   encode(message: QueryIncentivizedPacketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -226,7 +228,6 @@ export const QueryIncentivizedPacketsRequest = {
   create(base?: DeepPartial<QueryIncentivizedPacketsRequest>): QueryIncentivizedPacketsRequest {
     return QueryIncentivizedPacketsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsRequest>): QueryIncentivizedPacketsRequest {
     const message = createBaseQueryIncentivizedPacketsRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -242,6 +243,8 @@ function createBaseQueryIncentivizedPacketsResponse(): QueryIncentivizedPacketsR
 }
 
 export const QueryIncentivizedPacketsResponse = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketsResponse" as const,
+
   encode(message: QueryIncentivizedPacketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentivizedPackets) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -305,7 +308,6 @@ export const QueryIncentivizedPacketsResponse = {
   create(base?: DeepPartial<QueryIncentivizedPacketsResponse>): QueryIncentivizedPacketsResponse {
     return QueryIncentivizedPacketsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryIncentivizedPacketsResponse>): QueryIncentivizedPacketsResponse {
     const message = createBaseQueryIncentivizedPacketsResponse();
     message.incentivizedPackets = object.incentivizedPackets?.map((e) => IdentifiedPacketFees.fromPartial(e)) || [];
@@ -321,6 +323,8 @@ function createBaseQueryIncentivizedPacketRequest(): QueryIncentivizedPacketRequ
 }
 
 export const QueryIncentivizedPacketRequest = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketRequest" as const,
+
   encode(message: QueryIncentivizedPacketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -382,7 +386,6 @@ export const QueryIncentivizedPacketRequest = {
   create(base?: DeepPartial<QueryIncentivizedPacketRequest>): QueryIncentivizedPacketRequest {
     return QueryIncentivizedPacketRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryIncentivizedPacketRequest>): QueryIncentivizedPacketRequest {
     const message = createBaseQueryIncentivizedPacketRequest();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)
@@ -398,6 +401,8 @@ function createBaseQueryIncentivizedPacketResponse(): QueryIncentivizedPacketRes
 }
 
 export const QueryIncentivizedPacketResponse = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketResponse" as const,
+
   encode(message: QueryIncentivizedPacketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.incentivizedPacket !== undefined) {
       IdentifiedPacketFees.encode(message.incentivizedPacket, writer.uint32(10).fork()).ldelim();
@@ -447,7 +452,6 @@ export const QueryIncentivizedPacketResponse = {
   create(base?: DeepPartial<QueryIncentivizedPacketResponse>): QueryIncentivizedPacketResponse {
     return QueryIncentivizedPacketResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryIncentivizedPacketResponse>): QueryIncentivizedPacketResponse {
     const message = createBaseQueryIncentivizedPacketResponse();
     message.incentivizedPacket = (object.incentivizedPacket !== undefined && object.incentivizedPacket !== null)
@@ -462,6 +466,8 @@ function createBaseQueryIncentivizedPacketsForChannelRequest(): QueryIncentivize
 }
 
 export const QueryIncentivizedPacketsForChannelRequest = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelRequest" as const,
+
   encode(message: QueryIncentivizedPacketsForChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -551,7 +557,6 @@ export const QueryIncentivizedPacketsForChannelRequest = {
   create(base?: DeepPartial<QueryIncentivizedPacketsForChannelRequest>): QueryIncentivizedPacketsForChannelRequest {
     return QueryIncentivizedPacketsForChannelRequest.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryIncentivizedPacketsForChannelRequest>,
   ): QueryIncentivizedPacketsForChannelRequest {
@@ -571,6 +576,8 @@ function createBaseQueryIncentivizedPacketsForChannelResponse(): QueryIncentiviz
 }
 
 export const QueryIncentivizedPacketsForChannelResponse = {
+  $type: "ibc.applications.fee.v1.QueryIncentivizedPacketsForChannelResponse" as const,
+
   encode(message: QueryIncentivizedPacketsForChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.incentivizedPackets) {
       IdentifiedPacketFees.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -634,7 +641,6 @@ export const QueryIncentivizedPacketsForChannelResponse = {
   create(base?: DeepPartial<QueryIncentivizedPacketsForChannelResponse>): QueryIncentivizedPacketsForChannelResponse {
     return QueryIncentivizedPacketsForChannelResponse.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<QueryIncentivizedPacketsForChannelResponse>,
   ): QueryIncentivizedPacketsForChannelResponse {
@@ -652,6 +658,8 @@ function createBaseQueryTotalRecvFeesRequest(): QueryTotalRecvFeesRequest {
 }
 
 export const QueryTotalRecvFeesRequest = {
+  $type: "ibc.applications.fee.v1.QueryTotalRecvFeesRequest" as const,
+
   encode(message: QueryTotalRecvFeesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -697,7 +705,6 @@ export const QueryTotalRecvFeesRequest = {
   create(base?: DeepPartial<QueryTotalRecvFeesRequest>): QueryTotalRecvFeesRequest {
     return QueryTotalRecvFeesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalRecvFeesRequest>): QueryTotalRecvFeesRequest {
     const message = createBaseQueryTotalRecvFeesRequest();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)
@@ -712,6 +719,8 @@ function createBaseQueryTotalRecvFeesResponse(): QueryTotalRecvFeesResponse {
 }
 
 export const QueryTotalRecvFeesResponse = {
+  $type: "ibc.applications.fee.v1.QueryTotalRecvFeesResponse" as const,
+
   encode(message: QueryTotalRecvFeesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.recvFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -757,7 +766,6 @@ export const QueryTotalRecvFeesResponse = {
   create(base?: DeepPartial<QueryTotalRecvFeesResponse>): QueryTotalRecvFeesResponse {
     return QueryTotalRecvFeesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalRecvFeesResponse>): QueryTotalRecvFeesResponse {
     const message = createBaseQueryTotalRecvFeesResponse();
     message.recvFees = object.recvFees?.map((e) => Coin.fromPartial(e)) || [];
@@ -770,6 +778,8 @@ function createBaseQueryTotalAckFeesRequest(): QueryTotalAckFeesRequest {
 }
 
 export const QueryTotalAckFeesRequest = {
+  $type: "ibc.applications.fee.v1.QueryTotalAckFeesRequest" as const,
+
   encode(message: QueryTotalAckFeesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -815,7 +825,6 @@ export const QueryTotalAckFeesRequest = {
   create(base?: DeepPartial<QueryTotalAckFeesRequest>): QueryTotalAckFeesRequest {
     return QueryTotalAckFeesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalAckFeesRequest>): QueryTotalAckFeesRequest {
     const message = createBaseQueryTotalAckFeesRequest();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)
@@ -830,6 +839,8 @@ function createBaseQueryTotalAckFeesResponse(): QueryTotalAckFeesResponse {
 }
 
 export const QueryTotalAckFeesResponse = {
+  $type: "ibc.applications.fee.v1.QueryTotalAckFeesResponse" as const,
+
   encode(message: QueryTotalAckFeesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.ackFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -875,7 +886,6 @@ export const QueryTotalAckFeesResponse = {
   create(base?: DeepPartial<QueryTotalAckFeesResponse>): QueryTotalAckFeesResponse {
     return QueryTotalAckFeesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalAckFeesResponse>): QueryTotalAckFeesResponse {
     const message = createBaseQueryTotalAckFeesResponse();
     message.ackFees = object.ackFees?.map((e) => Coin.fromPartial(e)) || [];
@@ -888,6 +898,8 @@ function createBaseQueryTotalTimeoutFeesRequest(): QueryTotalTimeoutFeesRequest 
 }
 
 export const QueryTotalTimeoutFeesRequest = {
+  $type: "ibc.applications.fee.v1.QueryTotalTimeoutFeesRequest" as const,
+
   encode(message: QueryTotalTimeoutFeesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -933,7 +945,6 @@ export const QueryTotalTimeoutFeesRequest = {
   create(base?: DeepPartial<QueryTotalTimeoutFeesRequest>): QueryTotalTimeoutFeesRequest {
     return QueryTotalTimeoutFeesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalTimeoutFeesRequest>): QueryTotalTimeoutFeesRequest {
     const message = createBaseQueryTotalTimeoutFeesRequest();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)
@@ -948,6 +959,8 @@ function createBaseQueryTotalTimeoutFeesResponse(): QueryTotalTimeoutFeesRespons
 }
 
 export const QueryTotalTimeoutFeesResponse = {
+  $type: "ibc.applications.fee.v1.QueryTotalTimeoutFeesResponse" as const,
+
   encode(message: QueryTotalTimeoutFeesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.timeoutFees) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -995,7 +1008,6 @@ export const QueryTotalTimeoutFeesResponse = {
   create(base?: DeepPartial<QueryTotalTimeoutFeesResponse>): QueryTotalTimeoutFeesResponse {
     return QueryTotalTimeoutFeesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTotalTimeoutFeesResponse>): QueryTotalTimeoutFeesResponse {
     const message = createBaseQueryTotalTimeoutFeesResponse();
     message.timeoutFees = object.timeoutFees?.map((e) => Coin.fromPartial(e)) || [];
@@ -1008,6 +1020,8 @@ function createBaseQueryPayeeRequest(): QueryPayeeRequest {
 }
 
 export const QueryPayeeRequest = {
+  $type: "ibc.applications.fee.v1.QueryPayeeRequest" as const,
+
   encode(message: QueryPayeeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -1069,7 +1083,6 @@ export const QueryPayeeRequest = {
   create(base?: DeepPartial<QueryPayeeRequest>): QueryPayeeRequest {
     return QueryPayeeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPayeeRequest>): QueryPayeeRequest {
     const message = createBaseQueryPayeeRequest();
     message.channelId = object.channelId ?? "";
@@ -1083,6 +1096,8 @@ function createBaseQueryPayeeResponse(): QueryPayeeResponse {
 }
 
 export const QueryPayeeResponse = {
+  $type: "ibc.applications.fee.v1.QueryPayeeResponse" as const,
+
   encode(message: QueryPayeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.payeeAddress !== "") {
       writer.uint32(10).string(message.payeeAddress);
@@ -1128,7 +1143,6 @@ export const QueryPayeeResponse = {
   create(base?: DeepPartial<QueryPayeeResponse>): QueryPayeeResponse {
     return QueryPayeeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryPayeeResponse>): QueryPayeeResponse {
     const message = createBaseQueryPayeeResponse();
     message.payeeAddress = object.payeeAddress ?? "";
@@ -1141,6 +1155,8 @@ function createBaseQueryCounterpartyPayeeRequest(): QueryCounterpartyPayeeReques
 }
 
 export const QueryCounterpartyPayeeRequest = {
+  $type: "ibc.applications.fee.v1.QueryCounterpartyPayeeRequest" as const,
+
   encode(message: QueryCounterpartyPayeeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.channelId !== "") {
       writer.uint32(10).string(message.channelId);
@@ -1202,7 +1218,6 @@ export const QueryCounterpartyPayeeRequest = {
   create(base?: DeepPartial<QueryCounterpartyPayeeRequest>): QueryCounterpartyPayeeRequest {
     return QueryCounterpartyPayeeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCounterpartyPayeeRequest>): QueryCounterpartyPayeeRequest {
     const message = createBaseQueryCounterpartyPayeeRequest();
     message.channelId = object.channelId ?? "";
@@ -1216,6 +1231,8 @@ function createBaseQueryCounterpartyPayeeResponse(): QueryCounterpartyPayeeRespo
 }
 
 export const QueryCounterpartyPayeeResponse = {
+  $type: "ibc.applications.fee.v1.QueryCounterpartyPayeeResponse" as const,
+
   encode(message: QueryCounterpartyPayeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.counterpartyPayee !== "") {
       writer.uint32(10).string(message.counterpartyPayee);
@@ -1261,7 +1278,6 @@ export const QueryCounterpartyPayeeResponse = {
   create(base?: DeepPartial<QueryCounterpartyPayeeResponse>): QueryCounterpartyPayeeResponse {
     return QueryCounterpartyPayeeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryCounterpartyPayeeResponse>): QueryCounterpartyPayeeResponse {
     const message = createBaseQueryCounterpartyPayeeResponse();
     message.counterpartyPayee = object.counterpartyPayee ?? "";
@@ -1274,6 +1290,8 @@ function createBaseQueryFeeEnabledChannelsRequest(): QueryFeeEnabledChannelsRequ
 }
 
 export const QueryFeeEnabledChannelsRequest = {
+  $type: "ibc.applications.fee.v1.QueryFeeEnabledChannelsRequest" as const,
+
   encode(message: QueryFeeEnabledChannelsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -1335,7 +1353,6 @@ export const QueryFeeEnabledChannelsRequest = {
   create(base?: DeepPartial<QueryFeeEnabledChannelsRequest>): QueryFeeEnabledChannelsRequest {
     return QueryFeeEnabledChannelsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelsRequest>): QueryFeeEnabledChannelsRequest {
     const message = createBaseQueryFeeEnabledChannelsRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -1351,6 +1368,8 @@ function createBaseQueryFeeEnabledChannelsResponse(): QueryFeeEnabledChannelsRes
 }
 
 export const QueryFeeEnabledChannelsResponse = {
+  $type: "ibc.applications.fee.v1.QueryFeeEnabledChannelsResponse" as const,
+
   encode(message: QueryFeeEnabledChannelsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.feeEnabledChannels) {
       FeeEnabledChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1414,7 +1433,6 @@ export const QueryFeeEnabledChannelsResponse = {
   create(base?: DeepPartial<QueryFeeEnabledChannelsResponse>): QueryFeeEnabledChannelsResponse {
     return QueryFeeEnabledChannelsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelsResponse>): QueryFeeEnabledChannelsResponse {
     const message = createBaseQueryFeeEnabledChannelsResponse();
     message.feeEnabledChannels = object.feeEnabledChannels?.map((e) => FeeEnabledChannel.fromPartial(e)) || [];
@@ -1430,6 +1448,8 @@ function createBaseQueryFeeEnabledChannelRequest(): QueryFeeEnabledChannelReques
 }
 
 export const QueryFeeEnabledChannelRequest = {
+  $type: "ibc.applications.fee.v1.QueryFeeEnabledChannelRequest" as const,
+
   encode(message: QueryFeeEnabledChannelRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -1491,7 +1511,6 @@ export const QueryFeeEnabledChannelRequest = {
   create(base?: DeepPartial<QueryFeeEnabledChannelRequest>): QueryFeeEnabledChannelRequest {
     return QueryFeeEnabledChannelRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelRequest>): QueryFeeEnabledChannelRequest {
     const message = createBaseQueryFeeEnabledChannelRequest();
     message.portId = object.portId ?? "";
@@ -1505,6 +1524,8 @@ function createBaseQueryFeeEnabledChannelResponse(): QueryFeeEnabledChannelRespo
 }
 
 export const QueryFeeEnabledChannelResponse = {
+  $type: "ibc.applications.fee.v1.QueryFeeEnabledChannelResponse" as const,
+
   encode(message: QueryFeeEnabledChannelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.feeEnabled === true) {
       writer.uint32(8).bool(message.feeEnabled);
@@ -1550,7 +1571,6 @@ export const QueryFeeEnabledChannelResponse = {
   create(base?: DeepPartial<QueryFeeEnabledChannelResponse>): QueryFeeEnabledChannelResponse {
     return QueryFeeEnabledChannelResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryFeeEnabledChannelResponse>): QueryFeeEnabledChannelResponse {
     const message = createBaseQueryFeeEnabledChannelResponse();
     message.feeEnabled = object.feeEnabled ?? false;

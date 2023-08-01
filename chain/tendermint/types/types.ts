@@ -232,6 +232,8 @@ function createBasePartSetHeader(): PartSetHeader {
 }
 
 export const PartSetHeader = {
+  $type: "tendermint.types.PartSetHeader" as const,
+
   encode(message: PartSetHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.total !== 0) {
       writer.uint32(8).uint32(message.total);
@@ -293,7 +295,6 @@ export const PartSetHeader = {
   create(base?: DeepPartial<PartSetHeader>): PartSetHeader {
     return PartSetHeader.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PartSetHeader>): PartSetHeader {
     const message = createBasePartSetHeader();
     message.total = object.total ?? 0;
@@ -307,6 +308,8 @@ function createBasePart(): Part {
 }
 
 export const Part = {
+  $type: "tendermint.types.Part" as const,
+
   encode(message: Part, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
@@ -382,7 +385,6 @@ export const Part = {
   create(base?: DeepPartial<Part>): Part {
     return Part.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Part>): Part {
     const message = createBasePart();
     message.index = object.index ?? 0;
@@ -397,6 +399,8 @@ function createBaseBlockID(): BlockID {
 }
 
 export const BlockID = {
+  $type: "tendermint.types.BlockID" as const,
+
   encode(message: BlockID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -458,7 +462,6 @@ export const BlockID = {
   create(base?: DeepPartial<BlockID>): BlockID {
     return BlockID.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockID>): BlockID {
     const message = createBaseBlockID();
     message.hash = object.hash ?? new Uint8Array(0);
@@ -489,6 +492,8 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
+  $type: "tendermint.types.Header" as const,
+
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== undefined) {
       Consensus.encode(message.version, writer.uint32(10).fork()).ldelim();
@@ -720,7 +725,6 @@ export const Header = {
   create(base?: DeepPartial<Header>): Header {
     return Header.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.version = (object.version !== undefined && object.version !== null)
@@ -750,6 +754,8 @@ function createBaseData(): Data {
 }
 
 export const Data = {
+  $type: "tendermint.types.Data" as const,
+
   encode(message: Data, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       writer.uint32(10).bytes(v!);
@@ -795,7 +801,6 @@ export const Data = {
   create(base?: DeepPartial<Data>): Data {
     return Data.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Data>): Data {
     const message = createBaseData();
     message.txs = object.txs?.map((e) => e) || [];
@@ -817,6 +822,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  $type: "tendermint.types.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -962,7 +969,6 @@ export const Vote = {
   create(base?: DeepPartial<Vote>): Vote {
     return Vote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.type = object.type ?? 0;
@@ -984,6 +990,8 @@ function createBaseCommit(): Commit {
 }
 
 export const Commit = {
+  $type: "tendermint.types.Commit" as const,
+
   encode(message: Commit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -1073,7 +1081,6 @@ export const Commit = {
   create(base?: DeepPartial<Commit>): Commit {
     return Commit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Commit>): Commit {
     const message = createBaseCommit();
     message.height = object.height ?? "0";
@@ -1091,6 +1098,8 @@ function createBaseCommitSig(): CommitSig {
 }
 
 export const CommitSig = {
+  $type: "tendermint.types.CommitSig" as const,
+
   encode(message: CommitSig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockIdFlag !== 0) {
       writer.uint32(8).int32(message.blockIdFlag);
@@ -1180,7 +1189,6 @@ export const CommitSig = {
   create(base?: DeepPartial<CommitSig>): CommitSig {
     return CommitSig.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommitSig>): CommitSig {
     const message = createBaseCommitSig();
     message.blockIdFlag = object.blockIdFlag ?? 0;
@@ -1204,6 +1212,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "tendermint.types.Proposal" as const,
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -1335,7 +1345,6 @@ export const Proposal = {
   create(base?: DeepPartial<Proposal>): Proposal {
     return Proposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.type = object.type ?? 0;
@@ -1356,6 +1365,8 @@ function createBaseSignedHeader(): SignedHeader {
 }
 
 export const SignedHeader = {
+  $type: "tendermint.types.SignedHeader" as const,
+
   encode(message: SignedHeader, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -1417,7 +1428,6 @@ export const SignedHeader = {
   create(base?: DeepPartial<SignedHeader>): SignedHeader {
     return SignedHeader.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignedHeader>): SignedHeader {
     const message = createBaseSignedHeader();
     message.header = (object.header !== undefined && object.header !== null)
@@ -1435,6 +1445,8 @@ function createBaseLightBlock(): LightBlock {
 }
 
 export const LightBlock = {
+  $type: "tendermint.types.LightBlock" as const,
+
   encode(message: LightBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedHeader !== undefined) {
       SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
@@ -1496,7 +1508,6 @@ export const LightBlock = {
   create(base?: DeepPartial<LightBlock>): LightBlock {
     return LightBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LightBlock>): LightBlock {
     const message = createBaseLightBlock();
     message.signedHeader = (object.signedHeader !== undefined && object.signedHeader !== null)
@@ -1514,6 +1525,8 @@ function createBaseBlockMeta(): BlockMeta {
 }
 
 export const BlockMeta = {
+  $type: "tendermint.types.BlockMeta" as const,
+
   encode(message: BlockMeta, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
@@ -1603,7 +1616,6 @@ export const BlockMeta = {
   create(base?: DeepPartial<BlockMeta>): BlockMeta {
     return BlockMeta.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockMeta>): BlockMeta {
     const message = createBaseBlockMeta();
     message.blockId = (object.blockId !== undefined && object.blockId !== null)
@@ -1623,6 +1635,8 @@ function createBaseTxProof(): TxProof {
 }
 
 export const TxProof = {
+  $type: "tendermint.types.TxProof" as const,
+
   encode(message: TxProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rootHash.length !== 0) {
       writer.uint32(10).bytes(message.rootHash);
@@ -1698,7 +1712,6 @@ export const TxProof = {
   create(base?: DeepPartial<TxProof>): TxProof {
     return TxProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxProof>): TxProof {
     const message = createBaseTxProof();
     message.rootHash = object.rootHash ?? new Uint8Array(0);

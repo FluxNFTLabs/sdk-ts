@@ -326,6 +326,8 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
 }
 
 export const StoreCodeProposal = {
+  $type: "cosmwasm.wasm.v1.StoreCodeProposal" as const,
+
   encode(message: StoreCodeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -487,7 +489,6 @@ export const StoreCodeProposal = {
   create(base?: DeepPartial<StoreCodeProposal>): StoreCodeProposal {
     return StoreCodeProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StoreCodeProposal>): StoreCodeProposal {
     const message = createBaseStoreCodeProposal();
     message.title = object.title ?? "";
@@ -520,6 +521,8 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
 }
 
 export const InstantiateContractProposal = {
+  $type: "cosmwasm.wasm.v1.InstantiateContractProposal" as const,
+
   encode(message: InstantiateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -665,7 +668,6 @@ export const InstantiateContractProposal = {
   create(base?: DeepPartial<InstantiateContractProposal>): InstantiateContractProposal {
     return InstantiateContractProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InstantiateContractProposal>): InstantiateContractProposal {
     const message = createBaseInstantiateContractProposal();
     message.title = object.title ?? "";
@@ -696,6 +698,8 @@ function createBaseInstantiateContract2Proposal(): InstantiateContract2Proposal 
 }
 
 export const InstantiateContract2Proposal = {
+  $type: "cosmwasm.wasm.v1.InstantiateContract2Proposal" as const,
+
   encode(message: InstantiateContract2Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -869,7 +873,6 @@ export const InstantiateContract2Proposal = {
   create(base?: DeepPartial<InstantiateContract2Proposal>): InstantiateContract2Proposal {
     return InstantiateContract2Proposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InstantiateContract2Proposal>): InstantiateContract2Proposal {
     const message = createBaseInstantiateContract2Proposal();
     message.title = object.title ?? "";
@@ -891,6 +894,8 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
 }
 
 export const MigrateContractProposal = {
+  $type: "cosmwasm.wasm.v1.MigrateContractProposal" as const,
+
   encode(message: MigrateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -994,7 +999,6 @@ export const MigrateContractProposal = {
   create(base?: DeepPartial<MigrateContractProposal>): MigrateContractProposal {
     return MigrateContractProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MigrateContractProposal>): MigrateContractProposal {
     const message = createBaseMigrateContractProposal();
     message.title = object.title ?? "";
@@ -1011,6 +1015,8 @@ function createBaseSudoContractProposal(): SudoContractProposal {
 }
 
 export const SudoContractProposal = {
+  $type: "cosmwasm.wasm.v1.SudoContractProposal" as const,
+
   encode(message: SudoContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1100,7 +1106,6 @@ export const SudoContractProposal = {
   create(base?: DeepPartial<SudoContractProposal>): SudoContractProposal {
     return SudoContractProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SudoContractProposal>): SudoContractProposal {
     const message = createBaseSudoContractProposal();
     message.title = object.title ?? "";
@@ -1116,6 +1121,8 @@ function createBaseExecuteContractProposal(): ExecuteContractProposal {
 }
 
 export const ExecuteContractProposal = {
+  $type: "cosmwasm.wasm.v1.ExecuteContractProposal" as const,
+
   encode(message: ExecuteContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1233,7 +1240,6 @@ export const ExecuteContractProposal = {
   create(base?: DeepPartial<ExecuteContractProposal>): ExecuteContractProposal {
     return ExecuteContractProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ExecuteContractProposal>): ExecuteContractProposal {
     const message = createBaseExecuteContractProposal();
     message.title = object.title ?? "";
@@ -1251,6 +1257,8 @@ function createBaseUpdateAdminProposal(): UpdateAdminProposal {
 }
 
 export const UpdateAdminProposal = {
+  $type: "cosmwasm.wasm.v1.UpdateAdminProposal" as const,
+
   encode(message: UpdateAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1340,7 +1348,6 @@ export const UpdateAdminProposal = {
   create(base?: DeepPartial<UpdateAdminProposal>): UpdateAdminProposal {
     return UpdateAdminProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpdateAdminProposal>): UpdateAdminProposal {
     const message = createBaseUpdateAdminProposal();
     message.title = object.title ?? "";
@@ -1356,6 +1363,8 @@ function createBaseClearAdminProposal(): ClearAdminProposal {
 }
 
 export const ClearAdminProposal = {
+  $type: "cosmwasm.wasm.v1.ClearAdminProposal" as const,
+
   encode(message: ClearAdminProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1431,7 +1440,6 @@ export const ClearAdminProposal = {
   create(base?: DeepPartial<ClearAdminProposal>): ClearAdminProposal {
     return ClearAdminProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClearAdminProposal>): ClearAdminProposal {
     const message = createBaseClearAdminProposal();
     message.title = object.title ?? "";
@@ -1446,6 +1454,8 @@ function createBasePinCodesProposal(): PinCodesProposal {
 }
 
 export const PinCodesProposal = {
+  $type: "cosmwasm.wasm.v1.PinCodesProposal" as const,
+
   encode(message: PinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1533,7 +1543,6 @@ export const PinCodesProposal = {
   create(base?: DeepPartial<PinCodesProposal>): PinCodesProposal {
     return PinCodesProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
@@ -1548,6 +1557,8 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
 }
 
 export const UnpinCodesProposal = {
+  $type: "cosmwasm.wasm.v1.UnpinCodesProposal" as const,
+
   encode(message: UnpinCodesProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1635,7 +1646,6 @@ export const UnpinCodesProposal = {
   create(base?: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
     return UnpinCodesProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
@@ -1650,6 +1660,8 @@ function createBaseAccessConfigUpdate(): AccessConfigUpdate {
 }
 
 export const AccessConfigUpdate = {
+  $type: "cosmwasm.wasm.v1.AccessConfigUpdate" as const,
+
   encode(message: AccessConfigUpdate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -1713,7 +1725,6 @@ export const AccessConfigUpdate = {
   create(base?: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     return AccessConfigUpdate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     const message = createBaseAccessConfigUpdate();
     message.codeId = object.codeId ?? "0";
@@ -1730,6 +1741,8 @@ function createBaseUpdateInstantiateConfigProposal(): UpdateInstantiateConfigPro
 }
 
 export const UpdateInstantiateConfigProposal = {
+  $type: "cosmwasm.wasm.v1.UpdateInstantiateConfigProposal" as const,
+
   encode(message: UpdateInstantiateConfigProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1807,7 +1820,6 @@ export const UpdateInstantiateConfigProposal = {
   create(base?: DeepPartial<UpdateInstantiateConfigProposal>): UpdateInstantiateConfigProposal {
     return UpdateInstantiateConfigProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpdateInstantiateConfigProposal>): UpdateInstantiateConfigProposal {
     const message = createBaseUpdateInstantiateConfigProposal();
     message.title = object.title ?? "";
@@ -1836,6 +1848,8 @@ function createBaseStoreAndInstantiateContractProposal(): StoreAndInstantiateCon
 }
 
 export const StoreAndInstantiateContractProposal = {
+  $type: "cosmwasm.wasm.v1.StoreAndInstantiateContractProposal" as const,
+
   encode(message: StoreAndInstantiateContractProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -2053,7 +2067,6 @@ export const StoreAndInstantiateContractProposal = {
   create(base?: DeepPartial<StoreAndInstantiateContractProposal>): StoreAndInstantiateContractProposal {
     return StoreAndInstantiateContractProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StoreAndInstantiateContractProposal>): StoreAndInstantiateContractProposal {
     const message = createBaseStoreAndInstantiateContractProposal();
     message.title = object.title ?? "";

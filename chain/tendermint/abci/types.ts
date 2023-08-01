@@ -576,6 +576,8 @@ function createBaseRequest(): Request {
 }
 
 export const Request = {
+  $type: "tendermint.abci.Request" as const,
+
   encode(message: Request, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.echo !== undefined) {
       RequestEcho.encode(message.echo, writer.uint32(10).fork()).ldelim();
@@ -823,7 +825,6 @@ export const Request = {
   create(base?: DeepPartial<Request>): Request {
     return Request.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Request>): Request {
     const message = createBaseRequest();
     message.echo = (object.echo !== undefined && object.echo !== null)
@@ -880,6 +881,8 @@ function createBaseRequestEcho(): RequestEcho {
 }
 
 export const RequestEcho = {
+  $type: "tendermint.abci.RequestEcho" as const,
+
   encode(message: RequestEcho, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.message !== "") {
       writer.uint32(10).string(message.message);
@@ -925,7 +928,6 @@ export const RequestEcho = {
   create(base?: DeepPartial<RequestEcho>): RequestEcho {
     return RequestEcho.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestEcho>): RequestEcho {
     const message = createBaseRequestEcho();
     message.message = object.message ?? "";
@@ -938,6 +940,8 @@ function createBaseRequestFlush(): RequestFlush {
 }
 
 export const RequestFlush = {
+  $type: "tendermint.abci.RequestFlush" as const,
+
   encode(_: RequestFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -970,7 +974,6 @@ export const RequestFlush = {
   create(base?: DeepPartial<RequestFlush>): RequestFlush {
     return RequestFlush.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<RequestFlush>): RequestFlush {
     const message = createBaseRequestFlush();
     return message;
@@ -982,6 +985,8 @@ function createBaseRequestInfo(): RequestInfo {
 }
 
 export const RequestInfo = {
+  $type: "tendermint.abci.RequestInfo" as const,
+
   encode(message: RequestInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "") {
       writer.uint32(10).string(message.version);
@@ -1057,7 +1062,6 @@ export const RequestInfo = {
   create(base?: DeepPartial<RequestInfo>): RequestInfo {
     return RequestInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
@@ -1072,6 +1076,8 @@ function createBaseRequestSetOption(): RequestSetOption {
 }
 
 export const RequestSetOption = {
+  $type: "tendermint.abci.RequestSetOption" as const,
+
   encode(message: RequestSetOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -1130,7 +1136,6 @@ export const RequestSetOption = {
   create(base?: DeepPartial<RequestSetOption>): RequestSetOption {
     return RequestSetOption.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestSetOption>): RequestSetOption {
     const message = createBaseRequestSetOption();
     message.key = object.key ?? "";
@@ -1151,6 +1156,8 @@ function createBaseRequestInitChain(): RequestInitChain {
 }
 
 export const RequestInitChain = {
+  $type: "tendermint.abci.RequestInitChain" as const,
+
   encode(message: RequestInitChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
@@ -1270,7 +1277,6 @@ export const RequestInitChain = {
   create(base?: DeepPartial<RequestInitChain>): RequestInitChain {
     return RequestInitChain.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestInitChain>): RequestInitChain {
     const message = createBaseRequestInitChain();
     message.time = object.time ?? undefined;
@@ -1290,6 +1296,8 @@ function createBaseRequestQuery(): RequestQuery {
 }
 
 export const RequestQuery = {
+  $type: "tendermint.abci.RequestQuery" as const,
+
   encode(message: RequestQuery, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1379,7 +1387,6 @@ export const RequestQuery = {
   create(base?: DeepPartial<RequestQuery>): RequestQuery {
     return RequestQuery.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestQuery>): RequestQuery {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array(0);
@@ -1395,6 +1402,8 @@ function createBaseRequestBeginBlock(): RequestBeginBlock {
 }
 
 export const RequestBeginBlock = {
+  $type: "tendermint.abci.RequestBeginBlock" as const,
+
   encode(message: RequestBeginBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -1486,7 +1495,6 @@ export const RequestBeginBlock = {
   create(base?: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     return RequestBeginBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
     message.hash = object.hash ?? new Uint8Array(0);
@@ -1506,6 +1514,8 @@ function createBaseRequestCheckTx(): RequestCheckTx {
 }
 
 export const RequestCheckTx = {
+  $type: "tendermint.abci.RequestCheckTx" as const,
+
   encode(message: RequestCheckTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
@@ -1567,7 +1577,6 @@ export const RequestCheckTx = {
   create(base?: DeepPartial<RequestCheckTx>): RequestCheckTx {
     return RequestCheckTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestCheckTx>): RequestCheckTx {
     const message = createBaseRequestCheckTx();
     message.tx = object.tx ?? new Uint8Array(0);
@@ -1581,6 +1590,8 @@ function createBaseRequestDeliverTx(): RequestDeliverTx {
 }
 
 export const RequestDeliverTx = {
+  $type: "tendermint.abci.RequestDeliverTx" as const,
+
   encode(message: RequestDeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx.length !== 0) {
       writer.uint32(10).bytes(message.tx);
@@ -1626,7 +1637,6 @@ export const RequestDeliverTx = {
   create(base?: DeepPartial<RequestDeliverTx>): RequestDeliverTx {
     return RequestDeliverTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestDeliverTx>): RequestDeliverTx {
     const message = createBaseRequestDeliverTx();
     message.tx = object.tx ?? new Uint8Array(0);
@@ -1639,6 +1649,8 @@ function createBaseRequestEndBlock(): RequestEndBlock {
 }
 
 export const RequestEndBlock = {
+  $type: "tendermint.abci.RequestEndBlock" as const,
+
   encode(message: RequestEndBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -1684,7 +1696,6 @@ export const RequestEndBlock = {
   create(base?: DeepPartial<RequestEndBlock>): RequestEndBlock {
     return RequestEndBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
     message.height = object.height ?? "0";
@@ -1697,6 +1708,8 @@ function createBaseRequestCommit(): RequestCommit {
 }
 
 export const RequestCommit = {
+  $type: "tendermint.abci.RequestCommit" as const,
+
   encode(_: RequestCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1729,7 +1742,6 @@ export const RequestCommit = {
   create(base?: DeepPartial<RequestCommit>): RequestCommit {
     return RequestCommit.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<RequestCommit>): RequestCommit {
     const message = createBaseRequestCommit();
     return message;
@@ -1741,6 +1753,8 @@ function createBaseRequestListSnapshots(): RequestListSnapshots {
 }
 
 export const RequestListSnapshots = {
+  $type: "tendermint.abci.RequestListSnapshots" as const,
+
   encode(_: RequestListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1773,7 +1787,6 @@ export const RequestListSnapshots = {
   create(base?: DeepPartial<RequestListSnapshots>): RequestListSnapshots {
     return RequestListSnapshots.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<RequestListSnapshots>): RequestListSnapshots {
     const message = createBaseRequestListSnapshots();
     return message;
@@ -1785,6 +1798,8 @@ function createBaseRequestOfferSnapshot(): RequestOfferSnapshot {
 }
 
 export const RequestOfferSnapshot = {
+  $type: "tendermint.abci.RequestOfferSnapshot" as const,
+
   encode(message: RequestOfferSnapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.snapshot !== undefined) {
       Snapshot.encode(message.snapshot, writer.uint32(10).fork()).ldelim();
@@ -1846,7 +1861,6 @@ export const RequestOfferSnapshot = {
   create(base?: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
     return RequestOfferSnapshot.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
     const message = createBaseRequestOfferSnapshot();
     message.snapshot = (object.snapshot !== undefined && object.snapshot !== null)
@@ -1862,6 +1876,8 @@ function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
 }
 
 export const RequestLoadSnapshotChunk = {
+  $type: "tendermint.abci.RequestLoadSnapshotChunk" as const,
+
   encode(message: RequestLoadSnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -1937,7 +1953,6 @@ export const RequestLoadSnapshotChunk = {
   create(base?: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     return RequestLoadSnapshotChunk.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
     message.height = object.height ?? "0";
@@ -1952,6 +1967,8 @@ function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
 }
 
 export const RequestApplySnapshotChunk = {
+  $type: "tendermint.abci.RequestApplySnapshotChunk" as const,
+
   encode(message: RequestApplySnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
@@ -2027,7 +2044,6 @@ export const RequestApplySnapshotChunk = {
   create(base?: DeepPartial<RequestApplySnapshotChunk>): RequestApplySnapshotChunk {
     return RequestApplySnapshotChunk.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RequestApplySnapshotChunk>): RequestApplySnapshotChunk {
     const message = createBaseRequestApplySnapshotChunk();
     message.index = object.index ?? 0;
@@ -2059,6 +2075,8 @@ function createBaseResponse(): Response {
 }
 
 export const Response = {
+  $type: "tendermint.abci.Response" as const,
+
   encode(message: Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.exception !== undefined) {
       ResponseException.encode(message.exception, writer.uint32(10).fork()).ldelim();
@@ -2320,7 +2338,6 @@ export const Response = {
   create(base?: DeepPartial<Response>): Response {
     return Response.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Response>): Response {
     const message = createBaseResponse();
     message.exception = (object.exception !== undefined && object.exception !== null)
@@ -2380,6 +2397,8 @@ function createBaseResponseException(): ResponseException {
 }
 
 export const ResponseException = {
+  $type: "tendermint.abci.ResponseException" as const,
+
   encode(message: ResponseException, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
@@ -2425,7 +2444,6 @@ export const ResponseException = {
   create(base?: DeepPartial<ResponseException>): ResponseException {
     return ResponseException.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseException>): ResponseException {
     const message = createBaseResponseException();
     message.error = object.error ?? "";
@@ -2438,6 +2456,8 @@ function createBaseResponseEcho(): ResponseEcho {
 }
 
 export const ResponseEcho = {
+  $type: "tendermint.abci.ResponseEcho" as const,
+
   encode(message: ResponseEcho, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.message !== "") {
       writer.uint32(10).string(message.message);
@@ -2483,7 +2503,6 @@ export const ResponseEcho = {
   create(base?: DeepPartial<ResponseEcho>): ResponseEcho {
     return ResponseEcho.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseEcho>): ResponseEcho {
     const message = createBaseResponseEcho();
     message.message = object.message ?? "";
@@ -2496,6 +2515,8 @@ function createBaseResponseFlush(): ResponseFlush {
 }
 
 export const ResponseFlush = {
+  $type: "tendermint.abci.ResponseFlush" as const,
+
   encode(_: ResponseFlush, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2528,7 +2549,6 @@ export const ResponseFlush = {
   create(base?: DeepPartial<ResponseFlush>): ResponseFlush {
     return ResponseFlush.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<ResponseFlush>): ResponseFlush {
     const message = createBaseResponseFlush();
     return message;
@@ -2540,6 +2560,8 @@ function createBaseResponseInfo(): ResponseInfo {
 }
 
 export const ResponseInfo = {
+  $type: "tendermint.abci.ResponseInfo" as const,
+
   encode(message: ResponseInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data !== "") {
       writer.uint32(10).string(message.data);
@@ -2643,7 +2665,6 @@ export const ResponseInfo = {
   create(base?: DeepPartial<ResponseInfo>): ResponseInfo {
     return ResponseInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseInfo>): ResponseInfo {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
@@ -2660,6 +2681,8 @@ function createBaseResponseSetOption(): ResponseSetOption {
 }
 
 export const ResponseSetOption = {
+  $type: "tendermint.abci.ResponseSetOption" as const,
+
   encode(message: ResponseSetOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
@@ -2735,7 +2758,6 @@ export const ResponseSetOption = {
   create(base?: DeepPartial<ResponseSetOption>): ResponseSetOption {
     return ResponseSetOption.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseSetOption>): ResponseSetOption {
     const message = createBaseResponseSetOption();
     message.code = object.code ?? 0;
@@ -2750,6 +2772,8 @@ function createBaseResponseInitChain(): ResponseInitChain {
 }
 
 export const ResponseInitChain = {
+  $type: "tendermint.abci.ResponseInitChain" as const,
+
   encode(message: ResponseInitChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusParams !== undefined) {
       ConsensusParams.encode(message.consensusParams, writer.uint32(10).fork()).ldelim();
@@ -2827,7 +2851,6 @@ export const ResponseInitChain = {
   create(base?: DeepPartial<ResponseInitChain>): ResponseInitChain {
     return ResponseInitChain.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
     const message = createBaseResponseInitChain();
     message.consensusParams = (object.consensusParams !== undefined && object.consensusParams !== null)
@@ -2854,6 +2877,8 @@ function createBaseResponseQuery(): ResponseQuery {
 }
 
 export const ResponseQuery = {
+  $type: "tendermint.abci.ResponseQuery" as const,
+
   encode(message: ResponseQuery, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
@@ -3013,7 +3038,6 @@ export const ResponseQuery = {
   create(base?: DeepPartial<ResponseQuery>): ResponseQuery {
     return ResponseQuery.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseQuery>): ResponseQuery {
     const message = createBaseResponseQuery();
     message.code = object.code ?? 0;
@@ -3036,6 +3060,8 @@ function createBaseResponseBeginBlock(): ResponseBeginBlock {
 }
 
 export const ResponseBeginBlock = {
+  $type: "tendermint.abci.ResponseBeginBlock" as const,
+
   encode(message: ResponseBeginBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3081,7 +3107,6 @@ export const ResponseBeginBlock = {
   create(base?: DeepPartial<ResponseBeginBlock>): ResponseBeginBlock {
     return ResponseBeginBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseBeginBlock>): ResponseBeginBlock {
     const message = createBaseResponseBeginBlock();
     message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
@@ -3106,6 +3131,8 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
 }
 
 export const ResponseCheckTx = {
+  $type: "tendermint.abci.ResponseCheckTx" as const,
+
   encode(message: ResponseCheckTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
@@ -3293,7 +3320,6 @@ export const ResponseCheckTx = {
   create(base?: DeepPartial<ResponseCheckTx>): ResponseCheckTx {
     return ResponseCheckTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseCheckTx>): ResponseCheckTx {
     const message = createBaseResponseCheckTx();
     message.code = object.code ?? 0;
@@ -3325,6 +3351,8 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
 }
 
 export const ResponseDeliverTx = {
+  $type: "tendermint.abci.ResponseDeliverTx" as const,
+
   encode(message: ResponseDeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
@@ -3470,7 +3498,6 @@ export const ResponseDeliverTx = {
   create(base?: DeepPartial<ResponseDeliverTx>): ResponseDeliverTx {
     return ResponseDeliverTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseDeliverTx>): ResponseDeliverTx {
     const message = createBaseResponseDeliverTx();
     message.code = object.code ?? 0;
@@ -3490,6 +3517,8 @@ function createBaseResponseEndBlock(): ResponseEndBlock {
 }
 
 export const ResponseEndBlock = {
+  $type: "tendermint.abci.ResponseEndBlock" as const,
+
   encode(message: ResponseEndBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validatorUpdates) {
       ValidatorUpdate.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3569,7 +3598,6 @@ export const ResponseEndBlock = {
   create(base?: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     return ResponseEndBlock.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
     message.validatorUpdates = object.validatorUpdates?.map((e) => ValidatorUpdate.fromPartial(e)) || [];
@@ -3587,6 +3615,8 @@ function createBaseResponseCommit(): ResponseCommit {
 }
 
 export const ResponseCommit = {
+  $type: "tendermint.abci.ResponseCommit" as const,
+
   encode(message: ResponseCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
@@ -3648,7 +3678,6 @@ export const ResponseCommit = {
   create(base?: DeepPartial<ResponseCommit>): ResponseCommit {
     return ResponseCommit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array(0);
@@ -3662,6 +3691,8 @@ function createBaseResponseListSnapshots(): ResponseListSnapshots {
 }
 
 export const ResponseListSnapshots = {
+  $type: "tendermint.abci.ResponseListSnapshots" as const,
+
   encode(message: ResponseListSnapshots, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.snapshots) {
       Snapshot.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3709,7 +3740,6 @@ export const ResponseListSnapshots = {
   create(base?: DeepPartial<ResponseListSnapshots>): ResponseListSnapshots {
     return ResponseListSnapshots.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseListSnapshots>): ResponseListSnapshots {
     const message = createBaseResponseListSnapshots();
     message.snapshots = object.snapshots?.map((e) => Snapshot.fromPartial(e)) || [];
@@ -3722,6 +3752,8 @@ function createBaseResponseOfferSnapshot(): ResponseOfferSnapshot {
 }
 
 export const ResponseOfferSnapshot = {
+  $type: "tendermint.abci.ResponseOfferSnapshot" as const,
+
   encode(message: ResponseOfferSnapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -3767,7 +3799,6 @@ export const ResponseOfferSnapshot = {
   create(base?: DeepPartial<ResponseOfferSnapshot>): ResponseOfferSnapshot {
     return ResponseOfferSnapshot.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseOfferSnapshot>): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
     message.result = object.result ?? 0;
@@ -3780,6 +3811,8 @@ function createBaseResponseLoadSnapshotChunk(): ResponseLoadSnapshotChunk {
 }
 
 export const ResponseLoadSnapshotChunk = {
+  $type: "tendermint.abci.ResponseLoadSnapshotChunk" as const,
+
   encode(message: ResponseLoadSnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chunk.length !== 0) {
       writer.uint32(10).bytes(message.chunk);
@@ -3825,7 +3858,6 @@ export const ResponseLoadSnapshotChunk = {
   create(base?: DeepPartial<ResponseLoadSnapshotChunk>): ResponseLoadSnapshotChunk {
     return ResponseLoadSnapshotChunk.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseLoadSnapshotChunk>): ResponseLoadSnapshotChunk {
     const message = createBaseResponseLoadSnapshotChunk();
     message.chunk = object.chunk ?? new Uint8Array(0);
@@ -3838,6 +3870,8 @@ function createBaseResponseApplySnapshotChunk(): ResponseApplySnapshotChunk {
 }
 
 export const ResponseApplySnapshotChunk = {
+  $type: "tendermint.abci.ResponseApplySnapshotChunk" as const,
+
   encode(message: ResponseApplySnapshotChunk, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(8).int32(message.result);
@@ -3925,7 +3959,6 @@ export const ResponseApplySnapshotChunk = {
   create(base?: DeepPartial<ResponseApplySnapshotChunk>): ResponseApplySnapshotChunk {
     return ResponseApplySnapshotChunk.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ResponseApplySnapshotChunk>): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
     message.result = object.result ?? 0;
@@ -3940,6 +3973,8 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
+  $type: "tendermint.abci.ConsensusParams" as const,
+
   encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
@@ -4029,7 +4064,6 @@ export const ConsensusParams = {
   create(base?: DeepPartial<ConsensusParams>): ConsensusParams {
     return ConsensusParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
     message.block = (object.block !== undefined && object.block !== null)
@@ -4053,6 +4087,8 @@ function createBaseBlockParams(): BlockParams {
 }
 
 export const BlockParams = {
+  $type: "tendermint.abci.BlockParams" as const,
+
   encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxBytes !== "0") {
       writer.uint32(8).int64(message.maxBytes);
@@ -4114,7 +4150,6 @@ export const BlockParams = {
   create(base?: DeepPartial<BlockParams>): BlockParams {
     return BlockParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
     message.maxBytes = object.maxBytes ?? "0";
@@ -4128,6 +4163,8 @@ function createBaseLastCommitInfo(): LastCommitInfo {
 }
 
 export const LastCommitInfo = {
+  $type: "tendermint.abci.LastCommitInfo" as const,
+
   encode(message: LastCommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.round !== 0) {
       writer.uint32(8).int32(message.round);
@@ -4189,7 +4226,6 @@ export const LastCommitInfo = {
   create(base?: DeepPartial<LastCommitInfo>): LastCommitInfo {
     return LastCommitInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LastCommitInfo>): LastCommitInfo {
     const message = createBaseLastCommitInfo();
     message.round = object.round ?? 0;
@@ -4203,6 +4239,8 @@ function createBaseEvent(): Event {
 }
 
 export const Event = {
+  $type: "tendermint.abci.Event" as const,
+
   encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -4266,7 +4304,6 @@ export const Event = {
   create(base?: DeepPartial<Event>): Event {
     return Event.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Event>): Event {
     const message = createBaseEvent();
     message.type = object.type ?? "";
@@ -4280,6 +4317,8 @@ function createBaseEventAttribute(): EventAttribute {
 }
 
 export const EventAttribute = {
+  $type: "tendermint.abci.EventAttribute" as const,
+
   encode(message: EventAttribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -4355,7 +4394,6 @@ export const EventAttribute = {
   create(base?: DeepPartial<EventAttribute>): EventAttribute {
     return EventAttribute.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventAttribute>): EventAttribute {
     const message = createBaseEventAttribute();
     message.key = object.key ?? new Uint8Array(0);
@@ -4370,6 +4408,8 @@ function createBaseTxResult(): TxResult {
 }
 
 export const TxResult = {
+  $type: "tendermint.abci.TxResult" as const,
+
   encode(message: TxResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -4459,7 +4499,6 @@ export const TxResult = {
   create(base?: DeepPartial<TxResult>): TxResult {
     return TxResult.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
     message.height = object.height ?? "0";
@@ -4477,6 +4516,8 @@ function createBaseValidator(): Validator {
 }
 
 export const Validator = {
+  $type: "tendermint.abci.Validator" as const,
+
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
@@ -4538,7 +4579,6 @@ export const Validator = {
   create(base?: DeepPartial<Validator>): Validator {
     return Validator.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array(0);
@@ -4552,6 +4592,8 @@ function createBaseValidatorUpdate(): ValidatorUpdate {
 }
 
 export const ValidatorUpdate = {
+  $type: "tendermint.abci.ValidatorUpdate" as const,
+
   encode(message: ValidatorUpdate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -4613,7 +4655,6 @@ export const ValidatorUpdate = {
   create(base?: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     return ValidatorUpdate.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
     message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
@@ -4629,6 +4670,8 @@ function createBaseVoteInfo(): VoteInfo {
 }
 
 export const VoteInfo = {
+  $type: "tendermint.abci.VoteInfo" as const,
+
   encode(message: VoteInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
@@ -4690,7 +4733,6 @@ export const VoteInfo = {
   create(base?: DeepPartial<VoteInfo>): VoteInfo {
     return VoteInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VoteInfo>): VoteInfo {
     const message = createBaseVoteInfo();
     message.validator = (object.validator !== undefined && object.validator !== null)
@@ -4706,6 +4748,8 @@ function createBaseEvidence(): Evidence {
 }
 
 export const Evidence = {
+  $type: "tendermint.abci.Evidence" as const,
+
   encode(message: Evidence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -4809,7 +4853,6 @@ export const Evidence = {
   create(base?: DeepPartial<Evidence>): Evidence {
     return Evidence.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
@@ -4828,6 +4871,8 @@ function createBaseSnapshot(): Snapshot {
 }
 
 export const Snapshot = {
+  $type: "tendermint.abci.Snapshot" as const,
+
   encode(message: Snapshot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -4931,7 +4976,6 @@ export const Snapshot = {
   create(base?: DeepPartial<Snapshot>): Snapshot {
     return Snapshot.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
     message.height = object.height ?? "0";

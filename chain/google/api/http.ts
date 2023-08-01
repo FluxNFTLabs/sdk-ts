@@ -372,6 +372,8 @@ function createBaseHttp(): Http {
 }
 
 export const Http = {
+  $type: "google.api.Http" as const,
+
   encode(message: Http, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rules) {
       HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -435,7 +437,6 @@ export const Http = {
   create(base?: DeepPartial<Http>): Http {
     return Http.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Http>): Http {
     const message = createBaseHttp();
     message.rules = object.rules?.map((e) => HttpRule.fromPartial(e)) || [];
@@ -460,6 +461,8 @@ function createBaseHttpRule(): HttpRule {
 }
 
 export const HttpRule = {
+  $type: "google.api.HttpRule" as const,
+
   encode(message: HttpRule, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
@@ -635,7 +638,6 @@ export const HttpRule = {
   create(base?: DeepPartial<HttpRule>): HttpRule {
     return HttpRule.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<HttpRule>): HttpRule {
     const message = createBaseHttpRule();
     message.selector = object.selector ?? "";
@@ -659,6 +661,8 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 }
 
 export const CustomHttpPattern = {
+  $type: "google.api.CustomHttpPattern" as const,
+
   encode(message: CustomHttpPattern, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
@@ -717,7 +721,6 @@ export const CustomHttpPattern = {
   create(base?: DeepPartial<CustomHttpPattern>): CustomHttpPattern {
     return CustomHttpPattern.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CustomHttpPattern>): CustomHttpPattern {
     const message = createBaseCustomHttpPattern();
     message.kind = object.kind ?? "";

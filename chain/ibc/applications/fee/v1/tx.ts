@@ -83,6 +83,8 @@ function createBaseMsgRegisterPayee(): MsgRegisterPayee {
 }
 
 export const MsgRegisterPayee = {
+  $type: "ibc.applications.fee.v1.MsgRegisterPayee" as const,
+
   encode(message: MsgRegisterPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -172,7 +174,6 @@ export const MsgRegisterPayee = {
   create(base?: DeepPartial<MsgRegisterPayee>): MsgRegisterPayee {
     return MsgRegisterPayee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRegisterPayee>): MsgRegisterPayee {
     const message = createBaseMsgRegisterPayee();
     message.portId = object.portId ?? "";
@@ -188,6 +189,8 @@ function createBaseMsgRegisterPayeeResponse(): MsgRegisterPayeeResponse {
 }
 
 export const MsgRegisterPayeeResponse = {
+  $type: "ibc.applications.fee.v1.MsgRegisterPayeeResponse" as const,
+
   encode(_: MsgRegisterPayeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -220,7 +223,6 @@ export const MsgRegisterPayeeResponse = {
   create(base?: DeepPartial<MsgRegisterPayeeResponse>): MsgRegisterPayeeResponse {
     return MsgRegisterPayeeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgRegisterPayeeResponse>): MsgRegisterPayeeResponse {
     const message = createBaseMsgRegisterPayeeResponse();
     return message;
@@ -232,6 +234,8 @@ function createBaseMsgRegisterCounterpartyPayee(): MsgRegisterCounterpartyPayee 
 }
 
 export const MsgRegisterCounterpartyPayee = {
+  $type: "ibc.applications.fee.v1.MsgRegisterCounterpartyPayee" as const,
+
   encode(message: MsgRegisterCounterpartyPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
@@ -321,7 +325,6 @@ export const MsgRegisterCounterpartyPayee = {
   create(base?: DeepPartial<MsgRegisterCounterpartyPayee>): MsgRegisterCounterpartyPayee {
     return MsgRegisterCounterpartyPayee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRegisterCounterpartyPayee>): MsgRegisterCounterpartyPayee {
     const message = createBaseMsgRegisterCounterpartyPayee();
     message.portId = object.portId ?? "";
@@ -337,6 +340,8 @@ function createBaseMsgRegisterCounterpartyPayeeResponse(): MsgRegisterCounterpar
 }
 
 export const MsgRegisterCounterpartyPayeeResponse = {
+  $type: "ibc.applications.fee.v1.MsgRegisterCounterpartyPayeeResponse" as const,
+
   encode(_: MsgRegisterCounterpartyPayeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -369,7 +374,6 @@ export const MsgRegisterCounterpartyPayeeResponse = {
   create(base?: DeepPartial<MsgRegisterCounterpartyPayeeResponse>): MsgRegisterCounterpartyPayeeResponse {
     return MsgRegisterCounterpartyPayeeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgRegisterCounterpartyPayeeResponse>): MsgRegisterCounterpartyPayeeResponse {
     const message = createBaseMsgRegisterCounterpartyPayeeResponse();
     return message;
@@ -381,6 +385,8 @@ function createBaseMsgPayPacketFee(): MsgPayPacketFee {
 }
 
 export const MsgPayPacketFee = {
+  $type: "ibc.applications.fee.v1.MsgPayPacketFee" as const,
+
   encode(message: MsgPayPacketFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
@@ -484,7 +490,6 @@ export const MsgPayPacketFee = {
   create(base?: DeepPartial<MsgPayPacketFee>): MsgPayPacketFee {
     return MsgPayPacketFee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgPayPacketFee>): MsgPayPacketFee {
     const message = createBaseMsgPayPacketFee();
     message.fee = (object.fee !== undefined && object.fee !== null) ? Fee.fromPartial(object.fee) : undefined;
@@ -501,6 +506,8 @@ function createBaseMsgPayPacketFeeResponse(): MsgPayPacketFeeResponse {
 }
 
 export const MsgPayPacketFeeResponse = {
+  $type: "ibc.applications.fee.v1.MsgPayPacketFeeResponse" as const,
+
   encode(_: MsgPayPacketFeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -533,7 +540,6 @@ export const MsgPayPacketFeeResponse = {
   create(base?: DeepPartial<MsgPayPacketFeeResponse>): MsgPayPacketFeeResponse {
     return MsgPayPacketFeeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgPayPacketFeeResponse>): MsgPayPacketFeeResponse {
     const message = createBaseMsgPayPacketFeeResponse();
     return message;
@@ -545,6 +551,8 @@ function createBaseMsgPayPacketFeeAsync(): MsgPayPacketFeeAsync {
 }
 
 export const MsgPayPacketFeeAsync = {
+  $type: "ibc.applications.fee.v1.MsgPayPacketFeeAsync" as const,
+
   encode(message: MsgPayPacketFeeAsync, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -606,7 +614,6 @@ export const MsgPayPacketFeeAsync = {
   create(base?: DeepPartial<MsgPayPacketFeeAsync>): MsgPayPacketFeeAsync {
     return MsgPayPacketFeeAsync.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgPayPacketFeeAsync>): MsgPayPacketFeeAsync {
     const message = createBaseMsgPayPacketFeeAsync();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)
@@ -624,6 +631,8 @@ function createBaseMsgPayPacketFeeAsyncResponse(): MsgPayPacketFeeAsyncResponse 
 }
 
 export const MsgPayPacketFeeAsyncResponse = {
+  $type: "ibc.applications.fee.v1.MsgPayPacketFeeAsyncResponse" as const,
+
   encode(_: MsgPayPacketFeeAsyncResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -656,7 +665,6 @@ export const MsgPayPacketFeeAsyncResponse = {
   create(base?: DeepPartial<MsgPayPacketFeeAsyncResponse>): MsgPayPacketFeeAsyncResponse {
     return MsgPayPacketFeeAsyncResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgPayPacketFeeAsyncResponse>): MsgPayPacketFeeAsyncResponse {
     const message = createBaseMsgPayPacketFeeAsyncResponse();
     return message;

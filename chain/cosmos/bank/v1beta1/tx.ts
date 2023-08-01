@@ -90,6 +90,8 @@ function createBaseMsgSend(): MsgSend {
 }
 
 export const MsgSend = {
+  $type: "cosmos.bank.v1beta1.MsgSend" as const,
+
   encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fromAddress !== "") {
       writer.uint32(10).string(message.fromAddress);
@@ -165,7 +167,6 @@ export const MsgSend = {
   create(base?: DeepPartial<MsgSend>): MsgSend {
     return MsgSend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.fromAddress = object.fromAddress ?? "";
@@ -180,6 +181,8 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 
 export const MsgSendResponse = {
+  $type: "cosmos.bank.v1beta1.MsgSendResponse" as const,
+
   encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -212,7 +215,6 @@ export const MsgSendResponse = {
   create(base?: DeepPartial<MsgSendResponse>): MsgSendResponse {
     return MsgSendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
@@ -224,6 +226,8 @@ function createBaseMsgMultiSend(): MsgMultiSend {
 }
 
 export const MsgMultiSend = {
+  $type: "cosmos.bank.v1beta1.MsgMultiSend" as const,
+
   encode(message: MsgMultiSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.inputs) {
       Input.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -285,7 +289,6 @@ export const MsgMultiSend = {
   create(base?: DeepPartial<MsgMultiSend>): MsgMultiSend {
     return MsgMultiSend.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgMultiSend>): MsgMultiSend {
     const message = createBaseMsgMultiSend();
     message.inputs = object.inputs?.map((e) => Input.fromPartial(e)) || [];
@@ -299,6 +302,8 @@ function createBaseMsgMultiSendResponse(): MsgMultiSendResponse {
 }
 
 export const MsgMultiSendResponse = {
+  $type: "cosmos.bank.v1beta1.MsgMultiSendResponse" as const,
+
   encode(_: MsgMultiSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -331,7 +336,6 @@ export const MsgMultiSendResponse = {
   create(base?: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {
     return MsgMultiSendResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {
     const message = createBaseMsgMultiSendResponse();
     return message;
@@ -343,6 +347,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.bank.v1beta1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -404,7 +410,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -420,6 +425,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.bank.v1beta1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -452,7 +459,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -464,6 +470,8 @@ function createBaseMsgSetSendEnabled(): MsgSetSendEnabled {
 }
 
 export const MsgSetSendEnabled = {
+  $type: "cosmos.bank.v1beta1.MsgSetSendEnabled" as const,
+
   encode(message: MsgSetSendEnabled, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -541,7 +549,6 @@ export const MsgSetSendEnabled = {
   create(base?: DeepPartial<MsgSetSendEnabled>): MsgSetSendEnabled {
     return MsgSetSendEnabled.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSetSendEnabled>): MsgSetSendEnabled {
     const message = createBaseMsgSetSendEnabled();
     message.authority = object.authority ?? "";
@@ -556,6 +563,8 @@ function createBaseMsgSetSendEnabledResponse(): MsgSetSendEnabledResponse {
 }
 
 export const MsgSetSendEnabledResponse = {
+  $type: "cosmos.bank.v1beta1.MsgSetSendEnabledResponse" as const,
+
   encode(_: MsgSetSendEnabledResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -588,7 +597,6 @@ export const MsgSetSendEnabledResponse = {
   create(base?: DeepPartial<MsgSetSendEnabledResponse>): MsgSetSendEnabledResponse {
     return MsgSetSendEnabledResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgSetSendEnabledResponse>): MsgSetSendEnabledResponse {
     const message = createBaseMsgSetSendEnabledResponse();
     return message;

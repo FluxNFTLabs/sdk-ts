@@ -101,6 +101,8 @@ function createBaseClientState(): ClientState {
 }
 
 export const ClientState = {
+  $type: "ibc.lightclients.solomachine.v3.ClientState" as const,
+
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -176,7 +178,6 @@ export const ClientState = {
   create(base?: DeepPartial<ClientState>): ClientState {
     return ClientState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.sequence = object.sequence ?? "0";
@@ -193,6 +194,8 @@ function createBaseConsensusState(): ConsensusState {
 }
 
 export const ConsensusState = {
+  $type: "ibc.lightclients.solomachine.v3.ConsensusState" as const,
+
   encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
@@ -268,7 +271,6 @@ export const ConsensusState = {
   create(base?: DeepPartial<ConsensusState>): ConsensusState {
     return ConsensusState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
@@ -285,6 +287,8 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
+  $type: "ibc.lightclients.solomachine.v3.Header" as const,
+
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.timestamp !== "0") {
       writer.uint32(8).uint64(message.timestamp);
@@ -374,7 +378,6 @@ export const Header = {
   create(base?: DeepPartial<Header>): Header {
     return Header.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.timestamp = object.timestamp ?? "0";
@@ -392,6 +395,8 @@ function createBaseMisbehaviour(): Misbehaviour {
 }
 
 export const Misbehaviour = {
+  $type: "ibc.lightclients.solomachine.v3.Misbehaviour" as const,
+
   encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -467,7 +472,6 @@ export const Misbehaviour = {
   create(base?: DeepPartial<Misbehaviour>): Misbehaviour {
     return Misbehaviour.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.sequence = object.sequence ?? "0";
@@ -486,6 +490,8 @@ function createBaseSignatureAndData(): SignatureAndData {
 }
 
 export const SignatureAndData = {
+  $type: "ibc.lightclients.solomachine.v3.SignatureAndData" as const,
+
   encode(message: SignatureAndData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signature.length !== 0) {
       writer.uint32(10).bytes(message.signature);
@@ -575,7 +581,6 @@ export const SignatureAndData = {
   create(base?: DeepPartial<SignatureAndData>): SignatureAndData {
     return SignatureAndData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureAndData>): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array(0);
@@ -591,6 +596,8 @@ function createBaseTimestampedSignatureData(): TimestampedSignatureData {
 }
 
 export const TimestampedSignatureData = {
+  $type: "ibc.lightclients.solomachine.v3.TimestampedSignatureData" as const,
+
   encode(message: TimestampedSignatureData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signatureData.length !== 0) {
       writer.uint32(10).bytes(message.signatureData);
@@ -652,7 +659,6 @@ export const TimestampedSignatureData = {
   create(base?: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     return TimestampedSignatureData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
     message.signatureData = object.signatureData ?? new Uint8Array(0);
@@ -666,6 +672,8 @@ function createBaseSignBytes(): SignBytes {
 }
 
 export const SignBytes = {
+  $type: "ibc.lightclients.solomachine.v3.SignBytes" as const,
+
   encode(message: SignBytes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
@@ -769,7 +777,6 @@ export const SignBytes = {
   create(base?: DeepPartial<SignBytes>): SignBytes {
     return SignBytes.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
     message.sequence = object.sequence ?? "0";
@@ -786,6 +793,8 @@ function createBaseHeaderData(): HeaderData {
 }
 
 export const HeaderData = {
+  $type: "ibc.lightclients.solomachine.v3.HeaderData" as const,
+
   encode(message: HeaderData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.newPubKey !== undefined) {
       Any.encode(message.newPubKey, writer.uint32(10).fork()).ldelim();
@@ -847,7 +856,6 @@ export const HeaderData = {
   create(base?: DeepPartial<HeaderData>): HeaderData {
     return HeaderData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
     message.newPubKey = (object.newPubKey !== undefined && object.newPubKey !== null)

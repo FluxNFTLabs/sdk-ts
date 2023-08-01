@@ -60,6 +60,8 @@ function createBaseQueryGrantsRequest(): QueryGrantsRequest {
 }
 
 export const QueryGrantsRequest = {
+  $type: "cosmos.authz.v1beta1.QueryGrantsRequest" as const,
+
   encode(message: QueryGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -149,7 +151,6 @@ export const QueryGrantsRequest = {
   create(base?: DeepPartial<QueryGrantsRequest>): QueryGrantsRequest {
     return QueryGrantsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGrantsRequest>): QueryGrantsRequest {
     const message = createBaseQueryGrantsRequest();
     message.granter = object.granter ?? "";
@@ -167,6 +168,8 @@ function createBaseQueryGrantsResponse(): QueryGrantsResponse {
 }
 
 export const QueryGrantsResponse = {
+  $type: "cosmos.authz.v1beta1.QueryGrantsResponse" as const,
+
   encode(message: QueryGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -228,7 +231,6 @@ export const QueryGrantsResponse = {
   create(base?: DeepPartial<QueryGrantsResponse>): QueryGrantsResponse {
     return QueryGrantsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGrantsResponse>): QueryGrantsResponse {
     const message = createBaseQueryGrantsResponse();
     message.grants = object.grants?.map((e) => Grant.fromPartial(e)) || [];
@@ -244,6 +246,8 @@ function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
 }
 
 export const QueryGranterGrantsRequest = {
+  $type: "cosmos.authz.v1beta1.QueryGranterGrantsRequest" as const,
+
   encode(message: QueryGranterGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -305,7 +309,6 @@ export const QueryGranterGrantsRequest = {
   create(base?: DeepPartial<QueryGranterGrantsRequest>): QueryGranterGrantsRequest {
     return QueryGranterGrantsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGranterGrantsRequest>): QueryGranterGrantsRequest {
     const message = createBaseQueryGranterGrantsRequest();
     message.granter = object.granter ?? "";
@@ -321,6 +324,8 @@ function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
 }
 
 export const QueryGranterGrantsResponse = {
+  $type: "cosmos.authz.v1beta1.QueryGranterGrantsResponse" as const,
+
   encode(message: QueryGranterGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -382,7 +387,6 @@ export const QueryGranterGrantsResponse = {
   create(base?: DeepPartial<QueryGranterGrantsResponse>): QueryGranterGrantsResponse {
     return QueryGranterGrantsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGranterGrantsResponse>): QueryGranterGrantsResponse {
     const message = createBaseQueryGranterGrantsResponse();
     message.grants = object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];
@@ -398,6 +402,8 @@ function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
 }
 
 export const QueryGranteeGrantsRequest = {
+  $type: "cosmos.authz.v1beta1.QueryGranteeGrantsRequest" as const,
+
   encode(message: QueryGranteeGrantsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
@@ -459,7 +465,6 @@ export const QueryGranteeGrantsRequest = {
   create(base?: DeepPartial<QueryGranteeGrantsRequest>): QueryGranteeGrantsRequest {
     return QueryGranteeGrantsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGranteeGrantsRequest>): QueryGranteeGrantsRequest {
     const message = createBaseQueryGranteeGrantsRequest();
     message.grantee = object.grantee ?? "";
@@ -475,6 +480,8 @@ function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
 }
 
 export const QueryGranteeGrantsResponse = {
+  $type: "cosmos.authz.v1beta1.QueryGranteeGrantsResponse" as const,
+
   encode(message: QueryGranteeGrantsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -536,7 +543,6 @@ export const QueryGranteeGrantsResponse = {
   create(base?: DeepPartial<QueryGranteeGrantsResponse>): QueryGranteeGrantsResponse {
     return QueryGranteeGrantsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryGranteeGrantsResponse>): QueryGranteeGrantsResponse {
     const message = createBaseQueryGranteeGrantsResponse();
     message.grants = object.grants?.map((e) => GrantAuthorization.fromPartial(e)) || [];

@@ -34,6 +34,8 @@ function createBaseCommitInfo(): CommitInfo {
 }
 
 export const CommitInfo = {
+  $type: "cosmos.base.store.v1beta1.CommitInfo" as const,
+
   encode(message: CommitInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "0") {
       writer.uint32(8).int64(message.version);
@@ -95,7 +97,6 @@ export const CommitInfo = {
   create(base?: DeepPartial<CommitInfo>): CommitInfo {
     return CommitInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
     message.version = object.version ?? "0";
@@ -109,6 +110,8 @@ function createBaseStoreInfo(): StoreInfo {
 }
 
 export const StoreInfo = {
+  $type: "cosmos.base.store.v1beta1.StoreInfo" as const,
+
   encode(message: StoreInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -170,7 +173,6 @@ export const StoreInfo = {
   create(base?: DeepPartial<StoreInfo>): StoreInfo {
     return StoreInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
@@ -186,6 +188,8 @@ function createBaseCommitID(): CommitID {
 }
 
 export const CommitID = {
+  $type: "cosmos.base.store.v1beta1.CommitID" as const,
+
   encode(message: CommitID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== "0") {
       writer.uint32(8).int64(message.version);
@@ -247,7 +251,6 @@ export const CommitID = {
   create(base?: DeepPartial<CommitID>): CommitID {
     return CommitID.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = createBaseCommitID();
     message.version = object.version ?? "0";

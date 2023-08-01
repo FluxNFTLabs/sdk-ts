@@ -13,6 +13,8 @@ function createBaseEventDataRoundState(): EventDataRoundState {
 }
 
 export const EventDataRoundState = {
+  $type: "tendermint.types.EventDataRoundState" as const,
+
   encode(message: EventDataRoundState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -88,7 +90,6 @@ export const EventDataRoundState = {
   create(base?: DeepPartial<EventDataRoundState>): EventDataRoundState {
     return EventDataRoundState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventDataRoundState>): EventDataRoundState {
     const message = createBaseEventDataRoundState();
     message.height = object.height ?? "0";

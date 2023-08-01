@@ -436,6 +436,8 @@ function createBaseMember(): Member {
 }
 
 export const Member = {
+  $type: "cosmos.group.v1.Member" as const,
+
   encode(message: Member, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -525,7 +527,6 @@ export const Member = {
   create(base?: DeepPartial<Member>): Member {
     return Member.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Member>): Member {
     const message = createBaseMember();
     message.address = object.address ?? "";
@@ -541,6 +542,8 @@ function createBaseMemberRequest(): MemberRequest {
 }
 
 export const MemberRequest = {
+  $type: "cosmos.group.v1.MemberRequest" as const,
+
   encode(message: MemberRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -616,7 +619,6 @@ export const MemberRequest = {
   create(base?: DeepPartial<MemberRequest>): MemberRequest {
     return MemberRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MemberRequest>): MemberRequest {
     const message = createBaseMemberRequest();
     message.address = object.address ?? "";
@@ -631,6 +633,8 @@ function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
 }
 
 export const ThresholdDecisionPolicy = {
+  $type: "cosmos.group.v1.ThresholdDecisionPolicy" as const,
+
   encode(message: ThresholdDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.threshold !== "") {
       writer.uint32(10).string(message.threshold);
@@ -692,7 +696,6 @@ export const ThresholdDecisionPolicy = {
   create(base?: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     return ThresholdDecisionPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
@@ -708,6 +711,8 @@ function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
 }
 
 export const PercentageDecisionPolicy = {
+  $type: "cosmos.group.v1.PercentageDecisionPolicy" as const,
+
   encode(message: PercentageDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.percentage !== "") {
       writer.uint32(10).string(message.percentage);
@@ -769,7 +774,6 @@ export const PercentageDecisionPolicy = {
   create(base?: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     return PercentageDecisionPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
@@ -785,6 +789,8 @@ function createBaseDecisionPolicyWindows(): DecisionPolicyWindows {
 }
 
 export const DecisionPolicyWindows = {
+  $type: "cosmos.group.v1.DecisionPolicyWindows" as const,
+
   encode(message: DecisionPolicyWindows, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -846,7 +852,6 @@ export const DecisionPolicyWindows = {
   create(base?: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     return DecisionPolicyWindows.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
     message.votingPeriod = (object.votingPeriod !== undefined && object.votingPeriod !== null)
@@ -864,6 +869,8 @@ function createBaseGroupInfo(): GroupInfo {
 }
 
 export const GroupInfo = {
+  $type: "cosmos.group.v1.GroupInfo" as const,
+
   encode(message: GroupInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "0") {
       writer.uint32(8).uint64(message.id);
@@ -981,7 +988,6 @@ export const GroupInfo = {
   create(base?: DeepPartial<GroupInfo>): GroupInfo {
     return GroupInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
     message.id = object.id ?? "0";
@@ -999,6 +1005,8 @@ function createBaseGroupMember(): GroupMember {
 }
 
 export const GroupMember = {
+  $type: "cosmos.group.v1.GroupMember" as const,
+
   encode(message: GroupMember, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -1060,7 +1068,6 @@ export const GroupMember = {
   create(base?: DeepPartial<GroupMember>): GroupMember {
     return GroupMember.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
     message.groupId = object.groupId ?? "0";
@@ -1084,6 +1091,8 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
 }
 
 export const GroupPolicyInfo = {
+  $type: "cosmos.group.v1.GroupPolicyInfo" as const,
+
   encode(message: GroupPolicyInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1215,7 +1224,6 @@ export const GroupPolicyInfo = {
   create(base?: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     return GroupPolicyInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
@@ -1251,6 +1259,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "cosmos.group.v1.Proposal" as const,
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "0") {
       writer.uint32(8).uint64(message.id);
@@ -1480,7 +1490,6 @@ export const Proposal = {
   create(base?: DeepPartial<Proposal>): Proposal {
     return Proposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.id = object.id ?? "0";
@@ -1508,6 +1517,8 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
+  $type: "cosmos.group.v1.TallyResult" as const,
+
   encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
@@ -1597,7 +1608,6 @@ export const TallyResult = {
   create(base?: DeepPartial<TallyResult>): TallyResult {
     return TallyResult.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
@@ -1613,6 +1623,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  $type: "cosmos.group.v1.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1716,7 +1728,6 @@ export const Vote = {
   create(base?: DeepPartial<Vote>): Vote {
     return Vote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.proposalId = object.proposalId ?? "0";

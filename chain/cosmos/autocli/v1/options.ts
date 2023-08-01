@@ -140,6 +140,8 @@ function createBaseModuleOptions(): ModuleOptions {
 }
 
 export const ModuleOptions = {
+  $type: "cosmos.autocli.v1.ModuleOptions" as const,
+
   encode(message: ModuleOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       ServiceCommandDescriptor.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -201,7 +203,6 @@ export const ModuleOptions = {
   create(base?: DeepPartial<ModuleOptions>): ModuleOptions {
     return ModuleOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleOptions>): ModuleOptions {
     const message = createBaseModuleOptions();
     message.tx = (object.tx !== undefined && object.tx !== null)
@@ -219,6 +220,8 @@ function createBaseServiceCommandDescriptor(): ServiceCommandDescriptor {
 }
 
 export const ServiceCommandDescriptor = {
+  $type: "cosmos.autocli.v1.ServiceCommandDescriptor" as const,
+
   encode(message: ServiceCommandDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
@@ -313,7 +316,6 @@ export const ServiceCommandDescriptor = {
   create(base?: DeepPartial<ServiceCommandDescriptor>): ServiceCommandDescriptor {
     return ServiceCommandDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ServiceCommandDescriptor>): ServiceCommandDescriptor {
     const message = createBaseServiceCommandDescriptor();
     message.service = object.service ?? "";
@@ -336,6 +338,8 @@ function createBaseServiceCommandDescriptor_SubCommandsEntry(): ServiceCommandDe
 }
 
 export const ServiceCommandDescriptor_SubCommandsEntry = {
+  $type: "cosmos.autocli.v1.ServiceCommandDescriptor.SubCommandsEntry" as const,
+
   encode(message: ServiceCommandDescriptor_SubCommandsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -397,7 +401,6 @@ export const ServiceCommandDescriptor_SubCommandsEntry = {
   create(base?: DeepPartial<ServiceCommandDescriptor_SubCommandsEntry>): ServiceCommandDescriptor_SubCommandsEntry {
     return ServiceCommandDescriptor_SubCommandsEntry.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<ServiceCommandDescriptor_SubCommandsEntry>,
   ): ServiceCommandDescriptor_SubCommandsEntry {
@@ -428,6 +431,8 @@ function createBaseRpcCommandOptions(): RpcCommandOptions {
 }
 
 export const RpcCommandOptions = {
+  $type: "cosmos.autocli.v1.RpcCommandOptions" as const,
+
   encode(message: RpcCommandOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.rpcMethod !== "") {
       writer.uint32(10).string(message.rpcMethod);
@@ -645,7 +650,6 @@ export const RpcCommandOptions = {
   create(base?: DeepPartial<RpcCommandOptions>): RpcCommandOptions {
     return RpcCommandOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RpcCommandOptions>): RpcCommandOptions {
     const message = createBaseRpcCommandOptions();
     message.rpcMethod = object.rpcMethod ?? "";
@@ -677,6 +681,8 @@ function createBaseRpcCommandOptions_FlagOptionsEntry(): RpcCommandOptions_FlagO
 }
 
 export const RpcCommandOptions_FlagOptionsEntry = {
+  $type: "cosmos.autocli.v1.RpcCommandOptions.FlagOptionsEntry" as const,
+
   encode(message: RpcCommandOptions_FlagOptionsEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -738,7 +744,6 @@ export const RpcCommandOptions_FlagOptionsEntry = {
   create(base?: DeepPartial<RpcCommandOptions_FlagOptionsEntry>): RpcCommandOptions_FlagOptionsEntry {
     return RpcCommandOptions_FlagOptionsEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<RpcCommandOptions_FlagOptionsEntry>): RpcCommandOptions_FlagOptionsEntry {
     const message = createBaseRpcCommandOptions_FlagOptionsEntry();
     message.key = object.key ?? "";
@@ -763,6 +768,8 @@ function createBaseFlagOptions(): FlagOptions {
 }
 
 export const FlagOptions = {
+  $type: "cosmos.autocli.v1.FlagOptions" as const,
+
   encode(message: FlagOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -908,7 +915,6 @@ export const FlagOptions = {
   create(base?: DeepPartial<FlagOptions>): FlagOptions {
     return FlagOptions.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FlagOptions>): FlagOptions {
     const message = createBaseFlagOptions();
     message.name = object.name ?? "";
@@ -928,6 +934,8 @@ function createBasePositionalArgDescriptor(): PositionalArgDescriptor {
 }
 
 export const PositionalArgDescriptor = {
+  $type: "cosmos.autocli.v1.PositionalArgDescriptor" as const,
+
   encode(message: PositionalArgDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.protoField !== "") {
       writer.uint32(10).string(message.protoField);
@@ -989,7 +997,6 @@ export const PositionalArgDescriptor = {
   create(base?: DeepPartial<PositionalArgDescriptor>): PositionalArgDescriptor {
     return PositionalArgDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PositionalArgDescriptor>): PositionalArgDescriptor {
     const message = createBasePositionalArgDescriptor();
     message.protoField = object.protoField ?? "";

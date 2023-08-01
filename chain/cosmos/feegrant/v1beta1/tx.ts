@@ -40,6 +40,8 @@ function createBaseMsgGrantAllowance(): MsgGrantAllowance {
 }
 
 export const MsgGrantAllowance = {
+  $type: "cosmos.feegrant.v1beta1.MsgGrantAllowance" as const,
+
   encode(message: MsgGrantAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -115,7 +117,6 @@ export const MsgGrantAllowance = {
   create(base?: DeepPartial<MsgGrantAllowance>): MsgGrantAllowance {
     return MsgGrantAllowance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgGrantAllowance>): MsgGrantAllowance {
     const message = createBaseMsgGrantAllowance();
     message.granter = object.granter ?? "";
@@ -132,6 +133,8 @@ function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
 }
 
 export const MsgGrantAllowanceResponse = {
+  $type: "cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse" as const,
+
   encode(_: MsgGrantAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -164,7 +167,6 @@ export const MsgGrantAllowanceResponse = {
   create(base?: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     return MsgGrantAllowanceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
@@ -176,6 +178,8 @@ function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
 }
 
 export const MsgRevokeAllowance = {
+  $type: "cosmos.feegrant.v1beta1.MsgRevokeAllowance" as const,
+
   encode(message: MsgRevokeAllowance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -237,7 +241,6 @@ export const MsgRevokeAllowance = {
   create(base?: DeepPartial<MsgRevokeAllowance>): MsgRevokeAllowance {
     return MsgRevokeAllowance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRevokeAllowance>): MsgRevokeAllowance {
     const message = createBaseMsgRevokeAllowance();
     message.granter = object.granter ?? "";
@@ -251,6 +254,8 @@ function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
 }
 
 export const MsgRevokeAllowanceResponse = {
+  $type: "cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse" as const,
+
   encode(_: MsgRevokeAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -283,7 +288,6 @@ export const MsgRevokeAllowanceResponse = {
   create(base?: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
     return MsgRevokeAllowanceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;

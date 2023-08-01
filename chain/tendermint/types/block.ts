@@ -15,6 +15,8 @@ function createBaseBlock(): Block {
 }
 
 export const Block = {
+  $type: "tendermint.types.Block" as const,
+
   encode(message: Block, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -104,7 +106,6 @@ export const Block = {
   create(base?: DeepPartial<Block>): Block {
     return Block.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
     message.header = (object.header !== undefined && object.header !== null)

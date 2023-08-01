@@ -23,6 +23,8 @@ function createBasePubKey(): PubKey {
 }
 
 export const PubKey = {
+  $type: "flux.crypto.v1beta1.ethsecp256k1.PubKey" as const,
+
   encode(message: PubKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -68,7 +70,6 @@ export const PubKey = {
   create(base?: DeepPartial<PubKey>): PubKey {
     return PubKey.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array(0);
@@ -81,6 +82,8 @@ function createBasePrivKey(): PrivKey {
 }
 
 export const PrivKey = {
+  $type: "flux.crypto.v1beta1.ethsecp256k1.PrivKey" as const,
+
   encode(message: PrivKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -126,7 +129,6 @@ export const PrivKey = {
   create(base?: DeepPartial<PrivKey>): PrivKey {
     return PrivKey.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
     message.key = object.key ?? new Uint8Array(0);

@@ -43,6 +43,8 @@ function createBaseMsgUnjail(): MsgUnjail {
 }
 
 export const MsgUnjail = {
+  $type: "cosmos.slashing.v1beta1.MsgUnjail" as const,
+
   encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
@@ -88,7 +90,6 @@ export const MsgUnjail = {
   create(base?: DeepPartial<MsgUnjail>): MsgUnjail {
     return MsgUnjail.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
@@ -101,6 +102,8 @@ function createBaseMsgUnjailResponse(): MsgUnjailResponse {
 }
 
 export const MsgUnjailResponse = {
+  $type: "cosmos.slashing.v1beta1.MsgUnjailResponse" as const,
+
   encode(_: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -133,7 +136,6 @@ export const MsgUnjailResponse = {
   create(base?: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     return MsgUnjailResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
@@ -145,6 +147,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmos.slashing.v1beta1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -206,7 +210,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -222,6 +225,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmos.slashing.v1beta1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -254,7 +259,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;

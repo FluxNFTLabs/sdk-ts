@@ -143,6 +143,8 @@ function createBaseClientState(): ClientState {
 }
 
 export const ClientState = {
+  $type: "ibc.lightclients.tendermint.v1.ClientState" as const,
+
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
@@ -332,7 +334,6 @@ export const ClientState = {
   create(base?: DeepPartial<ClientState>): ClientState {
     return ClientState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
@@ -367,6 +368,8 @@ function createBaseConsensusState(): ConsensusState {
 }
 
 export const ConsensusState = {
+  $type: "ibc.lightclients.tendermint.v1.ConsensusState" as const,
+
   encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).ldelim();
@@ -444,7 +447,6 @@ export const ConsensusState = {
   create(base?: DeepPartial<ConsensusState>): ConsensusState {
     return ConsensusState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
     message.timestamp = object.timestamp ?? undefined;
@@ -461,6 +463,8 @@ function createBaseMisbehaviour(): Misbehaviour {
 }
 
 export const Misbehaviour = {
+  $type: "ibc.lightclients.tendermint.v1.Misbehaviour" as const,
+
   encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -536,7 +540,6 @@ export const Misbehaviour = {
   create(base?: DeepPartial<Misbehaviour>): Misbehaviour {
     return Misbehaviour.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -555,6 +558,8 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
+  $type: "ibc.lightclients.tendermint.v1.Header" as const,
+
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedHeader !== undefined) {
       SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
@@ -644,7 +649,6 @@ export const Header = {
   create(base?: DeepPartial<Header>): Header {
     return Header.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.signedHeader = (object.signedHeader !== undefined && object.signedHeader !== null)
@@ -668,6 +672,8 @@ function createBaseFraction(): Fraction {
 }
 
 export const Fraction = {
+  $type: "ibc.lightclients.tendermint.v1.Fraction" as const,
+
   encode(message: Fraction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.numerator !== "0") {
       writer.uint32(8).uint64(message.numerator);
@@ -729,7 +735,6 @@ export const Fraction = {
   create(base?: DeepPartial<Fraction>): Fraction {
     return Fraction.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Fraction>): Fraction {
     const message = createBaseFraction();
     message.numerator = object.numerator ?? "0";

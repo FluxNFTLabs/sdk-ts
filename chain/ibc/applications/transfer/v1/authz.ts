@@ -28,6 +28,8 @@ function createBaseAllocation(): Allocation {
 }
 
 export const Allocation = {
+  $type: "ibc.applications.transfer.v1.Allocation" as const,
+
   encode(message: Allocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
@@ -117,7 +119,6 @@ export const Allocation = {
   create(base?: DeepPartial<Allocation>): Allocation {
     return Allocation.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Allocation>): Allocation {
     const message = createBaseAllocation();
     message.sourcePort = object.sourcePort ?? "";
@@ -133,6 +134,8 @@ function createBaseTransferAuthorization(): TransferAuthorization {
 }
 
 export const TransferAuthorization = {
+  $type: "ibc.applications.transfer.v1.TransferAuthorization" as const,
+
   encode(message: TransferAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allocations) {
       Allocation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -180,7 +183,6 @@ export const TransferAuthorization = {
   create(base?: DeepPartial<TransferAuthorization>): TransferAuthorization {
     return TransferAuthorization.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TransferAuthorization>): TransferAuthorization {
     const message = createBaseTransferAuthorization();
     message.allocations = object.allocations?.map((e) => Allocation.fromPartial(e)) || [];

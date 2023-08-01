@@ -358,6 +358,8 @@ function createBaseExistenceProof(): ExistenceProof {
 }
 
 export const ExistenceProof = {
+  $type: "cosmos.ics23.v1.ExistenceProof" as const,
+
   encode(message: ExistenceProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -447,7 +449,6 @@ export const ExistenceProof = {
   create(base?: DeepPartial<ExistenceProof>): ExistenceProof {
     return ExistenceProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ExistenceProof>): ExistenceProof {
     const message = createBaseExistenceProof();
     message.key = object.key ?? new Uint8Array(0);
@@ -463,6 +464,8 @@ function createBaseNonExistenceProof(): NonExistenceProof {
 }
 
 export const NonExistenceProof = {
+  $type: "cosmos.ics23.v1.NonExistenceProof" as const,
+
   encode(message: NonExistenceProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -538,7 +541,6 @@ export const NonExistenceProof = {
   create(base?: DeepPartial<NonExistenceProof>): NonExistenceProof {
     return NonExistenceProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<NonExistenceProof>): NonExistenceProof {
     const message = createBaseNonExistenceProof();
     message.key = object.key ?? new Uint8Array(0);
@@ -557,6 +559,8 @@ function createBaseCommitmentProof(): CommitmentProof {
 }
 
 export const CommitmentProof = {
+  $type: "cosmos.ics23.v1.CommitmentProof" as const,
+
   encode(message: CommitmentProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -646,7 +650,6 @@ export const CommitmentProof = {
   create(base?: DeepPartial<CommitmentProof>): CommitmentProof {
     return CommitmentProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommitmentProof>): CommitmentProof {
     const message = createBaseCommitmentProof();
     message.exist = (object.exist !== undefined && object.exist !== null)
@@ -670,6 +673,8 @@ function createBaseLeafOp(): LeafOp {
 }
 
 export const LeafOp = {
+  $type: "cosmos.ics23.v1.LeafOp" as const,
+
   encode(message: LeafOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -773,7 +778,6 @@ export const LeafOp = {
   create(base?: DeepPartial<LeafOp>): LeafOp {
     return LeafOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LeafOp>): LeafOp {
     const message = createBaseLeafOp();
     message.hash = object.hash ?? 0;
@@ -790,6 +794,8 @@ function createBaseInnerOp(): InnerOp {
 }
 
 export const InnerOp = {
+  $type: "cosmos.ics23.v1.InnerOp" as const,
+
   encode(message: InnerOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -865,7 +871,6 @@ export const InnerOp = {
   create(base?: DeepPartial<InnerOp>): InnerOp {
     return InnerOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InnerOp>): InnerOp {
     const message = createBaseInnerOp();
     message.hash = object.hash ?? 0;
@@ -880,6 +885,8 @@ function createBaseProofSpec(): ProofSpec {
 }
 
 export const ProofSpec = {
+  $type: "cosmos.ics23.v1.ProofSpec" as const,
+
   encode(message: ProofSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.leafSpec !== undefined) {
       LeafOp.encode(message.leafSpec, writer.uint32(10).fork()).ldelim();
@@ -985,7 +992,6 @@ export const ProofSpec = {
   create(base?: DeepPartial<ProofSpec>): ProofSpec {
     return ProofSpec.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProofSpec>): ProofSpec {
     const message = createBaseProofSpec();
     message.leafSpec = (object.leafSpec !== undefined && object.leafSpec !== null)
@@ -1013,6 +1019,8 @@ function createBaseInnerSpec(): InnerSpec {
 }
 
 export const InnerSpec = {
+  $type: "cosmos.ics23.v1.InnerSpec" as const,
+
   encode(message: InnerSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.childOrder) {
@@ -1142,7 +1150,6 @@ export const InnerSpec = {
   create(base?: DeepPartial<InnerSpec>): InnerSpec {
     return InnerSpec.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<InnerSpec>): InnerSpec {
     const message = createBaseInnerSpec();
     message.childOrder = object.childOrder?.map((e) => e) || [];
@@ -1160,6 +1167,8 @@ function createBaseBatchProof(): BatchProof {
 }
 
 export const BatchProof = {
+  $type: "cosmos.ics23.v1.BatchProof" as const,
+
   encode(message: BatchProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       BatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1205,7 +1214,6 @@ export const BatchProof = {
   create(base?: DeepPartial<BatchProof>): BatchProof {
     return BatchProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BatchProof>): BatchProof {
     const message = createBaseBatchProof();
     message.entries = object.entries?.map((e) => BatchEntry.fromPartial(e)) || [];
@@ -1218,6 +1226,8 @@ function createBaseBatchEntry(): BatchEntry {
 }
 
 export const BatchEntry = {
+  $type: "cosmos.ics23.v1.BatchEntry" as const,
+
   encode(message: BatchEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -1279,7 +1289,6 @@ export const BatchEntry = {
   create(base?: DeepPartial<BatchEntry>): BatchEntry {
     return BatchEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BatchEntry>): BatchEntry {
     const message = createBaseBatchEntry();
     message.exist = (object.exist !== undefined && object.exist !== null)
@@ -1297,6 +1306,8 @@ function createBaseCompressedBatchProof(): CompressedBatchProof {
 }
 
 export const CompressedBatchProof = {
+  $type: "cosmos.ics23.v1.CompressedBatchProof" as const,
+
   encode(message: CompressedBatchProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.entries) {
       CompressedBatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1358,7 +1369,6 @@ export const CompressedBatchProof = {
   create(base?: DeepPartial<CompressedBatchProof>): CompressedBatchProof {
     return CompressedBatchProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CompressedBatchProof>): CompressedBatchProof {
     const message = createBaseCompressedBatchProof();
     message.entries = object.entries?.map((e) => CompressedBatchEntry.fromPartial(e)) || [];
@@ -1372,6 +1382,8 @@ function createBaseCompressedBatchEntry(): CompressedBatchEntry {
 }
 
 export const CompressedBatchEntry = {
+  $type: "cosmos.ics23.v1.CompressedBatchEntry" as const,
+
   encode(message: CompressedBatchEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.exist !== undefined) {
       CompressedExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -1433,7 +1445,6 @@ export const CompressedBatchEntry = {
   create(base?: DeepPartial<CompressedBatchEntry>): CompressedBatchEntry {
     return CompressedBatchEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CompressedBatchEntry>): CompressedBatchEntry {
     const message = createBaseCompressedBatchEntry();
     message.exist = (object.exist !== undefined && object.exist !== null)
@@ -1451,6 +1462,8 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
 }
 
 export const CompressedExistenceProof = {
+  $type: "cosmos.ics23.v1.CompressedExistenceProof" as const,
+
   encode(message: CompressedExistenceProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -1552,7 +1565,6 @@ export const CompressedExistenceProof = {
   create(base?: DeepPartial<CompressedExistenceProof>): CompressedExistenceProof {
     return CompressedExistenceProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CompressedExistenceProof>): CompressedExistenceProof {
     const message = createBaseCompressedExistenceProof();
     message.key = object.key ?? new Uint8Array(0);
@@ -1568,6 +1580,8 @@ function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
 }
 
 export const CompressedNonExistenceProof = {
+  $type: "cosmos.ics23.v1.CompressedNonExistenceProof" as const,
+
   encode(message: CompressedNonExistenceProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -1643,7 +1657,6 @@ export const CompressedNonExistenceProof = {
   create(base?: DeepPartial<CompressedNonExistenceProof>): CompressedNonExistenceProof {
     return CompressedNonExistenceProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CompressedNonExistenceProof>): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
     message.key = object.key ?? new Uint8Array(0);

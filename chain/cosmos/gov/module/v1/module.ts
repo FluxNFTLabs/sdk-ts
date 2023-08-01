@@ -18,6 +18,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.gov.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxMetadataLen !== "0") {
       writer.uint32(8).uint64(message.maxMetadataLen);
@@ -79,7 +81,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.maxMetadataLen = object.maxMetadataLen ?? "0";

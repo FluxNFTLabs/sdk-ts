@@ -167,6 +167,8 @@ function createBaseSignatureDescriptors(): SignatureDescriptors {
 }
 
 export const SignatureDescriptors = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptors" as const,
+
   encode(message: SignatureDescriptors, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
       SignatureDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -216,7 +218,6 @@ export const SignatureDescriptors = {
   create(base?: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
     return SignatureDescriptors.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map((e) => SignatureDescriptor.fromPartial(e)) || [];
@@ -229,6 +230,8 @@ function createBaseSignatureDescriptor(): SignatureDescriptor {
 }
 
 export const SignatureDescriptor = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor" as const,
+
   encode(message: SignatureDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
@@ -304,7 +307,6 @@ export const SignatureDescriptor = {
   create(base?: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     return SignatureDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
     const message = createBaseSignatureDescriptor();
     message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
@@ -323,6 +325,8 @@ function createBaseSignatureDescriptor_Data(): SignatureDescriptor_Data {
 }
 
 export const SignatureDescriptor_Data = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data" as const,
+
   encode(message: SignatureDescriptor_Data, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.single !== undefined) {
       SignatureDescriptor_Data_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
@@ -384,7 +388,6 @@ export const SignatureDescriptor_Data = {
   create(base?: DeepPartial<SignatureDescriptor_Data>): SignatureDescriptor_Data {
     return SignatureDescriptor_Data.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptor_Data>): SignatureDescriptor_Data {
     const message = createBaseSignatureDescriptor_Data();
     message.single = (object.single !== undefined && object.single !== null)
@@ -402,6 +405,8 @@ function createBaseSignatureDescriptor_Data_Single(): SignatureDescriptor_Data_S
 }
 
 export const SignatureDescriptor_Data_Single = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Single" as const,
+
   encode(message: SignatureDescriptor_Data_Single, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mode !== 0) {
       writer.uint32(8).int32(message.mode);
@@ -463,7 +468,6 @@ export const SignatureDescriptor_Data_Single = {
   create(base?: DeepPartial<SignatureDescriptor_Data_Single>): SignatureDescriptor_Data_Single {
     return SignatureDescriptor_Data_Single.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Single>): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
     message.mode = object.mode ?? 0;
@@ -477,6 +481,8 @@ function createBaseSignatureDescriptor_Data_Multi(): SignatureDescriptor_Data_Mu
 }
 
 export const SignatureDescriptor_Data_Multi = {
+  $type: "cosmos.tx.signing.v1beta1.SignatureDescriptor.Data.Multi" as const,
+
   encode(message: SignatureDescriptor_Data_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bitarray !== undefined) {
       CompactBitArray.encode(message.bitarray, writer.uint32(10).fork()).ldelim();
@@ -540,7 +546,6 @@ export const SignatureDescriptor_Data_Multi = {
   create(base?: DeepPartial<SignatureDescriptor_Data_Multi>): SignatureDescriptor_Data_Multi {
     return SignatureDescriptor_Data_Multi.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Multi>): SignatureDescriptor_Data_Multi {
     const message = createBaseSignatureDescriptor_Data_Multi();
     message.bitarray = (object.bitarray !== undefined && object.bitarray !== null)

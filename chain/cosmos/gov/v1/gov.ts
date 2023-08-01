@@ -327,6 +327,8 @@ function createBaseWeightedVoteOption(): WeightedVoteOption {
 }
 
 export const WeightedVoteOption = {
+  $type: "cosmos.gov.v1.WeightedVoteOption" as const,
+
   encode(message: WeightedVoteOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
@@ -388,7 +390,6 @@ export const WeightedVoteOption = {
   create(base?: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
     return WeightedVoteOption.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
     message.option = object.option ?? 0;
@@ -402,6 +403,8 @@ function createBaseDeposit(): Deposit {
 }
 
 export const Deposit = {
+  $type: "cosmos.gov.v1.Deposit" as const,
+
   encode(message: Deposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -477,7 +480,6 @@ export const Deposit = {
   create(base?: DeepPartial<Deposit>): Deposit {
     return Deposit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Deposit>): Deposit {
     const message = createBaseDeposit();
     message.proposalId = object.proposalId ?? "0";
@@ -506,6 +508,8 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
+  $type: "cosmos.gov.v1.Proposal" as const,
+
   encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "0") {
       writer.uint32(8).uint64(message.id);
@@ -721,7 +725,6 @@ export const Proposal = {
   create(base?: DeepPartial<Proposal>): Proposal {
     return Proposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     message.id = object.id ?? "0";
@@ -748,6 +751,8 @@ function createBaseTallyResult(): TallyResult {
 }
 
 export const TallyResult = {
+  $type: "cosmos.gov.v1.TallyResult" as const,
+
   encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
@@ -837,7 +842,6 @@ export const TallyResult = {
   create(base?: DeepPartial<TallyResult>): TallyResult {
     return TallyResult.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
@@ -853,6 +857,8 @@ function createBaseVote(): Vote {
 }
 
 export const Vote = {
+  $type: "cosmos.gov.v1.Vote" as const,
+
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -942,7 +948,6 @@ export const Vote = {
   create(base?: DeepPartial<Vote>): Vote {
     return Vote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
     message.proposalId = object.proposalId ?? "0";
@@ -958,6 +963,8 @@ function createBaseDepositParams(): DepositParams {
 }
 
 export const DepositParams = {
+  $type: "cosmos.gov.v1.DepositParams" as const,
+
   encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1019,7 +1026,6 @@ export const DepositParams = {
   create(base?: DeepPartial<DepositParams>): DepositParams {
     return DepositParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit = object.minDeposit?.map((e) => Coin.fromPartial(e)) || [];
@@ -1035,6 +1041,8 @@ function createBaseVotingParams(): VotingParams {
 }
 
 export const VotingParams = {
+  $type: "cosmos.gov.v1.VotingParams" as const,
+
   encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -1080,7 +1088,6 @@ export const VotingParams = {
   create(base?: DeepPartial<VotingParams>): VotingParams {
     return VotingParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<VotingParams>): VotingParams {
     const message = createBaseVotingParams();
     message.votingPeriod = (object.votingPeriod !== undefined && object.votingPeriod !== null)
@@ -1095,6 +1102,8 @@ function createBaseTallyParams(): TallyParams {
 }
 
 export const TallyParams = {
+  $type: "cosmos.gov.v1.TallyParams" as const,
+
   encode(message: TallyParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quorum !== "") {
       writer.uint32(10).string(message.quorum);
@@ -1170,7 +1179,6 @@ export const TallyParams = {
   create(base?: DeepPartial<TallyParams>): TallyParams {
     return TallyParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TallyParams>): TallyParams {
     const message = createBaseTallyParams();
     message.quorum = object.quorum ?? "";
@@ -1196,6 +1204,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.gov.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1371,7 +1381,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.minDeposit = object.minDeposit?.map((e) => Coin.fromPartial(e)) || [];

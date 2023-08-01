@@ -55,6 +55,8 @@ function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
 }
 
 export const ValidatorSigningInfo = {
+  $type: "cosmos.slashing.v1beta1.ValidatorSigningInfo" as const,
+
   encode(message: ValidatorSigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -172,7 +174,6 @@ export const ValidatorSigningInfo = {
   create(base?: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     return ValidatorSigningInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
     message.address = object.address ?? "";
@@ -196,6 +197,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.slashing.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signedBlocksWindow !== "0") {
       writer.uint32(8).int64(message.signedBlocksWindow);
@@ -307,7 +310,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.signedBlocksWindow = object.signedBlocksWindow ?? "0";

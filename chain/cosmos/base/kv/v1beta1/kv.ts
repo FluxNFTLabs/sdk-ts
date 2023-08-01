@@ -17,6 +17,8 @@ function createBasePairs(): Pairs {
 }
 
 export const Pairs = {
+  $type: "cosmos.base.kv.v1beta1.Pairs" as const,
+
   encode(message: Pairs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pairs) {
       Pair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -62,7 +64,6 @@ export const Pairs = {
   create(base?: DeepPartial<Pairs>): Pairs {
     return Pairs.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Pairs>): Pairs {
     const message = createBasePairs();
     message.pairs = object.pairs?.map((e) => Pair.fromPartial(e)) || [];
@@ -75,6 +76,8 @@ function createBasePair(): Pair {
 }
 
 export const Pair = {
+  $type: "cosmos.base.kv.v1beta1.Pair" as const,
+
   encode(message: Pair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -136,7 +139,6 @@ export const Pair = {
   create(base?: DeepPartial<Pair>): Pair {
     return Pair.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Pair>): Pair {
     const message = createBasePair();
     message.key = object.key ?? new Uint8Array(0);

@@ -50,6 +50,8 @@ function createBaseStoreKVPair(): StoreKVPair {
 }
 
 export const StoreKVPair = {
+  $type: "cosmos.base.store.v1beta1.StoreKVPair" as const,
+
   encode(message: StoreKVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.storeKey !== "") {
       writer.uint32(10).string(message.storeKey);
@@ -139,7 +141,6 @@ export const StoreKVPair = {
   create(base?: DeepPartial<StoreKVPair>): StoreKVPair {
     return StoreKVPair.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {
     const message = createBaseStoreKVPair();
     message.storeKey = object.storeKey ?? "";
@@ -162,6 +163,8 @@ function createBaseBlockMetadata(): BlockMetadata {
 }
 
 export const BlockMetadata = {
+  $type: "cosmos.base.store.v1beta1.BlockMetadata" as const,
+
   encode(message: BlockMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestBeginBlock !== undefined) {
       RequestBeginBlock.encode(message.requestBeginBlock, writer.uint32(10).fork()).ldelim();
@@ -285,7 +288,6 @@ export const BlockMetadata = {
   create(base?: DeepPartial<BlockMetadata>): BlockMetadata {
     return BlockMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockMetadata>): BlockMetadata {
     const message = createBaseBlockMetadata();
     message.requestBeginBlock = (object.requestBeginBlock !== undefined && object.requestBeginBlock !== null)
@@ -313,6 +315,8 @@ function createBaseBlockMetadata_DeliverTx(): BlockMetadata_DeliverTx {
 }
 
 export const BlockMetadata_DeliverTx = {
+  $type: "cosmos.base.store.v1beta1.BlockMetadata.DeliverTx" as const,
+
   encode(message: BlockMetadata_DeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.request !== undefined) {
       RequestDeliverTx.encode(message.request, writer.uint32(10).fork()).ldelim();
@@ -374,7 +378,6 @@ export const BlockMetadata_DeliverTx = {
   create(base?: DeepPartial<BlockMetadata_DeliverTx>): BlockMetadata_DeliverTx {
     return BlockMetadata_DeliverTx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BlockMetadata_DeliverTx>): BlockMetadata_DeliverTx {
     const message = createBaseBlockMetadata_DeliverTx();
     message.request = (object.request !== undefined && object.request !== null)

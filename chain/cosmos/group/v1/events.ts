@@ -70,6 +70,8 @@ function createBaseEventCreateGroup(): EventCreateGroup {
 }
 
 export const EventCreateGroup = {
+  $type: "cosmos.group.v1.EventCreateGroup" as const,
+
   encode(message: EventCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -115,7 +117,6 @@ export const EventCreateGroup = {
   create(base?: DeepPartial<EventCreateGroup>): EventCreateGroup {
     return EventCreateGroup.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup {
     const message = createBaseEventCreateGroup();
     message.groupId = object.groupId ?? "0";
@@ -128,6 +129,8 @@ function createBaseEventUpdateGroup(): EventUpdateGroup {
 }
 
 export const EventUpdateGroup = {
+  $type: "cosmos.group.v1.EventUpdateGroup" as const,
+
   encode(message: EventUpdateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -173,7 +176,6 @@ export const EventUpdateGroup = {
   create(base?: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
     return EventUpdateGroup.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
     const message = createBaseEventUpdateGroup();
     message.groupId = object.groupId ?? "0";
@@ -186,6 +188,8 @@ function createBaseEventCreateGroupPolicy(): EventCreateGroupPolicy {
 }
 
 export const EventCreateGroupPolicy = {
+  $type: "cosmos.group.v1.EventCreateGroupPolicy" as const,
+
   encode(message: EventCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -231,7 +235,6 @@ export const EventCreateGroupPolicy = {
   create(base?: DeepPartial<EventCreateGroupPolicy>): EventCreateGroupPolicy {
     return EventCreateGroupPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventCreateGroupPolicy>): EventCreateGroupPolicy {
     const message = createBaseEventCreateGroupPolicy();
     message.address = object.address ?? "";
@@ -244,6 +247,8 @@ function createBaseEventUpdateGroupPolicy(): EventUpdateGroupPolicy {
 }
 
 export const EventUpdateGroupPolicy = {
+  $type: "cosmos.group.v1.EventUpdateGroupPolicy" as const,
+
   encode(message: EventUpdateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -289,7 +294,6 @@ export const EventUpdateGroupPolicy = {
   create(base?: DeepPartial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy {
     return EventUpdateGroupPolicy.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy {
     const message = createBaseEventUpdateGroupPolicy();
     message.address = object.address ?? "";
@@ -302,6 +306,8 @@ function createBaseEventSubmitProposal(): EventSubmitProposal {
 }
 
 export const EventSubmitProposal = {
+  $type: "cosmos.group.v1.EventSubmitProposal" as const,
+
   encode(message: EventSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -347,7 +353,6 @@ export const EventSubmitProposal = {
   create(base?: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
     return EventSubmitProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
     const message = createBaseEventSubmitProposal();
     message.proposalId = object.proposalId ?? "0";
@@ -360,6 +365,8 @@ function createBaseEventWithdrawProposal(): EventWithdrawProposal {
 }
 
 export const EventWithdrawProposal = {
+  $type: "cosmos.group.v1.EventWithdrawProposal" as const,
+
   encode(message: EventWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -405,7 +412,6 @@ export const EventWithdrawProposal = {
   create(base?: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     return EventWithdrawProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
     message.proposalId = object.proposalId ?? "0";
@@ -418,6 +424,8 @@ function createBaseEventVote(): EventVote {
 }
 
 export const EventVote = {
+  $type: "cosmos.group.v1.EventVote" as const,
+
   encode(message: EventVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -463,7 +471,6 @@ export const EventVote = {
   create(base?: DeepPartial<EventVote>): EventVote {
     return EventVote.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventVote>): EventVote {
     const message = createBaseEventVote();
     message.proposalId = object.proposalId ?? "0";
@@ -476,6 +483,8 @@ function createBaseEventExec(): EventExec {
 }
 
 export const EventExec = {
+  $type: "cosmos.group.v1.EventExec" as const,
+
   encode(message: EventExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -551,7 +560,6 @@ export const EventExec = {
   create(base?: DeepPartial<EventExec>): EventExec {
     return EventExec.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventExec>): EventExec {
     const message = createBaseEventExec();
     message.proposalId = object.proposalId ?? "0";
@@ -566,6 +574,8 @@ function createBaseEventLeaveGroup(): EventLeaveGroup {
 }
 
 export const EventLeaveGroup = {
+  $type: "cosmos.group.v1.EventLeaveGroup" as const,
+
   encode(message: EventLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.groupId !== "0") {
       writer.uint32(8).uint64(message.groupId);
@@ -627,7 +637,6 @@ export const EventLeaveGroup = {
   create(base?: DeepPartial<EventLeaveGroup>): EventLeaveGroup {
     return EventLeaveGroup.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup {
     const message = createBaseEventLeaveGroup();
     message.groupId = object.groupId ?? "0";

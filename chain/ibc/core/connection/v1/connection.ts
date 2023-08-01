@@ -167,6 +167,8 @@ function createBaseConnectionEnd(): ConnectionEnd {
 }
 
 export const ConnectionEnd = {
+  $type: "ibc.core.connection.v1.ConnectionEnd" as const,
+
   encode(message: ConnectionEnd, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -270,7 +272,6 @@ export const ConnectionEnd = {
   create(base?: DeepPartial<ConnectionEnd>): ConnectionEnd {
     return ConnectionEnd.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConnectionEnd>): ConnectionEnd {
     const message = createBaseConnectionEnd();
     message.clientId = object.clientId ?? "";
@@ -289,6 +290,8 @@ function createBaseIdentifiedConnection(): IdentifiedConnection {
 }
 
 export const IdentifiedConnection = {
+  $type: "ibc.core.connection.v1.IdentifiedConnection" as const,
+
   encode(message: IdentifiedConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
@@ -406,7 +409,6 @@ export const IdentifiedConnection = {
   create(base?: DeepPartial<IdentifiedConnection>): IdentifiedConnection {
     return IdentifiedConnection.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IdentifiedConnection>): IdentifiedConnection {
     const message = createBaseIdentifiedConnection();
     message.id = object.id ?? "";
@@ -426,6 +428,8 @@ function createBaseCounterparty(): Counterparty {
 }
 
 export const Counterparty = {
+  $type: "ibc.core.connection.v1.Counterparty" as const,
+
   encode(message: Counterparty, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -501,7 +505,6 @@ export const Counterparty = {
   create(base?: DeepPartial<Counterparty>): Counterparty {
     return Counterparty.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.clientId = object.clientId ?? "";
@@ -518,6 +521,8 @@ function createBaseClientPaths(): ClientPaths {
 }
 
 export const ClientPaths = {
+  $type: "ibc.core.connection.v1.ClientPaths" as const,
+
   encode(message: ClientPaths, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.paths) {
       writer.uint32(10).string(v!);
@@ -563,7 +568,6 @@ export const ClientPaths = {
   create(base?: DeepPartial<ClientPaths>): ClientPaths {
     return ClientPaths.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ClientPaths>): ClientPaths {
     const message = createBaseClientPaths();
     message.paths = object.paths?.map((e) => e) || [];
@@ -576,6 +580,8 @@ function createBaseConnectionPaths(): ConnectionPaths {
 }
 
 export const ConnectionPaths = {
+  $type: "ibc.core.connection.v1.ConnectionPaths" as const,
+
   encode(message: ConnectionPaths, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -637,7 +643,6 @@ export const ConnectionPaths = {
   create(base?: DeepPartial<ConnectionPaths>): ConnectionPaths {
     return ConnectionPaths.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConnectionPaths>): ConnectionPaths {
     const message = createBaseConnectionPaths();
     message.clientId = object.clientId ?? "";
@@ -651,6 +656,8 @@ function createBaseVersion(): Version {
 }
 
 export const Version = {
+  $type: "ibc.core.connection.v1.Version" as const,
+
   encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
@@ -712,7 +719,6 @@ export const Version = {
   create(base?: DeepPartial<Version>): Version {
     return Version.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
     message.identifier = object.identifier ?? "";
@@ -726,6 +732,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "ibc.core.connection.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxExpectedTimePerBlock !== "0") {
       writer.uint32(8).uint64(message.maxExpectedTimePerBlock);
@@ -773,7 +781,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.maxExpectedTimePerBlock = object.maxExpectedTimePerBlock ?? "0";

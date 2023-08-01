@@ -26,6 +26,8 @@ function createBaseMultiSignature(): MultiSignature {
 }
 
 export const MultiSignature = {
+  $type: "cosmos.crypto.multisig.v1beta1.MultiSignature" as const,
+
   encode(message: MultiSignature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
@@ -73,7 +75,6 @@ export const MultiSignature = {
   create(base?: DeepPartial<MultiSignature>): MultiSignature {
     return MultiSignature.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map((e) => e) || [];
@@ -86,6 +87,8 @@ function createBaseCompactBitArray(): CompactBitArray {
 }
 
 export const CompactBitArray = {
+  $type: "cosmos.crypto.multisig.v1beta1.CompactBitArray" as const,
+
   encode(message: CompactBitArray, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
@@ -147,7 +150,6 @@ export const CompactBitArray = {
   create(base?: DeepPartial<CompactBitArray>): CompactBitArray {
     return CompactBitArray.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;

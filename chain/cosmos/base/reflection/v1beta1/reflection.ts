@@ -35,6 +35,8 @@ function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
 }
 
 export const ListAllInterfacesRequest = {
+  $type: "cosmos.base.reflection.v1beta1.ListAllInterfacesRequest" as const,
+
   encode(_: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -67,7 +69,6 @@ export const ListAllInterfacesRequest = {
   create(base?: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     return ListAllInterfacesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
@@ -79,6 +80,8 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
 }
 
 export const ListAllInterfacesResponse = {
+  $type: "cosmos.base.reflection.v1beta1.ListAllInterfacesResponse" as const,
+
   encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
@@ -126,7 +129,6 @@ export const ListAllInterfacesResponse = {
   create(base?: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     return ListAllInterfacesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map((e) => e) || [];
@@ -139,6 +141,8 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
 }
 
 export const ListImplementationsRequest = {
+  $type: "cosmos.base.reflection.v1beta1.ListImplementationsRequest" as const,
+
   encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
@@ -184,7 +188,6 @@ export const ListImplementationsRequest = {
   create(base?: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     return ListImplementationsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
@@ -197,6 +200,8 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
 }
 
 export const ListImplementationsResponse = {
+  $type: "cosmos.base.reflection.v1beta1.ListImplementationsResponse" as const,
+
   encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);
@@ -246,7 +251,6 @@ export const ListImplementationsResponse = {
   create(base?: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
     return ListImplementationsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map((e) => e) || [];

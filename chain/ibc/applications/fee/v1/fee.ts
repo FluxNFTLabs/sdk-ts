@@ -46,6 +46,8 @@ function createBaseFee(): Fee {
 }
 
 export const Fee = {
+  $type: "ibc.applications.fee.v1.Fee" as const,
+
   encode(message: Fee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.recvFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -121,7 +123,6 @@ export const Fee = {
   create(base?: DeepPartial<Fee>): Fee {
     return Fee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Fee>): Fee {
     const message = createBaseFee();
     message.recvFee = object.recvFee?.map((e) => Coin.fromPartial(e)) || [];
@@ -136,6 +137,8 @@ function createBasePacketFee(): PacketFee {
 }
 
 export const PacketFee = {
+  $type: "ibc.applications.fee.v1.PacketFee" as const,
+
   encode(message: PacketFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
@@ -211,7 +214,6 @@ export const PacketFee = {
   create(base?: DeepPartial<PacketFee>): PacketFee {
     return PacketFee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketFee>): PacketFee {
     const message = createBasePacketFee();
     message.fee = (object.fee !== undefined && object.fee !== null) ? Fee.fromPartial(object.fee) : undefined;
@@ -226,6 +228,8 @@ function createBasePacketFees(): PacketFees {
 }
 
 export const PacketFees = {
+  $type: "ibc.applications.fee.v1.PacketFees" as const,
+
   encode(message: PacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.packetFees) {
       PacketFee.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -273,7 +277,6 @@ export const PacketFees = {
   create(base?: DeepPartial<PacketFees>): PacketFees {
     return PacketFees.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PacketFees>): PacketFees {
     const message = createBasePacketFees();
     message.packetFees = object.packetFees?.map((e) => PacketFee.fromPartial(e)) || [];
@@ -286,6 +289,8 @@ function createBaseIdentifiedPacketFees(): IdentifiedPacketFees {
 }
 
 export const IdentifiedPacketFees = {
+  $type: "ibc.applications.fee.v1.IdentifiedPacketFees" as const,
+
   encode(message: IdentifiedPacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.packetId !== undefined) {
       PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
@@ -347,7 +352,6 @@ export const IdentifiedPacketFees = {
   create(base?: DeepPartial<IdentifiedPacketFees>): IdentifiedPacketFees {
     return IdentifiedPacketFees.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<IdentifiedPacketFees>): IdentifiedPacketFees {
     const message = createBaseIdentifiedPacketFees();
     message.packetId = (object.packetId !== undefined && object.packetId !== null)

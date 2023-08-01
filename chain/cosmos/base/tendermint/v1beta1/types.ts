@@ -59,6 +59,8 @@ function createBaseBlock(): Block {
 }
 
 export const Block = {
+  $type: "cosmos.base.tendermint.v1beta1.Block" as const,
+
   encode(message: Block, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
       Header.encode(message.header, writer.uint32(10).fork()).ldelim();
@@ -148,7 +150,6 @@ export const Block = {
   create(base?: DeepPartial<Block>): Block {
     return Block.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
     message.header = (object.header !== undefined && object.header !== null)
@@ -185,6 +186,8 @@ function createBaseHeader(): Header {
 }
 
 export const Header = {
+  $type: "cosmos.base.tendermint.v1beta1.Header" as const,
+
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== undefined) {
       Consensus.encode(message.version, writer.uint32(10).fork()).ldelim();
@@ -416,7 +419,6 @@ export const Header = {
   create(base?: DeepPartial<Header>): Header {
     return Header.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
     message.version = (object.version !== undefined && object.version !== null)

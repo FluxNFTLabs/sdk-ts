@@ -27,6 +27,8 @@ function createBaseApp(): App {
 }
 
 export const App = {
+  $type: "tendermint.version.App" as const,
+
   encode(message: App, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.protocol !== "0") {
       writer.uint32(8).uint64(message.protocol);
@@ -88,7 +90,6 @@ export const App = {
   create(base?: DeepPartial<App>): App {
     return App.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
     message.protocol = object.protocol ?? "0";
@@ -102,6 +103,8 @@ function createBaseConsensus(): Consensus {
 }
 
 export const Consensus = {
+  $type: "tendermint.version.Consensus" as const,
+
   encode(message: Consensus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== "0") {
       writer.uint32(8).uint64(message.block);
@@ -163,7 +166,6 @@ export const Consensus = {
   create(base?: DeepPartial<Consensus>): Consensus {
     return Consensus.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
     message.block = object.block ?? "0";

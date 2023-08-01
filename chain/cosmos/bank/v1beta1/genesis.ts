@@ -42,6 +42,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.bank.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -149,7 +151,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = (object.params !== undefined && object.params !== null)
@@ -168,6 +169,8 @@ function createBaseBalance(): Balance {
 }
 
 export const Balance = {
+  $type: "cosmos.bank.v1beta1.Balance" as const,
+
   encode(message: Balance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -229,7 +232,6 @@ export const Balance = {
   create(base?: DeepPartial<Balance>): Balance {
     return Balance.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Balance>): Balance {
     const message = createBaseBalance();
     message.address = object.address ?? "";

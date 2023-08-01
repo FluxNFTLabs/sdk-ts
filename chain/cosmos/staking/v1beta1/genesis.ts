@@ -52,6 +52,8 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
+  $type: "cosmos.staking.v1beta1.GenesisState" as const,
+
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -203,7 +205,6 @@ export const GenesisState = {
   create(base?: DeepPartial<GenesisState>): GenesisState {
     return GenesisState.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.params = (object.params !== undefined && object.params !== null)
@@ -225,6 +226,8 @@ function createBaseLastValidatorPower(): LastValidatorPower {
 }
 
 export const LastValidatorPower = {
+  $type: "cosmos.staking.v1beta1.LastValidatorPower" as const,
+
   encode(message: LastValidatorPower, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -286,7 +289,6 @@ export const LastValidatorPower = {
   create(base?: DeepPartial<LastValidatorPower>): LastValidatorPower {
     return LastValidatorPower.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";

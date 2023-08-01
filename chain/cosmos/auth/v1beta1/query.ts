@@ -189,6 +189,8 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 }
 
 export const QueryAccountsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountsRequest" as const,
+
   encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -234,7 +236,6 @@ export const QueryAccountsRequest = {
   create(base?: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     return QueryAccountsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -249,6 +250,8 @@ function createBaseQueryAccountsResponse(): QueryAccountsResponse {
 }
 
 export const QueryAccountsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountsResponse" as const,
+
   encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -310,7 +313,6 @@ export const QueryAccountsResponse = {
   create(base?: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     return QueryAccountsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map((e) => Any.fromPartial(e)) || [];
@@ -326,6 +328,8 @@ function createBaseQueryAccountRequest(): QueryAccountRequest {
 }
 
 export const QueryAccountRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountRequest" as const,
+
   encode(message: QueryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -371,7 +375,6 @@ export const QueryAccountRequest = {
   create(base?: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
     return QueryAccountRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
@@ -384,6 +387,8 @@ function createBaseQueryAccountResponse(): QueryAccountResponse {
 }
 
 export const QueryAccountResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountResponse" as const,
+
   encode(message: QueryAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
@@ -429,7 +434,6 @@ export const QueryAccountResponse = {
   create(base?: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     return QueryAccountResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     const message = createBaseQueryAccountResponse();
     message.account = (object.account !== undefined && object.account !== null)
@@ -444,6 +448,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryParamsRequest" as const,
+
   encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -476,7 +482,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -488,6 +493,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -533,7 +540,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params = (object.params !== undefined && object.params !== null)
@@ -548,6 +554,8 @@ function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
 }
 
 export const QueryModuleAccountsRequest = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest" as const,
+
   encode(_: QueryModuleAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -580,7 +588,6 @@ export const QueryModuleAccountsRequest = {
   create(base?: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
     return QueryModuleAccountsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
     const message = createBaseQueryModuleAccountsRequest();
     return message;
@@ -592,6 +599,8 @@ function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
 }
 
 export const QueryModuleAccountsResponse = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse" as const,
+
   encode(message: QueryModuleAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -637,7 +646,6 @@ export const QueryModuleAccountsResponse = {
   create(base?: DeepPartial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse {
     return QueryModuleAccountsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse {
     const message = createBaseQueryModuleAccountsResponse();
     message.accounts = object.accounts?.map((e) => Any.fromPartial(e)) || [];
@@ -650,6 +658,8 @@ function createBaseQueryModuleAccountByNameRequest(): QueryModuleAccountByNameRe
 }
 
 export const QueryModuleAccountByNameRequest = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameRequest" as const,
+
   encode(message: QueryModuleAccountByNameRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -695,7 +705,6 @@ export const QueryModuleAccountByNameRequest = {
   create(base?: DeepPartial<QueryModuleAccountByNameRequest>): QueryModuleAccountByNameRequest {
     return QueryModuleAccountByNameRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryModuleAccountByNameRequest>): QueryModuleAccountByNameRequest {
     const message = createBaseQueryModuleAccountByNameRequest();
     message.name = object.name ?? "";
@@ -708,6 +717,8 @@ function createBaseQueryModuleAccountByNameResponse(): QueryModuleAccountByNameR
 }
 
 export const QueryModuleAccountByNameResponse = {
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameResponse" as const,
+
   encode(message: QueryModuleAccountByNameResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
@@ -753,7 +764,6 @@ export const QueryModuleAccountByNameResponse = {
   create(base?: DeepPartial<QueryModuleAccountByNameResponse>): QueryModuleAccountByNameResponse {
     return QueryModuleAccountByNameResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryModuleAccountByNameResponse>): QueryModuleAccountByNameResponse {
     const message = createBaseQueryModuleAccountByNameResponse();
     message.account = (object.account !== undefined && object.account !== null)
@@ -768,6 +778,8 @@ function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
 }
 
 export const Bech32PrefixRequest = {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixRequest" as const,
+
   encode(_: Bech32PrefixRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -800,7 +812,6 @@ export const Bech32PrefixRequest = {
   create(base?: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
     return Bech32PrefixRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
     const message = createBaseBech32PrefixRequest();
     return message;
@@ -812,6 +823,8 @@ function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
 }
 
 export const Bech32PrefixResponse = {
+  $type: "cosmos.auth.v1beta1.Bech32PrefixResponse" as const,
+
   encode(message: Bech32PrefixResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bech32Prefix !== "") {
       writer.uint32(10).string(message.bech32Prefix);
@@ -857,7 +870,6 @@ export const Bech32PrefixResponse = {
   create(base?: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
     return Bech32PrefixResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
     const message = createBaseBech32PrefixResponse();
     message.bech32Prefix = object.bech32Prefix ?? "";
@@ -870,6 +882,8 @@ function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
 }
 
 export const AddressBytesToStringRequest = {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest" as const,
+
   encode(message: AddressBytesToStringRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
@@ -915,7 +929,6 @@ export const AddressBytesToStringRequest = {
   create(base?: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
     return AddressBytesToStringRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
     const message = createBaseAddressBytesToStringRequest();
     message.addressBytes = object.addressBytes ?? new Uint8Array(0);
@@ -928,6 +941,8 @@ function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse 
 }
 
 export const AddressBytesToStringResponse = {
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse" as const,
+
   encode(message: AddressBytesToStringResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
@@ -973,7 +988,6 @@ export const AddressBytesToStringResponse = {
   create(base?: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
     return AddressBytesToStringResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
     const message = createBaseAddressBytesToStringResponse();
     message.addressString = object.addressString ?? "";
@@ -986,6 +1000,8 @@ function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
 }
 
 export const AddressStringToBytesRequest = {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest" as const,
+
   encode(message: AddressStringToBytesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
@@ -1031,7 +1047,6 @@ export const AddressStringToBytesRequest = {
   create(base?: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
     return AddressStringToBytesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
     const message = createBaseAddressStringToBytesRequest();
     message.addressString = object.addressString ?? "";
@@ -1044,6 +1059,8 @@ function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse 
 }
 
 export const AddressStringToBytesResponse = {
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse" as const,
+
   encode(message: AddressStringToBytesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
@@ -1089,7 +1106,6 @@ export const AddressStringToBytesResponse = {
   create(base?: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {
     return AddressStringToBytesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {
     const message = createBaseAddressStringToBytesResponse();
     message.addressBytes = object.addressBytes ?? new Uint8Array(0);
@@ -1102,6 +1118,8 @@ function createBaseQueryAccountAddressByIDRequest(): QueryAccountAddressByIDRequ
 }
 
 export const QueryAccountAddressByIDRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDRequest" as const,
+
   encode(message: QueryAccountAddressByIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "0") {
       writer.uint32(8).int64(message.id);
@@ -1163,7 +1181,6 @@ export const QueryAccountAddressByIDRequest = {
   create(base?: DeepPartial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest {
     return QueryAccountAddressByIDRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest {
     const message = createBaseQueryAccountAddressByIDRequest();
     message.id = object.id ?? "0";
@@ -1177,6 +1194,8 @@ function createBaseQueryAccountAddressByIDResponse(): QueryAccountAddressByIDRes
 }
 
 export const QueryAccountAddressByIDResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDResponse" as const,
+
   encode(message: QueryAccountAddressByIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
@@ -1222,7 +1241,6 @@ export const QueryAccountAddressByIDResponse = {
   create(base?: DeepPartial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse {
     return QueryAccountAddressByIDResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse {
     const message = createBaseQueryAccountAddressByIDResponse();
     message.accountAddress = object.accountAddress ?? "";
@@ -1235,6 +1253,8 @@ function createBaseQueryAccountInfoRequest(): QueryAccountInfoRequest {
 }
 
 export const QueryAccountInfoRequest = {
+  $type: "cosmos.auth.v1beta1.QueryAccountInfoRequest" as const,
+
   encode(message: QueryAccountInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1280,7 +1300,6 @@ export const QueryAccountInfoRequest = {
   create(base?: DeepPartial<QueryAccountInfoRequest>): QueryAccountInfoRequest {
     return QueryAccountInfoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountInfoRequest>): QueryAccountInfoRequest {
     const message = createBaseQueryAccountInfoRequest();
     message.address = object.address ?? "";
@@ -1293,6 +1312,8 @@ function createBaseQueryAccountInfoResponse(): QueryAccountInfoResponse {
 }
 
 export const QueryAccountInfoResponse = {
+  $type: "cosmos.auth.v1beta1.QueryAccountInfoResponse" as const,
+
   encode(message: QueryAccountInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       BaseAccount.encode(message.info, writer.uint32(10).fork()).ldelim();
@@ -1338,7 +1359,6 @@ export const QueryAccountInfoResponse = {
   create(base?: DeepPartial<QueryAccountInfoResponse>): QueryAccountInfoResponse {
     return QueryAccountInfoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryAccountInfoResponse>): QueryAccountInfoResponse {
     const message = createBaseQueryAccountInfoResponse();
     message.info = (object.info !== undefined && object.info !== null)

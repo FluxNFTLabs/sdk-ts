@@ -187,6 +187,8 @@ function createBaseAccessTypeParam(): AccessTypeParam {
 }
 
 export const AccessTypeParam = {
+  $type: "cosmwasm.wasm.v1.AccessTypeParam" as const,
+
   encode(message: AccessTypeParam, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
@@ -232,7 +234,6 @@ export const AccessTypeParam = {
   create(base?: DeepPartial<AccessTypeParam>): AccessTypeParam {
     return AccessTypeParam.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AccessTypeParam>): AccessTypeParam {
     const message = createBaseAccessTypeParam();
     message.value = object.value ?? 0;
@@ -245,6 +246,8 @@ function createBaseAccessConfig(): AccessConfig {
 }
 
 export const AccessConfig = {
+  $type: "cosmwasm.wasm.v1.AccessConfig" as const,
+
   encode(message: AccessConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.permission !== 0) {
       writer.uint32(8).int32(message.permission);
@@ -306,7 +309,6 @@ export const AccessConfig = {
   create(base?: DeepPartial<AccessConfig>): AccessConfig {
     return AccessConfig.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AccessConfig>): AccessConfig {
     const message = createBaseAccessConfig();
     message.permission = object.permission ?? 0;
@@ -320,6 +322,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmwasm.wasm.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeUploadAccess !== undefined) {
       AccessConfig.encode(message.codeUploadAccess, writer.uint32(10).fork()).ldelim();
@@ -383,7 +387,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.codeUploadAccess = (object.codeUploadAccess !== undefined && object.codeUploadAccess !== null)
@@ -399,6 +402,8 @@ function createBaseCodeInfo(): CodeInfo {
 }
 
 export const CodeInfo = {
+  $type: "cosmwasm.wasm.v1.CodeInfo" as const,
+
   encode(message: CodeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeHash.length !== 0) {
       writer.uint32(10).bytes(message.codeHash);
@@ -474,7 +479,6 @@ export const CodeInfo = {
   create(base?: DeepPartial<CodeInfo>): CodeInfo {
     return CodeInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CodeInfo>): CodeInfo {
     const message = createBaseCodeInfo();
     message.codeHash = object.codeHash ?? new Uint8Array(0);
@@ -491,6 +495,8 @@ function createBaseContractInfo(): ContractInfo {
 }
 
 export const ContractInfo = {
+  $type: "cosmwasm.wasm.v1.ContractInfo" as const,
+
   encode(message: ContractInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -622,7 +628,6 @@ export const ContractInfo = {
   create(base?: DeepPartial<ContractInfo>): ContractInfo {
     return ContractInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
     const message = createBaseContractInfo();
     message.codeId = object.codeId ?? "0";
@@ -645,6 +650,8 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
 }
 
 export const ContractCodeHistoryEntry = {
+  $type: "cosmwasm.wasm.v1.ContractCodeHistoryEntry" as const,
+
   encode(message: ContractCodeHistoryEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.operation !== 0) {
       writer.uint32(8).int32(message.operation);
@@ -734,7 +741,6 @@ export const ContractCodeHistoryEntry = {
   create(base?: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     return ContractCodeHistoryEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
@@ -752,6 +758,8 @@ function createBaseAbsoluteTxPosition(): AbsoluteTxPosition {
 }
 
 export const AbsoluteTxPosition = {
+  $type: "cosmwasm.wasm.v1.AbsoluteTxPosition" as const,
+
   encode(message: AbsoluteTxPosition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blockHeight !== "0") {
       writer.uint32(8).uint64(message.blockHeight);
@@ -813,7 +821,6 @@ export const AbsoluteTxPosition = {
   create(base?: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     return AbsoluteTxPosition.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
     message.blockHeight = object.blockHeight ?? "0";
@@ -827,6 +834,8 @@ function createBaseModel(): Model {
 }
 
 export const Model = {
+  $type: "cosmwasm.wasm.v1.Model" as const,
+
   encode(message: Model, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -888,7 +897,6 @@ export const Model = {
   create(base?: DeepPartial<Model>): Model {
     return Model.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Model>): Model {
     const message = createBaseModel();
     message.key = object.key ?? new Uint8Array(0);

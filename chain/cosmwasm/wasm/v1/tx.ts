@@ -356,6 +356,8 @@ function createBaseMsgStoreCode(): MsgStoreCode {
 }
 
 export const MsgStoreCode = {
+  $type: "cosmwasm.wasm.v1.MsgStoreCode" as const,
+
   encode(message: MsgStoreCode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -433,7 +435,6 @@ export const MsgStoreCode = {
   create(base?: DeepPartial<MsgStoreCode>): MsgStoreCode {
     return MsgStoreCode.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
@@ -451,6 +452,8 @@ function createBaseMsgStoreCodeResponse(): MsgStoreCodeResponse {
 }
 
 export const MsgStoreCodeResponse = {
+  $type: "cosmwasm.wasm.v1.MsgStoreCodeResponse" as const,
+
   encode(message: MsgStoreCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codeId !== "0") {
       writer.uint32(8).uint64(message.codeId);
@@ -512,7 +515,6 @@ export const MsgStoreCodeResponse = {
   create(base?: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     return MsgStoreCodeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     const message = createBaseMsgStoreCodeResponse();
     message.codeId = object.codeId ?? "0";
@@ -526,6 +528,8 @@ function createBaseMsgInstantiateContract(): MsgInstantiateContract {
 }
 
 export const MsgInstantiateContract = {
+  $type: "cosmwasm.wasm.v1.MsgInstantiateContract" as const,
+
   encode(message: MsgInstantiateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -643,7 +647,6 @@ export const MsgInstantiateContract = {
   create(base?: DeepPartial<MsgInstantiateContract>): MsgInstantiateContract {
     return MsgInstantiateContract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgInstantiateContract>): MsgInstantiateContract {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? "";
@@ -661,6 +664,8 @@ function createBaseMsgInstantiateContractResponse(): MsgInstantiateContractRespo
 }
 
 export const MsgInstantiateContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgInstantiateContractResponse" as const,
+
   encode(message: MsgInstantiateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -722,7 +727,6 @@ export const MsgInstantiateContractResponse = {
   create(base?: DeepPartial<MsgInstantiateContractResponse>): MsgInstantiateContractResponse {
     return MsgInstantiateContractResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgInstantiateContractResponse>): MsgInstantiateContractResponse {
     const message = createBaseMsgInstantiateContractResponse();
     message.address = object.address ?? "";
@@ -745,6 +749,8 @@ function createBaseMsgInstantiateContract2(): MsgInstantiateContract2 {
 }
 
 export const MsgInstantiateContract2 = {
+  $type: "cosmwasm.wasm.v1.MsgInstantiateContract2" as const,
+
   encode(message: MsgInstantiateContract2, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -890,7 +896,6 @@ export const MsgInstantiateContract2 = {
   create(base?: DeepPartial<MsgInstantiateContract2>): MsgInstantiateContract2 {
     return MsgInstantiateContract2.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgInstantiateContract2>): MsgInstantiateContract2 {
     const message = createBaseMsgInstantiateContract2();
     message.sender = object.sender ?? "";
@@ -910,6 +915,8 @@ function createBaseMsgInstantiateContract2Response(): MsgInstantiateContract2Res
 }
 
 export const MsgInstantiateContract2Response = {
+  $type: "cosmwasm.wasm.v1.MsgInstantiateContract2Response" as const,
+
   encode(message: MsgInstantiateContract2Response, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -971,7 +978,6 @@ export const MsgInstantiateContract2Response = {
   create(base?: DeepPartial<MsgInstantiateContract2Response>): MsgInstantiateContract2Response {
     return MsgInstantiateContract2Response.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgInstantiateContract2Response>): MsgInstantiateContract2Response {
     const message = createBaseMsgInstantiateContract2Response();
     message.address = object.address ?? "";
@@ -985,6 +991,8 @@ function createBaseMsgExecuteContract(): MsgExecuteContract {
 }
 
 export const MsgExecuteContract = {
+  $type: "cosmwasm.wasm.v1.MsgExecuteContract" as const,
+
   encode(message: MsgExecuteContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1074,7 +1082,6 @@ export const MsgExecuteContract = {
   create(base?: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     return MsgExecuteContract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? "";
@@ -1090,6 +1097,8 @@ function createBaseMsgExecuteContractResponse(): MsgExecuteContractResponse {
 }
 
 export const MsgExecuteContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgExecuteContractResponse" as const,
+
   encode(message: MsgExecuteContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1135,7 +1144,6 @@ export const MsgExecuteContractResponse = {
   create(base?: DeepPartial<MsgExecuteContractResponse>): MsgExecuteContractResponse {
     return MsgExecuteContractResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgExecuteContractResponse>): MsgExecuteContractResponse {
     const message = createBaseMsgExecuteContractResponse();
     message.data = object.data ?? new Uint8Array(0);
@@ -1148,6 +1156,8 @@ function createBaseMsgMigrateContract(): MsgMigrateContract {
 }
 
 export const MsgMigrateContract = {
+  $type: "cosmwasm.wasm.v1.MsgMigrateContract" as const,
+
   encode(message: MsgMigrateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1237,7 +1247,6 @@ export const MsgMigrateContract = {
   create(base?: DeepPartial<MsgMigrateContract>): MsgMigrateContract {
     return MsgMigrateContract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgMigrateContract>): MsgMigrateContract {
     const message = createBaseMsgMigrateContract();
     message.sender = object.sender ?? "";
@@ -1253,6 +1262,8 @@ function createBaseMsgMigrateContractResponse(): MsgMigrateContractResponse {
 }
 
 export const MsgMigrateContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgMigrateContractResponse" as const,
+
   encode(message: MsgMigrateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1298,7 +1309,6 @@ export const MsgMigrateContractResponse = {
   create(base?: DeepPartial<MsgMigrateContractResponse>): MsgMigrateContractResponse {
     return MsgMigrateContractResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgMigrateContractResponse>): MsgMigrateContractResponse {
     const message = createBaseMsgMigrateContractResponse();
     message.data = object.data ?? new Uint8Array(0);
@@ -1311,6 +1321,8 @@ function createBaseMsgUpdateAdmin(): MsgUpdateAdmin {
 }
 
 export const MsgUpdateAdmin = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateAdmin" as const,
+
   encode(message: MsgUpdateAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1386,7 +1398,6 @@ export const MsgUpdateAdmin = {
   create(base?: DeepPartial<MsgUpdateAdmin>): MsgUpdateAdmin {
     return MsgUpdateAdmin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateAdmin>): MsgUpdateAdmin {
     const message = createBaseMsgUpdateAdmin();
     message.sender = object.sender ?? "";
@@ -1401,6 +1412,8 @@ function createBaseMsgUpdateAdminResponse(): MsgUpdateAdminResponse {
 }
 
 export const MsgUpdateAdminResponse = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateAdminResponse" as const,
+
   encode(_: MsgUpdateAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1433,7 +1446,6 @@ export const MsgUpdateAdminResponse = {
   create(base?: DeepPartial<MsgUpdateAdminResponse>): MsgUpdateAdminResponse {
     return MsgUpdateAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateAdminResponse>): MsgUpdateAdminResponse {
     const message = createBaseMsgUpdateAdminResponse();
     return message;
@@ -1445,6 +1457,8 @@ function createBaseMsgClearAdmin(): MsgClearAdmin {
 }
 
 export const MsgClearAdmin = {
+  $type: "cosmwasm.wasm.v1.MsgClearAdmin" as const,
+
   encode(message: MsgClearAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1506,7 +1520,6 @@ export const MsgClearAdmin = {
   create(base?: DeepPartial<MsgClearAdmin>): MsgClearAdmin {
     return MsgClearAdmin.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgClearAdmin>): MsgClearAdmin {
     const message = createBaseMsgClearAdmin();
     message.sender = object.sender ?? "";
@@ -1520,6 +1533,8 @@ function createBaseMsgClearAdminResponse(): MsgClearAdminResponse {
 }
 
 export const MsgClearAdminResponse = {
+  $type: "cosmwasm.wasm.v1.MsgClearAdminResponse" as const,
+
   encode(_: MsgClearAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1552,7 +1567,6 @@ export const MsgClearAdminResponse = {
   create(base?: DeepPartial<MsgClearAdminResponse>): MsgClearAdminResponse {
     return MsgClearAdminResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgClearAdminResponse>): MsgClearAdminResponse {
     const message = createBaseMsgClearAdminResponse();
     return message;
@@ -1564,6 +1578,8 @@ function createBaseMsgUpdateInstantiateConfig(): MsgUpdateInstantiateConfig {
 }
 
 export const MsgUpdateInstantiateConfig = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateInstantiateConfig" as const,
+
   encode(message: MsgUpdateInstantiateConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -1641,7 +1657,6 @@ export const MsgUpdateInstantiateConfig = {
   create(base?: DeepPartial<MsgUpdateInstantiateConfig>): MsgUpdateInstantiateConfig {
     return MsgUpdateInstantiateConfig.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateInstantiateConfig>): MsgUpdateInstantiateConfig {
     const message = createBaseMsgUpdateInstantiateConfig();
     message.sender = object.sender ?? "";
@@ -1659,6 +1674,8 @@ function createBaseMsgUpdateInstantiateConfigResponse(): MsgUpdateInstantiateCon
 }
 
 export const MsgUpdateInstantiateConfigResponse = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateInstantiateConfigResponse" as const,
+
   encode(_: MsgUpdateInstantiateConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1691,7 +1708,6 @@ export const MsgUpdateInstantiateConfigResponse = {
   create(base?: DeepPartial<MsgUpdateInstantiateConfigResponse>): MsgUpdateInstantiateConfigResponse {
     return MsgUpdateInstantiateConfigResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateInstantiateConfigResponse>): MsgUpdateInstantiateConfigResponse {
     const message = createBaseMsgUpdateInstantiateConfigResponse();
     return message;
@@ -1703,6 +1719,8 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 }
 
 export const MsgUpdateParams = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateParams" as const,
+
   encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1764,7 +1782,6 @@ export const MsgUpdateParams = {
   create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     return MsgUpdateParams.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -1780,6 +1797,8 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 }
 
 export const MsgUpdateParamsResponse = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateParamsResponse" as const,
+
   encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -1812,7 +1831,6 @@ export const MsgUpdateParamsResponse = {
   create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -1824,6 +1842,8 @@ function createBaseMsgSudoContract(): MsgSudoContract {
 }
 
 export const MsgSudoContract = {
+  $type: "cosmwasm.wasm.v1.MsgSudoContract" as const,
+
   encode(message: MsgSudoContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1899,7 +1919,6 @@ export const MsgSudoContract = {
   create(base?: DeepPartial<MsgSudoContract>): MsgSudoContract {
     return MsgSudoContract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSudoContract>): MsgSudoContract {
     const message = createBaseMsgSudoContract();
     message.authority = object.authority ?? "";
@@ -1914,6 +1933,8 @@ function createBaseMsgSudoContractResponse(): MsgSudoContractResponse {
 }
 
 export const MsgSudoContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgSudoContractResponse" as const,
+
   encode(message: MsgSudoContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -1959,7 +1980,6 @@ export const MsgSudoContractResponse = {
   create(base?: DeepPartial<MsgSudoContractResponse>): MsgSudoContractResponse {
     return MsgSudoContractResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgSudoContractResponse>): MsgSudoContractResponse {
     const message = createBaseMsgSudoContractResponse();
     message.data = object.data ?? new Uint8Array(0);
@@ -1972,6 +1992,8 @@ function createBaseMsgPinCodes(): MsgPinCodes {
 }
 
 export const MsgPinCodes = {
+  $type: "cosmwasm.wasm.v1.MsgPinCodes" as const,
+
   encode(message: MsgPinCodes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2045,7 +2067,6 @@ export const MsgPinCodes = {
   create(base?: DeepPartial<MsgPinCodes>): MsgPinCodes {
     return MsgPinCodes.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgPinCodes>): MsgPinCodes {
     const message = createBaseMsgPinCodes();
     message.authority = object.authority ?? "";
@@ -2059,6 +2080,8 @@ function createBaseMsgPinCodesResponse(): MsgPinCodesResponse {
 }
 
 export const MsgPinCodesResponse = {
+  $type: "cosmwasm.wasm.v1.MsgPinCodesResponse" as const,
+
   encode(_: MsgPinCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2091,7 +2114,6 @@ export const MsgPinCodesResponse = {
   create(base?: DeepPartial<MsgPinCodesResponse>): MsgPinCodesResponse {
     return MsgPinCodesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgPinCodesResponse>): MsgPinCodesResponse {
     const message = createBaseMsgPinCodesResponse();
     return message;
@@ -2103,6 +2125,8 @@ function createBaseMsgUnpinCodes(): MsgUnpinCodes {
 }
 
 export const MsgUnpinCodes = {
+  $type: "cosmwasm.wasm.v1.MsgUnpinCodes" as const,
+
   encode(message: MsgUnpinCodes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2176,7 +2200,6 @@ export const MsgUnpinCodes = {
   create(base?: DeepPartial<MsgUnpinCodes>): MsgUnpinCodes {
     return MsgUnpinCodes.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgUnpinCodes>): MsgUnpinCodes {
     const message = createBaseMsgUnpinCodes();
     message.authority = object.authority ?? "";
@@ -2190,6 +2213,8 @@ function createBaseMsgUnpinCodesResponse(): MsgUnpinCodesResponse {
 }
 
 export const MsgUnpinCodesResponse = {
+  $type: "cosmwasm.wasm.v1.MsgUnpinCodesResponse" as const,
+
   encode(_: MsgUnpinCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2222,7 +2247,6 @@ export const MsgUnpinCodesResponse = {
   create(base?: DeepPartial<MsgUnpinCodesResponse>): MsgUnpinCodesResponse {
     return MsgUnpinCodesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgUnpinCodesResponse>): MsgUnpinCodesResponse {
     const message = createBaseMsgUnpinCodesResponse();
     return message;
@@ -2246,6 +2270,8 @@ function createBaseMsgStoreAndInstantiateContract(): MsgStoreAndInstantiateContr
 }
 
 export const MsgStoreAndInstantiateContract = {
+  $type: "cosmwasm.wasm.v1.MsgStoreAndInstantiateContract" as const,
+
   encode(message: MsgStoreAndInstantiateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2435,7 +2461,6 @@ export const MsgStoreAndInstantiateContract = {
   create(base?: DeepPartial<MsgStoreAndInstantiateContract>): MsgStoreAndInstantiateContract {
     return MsgStoreAndInstantiateContract.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgStoreAndInstantiateContract>): MsgStoreAndInstantiateContract {
     const message = createBaseMsgStoreAndInstantiateContract();
     message.authority = object.authority ?? "";
@@ -2461,6 +2486,8 @@ function createBaseMsgStoreAndInstantiateContractResponse(): MsgStoreAndInstanti
 }
 
 export const MsgStoreAndInstantiateContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgStoreAndInstantiateContractResponse" as const,
+
   encode(message: MsgStoreAndInstantiateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -2522,7 +2549,6 @@ export const MsgStoreAndInstantiateContractResponse = {
   create(base?: DeepPartial<MsgStoreAndInstantiateContractResponse>): MsgStoreAndInstantiateContractResponse {
     return MsgStoreAndInstantiateContractResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgStoreAndInstantiateContractResponse>): MsgStoreAndInstantiateContractResponse {
     const message = createBaseMsgStoreAndInstantiateContractResponse();
     message.address = object.address ?? "";
@@ -2536,6 +2562,8 @@ function createBaseMsgAddCodeUploadParamsAddresses(): MsgAddCodeUploadParamsAddr
 }
 
 export const MsgAddCodeUploadParamsAddresses = {
+  $type: "cosmwasm.wasm.v1.MsgAddCodeUploadParamsAddresses" as const,
+
   encode(message: MsgAddCodeUploadParamsAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2597,7 +2625,6 @@ export const MsgAddCodeUploadParamsAddresses = {
   create(base?: DeepPartial<MsgAddCodeUploadParamsAddresses>): MsgAddCodeUploadParamsAddresses {
     return MsgAddCodeUploadParamsAddresses.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgAddCodeUploadParamsAddresses>): MsgAddCodeUploadParamsAddresses {
     const message = createBaseMsgAddCodeUploadParamsAddresses();
     message.authority = object.authority ?? "";
@@ -2611,6 +2638,8 @@ function createBaseMsgAddCodeUploadParamsAddressesResponse(): MsgAddCodeUploadPa
 }
 
 export const MsgAddCodeUploadParamsAddressesResponse = {
+  $type: "cosmwasm.wasm.v1.MsgAddCodeUploadParamsAddressesResponse" as const,
+
   encode(_: MsgAddCodeUploadParamsAddressesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2643,7 +2672,6 @@ export const MsgAddCodeUploadParamsAddressesResponse = {
   create(base?: DeepPartial<MsgAddCodeUploadParamsAddressesResponse>): MsgAddCodeUploadParamsAddressesResponse {
     return MsgAddCodeUploadParamsAddressesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgAddCodeUploadParamsAddressesResponse>): MsgAddCodeUploadParamsAddressesResponse {
     const message = createBaseMsgAddCodeUploadParamsAddressesResponse();
     return message;
@@ -2655,6 +2683,8 @@ function createBaseMsgRemoveCodeUploadParamsAddresses(): MsgRemoveCodeUploadPara
 }
 
 export const MsgRemoveCodeUploadParamsAddresses = {
+  $type: "cosmwasm.wasm.v1.MsgRemoveCodeUploadParamsAddresses" as const,
+
   encode(message: MsgRemoveCodeUploadParamsAddresses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2716,7 +2746,6 @@ export const MsgRemoveCodeUploadParamsAddresses = {
   create(base?: DeepPartial<MsgRemoveCodeUploadParamsAddresses>): MsgRemoveCodeUploadParamsAddresses {
     return MsgRemoveCodeUploadParamsAddresses.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgRemoveCodeUploadParamsAddresses>): MsgRemoveCodeUploadParamsAddresses {
     const message = createBaseMsgRemoveCodeUploadParamsAddresses();
     message.authority = object.authority ?? "";
@@ -2730,6 +2759,8 @@ function createBaseMsgRemoveCodeUploadParamsAddressesResponse(): MsgRemoveCodeUp
 }
 
 export const MsgRemoveCodeUploadParamsAddressesResponse = {
+  $type: "cosmwasm.wasm.v1.MsgRemoveCodeUploadParamsAddressesResponse" as const,
+
   encode(_: MsgRemoveCodeUploadParamsAddressesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -2762,7 +2793,6 @@ export const MsgRemoveCodeUploadParamsAddressesResponse = {
   create(base?: DeepPartial<MsgRemoveCodeUploadParamsAddressesResponse>): MsgRemoveCodeUploadParamsAddressesResponse {
     return MsgRemoveCodeUploadParamsAddressesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<MsgRemoveCodeUploadParamsAddressesResponse>): MsgRemoveCodeUploadParamsAddressesResponse {
     const message = createBaseMsgRemoveCodeUploadParamsAddressesResponse();
     return message;

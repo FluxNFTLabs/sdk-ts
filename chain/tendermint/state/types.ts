@@ -83,6 +83,8 @@ function createBaseABCIResponses(): ABCIResponses {
 }
 
 export const ABCIResponses = {
+  $type: "tendermint.state.ABCIResponses" as const,
+
   encode(message: ABCIResponses, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deliverTxs) {
       ResponseDeliverTx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -160,7 +162,6 @@ export const ABCIResponses = {
   create(base?: DeepPartial<ABCIResponses>): ABCIResponses {
     return ABCIResponses.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ABCIResponses>): ABCIResponses {
     const message = createBaseABCIResponses();
     message.deliverTxs = object.deliverTxs?.map((e) => ResponseDeliverTx.fromPartial(e)) || [];
@@ -179,6 +180,8 @@ function createBaseValidatorsInfo(): ValidatorsInfo {
 }
 
 export const ValidatorsInfo = {
+  $type: "tendermint.state.ValidatorsInfo" as const,
+
   encode(message: ValidatorsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorSet !== undefined) {
       ValidatorSet.encode(message.validatorSet, writer.uint32(10).fork()).ldelim();
@@ -240,7 +243,6 @@ export const ValidatorsInfo = {
   create(base?: DeepPartial<ValidatorsInfo>): ValidatorsInfo {
     return ValidatorsInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorsInfo>): ValidatorsInfo {
     const message = createBaseValidatorsInfo();
     message.validatorSet = (object.validatorSet !== undefined && object.validatorSet !== null)
@@ -256,6 +258,8 @@ function createBaseConsensusParamsInfo(): ConsensusParamsInfo {
 }
 
 export const ConsensusParamsInfo = {
+  $type: "tendermint.state.ConsensusParamsInfo" as const,
+
   encode(message: ConsensusParamsInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensusParams !== undefined) {
       ConsensusParams.encode(message.consensusParams, writer.uint32(10).fork()).ldelim();
@@ -317,7 +321,6 @@ export const ConsensusParamsInfo = {
   create(base?: DeepPartial<ConsensusParamsInfo>): ConsensusParamsInfo {
     return ConsensusParamsInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConsensusParamsInfo>): ConsensusParamsInfo {
     const message = createBaseConsensusParamsInfo();
     message.consensusParams = (object.consensusParams !== undefined && object.consensusParams !== null)
@@ -333,6 +336,8 @@ function createBaseABCIResponsesInfo(): ABCIResponsesInfo {
 }
 
 export const ABCIResponsesInfo = {
+  $type: "tendermint.state.ABCIResponsesInfo" as const,
+
   encode(message: ABCIResponsesInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.abciResponses !== undefined) {
       ABCIResponses.encode(message.abciResponses, writer.uint32(10).fork()).ldelim();
@@ -394,7 +399,6 @@ export const ABCIResponsesInfo = {
   create(base?: DeepPartial<ABCIResponsesInfo>): ABCIResponsesInfo {
     return ABCIResponsesInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ABCIResponsesInfo>): ABCIResponsesInfo {
     const message = createBaseABCIResponsesInfo();
     message.abciResponses = (object.abciResponses !== undefined && object.abciResponses !== null)
@@ -410,6 +414,8 @@ function createBaseVersion(): Version {
 }
 
 export const Version = {
+  $type: "tendermint.state.Version" as const,
+
   encode(message: Version, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.consensus !== undefined) {
       Consensus.encode(message.consensus, writer.uint32(10).fork()).ldelim();
@@ -471,7 +477,6 @@ export const Version = {
   create(base?: DeepPartial<Version>): Version {
     return Version.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
     message.consensus = (object.consensus !== undefined && object.consensus !== null)
@@ -502,6 +507,8 @@ function createBaseState(): State {
 }
 
 export const State = {
+  $type: "tendermint.state.State" as const,
+
   encode(message: State, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.version !== undefined) {
       Version.encode(message.version, writer.uint32(10).fork()).ldelim();
@@ -735,7 +742,6 @@ export const State = {
   create(base?: DeepPartial<State>): State {
     return State.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<State>): State {
     const message = createBaseState();
     message.version = (object.version !== undefined && object.version !== null)

@@ -51,6 +51,8 @@ function createBaseBaseAccount(): BaseAccount {
 }
 
 export const BaseAccount = {
+  $type: "cosmos.auth.v1beta1.BaseAccount" as const,
+
   encode(message: BaseAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -140,7 +142,6 @@ export const BaseAccount = {
   create(base?: DeepPartial<BaseAccount>): BaseAccount {
     return BaseAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
@@ -158,6 +159,8 @@ function createBaseModuleAccount(): ModuleAccount {
 }
 
 export const ModuleAccount = {
+  $type: "cosmos.auth.v1beta1.ModuleAccount" as const,
+
   encode(message: ModuleAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
@@ -233,7 +236,6 @@ export const ModuleAccount = {
   create(base?: DeepPartial<ModuleAccount>): ModuleAccount {
     return ModuleAccount.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
     const message = createBaseModuleAccount();
     message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)
@@ -250,6 +252,8 @@ function createBaseModuleCredential(): ModuleCredential {
 }
 
 export const ModuleCredential = {
+  $type: "cosmos.auth.v1beta1.ModuleCredential" as const,
+
   encode(message: ModuleCredential, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.moduleName !== "") {
       writer.uint32(10).string(message.moduleName);
@@ -313,7 +317,6 @@ export const ModuleCredential = {
   create(base?: DeepPartial<ModuleCredential>): ModuleCredential {
     return ModuleCredential.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleCredential>): ModuleCredential {
     const message = createBaseModuleCredential();
     message.moduleName = object.moduleName ?? "";
@@ -333,6 +336,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.auth.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxMemoCharacters !== "0") {
       writer.uint32(8).uint64(message.maxMemoCharacters);
@@ -436,7 +441,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.maxMemoCharacters = object.maxMemoCharacters ?? "0";

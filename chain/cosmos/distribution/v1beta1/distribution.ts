@@ -148,6 +148,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "cosmos.distribution.v1beta1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.communityTax !== "") {
       writer.uint32(10).string(message.communityTax);
@@ -237,7 +239,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.communityTax = object.communityTax ?? "";
@@ -253,6 +254,8 @@ function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
 }
 
 export const ValidatorHistoricalRewards = {
+  $type: "cosmos.distribution.v1beta1.ValidatorHistoricalRewards" as const,
+
   encode(message: ValidatorHistoricalRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.cumulativeRewardRatio) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -316,7 +319,6 @@ export const ValidatorHistoricalRewards = {
   create(base?: DeepPartial<ValidatorHistoricalRewards>): ValidatorHistoricalRewards {
     return ValidatorHistoricalRewards.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorHistoricalRewards>): ValidatorHistoricalRewards {
     const message = createBaseValidatorHistoricalRewards();
     message.cumulativeRewardRatio = object.cumulativeRewardRatio?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -330,6 +332,8 @@ function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
 }
 
 export const ValidatorCurrentRewards = {
+  $type: "cosmos.distribution.v1beta1.ValidatorCurrentRewards" as const,
+
   encode(message: ValidatorCurrentRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -391,7 +395,6 @@ export const ValidatorCurrentRewards = {
   create(base?: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     return ValidatorCurrentRewards.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -405,6 +408,8 @@ function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommiss
 }
 
 export const ValidatorAccumulatedCommission = {
+  $type: "cosmos.distribution.v1beta1.ValidatorAccumulatedCommission" as const,
+
   encode(message: ValidatorAccumulatedCommission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.commission) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -452,7 +457,6 @@ export const ValidatorAccumulatedCommission = {
   create(base?: DeepPartial<ValidatorAccumulatedCommission>): ValidatorAccumulatedCommission {
     return ValidatorAccumulatedCommission.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorAccumulatedCommission>): ValidatorAccumulatedCommission {
     const message = createBaseValidatorAccumulatedCommission();
     message.commission = object.commission?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -465,6 +469,8 @@ function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
 }
 
 export const ValidatorOutstandingRewards = {
+  $type: "cosmos.distribution.v1beta1.ValidatorOutstandingRewards" as const,
+
   encode(message: ValidatorOutstandingRewards, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -510,7 +516,6 @@ export const ValidatorOutstandingRewards = {
   create(base?: DeepPartial<ValidatorOutstandingRewards>): ValidatorOutstandingRewards {
     return ValidatorOutstandingRewards.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorOutstandingRewards>): ValidatorOutstandingRewards {
     const message = createBaseValidatorOutstandingRewards();
     message.rewards = object.rewards?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -523,6 +528,8 @@ function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
 }
 
 export const ValidatorSlashEvent = {
+  $type: "cosmos.distribution.v1beta1.ValidatorSlashEvent" as const,
+
   encode(message: ValidatorSlashEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorPeriod !== "0") {
       writer.uint32(8).uint64(message.validatorPeriod);
@@ -584,7 +591,6 @@ export const ValidatorSlashEvent = {
   create(base?: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     return ValidatorSlashEvent.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
     message.validatorPeriod = object.validatorPeriod ?? "0";
@@ -598,6 +604,8 @@ function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
 }
 
 export const ValidatorSlashEvents = {
+  $type: "cosmos.distribution.v1beta1.ValidatorSlashEvents" as const,
+
   encode(message: ValidatorSlashEvents, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.validatorSlashEvents) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -647,7 +655,6 @@ export const ValidatorSlashEvents = {
   create(base?: DeepPartial<ValidatorSlashEvents>): ValidatorSlashEvents {
     return ValidatorSlashEvents.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValidatorSlashEvents>): ValidatorSlashEvents {
     const message = createBaseValidatorSlashEvents();
     message.validatorSlashEvents = object.validatorSlashEvents?.map((e) => ValidatorSlashEvent.fromPartial(e)) || [];
@@ -660,6 +667,8 @@ function createBaseFeePool(): FeePool {
 }
 
 export const FeePool = {
+  $type: "cosmos.distribution.v1beta1.FeePool" as const,
+
   encode(message: FeePool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.communityPool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -709,7 +718,6 @@ export const FeePool = {
   create(base?: DeepPartial<FeePool>): FeePool {
     return FeePool.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FeePool>): FeePool {
     const message = createBaseFeePool();
     message.communityPool = object.communityPool?.map((e) => DecCoin.fromPartial(e)) || [];
@@ -722,6 +730,8 @@ function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
 }
 
 export const CommunityPoolSpendProposal = {
+  $type: "cosmos.distribution.v1beta1.CommunityPoolSpendProposal" as const,
+
   encode(message: CommunityPoolSpendProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -811,7 +821,6 @@ export const CommunityPoolSpendProposal = {
   create(base?: DeepPartial<CommunityPoolSpendProposal>): CommunityPoolSpendProposal {
     return CommunityPoolSpendProposal.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommunityPoolSpendProposal>): CommunityPoolSpendProposal {
     const message = createBaseCommunityPoolSpendProposal();
     message.title = object.title ?? "";
@@ -827,6 +836,8 @@ function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
 }
 
 export const DelegatorStartingInfo = {
+  $type: "cosmos.distribution.v1beta1.DelegatorStartingInfo" as const,
+
   encode(message: DelegatorStartingInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.previousPeriod !== "0") {
       writer.uint32(8).uint64(message.previousPeriod);
@@ -902,7 +913,6 @@ export const DelegatorStartingInfo = {
   create(base?: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     return DelegatorStartingInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
     message.previousPeriod = object.previousPeriod ?? "0";
@@ -917,6 +927,8 @@ function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
 }
 
 export const DelegationDelegatorReward = {
+  $type: "cosmos.distribution.v1beta1.DelegationDelegatorReward" as const,
+
   encode(message: DelegationDelegatorReward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validatorAddress !== "") {
       writer.uint32(10).string(message.validatorAddress);
@@ -978,7 +990,6 @@ export const DelegationDelegatorReward = {
   create(base?: DeepPartial<DelegationDelegatorReward>): DelegationDelegatorReward {
     return DelegationDelegatorReward.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DelegationDelegatorReward>): DelegationDelegatorReward {
     const message = createBaseDelegationDelegatorReward();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -992,6 +1003,8 @@ function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendPr
 }
 
 export const CommunityPoolSpendProposalWithDeposit = {
+  $type: "cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit" as const,
+
   encode(message: CommunityPoolSpendProposalWithDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -1095,7 +1108,6 @@ export const CommunityPoolSpendProposalWithDeposit = {
   create(base?: DeepPartial<CommunityPoolSpendProposalWithDeposit>): CommunityPoolSpendProposalWithDeposit {
     return CommunityPoolSpendProposalWithDeposit.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<CommunityPoolSpendProposalWithDeposit>): CommunityPoolSpendProposalWithDeposit {
     const message = createBaseCommunityPoolSpendProposalWithDeposit();
     message.title = object.title ?? "";

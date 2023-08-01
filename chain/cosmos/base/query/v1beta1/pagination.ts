@@ -72,6 +72,8 @@ function createBasePageRequest(): PageRequest {
 }
 
 export const PageRequest = {
+  $type: "cosmos.base.query.v1beta1.PageRequest" as const,
+
   encode(message: PageRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -175,7 +177,6 @@ export const PageRequest = {
   create(base?: DeepPartial<PageRequest>): PageRequest {
     return PageRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array(0);
@@ -192,6 +193,8 @@ function createBasePageResponse(): PageResponse {
 }
 
 export const PageResponse = {
+  $type: "cosmos.base.query.v1beta1.PageResponse" as const,
+
   encode(message: PageResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
@@ -253,7 +256,6 @@ export const PageResponse = {
   create(base?: DeepPartial<PageResponse>): PageResponse {
     return PageResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array(0);

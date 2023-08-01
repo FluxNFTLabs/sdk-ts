@@ -43,6 +43,8 @@ function createBaseProof(): Proof {
 }
 
 export const Proof = {
+  $type: "tendermint.crypto.Proof" as const,
+
   encode(message: Proof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.total !== "0") {
       writer.uint32(8).int64(message.total);
@@ -132,7 +134,6 @@ export const Proof = {
   create(base?: DeepPartial<Proof>): Proof {
     return Proof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Proof>): Proof {
     const message = createBaseProof();
     message.total = object.total ?? "0";
@@ -148,6 +149,8 @@ function createBaseValueOp(): ValueOp {
 }
 
 export const ValueOp = {
+  $type: "tendermint.crypto.ValueOp" as const,
+
   encode(message: ValueOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -209,7 +212,6 @@ export const ValueOp = {
   create(base?: DeepPartial<ValueOp>): ValueOp {
     return ValueOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ValueOp>): ValueOp {
     const message = createBaseValueOp();
     message.key = object.key ?? new Uint8Array(0);
@@ -223,6 +225,8 @@ function createBaseDominoOp(): DominoOp {
 }
 
 export const DominoOp = {
+  $type: "tendermint.crypto.DominoOp" as const,
+
   encode(message: DominoOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -298,7 +302,6 @@ export const DominoOp = {
   create(base?: DeepPartial<DominoOp>): DominoOp {
     return DominoOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DominoOp>): DominoOp {
     const message = createBaseDominoOp();
     message.key = object.key ?? "";
@@ -313,6 +316,8 @@ function createBaseProofOp(): ProofOp {
 }
 
 export const ProofOp = {
+  $type: "tendermint.crypto.ProofOp" as const,
+
   encode(message: ProofOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -388,7 +393,6 @@ export const ProofOp = {
   create(base?: DeepPartial<ProofOp>): ProofOp {
     return ProofOp.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProofOp>): ProofOp {
     const message = createBaseProofOp();
     message.type = object.type ?? "";
@@ -403,6 +407,8 @@ function createBaseProofOps(): ProofOps {
 }
 
 export const ProofOps = {
+  $type: "tendermint.crypto.ProofOps" as const,
+
   encode(message: ProofOps, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.ops) {
       ProofOp.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -448,7 +454,6 @@ export const ProofOps = {
   create(base?: DeepPartial<ProofOps>): ProofOps {
     return ProofOps.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProofOps>): ProofOps {
     const message = createBaseProofOps();
     message.ops = object.ops?.map((e) => ProofOp.fromPartial(e)) || [];

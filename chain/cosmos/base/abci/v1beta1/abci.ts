@@ -190,6 +190,8 @@ function createBaseTxResponse(): TxResponse {
 }
 
 export const TxResponse = {
+  $type: "cosmos.base.abci.v1beta1.TxResponse" as const,
+
   encode(message: TxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -405,7 +407,6 @@ export const TxResponse = {
   create(base?: DeepPartial<TxResponse>): TxResponse {
     return TxResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
     message.height = object.height ?? "0";
@@ -430,6 +431,8 @@ function createBaseABCIMessageLog(): ABCIMessageLog {
 }
 
 export const ABCIMessageLog = {
+  $type: "cosmos.base.abci.v1beta1.ABCIMessageLog" as const,
+
   encode(message: ABCIMessageLog, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgIndex !== 0) {
       writer.uint32(8).uint32(message.msgIndex);
@@ -505,7 +508,6 @@ export const ABCIMessageLog = {
   create(base?: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     return ABCIMessageLog.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
     message.msgIndex = object.msgIndex ?? 0;
@@ -520,6 +522,8 @@ function createBaseStringEvent(): StringEvent {
 }
 
 export const StringEvent = {
+  $type: "cosmos.base.abci.v1beta1.StringEvent" as const,
+
   encode(message: StringEvent, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -581,7 +585,6 @@ export const StringEvent = {
   create(base?: DeepPartial<StringEvent>): StringEvent {
     return StringEvent.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<StringEvent>): StringEvent {
     const message = createBaseStringEvent();
     message.type = object.type ?? "";
@@ -595,6 +598,8 @@ function createBaseAttribute(): Attribute {
 }
 
 export const Attribute = {
+  $type: "cosmos.base.abci.v1beta1.Attribute" as const,
+
   encode(message: Attribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -653,7 +658,6 @@ export const Attribute = {
   create(base?: DeepPartial<Attribute>): Attribute {
     return Attribute.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
@@ -667,6 +671,8 @@ function createBaseGasInfo(): GasInfo {
 }
 
 export const GasInfo = {
+  $type: "cosmos.base.abci.v1beta1.GasInfo" as const,
+
   encode(message: GasInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gasWanted !== "0") {
       writer.uint32(8).uint64(message.gasWanted);
@@ -728,7 +734,6 @@ export const GasInfo = {
   create(base?: DeepPartial<GasInfo>): GasInfo {
     return GasInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
     message.gasWanted = object.gasWanted ?? "0";
@@ -742,6 +747,8 @@ function createBaseResult(): Result {
 }
 
 export const Result = {
+  $type: "cosmos.base.abci.v1beta1.Result" as const,
+
   encode(message: Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
@@ -831,7 +838,6 @@ export const Result = {
   create(base?: DeepPartial<Result>): Result {
     return Result.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Result>): Result {
     const message = createBaseResult();
     message.data = object.data ?? new Uint8Array(0);
@@ -847,6 +853,8 @@ function createBaseSimulationResponse(): SimulationResponse {
 }
 
 export const SimulationResponse = {
+  $type: "cosmos.base.abci.v1beta1.SimulationResponse" as const,
+
   encode(message: SimulationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
@@ -908,7 +916,6 @@ export const SimulationResponse = {
   create(base?: DeepPartial<SimulationResponse>): SimulationResponse {
     return SimulationResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
     message.gasInfo = (object.gasInfo !== undefined && object.gasInfo !== null)
@@ -926,6 +933,8 @@ function createBaseMsgData(): MsgData {
 }
 
 export const MsgData = {
+  $type: "cosmos.base.abci.v1beta1.MsgData" as const,
+
   encode(message: MsgData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgType !== "") {
       writer.uint32(10).string(message.msgType);
@@ -987,7 +996,6 @@ export const MsgData = {
   create(base?: DeepPartial<MsgData>): MsgData {
     return MsgData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
     message.msgType = object.msgType ?? "";
@@ -1001,6 +1009,8 @@ function createBaseTxMsgData(): TxMsgData {
 }
 
 export const TxMsgData = {
+  $type: "cosmos.base.abci.v1beta1.TxMsgData" as const,
+
   encode(message: TxMsgData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.data) {
       MsgData.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1062,7 +1072,6 @@ export const TxMsgData = {
   create(base?: DeepPartial<TxMsgData>): TxMsgData {
     return TxMsgData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxMsgData>): TxMsgData {
     const message = createBaseTxMsgData();
     message.data = object.data?.map((e) => MsgData.fromPartial(e)) || [];
@@ -1076,6 +1085,8 @@ function createBaseSearchTxsResult(): SearchTxsResult {
 }
 
 export const SearchTxsResult = {
+  $type: "cosmos.base.abci.v1beta1.SearchTxsResult" as const,
+
   encode(message: SearchTxsResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.totalCount !== "0") {
       writer.uint32(8).uint64(message.totalCount);
@@ -1193,7 +1204,6 @@ export const SearchTxsResult = {
   create(base?: DeepPartial<SearchTxsResult>): SearchTxsResult {
     return SearchTxsResult.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
     message.totalCount = object.totalCount ?? "0";

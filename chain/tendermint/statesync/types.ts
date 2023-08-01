@@ -44,6 +44,8 @@ function createBaseMessage(): Message {
 }
 
 export const Message = {
+  $type: "tendermint.statesync.Message" as const,
+
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.snapshotsRequest !== undefined) {
       SnapshotsRequest.encode(message.snapshotsRequest, writer.uint32(10).fork()).ldelim();
@@ -135,7 +137,6 @@ export const Message = {
   create(base?: DeepPartial<Message>): Message {
     return Message.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
     message.snapshotsRequest = (object.snapshotsRequest !== undefined && object.snapshotsRequest !== null)
@@ -159,6 +160,8 @@ function createBaseSnapshotsRequest(): SnapshotsRequest {
 }
 
 export const SnapshotsRequest = {
+  $type: "tendermint.statesync.SnapshotsRequest" as const,
+
   encode(_: SnapshotsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -191,7 +194,6 @@ export const SnapshotsRequest = {
   create(base?: DeepPartial<SnapshotsRequest>): SnapshotsRequest {
     return SnapshotsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<SnapshotsRequest>): SnapshotsRequest {
     const message = createBaseSnapshotsRequest();
     return message;
@@ -203,6 +205,8 @@ function createBaseSnapshotsResponse(): SnapshotsResponse {
 }
 
 export const SnapshotsResponse = {
+  $type: "tendermint.statesync.SnapshotsResponse" as const,
+
   encode(message: SnapshotsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -306,7 +310,6 @@ export const SnapshotsResponse = {
   create(base?: DeepPartial<SnapshotsResponse>): SnapshotsResponse {
     return SnapshotsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SnapshotsResponse>): SnapshotsResponse {
     const message = createBaseSnapshotsResponse();
     message.height = object.height ?? "0";
@@ -323,6 +326,8 @@ function createBaseChunkRequest(): ChunkRequest {
 }
 
 export const ChunkRequest = {
+  $type: "tendermint.statesync.ChunkRequest" as const,
+
   encode(message: ChunkRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -398,7 +403,6 @@ export const ChunkRequest = {
   create(base?: DeepPartial<ChunkRequest>): ChunkRequest {
     return ChunkRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ChunkRequest>): ChunkRequest {
     const message = createBaseChunkRequest();
     message.height = object.height ?? "0";
@@ -413,6 +417,8 @@ function createBaseChunkResponse(): ChunkResponse {
 }
 
 export const ChunkResponse = {
+  $type: "tendermint.statesync.ChunkResponse" as const,
+
   encode(message: ChunkResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -516,7 +522,6 @@ export const ChunkResponse = {
   create(base?: DeepPartial<ChunkResponse>): ChunkResponse {
     return ChunkResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ChunkResponse>): ChunkResponse {
     const message = createBaseChunkResponse();
     message.height = object.height ?? "0";

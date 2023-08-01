@@ -31,6 +31,8 @@ function createBaseEventsRequest(): EventsRequest {
 }
 
 export const EventsRequest = {
+  $type: "flux.stream.v1beta1.EventsRequest" as const,
+
   encode(message: EventsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -106,7 +108,6 @@ export const EventsRequest = {
   create(base?: DeepPartial<EventsRequest>): EventsRequest {
     return EventsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventsRequest>): EventsRequest {
     const message = createBaseEventsRequest();
     message.height = object.height ?? "0";
@@ -121,6 +122,8 @@ function createBaseEventsResponse(): EventsResponse {
 }
 
 export const EventsResponse = {
+  $type: "flux.stream.v1beta1.EventsResponse" as const,
+
   encode(message: EventsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
@@ -238,7 +241,6 @@ export const EventsResponse = {
   create(base?: DeepPartial<EventsResponse>): EventsResponse {
     return EventsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventsResponse>): EventsResponse {
     const message = createBaseEventsResponse();
     message.height = object.height ?? "0";
@@ -256,6 +258,8 @@ function createBaseEvents(): Events {
 }
 
 export const Events = {
+  $type: "flux.stream.v1beta1.Events" as const,
+
   encode(message: Events, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.rawEvents) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -301,7 +305,6 @@ export const Events = {
   create(base?: DeepPartial<Events>): Events {
     return Events.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Events>): Events {
     const message = createBaseEvents();
     message.rawEvents = object.rawEvents?.map((e) => Any.fromPartial(e)) || [];

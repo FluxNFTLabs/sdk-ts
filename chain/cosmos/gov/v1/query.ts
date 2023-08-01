@@ -178,6 +178,8 @@ function createBaseQueryProposalRequest(): QueryProposalRequest {
 }
 
 export const QueryProposalRequest = {
+  $type: "cosmos.gov.v1.QueryProposalRequest" as const,
+
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -223,7 +225,6 @@ export const QueryProposalRequest = {
   create(base?: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     return QueryProposalRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -236,6 +237,8 @@ function createBaseQueryProposalResponse(): QueryProposalResponse {
 }
 
 export const QueryProposalResponse = {
+  $type: "cosmos.gov.v1.QueryProposalResponse" as const,
+
   encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
@@ -281,7 +284,6 @@ export const QueryProposalResponse = {
   create(base?: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     return QueryProposalResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
@@ -296,6 +298,8 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
 }
 
 export const QueryProposalsRequest = {
+  $type: "cosmos.gov.v1.QueryProposalsRequest" as const,
+
   encode(message: QueryProposalsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalStatus !== 0) {
       writer.uint32(8).int32(message.proposalStatus);
@@ -385,7 +389,6 @@ export const QueryProposalsRequest = {
   create(base?: DeepPartial<QueryProposalsRequest>): QueryProposalsRequest {
     return QueryProposalsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalsRequest>): QueryProposalsRequest {
     const message = createBaseQueryProposalsRequest();
     message.proposalStatus = object.proposalStatus ?? 0;
@@ -403,6 +406,8 @@ function createBaseQueryProposalsResponse(): QueryProposalsResponse {
 }
 
 export const QueryProposalsResponse = {
+  $type: "cosmos.gov.v1.QueryProposalsResponse" as const,
+
   encode(message: QueryProposalsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -464,7 +469,6 @@ export const QueryProposalsResponse = {
   create(base?: DeepPartial<QueryProposalsResponse>): QueryProposalsResponse {
     return QueryProposalsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryProposalsResponse>): QueryProposalsResponse {
     const message = createBaseQueryProposalsResponse();
     message.proposals = object.proposals?.map((e) => Proposal.fromPartial(e)) || [];
@@ -480,6 +484,8 @@ function createBaseQueryVoteRequest(): QueryVoteRequest {
 }
 
 export const QueryVoteRequest = {
+  $type: "cosmos.gov.v1.QueryVoteRequest" as const,
+
   encode(message: QueryVoteRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -541,7 +547,6 @@ export const QueryVoteRequest = {
   create(base?: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     return QueryVoteRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     const message = createBaseQueryVoteRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -555,6 +560,8 @@ function createBaseQueryVoteResponse(): QueryVoteResponse {
 }
 
 export const QueryVoteResponse = {
+  $type: "cosmos.gov.v1.QueryVoteResponse" as const,
+
   encode(message: QueryVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
@@ -600,7 +607,6 @@ export const QueryVoteResponse = {
   create(base?: DeepPartial<QueryVoteResponse>): QueryVoteResponse {
     return QueryVoteResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVoteResponse>): QueryVoteResponse {
     const message = createBaseQueryVoteResponse();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
@@ -613,6 +619,8 @@ function createBaseQueryVotesRequest(): QueryVotesRequest {
 }
 
 export const QueryVotesRequest = {
+  $type: "cosmos.gov.v1.QueryVotesRequest" as const,
+
   encode(message: QueryVotesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -674,7 +682,6 @@ export const QueryVotesRequest = {
   create(base?: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     return QueryVotesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = createBaseQueryVotesRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -690,6 +697,8 @@ function createBaseQueryVotesResponse(): QueryVotesResponse {
 }
 
 export const QueryVotesResponse = {
+  $type: "cosmos.gov.v1.QueryVotesResponse" as const,
+
   encode(message: QueryVotesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -751,7 +760,6 @@ export const QueryVotesResponse = {
   create(base?: DeepPartial<QueryVotesResponse>): QueryVotesResponse {
     return QueryVotesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryVotesResponse>): QueryVotesResponse {
     const message = createBaseQueryVotesResponse();
     message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
@@ -767,6 +775,8 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
+  $type: "cosmos.gov.v1.QueryParamsRequest" as const,
+
   encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.paramsType !== "") {
       writer.uint32(10).string(message.paramsType);
@@ -812,7 +822,6 @@ export const QueryParamsRequest = {
   create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     return QueryParamsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     message.paramsType = object.paramsType ?? "";
@@ -825,6 +834,8 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
+  $type: "cosmos.gov.v1.QueryParamsResponse" as const,
+
   encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingParams !== undefined) {
       VotingParams.encode(message.votingParams, writer.uint32(10).fork()).ldelim();
@@ -914,7 +925,6 @@ export const QueryParamsResponse = {
   create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     return QueryParamsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.votingParams = (object.votingParams !== undefined && object.votingParams !== null)
@@ -938,6 +948,8 @@ function createBaseQueryDepositRequest(): QueryDepositRequest {
 }
 
 export const QueryDepositRequest = {
+  $type: "cosmos.gov.v1.QueryDepositRequest" as const,
+
   encode(message: QueryDepositRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -999,7 +1011,6 @@ export const QueryDepositRequest = {
   create(base?: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     return QueryDepositRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     const message = createBaseQueryDepositRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1013,6 +1024,8 @@ function createBaseQueryDepositResponse(): QueryDepositResponse {
 }
 
 export const QueryDepositResponse = {
+  $type: "cosmos.gov.v1.QueryDepositResponse" as const,
+
   encode(message: QueryDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.deposit !== undefined) {
       Deposit.encode(message.deposit, writer.uint32(10).fork()).ldelim();
@@ -1058,7 +1071,6 @@ export const QueryDepositResponse = {
   create(base?: DeepPartial<QueryDepositResponse>): QueryDepositResponse {
     return QueryDepositResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDepositResponse>): QueryDepositResponse {
     const message = createBaseQueryDepositResponse();
     message.deposit = (object.deposit !== undefined && object.deposit !== null)
@@ -1073,6 +1085,8 @@ function createBaseQueryDepositsRequest(): QueryDepositsRequest {
 }
 
 export const QueryDepositsRequest = {
+  $type: "cosmos.gov.v1.QueryDepositsRequest" as const,
+
   encode(message: QueryDepositsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1134,7 +1148,6 @@ export const QueryDepositsRequest = {
   create(base?: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     return QueryDepositsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = createBaseQueryDepositsRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1150,6 +1163,8 @@ function createBaseQueryDepositsResponse(): QueryDepositsResponse {
 }
 
 export const QueryDepositsResponse = {
+  $type: "cosmos.gov.v1.QueryDepositsResponse" as const,
+
   encode(message: QueryDepositsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.deposits) {
       Deposit.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1211,7 +1226,6 @@ export const QueryDepositsResponse = {
   create(base?: DeepPartial<QueryDepositsResponse>): QueryDepositsResponse {
     return QueryDepositsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryDepositsResponse>): QueryDepositsResponse {
     const message = createBaseQueryDepositsResponse();
     message.deposits = object.deposits?.map((e) => Deposit.fromPartial(e)) || [];
@@ -1227,6 +1241,8 @@ function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
 }
 
 export const QueryTallyResultRequest = {
+  $type: "cosmos.gov.v1.QueryTallyResultRequest" as const,
+
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposalId !== "0") {
       writer.uint32(8).uint64(message.proposalId);
@@ -1272,7 +1288,6 @@ export const QueryTallyResultRequest = {
   create(base?: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     return QueryTallyResultRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
     message.proposalId = object.proposalId ?? "0";
@@ -1285,6 +1300,8 @@ function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
 }
 
 export const QueryTallyResultResponse = {
+  $type: "cosmos.gov.v1.QueryTallyResultResponse" as const,
+
   encode(message: QueryTallyResultResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tally !== undefined) {
       TallyResult.encode(message.tally, writer.uint32(10).fork()).ldelim();
@@ -1330,7 +1347,6 @@ export const QueryTallyResultResponse = {
   create(base?: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     return QueryTallyResultResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {
     const message = createBaseQueryTallyResultResponse();
     message.tally = (object.tally !== undefined && object.tally !== null)

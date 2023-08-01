@@ -350,6 +350,8 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
 }
 
 export const GetTxsEventRequest = {
+  $type: "cosmos.tx.v1beta1.GetTxsEventRequest" as const,
+
   encode(message: GetTxsEventRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.events) {
       writer.uint32(10).string(v!);
@@ -453,7 +455,6 @@ export const GetTxsEventRequest = {
   create(base?: DeepPartial<GetTxsEventRequest>): GetTxsEventRequest {
     return GetTxsEventRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetTxsEventRequest>): GetTxsEventRequest {
     const message = createBaseGetTxsEventRequest();
     message.events = object.events?.map((e) => e) || [];
@@ -472,6 +473,8 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
 }
 
 export const GetTxsEventResponse = {
+  $type: "cosmos.tx.v1beta1.GetTxsEventResponse" as const,
+
   encode(message: GetTxsEventResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -561,7 +564,6 @@ export const GetTxsEventResponse = {
   create(base?: DeepPartial<GetTxsEventResponse>): GetTxsEventResponse {
     return GetTxsEventResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetTxsEventResponse>): GetTxsEventResponse {
     const message = createBaseGetTxsEventResponse();
     message.txs = object.txs?.map((e) => Tx.fromPartial(e)) || [];
@@ -579,6 +581,8 @@ function createBaseBroadcastTxRequest(): BroadcastTxRequest {
 }
 
 export const BroadcastTxRequest = {
+  $type: "cosmos.tx.v1beta1.BroadcastTxRequest" as const,
+
   encode(message: BroadcastTxRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
@@ -640,7 +644,6 @@ export const BroadcastTxRequest = {
   create(base?: DeepPartial<BroadcastTxRequest>): BroadcastTxRequest {
     return BroadcastTxRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BroadcastTxRequest>): BroadcastTxRequest {
     const message = createBaseBroadcastTxRequest();
     message.txBytes = object.txBytes ?? new Uint8Array(0);
@@ -654,6 +657,8 @@ function createBaseBroadcastTxResponse(): BroadcastTxResponse {
 }
 
 export const BroadcastTxResponse = {
+  $type: "cosmos.tx.v1beta1.BroadcastTxResponse" as const,
+
   encode(message: BroadcastTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txResponse !== undefined) {
       TxResponse.encode(message.txResponse, writer.uint32(10).fork()).ldelim();
@@ -699,7 +704,6 @@ export const BroadcastTxResponse = {
   create(base?: DeepPartial<BroadcastTxResponse>): BroadcastTxResponse {
     return BroadcastTxResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<BroadcastTxResponse>): BroadcastTxResponse {
     const message = createBaseBroadcastTxResponse();
     message.txResponse = (object.txResponse !== undefined && object.txResponse !== null)
@@ -714,6 +718,8 @@ function createBaseSimulateRequest(): SimulateRequest {
 }
 
 export const SimulateRequest = {
+  $type: "cosmos.tx.v1beta1.SimulateRequest" as const,
+
   encode(message: SimulateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -775,7 +781,6 @@ export const SimulateRequest = {
   create(base?: DeepPartial<SimulateRequest>): SimulateRequest {
     return SimulateRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SimulateRequest>): SimulateRequest {
     const message = createBaseSimulateRequest();
     message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
@@ -789,6 +794,8 @@ function createBaseSimulateResponse(): SimulateResponse {
 }
 
 export const SimulateResponse = {
+  $type: "cosmos.tx.v1beta1.SimulateResponse" as const,
+
   encode(message: SimulateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
@@ -850,7 +857,6 @@ export const SimulateResponse = {
   create(base?: DeepPartial<SimulateResponse>): SimulateResponse {
     return SimulateResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SimulateResponse>): SimulateResponse {
     const message = createBaseSimulateResponse();
     message.gasInfo = (object.gasInfo !== undefined && object.gasInfo !== null)
@@ -868,6 +874,8 @@ function createBaseGetTxRequest(): GetTxRequest {
 }
 
 export const GetTxRequest = {
+  $type: "cosmos.tx.v1beta1.GetTxRequest" as const,
+
   encode(message: GetTxRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
@@ -913,7 +921,6 @@ export const GetTxRequest = {
   create(base?: DeepPartial<GetTxRequest>): GetTxRequest {
     return GetTxRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetTxRequest>): GetTxRequest {
     const message = createBaseGetTxRequest();
     message.hash = object.hash ?? "";
@@ -926,6 +933,8 @@ function createBaseGetTxResponse(): GetTxResponse {
 }
 
 export const GetTxResponse = {
+  $type: "cosmos.tx.v1beta1.GetTxResponse" as const,
+
   encode(message: GetTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -987,7 +996,6 @@ export const GetTxResponse = {
   create(base?: DeepPartial<GetTxResponse>): GetTxResponse {
     return GetTxResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetTxResponse>): GetTxResponse {
     const message = createBaseGetTxResponse();
     message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
@@ -1003,6 +1011,8 @@ function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
 }
 
 export const GetBlockWithTxsRequest = {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsRequest" as const,
+
   encode(message: GetBlockWithTxsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.height !== "0") {
       writer.uint32(8).int64(message.height);
@@ -1064,7 +1074,6 @@ export const GetBlockWithTxsRequest = {
   create(base?: DeepPartial<GetBlockWithTxsRequest>): GetBlockWithTxsRequest {
     return GetBlockWithTxsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetBlockWithTxsRequest>): GetBlockWithTxsRequest {
     const message = createBaseGetBlockWithTxsRequest();
     message.height = object.height ?? "0";
@@ -1080,6 +1089,8 @@ function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
 }
 
 export const GetBlockWithTxsResponse = {
+  $type: "cosmos.tx.v1beta1.GetBlockWithTxsResponse" as const,
+
   encode(message: GetBlockWithTxsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1169,7 +1180,6 @@ export const GetBlockWithTxsResponse = {
   create(base?: DeepPartial<GetBlockWithTxsResponse>): GetBlockWithTxsResponse {
     return GetBlockWithTxsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetBlockWithTxsResponse>): GetBlockWithTxsResponse {
     const message = createBaseGetBlockWithTxsResponse();
     message.txs = object.txs?.map((e) => Tx.fromPartial(e)) || [];
@@ -1189,6 +1199,8 @@ function createBaseTxDecodeRequest(): TxDecodeRequest {
 }
 
 export const TxDecodeRequest = {
+  $type: "cosmos.tx.v1beta1.TxDecodeRequest" as const,
+
   encode(message: TxDecodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
@@ -1234,7 +1246,6 @@ export const TxDecodeRequest = {
   create(base?: DeepPartial<TxDecodeRequest>): TxDecodeRequest {
     return TxDecodeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxDecodeRequest>): TxDecodeRequest {
     const message = createBaseTxDecodeRequest();
     message.txBytes = object.txBytes ?? new Uint8Array(0);
@@ -1247,6 +1258,8 @@ function createBaseTxDecodeResponse(): TxDecodeResponse {
 }
 
 export const TxDecodeResponse = {
+  $type: "cosmos.tx.v1beta1.TxDecodeResponse" as const,
+
   encode(message: TxDecodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -1292,7 +1305,6 @@ export const TxDecodeResponse = {
   create(base?: DeepPartial<TxDecodeResponse>): TxDecodeResponse {
     return TxDecodeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxDecodeResponse>): TxDecodeResponse {
     const message = createBaseTxDecodeResponse();
     message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
@@ -1305,6 +1317,8 @@ function createBaseTxEncodeRequest(): TxEncodeRequest {
 }
 
 export const TxEncodeRequest = {
+  $type: "cosmos.tx.v1beta1.TxEncodeRequest" as const,
+
   encode(message: TxEncodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -1350,7 +1364,6 @@ export const TxEncodeRequest = {
   create(base?: DeepPartial<TxEncodeRequest>): TxEncodeRequest {
     return TxEncodeRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxEncodeRequest>): TxEncodeRequest {
     const message = createBaseTxEncodeRequest();
     message.tx = (object.tx !== undefined && object.tx !== null) ? Tx.fromPartial(object.tx) : undefined;
@@ -1363,6 +1376,8 @@ function createBaseTxEncodeResponse(): TxEncodeResponse {
 }
 
 export const TxEncodeResponse = {
+  $type: "cosmos.tx.v1beta1.TxEncodeResponse" as const,
+
   encode(message: TxEncodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
@@ -1408,7 +1423,6 @@ export const TxEncodeResponse = {
   create(base?: DeepPartial<TxEncodeResponse>): TxEncodeResponse {
     return TxEncodeResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxEncodeResponse>): TxEncodeResponse {
     const message = createBaseTxEncodeResponse();
     message.txBytes = object.txBytes ?? new Uint8Array(0);
@@ -1421,6 +1435,8 @@ function createBaseTxEncodeAminoRequest(): TxEncodeAminoRequest {
 }
 
 export const TxEncodeAminoRequest = {
+  $type: "cosmos.tx.v1beta1.TxEncodeAminoRequest" as const,
+
   encode(message: TxEncodeAminoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.aminoJson !== "") {
       writer.uint32(10).string(message.aminoJson);
@@ -1466,7 +1482,6 @@ export const TxEncodeAminoRequest = {
   create(base?: DeepPartial<TxEncodeAminoRequest>): TxEncodeAminoRequest {
     return TxEncodeAminoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxEncodeAminoRequest>): TxEncodeAminoRequest {
     const message = createBaseTxEncodeAminoRequest();
     message.aminoJson = object.aminoJson ?? "";
@@ -1479,6 +1494,8 @@ function createBaseTxEncodeAminoResponse(): TxEncodeAminoResponse {
 }
 
 export const TxEncodeAminoResponse = {
+  $type: "cosmos.tx.v1beta1.TxEncodeAminoResponse" as const,
+
   encode(message: TxEncodeAminoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.aminoBinary.length !== 0) {
       writer.uint32(10).bytes(message.aminoBinary);
@@ -1524,7 +1541,6 @@ export const TxEncodeAminoResponse = {
   create(base?: DeepPartial<TxEncodeAminoResponse>): TxEncodeAminoResponse {
     return TxEncodeAminoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxEncodeAminoResponse>): TxEncodeAminoResponse {
     const message = createBaseTxEncodeAminoResponse();
     message.aminoBinary = object.aminoBinary ?? new Uint8Array(0);
@@ -1537,6 +1553,8 @@ function createBaseTxDecodeAminoRequest(): TxDecodeAminoRequest {
 }
 
 export const TxDecodeAminoRequest = {
+  $type: "cosmos.tx.v1beta1.TxDecodeAminoRequest" as const,
+
   encode(message: TxDecodeAminoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.aminoBinary.length !== 0) {
       writer.uint32(10).bytes(message.aminoBinary);
@@ -1582,7 +1600,6 @@ export const TxDecodeAminoRequest = {
   create(base?: DeepPartial<TxDecodeAminoRequest>): TxDecodeAminoRequest {
     return TxDecodeAminoRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxDecodeAminoRequest>): TxDecodeAminoRequest {
     const message = createBaseTxDecodeAminoRequest();
     message.aminoBinary = object.aminoBinary ?? new Uint8Array(0);
@@ -1595,6 +1612,8 @@ function createBaseTxDecodeAminoResponse(): TxDecodeAminoResponse {
 }
 
 export const TxDecodeAminoResponse = {
+  $type: "cosmos.tx.v1beta1.TxDecodeAminoResponse" as const,
+
   encode(message: TxDecodeAminoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.aminoJson !== "") {
       writer.uint32(10).string(message.aminoJson);
@@ -1640,7 +1659,6 @@ export const TxDecodeAminoResponse = {
   create(base?: DeepPartial<TxDecodeAminoResponse>): TxDecodeAminoResponse {
     return TxDecodeAminoResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxDecodeAminoResponse>): TxDecodeAminoResponse {
     const message = createBaseTxDecodeAminoResponse();
     message.aminoJson = object.aminoJson ?? "";

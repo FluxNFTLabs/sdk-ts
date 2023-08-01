@@ -17,6 +17,8 @@ function createBaseConfigRequest(): ConfigRequest {
 }
 
 export const ConfigRequest = {
+  $type: "cosmos.base.node.v1beta1.ConfigRequest" as const,
+
   encode(_: ConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -49,7 +51,6 @@ export const ConfigRequest = {
   create(base?: DeepPartial<ConfigRequest>): ConfigRequest {
     return ConfigRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<ConfigRequest>): ConfigRequest {
     const message = createBaseConfigRequest();
     return message;
@@ -61,6 +62,8 @@ function createBaseConfigResponse(): ConfigResponse {
 }
 
 export const ConfigResponse = {
+  $type: "cosmos.base.node.v1beta1.ConfigResponse" as const,
+
   encode(message: ConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minimumGasPrice !== "") {
       writer.uint32(10).string(message.minimumGasPrice);
@@ -106,7 +109,6 @@ export const ConfigResponse = {
   create(base?: DeepPartial<ConfigResponse>): ConfigResponse {
     return ConfigResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ConfigResponse>): ConfigResponse {
     const message = createBaseConfigResponse();
     message.minimumGasPrice = object.minimumGasPrice ?? "";

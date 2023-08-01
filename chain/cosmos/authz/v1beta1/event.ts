@@ -28,6 +28,8 @@ function createBaseEventGrant(): EventGrant {
 }
 
 export const EventGrant = {
+  $type: "cosmos.authz.v1beta1.EventGrant" as const,
+
   encode(message: EventGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
@@ -103,7 +105,6 @@ export const EventGrant = {
   create(base?: DeepPartial<EventGrant>): EventGrant {
     return EventGrant.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventGrant>): EventGrant {
     const message = createBaseEventGrant();
     message.msgTypeUrl = object.msgTypeUrl ?? "";
@@ -118,6 +119,8 @@ function createBaseEventRevoke(): EventRevoke {
 }
 
 export const EventRevoke = {
+  $type: "cosmos.authz.v1beta1.EventRevoke" as const,
+
   encode(message: EventRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
@@ -193,7 +196,6 @@ export const EventRevoke = {
   create(base?: DeepPartial<EventRevoke>): EventRevoke {
     return EventRevoke.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventRevoke>): EventRevoke {
     const message = createBaseEventRevoke();
     message.msgTypeUrl = object.msgTypeUrl ?? "";

@@ -18,6 +18,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.bank.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.blockedModuleAccountsOverride) {
       writer.uint32(10).string(v!);
@@ -81,7 +83,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.blockedModuleAccountsOverride = object.blockedModuleAccountsOverride?.map((e) => e) || [];

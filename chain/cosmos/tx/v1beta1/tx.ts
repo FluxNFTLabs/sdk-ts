@@ -315,6 +315,8 @@ function createBaseTx(): Tx {
 }
 
 export const Tx = {
+  $type: "cosmos.tx.v1beta1.Tx" as const,
+
   encode(message: Tx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.body !== undefined) {
       TxBody.encode(message.body, writer.uint32(10).fork()).ldelim();
@@ -390,7 +392,6 @@ export const Tx = {
   create(base?: DeepPartial<Tx>): Tx {
     return Tx.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Tx>): Tx {
     const message = createBaseTx();
     message.body = (object.body !== undefined && object.body !== null) ? TxBody.fromPartial(object.body) : undefined;
@@ -407,6 +408,8 @@ function createBaseTxRaw(): TxRaw {
 }
 
 export const TxRaw = {
+  $type: "cosmos.tx.v1beta1.TxRaw" as const,
+
   encode(message: TxRaw, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bodyBytes.length !== 0) {
       writer.uint32(10).bytes(message.bodyBytes);
@@ -482,7 +485,6 @@ export const TxRaw = {
   create(base?: DeepPartial<TxRaw>): TxRaw {
     return TxRaw.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxRaw>): TxRaw {
     const message = createBaseTxRaw();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array(0);
@@ -497,6 +499,8 @@ function createBaseSignDoc(): SignDoc {
 }
 
 export const SignDoc = {
+  $type: "cosmos.tx.v1beta1.SignDoc" as const,
+
   encode(message: SignDoc, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bodyBytes.length !== 0) {
       writer.uint32(10).bytes(message.bodyBytes);
@@ -586,7 +590,6 @@ export const SignDoc = {
   create(base?: DeepPartial<SignDoc>): SignDoc {
     return SignDoc.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignDoc>): SignDoc {
     const message = createBaseSignDoc();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array(0);
@@ -609,6 +612,8 @@ function createBaseSignDocDirectAux(): SignDocDirectAux {
 }
 
 export const SignDocDirectAux = {
+  $type: "cosmos.tx.v1beta1.SignDocDirectAux" as const,
+
   encode(message: SignDocDirectAux, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bodyBytes.length !== 0) {
       writer.uint32(10).bytes(message.bodyBytes);
@@ -726,7 +731,6 @@ export const SignDocDirectAux = {
   create(base?: DeepPartial<SignDocDirectAux>): SignDocDirectAux {
     return SignDocDirectAux.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignDocDirectAux>): SignDocDirectAux {
     const message = createBaseSignDocDirectAux();
     message.bodyBytes = object.bodyBytes ?? new Uint8Array(0);
@@ -746,6 +750,8 @@ function createBaseTxBody(): TxBody {
 }
 
 export const TxBody = {
+  $type: "cosmos.tx.v1beta1.TxBody" as const,
+
   encode(message: TxBody, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -853,7 +859,6 @@ export const TxBody = {
   create(base?: DeepPartial<TxBody>): TxBody {
     return TxBody.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<TxBody>): TxBody {
     const message = createBaseTxBody();
     message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];
@@ -870,6 +875,8 @@ function createBaseAuthInfo(): AuthInfo {
 }
 
 export const AuthInfo = {
+  $type: "cosmos.tx.v1beta1.AuthInfo" as const,
+
   encode(message: AuthInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signerInfos) {
       SignerInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -945,7 +952,6 @@ export const AuthInfo = {
   create(base?: DeepPartial<AuthInfo>): AuthInfo {
     return AuthInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AuthInfo>): AuthInfo {
     const message = createBaseAuthInfo();
     message.signerInfos = object.signerInfos?.map((e) => SignerInfo.fromPartial(e)) || [];
@@ -960,6 +966,8 @@ function createBaseSignerInfo(): SignerInfo {
 }
 
 export const SignerInfo = {
+  $type: "cosmos.tx.v1beta1.SignerInfo" as const,
+
   encode(message: SignerInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.publicKey !== undefined) {
       Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
@@ -1035,7 +1043,6 @@ export const SignerInfo = {
   create(base?: DeepPartial<SignerInfo>): SignerInfo {
     return SignerInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<SignerInfo>): SignerInfo {
     const message = createBaseSignerInfo();
     message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
@@ -1054,6 +1061,8 @@ function createBaseModeInfo(): ModeInfo {
 }
 
 export const ModeInfo = {
+  $type: "cosmos.tx.v1beta1.ModeInfo" as const,
+
   encode(message: ModeInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.single !== undefined) {
       ModeInfo_Single.encode(message.single, writer.uint32(10).fork()).ldelim();
@@ -1115,7 +1124,6 @@ export const ModeInfo = {
   create(base?: DeepPartial<ModeInfo>): ModeInfo {
     return ModeInfo.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModeInfo>): ModeInfo {
     const message = createBaseModeInfo();
     message.single = (object.single !== undefined && object.single !== null)
@@ -1133,6 +1141,8 @@ function createBaseModeInfo_Single(): ModeInfo_Single {
 }
 
 export const ModeInfo_Single = {
+  $type: "cosmos.tx.v1beta1.ModeInfo.Single" as const,
+
   encode(message: ModeInfo_Single, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.mode !== 0) {
       writer.uint32(8).int32(message.mode);
@@ -1178,7 +1188,6 @@ export const ModeInfo_Single = {
   create(base?: DeepPartial<ModeInfo_Single>): ModeInfo_Single {
     return ModeInfo_Single.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModeInfo_Single>): ModeInfo_Single {
     const message = createBaseModeInfo_Single();
     message.mode = object.mode ?? 0;
@@ -1191,6 +1200,8 @@ function createBaseModeInfo_Multi(): ModeInfo_Multi {
 }
 
 export const ModeInfo_Multi = {
+  $type: "cosmos.tx.v1beta1.ModeInfo.Multi" as const,
+
   encode(message: ModeInfo_Multi, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bitarray !== undefined) {
       CompactBitArray.encode(message.bitarray, writer.uint32(10).fork()).ldelim();
@@ -1252,7 +1263,6 @@ export const ModeInfo_Multi = {
   create(base?: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     return ModeInfo_Multi.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModeInfo_Multi>): ModeInfo_Multi {
     const message = createBaseModeInfo_Multi();
     message.bitarray = (object.bitarray !== undefined && object.bitarray !== null)
@@ -1268,6 +1278,8 @@ function createBaseFee(): Fee {
 }
 
 export const Fee = {
+  $type: "cosmos.tx.v1beta1.Fee" as const,
+
   encode(message: Fee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1357,7 +1369,6 @@ export const Fee = {
   create(base?: DeepPartial<Fee>): Fee {
     return Fee.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Fee>): Fee {
     const message = createBaseFee();
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
@@ -1373,6 +1384,8 @@ function createBaseTip(): Tip {
 }
 
 export const Tip = {
+  $type: "cosmos.tx.v1beta1.Tip" as const,
+
   encode(message: Tip, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1434,7 +1447,6 @@ export const Tip = {
   create(base?: DeepPartial<Tip>): Tip {
     return Tip.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Tip>): Tip {
     const message = createBaseTip();
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
@@ -1448,6 +1460,8 @@ function createBaseAuxSignerData(): AuxSignerData {
 }
 
 export const AuxSignerData = {
+  $type: "cosmos.tx.v1beta1.AuxSignerData" as const,
+
   encode(message: AuxSignerData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
@@ -1537,7 +1551,6 @@ export const AuxSignerData = {
   create(base?: DeepPartial<AuxSignerData>): AuxSignerData {
     return AuxSignerData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AuxSignerData>): AuxSignerData {
     const message = createBaseAuxSignerData();
     message.address = object.address ?? "";

@@ -44,6 +44,8 @@ function createBaseMerkleRoot(): MerkleRoot {
 }
 
 export const MerkleRoot = {
+  $type: "ibc.core.commitment.v1.MerkleRoot" as const,
+
   encode(message: MerkleRoot, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
@@ -89,7 +91,6 @@ export const MerkleRoot = {
   create(base?: DeepPartial<MerkleRoot>): MerkleRoot {
     return MerkleRoot.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MerkleRoot>): MerkleRoot {
     const message = createBaseMerkleRoot();
     message.hash = object.hash ?? new Uint8Array(0);
@@ -102,6 +103,8 @@ function createBaseMerklePrefix(): MerklePrefix {
 }
 
 export const MerklePrefix = {
+  $type: "ibc.core.commitment.v1.MerklePrefix" as const,
+
   encode(message: MerklePrefix, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.keyPrefix.length !== 0) {
       writer.uint32(10).bytes(message.keyPrefix);
@@ -147,7 +150,6 @@ export const MerklePrefix = {
   create(base?: DeepPartial<MerklePrefix>): MerklePrefix {
     return MerklePrefix.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MerklePrefix>): MerklePrefix {
     const message = createBaseMerklePrefix();
     message.keyPrefix = object.keyPrefix ?? new Uint8Array(0);
@@ -160,6 +162,8 @@ function createBaseMerklePath(): MerklePath {
 }
 
 export const MerklePath = {
+  $type: "ibc.core.commitment.v1.MerklePath" as const,
+
   encode(message: MerklePath, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.keyPath) {
       writer.uint32(10).string(v!);
@@ -205,7 +209,6 @@ export const MerklePath = {
   create(base?: DeepPartial<MerklePath>): MerklePath {
     return MerklePath.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MerklePath>): MerklePath {
     const message = createBaseMerklePath();
     message.keyPath = object.keyPath?.map((e) => e) || [];
@@ -218,6 +221,8 @@ function createBaseMerkleProof(): MerkleProof {
 }
 
 export const MerkleProof = {
+  $type: "ibc.core.commitment.v1.MerkleProof" as const,
+
   encode(message: MerkleProof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proofs) {
       CommitmentProof.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -263,7 +268,6 @@ export const MerkleProof = {
   create(base?: DeepPartial<MerkleProof>): MerkleProof {
     return MerkleProof.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<MerkleProof>): MerkleProof {
     const message = createBaseMerkleProof();
     message.proofs = object.proofs?.map((e) => CommitmentProof.fromPartial(e)) || [];

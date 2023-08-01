@@ -109,6 +109,8 @@ function createBaseQueryBalanceRequest(): QueryBalanceRequest {
 }
 
 export const QueryBalanceRequest = {
+  $type: "cosmos.nft.v1beta1.QueryBalanceRequest" as const,
+
   encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -170,7 +172,6 @@ export const QueryBalanceRequest = {
   create(base?: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     return QueryBalanceRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     const message = createBaseQueryBalanceRequest();
     message.classId = object.classId ?? "";
@@ -184,6 +185,8 @@ function createBaseQueryBalanceResponse(): QueryBalanceResponse {
 }
 
 export const QueryBalanceResponse = {
+  $type: "cosmos.nft.v1beta1.QueryBalanceResponse" as const,
+
   encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.amount !== "0") {
       writer.uint32(8).uint64(message.amount);
@@ -229,7 +232,6 @@ export const QueryBalanceResponse = {
   create(base?: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     return QueryBalanceResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
     message.amount = object.amount ?? "0";
@@ -242,6 +244,8 @@ function createBaseQueryOwnerRequest(): QueryOwnerRequest {
 }
 
 export const QueryOwnerRequest = {
+  $type: "cosmos.nft.v1beta1.QueryOwnerRequest" as const,
+
   encode(message: QueryOwnerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -303,7 +307,6 @@ export const QueryOwnerRequest = {
   create(base?: DeepPartial<QueryOwnerRequest>): QueryOwnerRequest {
     return QueryOwnerRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryOwnerRequest>): QueryOwnerRequest {
     const message = createBaseQueryOwnerRequest();
     message.classId = object.classId ?? "";
@@ -317,6 +320,8 @@ function createBaseQueryOwnerResponse(): QueryOwnerResponse {
 }
 
 export const QueryOwnerResponse = {
+  $type: "cosmos.nft.v1beta1.QueryOwnerResponse" as const,
+
   encode(message: QueryOwnerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -362,7 +367,6 @@ export const QueryOwnerResponse = {
   create(base?: DeepPartial<QueryOwnerResponse>): QueryOwnerResponse {
     return QueryOwnerResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryOwnerResponse>): QueryOwnerResponse {
     const message = createBaseQueryOwnerResponse();
     message.owner = object.owner ?? "";
@@ -375,6 +379,8 @@ function createBaseQuerySupplyRequest(): QuerySupplyRequest {
 }
 
 export const QuerySupplyRequest = {
+  $type: "cosmos.nft.v1beta1.QuerySupplyRequest" as const,
+
   encode(message: QuerySupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -420,7 +426,6 @@ export const QuerySupplyRequest = {
   create(base?: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
     return QuerySupplyRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
     const message = createBaseQuerySupplyRequest();
     message.classId = object.classId ?? "";
@@ -433,6 +438,8 @@ function createBaseQuerySupplyResponse(): QuerySupplyResponse {
 }
 
 export const QuerySupplyResponse = {
+  $type: "cosmos.nft.v1beta1.QuerySupplyResponse" as const,
+
   encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.amount !== "0") {
       writer.uint32(8).uint64(message.amount);
@@ -478,7 +485,6 @@ export const QuerySupplyResponse = {
   create(base?: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     return QuerySupplyResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
     message.amount = object.amount ?? "0";
@@ -491,6 +497,8 @@ function createBaseQueryNFTsRequest(): QueryNFTsRequest {
 }
 
 export const QueryNFTsRequest = {
+  $type: "cosmos.nft.v1beta1.QueryNFTsRequest" as const,
+
   encode(message: QueryNFTsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -566,7 +574,6 @@ export const QueryNFTsRequest = {
   create(base?: DeepPartial<QueryNFTsRequest>): QueryNFTsRequest {
     return QueryNFTsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNFTsRequest>): QueryNFTsRequest {
     const message = createBaseQueryNFTsRequest();
     message.classId = object.classId ?? "";
@@ -583,6 +590,8 @@ function createBaseQueryNFTsResponse(): QueryNFTsResponse {
 }
 
 export const QueryNFTsResponse = {
+  $type: "cosmos.nft.v1beta1.QueryNFTsResponse" as const,
+
   encode(message: QueryNFTsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.nfts) {
       NFT.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -644,7 +653,6 @@ export const QueryNFTsResponse = {
   create(base?: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse {
     return QueryNFTsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNFTsResponse>): QueryNFTsResponse {
     const message = createBaseQueryNFTsResponse();
     message.nfts = object.nfts?.map((e) => NFT.fromPartial(e)) || [];
@@ -660,6 +668,8 @@ function createBaseQueryNFTRequest(): QueryNFTRequest {
 }
 
 export const QueryNFTRequest = {
+  $type: "cosmos.nft.v1beta1.QueryNFTRequest" as const,
+
   encode(message: QueryNFTRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -721,7 +731,6 @@ export const QueryNFTRequest = {
   create(base?: DeepPartial<QueryNFTRequest>): QueryNFTRequest {
     return QueryNFTRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNFTRequest>): QueryNFTRequest {
     const message = createBaseQueryNFTRequest();
     message.classId = object.classId ?? "";
@@ -735,6 +744,8 @@ function createBaseQueryNFTResponse(): QueryNFTResponse {
 }
 
 export const QueryNFTResponse = {
+  $type: "cosmos.nft.v1beta1.QueryNFTResponse" as const,
+
   encode(message: QueryNFTResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nft !== undefined) {
       NFT.encode(message.nft, writer.uint32(10).fork()).ldelim();
@@ -780,7 +791,6 @@ export const QueryNFTResponse = {
   create(base?: DeepPartial<QueryNFTResponse>): QueryNFTResponse {
     return QueryNFTResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryNFTResponse>): QueryNFTResponse {
     const message = createBaseQueryNFTResponse();
     message.nft = (object.nft !== undefined && object.nft !== null) ? NFT.fromPartial(object.nft) : undefined;
@@ -793,6 +803,8 @@ function createBaseQueryClassRequest(): QueryClassRequest {
 }
 
 export const QueryClassRequest = {
+  $type: "cosmos.nft.v1beta1.QueryClassRequest" as const,
+
   encode(message: QueryClassRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
@@ -838,7 +850,6 @@ export const QueryClassRequest = {
   create(base?: DeepPartial<QueryClassRequest>): QueryClassRequest {
     return QueryClassRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClassRequest>): QueryClassRequest {
     const message = createBaseQueryClassRequest();
     message.classId = object.classId ?? "";
@@ -851,6 +862,8 @@ function createBaseQueryClassResponse(): QueryClassResponse {
 }
 
 export const QueryClassResponse = {
+  $type: "cosmos.nft.v1beta1.QueryClassResponse" as const,
+
   encode(message: QueryClassResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.class !== undefined) {
       Class.encode(message.class, writer.uint32(10).fork()).ldelim();
@@ -896,7 +909,6 @@ export const QueryClassResponse = {
   create(base?: DeepPartial<QueryClassResponse>): QueryClassResponse {
     return QueryClassResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClassResponse>): QueryClassResponse {
     const message = createBaseQueryClassResponse();
     message.class = (object.class !== undefined && object.class !== null) ? Class.fromPartial(object.class) : undefined;
@@ -909,6 +921,8 @@ function createBaseQueryClassesRequest(): QueryClassesRequest {
 }
 
 export const QueryClassesRequest = {
+  $type: "cosmos.nft.v1beta1.QueryClassesRequest" as const,
+
   encode(message: QueryClassesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -954,7 +968,6 @@ export const QueryClassesRequest = {
   create(base?: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     return QueryClassesRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     const message = createBaseQueryClassesRequest();
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
@@ -969,6 +982,8 @@ function createBaseQueryClassesResponse(): QueryClassesResponse {
 }
 
 export const QueryClassesResponse = {
+  $type: "cosmos.nft.v1beta1.QueryClassesResponse" as const,
+
   encode(message: QueryClassesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1030,7 +1045,6 @@ export const QueryClassesResponse = {
   create(base?: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     return QueryClassesResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     const message = createBaseQueryClassesResponse();
     message.classes = object.classes?.map((e) => Class.fromPartial(e)) || [];

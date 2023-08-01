@@ -123,6 +123,8 @@ function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
 }
 
 export const ModuleSchemaDescriptor = {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor" as const,
+
   encode(message: ModuleSchemaDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.schemaFile) {
       ModuleSchemaDescriptor_FileEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -186,7 +188,6 @@ export const ModuleSchemaDescriptor = {
   create(base?: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     return ModuleSchemaDescriptor.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
     message.schemaFile = object.schemaFile?.map((e) => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
@@ -200,6 +201,8 @@ function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_Fi
 }
 
 export const ModuleSchemaDescriptor_FileEntry = {
+  $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor.FileEntry" as const,
+
   encode(message: ModuleSchemaDescriptor_FileEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
@@ -275,7 +278,6 @@ export const ModuleSchemaDescriptor_FileEntry = {
   create(base?: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
     return ModuleSchemaDescriptor_FileEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
     const message = createBaseModuleSchemaDescriptor_FileEntry();
     message.id = object.id ?? 0;

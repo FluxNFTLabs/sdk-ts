@@ -19,6 +19,8 @@ function createBaseFileDescriptorsRequest(): FileDescriptorsRequest {
 }
 
 export const FileDescriptorsRequest = {
+  $type: "cosmos.reflection.v1.FileDescriptorsRequest" as const,
+
   encode(_: FileDescriptorsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
@@ -51,7 +53,6 @@ export const FileDescriptorsRequest = {
   create(base?: DeepPartial<FileDescriptorsRequest>): FileDescriptorsRequest {
     return FileDescriptorsRequest.fromPartial(base ?? {});
   },
-
   fromPartial(_: DeepPartial<FileDescriptorsRequest>): FileDescriptorsRequest {
     const message = createBaseFileDescriptorsRequest();
     return message;
@@ -63,6 +64,8 @@ function createBaseFileDescriptorsResponse(): FileDescriptorsResponse {
 }
 
 export const FileDescriptorsResponse = {
+  $type: "cosmos.reflection.v1.FileDescriptorsResponse" as const,
+
   encode(message: FileDescriptorsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.files) {
       FileDescriptorProto.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -108,7 +111,6 @@ export const FileDescriptorsResponse = {
   create(base?: DeepPartial<FileDescriptorsResponse>): FileDescriptorsResponse {
     return FileDescriptorsResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<FileDescriptorsResponse>): FileDescriptorsResponse {
     const message = createBaseFileDescriptorsResponse();
     message.files = object.files?.map((e) => FileDescriptorProto.fromPartial(e)) || [];

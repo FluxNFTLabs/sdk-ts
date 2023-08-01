@@ -15,6 +15,8 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
+  $type: "ibc.applications.interchain_accounts.controller.v1.Params" as const,
+
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.controllerEnabled === true) {
       writer.uint32(8).bool(message.controllerEnabled);
@@ -60,7 +62,6 @@ export const Params = {
   create(base?: DeepPartial<Params>): Params {
     return Params.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.controllerEnabled = object.controllerEnabled ?? false;

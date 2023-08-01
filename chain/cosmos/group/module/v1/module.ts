@@ -24,6 +24,8 @@ function createBaseModule(): Module {
 }
 
 export const Module = {
+  $type: "cosmos.group.module.v1.Module" as const,
+
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxExecutionPeriod !== undefined) {
       Duration.encode(message.maxExecutionPeriod, writer.uint32(10).fork()).ldelim();
@@ -85,7 +87,6 @@ export const Module = {
   create(base?: DeepPartial<Module>): Module {
     return Module.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
     message.maxExecutionPeriod = (object.maxExecutionPeriod !== undefined && object.maxExecutionPeriod !== null)

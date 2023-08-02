@@ -2,11 +2,12 @@ import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { keccak256 } from 'ethereum-cryptography/keccak.js'
 import * as bech32 from 'bech32'
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
 import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
 import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys'
-import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as anytypes from '../../../chain/google/protobuf/any'
 
@@ -15,13 +16,27 @@ function hexToBech32(hexBytes: ArrayLike<number>, prefix: string): string {
   return bech32.bech32.encode(prefix, words);
 }
 
+function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
+  const xCoord = uncompressedPublicKey.slice(0,32);
+  const yCoord = uncompressedPublicKey.slice(32,64);
+  const yParityByte = yCoord[31] % 2 == 0 ? Buffer.from([2]) : Buffer.from([3])
+  return Buffer.concat([yParityByte, xCoord])
+}
+
 const main = async () => {
+  // init client
+  const host = 'http://localhost:9091';
+  const cc = new txservice.GrpcWebImpl(host, {
+    transport: NodeHttpTransport(),
+  })
+  const client = new txservice.ServiceClientImpl(cc)
+
   // init account
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from("88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305", 'hex')))
   const senderPrivKey: secp256k1.PrivKey = {key: wallet.getPrivateKey()}
-  const senderPubkey: secp256k1.PubKey = {key: wallet.getPublicKey()}
+  const senderPubkey: secp256k1.PubKey = {key: compressPublicKey(Buffer.from(wallet.getPublicKey()))}
   const senderPubkeyAny: anytypes.Any = {
-    typeUrl: secp256k1.PubKey.$type,
+    typeUrl: '/' + secp256k1.PubKey.$type,
     value: secp256k1.PubKey.encode(senderPubkey).finish()
   }
   const senderAddr = hexToBech32(wallet.getAddress(), 'lux')
@@ -35,7 +50,7 @@ const main = async () => {
   }
 
   const msgAny: anytypes.Any = {
-    typeUrl: banktypes.MsgSend.$type,
+    typeUrl: '/' + banktypes.MsgSend.$type,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
 
@@ -43,7 +58,7 @@ const main = async () => {
   const txBody: txtypes.TxBody = {
     messages: [msgAny],
     memo: 'abc',
-    timeoutHeight: "20000",
+    timeoutHeight: "30000",
     extensionOptions: [],
     nonCriticalExtensionOptions: []
   }
@@ -57,14 +72,14 @@ const main = async () => {
             mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
           },
         },
-        sequence: "4",
+        sequence: "20",
       },
     ],
     fee: {
       amount: [
-        {denom: "lux", amount: "500000"}
+        {denom: "lux", amount: "100000000000000"}
       ],
-      gasLimit: "500000",
+      gasLimit: "200000",
       payer: "",
       granter: ""
     },
@@ -82,38 +97,35 @@ const main = async () => {
   // build tx
   const msgHash = Buffer.from(keccak256(signBytes))
   const sig = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))
+  const sigV2: signingtypes.SignatureDescriptor = {
+    publicKey: senderPubkeyAny,
+    data: {
+      single: {
+        mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
+        signature: Uint8Array.from(Buffer.concat([sig.r, sig.s, Buffer.from(sig.v.toString(16))])),
+      }
+    },
+    sequence: "20",
+  }
+
+  // broadcast tx
+  const txRaw: txtypes.TxRaw = {
+    bodyBytes: txtypes.TxBody.encode(txBody).finish(),
+    authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    signatures: [signingtypes.SignatureDescriptor.encode(sigV2).finish()],
+  }
+  const broadcastReq: txservice.BroadcastTxRequest = {
+    txBytes: txtypes.TxRaw.encode(txRaw).finish(),
+    mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
+  }
 
 
-  // func SignatureDataToProto(data SignatureData) *SignatureDescriptor_Data {
-  //   switch data := data.(type) {
-  //   case *SingleSignatureData:
-  //         return &SignatureDescriptor_Data{
-  //       Sum: &SignatureDescriptor_Data_Single_{
-  //         Single: &SignatureDescriptor_Data_Single{
-  //           Mode:      data.SignMode,
-  //               Signature: data.Signature,
-  //         },
-  //       },
-  //     }
-  //   case *MultiSignatureData:
-  //         descDatas := make([]*SignatureDescriptor_Data, len(data.Signatures))
-  //
-  //     for j, d := range data.Signatures {
-  //       descDatas[j] = SignatureDataToProto(d)
-  //     }
-  //
-  //     return &SignatureDescriptor_Data{
-  //       Sum: &SignatureDescriptor_Data_Multi_{
-  //         Multi: &SignatureDescriptor_Data_Multi{
-  //           Bitarray:   data.BitArray,
-  //               Signatures: descDatas,
-  //         },
-  //       },
-  //     }
-  //   default:
-  //     panic(fmt.Errorf("unexpected case %+v", data))
-  //   }
-  // }
+  try {
+    const res = await client.BroadcastTx(broadcastReq)
+    console.log(res)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 main()

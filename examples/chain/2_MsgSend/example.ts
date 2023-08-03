@@ -104,30 +104,22 @@ const main = async () => {
   // build tx
   const msgHash = Buffer.from(keccak256(signBytes))
   const sig = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))
-  const sigV2: signingtypes.SignatureDescriptor = {
-    publicKey: senderPubkeyAny,
-    data: {
-      single: {
-        mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
-        signature: Uint8Array.from(Buffer.concat([sig.r, sig.s, Buffer.from(sig.v.toString(16))])),
-      }
-    },
-    sequence: accSeq,
-  }
+  const cosmosSig = Uint8Array.from(Buffer.concat([sig.r, sig.s, Buffer.from([0])]))
+
+  console.log(sig.v.toString())
 
   // broadcast tx
   const txRaw: txtypes.TxRaw = {
     bodyBytes: txtypes.TxBody.encode(txBody).finish(),
     authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
-    signatures: [signingtypes.SignatureDescriptor.encode(sigV2).finish()],
+    signatures: [cosmosSig],
   }
   const broadcastReq: txservice.BroadcastTxRequest = {
     txBytes: txtypes.TxRaw.encode(txRaw).finish(),
     mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
   }
 
-  console.log(txtypes.TxRaw.encode(txRaw).finish().toString())
-
+  console.log(cosmosSig)
 
   try {
     const res = await txClient.BroadcastTx(broadcastReq)

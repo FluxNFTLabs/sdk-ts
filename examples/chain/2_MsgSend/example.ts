@@ -7,6 +7,7 @@ import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport'
 import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
+import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
 import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys'
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as anytypes from '../../../chain/google/protobuf/any'
@@ -29,7 +30,8 @@ const main = async () => {
   const cc = new txservice.GrpcWebImpl(host, {
     transport: NodeHttpTransport(),
   })
-  const client = new txservice.ServiceClientImpl(cc)
+  const txClient = new txservice.ServiceClientImpl(cc)
+  const authClient = new authservice.QueryClientImpl(cc)
 
   // init account
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from("88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305", 'hex')))
@@ -41,6 +43,11 @@ const main = async () => {
   }
   const senderAddr = hexToBech32(wallet.getAddress(), 'lux')
   const receiverAddr = 'lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx'
+
+  // fetch account num, seq
+  const senderInfo = await authClient.AccountInfo({address: senderAddr})
+  const accNum = senderInfo.info!.accountNumber!
+  const accSeq = senderInfo.info!.sequence!
 
   // init msg
   const msg: banktypes.MsgSend = {
@@ -72,7 +79,7 @@ const main = async () => {
             mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
           },
         },
-        sequence: "20",
+        sequence: accSeq,
       },
     ],
     fee: {
@@ -90,7 +97,7 @@ const main = async () => {
     bodyBytes: txtypes.TxBody.encode(txBody).finish(),
     authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
     chainId: 'flux-1',
-    accountNumber: '4',
+    accountNumber: accNum,
   }
   const signBytes = txtypes.SignDoc.encode(signDoc).finish()
 
@@ -105,7 +112,7 @@ const main = async () => {
         signature: Uint8Array.from(Buffer.concat([sig.r, sig.s, Buffer.from(sig.v.toString(16))])),
       }
     },
-    sequence: "20",
+    sequence: accSeq,
   }
 
   // broadcast tx
@@ -119,9 +126,11 @@ const main = async () => {
     mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
   }
 
+  console.log(txtypes.TxRaw.encode(txRaw).finish().toString())
+
 
   try {
-    const res = await client.BroadcastTx(broadcastReq)
+    const res = await txClient.BroadcastTx(broadcastReq)
     console.log(res)
   } catch (err) {
     console.log(err)

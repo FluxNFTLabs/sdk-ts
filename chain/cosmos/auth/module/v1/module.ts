@@ -4,9 +4,9 @@ import _m0 from "protobufjs/minimal";
 /** Module is the config object for the auth module. */
 export interface Module {
   /** bech32_prefix is the bech32 account prefix for the app. */
-  bech32Prefix: string;
+  bech32_prefix: string;
   /** module_account_permissions are module account permissions. */
-  moduleAccountPermissions: ModuleAccountPermission[];
+  module_account_permissions: ModuleAccountPermission[];
   /** authority defines the custom module authority. If not set, defaults to the governance module. */
   authority: string;
 }
@@ -23,17 +23,17 @@ export interface ModuleAccountPermission {
 }
 
 function createBaseModule(): Module {
-  return { bech32Prefix: "", moduleAccountPermissions: [], authority: "" };
+  return { bech32_prefix: "", module_account_permissions: [], authority: "" };
 }
 
 export const Module = {
   $type: "cosmos.auth.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.bech32Prefix !== "") {
-      writer.uint32(10).string(message.bech32Prefix);
+    if (message.bech32_prefix !== "") {
+      writer.uint32(10).string(message.bech32_prefix);
     }
-    for (const v of message.moduleAccountPermissions) {
+    for (const v of message.module_account_permissions) {
       ModuleAccountPermission.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.authority !== "") {
@@ -54,14 +54,14 @@ export const Module = {
             break;
           }
 
-          message.bech32Prefix = reader.string();
+          message.bech32_prefix = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.moduleAccountPermissions.push(ModuleAccountPermission.decode(reader, reader.uint32()));
+          message.module_account_permissions.push(ModuleAccountPermission.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
@@ -81,9 +81,9 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      bech32Prefix: isSet(object.bech32Prefix) ? String(object.bech32Prefix) : "",
-      moduleAccountPermissions: Array.isArray(object?.moduleAccountPermissions)
-        ? object.moduleAccountPermissions.map((e: any) => ModuleAccountPermission.fromJSON(e))
+      bech32_prefix: isSet(object.bech32_prefix) ? String(object.bech32_prefix) : "",
+      module_account_permissions: Array.isArray(object?.module_account_permissions)
+        ? object.module_account_permissions.map((e: any) => ModuleAccountPermission.fromJSON(e))
         : [],
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
@@ -91,11 +91,11 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.bech32Prefix !== "") {
-      obj.bech32Prefix = message.bech32Prefix;
+    if (message.bech32_prefix !== "") {
+      obj.bech32_prefix = message.bech32_prefix;
     }
-    if (message.moduleAccountPermissions?.length) {
-      obj.moduleAccountPermissions = message.moduleAccountPermissions.map((e) => ModuleAccountPermission.toJSON(e));
+    if (message.module_account_permissions?.length) {
+      obj.module_account_permissions = message.module_account_permissions.map((e) => ModuleAccountPermission.toJSON(e));
     }
     if (message.authority !== "") {
       obj.authority = message.authority;
@@ -108,9 +108,9 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.bech32Prefix = object.bech32Prefix ?? "";
-    message.moduleAccountPermissions =
-      object.moduleAccountPermissions?.map((e) => ModuleAccountPermission.fromPartial(e)) || [];
+    message.bech32_prefix = object.bech32_prefix ?? "";
+    message.module_account_permissions =
+      object.module_account_permissions?.map((e) => ModuleAccountPermission.fromPartial(e)) || [];
     message.authority = object.authority ?? "";
     return message;
   },

@@ -3,21 +3,21 @@ import _m0 from "protobufjs/minimal";
 
 /** Module is the config object of the mint module. */
 export interface Module {
-  feeCollectorName: string;
+  fee_collector_name: string;
   /** authority defines the custom module authority. If not set, defaults to the governance module. */
   authority: string;
 }
 
 function createBaseModule(): Module {
-  return { feeCollectorName: "", authority: "" };
+  return { fee_collector_name: "", authority: "" };
 }
 
 export const Module = {
   $type: "cosmos.mint.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.feeCollectorName !== "") {
-      writer.uint32(10).string(message.feeCollectorName);
+    if (message.fee_collector_name !== "") {
+      writer.uint32(10).string(message.fee_collector_name);
     }
     if (message.authority !== "") {
       writer.uint32(18).string(message.authority);
@@ -37,7 +37,7 @@ export const Module = {
             break;
           }
 
-          message.feeCollectorName = reader.string();
+          message.fee_collector_name = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -57,15 +57,15 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      feeCollectorName: isSet(object.feeCollectorName) ? String(object.feeCollectorName) : "",
+      fee_collector_name: isSet(object.fee_collector_name) ? String(object.fee_collector_name) : "",
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.feeCollectorName !== "") {
-      obj.feeCollectorName = message.feeCollectorName;
+    if (message.fee_collector_name !== "") {
+      obj.fee_collector_name = message.fee_collector_name;
     }
     if (message.authority !== "") {
       obj.authority = message.authority;
@@ -78,7 +78,7 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.feeCollectorName = object.feeCollectorName ?? "";
+    message.fee_collector_name = object.fee_collector_name ?? "";
     message.authority = object.authority ?? "";
     return message;
   },

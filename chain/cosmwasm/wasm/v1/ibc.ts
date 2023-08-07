@@ -10,12 +10,12 @@ export interface MsgIBCSend {
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
    */
-  timeoutHeight: string;
+  timeout_height: string;
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-  timeoutTimestamp: string;
+  timeout_timestamp: string;
   /**
    * Data is the payload to transfer. We must not make assumption what format or
    * content is in here.
@@ -35,7 +35,7 @@ export interface MsgIBCCloseChannel {
 }
 
 function createBaseMsgIBCSend(): MsgIBCSend {
-  return { channel: "", timeoutHeight: "0", timeoutTimestamp: "0", data: new Uint8Array(0) };
+  return { channel: "", timeout_height: "0", timeout_timestamp: "0", data: new Uint8Array(0) };
 }
 
 export const MsgIBCSend = {
@@ -45,11 +45,11 @@ export const MsgIBCSend = {
     if (message.channel !== "") {
       writer.uint32(18).string(message.channel);
     }
-    if (message.timeoutHeight !== "0") {
-      writer.uint32(32).uint64(message.timeoutHeight);
+    if (message.timeout_height !== "0") {
+      writer.uint32(32).uint64(message.timeout_height);
     }
-    if (message.timeoutTimestamp !== "0") {
-      writer.uint32(40).uint64(message.timeoutTimestamp);
+    if (message.timeout_timestamp !== "0") {
+      writer.uint32(40).uint64(message.timeout_timestamp);
     }
     if (message.data.length !== 0) {
       writer.uint32(50).bytes(message.data);
@@ -76,14 +76,14 @@ export const MsgIBCSend = {
             break;
           }
 
-          message.timeoutHeight = longToString(reader.uint64() as Long);
+          message.timeout_height = longToString(reader.uint64() as Long);
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.timeoutTimestamp = longToString(reader.uint64() as Long);
+          message.timeout_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 50) {
@@ -104,8 +104,8 @@ export const MsgIBCSend = {
   fromJSON(object: any): MsgIBCSend {
     return {
       channel: isSet(object.channel) ? String(object.channel) : "",
-      timeoutHeight: isSet(object.timeoutHeight) ? String(object.timeoutHeight) : "0",
-      timeoutTimestamp: isSet(object.timeoutTimestamp) ? String(object.timeoutTimestamp) : "0",
+      timeout_height: isSet(object.timeout_height) ? String(object.timeout_height) : "0",
+      timeout_timestamp: isSet(object.timeout_timestamp) ? String(object.timeout_timestamp) : "0",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
@@ -115,11 +115,11 @@ export const MsgIBCSend = {
     if (message.channel !== "") {
       obj.channel = message.channel;
     }
-    if (message.timeoutHeight !== "0") {
-      obj.timeoutHeight = message.timeoutHeight;
+    if (message.timeout_height !== "0") {
+      obj.timeout_height = message.timeout_height;
     }
-    if (message.timeoutTimestamp !== "0") {
-      obj.timeoutTimestamp = message.timeoutTimestamp;
+    if (message.timeout_timestamp !== "0") {
+      obj.timeout_timestamp = message.timeout_timestamp;
     }
     if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
@@ -133,8 +133,8 @@ export const MsgIBCSend = {
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
-    message.timeoutHeight = object.timeoutHeight ?? "0";
-    message.timeoutTimestamp = object.timeoutTimestamp ?? "0";
+    message.timeout_height = object.timeout_height ?? "0";
+    message.timeout_timestamp = object.timeout_timestamp ?? "0";
     message.data = object.data ?? new Uint8Array(0);
     return message;
   },

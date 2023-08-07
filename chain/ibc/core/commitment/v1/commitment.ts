@@ -16,7 +16,7 @@ export interface MerkleRoot {
  * append(Path.KeyPrefix, key...))
  */
 export interface MerklePrefix {
-  keyPrefix: Uint8Array;
+  key_prefix: Uint8Array;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface MerklePrefix {
  * MerklePath is represented from root-to-leaf
  */
 export interface MerklePath {
-  keyPath: string[];
+  key_path: string[];
 }
 
 /**
@@ -99,15 +99,15 @@ export const MerkleRoot = {
 };
 
 function createBaseMerklePrefix(): MerklePrefix {
-  return { keyPrefix: new Uint8Array(0) };
+  return { key_prefix: new Uint8Array(0) };
 }
 
 export const MerklePrefix = {
   $type: "ibc.core.commitment.v1.MerklePrefix" as const,
 
   encode(message: MerklePrefix, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.keyPrefix.length !== 0) {
-      writer.uint32(10).bytes(message.keyPrefix);
+    if (message.key_prefix.length !== 0) {
+      writer.uint32(10).bytes(message.key_prefix);
     }
     return writer;
   },
@@ -124,7 +124,7 @@ export const MerklePrefix = {
             break;
           }
 
-          message.keyPrefix = reader.bytes();
+          message.key_prefix = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -136,13 +136,13 @@ export const MerklePrefix = {
   },
 
   fromJSON(object: any): MerklePrefix {
-    return { keyPrefix: isSet(object.keyPrefix) ? bytesFromBase64(object.keyPrefix) : new Uint8Array(0) };
+    return { key_prefix: isSet(object.key_prefix) ? bytesFromBase64(object.key_prefix) : new Uint8Array(0) };
   },
 
   toJSON(message: MerklePrefix): unknown {
     const obj: any = {};
-    if (message.keyPrefix.length !== 0) {
-      obj.keyPrefix = base64FromBytes(message.keyPrefix);
+    if (message.key_prefix.length !== 0) {
+      obj.key_prefix = base64FromBytes(message.key_prefix);
     }
     return obj;
   },
@@ -152,20 +152,20 @@ export const MerklePrefix = {
   },
   fromPartial(object: DeepPartial<MerklePrefix>): MerklePrefix {
     const message = createBaseMerklePrefix();
-    message.keyPrefix = object.keyPrefix ?? new Uint8Array(0);
+    message.key_prefix = object.key_prefix ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseMerklePath(): MerklePath {
-  return { keyPath: [] };
+  return { key_path: [] };
 }
 
 export const MerklePath = {
   $type: "ibc.core.commitment.v1.MerklePath" as const,
 
   encode(message: MerklePath, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.keyPath) {
+    for (const v of message.key_path) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -183,7 +183,7 @@ export const MerklePath = {
             break;
           }
 
-          message.keyPath.push(reader.string());
+          message.key_path.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -195,13 +195,13 @@ export const MerklePath = {
   },
 
   fromJSON(object: any): MerklePath {
-    return { keyPath: Array.isArray(object?.keyPath) ? object.keyPath.map((e: any) => String(e)) : [] };
+    return { key_path: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => String(e)) : [] };
   },
 
   toJSON(message: MerklePath): unknown {
     const obj: any = {};
-    if (message.keyPath?.length) {
-      obj.keyPath = message.keyPath;
+    if (message.key_path?.length) {
+      obj.key_path = message.key_path;
     }
     return obj;
   },
@@ -211,7 +211,7 @@ export const MerklePath = {
   },
   fromPartial(object: DeepPartial<MerklePath>): MerklePath {
     const message = createBaseMerklePath();
-    message.keyPath = object.keyPath?.map((e) => e) || [];
+    message.key_path = object.key_path?.map((e) => e) || [];
     return message;
   },
 };

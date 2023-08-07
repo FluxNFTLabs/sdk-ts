@@ -11,10 +11,10 @@ import { Period } from "./vesting";
  * account.
  */
 export interface MsgCreateVestingAccount {
-  fromAddress: string;
-  toAddress: string;
+  from_address: string;
+  to_address: string;
   amount: Coin[];
-  endTime: string;
+  end_time: string;
   delayed: boolean;
 }
 
@@ -29,8 +29,8 @@ export interface MsgCreateVestingAccountResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCreatePermanentLockedAccount {
-  fromAddress: string;
-  toAddress: string;
+  from_address: string;
+  to_address: string;
   amount: Coin[];
 }
 
@@ -49,10 +49,10 @@ export interface MsgCreatePermanentLockedAccountResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCreatePeriodicVestingAccount {
-  fromAddress: string;
-  toAddress: string;
-  startTime: string;
-  vestingPeriods: Period[];
+  from_address: string;
+  to_address: string;
+  start_time: string;
+  vesting_periods: Period[];
 }
 
 /**
@@ -65,24 +65,24 @@ export interface MsgCreatePeriodicVestingAccountResponse {
 }
 
 function createBaseMsgCreateVestingAccount(): MsgCreateVestingAccount {
-  return { fromAddress: "", toAddress: "", amount: [], endTime: "0", delayed: false };
+  return { from_address: "", to_address: "", amount: [], end_time: "0", delayed: false };
 }
 
 export const MsgCreateVestingAccount = {
   $type: "cosmos.vesting.v1beta1.MsgCreateVestingAccount" as const,
 
   encode(message: MsgCreateVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fromAddress !== "") {
-      writer.uint32(10).string(message.fromAddress);
+    if (message.from_address !== "") {
+      writer.uint32(10).string(message.from_address);
     }
-    if (message.toAddress !== "") {
-      writer.uint32(18).string(message.toAddress);
+    if (message.to_address !== "") {
+      writer.uint32(18).string(message.to_address);
     }
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.endTime !== "0") {
-      writer.uint32(32).int64(message.endTime);
+    if (message.end_time !== "0") {
+      writer.uint32(32).int64(message.end_time);
     }
     if (message.delayed === true) {
       writer.uint32(40).bool(message.delayed);
@@ -102,14 +102,14 @@ export const MsgCreateVestingAccount = {
             break;
           }
 
-          message.fromAddress = reader.string();
+          message.from_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.toAddress = reader.string();
+          message.to_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -123,7 +123,7 @@ export const MsgCreateVestingAccount = {
             break;
           }
 
-          message.endTime = longToString(reader.int64() as Long);
+          message.end_time = longToString(reader.int64() as Long);
           continue;
         case 5:
           if (tag !== 40) {
@@ -143,27 +143,27 @@ export const MsgCreateVestingAccount = {
 
   fromJSON(object: any): MsgCreateVestingAccount {
     return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      endTime: isSet(object.endTime) ? String(object.endTime) : "0",
+      end_time: isSet(object.end_time) ? String(object.end_time) : "0",
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false,
     };
   },
 
   toJSON(message: MsgCreateVestingAccount): unknown {
     const obj: any = {};
-    if (message.fromAddress !== "") {
-      obj.fromAddress = message.fromAddress;
+    if (message.from_address !== "") {
+      obj.from_address = message.from_address;
     }
-    if (message.toAddress !== "") {
-      obj.toAddress = message.toAddress;
+    if (message.to_address !== "") {
+      obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
     }
-    if (message.endTime !== "0") {
-      obj.endTime = message.endTime;
+    if (message.end_time !== "0") {
+      obj.end_time = message.end_time;
     }
     if (message.delayed === true) {
       obj.delayed = message.delayed;
@@ -176,10 +176,10 @@ export const MsgCreateVestingAccount = {
   },
   fromPartial(object: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     const message = createBaseMsgCreateVestingAccount();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
+    message.from_address = object.from_address ?? "";
+    message.to_address = object.to_address ?? "";
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
-    message.endTime = object.endTime ?? "0";
+    message.end_time = object.end_time ?? "0";
     message.delayed = object.delayed ?? false;
     return message;
   },
@@ -231,18 +231,18 @@ export const MsgCreateVestingAccountResponse = {
 };
 
 function createBaseMsgCreatePermanentLockedAccount(): MsgCreatePermanentLockedAccount {
-  return { fromAddress: "", toAddress: "", amount: [] };
+  return { from_address: "", to_address: "", amount: [] };
 }
 
 export const MsgCreatePermanentLockedAccount = {
   $type: "cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccount" as const,
 
   encode(message: MsgCreatePermanentLockedAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fromAddress !== "") {
-      writer.uint32(10).string(message.fromAddress);
+    if (message.from_address !== "") {
+      writer.uint32(10).string(message.from_address);
     }
-    if (message.toAddress !== "") {
-      writer.uint32(18).string(message.toAddress);
+    if (message.to_address !== "") {
+      writer.uint32(18).string(message.to_address);
     }
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -262,14 +262,14 @@ export const MsgCreatePermanentLockedAccount = {
             break;
           }
 
-          message.fromAddress = reader.string();
+          message.from_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.toAddress = reader.string();
+          message.to_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -289,19 +289,19 @@ export const MsgCreatePermanentLockedAccount = {
 
   fromJSON(object: any): MsgCreatePermanentLockedAccount {
     return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: MsgCreatePermanentLockedAccount): unknown {
     const obj: any = {};
-    if (message.fromAddress !== "") {
-      obj.fromAddress = message.fromAddress;
+    if (message.from_address !== "") {
+      obj.from_address = message.from_address;
     }
-    if (message.toAddress !== "") {
-      obj.toAddress = message.toAddress;
+    if (message.to_address !== "") {
+      obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
@@ -314,8 +314,8 @@ export const MsgCreatePermanentLockedAccount = {
   },
   fromPartial(object: DeepPartial<MsgCreatePermanentLockedAccount>): MsgCreatePermanentLockedAccount {
     const message = createBaseMsgCreatePermanentLockedAccount();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
+    message.from_address = object.from_address ?? "";
+    message.to_address = object.to_address ?? "";
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -367,23 +367,23 @@ export const MsgCreatePermanentLockedAccountResponse = {
 };
 
 function createBaseMsgCreatePeriodicVestingAccount(): MsgCreatePeriodicVestingAccount {
-  return { fromAddress: "", toAddress: "", startTime: "0", vestingPeriods: [] };
+  return { from_address: "", to_address: "", start_time: "0", vesting_periods: [] };
 }
 
 export const MsgCreatePeriodicVestingAccount = {
   $type: "cosmos.vesting.v1beta1.MsgCreatePeriodicVestingAccount" as const,
 
   encode(message: MsgCreatePeriodicVestingAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fromAddress !== "") {
-      writer.uint32(10).string(message.fromAddress);
+    if (message.from_address !== "") {
+      writer.uint32(10).string(message.from_address);
     }
-    if (message.toAddress !== "") {
-      writer.uint32(18).string(message.toAddress);
+    if (message.to_address !== "") {
+      writer.uint32(18).string(message.to_address);
     }
-    if (message.startTime !== "0") {
-      writer.uint32(24).int64(message.startTime);
+    if (message.start_time !== "0") {
+      writer.uint32(24).int64(message.start_time);
     }
-    for (const v of message.vestingPeriods) {
+    for (const v of message.vesting_periods) {
       Period.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
@@ -401,28 +401,28 @@ export const MsgCreatePeriodicVestingAccount = {
             break;
           }
 
-          message.fromAddress = reader.string();
+          message.from_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.toAddress = reader.string();
+          message.to_address = reader.string();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.startTime = longToString(reader.int64() as Long);
+          message.start_time = longToString(reader.int64() as Long);
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.vestingPeriods.push(Period.decode(reader, reader.uint32()));
+          message.vesting_periods.push(Period.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -435,28 +435,28 @@ export const MsgCreatePeriodicVestingAccount = {
 
   fromJSON(object: any): MsgCreatePeriodicVestingAccount {
     return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? String(object.startTime) : "0",
-      vestingPeriods: Array.isArray(object?.vestingPeriods)
-        ? object.vestingPeriods.map((e: any) => Period.fromJSON(e))
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
+      start_time: isSet(object.start_time) ? String(object.start_time) : "0",
+      vesting_periods: Array.isArray(object?.vesting_periods)
+        ? object.vesting_periods.map((e: any) => Period.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: MsgCreatePeriodicVestingAccount): unknown {
     const obj: any = {};
-    if (message.fromAddress !== "") {
-      obj.fromAddress = message.fromAddress;
+    if (message.from_address !== "") {
+      obj.from_address = message.from_address;
     }
-    if (message.toAddress !== "") {
-      obj.toAddress = message.toAddress;
+    if (message.to_address !== "") {
+      obj.to_address = message.to_address;
     }
-    if (message.startTime !== "0") {
-      obj.startTime = message.startTime;
+    if (message.start_time !== "0") {
+      obj.start_time = message.start_time;
     }
-    if (message.vestingPeriods?.length) {
-      obj.vestingPeriods = message.vestingPeriods.map((e) => Period.toJSON(e));
+    if (message.vesting_periods?.length) {
+      obj.vesting_periods = message.vesting_periods.map((e) => Period.toJSON(e));
     }
     return obj;
   },
@@ -466,10 +466,10 @@ export const MsgCreatePeriodicVestingAccount = {
   },
   fromPartial(object: DeepPartial<MsgCreatePeriodicVestingAccount>): MsgCreatePeriodicVestingAccount {
     const message = createBaseMsgCreatePeriodicVestingAccount();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
-    message.startTime = object.startTime ?? "0";
-    message.vestingPeriods = object.vestingPeriods?.map((e) => Period.fromPartial(e)) || [];
+    message.from_address = object.from_address ?? "";
+    message.to_address = object.to_address ?? "";
+    message.start_time = object.start_time ?? "0";
+    message.vesting_periods = object.vesting_periods?.map((e) => Period.fromPartial(e)) || [];
     return message;
   },
 };

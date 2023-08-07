@@ -17,7 +17,7 @@ export interface MsgSubmitProposal {
   /** messages are the arbitrary messages to be executed if proposal passes. */
   messages: Any[];
   /** initial_deposit is the deposit value that must be paid at proposal submission. */
-  initialDeposit: Coin[];
+  initial_deposit: Coin[];
   /** proposer is the account address of the proposer. */
   proposer: string;
   /** metadata is any arbitrary metadata attached to the proposal. */
@@ -39,7 +39,7 @@ export interface MsgSubmitProposal {
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId: string;
+  proposal_id: string;
 }
 
 /**
@@ -62,7 +62,7 @@ export interface MsgExecLegacyContentResponse {
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVote {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId: string;
+  proposal_id: string;
   /** voter is the voter address for the proposal. */
   voter: string;
   /** option defines the vote option. */
@@ -78,7 +78,7 @@ export interface MsgVoteResponse {
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeighted {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId: string;
+  proposal_id: string;
   /** voter is the voter address for the proposal. */
   voter: string;
   /** options defines the weighted vote options. */
@@ -94,7 +94,7 @@ export interface MsgVoteWeightedResponse {
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
   /** proposal_id defines the unique id of the proposal. */
-  proposalId: string;
+  proposal_id: string;
   /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
   /** amount to be deposited by depositor. */
@@ -131,7 +131,7 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
-  return { messages: [], initialDeposit: [], proposer: "", metadata: "", title: "", summary: "" };
+  return { messages: [], initial_deposit: [], proposer: "", metadata: "", title: "", summary: "" };
 }
 
 export const MsgSubmitProposal = {
@@ -141,7 +141,7 @@ export const MsgSubmitProposal = {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.initialDeposit) {
+    for (const v of message.initial_deposit) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.proposer !== "") {
@@ -178,7 +178,7 @@ export const MsgSubmitProposal = {
             break;
           }
 
-          message.initialDeposit.push(Coin.decode(reader, reader.uint32()));
+          message.initial_deposit.push(Coin.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
@@ -220,8 +220,8 @@ export const MsgSubmitProposal = {
   fromJSON(object: any): MsgSubmitProposal {
     return {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      initialDeposit: Array.isArray(object?.initialDeposit)
-        ? object.initialDeposit.map((e: any) => Coin.fromJSON(e))
+      initial_deposit: Array.isArray(object?.initial_deposit)
+        ? object.initial_deposit.map((e: any) => Coin.fromJSON(e))
         : [],
       proposer: isSet(object.proposer) ? String(object.proposer) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -235,8 +235,8 @@ export const MsgSubmitProposal = {
     if (message.messages?.length) {
       obj.messages = message.messages.map((e) => Any.toJSON(e));
     }
-    if (message.initialDeposit?.length) {
-      obj.initialDeposit = message.initialDeposit.map((e) => Coin.toJSON(e));
+    if (message.initial_deposit?.length) {
+      obj.initial_deposit = message.initial_deposit.map((e) => Coin.toJSON(e));
     }
     if (message.proposer !== "") {
       obj.proposer = message.proposer;
@@ -259,7 +259,7 @@ export const MsgSubmitProposal = {
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];
-    message.initialDeposit = object.initialDeposit?.map((e) => Coin.fromPartial(e)) || [];
+    message.initial_deposit = object.initial_deposit?.map((e) => Coin.fromPartial(e)) || [];
     message.proposer = object.proposer ?? "";
     message.metadata = object.metadata ?? "";
     message.title = object.title ?? "";
@@ -269,15 +269,15 @@ export const MsgSubmitProposal = {
 };
 
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
-  return { proposalId: "0" };
+  return { proposal_id: "0" };
 }
 
 export const MsgSubmitProposalResponse = {
   $type: "cosmos.gov.v1.MsgSubmitProposalResponse" as const,
 
   encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     return writer;
   },
@@ -294,7 +294,7 @@ export const MsgSubmitProposalResponse = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -306,13 +306,13 @@ export const MsgSubmitProposalResponse = {
   },
 
   fromJSON(object: any): MsgSubmitProposalResponse {
-    return { proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     return obj;
   },
@@ -322,7 +322,7 @@ export const MsgSubmitProposalResponse = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     return message;
   },
 };
@@ -451,15 +451,15 @@ export const MsgExecLegacyContentResponse = {
 };
 
 function createBaseMsgVote(): MsgVote {
-  return { proposalId: "0", voter: "", option: 0, metadata: "" };
+  return { proposal_id: "0", voter: "", option: 0, metadata: "" };
 }
 
 export const MsgVote = {
   $type: "cosmos.gov.v1.MsgVote" as const,
 
   encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
@@ -485,7 +485,7 @@ export const MsgVote = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -519,7 +519,7 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
       voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -528,8 +528,8 @@ export const MsgVote = {
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     if (message.voter !== "") {
       obj.voter = message.voter;
@@ -548,7 +548,7 @@ export const MsgVote = {
   },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -602,15 +602,15 @@ export const MsgVoteResponse = {
 };
 
 function createBaseMsgVoteWeighted(): MsgVoteWeighted {
-  return { proposalId: "0", voter: "", options: [], metadata: "" };
+  return { proposal_id: "0", voter: "", options: [], metadata: "" };
 }
 
 export const MsgVoteWeighted = {
   $type: "cosmos.gov.v1.MsgVoteWeighted" as const,
 
   encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
@@ -636,7 +636,7 @@ export const MsgVoteWeighted = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -670,7 +670,7 @@ export const MsgVoteWeighted = {
 
   fromJSON(object: any): MsgVoteWeighted {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
       voter: isSet(object.voter) ? String(object.voter) : "",
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -679,8 +679,8 @@ export const MsgVoteWeighted = {
 
   toJSON(message: MsgVoteWeighted): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     if (message.voter !== "") {
       obj.voter = message.voter;
@@ -699,7 +699,7 @@ export const MsgVoteWeighted = {
   },
   fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     message.voter = object.voter ?? "";
     message.options = object.options?.map((e) => WeightedVoteOption.fromPartial(e)) || [];
     message.metadata = object.metadata ?? "";
@@ -753,15 +753,15 @@ export const MsgVoteWeightedResponse = {
 };
 
 function createBaseMsgDeposit(): MsgDeposit {
-  return { proposalId: "0", depositor: "", amount: [] };
+  return { proposal_id: "0", depositor: "", amount: [] };
 }
 
 export const MsgDeposit = {
   $type: "cosmos.gov.v1.MsgDeposit" as const,
 
   encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
@@ -784,7 +784,7 @@ export const MsgDeposit = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -811,7 +811,7 @@ export const MsgDeposit = {
 
   fromJSON(object: any): MsgDeposit {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
       depositor: isSet(object.depositor) ? String(object.depositor) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
@@ -819,8 +819,8 @@ export const MsgDeposit = {
 
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     if (message.depositor !== "") {
       obj.depositor = message.depositor;
@@ -836,7 +836,7 @@ export const MsgDeposit = {
   },
   fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
     const message = createBaseMsgDeposit();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     message.depositor = object.depositor ?? "";
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
     return message;

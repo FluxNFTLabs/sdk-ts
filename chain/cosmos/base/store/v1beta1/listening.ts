@@ -19,7 +19,7 @@ import {
  */
 export interface StoreKVPair {
   /** the store key for the KVStore this pair originates from */
-  storeKey: string;
+  store_key: string;
   /** true indicates a delete operation, false indicates a set operation */
   delete: boolean;
   key: Uint8Array;
@@ -31,12 +31,12 @@ export interface StoreKVPair {
  * the file streamer dump them into files together with the state changes.
  */
 export interface BlockMetadata {
-  requestBeginBlock: RequestBeginBlock | undefined;
-  responseBeginBlock: ResponseBeginBlock | undefined;
-  deliverTxs: BlockMetadata_DeliverTx[];
-  requestEndBlock: RequestEndBlock | undefined;
-  responseEndBlock: ResponseEndBlock | undefined;
-  responseCommit: ResponseCommit | undefined;
+  request_begin_block: RequestBeginBlock | undefined;
+  response_begin_block: ResponseBeginBlock | undefined;
+  deliver_txs: BlockMetadata_DeliverTx[];
+  request_end_block: RequestEndBlock | undefined;
+  response_end_block: ResponseEndBlock | undefined;
+  response_commit: ResponseCommit | undefined;
 }
 
 /** DeliverTx encapulate deliver tx request and response. */
@@ -46,15 +46,15 @@ export interface BlockMetadata_DeliverTx {
 }
 
 function createBaseStoreKVPair(): StoreKVPair {
-  return { storeKey: "", delete: false, key: new Uint8Array(0), value: new Uint8Array(0) };
+  return { store_key: "", delete: false, key: new Uint8Array(0), value: new Uint8Array(0) };
 }
 
 export const StoreKVPair = {
   $type: "cosmos.base.store.v1beta1.StoreKVPair" as const,
 
   encode(message: StoreKVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.storeKey !== "") {
-      writer.uint32(10).string(message.storeKey);
+    if (message.store_key !== "") {
+      writer.uint32(10).string(message.store_key);
     }
     if (message.delete === true) {
       writer.uint32(16).bool(message.delete);
@@ -80,7 +80,7 @@ export const StoreKVPair = {
             break;
           }
 
-          message.storeKey = reader.string();
+          message.store_key = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
@@ -114,7 +114,7 @@ export const StoreKVPair = {
 
   fromJSON(object: any): StoreKVPair {
     return {
-      storeKey: isSet(object.storeKey) ? String(object.storeKey) : "",
+      store_key: isSet(object.store_key) ? String(object.store_key) : "",
       delete: isSet(object.delete) ? Boolean(object.delete) : false,
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
@@ -123,8 +123,8 @@ export const StoreKVPair = {
 
   toJSON(message: StoreKVPair): unknown {
     const obj: any = {};
-    if (message.storeKey !== "") {
-      obj.storeKey = message.storeKey;
+    if (message.store_key !== "") {
+      obj.store_key = message.store_key;
     }
     if (message.delete === true) {
       obj.delete = message.delete;
@@ -143,7 +143,7 @@ export const StoreKVPair = {
   },
   fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {
     const message = createBaseStoreKVPair();
-    message.storeKey = object.storeKey ?? "";
+    message.store_key = object.store_key ?? "";
     message.delete = object.delete ?? false;
     message.key = object.key ?? new Uint8Array(0);
     message.value = object.value ?? new Uint8Array(0);
@@ -153,12 +153,12 @@ export const StoreKVPair = {
 
 function createBaseBlockMetadata(): BlockMetadata {
   return {
-    requestBeginBlock: undefined,
-    responseBeginBlock: undefined,
-    deliverTxs: [],
-    requestEndBlock: undefined,
-    responseEndBlock: undefined,
-    responseCommit: undefined,
+    request_begin_block: undefined,
+    response_begin_block: undefined,
+    deliver_txs: [],
+    request_end_block: undefined,
+    response_end_block: undefined,
+    response_commit: undefined,
   };
 }
 
@@ -166,23 +166,23 @@ export const BlockMetadata = {
   $type: "cosmos.base.store.v1beta1.BlockMetadata" as const,
 
   encode(message: BlockMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.requestBeginBlock !== undefined) {
-      RequestBeginBlock.encode(message.requestBeginBlock, writer.uint32(10).fork()).ldelim();
+    if (message.request_begin_block !== undefined) {
+      RequestBeginBlock.encode(message.request_begin_block, writer.uint32(10).fork()).ldelim();
     }
-    if (message.responseBeginBlock !== undefined) {
-      ResponseBeginBlock.encode(message.responseBeginBlock, writer.uint32(18).fork()).ldelim();
+    if (message.response_begin_block !== undefined) {
+      ResponseBeginBlock.encode(message.response_begin_block, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.deliverTxs) {
+    for (const v of message.deliver_txs) {
       BlockMetadata_DeliverTx.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.requestEndBlock !== undefined) {
-      RequestEndBlock.encode(message.requestEndBlock, writer.uint32(34).fork()).ldelim();
+    if (message.request_end_block !== undefined) {
+      RequestEndBlock.encode(message.request_end_block, writer.uint32(34).fork()).ldelim();
     }
-    if (message.responseEndBlock !== undefined) {
-      ResponseEndBlock.encode(message.responseEndBlock, writer.uint32(42).fork()).ldelim();
+    if (message.response_end_block !== undefined) {
+      ResponseEndBlock.encode(message.response_end_block, writer.uint32(42).fork()).ldelim();
     }
-    if (message.responseCommit !== undefined) {
-      ResponseCommit.encode(message.responseCommit, writer.uint32(50).fork()).ldelim();
+    if (message.response_commit !== undefined) {
+      ResponseCommit.encode(message.response_commit, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -199,42 +199,42 @@ export const BlockMetadata = {
             break;
           }
 
-          message.requestBeginBlock = RequestBeginBlock.decode(reader, reader.uint32());
+          message.request_begin_block = RequestBeginBlock.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.responseBeginBlock = ResponseBeginBlock.decode(reader, reader.uint32());
+          message.response_begin_block = ResponseBeginBlock.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.deliverTxs.push(BlockMetadata_DeliverTx.decode(reader, reader.uint32()));
+          message.deliver_txs.push(BlockMetadata_DeliverTx.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.requestEndBlock = RequestEndBlock.decode(reader, reader.uint32());
+          message.request_end_block = RequestEndBlock.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.responseEndBlock = ResponseEndBlock.decode(reader, reader.uint32());
+          message.response_end_block = ResponseEndBlock.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.responseCommit = ResponseCommit.decode(reader, reader.uint32());
+          message.response_commit = ResponseCommit.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -247,40 +247,44 @@ export const BlockMetadata = {
 
   fromJSON(object: any): BlockMetadata {
     return {
-      requestBeginBlock: isSet(object.requestBeginBlock)
-        ? RequestBeginBlock.fromJSON(object.requestBeginBlock)
+      request_begin_block: isSet(object.request_begin_block)
+        ? RequestBeginBlock.fromJSON(object.request_begin_block)
         : undefined,
-      responseBeginBlock: isSet(object.responseBeginBlock)
-        ? ResponseBeginBlock.fromJSON(object.responseBeginBlock)
+      response_begin_block: isSet(object.response_begin_block)
+        ? ResponseBeginBlock.fromJSON(object.response_begin_block)
         : undefined,
-      deliverTxs: Array.isArray(object?.deliverTxs)
-        ? object.deliverTxs.map((e: any) => BlockMetadata_DeliverTx.fromJSON(e))
+      deliver_txs: Array.isArray(object?.deliver_txs)
+        ? object.deliver_txs.map((e: any) => BlockMetadata_DeliverTx.fromJSON(e))
         : [],
-      requestEndBlock: isSet(object.requestEndBlock) ? RequestEndBlock.fromJSON(object.requestEndBlock) : undefined,
-      responseEndBlock: isSet(object.responseEndBlock) ? ResponseEndBlock.fromJSON(object.responseEndBlock) : undefined,
-      responseCommit: isSet(object.responseCommit) ? ResponseCommit.fromJSON(object.responseCommit) : undefined,
+      request_end_block: isSet(object.request_end_block)
+        ? RequestEndBlock.fromJSON(object.request_end_block)
+        : undefined,
+      response_end_block: isSet(object.response_end_block)
+        ? ResponseEndBlock.fromJSON(object.response_end_block)
+        : undefined,
+      response_commit: isSet(object.response_commit) ? ResponseCommit.fromJSON(object.response_commit) : undefined,
     };
   },
 
   toJSON(message: BlockMetadata): unknown {
     const obj: any = {};
-    if (message.requestBeginBlock !== undefined) {
-      obj.requestBeginBlock = RequestBeginBlock.toJSON(message.requestBeginBlock);
+    if (message.request_begin_block !== undefined) {
+      obj.request_begin_block = RequestBeginBlock.toJSON(message.request_begin_block);
     }
-    if (message.responseBeginBlock !== undefined) {
-      obj.responseBeginBlock = ResponseBeginBlock.toJSON(message.responseBeginBlock);
+    if (message.response_begin_block !== undefined) {
+      obj.response_begin_block = ResponseBeginBlock.toJSON(message.response_begin_block);
     }
-    if (message.deliverTxs?.length) {
-      obj.deliverTxs = message.deliverTxs.map((e) => BlockMetadata_DeliverTx.toJSON(e));
+    if (message.deliver_txs?.length) {
+      obj.deliver_txs = message.deliver_txs.map((e) => BlockMetadata_DeliverTx.toJSON(e));
     }
-    if (message.requestEndBlock !== undefined) {
-      obj.requestEndBlock = RequestEndBlock.toJSON(message.requestEndBlock);
+    if (message.request_end_block !== undefined) {
+      obj.request_end_block = RequestEndBlock.toJSON(message.request_end_block);
     }
-    if (message.responseEndBlock !== undefined) {
-      obj.responseEndBlock = ResponseEndBlock.toJSON(message.responseEndBlock);
+    if (message.response_end_block !== undefined) {
+      obj.response_end_block = ResponseEndBlock.toJSON(message.response_end_block);
     }
-    if (message.responseCommit !== undefined) {
-      obj.responseCommit = ResponseCommit.toJSON(message.responseCommit);
+    if (message.response_commit !== undefined) {
+      obj.response_commit = ResponseCommit.toJSON(message.response_commit);
     }
     return obj;
   },
@@ -290,21 +294,21 @@ export const BlockMetadata = {
   },
   fromPartial(object: DeepPartial<BlockMetadata>): BlockMetadata {
     const message = createBaseBlockMetadata();
-    message.requestBeginBlock = (object.requestBeginBlock !== undefined && object.requestBeginBlock !== null)
-      ? RequestBeginBlock.fromPartial(object.requestBeginBlock)
+    message.request_begin_block = (object.request_begin_block !== undefined && object.request_begin_block !== null)
+      ? RequestBeginBlock.fromPartial(object.request_begin_block)
       : undefined;
-    message.responseBeginBlock = (object.responseBeginBlock !== undefined && object.responseBeginBlock !== null)
-      ? ResponseBeginBlock.fromPartial(object.responseBeginBlock)
+    message.response_begin_block = (object.response_begin_block !== undefined && object.response_begin_block !== null)
+      ? ResponseBeginBlock.fromPartial(object.response_begin_block)
       : undefined;
-    message.deliverTxs = object.deliverTxs?.map((e) => BlockMetadata_DeliverTx.fromPartial(e)) || [];
-    message.requestEndBlock = (object.requestEndBlock !== undefined && object.requestEndBlock !== null)
-      ? RequestEndBlock.fromPartial(object.requestEndBlock)
+    message.deliver_txs = object.deliver_txs?.map((e) => BlockMetadata_DeliverTx.fromPartial(e)) || [];
+    message.request_end_block = (object.request_end_block !== undefined && object.request_end_block !== null)
+      ? RequestEndBlock.fromPartial(object.request_end_block)
       : undefined;
-    message.responseEndBlock = (object.responseEndBlock !== undefined && object.responseEndBlock !== null)
-      ? ResponseEndBlock.fromPartial(object.responseEndBlock)
+    message.response_end_block = (object.response_end_block !== undefined && object.response_end_block !== null)
+      ? ResponseEndBlock.fromPartial(object.response_end_block)
       : undefined;
-    message.responseCommit = (object.responseCommit !== undefined && object.responseCommit !== null)
-      ? ResponseCommit.fromPartial(object.responseCommit)
+    message.response_commit = (object.response_commit !== undefined && object.response_commit !== null)
+      ? ResponseCommit.fromPartial(object.response_commit)
       : undefined;
     return message;
   },

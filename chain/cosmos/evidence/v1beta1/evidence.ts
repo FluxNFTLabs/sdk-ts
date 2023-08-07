@@ -17,11 +17,11 @@ export interface Equivocation {
   /** power is the equivocation validator power. */
   power: string;
   /** consensus_address is the equivocation validator consensus address. */
-  consensusAddress: string;
+  consensus_address: string;
 }
 
 function createBaseEquivocation(): Equivocation {
-  return { height: "0", time: undefined, power: "0", consensusAddress: "" };
+  return { height: "0", time: undefined, power: "0", consensus_address: "" };
 }
 
 export const Equivocation = {
@@ -37,8 +37,8 @@ export const Equivocation = {
     if (message.power !== "0") {
       writer.uint32(24).int64(message.power);
     }
-    if (message.consensusAddress !== "") {
-      writer.uint32(34).string(message.consensusAddress);
+    if (message.consensus_address !== "") {
+      writer.uint32(34).string(message.consensus_address);
     }
     return writer;
   },
@@ -76,7 +76,7 @@ export const Equivocation = {
             break;
           }
 
-          message.consensusAddress = reader.string();
+          message.consensus_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -92,7 +92,7 @@ export const Equivocation = {
       height: isSet(object.height) ? String(object.height) : "0",
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
       power: isSet(object.power) ? String(object.power) : "0",
-      consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : "",
+      consensus_address: isSet(object.consensus_address) ? String(object.consensus_address) : "",
     };
   },
 
@@ -107,8 +107,8 @@ export const Equivocation = {
     if (message.power !== "0") {
       obj.power = message.power;
     }
-    if (message.consensusAddress !== "") {
-      obj.consensusAddress = message.consensusAddress;
+    if (message.consensus_address !== "") {
+      obj.consensus_address = message.consensus_address;
     }
     return obj;
   },
@@ -121,7 +121,7 @@ export const Equivocation = {
     message.height = object.height ?? "0";
     message.time = object.time ?? undefined;
     message.power = object.power ?? "0";
-    message.consensusAddress = object.consensusAddress ?? "";
+    message.consensus_address = object.consensus_address ?? "";
     return message;
   },
 };

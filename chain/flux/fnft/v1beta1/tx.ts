@@ -9,19 +9,19 @@ export interface MsgCreate {
   /** sender is the address of the owner of nft */
   sender: string;
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** uri defines uri link for this nft */
   uri: string;
   /** shares defines the number of shares this nft holds */
   supply: string;
   /** initial_price defines initial price of a share */
-  initialPrice: string;
+  initial_price: string;
   /** iso_timestamp defines when iso period is over */
-  ISOTimestamp: string;
+  ISO_timestamp: string;
   /** accepted_sponsorship_denoms defines accepted denoms for sponsorship */
-  acceptedSponsorshipDenom: string;
+  accepted_sponsorship_denom: string;
   /** dividend_interval defines period to distribute dividend to shareholders */
-  dividendInterval: string;
+  dividend_interval: string;
 }
 
 /** MsgCreateResponse defines the Msg/Create response type. */
@@ -33,7 +33,7 @@ export interface MsgPurchaseShares {
   /** sender is the address of sender */
   sender: string;
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the monotonic increasing id of the nft in nft class */
   id: string;
   /** amount defines the number of shares to purchase */
@@ -47,7 +47,7 @@ export interface MsgPurchaseSharesResponse {
 /** MsgTransferShares represents a message to transfer nft shares from one account to another account. */
 export interface MsgTransferShares {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the unique identification of nft */
   id: string;
   /** sender is the address of the owner of nft */
@@ -65,7 +65,7 @@ export interface MsgTransferSharesResponse {
 /** MsgDepositShares represents a message to deposit nft shares from bank to fnft. */
 export interface MsgDepositShares {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the unique identification of nft */
   id: string;
   /** sender is the address of the owner of nft */
@@ -81,7 +81,7 @@ export interface MsgDepositSharesResponse {
 /** MsgWithdrawShares represents a message to withdraw nft shares from fnft to bank. */
 export interface MsgWithdrawShares {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the unique identification of nft */
   id: string;
   /** sender is the address of the owner of nft */
@@ -99,7 +99,7 @@ export interface MsgSponsor {
   /** sender is the address of sender */
   sender: string;
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the unique identification of nft */
   id: string;
   /** coin defines the value of this sponsorship */
@@ -117,13 +117,13 @@ export interface MsgSponsorResponse {
 function createBaseMsgCreate(): MsgCreate {
   return {
     sender: "",
-    classId: "",
+    class_id: "",
     uri: "",
     supply: "",
-    initialPrice: "",
-    ISOTimestamp: "0",
-    acceptedSponsorshipDenom: "",
-    dividendInterval: "0",
+    initial_price: "",
+    ISO_timestamp: "0",
+    accepted_sponsorship_denom: "",
+    dividend_interval: "0",
   };
 }
 
@@ -134,8 +134,8 @@ export const MsgCreate = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.classId !== "") {
-      writer.uint32(18).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(18).string(message.class_id);
     }
     if (message.uri !== "") {
       writer.uint32(26).string(message.uri);
@@ -143,17 +143,17 @@ export const MsgCreate = {
     if (message.supply !== "") {
       writer.uint32(34).string(message.supply);
     }
-    if (message.initialPrice !== "") {
-      writer.uint32(42).string(message.initialPrice);
+    if (message.initial_price !== "") {
+      writer.uint32(42).string(message.initial_price);
     }
-    if (message.ISOTimestamp !== "0") {
-      writer.uint32(48).uint64(message.ISOTimestamp);
+    if (message.ISO_timestamp !== "0") {
+      writer.uint32(48).uint64(message.ISO_timestamp);
     }
-    if (message.acceptedSponsorshipDenom !== "") {
-      writer.uint32(58).string(message.acceptedSponsorshipDenom);
+    if (message.accepted_sponsorship_denom !== "") {
+      writer.uint32(58).string(message.accepted_sponsorship_denom);
     }
-    if (message.dividendInterval !== "0") {
-      writer.uint32(64).uint64(message.dividendInterval);
+    if (message.dividend_interval !== "0") {
+      writer.uint32(64).uint64(message.dividend_interval);
     }
     return writer;
   },
@@ -177,7 +177,7 @@ export const MsgCreate = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -198,28 +198,28 @@ export const MsgCreate = {
             break;
           }
 
-          message.initialPrice = reader.string();
+          message.initial_price = reader.string();
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.ISOTimestamp = longToString(reader.uint64() as Long);
+          message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.acceptedSponsorshipDenom = reader.string();
+          message.accepted_sponsorship_denom = reader.string();
           continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.dividendInterval = longToString(reader.uint64() as Long);
+          message.dividend_interval = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -233,13 +233,15 @@ export const MsgCreate = {
   fromJSON(object: any): MsgCreate {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       uri: isSet(object.uri) ? String(object.uri) : "",
       supply: isSet(object.supply) ? String(object.supply) : "",
-      initialPrice: isSet(object.initialPrice) ? String(object.initialPrice) : "",
-      ISOTimestamp: isSet(object.ISOTimestamp) ? String(object.ISOTimestamp) : "0",
-      acceptedSponsorshipDenom: isSet(object.acceptedSponsorshipDenom) ? String(object.acceptedSponsorshipDenom) : "",
-      dividendInterval: isSet(object.dividendInterval) ? String(object.dividendInterval) : "0",
+      initial_price: isSet(object.initial_price) ? String(object.initial_price) : "",
+      ISO_timestamp: isSet(object.ISO_timestamp) ? String(object.ISO_timestamp) : "0",
+      accepted_sponsorship_denom: isSet(object.accepted_sponsorship_denom)
+        ? String(object.accepted_sponsorship_denom)
+        : "",
+      dividend_interval: isSet(object.dividend_interval) ? String(object.dividend_interval) : "0",
     };
   },
 
@@ -248,8 +250,8 @@ export const MsgCreate = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.uri !== "") {
       obj.uri = message.uri;
@@ -257,17 +259,17 @@ export const MsgCreate = {
     if (message.supply !== "") {
       obj.supply = message.supply;
     }
-    if (message.initialPrice !== "") {
-      obj.initialPrice = message.initialPrice;
+    if (message.initial_price !== "") {
+      obj.initial_price = message.initial_price;
     }
-    if (message.ISOTimestamp !== "0") {
-      obj.ISOTimestamp = message.ISOTimestamp;
+    if (message.ISO_timestamp !== "0") {
+      obj.ISO_timestamp = message.ISO_timestamp;
     }
-    if (message.acceptedSponsorshipDenom !== "") {
-      obj.acceptedSponsorshipDenom = message.acceptedSponsorshipDenom;
+    if (message.accepted_sponsorship_denom !== "") {
+      obj.accepted_sponsorship_denom = message.accepted_sponsorship_denom;
     }
-    if (message.dividendInterval !== "0") {
-      obj.dividendInterval = message.dividendInterval;
+    if (message.dividend_interval !== "0") {
+      obj.dividend_interval = message.dividend_interval;
     }
     return obj;
   },
@@ -278,13 +280,13 @@ export const MsgCreate = {
   fromPartial(object: DeepPartial<MsgCreate>): MsgCreate {
     const message = createBaseMsgCreate();
     message.sender = object.sender ?? "";
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.uri = object.uri ?? "";
     message.supply = object.supply ?? "";
-    message.initialPrice = object.initialPrice ?? "";
-    message.ISOTimestamp = object.ISOTimestamp ?? "0";
-    message.acceptedSponsorshipDenom = object.acceptedSponsorshipDenom ?? "";
-    message.dividendInterval = object.dividendInterval ?? "0";
+    message.initial_price = object.initial_price ?? "";
+    message.ISO_timestamp = object.ISO_timestamp ?? "0";
+    message.accepted_sponsorship_denom = object.accepted_sponsorship_denom ?? "";
+    message.dividend_interval = object.dividend_interval ?? "0";
     return message;
   },
 };
@@ -335,7 +337,7 @@ export const MsgCreateResponse = {
 };
 
 function createBaseMsgPurchaseShares(): MsgPurchaseShares {
-  return { sender: "", classId: "", id: "", shares: "" };
+  return { sender: "", class_id: "", id: "", shares: "" };
 }
 
 export const MsgPurchaseShares = {
@@ -345,8 +347,8 @@ export const MsgPurchaseShares = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.classId !== "") {
-      writer.uint32(18).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(18).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(26).string(message.id);
@@ -376,7 +378,7 @@ export const MsgPurchaseShares = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -404,7 +406,7 @@ export const MsgPurchaseShares = {
   fromJSON(object: any): MsgPurchaseShares {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       shares: isSet(object.shares) ? String(object.shares) : "",
     };
@@ -415,8 +417,8 @@ export const MsgPurchaseShares = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -433,7 +435,7 @@ export const MsgPurchaseShares = {
   fromPartial(object: DeepPartial<MsgPurchaseShares>): MsgPurchaseShares {
     const message = createBaseMsgPurchaseShares();
     message.sender = object.sender ?? "";
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.shares = object.shares ?? "";
     return message;
@@ -486,15 +488,15 @@ export const MsgPurchaseSharesResponse = {
 };
 
 function createBaseMsgTransferShares(): MsgTransferShares {
-  return { classId: "", id: "", sender: "", receiver: "", shares: "" };
+  return { class_id: "", id: "", sender: "", receiver: "", shares: "" };
 }
 
 export const MsgTransferShares = {
   $type: "flux.fnft.v1beta1.MsgTransferShares" as const,
 
   encode(message: MsgTransferShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -523,7 +525,7 @@ export const MsgTransferShares = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -564,7 +566,7 @@ export const MsgTransferShares = {
 
   fromJSON(object: any): MsgTransferShares {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
@@ -574,8 +576,8 @@ export const MsgTransferShares = {
 
   toJSON(message: MsgTransferShares): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -597,7 +599,7 @@ export const MsgTransferShares = {
   },
   fromPartial(object: DeepPartial<MsgTransferShares>): MsgTransferShares {
     const message = createBaseMsgTransferShares();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
@@ -652,15 +654,15 @@ export const MsgTransferSharesResponse = {
 };
 
 function createBaseMsgDepositShares(): MsgDepositShares {
-  return { classId: "", id: "", sender: "", shares: "" };
+  return { class_id: "", id: "", sender: "", shares: "" };
 }
 
 export const MsgDepositShares = {
   $type: "flux.fnft.v1beta1.MsgDepositShares" as const,
 
   encode(message: MsgDepositShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -686,7 +688,7 @@ export const MsgDepositShares = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -720,7 +722,7 @@ export const MsgDepositShares = {
 
   fromJSON(object: any): MsgDepositShares {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
       shares: isSet(object.shares) ? String(object.shares) : "",
@@ -729,8 +731,8 @@ export const MsgDepositShares = {
 
   toJSON(message: MsgDepositShares): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -749,7 +751,7 @@ export const MsgDepositShares = {
   },
   fromPartial(object: DeepPartial<MsgDepositShares>): MsgDepositShares {
     const message = createBaseMsgDepositShares();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.sender = object.sender ?? "";
     message.shares = object.shares ?? "";
@@ -803,15 +805,15 @@ export const MsgDepositSharesResponse = {
 };
 
 function createBaseMsgWithdrawShares(): MsgWithdrawShares {
-  return { classId: "", id: "", sender: "", shares: "" };
+  return { class_id: "", id: "", sender: "", shares: "" };
 }
 
 export const MsgWithdrawShares = {
   $type: "flux.fnft.v1beta1.MsgWithdrawShares" as const,
 
   encode(message: MsgWithdrawShares, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -837,7 +839,7 @@ export const MsgWithdrawShares = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -871,7 +873,7 @@ export const MsgWithdrawShares = {
 
   fromJSON(object: any): MsgWithdrawShares {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
       shares: isSet(object.shares) ? String(object.shares) : "",
@@ -880,8 +882,8 @@ export const MsgWithdrawShares = {
 
   toJSON(message: MsgWithdrawShares): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -900,7 +902,7 @@ export const MsgWithdrawShares = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawShares>): MsgWithdrawShares {
     const message = createBaseMsgWithdrawShares();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.sender = object.sender ?? "";
     message.shares = object.shares ?? "";
@@ -954,7 +956,7 @@ export const MsgWithdrawSharesResponse = {
 };
 
 function createBaseMsgSponsor(): MsgSponsor {
-  return { sender: "", classId: "", id: "", coin: "", description: "", uri: "" };
+  return { sender: "", class_id: "", id: "", coin: "", description: "", uri: "" };
 }
 
 export const MsgSponsor = {
@@ -964,8 +966,8 @@ export const MsgSponsor = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.classId !== "") {
-      writer.uint32(18).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(18).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(26).string(message.id);
@@ -1001,7 +1003,7 @@ export const MsgSponsor = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -1043,7 +1045,7 @@ export const MsgSponsor = {
   fromJSON(object: any): MsgSponsor {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       coin: isSet(object.coin) ? String(object.coin) : "",
       description: isSet(object.description) ? String(object.description) : "",
@@ -1056,8 +1058,8 @@ export const MsgSponsor = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -1080,7 +1082,7 @@ export const MsgSponsor = {
   fromPartial(object: DeepPartial<MsgSponsor>): MsgSponsor {
     const message = createBaseMsgSponsor();
     message.sender = object.sender ?? "";
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.coin = object.coin ?? "";
     message.description = object.description ?? "";

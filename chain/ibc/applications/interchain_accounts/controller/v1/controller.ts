@@ -7,19 +7,19 @@ import _m0 from "protobufjs/minimal";
  */
 export interface Params {
   /** controller_enabled enables or disables the controller submodule. */
-  controllerEnabled: boolean;
+  controller_enabled: boolean;
 }
 
 function createBaseParams(): Params {
-  return { controllerEnabled: false };
+  return { controller_enabled: false };
 }
 
 export const Params = {
   $type: "ibc.applications.interchain_accounts.controller.v1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.controllerEnabled === true) {
-      writer.uint32(8).bool(message.controllerEnabled);
+    if (message.controller_enabled === true) {
+      writer.uint32(8).bool(message.controller_enabled);
     }
     return writer;
   },
@@ -36,7 +36,7 @@ export const Params = {
             break;
           }
 
-          message.controllerEnabled = reader.bool();
+          message.controller_enabled = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -48,13 +48,13 @@ export const Params = {
   },
 
   fromJSON(object: any): Params {
-    return { controllerEnabled: isSet(object.controllerEnabled) ? Boolean(object.controllerEnabled) : false };
+    return { controller_enabled: isSet(object.controller_enabled) ? Boolean(object.controller_enabled) : false };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.controllerEnabled === true) {
-      obj.controllerEnabled = message.controllerEnabled;
+    if (message.controller_enabled === true) {
+      obj.controller_enabled = message.controller_enabled;
     }
     return obj;
   },
@@ -64,7 +64,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.controllerEnabled = object.controllerEnabled ?? false;
+    message.controller_enabled = object.controller_enabled ?? false;
     return message;
   },
 };

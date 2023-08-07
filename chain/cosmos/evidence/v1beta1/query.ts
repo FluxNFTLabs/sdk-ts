@@ -13,7 +13,7 @@ export interface QueryEvidenceRequest {
    *
    * @deprecated
    */
-  evidenceHash: Uint8Array;
+  evidence_hash: Uint8Array;
   /**
    * hash defines the evidence hash of the requested evidence.
    *
@@ -49,15 +49,15 @@ export interface QueryAllEvidenceResponse {
 }
 
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
-  return { evidenceHash: new Uint8Array(0), hash: "" };
+  return { evidence_hash: new Uint8Array(0), hash: "" };
 }
 
 export const QueryEvidenceRequest = {
   $type: "cosmos.evidence.v1beta1.QueryEvidenceRequest" as const,
 
   encode(message: QueryEvidenceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.evidenceHash.length !== 0) {
-      writer.uint32(10).bytes(message.evidenceHash);
+    if (message.evidence_hash.length !== 0) {
+      writer.uint32(10).bytes(message.evidence_hash);
     }
     if (message.hash !== "") {
       writer.uint32(18).string(message.hash);
@@ -77,7 +77,7 @@ export const QueryEvidenceRequest = {
             break;
           }
 
-          message.evidenceHash = reader.bytes();
+          message.evidence_hash = reader.bytes();
           continue;
         case 2:
           if (tag !== 18) {
@@ -97,15 +97,15 @@ export const QueryEvidenceRequest = {
 
   fromJSON(object: any): QueryEvidenceRequest {
     return {
-      evidenceHash: isSet(object.evidenceHash) ? bytesFromBase64(object.evidenceHash) : new Uint8Array(0),
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array(0),
       hash: isSet(object.hash) ? String(object.hash) : "",
     };
   },
 
   toJSON(message: QueryEvidenceRequest): unknown {
     const obj: any = {};
-    if (message.evidenceHash.length !== 0) {
-      obj.evidenceHash = base64FromBytes(message.evidenceHash);
+    if (message.evidence_hash.length !== 0) {
+      obj.evidence_hash = base64FromBytes(message.evidence_hash);
     }
     if (message.hash !== "") {
       obj.hash = message.hash;
@@ -118,7 +118,7 @@ export const QueryEvidenceRequest = {
   },
   fromPartial(object: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
-    message.evidenceHash = object.evidenceHash ?? new Uint8Array(0);
+    message.evidence_hash = object.evidence_hash ?? new Uint8Array(0);
     message.hash = object.hash ?? "";
     return message;
   },

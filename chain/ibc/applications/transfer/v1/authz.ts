@@ -5,13 +5,13 @@ import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 /** Allocation defines the spend limit for a particular port and channel */
 export interface Allocation {
   /** the port on which the packet will be sent */
-  sourcePort: string;
+  source_port: string;
   /** the channel by which the packet will be sent */
-  sourceChannel: string;
+  source_channel: string;
   /** spend limitation on the channel */
-  spendLimit: Coin[];
+  spend_limit: Coin[];
   /** allow list of receivers, an empty allow list permits any receiver address */
-  allowList: string[];
+  allow_list: string[];
 }
 
 /**
@@ -24,23 +24,23 @@ export interface TransferAuthorization {
 }
 
 function createBaseAllocation(): Allocation {
-  return { sourcePort: "", sourceChannel: "", spendLimit: [], allowList: [] };
+  return { source_port: "", source_channel: "", spend_limit: [], allow_list: [] };
 }
 
 export const Allocation = {
   $type: "ibc.applications.transfer.v1.Allocation" as const,
 
   encode(message: Allocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sourcePort !== "") {
-      writer.uint32(10).string(message.sourcePort);
+    if (message.source_port !== "") {
+      writer.uint32(10).string(message.source_port);
     }
-    if (message.sourceChannel !== "") {
-      writer.uint32(18).string(message.sourceChannel);
+    if (message.source_channel !== "") {
+      writer.uint32(18).string(message.source_channel);
     }
-    for (const v of message.spendLimit) {
+    for (const v of message.spend_limit) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    for (const v of message.allowList) {
+    for (const v of message.allow_list) {
       writer.uint32(34).string(v!);
     }
     return writer;
@@ -58,28 +58,28 @@ export const Allocation = {
             break;
           }
 
-          message.sourcePort = reader.string();
+          message.source_port = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.sourceChannel = reader.string();
+          message.source_channel = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
+          message.spend_limit.push(Coin.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.allowList.push(reader.string());
+          message.allow_list.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -92,26 +92,26 @@ export const Allocation = {
 
   fromJSON(object: any): Allocation {
     return {
-      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
-      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
-      spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : [],
-      allowList: Array.isArray(object?.allowList) ? object.allowList.map((e: any) => String(e)) : [],
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromJSON(e)) : [],
+      allow_list: Array.isArray(object?.allow_list) ? object.allow_list.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: Allocation): unknown {
     const obj: any = {};
-    if (message.sourcePort !== "") {
-      obj.sourcePort = message.sourcePort;
+    if (message.source_port !== "") {
+      obj.source_port = message.source_port;
     }
-    if (message.sourceChannel !== "") {
-      obj.sourceChannel = message.sourceChannel;
+    if (message.source_channel !== "") {
+      obj.source_channel = message.source_channel;
     }
-    if (message.spendLimit?.length) {
-      obj.spendLimit = message.spendLimit.map((e) => Coin.toJSON(e));
+    if (message.spend_limit?.length) {
+      obj.spend_limit = message.spend_limit.map((e) => Coin.toJSON(e));
     }
-    if (message.allowList?.length) {
-      obj.allowList = message.allowList;
+    if (message.allow_list?.length) {
+      obj.allow_list = message.allow_list;
     }
     return obj;
   },
@@ -121,10 +121,10 @@ export const Allocation = {
   },
   fromPartial(object: DeepPartial<Allocation>): Allocation {
     const message = createBaseAllocation();
-    message.sourcePort = object.sourcePort ?? "";
-    message.sourceChannel = object.sourceChannel ?? "";
-    message.spendLimit = object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];
-    message.allowList = object.allowList?.map((e) => e) || [];
+    message.source_port = object.source_port ?? "";
+    message.source_channel = object.source_channel ?? "";
+    message.spend_limit = object.spend_limit?.map((e) => Coin.fromPartial(e)) || [];
+    message.allow_list = object.allow_list?.map((e) => e) || [];
     return message;
   },
 };

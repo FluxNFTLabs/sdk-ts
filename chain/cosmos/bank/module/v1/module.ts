@@ -8,20 +8,20 @@ export interface Module {
    * If left empty it defaults to the list of account names supplied in the auth module configuration as
    * module_account_permissions
    */
-  blockedModuleAccountsOverride: string[];
+  blocked_module_accounts_override: string[];
   /** authority defines the custom module authority. If not set, defaults to the governance module. */
   authority: string;
 }
 
 function createBaseModule(): Module {
-  return { blockedModuleAccountsOverride: [], authority: "" };
+  return { blocked_module_accounts_override: [], authority: "" };
 }
 
 export const Module = {
   $type: "cosmos.bank.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.blockedModuleAccountsOverride) {
+    for (const v of message.blocked_module_accounts_override) {
       writer.uint32(10).string(v!);
     }
     if (message.authority !== "") {
@@ -42,7 +42,7 @@ export const Module = {
             break;
           }
 
-          message.blockedModuleAccountsOverride.push(reader.string());
+          message.blocked_module_accounts_override.push(reader.string());
           continue;
         case 2:
           if (tag !== 18) {
@@ -62,8 +62,8 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      blockedModuleAccountsOverride: Array.isArray(object?.blockedModuleAccountsOverride)
-        ? object.blockedModuleAccountsOverride.map((e: any) => String(e))
+      blocked_module_accounts_override: Array.isArray(object?.blocked_module_accounts_override)
+        ? object.blocked_module_accounts_override.map((e: any) => String(e))
         : [],
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
@@ -71,8 +71,8 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.blockedModuleAccountsOverride?.length) {
-      obj.blockedModuleAccountsOverride = message.blockedModuleAccountsOverride;
+    if (message.blocked_module_accounts_override?.length) {
+      obj.blocked_module_accounts_override = message.blocked_module_accounts_override;
     }
     if (message.authority !== "") {
       obj.authority = message.authority;
@@ -85,7 +85,7 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.blockedModuleAccountsOverride = object.blockedModuleAccountsOverride?.map((e) => e) || [];
+    message.blocked_module_accounts_override = object.blocked_module_accounts_override?.map((e) => e) || [];
     message.authority = object.authority ?? "";
     return message;
   },

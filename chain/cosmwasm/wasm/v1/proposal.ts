@@ -18,15 +18,15 @@ export interface StoreCodeProposal {
   /** Description is a human readable text */
   description: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
+  run_as: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasmByteCode: Uint8Array;
+  wasm_byte_code: Uint8Array;
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission:
+  instantiate_permission:
     | AccessConfig
     | undefined;
   /** UnpinCode code on upload, optional */
-  unpinCode: boolean;
+  unpin_code: boolean;
   /** Source is the URL where the code is hosted */
   source: string;
   /**
@@ -38,7 +38,7 @@ export interface StoreCodeProposal {
    * CodeHash is the SHA256 sum of the code outputted by builder, used for smart
    * contract verification
    */
-  codeHash: Uint8Array;
+  code_hash: Uint8Array;
 }
 
 /**
@@ -55,11 +55,11 @@ export interface InstantiateContractProposal {
   /** Description is a human readable text */
   description: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
+  run_as: string;
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** CodeID is the reference to the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** Label is optional metadata to be stored with a constract instance. */
   label: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
@@ -82,11 +82,11 @@ export interface InstantiateContract2Proposal {
   /** Description is a human readable text */
   description: string;
   /** RunAs is the address that is passed to the contract's enviroment as sender */
-  runAs: string;
+  run_as: string;
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** CodeID is the reference to the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** Label is optional metadata to be stored with a constract instance. */
   label: string;
   /** Msg json encode message to be passed to the contract on instantiation */
@@ -99,7 +99,7 @@ export interface InstantiateContract2Proposal {
    * FixMsg include the msg value into the hash for the predictable address.
    * Default is false
    */
-  fixMsg: boolean;
+  fix_msg: boolean;
 }
 
 /**
@@ -118,7 +118,7 @@ export interface MigrateContractProposal {
   /** Contract is the address of the smart contract */
   contract: string;
   /** CodeID references the new WASM code */
-  codeId: string;
+  code_id: string;
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
@@ -156,7 +156,7 @@ export interface ExecuteContractProposal {
   /** Description is a human readable text */
   description: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
+  run_as: string;
   /** Contract is the address of the smart contract */
   contract: string;
   /** Msg json encoded message to be passed to the contract as execute */
@@ -179,7 +179,7 @@ export interface UpdateAdminProposal {
   /** Description is a human readable text */
   description: string;
   /** NewAdmin address to be set */
-  newAdmin: string;
+  new_admin: string;
   /** Contract is the address of the smart contract */
   contract: string;
 }
@@ -215,7 +215,7 @@ export interface PinCodesProposal {
   /** Description is a human readable text */
   description: string;
   /** CodeIDs references the new WASM codes */
-  codeIds: string[];
+  code_ids: string[];
 }
 
 /**
@@ -232,7 +232,7 @@ export interface UnpinCodesProposal {
   /** Description is a human readable text */
   description: string;
   /** CodeIDs references the WASM codes */
-  codeIds: string[];
+  code_ids: string[];
 }
 
 /**
@@ -241,9 +241,9 @@ export interface UnpinCodesProposal {
  */
 export interface AccessConfigUpdate {
   /** CodeID is the reference to the stored WASM code to be updated */
-  codeId: string;
+  code_id: string;
   /** InstantiatePermission to apply to the set of code ids */
-  instantiatePermission: AccessConfig | undefined;
+  instantiate_permission: AccessConfig | undefined;
 }
 
 /**
@@ -263,7 +263,7 @@ export interface UpdateInstantiateConfigProposal {
    * AccessConfigUpdate contains the list of code ids and the access config
    * to be applied.
    */
-  accessConfigUpdates: AccessConfigUpdate[];
+  access_config_updates: AccessConfigUpdate[];
 }
 
 /**
@@ -280,15 +280,15 @@ export interface StoreAndInstantiateContractProposal {
   /** Description is a human readable text */
   description: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  runAs: string;
+  run_as: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasmByteCode: Uint8Array;
+  wasm_byte_code: Uint8Array;
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission:
+  instantiate_permission:
     | AccessConfig
     | undefined;
   /** UnpinCode code on upload, optional */
-  unpinCode: boolean;
+  unpin_code: boolean;
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** Label is optional metadata to be stored with a constract instance. */
@@ -308,20 +308,20 @@ export interface StoreAndInstantiateContractProposal {
    * CodeHash is the SHA256 sum of the code outputted by builder, used for smart
    * contract verification
    */
-  codeHash: Uint8Array;
+  code_hash: Uint8Array;
 }
 
 function createBaseStoreCodeProposal(): StoreCodeProposal {
   return {
     title: "",
     description: "",
-    runAs: "",
-    wasmByteCode: new Uint8Array(0),
-    instantiatePermission: undefined,
-    unpinCode: false,
+    run_as: "",
+    wasm_byte_code: new Uint8Array(0),
+    instantiate_permission: undefined,
+    unpin_code: false,
     source: "",
     builder: "",
-    codeHash: new Uint8Array(0),
+    code_hash: new Uint8Array(0),
   };
 }
 
@@ -335,17 +335,17 @@ export const StoreCodeProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.runAs !== "") {
-      writer.uint32(26).string(message.runAs);
+    if (message.run_as !== "") {
+      writer.uint32(26).string(message.run_as);
     }
-    if (message.wasmByteCode.length !== 0) {
-      writer.uint32(34).bytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      writer.uint32(34).bytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(58).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(58).fork()).ldelim();
     }
-    if (message.unpinCode === true) {
-      writer.uint32(64).bool(message.unpinCode);
+    if (message.unpin_code === true) {
+      writer.uint32(64).bool(message.unpin_code);
     }
     if (message.source !== "") {
       writer.uint32(74).string(message.source);
@@ -353,8 +353,8 @@ export const StoreCodeProposal = {
     if (message.builder !== "") {
       writer.uint32(82).string(message.builder);
     }
-    if (message.codeHash.length !== 0) {
-      writer.uint32(90).bytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      writer.uint32(90).bytes(message.code_hash);
     }
     return writer;
   },
@@ -385,28 +385,28 @@ export const StoreCodeProposal = {
             break;
           }
 
-          message.runAs = reader.string();
+          message.run_as = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.wasmByteCode = reader.bytes();
+          message.wasm_byte_code = reader.bytes();
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.unpinCode = reader.bool();
+          message.unpin_code = reader.bool();
           continue;
         case 9:
           if (tag !== 74) {
@@ -427,7 +427,7 @@ export const StoreCodeProposal = {
             break;
           }
 
-          message.codeHash = reader.bytes();
+          message.code_hash = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -442,15 +442,15 @@ export const StoreCodeProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      runAs: isSet(object.runAs) ? String(object.runAs) : "",
-      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(0),
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpinCode: isSet(object.unpinCode) ? Boolean(object.unpinCode) : false,
+      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
       source: isSet(object.source) ? String(object.source) : "",
       builder: isSet(object.builder) ? String(object.builder) : "",
-      codeHash: isSet(object.codeHash) ? bytesFromBase64(object.codeHash) : new Uint8Array(0),
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
 
@@ -462,17 +462,17 @@ export const StoreCodeProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.runAs !== "") {
-      obj.runAs = message.runAs;
+    if (message.run_as !== "") {
+      obj.run_as = message.run_as;
     }
-    if (message.wasmByteCode.length !== 0) {
-      obj.wasmByteCode = base64FromBytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
-    if (message.unpinCode === true) {
-      obj.unpinCode = message.unpinCode;
+    if (message.unpin_code === true) {
+      obj.unpin_code = message.unpin_code;
     }
     if (message.source !== "") {
       obj.source = message.source;
@@ -480,8 +480,8 @@ export const StoreCodeProposal = {
     if (message.builder !== "") {
       obj.builder = message.builder;
     }
-    if (message.codeHash.length !== 0) {
-      obj.codeHash = base64FromBytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;
   },
@@ -493,16 +493,16 @@ export const StoreCodeProposal = {
     const message = createBaseStoreCodeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.runAs = object.runAs ?? "";
-    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array(0);
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.run_as = object.run_as ?? "";
+    message.wasm_byte_code = object.wasm_byte_code ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
-    message.unpinCode = object.unpinCode ?? false;
+    message.unpin_code = object.unpin_code ?? false;
     message.source = object.source ?? "";
     message.builder = object.builder ?? "";
-    message.codeHash = object.codeHash ?? new Uint8Array(0);
+    message.code_hash = object.code_hash ?? new Uint8Array(0);
     return message;
   },
 };
@@ -511,9 +511,9 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
   return {
     title: "",
     description: "",
-    runAs: "",
+    run_as: "",
     admin: "",
-    codeId: "0",
+    code_id: "0",
     label: "",
     msg: new Uint8Array(0),
     funds: [],
@@ -530,14 +530,14 @@ export const InstantiateContractProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.runAs !== "") {
-      writer.uint32(26).string(message.runAs);
+    if (message.run_as !== "") {
+      writer.uint32(26).string(message.run_as);
     }
     if (message.admin !== "") {
       writer.uint32(34).string(message.admin);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(40).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(40).uint64(message.code_id);
     }
     if (message.label !== "") {
       writer.uint32(50).string(message.label);
@@ -577,7 +577,7 @@ export const InstantiateContractProposal = {
             break;
           }
 
-          message.runAs = reader.string();
+          message.run_as = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -591,7 +591,7 @@ export const InstantiateContractProposal = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 50) {
@@ -627,9 +627,9 @@ export const InstantiateContractProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
@@ -644,14 +644,14 @@ export const InstantiateContractProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.runAs !== "") {
-      obj.runAs = message.runAs;
+    if (message.run_as !== "") {
+      obj.run_as = message.run_as;
     }
     if (message.admin !== "") {
       obj.admin = message.admin;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.label !== "") {
       obj.label = message.label;
@@ -672,9 +672,9 @@ export const InstantiateContractProposal = {
     const message = createBaseInstantiateContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.runAs = object.runAs ?? "";
+    message.run_as = object.run_as ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
@@ -686,14 +686,14 @@ function createBaseInstantiateContract2Proposal(): InstantiateContract2Proposal 
   return {
     title: "",
     description: "",
-    runAs: "",
+    run_as: "",
     admin: "",
-    codeId: "0",
+    code_id: "0",
     label: "",
     msg: new Uint8Array(0),
     funds: [],
     salt: new Uint8Array(0),
-    fixMsg: false,
+    fix_msg: false,
   };
 }
 
@@ -707,14 +707,14 @@ export const InstantiateContract2Proposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.runAs !== "") {
-      writer.uint32(26).string(message.runAs);
+    if (message.run_as !== "") {
+      writer.uint32(26).string(message.run_as);
     }
     if (message.admin !== "") {
       writer.uint32(34).string(message.admin);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(40).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(40).uint64(message.code_id);
     }
     if (message.label !== "") {
       writer.uint32(50).string(message.label);
@@ -728,8 +728,8 @@ export const InstantiateContract2Proposal = {
     if (message.salt.length !== 0) {
       writer.uint32(74).bytes(message.salt);
     }
-    if (message.fixMsg === true) {
-      writer.uint32(80).bool(message.fixMsg);
+    if (message.fix_msg === true) {
+      writer.uint32(80).bool(message.fix_msg);
     }
     return writer;
   },
@@ -760,7 +760,7 @@ export const InstantiateContract2Proposal = {
             break;
           }
 
-          message.runAs = reader.string();
+          message.run_as = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -774,7 +774,7 @@ export const InstantiateContract2Proposal = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 50) {
@@ -809,7 +809,7 @@ export const InstantiateContract2Proposal = {
             break;
           }
 
-          message.fixMsg = reader.bool();
+          message.fix_msg = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -824,14 +824,14 @@ export const InstantiateContract2Proposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(0),
-      fixMsg: isSet(object.fixMsg) ? Boolean(object.fixMsg) : false,
+      fix_msg: isSet(object.fix_msg) ? Boolean(object.fix_msg) : false,
     };
   },
 
@@ -843,14 +843,14 @@ export const InstantiateContract2Proposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.runAs !== "") {
-      obj.runAs = message.runAs;
+    if (message.run_as !== "") {
+      obj.run_as = message.run_as;
     }
     if (message.admin !== "") {
       obj.admin = message.admin;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.label !== "") {
       obj.label = message.label;
@@ -864,8 +864,8 @@ export const InstantiateContract2Proposal = {
     if (message.salt.length !== 0) {
       obj.salt = base64FromBytes(message.salt);
     }
-    if (message.fixMsg === true) {
-      obj.fixMsg = message.fixMsg;
+    if (message.fix_msg === true) {
+      obj.fix_msg = message.fix_msg;
     }
     return obj;
   },
@@ -877,20 +877,20 @@ export const InstantiateContract2Proposal = {
     const message = createBaseInstantiateContract2Proposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.runAs = object.runAs ?? "";
+    message.run_as = object.run_as ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
     message.salt = object.salt ?? new Uint8Array(0);
-    message.fixMsg = object.fixMsg ?? false;
+    message.fix_msg = object.fix_msg ?? false;
     return message;
   },
 };
 
 function createBaseMigrateContractProposal(): MigrateContractProposal {
-  return { title: "", description: "", contract: "", codeId: "0", msg: new Uint8Array(0) };
+  return { title: "", description: "", contract: "", code_id: "0", msg: new Uint8Array(0) };
 }
 
 export const MigrateContractProposal = {
@@ -906,8 +906,8 @@ export const MigrateContractProposal = {
     if (message.contract !== "") {
       writer.uint32(34).string(message.contract);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(40).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(40).uint64(message.code_id);
     }
     if (message.msg.length !== 0) {
       writer.uint32(50).bytes(message.msg);
@@ -948,7 +948,7 @@ export const MigrateContractProposal = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 50) {
@@ -971,7 +971,7 @@ export const MigrateContractProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -987,8 +987,8 @@ export const MigrateContractProposal = {
     if (message.contract !== "") {
       obj.contract = message.contract;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.msg.length !== 0) {
       obj.msg = base64FromBytes(message.msg);
@@ -1004,7 +1004,7 @@ export const MigrateContractProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.msg = object.msg ?? new Uint8Array(0);
     return message;
   },
@@ -1117,7 +1117,7 @@ export const SudoContractProposal = {
 };
 
 function createBaseExecuteContractProposal(): ExecuteContractProposal {
-  return { title: "", description: "", runAs: "", contract: "", msg: new Uint8Array(0), funds: [] };
+  return { title: "", description: "", run_as: "", contract: "", msg: new Uint8Array(0), funds: [] };
 }
 
 export const ExecuteContractProposal = {
@@ -1130,8 +1130,8 @@ export const ExecuteContractProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.runAs !== "") {
-      writer.uint32(26).string(message.runAs);
+    if (message.run_as !== "") {
+      writer.uint32(26).string(message.run_as);
     }
     if (message.contract !== "") {
       writer.uint32(34).string(message.contract);
@@ -1171,7 +1171,7 @@ export const ExecuteContractProposal = {
             break;
           }
 
-          message.runAs = reader.string();
+          message.run_as = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -1207,7 +1207,7 @@ export const ExecuteContractProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      runAs: isSet(object.runAs) ? String(object.runAs) : "",
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
@@ -1222,8 +1222,8 @@ export const ExecuteContractProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.runAs !== "") {
-      obj.runAs = message.runAs;
+    if (message.run_as !== "") {
+      obj.run_as = message.run_as;
     }
     if (message.contract !== "") {
       obj.contract = message.contract;
@@ -1244,7 +1244,7 @@ export const ExecuteContractProposal = {
     const message = createBaseExecuteContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.runAs = object.runAs ?? "";
+    message.run_as = object.run_as ?? "";
     message.contract = object.contract ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
@@ -1253,7 +1253,7 @@ export const ExecuteContractProposal = {
 };
 
 function createBaseUpdateAdminProposal(): UpdateAdminProposal {
-  return { title: "", description: "", newAdmin: "", contract: "" };
+  return { title: "", description: "", new_admin: "", contract: "" };
 }
 
 export const UpdateAdminProposal = {
@@ -1266,8 +1266,8 @@ export const UpdateAdminProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.newAdmin !== "") {
-      writer.uint32(26).string(message.newAdmin);
+    if (message.new_admin !== "") {
+      writer.uint32(26).string(message.new_admin);
     }
     if (message.contract !== "") {
       writer.uint32(34).string(message.contract);
@@ -1301,7 +1301,7 @@ export const UpdateAdminProposal = {
             break;
           }
 
-          message.newAdmin = reader.string();
+          message.new_admin = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -1323,7 +1323,7 @@ export const UpdateAdminProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
     };
   },
@@ -1336,8 +1336,8 @@ export const UpdateAdminProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.newAdmin !== "") {
-      obj.newAdmin = message.newAdmin;
+    if (message.new_admin !== "") {
+      obj.new_admin = message.new_admin;
     }
     if (message.contract !== "") {
       obj.contract = message.contract;
@@ -1352,7 +1352,7 @@ export const UpdateAdminProposal = {
     const message = createBaseUpdateAdminProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.newAdmin = object.newAdmin ?? "";
+    message.new_admin = object.new_admin ?? "";
     message.contract = object.contract ?? "";
     return message;
   },
@@ -1450,7 +1450,7 @@ export const ClearAdminProposal = {
 };
 
 function createBasePinCodesProposal(): PinCodesProposal {
-  return { title: "", description: "", codeIds: [] };
+  return { title: "", description: "", code_ids: [] };
 }
 
 export const PinCodesProposal = {
@@ -1464,7 +1464,7 @@ export const PinCodesProposal = {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
-    for (const v of message.codeIds) {
+    for (const v of message.code_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -1494,7 +1494,7 @@ export const PinCodesProposal = {
           continue;
         case 3:
           if (tag === 24) {
-            message.codeIds.push(longToString(reader.uint64() as Long));
+            message.code_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -1502,7 +1502,7 @@ export const PinCodesProposal = {
           if (tag === 26) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(longToString(reader.uint64() as Long));
+              message.code_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -1522,7 +1522,7 @@ export const PinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => String(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
     };
   },
 
@@ -1534,8 +1534,8 @@ export const PinCodesProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.codeIds?.length) {
-      obj.codeIds = message.codeIds;
+    if (message.code_ids?.length) {
+      obj.code_ids = message.code_ids;
     }
     return obj;
   },
@@ -1547,13 +1547,13 @@ export const PinCodesProposal = {
     const message = createBasePinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map((e) => e) || [];
+    message.code_ids = object.code_ids?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseUnpinCodesProposal(): UnpinCodesProposal {
-  return { title: "", description: "", codeIds: [] };
+  return { title: "", description: "", code_ids: [] };
 }
 
 export const UnpinCodesProposal = {
@@ -1567,7 +1567,7 @@ export const UnpinCodesProposal = {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
-    for (const v of message.codeIds) {
+    for (const v of message.code_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -1597,7 +1597,7 @@ export const UnpinCodesProposal = {
           continue;
         case 3:
           if (tag === 24) {
-            message.codeIds.push(longToString(reader.uint64() as Long));
+            message.code_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -1605,7 +1605,7 @@ export const UnpinCodesProposal = {
           if (tag === 26) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(longToString(reader.uint64() as Long));
+              message.code_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -1625,7 +1625,7 @@ export const UnpinCodesProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => String(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
     };
   },
 
@@ -1637,8 +1637,8 @@ export const UnpinCodesProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.codeIds?.length) {
-      obj.codeIds = message.codeIds;
+    if (message.code_ids?.length) {
+      obj.code_ids = message.code_ids;
     }
     return obj;
   },
@@ -1650,24 +1650,24 @@ export const UnpinCodesProposal = {
     const message = createBaseUnpinCodesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.codeIds = object.codeIds?.map((e) => e) || [];
+    message.code_ids = object.code_ids?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseAccessConfigUpdate(): AccessConfigUpdate {
-  return { codeId: "0", instantiatePermission: undefined };
+  return { code_id: "0", instantiate_permission: undefined };
 }
 
 export const AccessConfigUpdate = {
   $type: "cosmwasm.wasm.v1.AccessConfigUpdate" as const,
 
   encode(message: AccessConfigUpdate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(18).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1684,14 +1684,14 @@ export const AccessConfigUpdate = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1704,20 +1704,20 @@ export const AccessConfigUpdate = {
 
   fromJSON(object: any): AccessConfigUpdate {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
     };
   },
 
   toJSON(message: AccessConfigUpdate): unknown {
     const obj: any = {};
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
     return obj;
   },
@@ -1727,17 +1727,17 @@ export const AccessConfigUpdate = {
   },
   fromPartial(object: DeepPartial<AccessConfigUpdate>): AccessConfigUpdate {
     const message = createBaseAccessConfigUpdate();
-    message.codeId = object.codeId ?? "0";
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.code_id = object.code_id ?? "0";
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
     return message;
   },
 };
 
 function createBaseUpdateInstantiateConfigProposal(): UpdateInstantiateConfigProposal {
-  return { title: "", description: "", accessConfigUpdates: [] };
+  return { title: "", description: "", access_config_updates: [] };
 }
 
 export const UpdateInstantiateConfigProposal = {
@@ -1750,7 +1750,7 @@ export const UpdateInstantiateConfigProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    for (const v of message.accessConfigUpdates) {
+    for (const v of message.access_config_updates) {
       AccessConfigUpdate.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
@@ -1782,7 +1782,7 @@ export const UpdateInstantiateConfigProposal = {
             break;
           }
 
-          message.accessConfigUpdates.push(AccessConfigUpdate.decode(reader, reader.uint32()));
+          message.access_config_updates.push(AccessConfigUpdate.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1797,8 +1797,8 @@ export const UpdateInstantiateConfigProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      accessConfigUpdates: Array.isArray(object?.accessConfigUpdates)
-        ? object.accessConfigUpdates.map((e: any) => AccessConfigUpdate.fromJSON(e))
+      access_config_updates: Array.isArray(object?.access_config_updates)
+        ? object.access_config_updates.map((e: any) => AccessConfigUpdate.fromJSON(e))
         : [],
     };
   },
@@ -1811,8 +1811,8 @@ export const UpdateInstantiateConfigProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.accessConfigUpdates?.length) {
-      obj.accessConfigUpdates = message.accessConfigUpdates.map((e) => AccessConfigUpdate.toJSON(e));
+    if (message.access_config_updates?.length) {
+      obj.access_config_updates = message.access_config_updates.map((e) => AccessConfigUpdate.toJSON(e));
     }
     return obj;
   },
@@ -1824,7 +1824,7 @@ export const UpdateInstantiateConfigProposal = {
     const message = createBaseUpdateInstantiateConfigProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.accessConfigUpdates = object.accessConfigUpdates?.map((e) => AccessConfigUpdate.fromPartial(e)) || [];
+    message.access_config_updates = object.access_config_updates?.map((e) => AccessConfigUpdate.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1833,17 +1833,17 @@ function createBaseStoreAndInstantiateContractProposal(): StoreAndInstantiateCon
   return {
     title: "",
     description: "",
-    runAs: "",
-    wasmByteCode: new Uint8Array(0),
-    instantiatePermission: undefined,
-    unpinCode: false,
+    run_as: "",
+    wasm_byte_code: new Uint8Array(0),
+    instantiate_permission: undefined,
+    unpin_code: false,
     admin: "",
     label: "",
     msg: new Uint8Array(0),
     funds: [],
     source: "",
     builder: "",
-    codeHash: new Uint8Array(0),
+    code_hash: new Uint8Array(0),
   };
 }
 
@@ -1857,17 +1857,17 @@ export const StoreAndInstantiateContractProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.runAs !== "") {
-      writer.uint32(26).string(message.runAs);
+    if (message.run_as !== "") {
+      writer.uint32(26).string(message.run_as);
     }
-    if (message.wasmByteCode.length !== 0) {
-      writer.uint32(34).bytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      writer.uint32(34).bytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(42).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(42).fork()).ldelim();
     }
-    if (message.unpinCode === true) {
-      writer.uint32(48).bool(message.unpinCode);
+    if (message.unpin_code === true) {
+      writer.uint32(48).bool(message.unpin_code);
     }
     if (message.admin !== "") {
       writer.uint32(58).string(message.admin);
@@ -1887,8 +1887,8 @@ export const StoreAndInstantiateContractProposal = {
     if (message.builder !== "") {
       writer.uint32(98).string(message.builder);
     }
-    if (message.codeHash.length !== 0) {
-      writer.uint32(106).bytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      writer.uint32(106).bytes(message.code_hash);
     }
     return writer;
   },
@@ -1919,28 +1919,28 @@ export const StoreAndInstantiateContractProposal = {
             break;
           }
 
-          message.runAs = reader.string();
+          message.run_as = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.wasmByteCode = reader.bytes();
+          message.wasm_byte_code = reader.bytes();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.unpinCode = reader.bool();
+          message.unpin_code = reader.bool();
           continue;
         case 7:
           if (tag !== 58) {
@@ -1989,7 +1989,7 @@ export const StoreAndInstantiateContractProposal = {
             break;
           }
 
-          message.codeHash = reader.bytes();
+          message.code_hash = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2004,19 +2004,19 @@ export const StoreAndInstantiateContractProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      runAs: isSet(object.runAs) ? String(object.runAs) : "",
-      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(0),
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpinCode: isSet(object.unpinCode) ? Boolean(object.unpinCode) : false,
+      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       source: isSet(object.source) ? String(object.source) : "",
       builder: isSet(object.builder) ? String(object.builder) : "",
-      codeHash: isSet(object.codeHash) ? bytesFromBase64(object.codeHash) : new Uint8Array(0),
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
 
@@ -2028,17 +2028,17 @@ export const StoreAndInstantiateContractProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.runAs !== "") {
-      obj.runAs = message.runAs;
+    if (message.run_as !== "") {
+      obj.run_as = message.run_as;
     }
-    if (message.wasmByteCode.length !== 0) {
-      obj.wasmByteCode = base64FromBytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
-    if (message.unpinCode === true) {
-      obj.unpinCode = message.unpinCode;
+    if (message.unpin_code === true) {
+      obj.unpin_code = message.unpin_code;
     }
     if (message.admin !== "") {
       obj.admin = message.admin;
@@ -2058,8 +2058,8 @@ export const StoreAndInstantiateContractProposal = {
     if (message.builder !== "") {
       obj.builder = message.builder;
     }
-    if (message.codeHash.length !== 0) {
-      obj.codeHash = base64FromBytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;
   },
@@ -2071,20 +2071,20 @@ export const StoreAndInstantiateContractProposal = {
     const message = createBaseStoreAndInstantiateContractProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.runAs = object.runAs ?? "";
-    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array(0);
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.run_as = object.run_as ?? "";
+    message.wasm_byte_code = object.wasm_byte_code ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
-    message.unpinCode = object.unpinCode ?? false;
+    message.unpin_code = object.unpin_code ?? false;
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
     message.source = object.source ?? "";
     message.builder = object.builder ?? "";
-    message.codeHash = object.codeHash ?? new Uint8Array(0);
+    message.code_hash = object.code_hash ?? new Uint8Array(0);
     return message;
   },
 };

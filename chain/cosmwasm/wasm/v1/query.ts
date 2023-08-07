@@ -22,7 +22,7 @@ export interface QueryContractInfoRequest {
 export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: string;
-  contractInfo: ContractInfo | undefined;
+  contract_info: ContractInfo | undefined;
 }
 
 /**
@@ -52,7 +52,7 @@ export interface QueryContractHistoryResponse {
  */
 export interface QueryContractsByCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
-  codeId: string;
+  code_id: string;
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest | undefined;
 }
@@ -96,7 +96,7 @@ export interface QueryAllContractStateResponse {
 export interface QueryRawContractStateRequest {
   /** address is the address of the contract */
   address: string;
-  queryData: Uint8Array;
+  query_data: Uint8Array;
 }
 
 /**
@@ -116,7 +116,7 @@ export interface QuerySmartContractStateRequest {
   /** address is the address of the contract */
   address: string;
   /** QueryData contains the query data passed to the contract */
-  queryData: Uint8Array;
+  query_data: Uint8Array;
 }
 
 /**
@@ -131,21 +131,21 @@ export interface QuerySmartContractStateResponse {
 /** QueryCodeRequest is the request type for the Query/Code RPC method */
 export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
-  codeId: string;
+  code_id: string;
 }
 
 /** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponse {
   /** id for legacy support */
-  codeId: string;
+  code_id: string;
   creator: string;
-  dataHash: Uint8Array;
-  instantiatePermission: AccessConfig | undefined;
+  data_hash: Uint8Array;
+  instantiate_permission: AccessConfig | undefined;
 }
 
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponse {
-  codeInfo: CodeInfoResponse | undefined;
+  code_info: CodeInfoResponse | undefined;
   data: Uint8Array;
 }
 
@@ -157,7 +157,7 @@ export interface QueryCodesRequest {
 
 /** QueryCodesResponse is the response type for the Query/Codes RPC method */
 export interface QueryCodesResponse {
-  codeInfos: CodeInfoResponse[];
+  code_infos: CodeInfoResponse[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -176,7 +176,7 @@ export interface QueryPinnedCodesRequest {
  * Query/PinnedCodes RPC method
  */
 export interface QueryPinnedCodesResponse {
-  codeIds: string[];
+  code_ids: string[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -197,7 +197,7 @@ export interface QueryParamsResponse {
  */
 export interface QueryContractsByCreatorRequest {
   /** CreatorAddress is the address of contract creator */
-  creatorAddress: string;
+  creator_address: string;
   /** Pagination defines an optional pagination for the request. */
   pagination: PageRequest | undefined;
 }
@@ -208,7 +208,7 @@ export interface QueryContractsByCreatorRequest {
  */
 export interface QueryContractsByCreatorResponse {
   /** ContractAddresses result set */
-  contractAddresses: string[];
+  contract_addresses: string[];
   /** Pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -273,7 +273,7 @@ export const QueryContractInfoRequest = {
 };
 
 function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
-  return { address: "", contractInfo: undefined };
+  return { address: "", contract_info: undefined };
 }
 
 export const QueryContractInfoResponse = {
@@ -283,8 +283,8 @@ export const QueryContractInfoResponse = {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.contractInfo !== undefined) {
-      ContractInfo.encode(message.contractInfo, writer.uint32(18).fork()).ldelim();
+    if (message.contract_info !== undefined) {
+      ContractInfo.encode(message.contract_info, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -308,7 +308,7 @@ export const QueryContractInfoResponse = {
             break;
           }
 
-          message.contractInfo = ContractInfo.decode(reader, reader.uint32());
+          message.contract_info = ContractInfo.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -322,7 +322,7 @@ export const QueryContractInfoResponse = {
   fromJSON(object: any): QueryContractInfoResponse {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      contractInfo: isSet(object.contractInfo) ? ContractInfo.fromJSON(object.contractInfo) : undefined,
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromJSON(object.contract_info) : undefined,
     };
   },
 
@@ -331,8 +331,8 @@ export const QueryContractInfoResponse = {
     if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.contractInfo !== undefined) {
-      obj.contractInfo = ContractInfo.toJSON(message.contractInfo);
+    if (message.contract_info !== undefined) {
+      obj.contract_info = ContractInfo.toJSON(message.contract_info);
     }
     return obj;
   },
@@ -343,8 +343,8 @@ export const QueryContractInfoResponse = {
   fromPartial(object: DeepPartial<QueryContractInfoResponse>): QueryContractInfoResponse {
     const message = createBaseQueryContractInfoResponse();
     message.address = object.address ?? "";
-    message.contractInfo = (object.contractInfo !== undefined && object.contractInfo !== null)
-      ? ContractInfo.fromPartial(object.contractInfo)
+    message.contract_info = (object.contract_info !== undefined && object.contract_info !== null)
+      ? ContractInfo.fromPartial(object.contract_info)
       : undefined;
     return message;
   },
@@ -509,15 +509,15 @@ export const QueryContractHistoryResponse = {
 };
 
 function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
-  return { codeId: "0", pagination: undefined };
+  return { code_id: "0", pagination: undefined };
 }
 
 export const QueryContractsByCodeRequest = {
   $type: "cosmwasm.wasm.v1.QueryContractsByCodeRequest" as const,
 
   encode(message: QueryContractsByCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -537,7 +537,7 @@ export const QueryContractsByCodeRequest = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -557,15 +557,15 @@ export const QueryContractsByCodeRequest = {
 
   fromJSON(object: any): QueryContractsByCodeRequest {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryContractsByCodeRequest): unknown {
     const obj: any = {};
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -578,7 +578,7 @@ export const QueryContractsByCodeRequest = {
   },
   fromPartial(object: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -821,7 +821,7 @@ export const QueryAllContractStateResponse = {
 };
 
 function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest {
-  return { address: "", queryData: new Uint8Array(0) };
+  return { address: "", query_data: new Uint8Array(0) };
 }
 
 export const QueryRawContractStateRequest = {
@@ -831,8 +831,8 @@ export const QueryRawContractStateRequest = {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
+    if (message.query_data.length !== 0) {
+      writer.uint32(18).bytes(message.query_data);
     }
     return writer;
   },
@@ -856,7 +856,7 @@ export const QueryRawContractStateRequest = {
             break;
           }
 
-          message.queryData = reader.bytes();
+          message.query_data = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -870,7 +870,7 @@ export const QueryRawContractStateRequest = {
   fromJSON(object: any): QueryRawContractStateRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(0),
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array(0),
     };
   },
 
@@ -879,8 +879,8 @@ export const QueryRawContractStateRequest = {
     if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.queryData.length !== 0) {
-      obj.queryData = base64FromBytes(message.queryData);
+    if (message.query_data.length !== 0) {
+      obj.query_data = base64FromBytes(message.query_data);
     }
     return obj;
   },
@@ -891,7 +891,7 @@ export const QueryRawContractStateRequest = {
   fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? "";
-    message.queryData = object.queryData ?? new Uint8Array(0);
+    message.query_data = object.query_data ?? new Uint8Array(0);
     return message;
   },
 };
@@ -956,7 +956,7 @@ export const QueryRawContractStateResponse = {
 };
 
 function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequest {
-  return { address: "", queryData: new Uint8Array(0) };
+  return { address: "", query_data: new Uint8Array(0) };
 }
 
 export const QuerySmartContractStateRequest = {
@@ -966,8 +966,8 @@ export const QuerySmartContractStateRequest = {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.queryData.length !== 0) {
-      writer.uint32(18).bytes(message.queryData);
+    if (message.query_data.length !== 0) {
+      writer.uint32(18).bytes(message.query_data);
     }
     return writer;
   },
@@ -991,7 +991,7 @@ export const QuerySmartContractStateRequest = {
             break;
           }
 
-          message.queryData = reader.bytes();
+          message.query_data = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1005,7 +1005,7 @@ export const QuerySmartContractStateRequest = {
   fromJSON(object: any): QuerySmartContractStateRequest {
     return {
       address: isSet(object.address) ? String(object.address) : "",
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array(0),
+      query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array(0),
     };
   },
 
@@ -1014,8 +1014,8 @@ export const QuerySmartContractStateRequest = {
     if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.queryData.length !== 0) {
-      obj.queryData = base64FromBytes(message.queryData);
+    if (message.query_data.length !== 0) {
+      obj.query_data = base64FromBytes(message.query_data);
     }
     return obj;
   },
@@ -1026,7 +1026,7 @@ export const QuerySmartContractStateRequest = {
   fromPartial(object: DeepPartial<QuerySmartContractStateRequest>): QuerySmartContractStateRequest {
     const message = createBaseQuerySmartContractStateRequest();
     message.address = object.address ?? "";
-    message.queryData = object.queryData ?? new Uint8Array(0);
+    message.query_data = object.query_data ?? new Uint8Array(0);
     return message;
   },
 };
@@ -1091,15 +1091,15 @@ export const QuerySmartContractStateResponse = {
 };
 
 function createBaseQueryCodeRequest(): QueryCodeRequest {
-  return { codeId: "0" };
+  return { code_id: "0" };
 }
 
 export const QueryCodeRequest = {
   $type: "cosmwasm.wasm.v1.QueryCodeRequest" as const,
 
   encode(message: QueryCodeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
     }
     return writer;
   },
@@ -1116,7 +1116,7 @@ export const QueryCodeRequest = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1128,13 +1128,13 @@ export const QueryCodeRequest = {
   },
 
   fromJSON(object: any): QueryCodeRequest {
-    return { codeId: isSet(object.codeId) ? String(object.codeId) : "0" };
+    return { code_id: isSet(object.code_id) ? String(object.code_id) : "0" };
   },
 
   toJSON(message: QueryCodeRequest): unknown {
     const obj: any = {};
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     return obj;
   },
@@ -1144,30 +1144,30 @@ export const QueryCodeRequest = {
   },
   fromPartial(object: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
     const message = createBaseQueryCodeRequest();
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     return message;
   },
 };
 
 function createBaseCodeInfoResponse(): CodeInfoResponse {
-  return { codeId: "0", creator: "", dataHash: new Uint8Array(0), instantiatePermission: undefined };
+  return { code_id: "0", creator: "", data_hash: new Uint8Array(0), instantiate_permission: undefined };
 }
 
 export const CodeInfoResponse = {
   $type: "cosmwasm.wasm.v1.CodeInfoResponse" as const,
 
   encode(message: CodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
     }
     if (message.creator !== "") {
       writer.uint32(18).string(message.creator);
     }
-    if (message.dataHash.length !== 0) {
-      writer.uint32(26).bytes(message.dataHash);
+    if (message.data_hash.length !== 0) {
+      writer.uint32(26).bytes(message.data_hash);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(50).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -1184,7 +1184,7 @@ export const CodeInfoResponse = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -1198,14 +1198,14 @@ export const CodeInfoResponse = {
             break;
           }
 
-          message.dataHash = reader.bytes();
+          message.data_hash = reader.bytes();
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1218,28 +1218,28 @@ export const CodeInfoResponse = {
 
   fromJSON(object: any): CodeInfoResponse {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       creator: isSet(object.creator) ? String(object.creator) : "",
-      dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array(0),
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
     };
   },
 
   toJSON(message: CodeInfoResponse): unknown {
     const obj: any = {};
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.creator !== "") {
       obj.creator = message.creator;
     }
-    if (message.dataHash.length !== 0) {
-      obj.dataHash = base64FromBytes(message.dataHash);
+    if (message.data_hash.length !== 0) {
+      obj.data_hash = base64FromBytes(message.data_hash);
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
     return obj;
   },
@@ -1249,27 +1249,27 @@ export const CodeInfoResponse = {
   },
   fromPartial(object: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
     const message = createBaseCodeInfoResponse();
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.creator = object.creator ?? "";
-    message.dataHash = object.dataHash ?? new Uint8Array(0);
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.data_hash = object.data_hash ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
     return message;
   },
 };
 
 function createBaseQueryCodeResponse(): QueryCodeResponse {
-  return { codeInfo: undefined, data: new Uint8Array(0) };
+  return { code_info: undefined, data: new Uint8Array(0) };
 }
 
 export const QueryCodeResponse = {
   $type: "cosmwasm.wasm.v1.QueryCodeResponse" as const,
 
   encode(message: QueryCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeInfo !== undefined) {
-      CodeInfoResponse.encode(message.codeInfo, writer.uint32(10).fork()).ldelim();
+    if (message.code_info !== undefined) {
+      CodeInfoResponse.encode(message.code_info, writer.uint32(10).fork()).ldelim();
     }
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
@@ -1289,7 +1289,7 @@ export const QueryCodeResponse = {
             break;
           }
 
-          message.codeInfo = CodeInfoResponse.decode(reader, reader.uint32());
+          message.code_info = CodeInfoResponse.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -1309,15 +1309,15 @@ export const QueryCodeResponse = {
 
   fromJSON(object: any): QueryCodeResponse {
     return {
-      codeInfo: isSet(object.codeInfo) ? CodeInfoResponse.fromJSON(object.codeInfo) : undefined,
+      code_info: isSet(object.code_info) ? CodeInfoResponse.fromJSON(object.code_info) : undefined,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
 
   toJSON(message: QueryCodeResponse): unknown {
     const obj: any = {};
-    if (message.codeInfo !== undefined) {
-      obj.codeInfo = CodeInfoResponse.toJSON(message.codeInfo);
+    if (message.code_info !== undefined) {
+      obj.code_info = CodeInfoResponse.toJSON(message.code_info);
     }
     if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
@@ -1330,8 +1330,8 @@ export const QueryCodeResponse = {
   },
   fromPartial(object: DeepPartial<QueryCodeResponse>): QueryCodeResponse {
     const message = createBaseQueryCodeResponse();
-    message.codeInfo = (object.codeInfo !== undefined && object.codeInfo !== null)
-      ? CodeInfoResponse.fromPartial(object.codeInfo)
+    message.code_info = (object.code_info !== undefined && object.code_info !== null)
+      ? CodeInfoResponse.fromPartial(object.code_info)
       : undefined;
     message.data = object.data ?? new Uint8Array(0);
     return message;
@@ -1400,14 +1400,14 @@ export const QueryCodesRequest = {
 };
 
 function createBaseQueryCodesResponse(): QueryCodesResponse {
-  return { codeInfos: [], pagination: undefined };
+  return { code_infos: [], pagination: undefined };
 }
 
 export const QueryCodesResponse = {
   $type: "cosmwasm.wasm.v1.QueryCodesResponse" as const,
 
   encode(message: QueryCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.codeInfos) {
+    for (const v of message.code_infos) {
       CodeInfoResponse.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -1428,7 +1428,7 @@ export const QueryCodesResponse = {
             break;
           }
 
-          message.codeInfos.push(CodeInfoResponse.decode(reader, reader.uint32()));
+          message.code_infos.push(CodeInfoResponse.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -1448,15 +1448,17 @@ export const QueryCodesResponse = {
 
   fromJSON(object: any): QueryCodesResponse {
     return {
-      codeInfos: Array.isArray(object?.codeInfos) ? object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e)) : [],
+      code_infos: Array.isArray(object?.code_infos)
+        ? object.code_infos.map((e: any) => CodeInfoResponse.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryCodesResponse): unknown {
     const obj: any = {};
-    if (message.codeInfos?.length) {
-      obj.codeInfos = message.codeInfos.map((e) => CodeInfoResponse.toJSON(e));
+    if (message.code_infos?.length) {
+      obj.code_infos = message.code_infos.map((e) => CodeInfoResponse.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1469,7 +1471,7 @@ export const QueryCodesResponse = {
   },
   fromPartial(object: DeepPartial<QueryCodesResponse>): QueryCodesResponse {
     const message = createBaseQueryCodesResponse();
-    message.codeInfos = object.codeInfos?.map((e) => CodeInfoResponse.fromPartial(e)) || [];
+    message.code_infos = object.code_infos?.map((e) => CodeInfoResponse.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -1539,7 +1541,7 @@ export const QueryPinnedCodesRequest = {
 };
 
 function createBaseQueryPinnedCodesResponse(): QueryPinnedCodesResponse {
-  return { codeIds: [], pagination: undefined };
+  return { code_ids: [], pagination: undefined };
 }
 
 export const QueryPinnedCodesResponse = {
@@ -1547,7 +1549,7 @@ export const QueryPinnedCodesResponse = {
 
   encode(message: QueryPinnedCodesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
-    for (const v of message.codeIds) {
+    for (const v of message.code_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -1566,7 +1568,7 @@ export const QueryPinnedCodesResponse = {
       switch (tag >>> 3) {
         case 1:
           if (tag === 8) {
-            message.codeIds.push(longToString(reader.uint64() as Long));
+            message.code_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -1574,7 +1576,7 @@ export const QueryPinnedCodesResponse = {
           if (tag === 10) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(longToString(reader.uint64() as Long));
+              message.code_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -1599,15 +1601,15 @@ export const QueryPinnedCodesResponse = {
 
   fromJSON(object: any): QueryPinnedCodesResponse {
     return {
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => String(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryPinnedCodesResponse): unknown {
     const obj: any = {};
-    if (message.codeIds?.length) {
-      obj.codeIds = message.codeIds;
+    if (message.code_ids?.length) {
+      obj.code_ids = message.code_ids;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1620,7 +1622,7 @@ export const QueryPinnedCodesResponse = {
   },
   fromPartial(object: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {
     const message = createBaseQueryPinnedCodesResponse();
-    message.codeIds = object.codeIds?.map((e) => e) || [];
+    message.code_ids = object.code_ids?.map((e) => e) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -1735,15 +1737,15 @@ export const QueryParamsResponse = {
 };
 
 function createBaseQueryContractsByCreatorRequest(): QueryContractsByCreatorRequest {
-  return { creatorAddress: "", pagination: undefined };
+  return { creator_address: "", pagination: undefined };
 }
 
 export const QueryContractsByCreatorRequest = {
   $type: "cosmwasm.wasm.v1.QueryContractsByCreatorRequest" as const,
 
   encode(message: QueryContractsByCreatorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.creatorAddress !== "") {
-      writer.uint32(10).string(message.creatorAddress);
+    if (message.creator_address !== "") {
+      writer.uint32(10).string(message.creator_address);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -1763,7 +1765,7 @@ export const QueryContractsByCreatorRequest = {
             break;
           }
 
-          message.creatorAddress = reader.string();
+          message.creator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -1783,15 +1785,15 @@ export const QueryContractsByCreatorRequest = {
 
   fromJSON(object: any): QueryContractsByCreatorRequest {
     return {
-      creatorAddress: isSet(object.creatorAddress) ? String(object.creatorAddress) : "",
+      creator_address: isSet(object.creator_address) ? String(object.creator_address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryContractsByCreatorRequest): unknown {
     const obj: any = {};
-    if (message.creatorAddress !== "") {
-      obj.creatorAddress = message.creatorAddress;
+    if (message.creator_address !== "") {
+      obj.creator_address = message.creator_address;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -1804,7 +1806,7 @@ export const QueryContractsByCreatorRequest = {
   },
   fromPartial(object: DeepPartial<QueryContractsByCreatorRequest>): QueryContractsByCreatorRequest {
     const message = createBaseQueryContractsByCreatorRequest();
-    message.creatorAddress = object.creatorAddress ?? "";
+    message.creator_address = object.creator_address ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -1813,14 +1815,14 @@ export const QueryContractsByCreatorRequest = {
 };
 
 function createBaseQueryContractsByCreatorResponse(): QueryContractsByCreatorResponse {
-  return { contractAddresses: [], pagination: undefined };
+  return { contract_addresses: [], pagination: undefined };
 }
 
 export const QueryContractsByCreatorResponse = {
   $type: "cosmwasm.wasm.v1.QueryContractsByCreatorResponse" as const,
 
   encode(message: QueryContractsByCreatorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.contractAddresses) {
+    for (const v of message.contract_addresses) {
       writer.uint32(10).string(v!);
     }
     if (message.pagination !== undefined) {
@@ -1841,7 +1843,7 @@ export const QueryContractsByCreatorResponse = {
             break;
           }
 
-          message.contractAddresses.push(reader.string());
+          message.contract_addresses.push(reader.string());
           continue;
         case 2:
           if (tag !== 18) {
@@ -1861,8 +1863,8 @@ export const QueryContractsByCreatorResponse = {
 
   fromJSON(object: any): QueryContractsByCreatorResponse {
     return {
-      contractAddresses: Array.isArray(object?.contractAddresses)
-        ? object.contractAddresses.map((e: any) => String(e))
+      contract_addresses: Array.isArray(object?.contract_addresses)
+        ? object.contract_addresses.map((e: any) => String(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -1870,8 +1872,8 @@ export const QueryContractsByCreatorResponse = {
 
   toJSON(message: QueryContractsByCreatorResponse): unknown {
     const obj: any = {};
-    if (message.contractAddresses?.length) {
-      obj.contractAddresses = message.contractAddresses;
+    if (message.contract_addresses?.length) {
+      obj.contract_addresses = message.contract_addresses;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1884,7 +1886,7 @@ export const QueryContractsByCreatorResponse = {
   },
   fromPartial(object: DeepPartial<QueryContractsByCreatorResponse>): QueryContractsByCreatorResponse {
     const message = createBaseQueryContractsByCreatorResponse();
-    message.contractAddresses = object.contractAddresses?.map((e) => e) || [];
+    message.contract_addresses = object.contract_addresses?.map((e) => e) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;

@@ -14,7 +14,7 @@ export interface Snapshot {
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {
   /** SHA-256 chunk hashes */
-  chunkHashes: Uint8Array[];
+  chunk_hashes: Uint8Array[];
 }
 
 /**
@@ -26,7 +26,7 @@ export interface SnapshotItem {
   store?: SnapshotStoreItem | undefined;
   iavl?: SnapshotIAVLItem | undefined;
   extension?: SnapshotExtensionMeta | undefined;
-  extensionPayload?:
+  extension_payload?:
     | SnapshotExtensionPayload
     | undefined;
   /** @deprecated */
@@ -228,14 +228,14 @@ export const Snapshot = {
 };
 
 function createBaseMetadata(): Metadata {
-  return { chunkHashes: [] };
+  return { chunk_hashes: [] };
 }
 
 export const Metadata = {
   $type: "cosmos.base.snapshots.v1beta1.Metadata" as const,
 
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.chunkHashes) {
+    for (const v of message.chunk_hashes) {
       writer.uint32(10).bytes(v!);
     }
     return writer;
@@ -253,7 +253,7 @@ export const Metadata = {
             break;
           }
 
-          message.chunkHashes.push(reader.bytes());
+          message.chunk_hashes.push(reader.bytes());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -266,14 +266,14 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      chunkHashes: Array.isArray(object?.chunkHashes) ? object.chunkHashes.map((e: any) => bytesFromBase64(e)) : [],
+      chunk_hashes: Array.isArray(object?.chunk_hashes) ? object.chunk_hashes.map((e: any) => bytesFromBase64(e)) : [],
     };
   },
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    if (message.chunkHashes?.length) {
-      obj.chunkHashes = message.chunkHashes.map((e) => base64FromBytes(e));
+    if (message.chunk_hashes?.length) {
+      obj.chunk_hashes = message.chunk_hashes.map((e) => base64FromBytes(e));
     }
     return obj;
   },
@@ -283,7 +283,7 @@ export const Metadata = {
   },
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
-    message.chunkHashes = object.chunkHashes?.map((e) => e) || [];
+    message.chunk_hashes = object.chunk_hashes?.map((e) => e) || [];
     return message;
   },
 };
@@ -293,7 +293,7 @@ function createBaseSnapshotItem(): SnapshotItem {
     store: undefined,
     iavl: undefined,
     extension: undefined,
-    extensionPayload: undefined,
+    extension_payload: undefined,
     kv: undefined,
     schema: undefined,
   };
@@ -312,8 +312,8 @@ export const SnapshotItem = {
     if (message.extension !== undefined) {
       SnapshotExtensionMeta.encode(message.extension, writer.uint32(26).fork()).ldelim();
     }
-    if (message.extensionPayload !== undefined) {
-      SnapshotExtensionPayload.encode(message.extensionPayload, writer.uint32(34).fork()).ldelim();
+    if (message.extension_payload !== undefined) {
+      SnapshotExtensionPayload.encode(message.extension_payload, writer.uint32(34).fork()).ldelim();
     }
     if (message.kv !== undefined) {
       SnapshotKVItem.encode(message.kv, writer.uint32(42).fork()).ldelim();
@@ -357,7 +357,7 @@ export const SnapshotItem = {
             break;
           }
 
-          message.extensionPayload = SnapshotExtensionPayload.decode(reader, reader.uint32());
+          message.extension_payload = SnapshotExtensionPayload.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
@@ -387,8 +387,8 @@ export const SnapshotItem = {
       store: isSet(object.store) ? SnapshotStoreItem.fromJSON(object.store) : undefined,
       iavl: isSet(object.iavl) ? SnapshotIAVLItem.fromJSON(object.iavl) : undefined,
       extension: isSet(object.extension) ? SnapshotExtensionMeta.fromJSON(object.extension) : undefined,
-      extensionPayload: isSet(object.extensionPayload)
-        ? SnapshotExtensionPayload.fromJSON(object.extensionPayload)
+      extension_payload: isSet(object.extension_payload)
+        ? SnapshotExtensionPayload.fromJSON(object.extension_payload)
         : undefined,
       kv: isSet(object.kv) ? SnapshotKVItem.fromJSON(object.kv) : undefined,
       schema: isSet(object.schema) ? SnapshotSchema.fromJSON(object.schema) : undefined,
@@ -406,8 +406,8 @@ export const SnapshotItem = {
     if (message.extension !== undefined) {
       obj.extension = SnapshotExtensionMeta.toJSON(message.extension);
     }
-    if (message.extensionPayload !== undefined) {
-      obj.extensionPayload = SnapshotExtensionPayload.toJSON(message.extensionPayload);
+    if (message.extension_payload !== undefined) {
+      obj.extension_payload = SnapshotExtensionPayload.toJSON(message.extension_payload);
     }
     if (message.kv !== undefined) {
       obj.kv = SnapshotKVItem.toJSON(message.kv);
@@ -432,8 +432,8 @@ export const SnapshotItem = {
     message.extension = (object.extension !== undefined && object.extension !== null)
       ? SnapshotExtensionMeta.fromPartial(object.extension)
       : undefined;
-    message.extensionPayload = (object.extensionPayload !== undefined && object.extensionPayload !== null)
-      ? SnapshotExtensionPayload.fromPartial(object.extensionPayload)
+    message.extension_payload = (object.extension_payload !== undefined && object.extension_payload !== null)
+      ? SnapshotExtensionPayload.fromPartial(object.extension_payload)
       : undefined;
     message.kv = (object.kv !== undefined && object.kv !== null) ? SnapshotKVItem.fromPartial(object.kv) : undefined;
     message.schema = (object.schema !== undefined && object.schema !== null)

@@ -7,27 +7,27 @@ export interface Minter {
   /** current annual inflation rate */
   inflation: string;
   /** current annual expected provisions */
-  annualProvisions: string;
+  annual_provisions: string;
 }
 
 /** Params defines the parameters for the x/mint module. */
 export interface Params {
   /** type of coin to mint */
-  mintDenom: string;
+  mint_denom: string;
   /** maximum annual change in inflation rate */
-  inflationRateChange: string;
+  inflation_rate_change: string;
   /** maximum inflation rate */
-  inflationMax: string;
+  inflation_max: string;
   /** minimum inflation rate */
-  inflationMin: string;
+  inflation_min: string;
   /** goal of percent bonded atoms */
-  goalBonded: string;
+  goal_bonded: string;
   /** expected blocks per year */
-  blocksPerYear: string;
+  blocks_per_year: string;
 }
 
 function createBaseMinter(): Minter {
-  return { inflation: "", annualProvisions: "" };
+  return { inflation: "", annual_provisions: "" };
 }
 
 export const Minter = {
@@ -37,8 +37,8 @@ export const Minter = {
     if (message.inflation !== "") {
       writer.uint32(10).string(message.inflation);
     }
-    if (message.annualProvisions !== "") {
-      writer.uint32(18).string(message.annualProvisions);
+    if (message.annual_provisions !== "") {
+      writer.uint32(18).string(message.annual_provisions);
     }
     return writer;
   },
@@ -62,7 +62,7 @@ export const Minter = {
             break;
           }
 
-          message.annualProvisions = reader.string();
+          message.annual_provisions = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -76,7 +76,7 @@ export const Minter = {
   fromJSON(object: any): Minter {
     return {
       inflation: isSet(object.inflation) ? String(object.inflation) : "",
-      annualProvisions: isSet(object.annualProvisions) ? String(object.annualProvisions) : "",
+      annual_provisions: isSet(object.annual_provisions) ? String(object.annual_provisions) : "",
     };
   },
 
@@ -85,8 +85,8 @@ export const Minter = {
     if (message.inflation !== "") {
       obj.inflation = message.inflation;
     }
-    if (message.annualProvisions !== "") {
-      obj.annualProvisions = message.annualProvisions;
+    if (message.annual_provisions !== "") {
+      obj.annual_provisions = message.annual_provisions;
     }
     return obj;
   },
@@ -97,19 +97,19 @@ export const Minter = {
   fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.inflation = object.inflation ?? "";
-    message.annualProvisions = object.annualProvisions ?? "";
+    message.annual_provisions = object.annual_provisions ?? "";
     return message;
   },
 };
 
 function createBaseParams(): Params {
   return {
-    mintDenom: "",
-    inflationRateChange: "",
-    inflationMax: "",
-    inflationMin: "",
-    goalBonded: "",
-    blocksPerYear: "0",
+    mint_denom: "",
+    inflation_rate_change: "",
+    inflation_max: "",
+    inflation_min: "",
+    goal_bonded: "",
+    blocks_per_year: "0",
   };
 }
 
@@ -117,23 +117,23 @@ export const Params = {
   $type: "cosmos.mint.v1beta1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.mintDenom !== "") {
-      writer.uint32(10).string(message.mintDenom);
+    if (message.mint_denom !== "") {
+      writer.uint32(10).string(message.mint_denom);
     }
-    if (message.inflationRateChange !== "") {
-      writer.uint32(18).string(message.inflationRateChange);
+    if (message.inflation_rate_change !== "") {
+      writer.uint32(18).string(message.inflation_rate_change);
     }
-    if (message.inflationMax !== "") {
-      writer.uint32(26).string(message.inflationMax);
+    if (message.inflation_max !== "") {
+      writer.uint32(26).string(message.inflation_max);
     }
-    if (message.inflationMin !== "") {
-      writer.uint32(34).string(message.inflationMin);
+    if (message.inflation_min !== "") {
+      writer.uint32(34).string(message.inflation_min);
     }
-    if (message.goalBonded !== "") {
-      writer.uint32(42).string(message.goalBonded);
+    if (message.goal_bonded !== "") {
+      writer.uint32(42).string(message.goal_bonded);
     }
-    if (message.blocksPerYear !== "0") {
-      writer.uint32(48).uint64(message.blocksPerYear);
+    if (message.blocks_per_year !== "0") {
+      writer.uint32(48).uint64(message.blocks_per_year);
     }
     return writer;
   },
@@ -150,42 +150,42 @@ export const Params = {
             break;
           }
 
-          message.mintDenom = reader.string();
+          message.mint_denom = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.inflationRateChange = reader.string();
+          message.inflation_rate_change = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.inflationMax = reader.string();
+          message.inflation_max = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.inflationMin = reader.string();
+          message.inflation_min = reader.string();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.goalBonded = reader.string();
+          message.goal_bonded = reader.string();
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.blocksPerYear = longToString(reader.uint64() as Long);
+          message.blocks_per_year = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -198,34 +198,34 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
-      inflationRateChange: isSet(object.inflationRateChange) ? String(object.inflationRateChange) : "",
-      inflationMax: isSet(object.inflationMax) ? String(object.inflationMax) : "",
-      inflationMin: isSet(object.inflationMin) ? String(object.inflationMin) : "",
-      goalBonded: isSet(object.goalBonded) ? String(object.goalBonded) : "",
-      blocksPerYear: isSet(object.blocksPerYear) ? String(object.blocksPerYear) : "0",
+      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
+      inflation_rate_change: isSet(object.inflation_rate_change) ? String(object.inflation_rate_change) : "",
+      inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
+      inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
+      goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
+      blocks_per_year: isSet(object.blocks_per_year) ? String(object.blocks_per_year) : "0",
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.mintDenom !== "") {
-      obj.mintDenom = message.mintDenom;
+    if (message.mint_denom !== "") {
+      obj.mint_denom = message.mint_denom;
     }
-    if (message.inflationRateChange !== "") {
-      obj.inflationRateChange = message.inflationRateChange;
+    if (message.inflation_rate_change !== "") {
+      obj.inflation_rate_change = message.inflation_rate_change;
     }
-    if (message.inflationMax !== "") {
-      obj.inflationMax = message.inflationMax;
+    if (message.inflation_max !== "") {
+      obj.inflation_max = message.inflation_max;
     }
-    if (message.inflationMin !== "") {
-      obj.inflationMin = message.inflationMin;
+    if (message.inflation_min !== "") {
+      obj.inflation_min = message.inflation_min;
     }
-    if (message.goalBonded !== "") {
-      obj.goalBonded = message.goalBonded;
+    if (message.goal_bonded !== "") {
+      obj.goal_bonded = message.goal_bonded;
     }
-    if (message.blocksPerYear !== "0") {
-      obj.blocksPerYear = message.blocksPerYear;
+    if (message.blocks_per_year !== "0") {
+      obj.blocks_per_year = message.blocks_per_year;
     }
     return obj;
   },
@@ -235,12 +235,12 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.mintDenom = object.mintDenom ?? "";
-    message.inflationRateChange = object.inflationRateChange ?? "";
-    message.inflationMax = object.inflationMax ?? "";
-    message.inflationMin = object.inflationMin ?? "";
-    message.goalBonded = object.goalBonded ?? "";
-    message.blocksPerYear = object.blocksPerYear ?? "0";
+    message.mint_denom = object.mint_denom ?? "";
+    message.inflation_rate_change = object.inflation_rate_change ?? "";
+    message.inflation_max = object.inflation_max ?? "";
+    message.inflation_min = object.inflation_min ?? "";
+    message.goal_bonded = object.goal_bonded ?? "";
+    message.blocks_per_year = object.blocks_per_year ?? "0";
     return message;
   },
 };

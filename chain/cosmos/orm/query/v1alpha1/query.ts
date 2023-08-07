@@ -11,7 +11,7 @@ import { PageRequest, PageResponse } from "../../../base/query/v1beta1/paginatio
 /** GetRequest is the Query/Get request type. */
 export interface GetRequest {
   /** message_name is the fully-qualified message name of the ORM table being queried. */
-  messageName: string;
+  message_name: string;
   /**
    * index is the index fields expression used in orm definitions. If it
    * is empty, the table's primary key is assumed. If it is non-empty, it must
@@ -38,7 +38,7 @@ export interface GetResponse {
 /** ListRequest is the Query/List request type. */
 export interface ListRequest {
   /** message_name is the fully-qualified message name of the ORM table being queried. */
-  messageName: string;
+  message_name: string;
   /**
    * index is the index fields expression used in orm definitions. If it
    * is empty, the table's primary key is assumed.
@@ -131,15 +131,15 @@ export interface IndexValue {
 }
 
 function createBaseGetRequest(): GetRequest {
-  return { messageName: "", index: "", values: [] };
+  return { message_name: "", index: "", values: [] };
 }
 
 export const GetRequest = {
   $type: "cosmos.orm.query.v1alpha1.GetRequest" as const,
 
   encode(message: GetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.messageName !== "") {
-      writer.uint32(10).string(message.messageName);
+    if (message.message_name !== "") {
+      writer.uint32(10).string(message.message_name);
     }
     if (message.index !== "") {
       writer.uint32(18).string(message.index);
@@ -162,7 +162,7 @@ export const GetRequest = {
             break;
           }
 
-          message.messageName = reader.string();
+          message.message_name = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -189,7 +189,7 @@ export const GetRequest = {
 
   fromJSON(object: any): GetRequest {
     return {
-      messageName: isSet(object.messageName) ? String(object.messageName) : "",
+      message_name: isSet(object.message_name) ? String(object.message_name) : "",
       index: isSet(object.index) ? String(object.index) : "",
       values: Array.isArray(object?.values) ? object.values.map((e: any) => IndexValue.fromJSON(e)) : [],
     };
@@ -197,8 +197,8 @@ export const GetRequest = {
 
   toJSON(message: GetRequest): unknown {
     const obj: any = {};
-    if (message.messageName !== "") {
-      obj.messageName = message.messageName;
+    if (message.message_name !== "") {
+      obj.message_name = message.message_name;
     }
     if (message.index !== "") {
       obj.index = message.index;
@@ -214,7 +214,7 @@ export const GetRequest = {
   },
   fromPartial(object: DeepPartial<GetRequest>): GetRequest {
     const message = createBaseGetRequest();
-    message.messageName = object.messageName ?? "";
+    message.message_name = object.message_name ?? "";
     message.index = object.index ?? "";
     message.values = object.values?.map((e) => IndexValue.fromPartial(e)) || [];
     return message;
@@ -283,15 +283,15 @@ export const GetResponse = {
 };
 
 function createBaseListRequest(): ListRequest {
-  return { messageName: "", index: "", prefix: undefined, range: undefined, pagination: undefined };
+  return { message_name: "", index: "", prefix: undefined, range: undefined, pagination: undefined };
 }
 
 export const ListRequest = {
   $type: "cosmos.orm.query.v1alpha1.ListRequest" as const,
 
   encode(message: ListRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.messageName !== "") {
-      writer.uint32(10).string(message.messageName);
+    if (message.message_name !== "") {
+      writer.uint32(10).string(message.message_name);
     }
     if (message.index !== "") {
       writer.uint32(18).string(message.index);
@@ -320,7 +320,7 @@ export const ListRequest = {
             break;
           }
 
-          message.messageName = reader.string();
+          message.message_name = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -361,7 +361,7 @@ export const ListRequest = {
 
   fromJSON(object: any): ListRequest {
     return {
-      messageName: isSet(object.messageName) ? String(object.messageName) : "",
+      message_name: isSet(object.message_name) ? String(object.message_name) : "",
       index: isSet(object.index) ? String(object.index) : "",
       prefix: isSet(object.prefix) ? ListRequest_Prefix.fromJSON(object.prefix) : undefined,
       range: isSet(object.range) ? ListRequest_Range.fromJSON(object.range) : undefined,
@@ -371,8 +371,8 @@ export const ListRequest = {
 
   toJSON(message: ListRequest): unknown {
     const obj: any = {};
-    if (message.messageName !== "") {
-      obj.messageName = message.messageName;
+    if (message.message_name !== "") {
+      obj.message_name = message.message_name;
     }
     if (message.index !== "") {
       obj.index = message.index;
@@ -394,7 +394,7 @@ export const ListRequest = {
   },
   fromPartial(object: DeepPartial<ListRequest>): ListRequest {
     const message = createBaseListRequest();
-    message.messageName = object.messageName ?? "";
+    message.message_name = object.message_name ?? "";
     message.index = object.index ?? "";
     message.prefix = (object.prefix !== undefined && object.prefix !== null)
       ? ListRequest_Prefix.fromPartial(object.prefix)

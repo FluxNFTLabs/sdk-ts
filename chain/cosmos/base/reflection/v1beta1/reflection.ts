@@ -10,7 +10,7 @@ export interface ListAllInterfacesRequest {
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
-  interfaceNames: string[];
+  interface_names: string[];
 }
 
 /**
@@ -19,7 +19,7 @@ export interface ListAllInterfacesResponse {
  */
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
-  interfaceName: string;
+  interface_name: string;
 }
 
 /**
@@ -27,7 +27,7 @@ export interface ListImplementationsRequest {
  * RPC.
  */
 export interface ListImplementationsResponse {
-  implementationMessageNames: string[];
+  implementation_message_names: string[];
 }
 
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
@@ -76,14 +76,14 @@ export const ListAllInterfacesRequest = {
 };
 
 function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
-  return { interfaceNames: [] };
+  return { interface_names: [] };
 }
 
 export const ListAllInterfacesResponse = {
   $type: "cosmos.base.reflection.v1beta1.ListAllInterfacesResponse" as const,
 
   encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.interfaceNames) {
+    for (const v of message.interface_names) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -101,7 +101,7 @@ export const ListAllInterfacesResponse = {
             break;
           }
 
-          message.interfaceNames.push(reader.string());
+          message.interface_names.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -114,14 +114,14 @@ export const ListAllInterfacesResponse = {
 
   fromJSON(object: any): ListAllInterfacesResponse {
     return {
-      interfaceNames: Array.isArray(object?.interfaceNames) ? object.interfaceNames.map((e: any) => String(e)) : [],
+      interface_names: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: ListAllInterfacesResponse): unknown {
     const obj: any = {};
-    if (message.interfaceNames?.length) {
-      obj.interfaceNames = message.interfaceNames;
+    if (message.interface_names?.length) {
+      obj.interface_names = message.interface_names;
     }
     return obj;
   },
@@ -131,21 +131,21 @@ export const ListAllInterfacesResponse = {
   },
   fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
-    message.interfaceNames = object.interfaceNames?.map((e) => e) || [];
+    message.interface_names = object.interface_names?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseListImplementationsRequest(): ListImplementationsRequest {
-  return { interfaceName: "" };
+  return { interface_name: "" };
 }
 
 export const ListImplementationsRequest = {
   $type: "cosmos.base.reflection.v1beta1.ListImplementationsRequest" as const,
 
   encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.interfaceName !== "") {
-      writer.uint32(10).string(message.interfaceName);
+    if (message.interface_name !== "") {
+      writer.uint32(10).string(message.interface_name);
     }
     return writer;
   },
@@ -162,7 +162,7 @@ export const ListImplementationsRequest = {
             break;
           }
 
-          message.interfaceName = reader.string();
+          message.interface_name = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -174,13 +174,13 @@ export const ListImplementationsRequest = {
   },
 
   fromJSON(object: any): ListImplementationsRequest {
-    return { interfaceName: isSet(object.interfaceName) ? String(object.interfaceName) : "" };
+    return { interface_name: isSet(object.interface_name) ? String(object.interface_name) : "" };
   },
 
   toJSON(message: ListImplementationsRequest): unknown {
     const obj: any = {};
-    if (message.interfaceName !== "") {
-      obj.interfaceName = message.interfaceName;
+    if (message.interface_name !== "") {
+      obj.interface_name = message.interface_name;
     }
     return obj;
   },
@@ -190,20 +190,20 @@ export const ListImplementationsRequest = {
   },
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
-    message.interfaceName = object.interfaceName ?? "";
+    message.interface_name = object.interface_name ?? "";
     return message;
   },
 };
 
 function createBaseListImplementationsResponse(): ListImplementationsResponse {
-  return { implementationMessageNames: [] };
+  return { implementation_message_names: [] };
 }
 
 export const ListImplementationsResponse = {
   $type: "cosmos.base.reflection.v1beta1.ListImplementationsResponse" as const,
 
   encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.implementationMessageNames) {
+    for (const v of message.implementation_message_names) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -221,7 +221,7 @@ export const ListImplementationsResponse = {
             break;
           }
 
-          message.implementationMessageNames.push(reader.string());
+          message.implementation_message_names.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -234,16 +234,16 @@ export const ListImplementationsResponse = {
 
   fromJSON(object: any): ListImplementationsResponse {
     return {
-      implementationMessageNames: Array.isArray(object?.implementationMessageNames)
-        ? object.implementationMessageNames.map((e: any) => String(e))
+      implementation_message_names: Array.isArray(object?.implementation_message_names)
+        ? object.implementation_message_names.map((e: any) => String(e))
         : [],
     };
   },
 
   toJSON(message: ListImplementationsResponse): unknown {
     const obj: any = {};
-    if (message.implementationMessageNames?.length) {
-      obj.implementationMessageNames = message.implementationMessageNames;
+    if (message.implementation_message_names?.length) {
+      obj.implementation_message_names = message.implementation_message_names;
     }
     return obj;
   },
@@ -253,7 +253,7 @@ export const ListImplementationsResponse = {
   },
   fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();
-    message.implementationMessageNames = object.implementationMessageNames?.map((e) => e) || [];
+    message.implementation_message_names = object.implementation_message_names?.map((e) => e) || [];
     return message;
   },
 };

@@ -5,19 +5,19 @@ import { Height } from "../../../core/client/v1/client";
 /** ClientState defines the 09-localhost client state */
 export interface ClientState {
   /** the latest block height */
-  latestHeight: Height | undefined;
+  latest_height: Height | undefined;
 }
 
 function createBaseClientState(): ClientState {
-  return { latestHeight: undefined };
+  return { latest_height: undefined };
 }
 
 export const ClientState = {
   $type: "ibc.lightclients.localhost.v2.ClientState" as const,
 
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.latestHeight !== undefined) {
-      Height.encode(message.latestHeight, writer.uint32(10).fork()).ldelim();
+    if (message.latest_height !== undefined) {
+      Height.encode(message.latest_height, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -34,7 +34,7 @@ export const ClientState = {
             break;
           }
 
-          message.latestHeight = Height.decode(reader, reader.uint32());
+          message.latest_height = Height.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -46,13 +46,13 @@ export const ClientState = {
   },
 
   fromJSON(object: any): ClientState {
-    return { latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined };
+    return { latest_height: isSet(object.latest_height) ? Height.fromJSON(object.latest_height) : undefined };
   },
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.latestHeight !== undefined) {
-      obj.latestHeight = Height.toJSON(message.latestHeight);
+    if (message.latest_height !== undefined) {
+      obj.latest_height = Height.toJSON(message.latest_height);
     }
     return obj;
   },
@@ -62,8 +62,8 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.latestHeight = (object.latestHeight !== undefined && object.latestHeight !== null)
-      ? Height.fromPartial(object.latestHeight)
+    message.latest_height = (object.latest_height !== undefined && object.latest_height !== null)
+      ? Height.fromPartial(object.latest_height)
       : undefined;
     return message;
   },

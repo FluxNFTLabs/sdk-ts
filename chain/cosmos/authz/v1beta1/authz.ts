@@ -44,7 +44,7 @@ export interface GrantAuthorization {
 /** GrantQueueItem contains the list of TypeURL of a sdk.Msg. */
 export interface GrantQueueItem {
   /** msg_type_urls contains the list of TypeURL of a sdk.Msg. */
-  msgTypeUrls: string[];
+  msg_type_urls: string[];
 }
 
 function createBaseGenericAuthorization(): GenericAuthorization {
@@ -293,14 +293,14 @@ export const GrantAuthorization = {
 };
 
 function createBaseGrantQueueItem(): GrantQueueItem {
-  return { msgTypeUrls: [] };
+  return { msg_type_urls: [] };
 }
 
 export const GrantQueueItem = {
   $type: "cosmos.authz.v1beta1.GrantQueueItem" as const,
 
   encode(message: GrantQueueItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.msgTypeUrls) {
+    for (const v of message.msg_type_urls) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -318,7 +318,7 @@ export const GrantQueueItem = {
             break;
           }
 
-          message.msgTypeUrls.push(reader.string());
+          message.msg_type_urls.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -330,13 +330,15 @@ export const GrantQueueItem = {
   },
 
   fromJSON(object: any): GrantQueueItem {
-    return { msgTypeUrls: Array.isArray(object?.msgTypeUrls) ? object.msgTypeUrls.map((e: any) => String(e)) : [] };
+    return {
+      msg_type_urls: Array.isArray(object?.msg_type_urls) ? object.msg_type_urls.map((e: any) => String(e)) : [],
+    };
   },
 
   toJSON(message: GrantQueueItem): unknown {
     const obj: any = {};
-    if (message.msgTypeUrls?.length) {
-      obj.msgTypeUrls = message.msgTypeUrls;
+    if (message.msg_type_urls?.length) {
+      obj.msg_type_urls = message.msg_type_urls;
     }
     return obj;
   },
@@ -346,7 +348,7 @@ export const GrantQueueItem = {
   },
   fromPartial(object: DeepPartial<GrantQueueItem>): GrantQueueItem {
     const message = createBaseGrantQueueItem();
-    message.msgTypeUrls = object.msgTypeUrls?.map((e) => e) || [];
+    message.msg_type_urls = object.msg_type_urls?.map((e) => e) || [];
     return message;
   },
 };

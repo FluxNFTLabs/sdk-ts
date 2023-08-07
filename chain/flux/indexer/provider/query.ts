@@ -15,7 +15,7 @@ export interface ProviderBlockResponse {
   height: string;
   time: string;
   block: string;
-  blockResults: string;
+  block_results: string;
   validators: string;
 }
 
@@ -91,7 +91,7 @@ export const ProviderBlockRequest = {
 };
 
 function createBaseProviderBlockResponse(): ProviderBlockResponse {
-  return { height: "0", time: "0", block: "", blockResults: "", validators: "" };
+  return { height: "0", time: "0", block: "", block_results: "", validators: "" };
 }
 
 export const ProviderBlockResponse = {
@@ -107,8 +107,8 @@ export const ProviderBlockResponse = {
     if (message.block !== "") {
       writer.uint32(26).string(message.block);
     }
-    if (message.blockResults !== "") {
-      writer.uint32(34).string(message.blockResults);
+    if (message.block_results !== "") {
+      writer.uint32(34).string(message.block_results);
     }
     if (message.validators !== "") {
       writer.uint32(42).string(message.validators);
@@ -149,7 +149,7 @@ export const ProviderBlockResponse = {
             break;
           }
 
-          message.blockResults = reader.string();
+          message.block_results = reader.string();
           continue;
         case 5:
           if (tag !== 42) {
@@ -172,7 +172,7 @@ export const ProviderBlockResponse = {
       height: isSet(object.height) ? String(object.height) : "0",
       time: isSet(object.time) ? String(object.time) : "0",
       block: isSet(object.block) ? String(object.block) : "",
-      blockResults: isSet(object.blockResults) ? String(object.blockResults) : "",
+      block_results: isSet(object.block_results) ? String(object.block_results) : "",
       validators: isSet(object.validators) ? String(object.validators) : "",
     };
   },
@@ -188,8 +188,8 @@ export const ProviderBlockResponse = {
     if (message.block !== "") {
       obj.block = message.block;
     }
-    if (message.blockResults !== "") {
-      obj.blockResults = message.blockResults;
+    if (message.block_results !== "") {
+      obj.block_results = message.block_results;
     }
     if (message.validators !== "") {
       obj.validators = message.validators;
@@ -205,7 +205,7 @@ export const ProviderBlockResponse = {
     message.height = object.height ?? "0";
     message.time = object.time ?? "0";
     message.block = object.block ?? "";
-    message.blockResults = object.blockResults ?? "";
+    message.block_results = object.block_results ?? "";
     message.validators = object.validators ?? "";
     return message;
   },

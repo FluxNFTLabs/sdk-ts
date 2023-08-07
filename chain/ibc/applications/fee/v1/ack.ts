@@ -4,29 +4,29 @@ import _m0 from "protobufjs/minimal";
 /** IncentivizedAcknowledgement is the acknowledgement format to be used by applications wrapped in the fee middleware */
 export interface IncentivizedAcknowledgement {
   /** the underlying app acknowledgement bytes */
-  appAcknowledgement: Uint8Array;
+  app_acknowledgement: Uint8Array;
   /** the relayer address which submits the recv packet message */
-  forwardRelayerAddress: string;
+  forward_relayer_address: string;
   /** success flag of the base application callback */
-  underlyingAppSuccess: boolean;
+  underlying_app_success: boolean;
 }
 
 function createBaseIncentivizedAcknowledgement(): IncentivizedAcknowledgement {
-  return { appAcknowledgement: new Uint8Array(0), forwardRelayerAddress: "", underlyingAppSuccess: false };
+  return { app_acknowledgement: new Uint8Array(0), forward_relayer_address: "", underlying_app_success: false };
 }
 
 export const IncentivizedAcknowledgement = {
   $type: "ibc.applications.fee.v1.IncentivizedAcknowledgement" as const,
 
   encode(message: IncentivizedAcknowledgement, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.appAcknowledgement.length !== 0) {
-      writer.uint32(10).bytes(message.appAcknowledgement);
+    if (message.app_acknowledgement.length !== 0) {
+      writer.uint32(10).bytes(message.app_acknowledgement);
     }
-    if (message.forwardRelayerAddress !== "") {
-      writer.uint32(18).string(message.forwardRelayerAddress);
+    if (message.forward_relayer_address !== "") {
+      writer.uint32(18).string(message.forward_relayer_address);
     }
-    if (message.underlyingAppSuccess === true) {
-      writer.uint32(24).bool(message.underlyingAppSuccess);
+    if (message.underlying_app_success === true) {
+      writer.uint32(24).bool(message.underlying_app_success);
     }
     return writer;
   },
@@ -43,21 +43,21 @@ export const IncentivizedAcknowledgement = {
             break;
           }
 
-          message.appAcknowledgement = reader.bytes();
+          message.app_acknowledgement = reader.bytes();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.forwardRelayerAddress = reader.string();
+          message.forward_relayer_address = reader.string();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.underlyingAppSuccess = reader.bool();
+          message.underlying_app_success = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -70,24 +70,24 @@ export const IncentivizedAcknowledgement = {
 
   fromJSON(object: any): IncentivizedAcknowledgement {
     return {
-      appAcknowledgement: isSet(object.appAcknowledgement)
-        ? bytesFromBase64(object.appAcknowledgement)
+      app_acknowledgement: isSet(object.app_acknowledgement)
+        ? bytesFromBase64(object.app_acknowledgement)
         : new Uint8Array(0),
-      forwardRelayerAddress: isSet(object.forwardRelayerAddress) ? String(object.forwardRelayerAddress) : "",
-      underlyingAppSuccess: isSet(object.underlyingAppSuccess) ? Boolean(object.underlyingAppSuccess) : false,
+      forward_relayer_address: isSet(object.forward_relayer_address) ? String(object.forward_relayer_address) : "",
+      underlying_app_success: isSet(object.underlying_app_success) ? Boolean(object.underlying_app_success) : false,
     };
   },
 
   toJSON(message: IncentivizedAcknowledgement): unknown {
     const obj: any = {};
-    if (message.appAcknowledgement.length !== 0) {
-      obj.appAcknowledgement = base64FromBytes(message.appAcknowledgement);
+    if (message.app_acknowledgement.length !== 0) {
+      obj.app_acknowledgement = base64FromBytes(message.app_acknowledgement);
     }
-    if (message.forwardRelayerAddress !== "") {
-      obj.forwardRelayerAddress = message.forwardRelayerAddress;
+    if (message.forward_relayer_address !== "") {
+      obj.forward_relayer_address = message.forward_relayer_address;
     }
-    if (message.underlyingAppSuccess === true) {
-      obj.underlyingAppSuccess = message.underlyingAppSuccess;
+    if (message.underlying_app_success === true) {
+      obj.underlying_app_success = message.underlying_app_success;
     }
     return obj;
   },
@@ -97,9 +97,9 @@ export const IncentivizedAcknowledgement = {
   },
   fromPartial(object: DeepPartial<IncentivizedAcknowledgement>): IncentivizedAcknowledgement {
     const message = createBaseIncentivizedAcknowledgement();
-    message.appAcknowledgement = object.appAcknowledgement ?? new Uint8Array(0);
-    message.forwardRelayerAddress = object.forwardRelayerAddress ?? "";
-    message.underlyingAppSuccess = object.underlyingAppSuccess ?? false;
+    message.app_acknowledgement = object.app_acknowledgement ?? new Uint8Array(0);
+    message.forward_relayer_address = object.forward_relayer_address ?? "";
+    message.underlying_app_success = object.underlying_app_success ?? false;
     return message;
   },
 };

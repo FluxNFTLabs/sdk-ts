@@ -11,18 +11,18 @@ export interface MsgStoreCode {
   /** Sender is the actor that signed the messages */
   sender: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasmByteCode: Uint8Array;
+  wasm_byte_code: Uint8Array;
   /**
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-  instantiatePermission: AccessConfig | undefined;
+  instantiate_permission: AccessConfig | undefined;
 }
 
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
   /** CodeID is the reference to the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** Checksum is the sha256 hash of the stored code */
   checksum: Uint8Array;
 }
@@ -37,7 +37,7 @@ export interface MsgInstantiateContract {
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** CodeID is the reference to the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** Label is optional metadata to be stored with a contract instance. */
   label: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
@@ -64,7 +64,7 @@ export interface MsgInstantiateContract2 {
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** CodeID is the reference to the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** Label is optional metadata to be stored with a contract instance. */
   label: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
@@ -77,7 +77,7 @@ export interface MsgInstantiateContract2 {
    * FixMsg include the msg value into the hash for the predictable address.
    * Default is false
    */
-  fixMsg: boolean;
+  fix_msg: boolean;
 }
 
 /** MsgInstantiateContract2Response return instantiation result data */
@@ -113,7 +113,7 @@ export interface MsgMigrateContract {
   /** Contract is the address of the smart contract */
   contract: string;
   /** CodeID references the new WASM code */
-  codeId: string;
+  code_id: string;
   /** Msg json encoded message to be passed to the contract on migration */
   msg: Uint8Array;
 }
@@ -132,7 +132,7 @@ export interface MsgUpdateAdmin {
   /** Sender is the that actor that signed the messages */
   sender: string;
   /** NewAdmin address to be set */
-  newAdmin: string;
+  new_admin: string;
   /** Contract is the address of the smart contract */
   contract: string;
 }
@@ -158,9 +158,9 @@ export interface MsgUpdateInstantiateConfig {
   /** Sender is the that actor that signed the messages */
   sender: string;
   /** CodeID references the stored WASM code */
-  codeId: string;
+  code_id: string;
   /** NewInstantiatePermission is the new access control */
-  newInstantiatePermission: AccessConfig | undefined;
+  new_instantiate_permission: AccessConfig | undefined;
 }
 
 /** MsgUpdateInstantiateConfigResponse returns empty data */
@@ -226,7 +226,7 @@ export interface MsgPinCodes {
   /** Authority is the address of the governance account. */
   authority: string;
   /** CodeIDs references the new WASM codes */
-  codeIds: string[];
+  code_ids: string[];
 }
 
 /**
@@ -247,7 +247,7 @@ export interface MsgUnpinCodes {
   /** Authority is the address of the governance account. */
   authority: string;
   /** CodeIDs references the WASM codes */
-  codeIds: string[];
+  code_ids: string[];
 }
 
 /**
@@ -269,16 +269,16 @@ export interface MsgStoreAndInstantiateContract {
   /** Authority is the address of the governance account. */
   authority: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasmByteCode: Uint8Array;
+  wasm_byte_code: Uint8Array;
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission:
+  instantiate_permission:
     | AccessConfig
     | undefined;
   /**
    * UnpinCode code on upload, optional. As default the uploaded contract is
    * pinned to cache.
    */
-  unpinCode: boolean;
+  unpin_code: boolean;
   /** Admin is an optional address that can execute migrations */
   admin: string;
   /** Label is optional metadata to be stored with a constract instance. */
@@ -301,7 +301,7 @@ export interface MsgStoreAndInstantiateContract {
    * CodeHash is the SHA256 sum of the code outputted by builder, used for smart
    * contract verification
    */
-  codeHash: Uint8Array;
+  code_hash: Uint8Array;
 }
 
 /**
@@ -352,7 +352,7 @@ export interface MsgRemoveCodeUploadParamsAddressesResponse {
 }
 
 function createBaseMsgStoreCode(): MsgStoreCode {
-  return { sender: "", wasmByteCode: new Uint8Array(0), instantiatePermission: undefined };
+  return { sender: "", wasm_byte_code: new Uint8Array(0), instantiate_permission: undefined };
 }
 
 export const MsgStoreCode = {
@@ -362,11 +362,11 @@ export const MsgStoreCode = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.wasmByteCode.length !== 0) {
-      writer.uint32(18).bytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      writer.uint32(18).bytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(42).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -390,14 +390,14 @@ export const MsgStoreCode = {
             break;
           }
 
-          message.wasmByteCode = reader.bytes();
+          message.wasm_byte_code = reader.bytes();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -411,9 +411,9 @@ export const MsgStoreCode = {
   fromJSON(object: any): MsgStoreCode {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(0),
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
     };
   },
@@ -423,11 +423,11 @@ export const MsgStoreCode = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.wasmByteCode.length !== 0) {
-      obj.wasmByteCode = base64FromBytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
     return obj;
   },
@@ -438,25 +438,25 @@ export const MsgStoreCode = {
   fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
-    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array(0);
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.wasm_byte_code = object.wasm_byte_code ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
     return message;
   },
 };
 
 function createBaseMsgStoreCodeResponse(): MsgStoreCodeResponse {
-  return { codeId: "0", checksum: new Uint8Array(0) };
+  return { code_id: "0", checksum: new Uint8Array(0) };
 }
 
 export const MsgStoreCodeResponse = {
   $type: "cosmwasm.wasm.v1.MsgStoreCodeResponse" as const,
 
   encode(message: MsgStoreCodeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.codeId !== "0") {
-      writer.uint32(8).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
     }
     if (message.checksum.length !== 0) {
       writer.uint32(18).bytes(message.checksum);
@@ -476,7 +476,7 @@ export const MsgStoreCodeResponse = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -496,15 +496,15 @@ export const MsgStoreCodeResponse = {
 
   fromJSON(object: any): MsgStoreCodeResponse {
     return {
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
     };
   },
 
   toJSON(message: MsgStoreCodeResponse): unknown {
     const obj: any = {};
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.checksum.length !== 0) {
       obj.checksum = base64FromBytes(message.checksum);
@@ -517,14 +517,14 @@ export const MsgStoreCodeResponse = {
   },
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
     const message = createBaseMsgStoreCodeResponse();
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.checksum = object.checksum ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseMsgInstantiateContract(): MsgInstantiateContract {
-  return { sender: "", admin: "", codeId: "0", label: "", msg: new Uint8Array(0), funds: [] };
+  return { sender: "", admin: "", code_id: "0", label: "", msg: new Uint8Array(0), funds: [] };
 }
 
 export const MsgInstantiateContract = {
@@ -537,8 +537,8 @@ export const MsgInstantiateContract = {
     if (message.admin !== "") {
       writer.uint32(18).string(message.admin);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(24).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(24).uint64(message.code_id);
     }
     if (message.label !== "") {
       writer.uint32(34).string(message.label);
@@ -578,7 +578,7 @@ export const MsgInstantiateContract = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 34) {
@@ -614,7 +614,7 @@ export const MsgInstantiateContract = {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
@@ -629,8 +629,8 @@ export const MsgInstantiateContract = {
     if (message.admin !== "") {
       obj.admin = message.admin;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.label !== "") {
       obj.label = message.label;
@@ -651,7 +651,7 @@ export const MsgInstantiateContract = {
     const message = createBaseMsgInstantiateContract();
     message.sender = object.sender ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
@@ -739,12 +739,12 @@ function createBaseMsgInstantiateContract2(): MsgInstantiateContract2 {
   return {
     sender: "",
     admin: "",
-    codeId: "0",
+    code_id: "0",
     label: "",
     msg: new Uint8Array(0),
     funds: [],
     salt: new Uint8Array(0),
-    fixMsg: false,
+    fix_msg: false,
   };
 }
 
@@ -758,8 +758,8 @@ export const MsgInstantiateContract2 = {
     if (message.admin !== "") {
       writer.uint32(18).string(message.admin);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(24).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(24).uint64(message.code_id);
     }
     if (message.label !== "") {
       writer.uint32(34).string(message.label);
@@ -773,8 +773,8 @@ export const MsgInstantiateContract2 = {
     if (message.salt.length !== 0) {
       writer.uint32(58).bytes(message.salt);
     }
-    if (message.fixMsg === true) {
-      writer.uint32(64).bool(message.fixMsg);
+    if (message.fix_msg === true) {
+      writer.uint32(64).bool(message.fix_msg);
     }
     return writer;
   },
@@ -805,7 +805,7 @@ export const MsgInstantiateContract2 = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 34) {
@@ -840,7 +840,7 @@ export const MsgInstantiateContract2 = {
             break;
           }
 
-          message.fixMsg = reader.bool();
+          message.fix_msg = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -855,12 +855,12 @@ export const MsgInstantiateContract2 = {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       admin: isSet(object.admin) ? String(object.admin) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(0),
-      fixMsg: isSet(object.fixMsg) ? Boolean(object.fixMsg) : false,
+      fix_msg: isSet(object.fix_msg) ? Boolean(object.fix_msg) : false,
     };
   },
 
@@ -872,8 +872,8 @@ export const MsgInstantiateContract2 = {
     if (message.admin !== "") {
       obj.admin = message.admin;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.label !== "") {
       obj.label = message.label;
@@ -887,8 +887,8 @@ export const MsgInstantiateContract2 = {
     if (message.salt.length !== 0) {
       obj.salt = base64FromBytes(message.salt);
     }
-    if (message.fixMsg === true) {
-      obj.fixMsg = message.fixMsg;
+    if (message.fix_msg === true) {
+      obj.fix_msg = message.fix_msg;
     }
     return obj;
   },
@@ -900,12 +900,12 @@ export const MsgInstantiateContract2 = {
     const message = createBaseMsgInstantiateContract2();
     message.sender = object.sender ?? "";
     message.admin = object.admin ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
     message.salt = object.salt ?? new Uint8Array(0);
-    message.fixMsg = object.fixMsg ?? false;
+    message.fix_msg = object.fix_msg ?? false;
     return message;
   },
 };
@@ -1152,7 +1152,7 @@ export const MsgExecuteContractResponse = {
 };
 
 function createBaseMsgMigrateContract(): MsgMigrateContract {
-  return { sender: "", contract: "", codeId: "0", msg: new Uint8Array(0) };
+  return { sender: "", contract: "", code_id: "0", msg: new Uint8Array(0) };
 }
 
 export const MsgMigrateContract = {
@@ -1165,8 +1165,8 @@ export const MsgMigrateContract = {
     if (message.contract !== "") {
       writer.uint32(18).string(message.contract);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(24).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(24).uint64(message.code_id);
     }
     if (message.msg.length !== 0) {
       writer.uint32(34).bytes(message.msg);
@@ -1200,7 +1200,7 @@ export const MsgMigrateContract = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 34) {
@@ -1222,7 +1222,7 @@ export const MsgMigrateContract = {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -1235,8 +1235,8 @@ export const MsgMigrateContract = {
     if (message.contract !== "") {
       obj.contract = message.contract;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
     if (message.msg.length !== 0) {
       obj.msg = base64FromBytes(message.msg);
@@ -1251,7 +1251,7 @@ export const MsgMigrateContract = {
     const message = createBaseMsgMigrateContract();
     message.sender = object.sender ?? "";
     message.contract = object.contract ?? "";
-    message.codeId = object.codeId ?? "0";
+    message.code_id = object.code_id ?? "0";
     message.msg = object.msg ?? new Uint8Array(0);
     return message;
   },
@@ -1317,7 +1317,7 @@ export const MsgMigrateContractResponse = {
 };
 
 function createBaseMsgUpdateAdmin(): MsgUpdateAdmin {
-  return { sender: "", newAdmin: "", contract: "" };
+  return { sender: "", new_admin: "", contract: "" };
 }
 
 export const MsgUpdateAdmin = {
@@ -1327,8 +1327,8 @@ export const MsgUpdateAdmin = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.newAdmin !== "") {
-      writer.uint32(18).string(message.newAdmin);
+    if (message.new_admin !== "") {
+      writer.uint32(18).string(message.new_admin);
     }
     if (message.contract !== "") {
       writer.uint32(26).string(message.contract);
@@ -1355,7 +1355,7 @@ export const MsgUpdateAdmin = {
             break;
           }
 
-          message.newAdmin = reader.string();
+          message.new_admin = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -1376,7 +1376,7 @@ export const MsgUpdateAdmin = {
   fromJSON(object: any): MsgUpdateAdmin {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
+      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
       contract: isSet(object.contract) ? String(object.contract) : "",
     };
   },
@@ -1386,8 +1386,8 @@ export const MsgUpdateAdmin = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.newAdmin !== "") {
-      obj.newAdmin = message.newAdmin;
+    if (message.new_admin !== "") {
+      obj.new_admin = message.new_admin;
     }
     if (message.contract !== "") {
       obj.contract = message.contract;
@@ -1401,7 +1401,7 @@ export const MsgUpdateAdmin = {
   fromPartial(object: DeepPartial<MsgUpdateAdmin>): MsgUpdateAdmin {
     const message = createBaseMsgUpdateAdmin();
     message.sender = object.sender ?? "";
-    message.newAdmin = object.newAdmin ?? "";
+    message.new_admin = object.new_admin ?? "";
     message.contract = object.contract ?? "";
     return message;
   },
@@ -1574,7 +1574,7 @@ export const MsgClearAdminResponse = {
 };
 
 function createBaseMsgUpdateInstantiateConfig(): MsgUpdateInstantiateConfig {
-  return { sender: "", codeId: "0", newInstantiatePermission: undefined };
+  return { sender: "", code_id: "0", new_instantiate_permission: undefined };
 }
 
 export const MsgUpdateInstantiateConfig = {
@@ -1584,11 +1584,11 @@ export const MsgUpdateInstantiateConfig = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.codeId !== "0") {
-      writer.uint32(16).uint64(message.codeId);
+    if (message.code_id !== "0") {
+      writer.uint32(16).uint64(message.code_id);
     }
-    if (message.newInstantiatePermission !== undefined) {
-      AccessConfig.encode(message.newInstantiatePermission, writer.uint32(26).fork()).ldelim();
+    if (message.new_instantiate_permission !== undefined) {
+      AccessConfig.encode(message.new_instantiate_permission, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -1612,14 +1612,14 @@ export const MsgUpdateInstantiateConfig = {
             break;
           }
 
-          message.codeId = longToString(reader.uint64() as Long);
+          message.code_id = longToString(reader.uint64() as Long);
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.newInstantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.new_instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1633,9 +1633,9 @@ export const MsgUpdateInstantiateConfig = {
   fromJSON(object: any): MsgUpdateInstantiateConfig {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      codeId: isSet(object.codeId) ? String(object.codeId) : "0",
-      newInstantiatePermission: isSet(object.newInstantiatePermission)
-        ? AccessConfig.fromJSON(object.newInstantiatePermission)
+      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      new_instantiate_permission: isSet(object.new_instantiate_permission)
+        ? AccessConfig.fromJSON(object.new_instantiate_permission)
         : undefined,
     };
   },
@@ -1645,11 +1645,11 @@ export const MsgUpdateInstantiateConfig = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.codeId !== "0") {
-      obj.codeId = message.codeId;
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
     }
-    if (message.newInstantiatePermission !== undefined) {
-      obj.newInstantiatePermission = AccessConfig.toJSON(message.newInstantiatePermission);
+    if (message.new_instantiate_permission !== undefined) {
+      obj.new_instantiate_permission = AccessConfig.toJSON(message.new_instantiate_permission);
     }
     return obj;
   },
@@ -1660,10 +1660,10 @@ export const MsgUpdateInstantiateConfig = {
   fromPartial(object: DeepPartial<MsgUpdateInstantiateConfig>): MsgUpdateInstantiateConfig {
     const message = createBaseMsgUpdateInstantiateConfig();
     message.sender = object.sender ?? "";
-    message.codeId = object.codeId ?? "0";
-    message.newInstantiatePermission =
-      (object.newInstantiatePermission !== undefined && object.newInstantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.newInstantiatePermission)
+    message.code_id = object.code_id ?? "0";
+    message.new_instantiate_permission =
+      (object.new_instantiate_permission !== undefined && object.new_instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.new_instantiate_permission)
         : undefined;
     return message;
   },
@@ -1988,7 +1988,7 @@ export const MsgSudoContractResponse = {
 };
 
 function createBaseMsgPinCodes(): MsgPinCodes {
-  return { authority: "", codeIds: [] };
+  return { authority: "", code_ids: [] };
 }
 
 export const MsgPinCodes = {
@@ -1999,7 +1999,7 @@ export const MsgPinCodes = {
       writer.uint32(10).string(message.authority);
     }
     writer.uint32(18).fork();
-    for (const v of message.codeIds) {
+    for (const v of message.code_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -2022,7 +2022,7 @@ export const MsgPinCodes = {
           continue;
         case 2:
           if (tag === 16) {
-            message.codeIds.push(longToString(reader.uint64() as Long));
+            message.code_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -2030,7 +2030,7 @@ export const MsgPinCodes = {
           if (tag === 18) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(longToString(reader.uint64() as Long));
+              message.code_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -2049,7 +2049,7 @@ export const MsgPinCodes = {
   fromJSON(object: any): MsgPinCodes {
     return {
       authority: isSet(object.authority) ? String(object.authority) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => String(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
     };
   },
 
@@ -2058,8 +2058,8 @@ export const MsgPinCodes = {
     if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.codeIds?.length) {
-      obj.codeIds = message.codeIds;
+    if (message.code_ids?.length) {
+      obj.code_ids = message.code_ids;
     }
     return obj;
   },
@@ -2070,7 +2070,7 @@ export const MsgPinCodes = {
   fromPartial(object: DeepPartial<MsgPinCodes>): MsgPinCodes {
     const message = createBaseMsgPinCodes();
     message.authority = object.authority ?? "";
-    message.codeIds = object.codeIds?.map((e) => e) || [];
+    message.code_ids = object.code_ids?.map((e) => e) || [];
     return message;
   },
 };
@@ -2121,7 +2121,7 @@ export const MsgPinCodesResponse = {
 };
 
 function createBaseMsgUnpinCodes(): MsgUnpinCodes {
-  return { authority: "", codeIds: [] };
+  return { authority: "", code_ids: [] };
 }
 
 export const MsgUnpinCodes = {
@@ -2132,7 +2132,7 @@ export const MsgUnpinCodes = {
       writer.uint32(10).string(message.authority);
     }
     writer.uint32(18).fork();
-    for (const v of message.codeIds) {
+    for (const v of message.code_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -2155,7 +2155,7 @@ export const MsgUnpinCodes = {
           continue;
         case 2:
           if (tag === 16) {
-            message.codeIds.push(longToString(reader.uint64() as Long));
+            message.code_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -2163,7 +2163,7 @@ export const MsgUnpinCodes = {
           if (tag === 18) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.codeIds.push(longToString(reader.uint64() as Long));
+              message.code_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -2182,7 +2182,7 @@ export const MsgUnpinCodes = {
   fromJSON(object: any): MsgUnpinCodes {
     return {
       authority: isSet(object.authority) ? String(object.authority) : "",
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => String(e)) : [],
+      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
     };
   },
 
@@ -2191,8 +2191,8 @@ export const MsgUnpinCodes = {
     if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.codeIds?.length) {
-      obj.codeIds = message.codeIds;
+    if (message.code_ids?.length) {
+      obj.code_ids = message.code_ids;
     }
     return obj;
   },
@@ -2203,7 +2203,7 @@ export const MsgUnpinCodes = {
   fromPartial(object: DeepPartial<MsgUnpinCodes>): MsgUnpinCodes {
     const message = createBaseMsgUnpinCodes();
     message.authority = object.authority ?? "";
-    message.codeIds = object.codeIds?.map((e) => e) || [];
+    message.code_ids = object.code_ids?.map((e) => e) || [];
     return message;
   },
 };
@@ -2256,16 +2256,16 @@ export const MsgUnpinCodesResponse = {
 function createBaseMsgStoreAndInstantiateContract(): MsgStoreAndInstantiateContract {
   return {
     authority: "",
-    wasmByteCode: new Uint8Array(0),
-    instantiatePermission: undefined,
-    unpinCode: false,
+    wasm_byte_code: new Uint8Array(0),
+    instantiate_permission: undefined,
+    unpin_code: false,
     admin: "",
     label: "",
     msg: new Uint8Array(0),
     funds: [],
     source: "",
     builder: "",
-    codeHash: new Uint8Array(0),
+    code_hash: new Uint8Array(0),
   };
 }
 
@@ -2276,14 +2276,14 @@ export const MsgStoreAndInstantiateContract = {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
-    if (message.wasmByteCode.length !== 0) {
-      writer.uint32(26).bytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      writer.uint32(26).bytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      AccessConfig.encode(message.instantiatePermission, writer.uint32(34).fork()).ldelim();
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(34).fork()).ldelim();
     }
-    if (message.unpinCode === true) {
-      writer.uint32(40).bool(message.unpinCode);
+    if (message.unpin_code === true) {
+      writer.uint32(40).bool(message.unpin_code);
     }
     if (message.admin !== "") {
       writer.uint32(50).string(message.admin);
@@ -2303,8 +2303,8 @@ export const MsgStoreAndInstantiateContract = {
     if (message.builder !== "") {
       writer.uint32(90).string(message.builder);
     }
-    if (message.codeHash.length !== 0) {
-      writer.uint32(98).bytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      writer.uint32(98).bytes(message.code_hash);
     }
     return writer;
   },
@@ -2328,21 +2328,21 @@ export const MsgStoreAndInstantiateContract = {
             break;
           }
 
-          message.wasmByteCode = reader.bytes();
+          message.wasm_byte_code = reader.bytes();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.unpinCode = reader.bool();
+          message.unpin_code = reader.bool();
           continue;
         case 6:
           if (tag !== 50) {
@@ -2391,7 +2391,7 @@ export const MsgStoreAndInstantiateContract = {
             break;
           }
 
-          message.codeHash = reader.bytes();
+          message.code_hash = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2405,18 +2405,18 @@ export const MsgStoreAndInstantiateContract = {
   fromJSON(object: any): MsgStoreAndInstantiateContract {
     return {
       authority: isSet(object.authority) ? String(object.authority) : "",
-      wasmByteCode: isSet(object.wasmByteCode) ? bytesFromBase64(object.wasmByteCode) : new Uint8Array(0),
-      instantiatePermission: isSet(object.instantiatePermission)
-        ? AccessConfig.fromJSON(object.instantiatePermission)
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpinCode: isSet(object.unpinCode) ? Boolean(object.unpinCode) : false,
+      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
       admin: isSet(object.admin) ? String(object.admin) : "",
       label: isSet(object.label) ? String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       source: isSet(object.source) ? String(object.source) : "",
       builder: isSet(object.builder) ? String(object.builder) : "",
-      codeHash: isSet(object.codeHash) ? bytesFromBase64(object.codeHash) : new Uint8Array(0),
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
 
@@ -2425,14 +2425,14 @@ export const MsgStoreAndInstantiateContract = {
     if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.wasmByteCode.length !== 0) {
-      obj.wasmByteCode = base64FromBytes(message.wasmByteCode);
+    if (message.wasm_byte_code.length !== 0) {
+      obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
-    if (message.instantiatePermission !== undefined) {
-      obj.instantiatePermission = AccessConfig.toJSON(message.instantiatePermission);
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
-    if (message.unpinCode === true) {
-      obj.unpinCode = message.unpinCode;
+    if (message.unpin_code === true) {
+      obj.unpin_code = message.unpin_code;
     }
     if (message.admin !== "") {
       obj.admin = message.admin;
@@ -2452,8 +2452,8 @@ export const MsgStoreAndInstantiateContract = {
     if (message.builder !== "") {
       obj.builder = message.builder;
     }
-    if (message.codeHash.length !== 0) {
-      obj.codeHash = base64FromBytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;
   },
@@ -2464,19 +2464,19 @@ export const MsgStoreAndInstantiateContract = {
   fromPartial(object: DeepPartial<MsgStoreAndInstantiateContract>): MsgStoreAndInstantiateContract {
     const message = createBaseMsgStoreAndInstantiateContract();
     message.authority = object.authority ?? "";
-    message.wasmByteCode = object.wasmByteCode ?? new Uint8Array(0);
-    message.instantiatePermission =
-      (object.instantiatePermission !== undefined && object.instantiatePermission !== null)
-        ? AccessConfig.fromPartial(object.instantiatePermission)
+    message.wasm_byte_code = object.wasm_byte_code ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
         : undefined;
-    message.unpinCode = object.unpinCode ?? false;
+    message.unpin_code = object.unpin_code ?? false;
     message.admin = object.admin ?? "";
     message.label = object.label ?? "";
     message.msg = object.msg ?? new Uint8Array(0);
     message.funds = object.funds?.map((e) => Coin.fromPartial(e)) || [];
     message.source = object.source ?? "";
     message.builder = object.builder ?? "";
-    message.codeHash = object.codeHash ?? new Uint8Array(0);
+    message.code_hash = object.code_hash ?? new Uint8Array(0);
     return message;
   },
 };

@@ -8,9 +8,9 @@ import { Fee, PacketFee } from "./fee";
 /** MsgRegisterPayee defines the request type for the RegisterPayee rpc */
 export interface MsgRegisterPayee {
   /** unique port identifier */
-  portId: string;
+  port_id: string;
   /** unique channel identifier */
-  channelId: string;
+  channel_id: string;
   /** the relayer address */
   relayer: string;
   /** the payee address */
@@ -24,13 +24,13 @@ export interface MsgRegisterPayeeResponse {
 /** MsgRegisterCounterpartyPayee defines the request type for the RegisterCounterpartyPayee rpc */
 export interface MsgRegisterCounterpartyPayee {
   /** unique port identifier */
-  portId: string;
+  port_id: string;
   /** unique channel identifier */
-  channelId: string;
+  channel_id: string;
   /** the relayer address */
   relayer: string;
   /** the counterparty payee address */
-  counterpartyPayee: string;
+  counterparty_payee: string;
 }
 
 /** MsgRegisterCounterpartyPayeeResponse defines the response type for the RegisterCounterpartyPayee rpc */
@@ -48,9 +48,9 @@ export interface MsgPayPacketFee {
     | Fee
     | undefined;
   /** the source port unique identifier */
-  sourcePortId: string;
+  source_port_id: string;
   /** the source channel unique identifer */
-  sourceChannelId: string;
+  source_channel_id: string;
   /** account address to refund fee if necessary */
   signer: string;
   /** optional list of relayers permitted to the receive packet fees */
@@ -67,11 +67,11 @@ export interface MsgPayPacketFeeResponse {
  */
 export interface MsgPayPacketFeeAsync {
   /** unique packet identifier comprised of the channel ID, port ID and sequence */
-  packetId:
+  packet_id:
     | PacketId
     | undefined;
   /** the packet fee associated with a particular IBC packet */
-  packetFee: PacketFee | undefined;
+  packet_fee: PacketFee | undefined;
 }
 
 /** MsgPayPacketFeeAsyncResponse defines the response type for the PayPacketFeeAsync rpc */
@@ -79,18 +79,18 @@ export interface MsgPayPacketFeeAsyncResponse {
 }
 
 function createBaseMsgRegisterPayee(): MsgRegisterPayee {
-  return { portId: "", channelId: "", relayer: "", payee: "" };
+  return { port_id: "", channel_id: "", relayer: "", payee: "" };
 }
 
 export const MsgRegisterPayee = {
   $type: "ibc.applications.fee.v1.MsgRegisterPayee" as const,
 
   encode(message: MsgRegisterPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.portId !== "") {
-      writer.uint32(10).string(message.portId);
+    if (message.port_id !== "") {
+      writer.uint32(10).string(message.port_id);
     }
-    if (message.channelId !== "") {
-      writer.uint32(18).string(message.channelId);
+    if (message.channel_id !== "") {
+      writer.uint32(18).string(message.channel_id);
     }
     if (message.relayer !== "") {
       writer.uint32(26).string(message.relayer);
@@ -113,14 +113,14 @@ export const MsgRegisterPayee = {
             break;
           }
 
-          message.portId = reader.string();
+          message.port_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.channelId = reader.string();
+          message.channel_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -147,8 +147,8 @@ export const MsgRegisterPayee = {
 
   fromJSON(object: any): MsgRegisterPayee {
     return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
       relayer: isSet(object.relayer) ? String(object.relayer) : "",
       payee: isSet(object.payee) ? String(object.payee) : "",
     };
@@ -156,11 +156,11 @@ export const MsgRegisterPayee = {
 
   toJSON(message: MsgRegisterPayee): unknown {
     const obj: any = {};
-    if (message.portId !== "") {
-      obj.portId = message.portId;
+    if (message.port_id !== "") {
+      obj.port_id = message.port_id;
     }
-    if (message.channelId !== "") {
-      obj.channelId = message.channelId;
+    if (message.channel_id !== "") {
+      obj.channel_id = message.channel_id;
     }
     if (message.relayer !== "") {
       obj.relayer = message.relayer;
@@ -176,8 +176,8 @@ export const MsgRegisterPayee = {
   },
   fromPartial(object: DeepPartial<MsgRegisterPayee>): MsgRegisterPayee {
     const message = createBaseMsgRegisterPayee();
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.port_id = object.port_id ?? "";
+    message.channel_id = object.channel_id ?? "";
     message.relayer = object.relayer ?? "";
     message.payee = object.payee ?? "";
     return message;
@@ -230,24 +230,24 @@ export const MsgRegisterPayeeResponse = {
 };
 
 function createBaseMsgRegisterCounterpartyPayee(): MsgRegisterCounterpartyPayee {
-  return { portId: "", channelId: "", relayer: "", counterpartyPayee: "" };
+  return { port_id: "", channel_id: "", relayer: "", counterparty_payee: "" };
 }
 
 export const MsgRegisterCounterpartyPayee = {
   $type: "ibc.applications.fee.v1.MsgRegisterCounterpartyPayee" as const,
 
   encode(message: MsgRegisterCounterpartyPayee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.portId !== "") {
-      writer.uint32(10).string(message.portId);
+    if (message.port_id !== "") {
+      writer.uint32(10).string(message.port_id);
     }
-    if (message.channelId !== "") {
-      writer.uint32(18).string(message.channelId);
+    if (message.channel_id !== "") {
+      writer.uint32(18).string(message.channel_id);
     }
     if (message.relayer !== "") {
       writer.uint32(26).string(message.relayer);
     }
-    if (message.counterpartyPayee !== "") {
-      writer.uint32(34).string(message.counterpartyPayee);
+    if (message.counterparty_payee !== "") {
+      writer.uint32(34).string(message.counterparty_payee);
     }
     return writer;
   },
@@ -264,14 +264,14 @@ export const MsgRegisterCounterpartyPayee = {
             break;
           }
 
-          message.portId = reader.string();
+          message.port_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.channelId = reader.string();
+          message.channel_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -285,7 +285,7 @@ export const MsgRegisterCounterpartyPayee = {
             break;
           }
 
-          message.counterpartyPayee = reader.string();
+          message.counterparty_payee = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -298,26 +298,26 @@ export const MsgRegisterCounterpartyPayee = {
 
   fromJSON(object: any): MsgRegisterCounterpartyPayee {
     return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
       relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      counterpartyPayee: isSet(object.counterpartyPayee) ? String(object.counterpartyPayee) : "",
+      counterparty_payee: isSet(object.counterparty_payee) ? String(object.counterparty_payee) : "",
     };
   },
 
   toJSON(message: MsgRegisterCounterpartyPayee): unknown {
     const obj: any = {};
-    if (message.portId !== "") {
-      obj.portId = message.portId;
+    if (message.port_id !== "") {
+      obj.port_id = message.port_id;
     }
-    if (message.channelId !== "") {
-      obj.channelId = message.channelId;
+    if (message.channel_id !== "") {
+      obj.channel_id = message.channel_id;
     }
     if (message.relayer !== "") {
       obj.relayer = message.relayer;
     }
-    if (message.counterpartyPayee !== "") {
-      obj.counterpartyPayee = message.counterpartyPayee;
+    if (message.counterparty_payee !== "") {
+      obj.counterparty_payee = message.counterparty_payee;
     }
     return obj;
   },
@@ -327,10 +327,10 @@ export const MsgRegisterCounterpartyPayee = {
   },
   fromPartial(object: DeepPartial<MsgRegisterCounterpartyPayee>): MsgRegisterCounterpartyPayee {
     const message = createBaseMsgRegisterCounterpartyPayee();
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.port_id = object.port_id ?? "";
+    message.channel_id = object.channel_id ?? "";
     message.relayer = object.relayer ?? "";
-    message.counterpartyPayee = object.counterpartyPayee ?? "";
+    message.counterparty_payee = object.counterparty_payee ?? "";
     return message;
   },
 };
@@ -381,7 +381,7 @@ export const MsgRegisterCounterpartyPayeeResponse = {
 };
 
 function createBaseMsgPayPacketFee(): MsgPayPacketFee {
-  return { fee: undefined, sourcePortId: "", sourceChannelId: "", signer: "", relayers: [] };
+  return { fee: undefined, source_port_id: "", source_channel_id: "", signer: "", relayers: [] };
 }
 
 export const MsgPayPacketFee = {
@@ -391,11 +391,11 @@ export const MsgPayPacketFee = {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
-    if (message.sourcePortId !== "") {
-      writer.uint32(18).string(message.sourcePortId);
+    if (message.source_port_id !== "") {
+      writer.uint32(18).string(message.source_port_id);
     }
-    if (message.sourceChannelId !== "") {
-      writer.uint32(26).string(message.sourceChannelId);
+    if (message.source_channel_id !== "") {
+      writer.uint32(26).string(message.source_channel_id);
     }
     if (message.signer !== "") {
       writer.uint32(34).string(message.signer);
@@ -425,14 +425,14 @@ export const MsgPayPacketFee = {
             break;
           }
 
-          message.sourcePortId = reader.string();
+          message.source_port_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.sourceChannelId = reader.string();
+          message.source_channel_id = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -460,8 +460,8 @@ export const MsgPayPacketFee = {
   fromJSON(object: any): MsgPayPacketFee {
     return {
       fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
-      sourcePortId: isSet(object.sourcePortId) ? String(object.sourcePortId) : "",
-      sourceChannelId: isSet(object.sourceChannelId) ? String(object.sourceChannelId) : "",
+      source_port_id: isSet(object.source_port_id) ? String(object.source_port_id) : "",
+      source_channel_id: isSet(object.source_channel_id) ? String(object.source_channel_id) : "",
       signer: isSet(object.signer) ? String(object.signer) : "",
       relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : [],
     };
@@ -472,11 +472,11 @@ export const MsgPayPacketFee = {
     if (message.fee !== undefined) {
       obj.fee = Fee.toJSON(message.fee);
     }
-    if (message.sourcePortId !== "") {
-      obj.sourcePortId = message.sourcePortId;
+    if (message.source_port_id !== "") {
+      obj.source_port_id = message.source_port_id;
     }
-    if (message.sourceChannelId !== "") {
-      obj.sourceChannelId = message.sourceChannelId;
+    if (message.source_channel_id !== "") {
+      obj.source_channel_id = message.source_channel_id;
     }
     if (message.signer !== "") {
       obj.signer = message.signer;
@@ -493,8 +493,8 @@ export const MsgPayPacketFee = {
   fromPartial(object: DeepPartial<MsgPayPacketFee>): MsgPayPacketFee {
     const message = createBaseMsgPayPacketFee();
     message.fee = (object.fee !== undefined && object.fee !== null) ? Fee.fromPartial(object.fee) : undefined;
-    message.sourcePortId = object.sourcePortId ?? "";
-    message.sourceChannelId = object.sourceChannelId ?? "";
+    message.source_port_id = object.source_port_id ?? "";
+    message.source_channel_id = object.source_channel_id ?? "";
     message.signer = object.signer ?? "";
     message.relayers = object.relayers?.map((e) => e) || [];
     return message;
@@ -547,18 +547,18 @@ export const MsgPayPacketFeeResponse = {
 };
 
 function createBaseMsgPayPacketFeeAsync(): MsgPayPacketFeeAsync {
-  return { packetId: undefined, packetFee: undefined };
+  return { packet_id: undefined, packet_fee: undefined };
 }
 
 export const MsgPayPacketFeeAsync = {
   $type: "ibc.applications.fee.v1.MsgPayPacketFeeAsync" as const,
 
   encode(message: MsgPayPacketFeeAsync, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.packetId !== undefined) {
-      PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
+    if (message.packet_id !== undefined) {
+      PacketId.encode(message.packet_id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.packetFee !== undefined) {
-      PacketFee.encode(message.packetFee, writer.uint32(18).fork()).ldelim();
+    if (message.packet_fee !== undefined) {
+      PacketFee.encode(message.packet_fee, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -575,14 +575,14 @@ export const MsgPayPacketFeeAsync = {
             break;
           }
 
-          message.packetId = PacketId.decode(reader, reader.uint32());
+          message.packet_id = PacketId.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.packetFee = PacketFee.decode(reader, reader.uint32());
+          message.packet_fee = PacketFee.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -595,18 +595,18 @@ export const MsgPayPacketFeeAsync = {
 
   fromJSON(object: any): MsgPayPacketFeeAsync {
     return {
-      packetId: isSet(object.packetId) ? PacketId.fromJSON(object.packetId) : undefined,
-      packetFee: isSet(object.packetFee) ? PacketFee.fromJSON(object.packetFee) : undefined,
+      packet_id: isSet(object.packet_id) ? PacketId.fromJSON(object.packet_id) : undefined,
+      packet_fee: isSet(object.packet_fee) ? PacketFee.fromJSON(object.packet_fee) : undefined,
     };
   },
 
   toJSON(message: MsgPayPacketFeeAsync): unknown {
     const obj: any = {};
-    if (message.packetId !== undefined) {
-      obj.packetId = PacketId.toJSON(message.packetId);
+    if (message.packet_id !== undefined) {
+      obj.packet_id = PacketId.toJSON(message.packet_id);
     }
-    if (message.packetFee !== undefined) {
-      obj.packetFee = PacketFee.toJSON(message.packetFee);
+    if (message.packet_fee !== undefined) {
+      obj.packet_fee = PacketFee.toJSON(message.packet_fee);
     }
     return obj;
   },
@@ -616,11 +616,11 @@ export const MsgPayPacketFeeAsync = {
   },
   fromPartial(object: DeepPartial<MsgPayPacketFeeAsync>): MsgPayPacketFeeAsync {
     const message = createBaseMsgPayPacketFeeAsync();
-    message.packetId = (object.packetId !== undefined && object.packetId !== null)
-      ? PacketId.fromPartial(object.packetId)
+    message.packet_id = (object.packet_id !== undefined && object.packet_id !== null)
+      ? PacketId.fromPartial(object.packet_id)
       : undefined;
-    message.packetFee = (object.packetFee !== undefined && object.packetFee !== null)
-      ? PacketFee.fromPartial(object.packetFee)
+    message.packet_fee = (object.packet_fee !== undefined && object.packet_fee !== null)
+      ? PacketFee.fromPartial(object.packet_fee)
       : undefined;
     return message;
   },

@@ -7,8 +7,8 @@ import { Input, Output, Params, SendEnabled } from "./bank";
 
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
-  fromAddress: string;
-  toAddress: string;
+  from_address: string;
+  to_address: string;
   amount: Coin[];
 }
 
@@ -67,14 +67,14 @@ export interface MsgUpdateParamsResponse {
 export interface MsgSetSendEnabled {
   authority: string;
   /** send_enabled is the list of entries to add or update. */
-  sendEnabled: SendEnabled[];
+  send_enabled: SendEnabled[];
   /**
    * use_default_for is a list of denoms that should use the params.default_send_enabled value.
    * Denoms listed here will have their SendEnabled entries deleted.
    * If a denom is included that doesn't have a SendEnabled entry,
    * it will be ignored.
    */
-  useDefaultFor: string[];
+  use_default_for: string[];
 }
 
 /**
@@ -86,18 +86,18 @@ export interface MsgSetSendEnabledResponse {
 }
 
 function createBaseMsgSend(): MsgSend {
-  return { fromAddress: "", toAddress: "", amount: [] };
+  return { from_address: "", to_address: "", amount: [] };
 }
 
 export const MsgSend = {
   $type: "cosmos.bank.v1beta1.MsgSend" as const,
 
   encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fromAddress !== "") {
-      writer.uint32(10).string(message.fromAddress);
+    if (message.from_address !== "") {
+      writer.uint32(10).string(message.from_address);
     }
-    if (message.toAddress !== "") {
-      writer.uint32(18).string(message.toAddress);
+    if (message.to_address !== "") {
+      writer.uint32(18).string(message.to_address);
     }
     for (const v of message.amount) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -117,14 +117,14 @@ export const MsgSend = {
             break;
           }
 
-          message.fromAddress = reader.string();
+          message.from_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.toAddress = reader.string();
+          message.to_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -144,19 +144,19 @@ export const MsgSend = {
 
   fromJSON(object: any): MsgSend {
     return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
+      from_address: isSet(object.from_address) ? String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? String(object.to_address) : "",
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
-    if (message.fromAddress !== "") {
-      obj.fromAddress = message.fromAddress;
+    if (message.from_address !== "") {
+      obj.from_address = message.from_address;
     }
-    if (message.toAddress !== "") {
-      obj.toAddress = message.toAddress;
+    if (message.to_address !== "") {
+      obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
@@ -169,8 +169,8 @@ export const MsgSend = {
   },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.fromAddress = object.fromAddress ?? "";
-    message.toAddress = object.toAddress ?? "";
+    message.from_address = object.from_address ?? "";
+    message.to_address = object.to_address ?? "";
     message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -466,7 +466,7 @@ export const MsgUpdateParamsResponse = {
 };
 
 function createBaseMsgSetSendEnabled(): MsgSetSendEnabled {
-  return { authority: "", sendEnabled: [], useDefaultFor: [] };
+  return { authority: "", send_enabled: [], use_default_for: [] };
 }
 
 export const MsgSetSendEnabled = {
@@ -476,10 +476,10 @@ export const MsgSetSendEnabled = {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
-    for (const v of message.sendEnabled) {
+    for (const v of message.send_enabled) {
       SendEnabled.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.useDefaultFor) {
+    for (const v of message.use_default_for) {
       writer.uint32(26).string(v!);
     }
     return writer;
@@ -504,14 +504,14 @@ export const MsgSetSendEnabled = {
             break;
           }
 
-          message.sendEnabled.push(SendEnabled.decode(reader, reader.uint32()));
+          message.send_enabled.push(SendEnabled.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.useDefaultFor.push(reader.string());
+          message.use_default_for.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -525,10 +525,10 @@ export const MsgSetSendEnabled = {
   fromJSON(object: any): MsgSetSendEnabled {
     return {
       authority: isSet(object.authority) ? String(object.authority) : "",
-      sendEnabled: Array.isArray(object?.sendEnabled)
-        ? object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e))
+      send_enabled: Array.isArray(object?.send_enabled)
+        ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
-      useDefaultFor: Array.isArray(object?.useDefaultFor) ? object.useDefaultFor.map((e: any) => String(e)) : [],
+      use_default_for: Array.isArray(object?.use_default_for) ? object.use_default_for.map((e: any) => String(e)) : [],
     };
   },
 
@@ -537,11 +537,11 @@ export const MsgSetSendEnabled = {
     if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.sendEnabled?.length) {
-      obj.sendEnabled = message.sendEnabled.map((e) => SendEnabled.toJSON(e));
+    if (message.send_enabled?.length) {
+      obj.send_enabled = message.send_enabled.map((e) => SendEnabled.toJSON(e));
     }
-    if (message.useDefaultFor?.length) {
-      obj.useDefaultFor = message.useDefaultFor;
+    if (message.use_default_for?.length) {
+      obj.use_default_for = message.use_default_for;
     }
     return obj;
   },
@@ -552,8 +552,8 @@ export const MsgSetSendEnabled = {
   fromPartial(object: DeepPartial<MsgSetSendEnabled>): MsgSetSendEnabled {
     const message = createBaseMsgSetSendEnabled();
     message.authority = object.authority ?? "";
-    message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
-    message.useDefaultFor = object.useDefaultFor?.map((e) => e) || [];
+    message.send_enabled = object.send_enabled?.map((e) => SendEnabled.fromPartial(e)) || [];
+    message.use_default_for = object.use_default_for?.map((e) => e) || [];
     return message;
   },
 };

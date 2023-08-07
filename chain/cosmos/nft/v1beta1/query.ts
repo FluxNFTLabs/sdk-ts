@@ -9,7 +9,7 @@ import { Class, NFT } from "./nft";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** owner is the owner address of the nft */
   owner: string;
 }
@@ -23,7 +23,7 @@ export interface QueryBalanceResponse {
 /** QueryOwnerRequest is the request type for the Query/Owner RPC method */
 export interface QueryOwnerRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the NFT */
   id: string;
 }
@@ -37,7 +37,7 @@ export interface QueryOwnerResponse {
 /** QuerySupplyRequest is the request type for the Query/Supply RPC method */
 export interface QuerySupplyRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
 }
 
 /** QuerySupplyResponse is the response type for the Query/Supply RPC method */
@@ -49,7 +49,7 @@ export interface QuerySupplyResponse {
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
 export interface QueryNFTsRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** owner is the owner address of the nft */
   owner: string;
   /** pagination defines an optional pagination for the request. */
@@ -67,7 +67,7 @@ export interface QueryNFTsResponse {
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the NFT */
   id: string;
 }
@@ -81,7 +81,7 @@ export interface QueryNFTResponse {
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
 }
 
 /** QueryClassResponse is the response type for the Query/Class RPC method */
@@ -105,15 +105,15 @@ export interface QueryClassesResponse {
 }
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
-  return { classId: "", owner: "" };
+  return { class_id: "", owner: "" };
 }
 
 export const QueryBalanceRequest = {
   $type: "cosmos.nft.v1beta1.QueryBalanceRequest" as const,
 
   encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
@@ -133,7 +133,7 @@ export const QueryBalanceRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -153,15 +153,15 @@ export const QueryBalanceRequest = {
 
   fromJSON(object: any): QueryBalanceRequest {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
 
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.owner !== "") {
       obj.owner = message.owner;
@@ -174,7 +174,7 @@ export const QueryBalanceRequest = {
   },
   fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     const message = createBaseQueryBalanceRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.owner = object.owner ?? "";
     return message;
   },
@@ -240,15 +240,15 @@ export const QueryBalanceResponse = {
 };
 
 function createBaseQueryOwnerRequest(): QueryOwnerRequest {
-  return { classId: "", id: "" };
+  return { class_id: "", id: "" };
 }
 
 export const QueryOwnerRequest = {
   $type: "cosmos.nft.v1beta1.QueryOwnerRequest" as const,
 
   encode(message: QueryOwnerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -268,7 +268,7 @@ export const QueryOwnerRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -288,15 +288,15 @@ export const QueryOwnerRequest = {
 
   fromJSON(object: any): QueryOwnerRequest {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
   },
 
   toJSON(message: QueryOwnerRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -309,7 +309,7 @@ export const QueryOwnerRequest = {
   },
   fromPartial(object: DeepPartial<QueryOwnerRequest>): QueryOwnerRequest {
     const message = createBaseQueryOwnerRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     return message;
   },
@@ -375,15 +375,15 @@ export const QueryOwnerResponse = {
 };
 
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
-  return { classId: "" };
+  return { class_id: "" };
 }
 
 export const QuerySupplyRequest = {
   $type: "cosmos.nft.v1beta1.QuerySupplyRequest" as const,
 
   encode(message: QuerySupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     return writer;
   },
@@ -400,7 +400,7 @@ export const QuerySupplyRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -412,13 +412,13 @@ export const QuerySupplyRequest = {
   },
 
   fromJSON(object: any): QuerySupplyRequest {
-    return { classId: isSet(object.classId) ? String(object.classId) : "" };
+    return { class_id: isSet(object.class_id) ? String(object.class_id) : "" };
   },
 
   toJSON(message: QuerySupplyRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     return obj;
   },
@@ -428,7 +428,7 @@ export const QuerySupplyRequest = {
   },
   fromPartial(object: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
     const message = createBaseQuerySupplyRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     return message;
   },
 };
@@ -493,15 +493,15 @@ export const QuerySupplyResponse = {
 };
 
 function createBaseQueryNFTsRequest(): QueryNFTsRequest {
-  return { classId: "", owner: "", pagination: undefined };
+  return { class_id: "", owner: "", pagination: undefined };
 }
 
 export const QueryNFTsRequest = {
   $type: "cosmos.nft.v1beta1.QueryNFTsRequest" as const,
 
   encode(message: QueryNFTsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
@@ -524,7 +524,7 @@ export const QueryNFTsRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -551,7 +551,7 @@ export const QueryNFTsRequest = {
 
   fromJSON(object: any): QueryNFTsRequest {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
@@ -559,8 +559,8 @@ export const QueryNFTsRequest = {
 
   toJSON(message: QueryNFTsRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.owner !== "") {
       obj.owner = message.owner;
@@ -576,7 +576,7 @@ export const QueryNFTsRequest = {
   },
   fromPartial(object: DeepPartial<QueryNFTsRequest>): QueryNFTsRequest {
     const message = createBaseQueryNFTsRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.owner = object.owner ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
@@ -664,15 +664,15 @@ export const QueryNFTsResponse = {
 };
 
 function createBaseQueryNFTRequest(): QueryNFTRequest {
-  return { classId: "", id: "" };
+  return { class_id: "", id: "" };
 }
 
 export const QueryNFTRequest = {
   $type: "cosmos.nft.v1beta1.QueryNFTRequest" as const,
 
   encode(message: QueryNFTRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -692,7 +692,7 @@ export const QueryNFTRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -712,15 +712,15 @@ export const QueryNFTRequest = {
 
   fromJSON(object: any): QueryNFTRequest {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
     };
   },
 
   toJSON(message: QueryNFTRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -733,7 +733,7 @@ export const QueryNFTRequest = {
   },
   fromPartial(object: DeepPartial<QueryNFTRequest>): QueryNFTRequest {
     const message = createBaseQueryNFTRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     return message;
   },
@@ -799,15 +799,15 @@ export const QueryNFTResponse = {
 };
 
 function createBaseQueryClassRequest(): QueryClassRequest {
-  return { classId: "" };
+  return { class_id: "" };
 }
 
 export const QueryClassRequest = {
   $type: "cosmos.nft.v1beta1.QueryClassRequest" as const,
 
   encode(message: QueryClassRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     return writer;
   },
@@ -824,7 +824,7 @@ export const QueryClassRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -836,13 +836,13 @@ export const QueryClassRequest = {
   },
 
   fromJSON(object: any): QueryClassRequest {
-    return { classId: isSet(object.classId) ? String(object.classId) : "" };
+    return { class_id: isSet(object.class_id) ? String(object.class_id) : "" };
   },
 
   toJSON(message: QueryClassRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     return obj;
   },
@@ -852,7 +852,7 @@ export const QueryClassRequest = {
   },
   fromPartial(object: DeepPartial<QueryClassRequest>): QueryClassRequest {
     const message = createBaseQueryClassRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     return message;
   },
 };

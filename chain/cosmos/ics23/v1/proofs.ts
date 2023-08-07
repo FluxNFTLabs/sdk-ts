@@ -222,8 +222,8 @@ export interface CommitmentProof {
  */
 export interface LeafOp {
   hash: HashOp;
-  prehashKey: HashOp;
-  prehashValue: HashOp;
+  prehash_key: HashOp;
+  prehash_value: HashOp;
   length: LengthOp;
   /**
    * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
@@ -272,20 +272,20 @@ export interface ProofSpec {
    * any field in the ExistenceProof must be the same as in this spec.
    * except Prefix, which is just the first bytes of prefix (spec can be longer)
    */
-  leafSpec: LeafOp | undefined;
-  innerSpec:
+  leaf_spec: LeafOp | undefined;
+  inner_spec:
     | InnerSpec
     | undefined;
   /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
-  maxDepth: number;
+  max_depth: number;
   /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
-  minDepth: number;
+  min_depth: number;
   /**
    * prehash_key_before_comparison is a flag that indicates whether to use the
    * prehash_key specified by LeafOp to compare lexical ordering of keys for
    * non-existence proofs.
    */
-  prehashKeyBeforeComparison: boolean;
+  prehash_key_before_comparison: boolean;
 }
 
 /**
@@ -304,12 +304,12 @@ export interface InnerSpec {
    * iavl tree is [0, 1] (left then right)
    * merk is [0, 2, 1] (left, right, here)
    */
-  childOrder: number[];
-  childSize: number;
-  minPrefixLength: number;
-  maxPrefixLength: number;
+  child_order: number[];
+  child_size: number;
+  min_prefix_length: number;
+  max_prefix_length: number;
   /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
-  emptyChild: Uint8Array;
+  empty_child: Uint8Array;
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
 }
@@ -327,7 +327,7 @@ export interface BatchEntry {
 
 export interface CompressedBatchProof {
   entries: CompressedBatchEntry[];
-  lookupInners: InnerOp[];
+  lookup_inners: InnerOp[];
 }
 
 /** Use BatchEntry not CommitmentProof, to avoid recursion */
@@ -669,7 +669,7 @@ export const CommitmentProof = {
 };
 
 function createBaseLeafOp(): LeafOp {
-  return { hash: 0, prehashKey: 0, prehashValue: 0, length: 0, prefix: new Uint8Array(0) };
+  return { hash: 0, prehash_key: 0, prehash_value: 0, length: 0, prefix: new Uint8Array(0) };
 }
 
 export const LeafOp = {
@@ -679,11 +679,11 @@ export const LeafOp = {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
     }
-    if (message.prehashKey !== 0) {
-      writer.uint32(16).int32(message.prehashKey);
+    if (message.prehash_key !== 0) {
+      writer.uint32(16).int32(message.prehash_key);
     }
-    if (message.prehashValue !== 0) {
-      writer.uint32(24).int32(message.prehashValue);
+    if (message.prehash_value !== 0) {
+      writer.uint32(24).int32(message.prehash_value);
     }
     if (message.length !== 0) {
       writer.uint32(32).int32(message.length);
@@ -713,14 +713,14 @@ export const LeafOp = {
             break;
           }
 
-          message.prehashKey = reader.int32() as any;
+          message.prehash_key = reader.int32() as any;
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.prehashValue = reader.int32() as any;
+          message.prehash_value = reader.int32() as any;
           continue;
         case 4:
           if (tag !== 32) {
@@ -748,8 +748,8 @@ export const LeafOp = {
   fromJSON(object: any): LeafOp {
     return {
       hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
-      prehashKey: isSet(object.prehashKey) ? hashOpFromJSON(object.prehashKey) : 0,
-      prehashValue: isSet(object.prehashValue) ? hashOpFromJSON(object.prehashValue) : 0,
+      prehash_key: isSet(object.prehash_key) ? hashOpFromJSON(object.prehash_key) : 0,
+      prehash_value: isSet(object.prehash_value) ? hashOpFromJSON(object.prehash_value) : 0,
       length: isSet(object.length) ? lengthOpFromJSON(object.length) : 0,
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(0),
     };
@@ -760,11 +760,11 @@ export const LeafOp = {
     if (message.hash !== 0) {
       obj.hash = hashOpToJSON(message.hash);
     }
-    if (message.prehashKey !== 0) {
-      obj.prehashKey = hashOpToJSON(message.prehashKey);
+    if (message.prehash_key !== 0) {
+      obj.prehash_key = hashOpToJSON(message.prehash_key);
     }
-    if (message.prehashValue !== 0) {
-      obj.prehashValue = hashOpToJSON(message.prehashValue);
+    if (message.prehash_value !== 0) {
+      obj.prehash_value = hashOpToJSON(message.prehash_value);
     }
     if (message.length !== 0) {
       obj.length = lengthOpToJSON(message.length);
@@ -781,8 +781,8 @@ export const LeafOp = {
   fromPartial(object: DeepPartial<LeafOp>): LeafOp {
     const message = createBaseLeafOp();
     message.hash = object.hash ?? 0;
-    message.prehashKey = object.prehashKey ?? 0;
-    message.prehashValue = object.prehashValue ?? 0;
+    message.prehash_key = object.prehash_key ?? 0;
+    message.prehash_value = object.prehash_value ?? 0;
     message.length = object.length ?? 0;
     message.prefix = object.prefix ?? new Uint8Array(0);
     return message;
@@ -881,27 +881,33 @@ export const InnerOp = {
 };
 
 function createBaseProofSpec(): ProofSpec {
-  return { leafSpec: undefined, innerSpec: undefined, maxDepth: 0, minDepth: 0, prehashKeyBeforeComparison: false };
+  return {
+    leaf_spec: undefined,
+    inner_spec: undefined,
+    max_depth: 0,
+    min_depth: 0,
+    prehash_key_before_comparison: false,
+  };
 }
 
 export const ProofSpec = {
   $type: "cosmos.ics23.v1.ProofSpec" as const,
 
   encode(message: ProofSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.leafSpec !== undefined) {
-      LeafOp.encode(message.leafSpec, writer.uint32(10).fork()).ldelim();
+    if (message.leaf_spec !== undefined) {
+      LeafOp.encode(message.leaf_spec, writer.uint32(10).fork()).ldelim();
     }
-    if (message.innerSpec !== undefined) {
-      InnerSpec.encode(message.innerSpec, writer.uint32(18).fork()).ldelim();
+    if (message.inner_spec !== undefined) {
+      InnerSpec.encode(message.inner_spec, writer.uint32(18).fork()).ldelim();
     }
-    if (message.maxDepth !== 0) {
-      writer.uint32(24).int32(message.maxDepth);
+    if (message.max_depth !== 0) {
+      writer.uint32(24).int32(message.max_depth);
     }
-    if (message.minDepth !== 0) {
-      writer.uint32(32).int32(message.minDepth);
+    if (message.min_depth !== 0) {
+      writer.uint32(32).int32(message.min_depth);
     }
-    if (message.prehashKeyBeforeComparison === true) {
-      writer.uint32(40).bool(message.prehashKeyBeforeComparison);
+    if (message.prehash_key_before_comparison === true) {
+      writer.uint32(40).bool(message.prehash_key_before_comparison);
     }
     return writer;
   },
@@ -918,35 +924,35 @@ export const ProofSpec = {
             break;
           }
 
-          message.leafSpec = LeafOp.decode(reader, reader.uint32());
+          message.leaf_spec = LeafOp.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.innerSpec = InnerSpec.decode(reader, reader.uint32());
+          message.inner_spec = InnerSpec.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.maxDepth = reader.int32();
+          message.max_depth = reader.int32();
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.minDepth = reader.int32();
+          message.min_depth = reader.int32();
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.prehashKeyBeforeComparison = reader.bool();
+          message.prehash_key_before_comparison = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -959,32 +965,32 @@ export const ProofSpec = {
 
   fromJSON(object: any): ProofSpec {
     return {
-      leafSpec: isSet(object.leafSpec) ? LeafOp.fromJSON(object.leafSpec) : undefined,
-      innerSpec: isSet(object.innerSpec) ? InnerSpec.fromJSON(object.innerSpec) : undefined,
-      maxDepth: isSet(object.maxDepth) ? Number(object.maxDepth) : 0,
-      minDepth: isSet(object.minDepth) ? Number(object.minDepth) : 0,
-      prehashKeyBeforeComparison: isSet(object.prehashKeyBeforeComparison)
-        ? Boolean(object.prehashKeyBeforeComparison)
+      leaf_spec: isSet(object.leaf_spec) ? LeafOp.fromJSON(object.leaf_spec) : undefined,
+      inner_spec: isSet(object.inner_spec) ? InnerSpec.fromJSON(object.inner_spec) : undefined,
+      max_depth: isSet(object.max_depth) ? Number(object.max_depth) : 0,
+      min_depth: isSet(object.min_depth) ? Number(object.min_depth) : 0,
+      prehash_key_before_comparison: isSet(object.prehash_key_before_comparison)
+        ? Boolean(object.prehash_key_before_comparison)
         : false,
     };
   },
 
   toJSON(message: ProofSpec): unknown {
     const obj: any = {};
-    if (message.leafSpec !== undefined) {
-      obj.leafSpec = LeafOp.toJSON(message.leafSpec);
+    if (message.leaf_spec !== undefined) {
+      obj.leaf_spec = LeafOp.toJSON(message.leaf_spec);
     }
-    if (message.innerSpec !== undefined) {
-      obj.innerSpec = InnerSpec.toJSON(message.innerSpec);
+    if (message.inner_spec !== undefined) {
+      obj.inner_spec = InnerSpec.toJSON(message.inner_spec);
     }
-    if (message.maxDepth !== 0) {
-      obj.maxDepth = Math.round(message.maxDepth);
+    if (message.max_depth !== 0) {
+      obj.max_depth = Math.round(message.max_depth);
     }
-    if (message.minDepth !== 0) {
-      obj.minDepth = Math.round(message.minDepth);
+    if (message.min_depth !== 0) {
+      obj.min_depth = Math.round(message.min_depth);
     }
-    if (message.prehashKeyBeforeComparison === true) {
-      obj.prehashKeyBeforeComparison = message.prehashKeyBeforeComparison;
+    if (message.prehash_key_before_comparison === true) {
+      obj.prehash_key_before_comparison = message.prehash_key_before_comparison;
     }
     return obj;
   },
@@ -994,26 +1000,26 @@ export const ProofSpec = {
   },
   fromPartial(object: DeepPartial<ProofSpec>): ProofSpec {
     const message = createBaseProofSpec();
-    message.leafSpec = (object.leafSpec !== undefined && object.leafSpec !== null)
-      ? LeafOp.fromPartial(object.leafSpec)
+    message.leaf_spec = (object.leaf_spec !== undefined && object.leaf_spec !== null)
+      ? LeafOp.fromPartial(object.leaf_spec)
       : undefined;
-    message.innerSpec = (object.innerSpec !== undefined && object.innerSpec !== null)
-      ? InnerSpec.fromPartial(object.innerSpec)
+    message.inner_spec = (object.inner_spec !== undefined && object.inner_spec !== null)
+      ? InnerSpec.fromPartial(object.inner_spec)
       : undefined;
-    message.maxDepth = object.maxDepth ?? 0;
-    message.minDepth = object.minDepth ?? 0;
-    message.prehashKeyBeforeComparison = object.prehashKeyBeforeComparison ?? false;
+    message.max_depth = object.max_depth ?? 0;
+    message.min_depth = object.min_depth ?? 0;
+    message.prehash_key_before_comparison = object.prehash_key_before_comparison ?? false;
     return message;
   },
 };
 
 function createBaseInnerSpec(): InnerSpec {
   return {
-    childOrder: [],
-    childSize: 0,
-    minPrefixLength: 0,
-    maxPrefixLength: 0,
-    emptyChild: new Uint8Array(0),
+    child_order: [],
+    child_size: 0,
+    min_prefix_length: 0,
+    max_prefix_length: 0,
+    empty_child: new Uint8Array(0),
     hash: 0,
   };
 }
@@ -1023,21 +1029,21 @@ export const InnerSpec = {
 
   encode(message: InnerSpec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
-    for (const v of message.childOrder) {
+    for (const v of message.child_order) {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.childSize !== 0) {
-      writer.uint32(16).int32(message.childSize);
+    if (message.child_size !== 0) {
+      writer.uint32(16).int32(message.child_size);
     }
-    if (message.minPrefixLength !== 0) {
-      writer.uint32(24).int32(message.minPrefixLength);
+    if (message.min_prefix_length !== 0) {
+      writer.uint32(24).int32(message.min_prefix_length);
     }
-    if (message.maxPrefixLength !== 0) {
-      writer.uint32(32).int32(message.maxPrefixLength);
+    if (message.max_prefix_length !== 0) {
+      writer.uint32(32).int32(message.max_prefix_length);
     }
-    if (message.emptyChild.length !== 0) {
-      writer.uint32(42).bytes(message.emptyChild);
+    if (message.empty_child.length !== 0) {
+      writer.uint32(42).bytes(message.empty_child);
     }
     if (message.hash !== 0) {
       writer.uint32(48).int32(message.hash);
@@ -1054,7 +1060,7 @@ export const InnerSpec = {
       switch (tag >>> 3) {
         case 1:
           if (tag === 8) {
-            message.childOrder.push(reader.int32());
+            message.child_order.push(reader.int32());
 
             continue;
           }
@@ -1062,7 +1068,7 @@ export const InnerSpec = {
           if (tag === 10) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.childOrder.push(reader.int32());
+              message.child_order.push(reader.int32());
             }
 
             continue;
@@ -1074,28 +1080,28 @@ export const InnerSpec = {
             break;
           }
 
-          message.childSize = reader.int32();
+          message.child_size = reader.int32();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.minPrefixLength = reader.int32();
+          message.min_prefix_length = reader.int32();
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.maxPrefixLength = reader.int32();
+          message.max_prefix_length = reader.int32();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.emptyChild = reader.bytes();
+          message.empty_child = reader.bytes();
           continue;
         case 6:
           if (tag !== 48) {
@@ -1115,31 +1121,31 @@ export const InnerSpec = {
 
   fromJSON(object: any): InnerSpec {
     return {
-      childOrder: Array.isArray(object?.childOrder) ? object.childOrder.map((e: any) => Number(e)) : [],
-      childSize: isSet(object.childSize) ? Number(object.childSize) : 0,
-      minPrefixLength: isSet(object.minPrefixLength) ? Number(object.minPrefixLength) : 0,
-      maxPrefixLength: isSet(object.maxPrefixLength) ? Number(object.maxPrefixLength) : 0,
-      emptyChild: isSet(object.emptyChild) ? bytesFromBase64(object.emptyChild) : new Uint8Array(0),
+      child_order: Array.isArray(object?.child_order) ? object.child_order.map((e: any) => Number(e)) : [],
+      child_size: isSet(object.child_size) ? Number(object.child_size) : 0,
+      min_prefix_length: isSet(object.min_prefix_length) ? Number(object.min_prefix_length) : 0,
+      max_prefix_length: isSet(object.max_prefix_length) ? Number(object.max_prefix_length) : 0,
+      empty_child: isSet(object.empty_child) ? bytesFromBase64(object.empty_child) : new Uint8Array(0),
       hash: isSet(object.hash) ? hashOpFromJSON(object.hash) : 0,
     };
   },
 
   toJSON(message: InnerSpec): unknown {
     const obj: any = {};
-    if (message.childOrder?.length) {
-      obj.childOrder = message.childOrder.map((e) => Math.round(e));
+    if (message.child_order?.length) {
+      obj.child_order = message.child_order.map((e) => Math.round(e));
     }
-    if (message.childSize !== 0) {
-      obj.childSize = Math.round(message.childSize);
+    if (message.child_size !== 0) {
+      obj.child_size = Math.round(message.child_size);
     }
-    if (message.minPrefixLength !== 0) {
-      obj.minPrefixLength = Math.round(message.minPrefixLength);
+    if (message.min_prefix_length !== 0) {
+      obj.min_prefix_length = Math.round(message.min_prefix_length);
     }
-    if (message.maxPrefixLength !== 0) {
-      obj.maxPrefixLength = Math.round(message.maxPrefixLength);
+    if (message.max_prefix_length !== 0) {
+      obj.max_prefix_length = Math.round(message.max_prefix_length);
     }
-    if (message.emptyChild.length !== 0) {
-      obj.emptyChild = base64FromBytes(message.emptyChild);
+    if (message.empty_child.length !== 0) {
+      obj.empty_child = base64FromBytes(message.empty_child);
     }
     if (message.hash !== 0) {
       obj.hash = hashOpToJSON(message.hash);
@@ -1152,11 +1158,11 @@ export const InnerSpec = {
   },
   fromPartial(object: DeepPartial<InnerSpec>): InnerSpec {
     const message = createBaseInnerSpec();
-    message.childOrder = object.childOrder?.map((e) => e) || [];
-    message.childSize = object.childSize ?? 0;
-    message.minPrefixLength = object.minPrefixLength ?? 0;
-    message.maxPrefixLength = object.maxPrefixLength ?? 0;
-    message.emptyChild = object.emptyChild ?? new Uint8Array(0);
+    message.child_order = object.child_order?.map((e) => e) || [];
+    message.child_size = object.child_size ?? 0;
+    message.min_prefix_length = object.min_prefix_length ?? 0;
+    message.max_prefix_length = object.max_prefix_length ?? 0;
+    message.empty_child = object.empty_child ?? new Uint8Array(0);
     message.hash = object.hash ?? 0;
     return message;
   },
@@ -1302,7 +1308,7 @@ export const BatchEntry = {
 };
 
 function createBaseCompressedBatchProof(): CompressedBatchProof {
-  return { entries: [], lookupInners: [] };
+  return { entries: [], lookup_inners: [] };
 }
 
 export const CompressedBatchProof = {
@@ -1312,7 +1318,7 @@ export const CompressedBatchProof = {
     for (const v of message.entries) {
       CompressedBatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.lookupInners) {
+    for (const v of message.lookup_inners) {
       InnerOp.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -1337,7 +1343,7 @@ export const CompressedBatchProof = {
             break;
           }
 
-          message.lookupInners.push(InnerOp.decode(reader, reader.uint32()));
+          message.lookup_inners.push(InnerOp.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1351,7 +1357,9 @@ export const CompressedBatchProof = {
   fromJSON(object: any): CompressedBatchProof {
     return {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => CompressedBatchEntry.fromJSON(e)) : [],
-      lookupInners: Array.isArray(object?.lookupInners) ? object.lookupInners.map((e: any) => InnerOp.fromJSON(e)) : [],
+      lookup_inners: Array.isArray(object?.lookup_inners)
+        ? object.lookup_inners.map((e: any) => InnerOp.fromJSON(e))
+        : [],
     };
   },
 
@@ -1360,8 +1368,8 @@ export const CompressedBatchProof = {
     if (message.entries?.length) {
       obj.entries = message.entries.map((e) => CompressedBatchEntry.toJSON(e));
     }
-    if (message.lookupInners?.length) {
-      obj.lookupInners = message.lookupInners.map((e) => InnerOp.toJSON(e));
+    if (message.lookup_inners?.length) {
+      obj.lookup_inners = message.lookup_inners.map((e) => InnerOp.toJSON(e));
     }
     return obj;
   },
@@ -1372,7 +1380,7 @@ export const CompressedBatchProof = {
   fromPartial(object: DeepPartial<CompressedBatchProof>): CompressedBatchProof {
     const message = createBaseCompressedBatchProof();
     message.entries = object.entries?.map((e) => CompressedBatchEntry.fromPartial(e)) || [];
-    message.lookupInners = object.lookupInners?.map((e) => InnerOp.fromPartial(e)) || [];
+    message.lookup_inners = object.lookup_inners?.map((e) => InnerOp.fromPartial(e)) || [];
     return message;
   },
 };

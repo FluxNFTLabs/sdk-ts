@@ -69,7 +69,7 @@ export interface MaxFundsLimit {
  */
 export interface CombinedLimit {
   /** Remaining number that is decremented on each execution */
-  callsRemaining: string;
+  calls_remaining: string;
   /** Amounts is the maximal amount of tokens transferable to the contract. */
   amounts: Coin[];
 }
@@ -432,15 +432,15 @@ export const MaxFundsLimit = {
 };
 
 function createBaseCombinedLimit(): CombinedLimit {
-  return { callsRemaining: "0", amounts: [] };
+  return { calls_remaining: "0", amounts: [] };
 }
 
 export const CombinedLimit = {
   $type: "cosmwasm.wasm.v1.CombinedLimit" as const,
 
   encode(message: CombinedLimit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.callsRemaining !== "0") {
-      writer.uint32(8).uint64(message.callsRemaining);
+    if (message.calls_remaining !== "0") {
+      writer.uint32(8).uint64(message.calls_remaining);
     }
     for (const v of message.amounts) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -460,7 +460,7 @@ export const CombinedLimit = {
             break;
           }
 
-          message.callsRemaining = longToString(reader.uint64() as Long);
+          message.calls_remaining = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -480,15 +480,15 @@ export const CombinedLimit = {
 
   fromJSON(object: any): CombinedLimit {
     return {
-      callsRemaining: isSet(object.callsRemaining) ? String(object.callsRemaining) : "0",
+      calls_remaining: isSet(object.calls_remaining) ? String(object.calls_remaining) : "0",
       amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: CombinedLimit): unknown {
     const obj: any = {};
-    if (message.callsRemaining !== "0") {
-      obj.callsRemaining = message.callsRemaining;
+    if (message.calls_remaining !== "0") {
+      obj.calls_remaining = message.calls_remaining;
     }
     if (message.amounts?.length) {
       obj.amounts = message.amounts.map((e) => Coin.toJSON(e));
@@ -501,7 +501,7 @@ export const CombinedLimit = {
   },
   fromPartial(object: DeepPartial<CombinedLimit>): CombinedLimit {
     const message = createBaseCombinedLimit();
-    message.callsRemaining = object.callsRemaining ?? "0";
+    message.calls_remaining = object.calls_remaining ?? "0";
     message.amounts = object.amounts?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },

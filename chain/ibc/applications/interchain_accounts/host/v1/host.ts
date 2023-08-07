@@ -7,23 +7,23 @@ import _m0 from "protobufjs/minimal";
  */
 export interface Params {
   /** host_enabled enables or disables the host submodule. */
-  hostEnabled: boolean;
+  host_enabled: boolean;
   /** allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain. */
-  allowMessages: string[];
+  allow_messages: string[];
 }
 
 function createBaseParams(): Params {
-  return { hostEnabled: false, allowMessages: [] };
+  return { host_enabled: false, allow_messages: [] };
 }
 
 export const Params = {
   $type: "ibc.applications.interchain_accounts.host.v1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.hostEnabled === true) {
-      writer.uint32(8).bool(message.hostEnabled);
+    if (message.host_enabled === true) {
+      writer.uint32(8).bool(message.host_enabled);
     }
-    for (const v of message.allowMessages) {
+    for (const v of message.allow_messages) {
       writer.uint32(18).string(v!);
     }
     return writer;
@@ -41,14 +41,14 @@ export const Params = {
             break;
           }
 
-          message.hostEnabled = reader.bool();
+          message.host_enabled = reader.bool();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.allowMessages.push(reader.string());
+          message.allow_messages.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -61,18 +61,18 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      hostEnabled: isSet(object.hostEnabled) ? Boolean(object.hostEnabled) : false,
-      allowMessages: Array.isArray(object?.allowMessages) ? object.allowMessages.map((e: any) => String(e)) : [],
+      host_enabled: isSet(object.host_enabled) ? Boolean(object.host_enabled) : false,
+      allow_messages: Array.isArray(object?.allow_messages) ? object.allow_messages.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.hostEnabled === true) {
-      obj.hostEnabled = message.hostEnabled;
+    if (message.host_enabled === true) {
+      obj.host_enabled = message.host_enabled;
     }
-    if (message.allowMessages?.length) {
-      obj.allowMessages = message.allowMessages;
+    if (message.allow_messages?.length) {
+      obj.allow_messages = message.allow_messages;
     }
     return obj;
   },
@@ -82,8 +82,8 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.hostEnabled = object.hostEnabled ?? false;
-    message.allowMessages = object.allowMessages?.map((e) => e) || [];
+    message.host_enabled = object.host_enabled ?? false;
+    message.allow_messages = object.allow_messages?.map((e) => e) || [];
     return message;
   },
 };

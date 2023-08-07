@@ -40,7 +40,7 @@ export interface QueryAnnualProvisionsRequest {
  */
 export interface QueryAnnualProvisionsResponse {
   /** annual_provisions is the current minting annual provisions value. */
-  annualProvisions: Uint8Array;
+  annual_provisions: Uint8Array;
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -299,15 +299,15 @@ export const QueryAnnualProvisionsRequest = {
 };
 
 function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsResponse {
-  return { annualProvisions: new Uint8Array(0) };
+  return { annual_provisions: new Uint8Array(0) };
 }
 
 export const QueryAnnualProvisionsResponse = {
   $type: "cosmos.mint.v1beta1.QueryAnnualProvisionsResponse" as const,
 
   encode(message: QueryAnnualProvisionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.annualProvisions.length !== 0) {
-      writer.uint32(10).bytes(message.annualProvisions);
+    if (message.annual_provisions.length !== 0) {
+      writer.uint32(10).bytes(message.annual_provisions);
     }
     return writer;
   },
@@ -324,7 +324,7 @@ export const QueryAnnualProvisionsResponse = {
             break;
           }
 
-          message.annualProvisions = reader.bytes();
+          message.annual_provisions = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -337,14 +337,16 @@ export const QueryAnnualProvisionsResponse = {
 
   fromJSON(object: any): QueryAnnualProvisionsResponse {
     return {
-      annualProvisions: isSet(object.annualProvisions) ? bytesFromBase64(object.annualProvisions) : new Uint8Array(0),
+      annual_provisions: isSet(object.annual_provisions)
+        ? bytesFromBase64(object.annual_provisions)
+        : new Uint8Array(0),
     };
   },
 
   toJSON(message: QueryAnnualProvisionsResponse): unknown {
     const obj: any = {};
-    if (message.annualProvisions.length !== 0) {
-      obj.annualProvisions = base64FromBytes(message.annualProvisions);
+    if (message.annual_provisions.length !== 0) {
+      obj.annual_provisions = base64FromBytes(message.annual_provisions);
     }
     return obj;
   },
@@ -354,7 +356,7 @@ export const QueryAnnualProvisionsResponse = {
   },
   fromPartial(object: DeepPartial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {
     const message = createBaseQueryAnnualProvisionsResponse();
-    message.annualProvisions = object.annualProvisions ?? new Uint8Array(0);
+    message.annual_provisions = object.annual_provisions ?? new Uint8Array(0);
     return message;
   },
 };

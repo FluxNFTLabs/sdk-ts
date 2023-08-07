@@ -4,7 +4,7 @@ import _m0 from "protobufjs/minimal";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
   /** primary_key defines the primary key for the table. */
-  primaryKey:
+  primary_key:
     | PrimaryKeyDescriptor
     | undefined;
   /** index defines one or more secondary indexes. */
@@ -57,7 +57,7 @@ export interface PrimaryKeyDescriptor {
    * auto-incrementing integer. If this is set to true fields must only
    * contain one field of that is of type uint64.
    */
-  autoIncrement: boolean;
+  auto_increment: boolean;
 }
 
 /** PrimaryKeyDescriptor describes a table secondary index. */
@@ -95,15 +95,15 @@ export interface SingletonDescriptor {
 }
 
 function createBaseTableDescriptor(): TableDescriptor {
-  return { primaryKey: undefined, index: [], id: 0 };
+  return { primary_key: undefined, index: [], id: 0 };
 }
 
 export const TableDescriptor = {
   $type: "cosmos.orm.v1.TableDescriptor" as const,
 
   encode(message: TableDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.primaryKey !== undefined) {
-      PrimaryKeyDescriptor.encode(message.primaryKey, writer.uint32(10).fork()).ldelim();
+    if (message.primary_key !== undefined) {
+      PrimaryKeyDescriptor.encode(message.primary_key, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.index) {
       SecondaryIndexDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -126,7 +126,7 @@ export const TableDescriptor = {
             break;
           }
 
-          message.primaryKey = PrimaryKeyDescriptor.decode(reader, reader.uint32());
+          message.primary_key = PrimaryKeyDescriptor.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -153,7 +153,7 @@ export const TableDescriptor = {
 
   fromJSON(object: any): TableDescriptor {
     return {
-      primaryKey: isSet(object.primaryKey) ? PrimaryKeyDescriptor.fromJSON(object.primaryKey) : undefined,
+      primary_key: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromJSON(object.primary_key) : undefined,
       index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e)) : [],
       id: isSet(object.id) ? Number(object.id) : 0,
     };
@@ -161,8 +161,8 @@ export const TableDescriptor = {
 
   toJSON(message: TableDescriptor): unknown {
     const obj: any = {};
-    if (message.primaryKey !== undefined) {
-      obj.primaryKey = PrimaryKeyDescriptor.toJSON(message.primaryKey);
+    if (message.primary_key !== undefined) {
+      obj.primary_key = PrimaryKeyDescriptor.toJSON(message.primary_key);
     }
     if (message.index?.length) {
       obj.index = message.index.map((e) => SecondaryIndexDescriptor.toJSON(e));
@@ -178,8 +178,8 @@ export const TableDescriptor = {
   },
   fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
     const message = createBaseTableDescriptor();
-    message.primaryKey = (object.primaryKey !== undefined && object.primaryKey !== null)
-      ? PrimaryKeyDescriptor.fromPartial(object.primaryKey)
+    message.primary_key = (object.primary_key !== undefined && object.primary_key !== null)
+      ? PrimaryKeyDescriptor.fromPartial(object.primary_key)
       : undefined;
     message.index = object.index?.map((e) => SecondaryIndexDescriptor.fromPartial(e)) || [];
     message.id = object.id ?? 0;
@@ -188,7 +188,7 @@ export const TableDescriptor = {
 };
 
 function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
-  return { fields: "", autoIncrement: false };
+  return { fields: "", auto_increment: false };
 }
 
 export const PrimaryKeyDescriptor = {
@@ -198,8 +198,8 @@ export const PrimaryKeyDescriptor = {
     if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
-    if (message.autoIncrement === true) {
-      writer.uint32(16).bool(message.autoIncrement);
+    if (message.auto_increment === true) {
+      writer.uint32(16).bool(message.auto_increment);
     }
     return writer;
   },
@@ -223,7 +223,7 @@ export const PrimaryKeyDescriptor = {
             break;
           }
 
-          message.autoIncrement = reader.bool();
+          message.auto_increment = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -237,7 +237,7 @@ export const PrimaryKeyDescriptor = {
   fromJSON(object: any): PrimaryKeyDescriptor {
     return {
       fields: isSet(object.fields) ? String(object.fields) : "",
-      autoIncrement: isSet(object.autoIncrement) ? Boolean(object.autoIncrement) : false,
+      auto_increment: isSet(object.auto_increment) ? Boolean(object.auto_increment) : false,
     };
   },
 
@@ -246,8 +246,8 @@ export const PrimaryKeyDescriptor = {
     if (message.fields !== "") {
       obj.fields = message.fields;
     }
-    if (message.autoIncrement === true) {
-      obj.autoIncrement = message.autoIncrement;
+    if (message.auto_increment === true) {
+      obj.auto_increment = message.auto_increment;
     }
     return obj;
   },
@@ -258,7 +258,7 @@ export const PrimaryKeyDescriptor = {
   fromPartial(object: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
     const message = createBasePrimaryKeyDescriptor();
     message.fields = object.fields ?? "";
-    message.autoIncrement = object.autoIncrement ?? false;
+    message.auto_increment = object.auto_increment ?? false;
     return message;
   },
 };

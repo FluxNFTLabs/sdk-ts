@@ -9,28 +9,28 @@ import { Coin } from "../../base/v1beta1/coin";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-  spendLimit: Coin[];
+  spend_limit: Coin[];
   /**
    * allow_list specifies an optional list of addresses to whom the grantee can send tokens on behalf of the
    * granter. If omitted, any recipient is allowed.
    *
    * Since: cosmos-sdk 0.47
    */
-  allowList: string[];
+  allow_list: string[];
 }
 
 function createBaseSendAuthorization(): SendAuthorization {
-  return { spendLimit: [], allowList: [] };
+  return { spend_limit: [], allow_list: [] };
 }
 
 export const SendAuthorization = {
   $type: "cosmos.bank.v1beta1.SendAuthorization" as const,
 
   encode(message: SendAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.spendLimit) {
+    for (const v of message.spend_limit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.allowList) {
+    for (const v of message.allow_list) {
       writer.uint32(18).string(v!);
     }
     return writer;
@@ -48,14 +48,14 @@ export const SendAuthorization = {
             break;
           }
 
-          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
+          message.spend_limit.push(Coin.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.allowList.push(reader.string());
+          message.allow_list.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -68,18 +68,18 @@ export const SendAuthorization = {
 
   fromJSON(object: any): SendAuthorization {
     return {
-      spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : [],
-      allowList: Array.isArray(object?.allowList) ? object.allowList.map((e: any) => String(e)) : [],
+      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromJSON(e)) : [],
+      allow_list: Array.isArray(object?.allow_list) ? object.allow_list.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: SendAuthorization): unknown {
     const obj: any = {};
-    if (message.spendLimit?.length) {
-      obj.spendLimit = message.spendLimit.map((e) => Coin.toJSON(e));
+    if (message.spend_limit?.length) {
+      obj.spend_limit = message.spend_limit.map((e) => Coin.toJSON(e));
     }
-    if (message.allowList?.length) {
-      obj.allowList = message.allowList;
+    if (message.allow_list?.length) {
+      obj.allow_list = message.allow_list;
     }
     return obj;
   },
@@ -89,8 +89,8 @@ export const SendAuthorization = {
   },
   fromPartial(object: DeepPartial<SendAuthorization>): SendAuthorization {
     const message = createBaseSendAuthorization();
-    message.spendLimit = object.spendLimit?.map((e) => Coin.fromPartial(e)) || [];
-    message.allowList = object.allowList?.map((e) => e) || [];
+    message.spend_limit = object.spend_limit?.map((e) => Coin.fromPartial(e)) || [];
+    message.allow_list = object.allow_list?.map((e) => e) || [];
     return message;
   },
 };

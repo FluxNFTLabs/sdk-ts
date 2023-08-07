@@ -8,7 +8,7 @@ export interface BIP44Params {
   /** purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation */
   purpose: number;
   /** coin_type is a constant that improves privacy */
-  coinType: number;
+  coin_type: number;
   /** account splits the key space into independent user identities */
   account: number;
   /**
@@ -17,11 +17,11 @@ export interface BIP44Params {
    */
   change: boolean;
   /** address_index is used as child index in BIP32 derivation */
-  addressIndex: number;
+  address_index: number;
 }
 
 function createBaseBIP44Params(): BIP44Params {
-  return { purpose: 0, coinType: 0, account: 0, change: false, addressIndex: 0 };
+  return { purpose: 0, coin_type: 0, account: 0, change: false, address_index: 0 };
 }
 
 export const BIP44Params = {
@@ -31,8 +31,8 @@ export const BIP44Params = {
     if (message.purpose !== 0) {
       writer.uint32(8).uint32(message.purpose);
     }
-    if (message.coinType !== 0) {
-      writer.uint32(16).uint32(message.coinType);
+    if (message.coin_type !== 0) {
+      writer.uint32(16).uint32(message.coin_type);
     }
     if (message.account !== 0) {
       writer.uint32(24).uint32(message.account);
@@ -40,8 +40,8 @@ export const BIP44Params = {
     if (message.change === true) {
       writer.uint32(32).bool(message.change);
     }
-    if (message.addressIndex !== 0) {
-      writer.uint32(40).uint32(message.addressIndex);
+    if (message.address_index !== 0) {
+      writer.uint32(40).uint32(message.address_index);
     }
     return writer;
   },
@@ -65,7 +65,7 @@ export const BIP44Params = {
             break;
           }
 
-          message.coinType = reader.uint32();
+          message.coin_type = reader.uint32();
           continue;
         case 3:
           if (tag !== 24) {
@@ -86,7 +86,7 @@ export const BIP44Params = {
             break;
           }
 
-          message.addressIndex = reader.uint32();
+          message.address_index = reader.uint32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -100,10 +100,10 @@ export const BIP44Params = {
   fromJSON(object: any): BIP44Params {
     return {
       purpose: isSet(object.purpose) ? Number(object.purpose) : 0,
-      coinType: isSet(object.coinType) ? Number(object.coinType) : 0,
+      coin_type: isSet(object.coin_type) ? Number(object.coin_type) : 0,
       account: isSet(object.account) ? Number(object.account) : 0,
       change: isSet(object.change) ? Boolean(object.change) : false,
-      addressIndex: isSet(object.addressIndex) ? Number(object.addressIndex) : 0,
+      address_index: isSet(object.address_index) ? Number(object.address_index) : 0,
     };
   },
 
@@ -112,8 +112,8 @@ export const BIP44Params = {
     if (message.purpose !== 0) {
       obj.purpose = Math.round(message.purpose);
     }
-    if (message.coinType !== 0) {
-      obj.coinType = Math.round(message.coinType);
+    if (message.coin_type !== 0) {
+      obj.coin_type = Math.round(message.coin_type);
     }
     if (message.account !== 0) {
       obj.account = Math.round(message.account);
@@ -121,8 +121,8 @@ export const BIP44Params = {
     if (message.change === true) {
       obj.change = message.change;
     }
-    if (message.addressIndex !== 0) {
-      obj.addressIndex = Math.round(message.addressIndex);
+    if (message.address_index !== 0) {
+      obj.address_index = Math.round(message.address_index);
     }
     return obj;
   },
@@ -133,10 +133,10 @@ export const BIP44Params = {
   fromPartial(object: DeepPartial<BIP44Params>): BIP44Params {
     const message = createBaseBIP44Params();
     message.purpose = object.purpose ?? 0;
-    message.coinType = object.coinType ?? 0;
+    message.coin_type = object.coin_type ?? 0;
     message.account = object.account ?? 0;
     message.change = object.change ?? false;
-    message.addressIndex = object.addressIndex ?? 0;
+    message.address_index = object.address_index ?? 0;
     return message;
   },
 };

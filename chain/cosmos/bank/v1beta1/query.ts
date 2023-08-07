@@ -202,7 +202,7 @@ export interface DenomOwner {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryDenomOwnersResponse {
-  denomOwners: DenomOwner[];
+  denom_owners: DenomOwner[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -228,7 +228,7 @@ export interface QuerySendEnabledRequest {
  * Since: cosmos-sdk 0.47
  */
 export interface QuerySendEnabledResponse {
-  sendEnabled: SendEnabled[];
+  send_enabled: SendEnabled[];
   /**
    * pagination defines the pagination in the response. This field is only
    * populated if the denoms field in the request is empty.
@@ -1603,14 +1603,14 @@ export const DenomOwner = {
 };
 
 function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
-  return { denomOwners: [], pagination: undefined };
+  return { denom_owners: [], pagination: undefined };
 }
 
 export const QueryDenomOwnersResponse = {
   $type: "cosmos.bank.v1beta1.QueryDenomOwnersResponse" as const,
 
   encode(message: QueryDenomOwnersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.denomOwners) {
+    for (const v of message.denom_owners) {
       DenomOwner.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -1631,7 +1631,7 @@ export const QueryDenomOwnersResponse = {
             break;
           }
 
-          message.denomOwners.push(DenomOwner.decode(reader, reader.uint32()));
+          message.denom_owners.push(DenomOwner.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -1651,15 +1651,17 @@ export const QueryDenomOwnersResponse = {
 
   fromJSON(object: any): QueryDenomOwnersResponse {
     return {
-      denomOwners: Array.isArray(object?.denomOwners) ? object.denomOwners.map((e: any) => DenomOwner.fromJSON(e)) : [],
+      denom_owners: Array.isArray(object?.denom_owners)
+        ? object.denom_owners.map((e: any) => DenomOwner.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryDenomOwnersResponse): unknown {
     const obj: any = {};
-    if (message.denomOwners?.length) {
-      obj.denomOwners = message.denomOwners.map((e) => DenomOwner.toJSON(e));
+    if (message.denom_owners?.length) {
+      obj.denom_owners = message.denom_owners.map((e) => DenomOwner.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1672,7 +1674,7 @@ export const QueryDenomOwnersResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomOwnersResponse>): QueryDenomOwnersResponse {
     const message = createBaseQueryDenomOwnersResponse();
-    message.denomOwners = object.denomOwners?.map((e) => DenomOwner.fromPartial(e)) || [];
+    message.denom_owners = object.denom_owners?.map((e) => DenomOwner.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -1759,14 +1761,14 @@ export const QuerySendEnabledRequest = {
 };
 
 function createBaseQuerySendEnabledResponse(): QuerySendEnabledResponse {
-  return { sendEnabled: [], pagination: undefined };
+  return { send_enabled: [], pagination: undefined };
 }
 
 export const QuerySendEnabledResponse = {
   $type: "cosmos.bank.v1beta1.QuerySendEnabledResponse" as const,
 
   encode(message: QuerySendEnabledResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.sendEnabled) {
+    for (const v of message.send_enabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -1787,7 +1789,7 @@ export const QuerySendEnabledResponse = {
             break;
           }
 
-          message.sendEnabled.push(SendEnabled.decode(reader, reader.uint32()));
+          message.send_enabled.push(SendEnabled.decode(reader, reader.uint32()));
           continue;
         case 99:
           if (tag !== 794) {
@@ -1807,8 +1809,8 @@ export const QuerySendEnabledResponse = {
 
   fromJSON(object: any): QuerySendEnabledResponse {
     return {
-      sendEnabled: Array.isArray(object?.sendEnabled)
-        ? object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e))
+      send_enabled: Array.isArray(object?.send_enabled)
+        ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -1816,8 +1818,8 @@ export const QuerySendEnabledResponse = {
 
   toJSON(message: QuerySendEnabledResponse): unknown {
     const obj: any = {};
-    if (message.sendEnabled?.length) {
-      obj.sendEnabled = message.sendEnabled.map((e) => SendEnabled.toJSON(e));
+    if (message.send_enabled?.length) {
+      obj.send_enabled = message.send_enabled.map((e) => SendEnabled.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1830,7 +1832,7 @@ export const QuerySendEnabledResponse = {
   },
   fromPartial(object: DeepPartial<QuerySendEnabledResponse>): QuerySendEnabledResponse {
     const message = createBaseQuerySendEnabledResponse();
-    message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
+    message.send_enabled = object.send_enabled?.map((e) => SendEnabled.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;

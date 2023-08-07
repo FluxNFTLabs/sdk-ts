@@ -21,7 +21,7 @@ export interface QueryDenomTraceRequest {
  */
 export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
-  denomTrace: DenomTrace | undefined;
+  denom_trace: DenomTrace | undefined;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface QueryDenomTracesRequest {
  */
 export interface QueryDenomTracesResponse {
   /** denom_traces returns all denominations trace information. */
-  denomTraces: DenomTrace[];
+  denom_traces: DenomTrace[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -75,15 +75,15 @@ export interface QueryDenomHashResponse {
 /** QueryEscrowAddressRequest is the request type for the EscrowAddress RPC method. */
 export interface QueryEscrowAddressRequest {
   /** unique port identifier */
-  portId: string;
+  port_id: string;
   /** unique channel identifier */
-  channelId: string;
+  channel_id: string;
 }
 
 /** QueryEscrowAddressResponse is the response type of the EscrowAddress RPC method. */
 export interface QueryEscrowAddressResponse {
   /** the escrow account address */
-  escrowAddress: string;
+  escrow_address: string;
 }
 
 /** QueryTotalEscrowForDenomRequest is the request type for TotalEscrowForDenom RPC method. */
@@ -156,15 +156,15 @@ export const QueryDenomTraceRequest = {
 };
 
 function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
-  return { denomTrace: undefined };
+  return { denom_trace: undefined };
 }
 
 export const QueryDenomTraceResponse = {
   $type: "ibc.applications.transfer.v1.QueryDenomTraceResponse" as const,
 
   encode(message: QueryDenomTraceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.denomTrace !== undefined) {
-      DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
+    if (message.denom_trace !== undefined) {
+      DenomTrace.encode(message.denom_trace, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -181,7 +181,7 @@ export const QueryDenomTraceResponse = {
             break;
           }
 
-          message.denomTrace = DenomTrace.decode(reader, reader.uint32());
+          message.denom_trace = DenomTrace.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -193,13 +193,13 @@ export const QueryDenomTraceResponse = {
   },
 
   fromJSON(object: any): QueryDenomTraceResponse {
-    return { denomTrace: isSet(object.denomTrace) ? DenomTrace.fromJSON(object.denomTrace) : undefined };
+    return { denom_trace: isSet(object.denom_trace) ? DenomTrace.fromJSON(object.denom_trace) : undefined };
   },
 
   toJSON(message: QueryDenomTraceResponse): unknown {
     const obj: any = {};
-    if (message.denomTrace !== undefined) {
-      obj.denomTrace = DenomTrace.toJSON(message.denomTrace);
+    if (message.denom_trace !== undefined) {
+      obj.denom_trace = DenomTrace.toJSON(message.denom_trace);
     }
     return obj;
   },
@@ -209,8 +209,8 @@ export const QueryDenomTraceResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomTraceResponse>): QueryDenomTraceResponse {
     const message = createBaseQueryDenomTraceResponse();
-    message.denomTrace = (object.denomTrace !== undefined && object.denomTrace !== null)
-      ? DenomTrace.fromPartial(object.denomTrace)
+    message.denom_trace = (object.denom_trace !== undefined && object.denom_trace !== null)
+      ? DenomTrace.fromPartial(object.denom_trace)
       : undefined;
     return message;
   },
@@ -278,14 +278,14 @@ export const QueryDenomTracesRequest = {
 };
 
 function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
-  return { denomTraces: [], pagination: undefined };
+  return { denom_traces: [], pagination: undefined };
 }
 
 export const QueryDenomTracesResponse = {
   $type: "ibc.applications.transfer.v1.QueryDenomTracesResponse" as const,
 
   encode(message: QueryDenomTracesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.denomTraces) {
+    for (const v of message.denom_traces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -306,7 +306,7 @@ export const QueryDenomTracesResponse = {
             break;
           }
 
-          message.denomTraces.push(DenomTrace.decode(reader, reader.uint32()));
+          message.denom_traces.push(DenomTrace.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -326,15 +326,17 @@ export const QueryDenomTracesResponse = {
 
   fromJSON(object: any): QueryDenomTracesResponse {
     return {
-      denomTraces: Array.isArray(object?.denomTraces) ? object.denomTraces.map((e: any) => DenomTrace.fromJSON(e)) : [],
+      denom_traces: Array.isArray(object?.denom_traces)
+        ? object.denom_traces.map((e: any) => DenomTrace.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryDenomTracesResponse): unknown {
     const obj: any = {};
-    if (message.denomTraces?.length) {
-      obj.denomTraces = message.denomTraces.map((e) => DenomTrace.toJSON(e));
+    if (message.denom_traces?.length) {
+      obj.denom_traces = message.denom_traces.map((e) => DenomTrace.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -347,7 +349,7 @@ export const QueryDenomTracesResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomTracesResponse>): QueryDenomTracesResponse {
     const message = createBaseQueryDenomTracesResponse();
-    message.denomTraces = object.denomTraces?.map((e) => DenomTrace.fromPartial(e)) || [];
+    message.denom_traces = object.denom_traces?.map((e) => DenomTrace.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -580,18 +582,18 @@ export const QueryDenomHashResponse = {
 };
 
 function createBaseQueryEscrowAddressRequest(): QueryEscrowAddressRequest {
-  return { portId: "", channelId: "" };
+  return { port_id: "", channel_id: "" };
 }
 
 export const QueryEscrowAddressRequest = {
   $type: "ibc.applications.transfer.v1.QueryEscrowAddressRequest" as const,
 
   encode(message: QueryEscrowAddressRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.portId !== "") {
-      writer.uint32(10).string(message.portId);
+    if (message.port_id !== "") {
+      writer.uint32(10).string(message.port_id);
     }
-    if (message.channelId !== "") {
-      writer.uint32(18).string(message.channelId);
+    if (message.channel_id !== "") {
+      writer.uint32(18).string(message.channel_id);
     }
     return writer;
   },
@@ -608,14 +610,14 @@ export const QueryEscrowAddressRequest = {
             break;
           }
 
-          message.portId = reader.string();
+          message.port_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.channelId = reader.string();
+          message.channel_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -628,18 +630,18 @@ export const QueryEscrowAddressRequest = {
 
   fromJSON(object: any): QueryEscrowAddressRequest {
     return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
     };
   },
 
   toJSON(message: QueryEscrowAddressRequest): unknown {
     const obj: any = {};
-    if (message.portId !== "") {
-      obj.portId = message.portId;
+    if (message.port_id !== "") {
+      obj.port_id = message.port_id;
     }
-    if (message.channelId !== "") {
-      obj.channelId = message.channelId;
+    if (message.channel_id !== "") {
+      obj.channel_id = message.channel_id;
     }
     return obj;
   },
@@ -649,22 +651,22 @@ export const QueryEscrowAddressRequest = {
   },
   fromPartial(object: DeepPartial<QueryEscrowAddressRequest>): QueryEscrowAddressRequest {
     const message = createBaseQueryEscrowAddressRequest();
-    message.portId = object.portId ?? "";
-    message.channelId = object.channelId ?? "";
+    message.port_id = object.port_id ?? "";
+    message.channel_id = object.channel_id ?? "";
     return message;
   },
 };
 
 function createBaseQueryEscrowAddressResponse(): QueryEscrowAddressResponse {
-  return { escrowAddress: "" };
+  return { escrow_address: "" };
 }
 
 export const QueryEscrowAddressResponse = {
   $type: "ibc.applications.transfer.v1.QueryEscrowAddressResponse" as const,
 
   encode(message: QueryEscrowAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.escrowAddress !== "") {
-      writer.uint32(10).string(message.escrowAddress);
+    if (message.escrow_address !== "") {
+      writer.uint32(10).string(message.escrow_address);
     }
     return writer;
   },
@@ -681,7 +683,7 @@ export const QueryEscrowAddressResponse = {
             break;
           }
 
-          message.escrowAddress = reader.string();
+          message.escrow_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -693,13 +695,13 @@ export const QueryEscrowAddressResponse = {
   },
 
   fromJSON(object: any): QueryEscrowAddressResponse {
-    return { escrowAddress: isSet(object.escrowAddress) ? String(object.escrowAddress) : "" };
+    return { escrow_address: isSet(object.escrow_address) ? String(object.escrow_address) : "" };
   },
 
   toJSON(message: QueryEscrowAddressResponse): unknown {
     const obj: any = {};
-    if (message.escrowAddress !== "") {
-      obj.escrowAddress = message.escrowAddress;
+    if (message.escrow_address !== "") {
+      obj.escrow_address = message.escrow_address;
     }
     return obj;
   },
@@ -709,7 +711,7 @@ export const QueryEscrowAddressResponse = {
   },
   fromPartial(object: DeepPartial<QueryEscrowAddressResponse>): QueryEscrowAddressResponse {
     const message = createBaseQueryEscrowAddressResponse();
-    message.escrowAddress = object.escrowAddress ?? "";
+    message.escrow_address = object.escrow_address ?? "";
     return message;
   },
 };

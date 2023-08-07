@@ -6,11 +6,11 @@ import { PacketId } from "../../../core/channel/v1/channel";
 /** Fee defines the ICS29 receive, acknowledgement and timeout fees */
 export interface Fee {
   /** the packet receive fee */
-  recvFee: Coin[];
+  recv_fee: Coin[];
   /** the packet acknowledgement fee */
-  ackFee: Coin[];
+  ack_fee: Coin[];
   /** the packet timeout fee */
-  timeoutFee: Coin[];
+  timeout_fee: Coin[];
 }
 
 /** PacketFee contains ICS29 relayer fees, refund address and optional list of permitted relayers */
@@ -20,7 +20,7 @@ export interface PacketFee {
     | Fee
     | undefined;
   /** the refund address for unspent fees */
-  refundAddress: string;
+  refund_address: string;
   /** optional list of relayers permitted to receive fees */
   relayers: string[];
 }
@@ -28,34 +28,34 @@ export interface PacketFee {
 /** PacketFees contains a list of type PacketFee */
 export interface PacketFees {
   /** list of packet fees */
-  packetFees: PacketFee[];
+  packet_fees: PacketFee[];
 }
 
 /** IdentifiedPacketFees contains a list of type PacketFee and associated PacketId */
 export interface IdentifiedPacketFees {
   /** unique packet identifier comprised of the channel ID, port ID and sequence */
-  packetId:
+  packet_id:
     | PacketId
     | undefined;
   /** list of packet fees */
-  packetFees: PacketFee[];
+  packet_fees: PacketFee[];
 }
 
 function createBaseFee(): Fee {
-  return { recvFee: [], ackFee: [], timeoutFee: [] };
+  return { recv_fee: [], ack_fee: [], timeout_fee: [] };
 }
 
 export const Fee = {
   $type: "ibc.applications.fee.v1.Fee" as const,
 
   encode(message: Fee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.recvFee) {
+    for (const v of message.recv_fee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.ackFee) {
+    for (const v of message.ack_fee) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.timeoutFee) {
+    for (const v of message.timeout_fee) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
@@ -73,21 +73,21 @@ export const Fee = {
             break;
           }
 
-          message.recvFee.push(Coin.decode(reader, reader.uint32()));
+          message.recv_fee.push(Coin.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.ackFee.push(Coin.decode(reader, reader.uint32()));
+          message.ack_fee.push(Coin.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.timeoutFee.push(Coin.decode(reader, reader.uint32()));
+          message.timeout_fee.push(Coin.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -100,22 +100,22 @@ export const Fee = {
 
   fromJSON(object: any): Fee {
     return {
-      recvFee: Array.isArray(object?.recvFee) ? object.recvFee.map((e: any) => Coin.fromJSON(e)) : [],
-      ackFee: Array.isArray(object?.ackFee) ? object.ackFee.map((e: any) => Coin.fromJSON(e)) : [],
-      timeoutFee: Array.isArray(object?.timeoutFee) ? object.timeoutFee.map((e: any) => Coin.fromJSON(e)) : [],
+      recv_fee: Array.isArray(object?.recv_fee) ? object.recv_fee.map((e: any) => Coin.fromJSON(e)) : [],
+      ack_fee: Array.isArray(object?.ack_fee) ? object.ack_fee.map((e: any) => Coin.fromJSON(e)) : [],
+      timeout_fee: Array.isArray(object?.timeout_fee) ? object.timeout_fee.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Fee): unknown {
     const obj: any = {};
-    if (message.recvFee?.length) {
-      obj.recvFee = message.recvFee.map((e) => Coin.toJSON(e));
+    if (message.recv_fee?.length) {
+      obj.recv_fee = message.recv_fee.map((e) => Coin.toJSON(e));
     }
-    if (message.ackFee?.length) {
-      obj.ackFee = message.ackFee.map((e) => Coin.toJSON(e));
+    if (message.ack_fee?.length) {
+      obj.ack_fee = message.ack_fee.map((e) => Coin.toJSON(e));
     }
-    if (message.timeoutFee?.length) {
-      obj.timeoutFee = message.timeoutFee.map((e) => Coin.toJSON(e));
+    if (message.timeout_fee?.length) {
+      obj.timeout_fee = message.timeout_fee.map((e) => Coin.toJSON(e));
     }
     return obj;
   },
@@ -125,15 +125,15 @@ export const Fee = {
   },
   fromPartial(object: DeepPartial<Fee>): Fee {
     const message = createBaseFee();
-    message.recvFee = object.recvFee?.map((e) => Coin.fromPartial(e)) || [];
-    message.ackFee = object.ackFee?.map((e) => Coin.fromPartial(e)) || [];
-    message.timeoutFee = object.timeoutFee?.map((e) => Coin.fromPartial(e)) || [];
+    message.recv_fee = object.recv_fee?.map((e) => Coin.fromPartial(e)) || [];
+    message.ack_fee = object.ack_fee?.map((e) => Coin.fromPartial(e)) || [];
+    message.timeout_fee = object.timeout_fee?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBasePacketFee(): PacketFee {
-  return { fee: undefined, refundAddress: "", relayers: [] };
+  return { fee: undefined, refund_address: "", relayers: [] };
 }
 
 export const PacketFee = {
@@ -143,8 +143,8 @@ export const PacketFee = {
     if (message.fee !== undefined) {
       Fee.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
-    if (message.refundAddress !== "") {
-      writer.uint32(18).string(message.refundAddress);
+    if (message.refund_address !== "") {
+      writer.uint32(18).string(message.refund_address);
     }
     for (const v of message.relayers) {
       writer.uint32(26).string(v!);
@@ -171,7 +171,7 @@ export const PacketFee = {
             break;
           }
 
-          message.refundAddress = reader.string();
+          message.refund_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -192,7 +192,7 @@ export const PacketFee = {
   fromJSON(object: any): PacketFee {
     return {
       fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
-      refundAddress: isSet(object.refundAddress) ? String(object.refundAddress) : "",
+      refund_address: isSet(object.refund_address) ? String(object.refund_address) : "",
       relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : [],
     };
   },
@@ -202,8 +202,8 @@ export const PacketFee = {
     if (message.fee !== undefined) {
       obj.fee = Fee.toJSON(message.fee);
     }
-    if (message.refundAddress !== "") {
-      obj.refundAddress = message.refundAddress;
+    if (message.refund_address !== "") {
+      obj.refund_address = message.refund_address;
     }
     if (message.relayers?.length) {
       obj.relayers = message.relayers;
@@ -217,21 +217,21 @@ export const PacketFee = {
   fromPartial(object: DeepPartial<PacketFee>): PacketFee {
     const message = createBasePacketFee();
     message.fee = (object.fee !== undefined && object.fee !== null) ? Fee.fromPartial(object.fee) : undefined;
-    message.refundAddress = object.refundAddress ?? "";
+    message.refund_address = object.refund_address ?? "";
     message.relayers = object.relayers?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBasePacketFees(): PacketFees {
-  return { packetFees: [] };
+  return { packet_fees: [] };
 }
 
 export const PacketFees = {
   $type: "ibc.applications.fee.v1.PacketFees" as const,
 
   encode(message: PacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.packetFees) {
+    for (const v of message.packet_fees) {
       PacketFee.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
@@ -249,7 +249,7 @@ export const PacketFees = {
             break;
           }
 
-          message.packetFees.push(PacketFee.decode(reader, reader.uint32()));
+          message.packet_fees.push(PacketFee.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -262,14 +262,14 @@ export const PacketFees = {
 
   fromJSON(object: any): PacketFees {
     return {
-      packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : [],
+      packet_fees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: PacketFees): unknown {
     const obj: any = {};
-    if (message.packetFees?.length) {
-      obj.packetFees = message.packetFees.map((e) => PacketFee.toJSON(e));
+    if (message.packet_fees?.length) {
+      obj.packet_fees = message.packet_fees.map((e) => PacketFee.toJSON(e));
     }
     return obj;
   },
@@ -279,23 +279,23 @@ export const PacketFees = {
   },
   fromPartial(object: DeepPartial<PacketFees>): PacketFees {
     const message = createBasePacketFees();
-    message.packetFees = object.packetFees?.map((e) => PacketFee.fromPartial(e)) || [];
+    message.packet_fees = object.packet_fees?.map((e) => PacketFee.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseIdentifiedPacketFees(): IdentifiedPacketFees {
-  return { packetId: undefined, packetFees: [] };
+  return { packet_id: undefined, packet_fees: [] };
 }
 
 export const IdentifiedPacketFees = {
   $type: "ibc.applications.fee.v1.IdentifiedPacketFees" as const,
 
   encode(message: IdentifiedPacketFees, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.packetId !== undefined) {
-      PacketId.encode(message.packetId, writer.uint32(10).fork()).ldelim();
+    if (message.packet_id !== undefined) {
+      PacketId.encode(message.packet_id, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.packetFees) {
+    for (const v of message.packet_fees) {
       PacketFee.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -313,14 +313,14 @@ export const IdentifiedPacketFees = {
             break;
           }
 
-          message.packetId = PacketId.decode(reader, reader.uint32());
+          message.packet_id = PacketId.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.packetFees.push(PacketFee.decode(reader, reader.uint32()));
+          message.packet_fees.push(PacketFee.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -333,18 +333,18 @@ export const IdentifiedPacketFees = {
 
   fromJSON(object: any): IdentifiedPacketFees {
     return {
-      packetId: isSet(object.packetId) ? PacketId.fromJSON(object.packetId) : undefined,
-      packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : [],
+      packet_id: isSet(object.packet_id) ? PacketId.fromJSON(object.packet_id) : undefined,
+      packet_fees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: IdentifiedPacketFees): unknown {
     const obj: any = {};
-    if (message.packetId !== undefined) {
-      obj.packetId = PacketId.toJSON(message.packetId);
+    if (message.packet_id !== undefined) {
+      obj.packet_id = PacketId.toJSON(message.packet_id);
     }
-    if (message.packetFees?.length) {
-      obj.packetFees = message.packetFees.map((e) => PacketFee.toJSON(e));
+    if (message.packet_fees?.length) {
+      obj.packet_fees = message.packet_fees.map((e) => PacketFee.toJSON(e));
     }
     return obj;
   },
@@ -354,10 +354,10 @@ export const IdentifiedPacketFees = {
   },
   fromPartial(object: DeepPartial<IdentifiedPacketFees>): IdentifiedPacketFees {
     const message = createBaseIdentifiedPacketFees();
-    message.packetId = (object.packetId !== undefined && object.packetId !== null)
-      ? PacketId.fromPartial(object.packetId)
+    message.packet_id = (object.packet_id !== undefined && object.packet_id !== null)
+      ? PacketId.fromPartial(object.packet_id)
       : undefined;
-    message.packetFees = object.packetFees?.map((e) => PacketFee.fromPartial(e)) || [];
+    message.packet_fees = object.packet_fees?.map((e) => PacketFee.fromPartial(e)) || [];
     return message;
   },
 };

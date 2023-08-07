@@ -8,7 +8,7 @@ export interface GenesisOwners {
   /** index is the index of the capability owner. */
   index: string;
   /** index_owners are the owners at the given index. */
-  indexOwners: CapabilityOwners | undefined;
+  index_owners: CapabilityOwners | undefined;
 }
 
 /** GenesisState defines the capability module's genesis state. */
@@ -23,7 +23,7 @@ export interface GenesisState {
 }
 
 function createBaseGenesisOwners(): GenesisOwners {
-  return { index: "0", indexOwners: undefined };
+  return { index: "0", index_owners: undefined };
 }
 
 export const GenesisOwners = {
@@ -33,8 +33,8 @@ export const GenesisOwners = {
     if (message.index !== "0") {
       writer.uint32(8).uint64(message.index);
     }
-    if (message.indexOwners !== undefined) {
-      CapabilityOwners.encode(message.indexOwners, writer.uint32(18).fork()).ldelim();
+    if (message.index_owners !== undefined) {
+      CapabilityOwners.encode(message.index_owners, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -58,7 +58,7 @@ export const GenesisOwners = {
             break;
           }
 
-          message.indexOwners = CapabilityOwners.decode(reader, reader.uint32());
+          message.index_owners = CapabilityOwners.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -72,7 +72,7 @@ export const GenesisOwners = {
   fromJSON(object: any): GenesisOwners {
     return {
       index: isSet(object.index) ? String(object.index) : "0",
-      indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined,
+      index_owners: isSet(object.index_owners) ? CapabilityOwners.fromJSON(object.index_owners) : undefined,
     };
   },
 
@@ -81,8 +81,8 @@ export const GenesisOwners = {
     if (message.index !== "0") {
       obj.index = message.index;
     }
-    if (message.indexOwners !== undefined) {
-      obj.indexOwners = CapabilityOwners.toJSON(message.indexOwners);
+    if (message.index_owners !== undefined) {
+      obj.index_owners = CapabilityOwners.toJSON(message.index_owners);
     }
     return obj;
   },
@@ -93,8 +93,8 @@ export const GenesisOwners = {
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
     message.index = object.index ?? "0";
-    message.indexOwners = (object.indexOwners !== undefined && object.indexOwners !== null)
-      ? CapabilityOwners.fromPartial(object.indexOwners)
+    message.index_owners = (object.index_owners !== undefined && object.index_owners !== null)
+      ? CapabilityOwners.fromPartial(object.index_owners)
       : undefined;
     return message;
   },

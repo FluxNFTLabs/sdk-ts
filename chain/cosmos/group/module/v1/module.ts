@@ -9,29 +9,29 @@ export interface Module {
    * max_execution_period defines the max duration after a proposal's voting period ends that members can send a MsgExec
    * to execute the proposal.
    */
-  maxExecutionPeriod:
+  max_execution_period:
     | Duration
     | undefined;
   /**
    * max_metadata_len defines the max length of the metadata bytes field for various entities within the group module.
    * Defaults to 255 if not explicitly set.
    */
-  maxMetadataLen: string;
+  max_metadata_len: string;
 }
 
 function createBaseModule(): Module {
-  return { maxExecutionPeriod: undefined, maxMetadataLen: "0" };
+  return { max_execution_period: undefined, max_metadata_len: "0" };
 }
 
 export const Module = {
   $type: "cosmos.group.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.maxExecutionPeriod !== undefined) {
-      Duration.encode(message.maxExecutionPeriod, writer.uint32(10).fork()).ldelim();
+    if (message.max_execution_period !== undefined) {
+      Duration.encode(message.max_execution_period, writer.uint32(10).fork()).ldelim();
     }
-    if (message.maxMetadataLen !== "0") {
-      writer.uint32(16).uint64(message.maxMetadataLen);
+    if (message.max_metadata_len !== "0") {
+      writer.uint32(16).uint64(message.max_metadata_len);
     }
     return writer;
   },
@@ -48,14 +48,14 @@ export const Module = {
             break;
           }
 
-          message.maxExecutionPeriod = Duration.decode(reader, reader.uint32());
+          message.max_execution_period = Duration.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.maxMetadataLen = longToString(reader.uint64() as Long);
+          message.max_metadata_len = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -68,18 +68,20 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      maxExecutionPeriod: isSet(object.maxExecutionPeriod) ? Duration.fromJSON(object.maxExecutionPeriod) : undefined,
-      maxMetadataLen: isSet(object.maxMetadataLen) ? String(object.maxMetadataLen) : "0",
+      max_execution_period: isSet(object.max_execution_period)
+        ? Duration.fromJSON(object.max_execution_period)
+        : undefined,
+      max_metadata_len: isSet(object.max_metadata_len) ? String(object.max_metadata_len) : "0",
     };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.maxExecutionPeriod !== undefined) {
-      obj.maxExecutionPeriod = Duration.toJSON(message.maxExecutionPeriod);
+    if (message.max_execution_period !== undefined) {
+      obj.max_execution_period = Duration.toJSON(message.max_execution_period);
     }
-    if (message.maxMetadataLen !== "0") {
-      obj.maxMetadataLen = message.maxMetadataLen;
+    if (message.max_metadata_len !== "0") {
+      obj.max_metadata_len = message.max_metadata_len;
     }
     return obj;
   },
@@ -89,10 +91,10 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.maxExecutionPeriod = (object.maxExecutionPeriod !== undefined && object.maxExecutionPeriod !== null)
-      ? Duration.fromPartial(object.maxExecutionPeriod)
+    message.max_execution_period = (object.max_execution_period !== undefined && object.max_execution_period !== null)
+      ? Duration.fromPartial(object.max_execution_period)
       : undefined;
-    message.maxMetadataLen = object.maxMetadataLen ?? "0";
+    message.max_metadata_len = object.max_metadata_len ?? "0";
     return message;
   },
 };

@@ -5,7 +5,7 @@ import _m0 from "protobufjs/minimal";
 import { NFT } from "../../fnft/v1beta1/nft";
 
 export interface GetNFTsRequest {
-  classId: string;
+  class_id: string;
   id: string;
   owner: string;
 }
@@ -15,15 +15,15 @@ export interface GetNFTsResponse {
 }
 
 function createBaseGetNFTsRequest(): GetNFTsRequest {
-  return { classId: "", id: "", owner: "" };
+  return { class_id: "", id: "", owner: "" };
 }
 
 export const GetNFTsRequest = {
   $type: "flux.indexer.fnft.GetNFTsRequest" as const,
 
   encode(message: GetNFTsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -46,7 +46,7 @@ export const GetNFTsRequest = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -73,7 +73,7 @@ export const GetNFTsRequest = {
 
   fromJSON(object: any): GetNFTsRequest {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
@@ -81,8 +81,8 @@ export const GetNFTsRequest = {
 
   toJSON(message: GetNFTsRequest): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -98,7 +98,7 @@ export const GetNFTsRequest = {
   },
   fromPartial(object: DeepPartial<GetNFTsRequest>): GetNFTsRequest {
     const message = createBaseGetNFTsRequest();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     return message;

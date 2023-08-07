@@ -15,7 +15,7 @@ export interface Class {
   /** uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
   uri: string;
   /** uri_hash is a hash of the document pointed by uri. Optional */
-  uriHash: string;
+  uri_hash: string;
   /** data is the app specific metadata of the NFT class. Optional */
   data: Any | undefined;
 }
@@ -23,19 +23,19 @@ export interface Class {
 /** NFT defines the NFT. */
 export interface NFT {
   /** class_id associated with the NFT, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the NFT */
   id: string;
   /** uri for the NFT metadata stored off chain */
   uri: string;
   /** uri_hash is a hash of the document pointed by uri */
-  uriHash: string;
+  uri_hash: string;
   /** data is an app specific data of the NFT. Optional */
   data: Any | undefined;
 }
 
 function createBaseClass(): Class {
-  return { id: "", name: "", symbol: "", description: "", uri: "", uriHash: "", data: undefined };
+  return { id: "", name: "", symbol: "", description: "", uri: "", uri_hash: "", data: undefined };
 }
 
 export const Class = {
@@ -57,8 +57,8 @@ export const Class = {
     if (message.uri !== "") {
       writer.uint32(42).string(message.uri);
     }
-    if (message.uriHash !== "") {
-      writer.uint32(50).string(message.uriHash);
+    if (message.uri_hash !== "") {
+      writer.uint32(50).string(message.uri_hash);
     }
     if (message.data !== undefined) {
       Any.encode(message.data, writer.uint32(58).fork()).ldelim();
@@ -113,7 +113,7 @@ export const Class = {
             break;
           }
 
-          message.uriHash = reader.string();
+          message.uri_hash = reader.string();
           continue;
         case 7:
           if (tag !== 58) {
@@ -138,7 +138,7 @@ export const Class = {
       symbol: isSet(object.symbol) ? String(object.symbol) : "",
       description: isSet(object.description) ? String(object.description) : "",
       uri: isSet(object.uri) ? String(object.uri) : "",
-      uriHash: isSet(object.uriHash) ? String(object.uriHash) : "",
+      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -160,8 +160,8 @@ export const Class = {
     if (message.uri !== "") {
       obj.uri = message.uri;
     }
-    if (message.uriHash !== "") {
-      obj.uriHash = message.uriHash;
+    if (message.uri_hash !== "") {
+      obj.uri_hash = message.uri_hash;
     }
     if (message.data !== undefined) {
       obj.data = Any.toJSON(message.data);
@@ -179,22 +179,22 @@ export const Class = {
     message.symbol = object.symbol ?? "";
     message.description = object.description ?? "";
     message.uri = object.uri ?? "";
-    message.uriHash = object.uriHash ?? "";
+    message.uri_hash = object.uri_hash ?? "";
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },
 };
 
 function createBaseNFT(): NFT {
-  return { classId: "", id: "", uri: "", uriHash: "", data: undefined };
+  return { class_id: "", id: "", uri: "", uri_hash: "", data: undefined };
 }
 
 export const NFT = {
   $type: "cosmos.nft.v1beta1.NFT" as const,
 
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -202,8 +202,8 @@ export const NFT = {
     if (message.uri !== "") {
       writer.uint32(26).string(message.uri);
     }
-    if (message.uriHash !== "") {
-      writer.uint32(34).string(message.uriHash);
+    if (message.uri_hash !== "") {
+      writer.uint32(34).string(message.uri_hash);
     }
     if (message.data !== undefined) {
       Any.encode(message.data, writer.uint32(82).fork()).ldelim();
@@ -223,7 +223,7 @@ export const NFT = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -244,7 +244,7 @@ export const NFT = {
             break;
           }
 
-          message.uriHash = reader.string();
+          message.uri_hash = reader.string();
           continue;
         case 10:
           if (tag !== 82) {
@@ -264,18 +264,18 @@ export const NFT = {
 
   fromJSON(object: any): NFT {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       uri: isSet(object.uri) ? String(object.uri) : "",
-      uriHash: isSet(object.uriHash) ? String(object.uriHash) : "",
+      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
 
   toJSON(message: NFT): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -283,8 +283,8 @@ export const NFT = {
     if (message.uri !== "") {
       obj.uri = message.uri;
     }
-    if (message.uriHash !== "") {
-      obj.uriHash = message.uriHash;
+    if (message.uri_hash !== "") {
+      obj.uri_hash = message.uri_hash;
     }
     if (message.data !== undefined) {
       obj.data = Any.toJSON(message.data);
@@ -297,10 +297,10 @@ export const NFT = {
   },
   fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.uri = object.uri ?? "";
-    message.uriHash = object.uriHash ?? "";
+    message.uri_hash = object.uri_hash ?? "";
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },

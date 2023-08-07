@@ -10,8 +10,8 @@ export interface PexAddrs {
 }
 
 export interface Message {
-  pexRequest?: PexRequest | undefined;
-  pexAddrs?: PexAddrs | undefined;
+  pex_request?: PexRequest | undefined;
+  pex_addrs?: PexAddrs | undefined;
 }
 
 function createBasePexRequest(): PexRequest {
@@ -119,18 +119,18 @@ export const PexAddrs = {
 };
 
 function createBaseMessage(): Message {
-  return { pexRequest: undefined, pexAddrs: undefined };
+  return { pex_request: undefined, pex_addrs: undefined };
 }
 
 export const Message = {
   $type: "tendermint.p2p.Message" as const,
 
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pexRequest !== undefined) {
-      PexRequest.encode(message.pexRequest, writer.uint32(10).fork()).ldelim();
+    if (message.pex_request !== undefined) {
+      PexRequest.encode(message.pex_request, writer.uint32(10).fork()).ldelim();
     }
-    if (message.pexAddrs !== undefined) {
-      PexAddrs.encode(message.pexAddrs, writer.uint32(18).fork()).ldelim();
+    if (message.pex_addrs !== undefined) {
+      PexAddrs.encode(message.pex_addrs, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -147,14 +147,14 @@ export const Message = {
             break;
           }
 
-          message.pexRequest = PexRequest.decode(reader, reader.uint32());
+          message.pex_request = PexRequest.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.pexAddrs = PexAddrs.decode(reader, reader.uint32());
+          message.pex_addrs = PexAddrs.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -167,18 +167,18 @@ export const Message = {
 
   fromJSON(object: any): Message {
     return {
-      pexRequest: isSet(object.pexRequest) ? PexRequest.fromJSON(object.pexRequest) : undefined,
-      pexAddrs: isSet(object.pexAddrs) ? PexAddrs.fromJSON(object.pexAddrs) : undefined,
+      pex_request: isSet(object.pex_request) ? PexRequest.fromJSON(object.pex_request) : undefined,
+      pex_addrs: isSet(object.pex_addrs) ? PexAddrs.fromJSON(object.pex_addrs) : undefined,
     };
   },
 
   toJSON(message: Message): unknown {
     const obj: any = {};
-    if (message.pexRequest !== undefined) {
-      obj.pexRequest = PexRequest.toJSON(message.pexRequest);
+    if (message.pex_request !== undefined) {
+      obj.pex_request = PexRequest.toJSON(message.pex_request);
     }
-    if (message.pexAddrs !== undefined) {
-      obj.pexAddrs = PexAddrs.toJSON(message.pexAddrs);
+    if (message.pex_addrs !== undefined) {
+      obj.pex_addrs = PexAddrs.toJSON(message.pex_addrs);
     }
     return obj;
   },
@@ -188,11 +188,11 @@ export const Message = {
   },
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
-    message.pexRequest = (object.pexRequest !== undefined && object.pexRequest !== null)
-      ? PexRequest.fromPartial(object.pexRequest)
+    message.pex_request = (object.pex_request !== undefined && object.pex_request !== null)
+      ? PexRequest.fromPartial(object.pex_request)
       : undefined;
-    message.pexAddrs = (object.pexAddrs !== undefined && object.pexAddrs !== null)
-      ? PexAddrs.fromPartial(object.pexAddrs)
+    message.pex_addrs = (object.pex_addrs !== undefined && object.pex_addrs !== null)
+      ? PexAddrs.fromPartial(object.pex_addrs)
       : undefined;
     return message;
   },

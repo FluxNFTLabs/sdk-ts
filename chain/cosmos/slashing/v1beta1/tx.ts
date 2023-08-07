@@ -6,7 +6,7 @@ import { Params } from "./slashing";
 
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
-  validatorAddr: string;
+  validator_addr: string;
 }
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
@@ -39,15 +39,15 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgUnjail(): MsgUnjail {
-  return { validatorAddr: "" };
+  return { validator_addr: "" };
 }
 
 export const MsgUnjail = {
   $type: "cosmos.slashing.v1beta1.MsgUnjail" as const,
 
   encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.validatorAddr !== "") {
-      writer.uint32(10).string(message.validatorAddr);
+    if (message.validator_addr !== "") {
+      writer.uint32(10).string(message.validator_addr);
     }
     return writer;
   },
@@ -64,7 +64,7 @@ export const MsgUnjail = {
             break;
           }
 
-          message.validatorAddr = reader.string();
+          message.validator_addr = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -76,13 +76,13 @@ export const MsgUnjail = {
   },
 
   fromJSON(object: any): MsgUnjail {
-    return { validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : "" };
+    return { validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "" };
   },
 
   toJSON(message: MsgUnjail): unknown {
     const obj: any = {};
-    if (message.validatorAddr !== "") {
-      obj.validatorAddr = message.validatorAddr;
+    if (message.validator_addr !== "") {
+      obj.validator_addr = message.validator_addr;
     }
     return obj;
   },
@@ -92,7 +92,7 @@ export const MsgUnjail = {
   },
   fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
-    message.validatorAddr = object.validatorAddr ?? "";
+    message.validator_addr = object.validator_addr ?? "";
     return message;
   },
 };

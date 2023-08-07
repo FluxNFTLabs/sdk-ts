@@ -120,19 +120,19 @@ export interface CommissionRates {
   /** rate is the commission rate charged to delegators, as a fraction. */
   rate: string;
   /** max_rate defines the maximum commission rate which validator can ever charge, as a fraction. */
-  maxRate: string;
+  max_rate: string;
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
-  maxChangeRate: string;
+  max_change_rate: string;
 }
 
 /** Commission defines commission parameters for a given validator. */
 export interface Commission {
   /** commission_rates defines the initial commission rates to be used for creating a validator. */
-  commissionRates:
+  commission_rates:
     | CommissionRates
     | undefined;
   /** update_time is the last time the commission rate was changed. */
-  updateTime: Date | undefined;
+  update_time: Date | undefined;
 }
 
 /** Description defines a validator description. */
@@ -144,7 +144,7 @@ export interface Description {
   /** website defines an optional website link. */
   website: string;
   /** security_contact defines an optional email for security contact. */
-  securityContact: string;
+  security_contact: string;
   /** details define other optional details. */
   details: string;
 }
@@ -161,9 +161,9 @@ export interface Description {
  */
 export interface Validator {
   /** operator_address defines the address of the validator's operator; bech encoded in JSON. */
-  operatorAddress: string;
+  operator_address: string;
   /** consensus_pubkey is the consensus public key of the validator, as a Protobuf Any. */
-  consensusPubkey:
+  consensus_pubkey:
     | Any
     | undefined;
   /** jailed defined whether the validator has been jailed from bonded status or not. */
@@ -173,15 +173,15 @@ export interface Validator {
   /** tokens define the delegated tokens (incl. self-delegation). */
   tokens: string;
   /** delegator_shares defines total shares issued to a validator's delegators. */
-  delegatorShares: string;
+  delegator_shares: string;
   /** description defines the description terms for the validator. */
   description:
     | Description
     | undefined;
   /** unbonding_height defines, if unbonding, the height at which this validator has begun unbonding. */
-  unbondingHeight: string;
+  unbonding_height: string;
   /** unbonding_time defines, if unbonding, the min time for the validator to complete unbonding. */
-  unbondingTime:
+  unbonding_time:
     | Date
     | undefined;
   /** commission defines the commission parameters. */
@@ -193,11 +193,11 @@ export interface Validator {
    *
    * Since: cosmos-sdk 0.46
    */
-  minSelfDelegation: string;
+  min_self_delegation: string;
   /** strictly positive if this validator's unbonding has been stopped by external modules */
-  unbondingOnHoldRefCount: string;
+  unbonding_on_hold_ref_count: string;
   /** list of unbonding ids, each uniquely identifing an unbonding of this validator */
-  unbondingIds: string[];
+  unbonding_ids: string[];
 }
 
 /** ValAddresses defines a repeated set of validator addresses. */
@@ -211,8 +211,8 @@ export interface ValAddresses {
  * be used to construct the key to getting an UnbondingDelegation from state.
  */
 export interface DVPair {
-  delegatorAddress: string;
-  validatorAddress: string;
+  delegator_address: string;
+  validator_address: string;
 }
 
 /** DVPairs defines an array of DVPair objects. */
@@ -227,9 +227,9 @@ export interface DVPairs {
  * Redelegation from state.
  */
 export interface DVVTriplet {
-  delegatorAddress: string;
-  validatorSrcAddress: string;
-  validatorDstAddress: string;
+  delegator_address: string;
+  validator_src_address: string;
+  validator_dst_address: string;
 }
 
 /** DVVTriplets defines an array of DVVTriplet objects. */
@@ -244,9 +244,9 @@ export interface DVVTriplets {
  */
 export interface Delegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress: string;
+  delegator_address: string;
   /** validator_address is the bech32-encoded address of the validator. */
-  validatorAddress: string;
+  validator_address: string;
   /** shares define the delegation shares received. */
   shares: string;
 }
@@ -257,9 +257,9 @@ export interface Delegation {
  */
 export interface UnbondingDelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress: string;
+  delegator_address: string;
   /** validator_address is the bech32-encoded address of the validator. */
-  validatorAddress: string;
+  validator_address: string;
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntry[];
 }
@@ -267,37 +267,37 @@ export interface UnbondingDelegation {
 /** UnbondingDelegationEntry defines an unbonding object with relevant metadata. */
 export interface UnbondingDelegationEntry {
   /** creation_height is the height which the unbonding took place. */
-  creationHeight: string;
+  creation_height: string;
   /** completion_time is the unix time for unbonding completion. */
-  completionTime:
+  completion_time:
     | Date
     | undefined;
   /** initial_balance defines the tokens initially scheduled to receive at completion. */
-  initialBalance: string;
+  initial_balance: string;
   /** balance defines the tokens to receive at completion. */
   balance: string;
   /** Incrementing id that uniquely identifies this entry */
-  unbondingId: string;
+  unbonding_id: string;
   /** Strictly positive if this entry's unbonding has been stopped by external modules */
-  unbondingOnHoldRefCount: string;
+  unbonding_on_hold_ref_count: string;
 }
 
 /** RedelegationEntry defines a redelegation object with relevant metadata. */
 export interface RedelegationEntry {
   /** creation_height  defines the height which the redelegation took place. */
-  creationHeight: string;
+  creation_height: string;
   /** completion_time defines the unix time for redelegation completion. */
-  completionTime:
+  completion_time:
     | Date
     | undefined;
   /** initial_balance defines the initial balance when redelegation started. */
-  initialBalance: string;
+  initial_balance: string;
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
-  sharesDst: string;
+  shares_dst: string;
   /** Incrementing id that uniquely identifies this entry */
-  unbondingId: string;
+  unbonding_id: string;
   /** Strictly positive if this entry's unbonding has been stopped by external modules */
-  unbondingOnHoldRefCount: string;
+  unbonding_on_hold_ref_count: string;
 }
 
 /**
@@ -306,11 +306,11 @@ export interface RedelegationEntry {
  */
 export interface Redelegation {
   /** delegator_address is the bech32-encoded address of the delegator. */
-  delegatorAddress: string;
+  delegator_address: string;
   /** validator_src_address is the validator redelegation source operator address. */
-  validatorSrcAddress: string;
+  validator_src_address: string;
   /** validator_dst_address is the validator redelegation destination operator address. */
-  validatorDstAddress: string;
+  validator_dst_address: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
 }
@@ -318,19 +318,19 @@ export interface Redelegation {
 /** Params defines the parameters for the x/staking module. */
 export interface Params {
   /** unbonding_time is the time duration of unbonding. */
-  unbondingTime:
+  unbonding_time:
     | Duration
     | undefined;
   /** max_validators is the maximum number of validators. */
-  maxValidators: number;
+  max_validators: number;
   /** max_entries is the max entries for either unbonding delegation or redelegation (per pair/trio). */
-  maxEntries: number;
+  max_entries: number;
   /** historical_entries is the number of historical entries to persist. */
-  historicalEntries: number;
+  historical_entries: number;
   /** bond_denom defines the bondable coin denomination. */
-  bondDenom: string;
+  bond_denom: string;
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
-  minCommissionRate: string;
+  min_commission_rate: string;
 }
 
 /**
@@ -348,7 +348,7 @@ export interface DelegationResponse {
  * responses.
  */
 export interface RedelegationEntryResponse {
-  redelegationEntry: RedelegationEntry | undefined;
+  redelegation_entry: RedelegationEntry | undefined;
   balance: string;
 }
 
@@ -367,8 +367,8 @@ export interface RedelegationResponse {
  * denomination.
  */
 export interface Pool {
-  notBondedTokens: string;
-  bondedTokens: string;
+  not_bonded_tokens: string;
+  bonded_tokens: string;
 }
 
 /**
@@ -458,7 +458,7 @@ export const HistoricalInfo = {
 };
 
 function createBaseCommissionRates(): CommissionRates {
-  return { rate: "", maxRate: "", maxChangeRate: "" };
+  return { rate: "", max_rate: "", max_change_rate: "" };
 }
 
 export const CommissionRates = {
@@ -468,11 +468,11 @@ export const CommissionRates = {
     if (message.rate !== "") {
       writer.uint32(10).string(message.rate);
     }
-    if (message.maxRate !== "") {
-      writer.uint32(18).string(message.maxRate);
+    if (message.max_rate !== "") {
+      writer.uint32(18).string(message.max_rate);
     }
-    if (message.maxChangeRate !== "") {
-      writer.uint32(26).string(message.maxChangeRate);
+    if (message.max_change_rate !== "") {
+      writer.uint32(26).string(message.max_change_rate);
     }
     return writer;
   },
@@ -496,14 +496,14 @@ export const CommissionRates = {
             break;
           }
 
-          message.maxRate = reader.string();
+          message.max_rate = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.maxChangeRate = reader.string();
+          message.max_change_rate = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -517,8 +517,8 @@ export const CommissionRates = {
   fromJSON(object: any): CommissionRates {
     return {
       rate: isSet(object.rate) ? String(object.rate) : "",
-      maxRate: isSet(object.maxRate) ? String(object.maxRate) : "",
-      maxChangeRate: isSet(object.maxChangeRate) ? String(object.maxChangeRate) : "",
+      max_rate: isSet(object.max_rate) ? String(object.max_rate) : "",
+      max_change_rate: isSet(object.max_change_rate) ? String(object.max_change_rate) : "",
     };
   },
 
@@ -527,11 +527,11 @@ export const CommissionRates = {
     if (message.rate !== "") {
       obj.rate = message.rate;
     }
-    if (message.maxRate !== "") {
-      obj.maxRate = message.maxRate;
+    if (message.max_rate !== "") {
+      obj.max_rate = message.max_rate;
     }
-    if (message.maxChangeRate !== "") {
-      obj.maxChangeRate = message.maxChangeRate;
+    if (message.max_change_rate !== "") {
+      obj.max_change_rate = message.max_change_rate;
     }
     return obj;
   },
@@ -542,25 +542,25 @@ export const CommissionRates = {
   fromPartial(object: DeepPartial<CommissionRates>): CommissionRates {
     const message = createBaseCommissionRates();
     message.rate = object.rate ?? "";
-    message.maxRate = object.maxRate ?? "";
-    message.maxChangeRate = object.maxChangeRate ?? "";
+    message.max_rate = object.max_rate ?? "";
+    message.max_change_rate = object.max_change_rate ?? "";
     return message;
   },
 };
 
 function createBaseCommission(): Commission {
-  return { commissionRates: undefined, updateTime: undefined };
+  return { commission_rates: undefined, update_time: undefined };
 }
 
 export const Commission = {
   $type: "cosmos.staking.v1beta1.Commission" as const,
 
   encode(message: Commission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.commissionRates !== undefined) {
-      CommissionRates.encode(message.commissionRates, writer.uint32(10).fork()).ldelim();
+    if (message.commission_rates !== undefined) {
+      CommissionRates.encode(message.commission_rates, writer.uint32(10).fork()).ldelim();
     }
-    if (message.updateTime !== undefined) {
-      Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(18).fork()).ldelim();
+    if (message.update_time !== undefined) {
+      Timestamp.encode(toTimestamp(message.update_time), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -577,14 +577,14 @@ export const Commission = {
             break;
           }
 
-          message.commissionRates = CommissionRates.decode(reader, reader.uint32());
+          message.commission_rates = CommissionRates.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.updateTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.update_time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -597,18 +597,18 @@ export const Commission = {
 
   fromJSON(object: any): Commission {
     return {
-      commissionRates: isSet(object.commissionRates) ? CommissionRates.fromJSON(object.commissionRates) : undefined,
-      updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined,
+      commission_rates: isSet(object.commission_rates) ? CommissionRates.fromJSON(object.commission_rates) : undefined,
+      update_time: isSet(object.update_time) ? fromJsonTimestamp(object.update_time) : undefined,
     };
   },
 
   toJSON(message: Commission): unknown {
     const obj: any = {};
-    if (message.commissionRates !== undefined) {
-      obj.commissionRates = CommissionRates.toJSON(message.commissionRates);
+    if (message.commission_rates !== undefined) {
+      obj.commission_rates = CommissionRates.toJSON(message.commission_rates);
     }
-    if (message.updateTime !== undefined) {
-      obj.updateTime = message.updateTime.toISOString();
+    if (message.update_time !== undefined) {
+      obj.update_time = message.update_time.toISOString();
     }
     return obj;
   },
@@ -618,16 +618,16 @@ export const Commission = {
   },
   fromPartial(object: DeepPartial<Commission>): Commission {
     const message = createBaseCommission();
-    message.commissionRates = (object.commissionRates !== undefined && object.commissionRates !== null)
-      ? CommissionRates.fromPartial(object.commissionRates)
+    message.commission_rates = (object.commission_rates !== undefined && object.commission_rates !== null)
+      ? CommissionRates.fromPartial(object.commission_rates)
       : undefined;
-    message.updateTime = object.updateTime ?? undefined;
+    message.update_time = object.update_time ?? undefined;
     return message;
   },
 };
 
 function createBaseDescription(): Description {
-  return { moniker: "", identity: "", website: "", securityContact: "", details: "" };
+  return { moniker: "", identity: "", website: "", security_contact: "", details: "" };
 }
 
 export const Description = {
@@ -643,8 +643,8 @@ export const Description = {
     if (message.website !== "") {
       writer.uint32(26).string(message.website);
     }
-    if (message.securityContact !== "") {
-      writer.uint32(34).string(message.securityContact);
+    if (message.security_contact !== "") {
+      writer.uint32(34).string(message.security_contact);
     }
     if (message.details !== "") {
       writer.uint32(42).string(message.details);
@@ -685,7 +685,7 @@ export const Description = {
             break;
           }
 
-          message.securityContact = reader.string();
+          message.security_contact = reader.string();
           continue;
         case 5:
           if (tag !== 42) {
@@ -708,7 +708,7 @@ export const Description = {
       moniker: isSet(object.moniker) ? String(object.moniker) : "",
       identity: isSet(object.identity) ? String(object.identity) : "",
       website: isSet(object.website) ? String(object.website) : "",
-      securityContact: isSet(object.securityContact) ? String(object.securityContact) : "",
+      security_contact: isSet(object.security_contact) ? String(object.security_contact) : "",
       details: isSet(object.details) ? String(object.details) : "",
     };
   },
@@ -724,8 +724,8 @@ export const Description = {
     if (message.website !== "") {
       obj.website = message.website;
     }
-    if (message.securityContact !== "") {
-      obj.securityContact = message.securityContact;
+    if (message.security_contact !== "") {
+      obj.security_contact = message.security_contact;
     }
     if (message.details !== "") {
       obj.details = message.details;
@@ -741,7 +741,7 @@ export const Description = {
     message.moniker = object.moniker ?? "";
     message.identity = object.identity ?? "";
     message.website = object.website ?? "";
-    message.securityContact = object.securityContact ?? "";
+    message.security_contact = object.security_contact ?? "";
     message.details = object.details ?? "";
     return message;
   },
@@ -749,19 +749,19 @@ export const Description = {
 
 function createBaseValidator(): Validator {
   return {
-    operatorAddress: "",
-    consensusPubkey: undefined,
+    operator_address: "",
+    consensus_pubkey: undefined,
     jailed: false,
     status: 0,
     tokens: "",
-    delegatorShares: "",
+    delegator_shares: "",
     description: undefined,
-    unbondingHeight: "0",
-    unbondingTime: undefined,
+    unbonding_height: "0",
+    unbonding_time: undefined,
     commission: undefined,
-    minSelfDelegation: "",
-    unbondingOnHoldRefCount: "0",
-    unbondingIds: [],
+    min_self_delegation: "",
+    unbonding_on_hold_ref_count: "0",
+    unbonding_ids: [],
   };
 }
 
@@ -769,11 +769,11 @@ export const Validator = {
   $type: "cosmos.staking.v1beta1.Validator" as const,
 
   encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.operatorAddress !== "") {
-      writer.uint32(10).string(message.operatorAddress);
+    if (message.operator_address !== "") {
+      writer.uint32(10).string(message.operator_address);
     }
-    if (message.consensusPubkey !== undefined) {
-      Any.encode(message.consensusPubkey, writer.uint32(18).fork()).ldelim();
+    if (message.consensus_pubkey !== undefined) {
+      Any.encode(message.consensus_pubkey, writer.uint32(18).fork()).ldelim();
     }
     if (message.jailed === true) {
       writer.uint32(24).bool(message.jailed);
@@ -784,29 +784,29 @@ export const Validator = {
     if (message.tokens !== "") {
       writer.uint32(42).string(message.tokens);
     }
-    if (message.delegatorShares !== "") {
-      writer.uint32(50).string(message.delegatorShares);
+    if (message.delegator_shares !== "") {
+      writer.uint32(50).string(message.delegator_shares);
     }
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(58).fork()).ldelim();
     }
-    if (message.unbondingHeight !== "0") {
-      writer.uint32(64).int64(message.unbondingHeight);
+    if (message.unbonding_height !== "0") {
+      writer.uint32(64).int64(message.unbonding_height);
     }
-    if (message.unbondingTime !== undefined) {
-      Timestamp.encode(toTimestamp(message.unbondingTime), writer.uint32(74).fork()).ldelim();
+    if (message.unbonding_time !== undefined) {
+      Timestamp.encode(toTimestamp(message.unbonding_time), writer.uint32(74).fork()).ldelim();
     }
     if (message.commission !== undefined) {
       Commission.encode(message.commission, writer.uint32(82).fork()).ldelim();
     }
-    if (message.minSelfDelegation !== "") {
-      writer.uint32(90).string(message.minSelfDelegation);
+    if (message.min_self_delegation !== "") {
+      writer.uint32(90).string(message.min_self_delegation);
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      writer.uint32(96).int64(message.unbondingOnHoldRefCount);
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      writer.uint32(96).int64(message.unbonding_on_hold_ref_count);
     }
     writer.uint32(106).fork();
-    for (const v of message.unbondingIds) {
+    for (const v of message.unbonding_ids) {
       writer.uint64(v);
     }
     writer.ldelim();
@@ -825,14 +825,14 @@ export const Validator = {
             break;
           }
 
-          message.operatorAddress = reader.string();
+          message.operator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.consensusPubkey = Any.decode(reader, reader.uint32());
+          message.consensus_pubkey = Any.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 24) {
@@ -860,7 +860,7 @@ export const Validator = {
             break;
           }
 
-          message.delegatorShares = reader.string();
+          message.delegator_shares = reader.string();
           continue;
         case 7:
           if (tag !== 58) {
@@ -874,14 +874,14 @@ export const Validator = {
             break;
           }
 
-          message.unbondingHeight = longToString(reader.int64() as Long);
+          message.unbonding_height = longToString(reader.int64() as Long);
           continue;
         case 9:
           if (tag !== 74) {
             break;
           }
 
-          message.unbondingTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.unbonding_time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 10:
           if (tag !== 82) {
@@ -895,18 +895,18 @@ export const Validator = {
             break;
           }
 
-          message.minSelfDelegation = reader.string();
+          message.min_self_delegation = reader.string();
           continue;
         case 12:
           if (tag !== 96) {
             break;
           }
 
-          message.unbondingOnHoldRefCount = longToString(reader.int64() as Long);
+          message.unbonding_on_hold_ref_count = longToString(reader.int64() as Long);
           continue;
         case 13:
           if (tag === 104) {
-            message.unbondingIds.push(longToString(reader.uint64() as Long));
+            message.unbonding_ids.push(longToString(reader.uint64() as Long));
 
             continue;
           }
@@ -914,7 +914,7 @@ export const Validator = {
           if (tag === 106) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.unbondingIds.push(longToString(reader.uint64() as Long));
+              message.unbonding_ids.push(longToString(reader.uint64() as Long));
             }
 
             continue;
@@ -932,29 +932,31 @@ export const Validator = {
 
   fromJSON(object: any): Validator {
     return {
-      operatorAddress: isSet(object.operatorAddress) ? String(object.operatorAddress) : "",
-      consensusPubkey: isSet(object.consensusPubkey) ? Any.fromJSON(object.consensusPubkey) : undefined,
+      operator_address: isSet(object.operator_address) ? String(object.operator_address) : "",
+      consensus_pubkey: isSet(object.consensus_pubkey) ? Any.fromJSON(object.consensus_pubkey) : undefined,
       jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
       status: isSet(object.status) ? bondStatusFromJSON(object.status) : 0,
       tokens: isSet(object.tokens) ? String(object.tokens) : "",
-      delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
+      delegator_shares: isSet(object.delegator_shares) ? String(object.delegator_shares) : "",
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      unbondingHeight: isSet(object.unbondingHeight) ? String(object.unbondingHeight) : "0",
-      unbondingTime: isSet(object.unbondingTime) ? fromJsonTimestamp(object.unbondingTime) : undefined,
+      unbonding_height: isSet(object.unbonding_height) ? String(object.unbonding_height) : "0",
+      unbonding_time: isSet(object.unbonding_time) ? fromJsonTimestamp(object.unbonding_time) : undefined,
       commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
-      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : "",
-      unbondingOnHoldRefCount: isSet(object.unbondingOnHoldRefCount) ? String(object.unbondingOnHoldRefCount) : "0",
-      unbondingIds: Array.isArray(object?.unbondingIds) ? object.unbondingIds.map((e: any) => String(e)) : [],
+      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
+      unbonding_on_hold_ref_count: isSet(object.unbonding_on_hold_ref_count)
+        ? String(object.unbonding_on_hold_ref_count)
+        : "0",
+      unbonding_ids: Array.isArray(object?.unbonding_ids) ? object.unbonding_ids.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    if (message.operatorAddress !== "") {
-      obj.operatorAddress = message.operatorAddress;
+    if (message.operator_address !== "") {
+      obj.operator_address = message.operator_address;
     }
-    if (message.consensusPubkey !== undefined) {
-      obj.consensusPubkey = Any.toJSON(message.consensusPubkey);
+    if (message.consensus_pubkey !== undefined) {
+      obj.consensus_pubkey = Any.toJSON(message.consensus_pubkey);
     }
     if (message.jailed === true) {
       obj.jailed = message.jailed;
@@ -965,29 +967,29 @@ export const Validator = {
     if (message.tokens !== "") {
       obj.tokens = message.tokens;
     }
-    if (message.delegatorShares !== "") {
-      obj.delegatorShares = message.delegatorShares;
+    if (message.delegator_shares !== "") {
+      obj.delegator_shares = message.delegator_shares;
     }
     if (message.description !== undefined) {
       obj.description = Description.toJSON(message.description);
     }
-    if (message.unbondingHeight !== "0") {
-      obj.unbondingHeight = message.unbondingHeight;
+    if (message.unbonding_height !== "0") {
+      obj.unbonding_height = message.unbonding_height;
     }
-    if (message.unbondingTime !== undefined) {
-      obj.unbondingTime = message.unbondingTime.toISOString();
+    if (message.unbonding_time !== undefined) {
+      obj.unbonding_time = message.unbonding_time.toISOString();
     }
     if (message.commission !== undefined) {
       obj.commission = Commission.toJSON(message.commission);
     }
-    if (message.minSelfDelegation !== "") {
-      obj.minSelfDelegation = message.minSelfDelegation;
+    if (message.min_self_delegation !== "") {
+      obj.min_self_delegation = message.min_self_delegation;
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      obj.unbondingOnHoldRefCount = message.unbondingOnHoldRefCount;
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
-    if (message.unbondingIds?.length) {
-      obj.unbondingIds = message.unbondingIds;
+    if (message.unbonding_ids?.length) {
+      obj.unbonding_ids = message.unbonding_ids;
     }
     return obj;
   },
@@ -997,25 +999,25 @@ export const Validator = {
   },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
-    message.operatorAddress = object.operatorAddress ?? "";
-    message.consensusPubkey = (object.consensusPubkey !== undefined && object.consensusPubkey !== null)
-      ? Any.fromPartial(object.consensusPubkey)
+    message.operator_address = object.operator_address ?? "";
+    message.consensus_pubkey = (object.consensus_pubkey !== undefined && object.consensus_pubkey !== null)
+      ? Any.fromPartial(object.consensus_pubkey)
       : undefined;
     message.jailed = object.jailed ?? false;
     message.status = object.status ?? 0;
     message.tokens = object.tokens ?? "";
-    message.delegatorShares = object.delegatorShares ?? "";
+    message.delegator_shares = object.delegator_shares ?? "";
     message.description = (object.description !== undefined && object.description !== null)
       ? Description.fromPartial(object.description)
       : undefined;
-    message.unbondingHeight = object.unbondingHeight ?? "0";
-    message.unbondingTime = object.unbondingTime ?? undefined;
+    message.unbonding_height = object.unbonding_height ?? "0";
+    message.unbonding_time = object.unbonding_time ?? undefined;
     message.commission = (object.commission !== undefined && object.commission !== null)
       ? Commission.fromPartial(object.commission)
       : undefined;
-    message.minSelfDelegation = object.minSelfDelegation ?? "";
-    message.unbondingOnHoldRefCount = object.unbondingOnHoldRefCount ?? "0";
-    message.unbondingIds = object.unbondingIds?.map((e) => e) || [];
+    message.min_self_delegation = object.min_self_delegation ?? "";
+    message.unbonding_on_hold_ref_count = object.unbonding_on_hold_ref_count ?? "0";
+    message.unbonding_ids = object.unbonding_ids?.map((e) => e) || [];
     return message;
   },
 };
@@ -1080,18 +1082,18 @@ export const ValAddresses = {
 };
 
 function createBaseDVPair(): DVPair {
-  return { delegatorAddress: "", validatorAddress: "" };
+  return { delegator_address: "", validator_address: "" };
 }
 
 export const DVPair = {
   $type: "cosmos.staking.v1beta1.DVPair" as const,
 
   encode(message: DVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorAddress !== "") {
-      writer.uint32(18).string(message.validatorAddress);
+    if (message.validator_address !== "") {
+      writer.uint32(18).string(message.validator_address);
     }
     return writer;
   },
@@ -1108,14 +1110,14 @@ export const DVPair = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorAddress = reader.string();
+          message.validator_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1128,18 +1130,18 @@ export const DVPair = {
 
   fromJSON(object: any): DVPair {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
     };
   },
 
   toJSON(message: DVPair): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorAddress !== "") {
-      obj.validatorAddress = message.validatorAddress;
+    if (message.validator_address !== "") {
+      obj.validator_address = message.validator_address;
     }
     return obj;
   },
@@ -1149,8 +1151,8 @@ export const DVPair = {
   },
   fromPartial(object: DeepPartial<DVPair>): DVPair {
     const message = createBaseDVPair();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_address = object.validator_address ?? "";
     return message;
   },
 };
@@ -1215,21 +1217,21 @@ export const DVPairs = {
 };
 
 function createBaseDVVTriplet(): DVVTriplet {
-  return { delegatorAddress: "", validatorSrcAddress: "", validatorDstAddress: "" };
+  return { delegator_address: "", validator_src_address: "", validator_dst_address: "" };
 }
 
 export const DVVTriplet = {
   $type: "cosmos.staking.v1beta1.DVVTriplet" as const,
 
   encode(message: DVVTriplet, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorSrcAddress !== "") {
-      writer.uint32(18).string(message.validatorSrcAddress);
+    if (message.validator_src_address !== "") {
+      writer.uint32(18).string(message.validator_src_address);
     }
-    if (message.validatorDstAddress !== "") {
-      writer.uint32(26).string(message.validatorDstAddress);
+    if (message.validator_dst_address !== "") {
+      writer.uint32(26).string(message.validator_dst_address);
     }
     return writer;
   },
@@ -1246,21 +1248,21 @@ export const DVVTriplet = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorSrcAddress = reader.string();
+          message.validator_src_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.validatorDstAddress = reader.string();
+          message.validator_dst_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1273,22 +1275,22 @@ export const DVVTriplet = {
 
   fromJSON(object: any): DVVTriplet {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorSrcAddress: isSet(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
-      validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
     };
   },
 
   toJSON(message: DVVTriplet): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorSrcAddress !== "") {
-      obj.validatorSrcAddress = message.validatorSrcAddress;
+    if (message.validator_src_address !== "") {
+      obj.validator_src_address = message.validator_src_address;
     }
-    if (message.validatorDstAddress !== "") {
-      obj.validatorDstAddress = message.validatorDstAddress;
+    if (message.validator_dst_address !== "") {
+      obj.validator_dst_address = message.validator_dst_address;
     }
     return obj;
   },
@@ -1298,9 +1300,9 @@ export const DVVTriplet = {
   },
   fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet {
     const message = createBaseDVVTriplet();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
-    message.validatorDstAddress = object.validatorDstAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_src_address = object.validator_src_address ?? "";
+    message.validator_dst_address = object.validator_dst_address ?? "";
     return message;
   },
 };
@@ -1365,18 +1367,18 @@ export const DVVTriplets = {
 };
 
 function createBaseDelegation(): Delegation {
-  return { delegatorAddress: "", validatorAddress: "", shares: "" };
+  return { delegator_address: "", validator_address: "", shares: "" };
 }
 
 export const Delegation = {
   $type: "cosmos.staking.v1beta1.Delegation" as const,
 
   encode(message: Delegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorAddress !== "") {
-      writer.uint32(18).string(message.validatorAddress);
+    if (message.validator_address !== "") {
+      writer.uint32(18).string(message.validator_address);
     }
     if (message.shares !== "") {
       writer.uint32(26).string(message.shares);
@@ -1396,14 +1398,14 @@ export const Delegation = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorAddress = reader.string();
+          message.validator_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -1423,19 +1425,19 @@ export const Delegation = {
 
   fromJSON(object: any): Delegation {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
       shares: isSet(object.shares) ? String(object.shares) : "",
     };
   },
 
   toJSON(message: Delegation): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorAddress !== "") {
-      obj.validatorAddress = message.validatorAddress;
+    if (message.validator_address !== "") {
+      obj.validator_address = message.validator_address;
     }
     if (message.shares !== "") {
       obj.shares = message.shares;
@@ -1448,26 +1450,26 @@ export const Delegation = {
   },
   fromPartial(object: DeepPartial<Delegation>): Delegation {
     const message = createBaseDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_address = object.validator_address ?? "";
     message.shares = object.shares ?? "";
     return message;
   },
 };
 
 function createBaseUnbondingDelegation(): UnbondingDelegation {
-  return { delegatorAddress: "", validatorAddress: "", entries: [] };
+  return { delegator_address: "", validator_address: "", entries: [] };
 }
 
 export const UnbondingDelegation = {
   $type: "cosmos.staking.v1beta1.UnbondingDelegation" as const,
 
   encode(message: UnbondingDelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorAddress !== "") {
-      writer.uint32(18).string(message.validatorAddress);
+    if (message.validator_address !== "") {
+      writer.uint32(18).string(message.validator_address);
     }
     for (const v of message.entries) {
       UnbondingDelegationEntry.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -1487,14 +1489,14 @@ export const UnbondingDelegation = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorAddress = reader.string();
+          message.validator_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -1514,8 +1516,8 @@ export const UnbondingDelegation = {
 
   fromJSON(object: any): UnbondingDelegation {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
       entries: Array.isArray(object?.entries)
         ? object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e))
         : [],
@@ -1524,11 +1526,11 @@ export const UnbondingDelegation = {
 
   toJSON(message: UnbondingDelegation): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorAddress !== "") {
-      obj.validatorAddress = message.validatorAddress;
+    if (message.validator_address !== "") {
+      obj.validator_address = message.validator_address;
     }
     if (message.entries?.length) {
       obj.entries = message.entries.map((e) => UnbondingDelegationEntry.toJSON(e));
@@ -1541,8 +1543,8 @@ export const UnbondingDelegation = {
   },
   fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
     const message = createBaseUnbondingDelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_address = object.validator_address ?? "";
     message.entries = object.entries?.map((e) => UnbondingDelegationEntry.fromPartial(e)) || [];
     return message;
   },
@@ -1550,12 +1552,12 @@ export const UnbondingDelegation = {
 
 function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
   return {
-    creationHeight: "0",
-    completionTime: undefined,
-    initialBalance: "",
+    creation_height: "0",
+    completion_time: undefined,
+    initial_balance: "",
     balance: "",
-    unbondingId: "0",
-    unbondingOnHoldRefCount: "0",
+    unbonding_id: "0",
+    unbonding_on_hold_ref_count: "0",
   };
 }
 
@@ -1563,23 +1565,23 @@ export const UnbondingDelegationEntry = {
   $type: "cosmos.staking.v1beta1.UnbondingDelegationEntry" as const,
 
   encode(message: UnbondingDelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.creationHeight !== "0") {
-      writer.uint32(8).int64(message.creationHeight);
+    if (message.creation_height !== "0") {
+      writer.uint32(8).int64(message.creation_height);
     }
-    if (message.completionTime !== undefined) {
-      Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(18).fork()).ldelim();
+    if (message.completion_time !== undefined) {
+      Timestamp.encode(toTimestamp(message.completion_time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.initialBalance !== "") {
-      writer.uint32(26).string(message.initialBalance);
+    if (message.initial_balance !== "") {
+      writer.uint32(26).string(message.initial_balance);
     }
     if (message.balance !== "") {
       writer.uint32(34).string(message.balance);
     }
-    if (message.unbondingId !== "0") {
-      writer.uint32(40).uint64(message.unbondingId);
+    if (message.unbonding_id !== "0") {
+      writer.uint32(40).uint64(message.unbonding_id);
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      writer.uint32(48).int64(message.unbondingOnHoldRefCount);
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      writer.uint32(48).int64(message.unbonding_on_hold_ref_count);
     }
     return writer;
   },
@@ -1596,21 +1598,21 @@ export const UnbondingDelegationEntry = {
             break;
           }
 
-          message.creationHeight = longToString(reader.int64() as Long);
+          message.creation_height = longToString(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.completionTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.completion_time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.initialBalance = reader.string();
+          message.initial_balance = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -1624,14 +1626,14 @@ export const UnbondingDelegationEntry = {
             break;
           }
 
-          message.unbondingId = longToString(reader.uint64() as Long);
+          message.unbonding_id = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.unbondingOnHoldRefCount = longToString(reader.int64() as Long);
+          message.unbonding_on_hold_ref_count = longToString(reader.int64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1644,34 +1646,36 @@ export const UnbondingDelegationEntry = {
 
   fromJSON(object: any): UnbondingDelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? String(object.creationHeight) : "0",
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
-      initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
+      creation_height: isSet(object.creation_height) ? String(object.creation_height) : "0",
+      completion_time: isSet(object.completion_time) ? fromJsonTimestamp(object.completion_time) : undefined,
+      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
       balance: isSet(object.balance) ? String(object.balance) : "",
-      unbondingId: isSet(object.unbondingId) ? String(object.unbondingId) : "0",
-      unbondingOnHoldRefCount: isSet(object.unbondingOnHoldRefCount) ? String(object.unbondingOnHoldRefCount) : "0",
+      unbonding_id: isSet(object.unbonding_id) ? String(object.unbonding_id) : "0",
+      unbonding_on_hold_ref_count: isSet(object.unbonding_on_hold_ref_count)
+        ? String(object.unbonding_on_hold_ref_count)
+        : "0",
     };
   },
 
   toJSON(message: UnbondingDelegationEntry): unknown {
     const obj: any = {};
-    if (message.creationHeight !== "0") {
-      obj.creationHeight = message.creationHeight;
+    if (message.creation_height !== "0") {
+      obj.creation_height = message.creation_height;
     }
-    if (message.completionTime !== undefined) {
-      obj.completionTime = message.completionTime.toISOString();
+    if (message.completion_time !== undefined) {
+      obj.completion_time = message.completion_time.toISOString();
     }
-    if (message.initialBalance !== "") {
-      obj.initialBalance = message.initialBalance;
+    if (message.initial_balance !== "") {
+      obj.initial_balance = message.initial_balance;
     }
     if (message.balance !== "") {
       obj.balance = message.balance;
     }
-    if (message.unbondingId !== "0") {
-      obj.unbondingId = message.unbondingId;
+    if (message.unbonding_id !== "0") {
+      obj.unbonding_id = message.unbonding_id;
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      obj.unbondingOnHoldRefCount = message.unbondingOnHoldRefCount;
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
     return obj;
   },
@@ -1681,24 +1685,24 @@ export const UnbondingDelegationEntry = {
   },
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
-    message.creationHeight = object.creationHeight ?? "0";
-    message.completionTime = object.completionTime ?? undefined;
-    message.initialBalance = object.initialBalance ?? "";
+    message.creation_height = object.creation_height ?? "0";
+    message.completion_time = object.completion_time ?? undefined;
+    message.initial_balance = object.initial_balance ?? "";
     message.balance = object.balance ?? "";
-    message.unbondingId = object.unbondingId ?? "0";
-    message.unbondingOnHoldRefCount = object.unbondingOnHoldRefCount ?? "0";
+    message.unbonding_id = object.unbonding_id ?? "0";
+    message.unbonding_on_hold_ref_count = object.unbonding_on_hold_ref_count ?? "0";
     return message;
   },
 };
 
 function createBaseRedelegationEntry(): RedelegationEntry {
   return {
-    creationHeight: "0",
-    completionTime: undefined,
-    initialBalance: "",
-    sharesDst: "",
-    unbondingId: "0",
-    unbondingOnHoldRefCount: "0",
+    creation_height: "0",
+    completion_time: undefined,
+    initial_balance: "",
+    shares_dst: "",
+    unbonding_id: "0",
+    unbonding_on_hold_ref_count: "0",
   };
 }
 
@@ -1706,23 +1710,23 @@ export const RedelegationEntry = {
   $type: "cosmos.staking.v1beta1.RedelegationEntry" as const,
 
   encode(message: RedelegationEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.creationHeight !== "0") {
-      writer.uint32(8).int64(message.creationHeight);
+    if (message.creation_height !== "0") {
+      writer.uint32(8).int64(message.creation_height);
     }
-    if (message.completionTime !== undefined) {
-      Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(18).fork()).ldelim();
+    if (message.completion_time !== undefined) {
+      Timestamp.encode(toTimestamp(message.completion_time), writer.uint32(18).fork()).ldelim();
     }
-    if (message.initialBalance !== "") {
-      writer.uint32(26).string(message.initialBalance);
+    if (message.initial_balance !== "") {
+      writer.uint32(26).string(message.initial_balance);
     }
-    if (message.sharesDst !== "") {
-      writer.uint32(34).string(message.sharesDst);
+    if (message.shares_dst !== "") {
+      writer.uint32(34).string(message.shares_dst);
     }
-    if (message.unbondingId !== "0") {
-      writer.uint32(40).uint64(message.unbondingId);
+    if (message.unbonding_id !== "0") {
+      writer.uint32(40).uint64(message.unbonding_id);
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      writer.uint32(48).int64(message.unbondingOnHoldRefCount);
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      writer.uint32(48).int64(message.unbonding_on_hold_ref_count);
     }
     return writer;
   },
@@ -1739,42 +1743,42 @@ export const RedelegationEntry = {
             break;
           }
 
-          message.creationHeight = longToString(reader.int64() as Long);
+          message.creation_height = longToString(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.completionTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.completion_time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.initialBalance = reader.string();
+          message.initial_balance = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.sharesDst = reader.string();
+          message.shares_dst = reader.string();
           continue;
         case 5:
           if (tag !== 40) {
             break;
           }
 
-          message.unbondingId = longToString(reader.uint64() as Long);
+          message.unbonding_id = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.unbondingOnHoldRefCount = longToString(reader.int64() as Long);
+          message.unbonding_on_hold_ref_count = longToString(reader.int64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1787,34 +1791,36 @@ export const RedelegationEntry = {
 
   fromJSON(object: any): RedelegationEntry {
     return {
-      creationHeight: isSet(object.creationHeight) ? String(object.creationHeight) : "0",
-      completionTime: isSet(object.completionTime) ? fromJsonTimestamp(object.completionTime) : undefined,
-      initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
-      sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : "",
-      unbondingId: isSet(object.unbondingId) ? String(object.unbondingId) : "0",
-      unbondingOnHoldRefCount: isSet(object.unbondingOnHoldRefCount) ? String(object.unbondingOnHoldRefCount) : "0",
+      creation_height: isSet(object.creation_height) ? String(object.creation_height) : "0",
+      completion_time: isSet(object.completion_time) ? fromJsonTimestamp(object.completion_time) : undefined,
+      initial_balance: isSet(object.initial_balance) ? String(object.initial_balance) : "",
+      shares_dst: isSet(object.shares_dst) ? String(object.shares_dst) : "",
+      unbonding_id: isSet(object.unbonding_id) ? String(object.unbonding_id) : "0",
+      unbonding_on_hold_ref_count: isSet(object.unbonding_on_hold_ref_count)
+        ? String(object.unbonding_on_hold_ref_count)
+        : "0",
     };
   },
 
   toJSON(message: RedelegationEntry): unknown {
     const obj: any = {};
-    if (message.creationHeight !== "0") {
-      obj.creationHeight = message.creationHeight;
+    if (message.creation_height !== "0") {
+      obj.creation_height = message.creation_height;
     }
-    if (message.completionTime !== undefined) {
-      obj.completionTime = message.completionTime.toISOString();
+    if (message.completion_time !== undefined) {
+      obj.completion_time = message.completion_time.toISOString();
     }
-    if (message.initialBalance !== "") {
-      obj.initialBalance = message.initialBalance;
+    if (message.initial_balance !== "") {
+      obj.initial_balance = message.initial_balance;
     }
-    if (message.sharesDst !== "") {
-      obj.sharesDst = message.sharesDst;
+    if (message.shares_dst !== "") {
+      obj.shares_dst = message.shares_dst;
     }
-    if (message.unbondingId !== "0") {
-      obj.unbondingId = message.unbondingId;
+    if (message.unbonding_id !== "0") {
+      obj.unbonding_id = message.unbonding_id;
     }
-    if (message.unbondingOnHoldRefCount !== "0") {
-      obj.unbondingOnHoldRefCount = message.unbondingOnHoldRefCount;
+    if (message.unbonding_on_hold_ref_count !== "0") {
+      obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
     return obj;
   },
@@ -1824,32 +1830,32 @@ export const RedelegationEntry = {
   },
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
-    message.creationHeight = object.creationHeight ?? "0";
-    message.completionTime = object.completionTime ?? undefined;
-    message.initialBalance = object.initialBalance ?? "";
-    message.sharesDst = object.sharesDst ?? "";
-    message.unbondingId = object.unbondingId ?? "0";
-    message.unbondingOnHoldRefCount = object.unbondingOnHoldRefCount ?? "0";
+    message.creation_height = object.creation_height ?? "0";
+    message.completion_time = object.completion_time ?? undefined;
+    message.initial_balance = object.initial_balance ?? "";
+    message.shares_dst = object.shares_dst ?? "";
+    message.unbonding_id = object.unbonding_id ?? "0";
+    message.unbonding_on_hold_ref_count = object.unbonding_on_hold_ref_count ?? "0";
     return message;
   },
 };
 
 function createBaseRedelegation(): Redelegation {
-  return { delegatorAddress: "", validatorSrcAddress: "", validatorDstAddress: "", entries: [] };
+  return { delegator_address: "", validator_src_address: "", validator_dst_address: "", entries: [] };
 }
 
 export const Redelegation = {
   $type: "cosmos.staking.v1beta1.Redelegation" as const,
 
   encode(message: Redelegation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorSrcAddress !== "") {
-      writer.uint32(18).string(message.validatorSrcAddress);
+    if (message.validator_src_address !== "") {
+      writer.uint32(18).string(message.validator_src_address);
     }
-    if (message.validatorDstAddress !== "") {
-      writer.uint32(26).string(message.validatorDstAddress);
+    if (message.validator_dst_address !== "") {
+      writer.uint32(26).string(message.validator_dst_address);
     }
     for (const v of message.entries) {
       RedelegationEntry.encode(v!, writer.uint32(34).fork()).ldelim();
@@ -1869,21 +1875,21 @@ export const Redelegation = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorSrcAddress = reader.string();
+          message.validator_src_address = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.validatorDstAddress = reader.string();
+          message.validator_dst_address = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
@@ -1903,23 +1909,23 @@ export const Redelegation = {
 
   fromJSON(object: any): Redelegation {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorSrcAddress: isSet(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
-      validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Redelegation): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorSrcAddress !== "") {
-      obj.validatorSrcAddress = message.validatorSrcAddress;
+    if (message.validator_src_address !== "") {
+      obj.validator_src_address = message.validator_src_address;
     }
-    if (message.validatorDstAddress !== "") {
-      obj.validatorDstAddress = message.validatorDstAddress;
+    if (message.validator_dst_address !== "") {
+      obj.validator_dst_address = message.validator_dst_address;
     }
     if (message.entries?.length) {
       obj.entries = message.entries.map((e) => RedelegationEntry.toJSON(e));
@@ -1932,9 +1938,9 @@ export const Redelegation = {
   },
   fromPartial(object: DeepPartial<Redelegation>): Redelegation {
     const message = createBaseRedelegation();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorSrcAddress = object.validatorSrcAddress ?? "";
-    message.validatorDstAddress = object.validatorDstAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_src_address = object.validator_src_address ?? "";
+    message.validator_dst_address = object.validator_dst_address ?? "";
     message.entries = object.entries?.map((e) => RedelegationEntry.fromPartial(e)) || [];
     return message;
   },
@@ -1942,12 +1948,12 @@ export const Redelegation = {
 
 function createBaseParams(): Params {
   return {
-    unbondingTime: undefined,
-    maxValidators: 0,
-    maxEntries: 0,
-    historicalEntries: 0,
-    bondDenom: "",
-    minCommissionRate: "",
+    unbonding_time: undefined,
+    max_validators: 0,
+    max_entries: 0,
+    historical_entries: 0,
+    bond_denom: "",
+    min_commission_rate: "",
   };
 }
 
@@ -1955,23 +1961,23 @@ export const Params = {
   $type: "cosmos.staking.v1beta1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.unbondingTime !== undefined) {
-      Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
+    if (message.unbonding_time !== undefined) {
+      Duration.encode(message.unbonding_time, writer.uint32(10).fork()).ldelim();
     }
-    if (message.maxValidators !== 0) {
-      writer.uint32(16).uint32(message.maxValidators);
+    if (message.max_validators !== 0) {
+      writer.uint32(16).uint32(message.max_validators);
     }
-    if (message.maxEntries !== 0) {
-      writer.uint32(24).uint32(message.maxEntries);
+    if (message.max_entries !== 0) {
+      writer.uint32(24).uint32(message.max_entries);
     }
-    if (message.historicalEntries !== 0) {
-      writer.uint32(32).uint32(message.historicalEntries);
+    if (message.historical_entries !== 0) {
+      writer.uint32(32).uint32(message.historical_entries);
     }
-    if (message.bondDenom !== "") {
-      writer.uint32(42).string(message.bondDenom);
+    if (message.bond_denom !== "") {
+      writer.uint32(42).string(message.bond_denom);
     }
-    if (message.minCommissionRate !== "") {
-      writer.uint32(50).string(message.minCommissionRate);
+    if (message.min_commission_rate !== "") {
+      writer.uint32(50).string(message.min_commission_rate);
     }
     return writer;
   },
@@ -1988,42 +1994,42 @@ export const Params = {
             break;
           }
 
-          message.unbondingTime = Duration.decode(reader, reader.uint32());
+          message.unbonding_time = Duration.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.maxValidators = reader.uint32();
+          message.max_validators = reader.uint32();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.maxEntries = reader.uint32();
+          message.max_entries = reader.uint32();
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.historicalEntries = reader.uint32();
+          message.historical_entries = reader.uint32();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.bondDenom = reader.string();
+          message.bond_denom = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.minCommissionRate = reader.string();
+          message.min_commission_rate = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2036,34 +2042,34 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      unbondingTime: isSet(object.unbondingTime) ? Duration.fromJSON(object.unbondingTime) : undefined,
-      maxValidators: isSet(object.maxValidators) ? Number(object.maxValidators) : 0,
-      maxEntries: isSet(object.maxEntries) ? Number(object.maxEntries) : 0,
-      historicalEntries: isSet(object.historicalEntries) ? Number(object.historicalEntries) : 0,
-      bondDenom: isSet(object.bondDenom) ? String(object.bondDenom) : "",
-      minCommissionRate: isSet(object.minCommissionRate) ? String(object.minCommissionRate) : "",
+      unbonding_time: isSet(object.unbonding_time) ? Duration.fromJSON(object.unbonding_time) : undefined,
+      max_validators: isSet(object.max_validators) ? Number(object.max_validators) : 0,
+      max_entries: isSet(object.max_entries) ? Number(object.max_entries) : 0,
+      historical_entries: isSet(object.historical_entries) ? Number(object.historical_entries) : 0,
+      bond_denom: isSet(object.bond_denom) ? String(object.bond_denom) : "",
+      min_commission_rate: isSet(object.min_commission_rate) ? String(object.min_commission_rate) : "",
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.unbondingTime !== undefined) {
-      obj.unbondingTime = Duration.toJSON(message.unbondingTime);
+    if (message.unbonding_time !== undefined) {
+      obj.unbonding_time = Duration.toJSON(message.unbonding_time);
     }
-    if (message.maxValidators !== 0) {
-      obj.maxValidators = Math.round(message.maxValidators);
+    if (message.max_validators !== 0) {
+      obj.max_validators = Math.round(message.max_validators);
     }
-    if (message.maxEntries !== 0) {
-      obj.maxEntries = Math.round(message.maxEntries);
+    if (message.max_entries !== 0) {
+      obj.max_entries = Math.round(message.max_entries);
     }
-    if (message.historicalEntries !== 0) {
-      obj.historicalEntries = Math.round(message.historicalEntries);
+    if (message.historical_entries !== 0) {
+      obj.historical_entries = Math.round(message.historical_entries);
     }
-    if (message.bondDenom !== "") {
-      obj.bondDenom = message.bondDenom;
+    if (message.bond_denom !== "") {
+      obj.bond_denom = message.bond_denom;
     }
-    if (message.minCommissionRate !== "") {
-      obj.minCommissionRate = message.minCommissionRate;
+    if (message.min_commission_rate !== "") {
+      obj.min_commission_rate = message.min_commission_rate;
     }
     return obj;
   },
@@ -2073,14 +2079,14 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.unbondingTime = (object.unbondingTime !== undefined && object.unbondingTime !== null)
-      ? Duration.fromPartial(object.unbondingTime)
+    message.unbonding_time = (object.unbonding_time !== undefined && object.unbonding_time !== null)
+      ? Duration.fromPartial(object.unbonding_time)
       : undefined;
-    message.maxValidators = object.maxValidators ?? 0;
-    message.maxEntries = object.maxEntries ?? 0;
-    message.historicalEntries = object.historicalEntries ?? 0;
-    message.bondDenom = object.bondDenom ?? "";
-    message.minCommissionRate = object.minCommissionRate ?? "";
+    message.max_validators = object.max_validators ?? 0;
+    message.max_entries = object.max_entries ?? 0;
+    message.historical_entries = object.historical_entries ?? 0;
+    message.bond_denom = object.bond_denom ?? "";
+    message.min_commission_rate = object.min_commission_rate ?? "";
     return message;
   },
 };
@@ -2166,15 +2172,15 @@ export const DelegationResponse = {
 };
 
 function createBaseRedelegationEntryResponse(): RedelegationEntryResponse {
-  return { redelegationEntry: undefined, balance: "" };
+  return { redelegation_entry: undefined, balance: "" };
 }
 
 export const RedelegationEntryResponse = {
   $type: "cosmos.staking.v1beta1.RedelegationEntryResponse" as const,
 
   encode(message: RedelegationEntryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.redelegationEntry !== undefined) {
-      RedelegationEntry.encode(message.redelegationEntry, writer.uint32(10).fork()).ldelim();
+    if (message.redelegation_entry !== undefined) {
+      RedelegationEntry.encode(message.redelegation_entry, writer.uint32(10).fork()).ldelim();
     }
     if (message.balance !== "") {
       writer.uint32(34).string(message.balance);
@@ -2194,7 +2200,7 @@ export const RedelegationEntryResponse = {
             break;
           }
 
-          message.redelegationEntry = RedelegationEntry.decode(reader, reader.uint32());
+          message.redelegation_entry = RedelegationEntry.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
@@ -2214,8 +2220,8 @@ export const RedelegationEntryResponse = {
 
   fromJSON(object: any): RedelegationEntryResponse {
     return {
-      redelegationEntry: isSet(object.redelegationEntry)
-        ? RedelegationEntry.fromJSON(object.redelegationEntry)
+      redelegation_entry: isSet(object.redelegation_entry)
+        ? RedelegationEntry.fromJSON(object.redelegation_entry)
         : undefined,
       balance: isSet(object.balance) ? String(object.balance) : "",
     };
@@ -2223,8 +2229,8 @@ export const RedelegationEntryResponse = {
 
   toJSON(message: RedelegationEntryResponse): unknown {
     const obj: any = {};
-    if (message.redelegationEntry !== undefined) {
-      obj.redelegationEntry = RedelegationEntry.toJSON(message.redelegationEntry);
+    if (message.redelegation_entry !== undefined) {
+      obj.redelegation_entry = RedelegationEntry.toJSON(message.redelegation_entry);
     }
     if (message.balance !== "") {
       obj.balance = message.balance;
@@ -2237,8 +2243,8 @@ export const RedelegationEntryResponse = {
   },
   fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     const message = createBaseRedelegationEntryResponse();
-    message.redelegationEntry = (object.redelegationEntry !== undefined && object.redelegationEntry !== null)
-      ? RedelegationEntry.fromPartial(object.redelegationEntry)
+    message.redelegation_entry = (object.redelegation_entry !== undefined && object.redelegation_entry !== null)
+      ? RedelegationEntry.fromPartial(object.redelegation_entry)
       : undefined;
     message.balance = object.balance ?? "";
     return message;
@@ -2326,18 +2332,18 @@ export const RedelegationResponse = {
 };
 
 function createBasePool(): Pool {
-  return { notBondedTokens: "", bondedTokens: "" };
+  return { not_bonded_tokens: "", bonded_tokens: "" };
 }
 
 export const Pool = {
   $type: "cosmos.staking.v1beta1.Pool" as const,
 
   encode(message: Pool, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.notBondedTokens !== "") {
-      writer.uint32(10).string(message.notBondedTokens);
+    if (message.not_bonded_tokens !== "") {
+      writer.uint32(10).string(message.not_bonded_tokens);
     }
-    if (message.bondedTokens !== "") {
-      writer.uint32(18).string(message.bondedTokens);
+    if (message.bonded_tokens !== "") {
+      writer.uint32(18).string(message.bonded_tokens);
     }
     return writer;
   },
@@ -2354,14 +2360,14 @@ export const Pool = {
             break;
           }
 
-          message.notBondedTokens = reader.string();
+          message.not_bonded_tokens = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.bondedTokens = reader.string();
+          message.bonded_tokens = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -2374,18 +2380,18 @@ export const Pool = {
 
   fromJSON(object: any): Pool {
     return {
-      notBondedTokens: isSet(object.notBondedTokens) ? String(object.notBondedTokens) : "",
-      bondedTokens: isSet(object.bondedTokens) ? String(object.bondedTokens) : "",
+      not_bonded_tokens: isSet(object.not_bonded_tokens) ? String(object.not_bonded_tokens) : "",
+      bonded_tokens: isSet(object.bonded_tokens) ? String(object.bonded_tokens) : "",
     };
   },
 
   toJSON(message: Pool): unknown {
     const obj: any = {};
-    if (message.notBondedTokens !== "") {
-      obj.notBondedTokens = message.notBondedTokens;
+    if (message.not_bonded_tokens !== "") {
+      obj.not_bonded_tokens = message.not_bonded_tokens;
     }
-    if (message.bondedTokens !== "") {
-      obj.bondedTokens = message.bondedTokens;
+    if (message.bonded_tokens !== "") {
+      obj.bonded_tokens = message.bonded_tokens;
     }
     return obj;
   },
@@ -2395,8 +2401,8 @@ export const Pool = {
   },
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
-    message.notBondedTokens = object.notBondedTokens ?? "";
-    message.bondedTokens = object.bondedTokens ?? "";
+    message.not_bonded_tokens = object.not_bonded_tokens ?? "";
+    message.bonded_tokens = object.bonded_tokens ?? "";
     return message;
   },
 };

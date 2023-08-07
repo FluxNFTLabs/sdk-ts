@@ -6,7 +6,7 @@ import _m0 from "protobufjs/minimal";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  classId: string;
+  class_id: string;
   /** id defines the unique identification of nft */
   id: string;
   /** sender is the address of the owner of nft */
@@ -20,15 +20,15 @@ export interface MsgSendResponse {
 }
 
 function createBaseMsgSend(): MsgSend {
-  return { classId: "", id: "", sender: "", receiver: "" };
+  return { class_id: "", id: "", sender: "", receiver: "" };
 }
 
 export const MsgSend = {
   $type: "cosmos.nft.v1beta1.MsgSend" as const,
 
   encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -54,7 +54,7 @@ export const MsgSend = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -88,7 +88,7 @@ export const MsgSend = {
 
   fromJSON(object: any): MsgSend {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
@@ -97,8 +97,8 @@ export const MsgSend = {
 
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -117,7 +117,7 @@ export const MsgSend = {
   },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";

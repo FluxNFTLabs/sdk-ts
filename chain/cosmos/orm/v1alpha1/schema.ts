@@ -89,7 +89,7 @@ export function storageTypeToJSON(object: StorageType): string {
 
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptor {
-  schemaFile: ModuleSchemaDescriptor_FileEntry[];
+  schema_file: ModuleSchemaDescriptor_FileEntry[];
   /**
    * prefix is an optional prefix that precedes all keys in this module's
    * store.
@@ -109,24 +109,24 @@ export interface ModuleSchemaDescriptor_FileEntry {
    * table definitions. The .proto file must be in a package that the
    * module has referenced using cosmos.app.v1.ModuleDescriptor.use_package.
    */
-  protoFileName: string;
+  proto_file_name: string;
   /**
    * storage_type optionally indicates the type of storage this file's
    * tables should used. If it is left unspecified, the default KV-storage
    * of the app will be used.
    */
-  storageType: StorageType;
+  storage_type: StorageType;
 }
 
 function createBaseModuleSchemaDescriptor(): ModuleSchemaDescriptor {
-  return { schemaFile: [], prefix: new Uint8Array(0) };
+  return { schema_file: [], prefix: new Uint8Array(0) };
 }
 
 export const ModuleSchemaDescriptor = {
   $type: "cosmos.orm.v1alpha1.ModuleSchemaDescriptor" as const,
 
   encode(message: ModuleSchemaDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.schemaFile) {
+    for (const v of message.schema_file) {
       ModuleSchemaDescriptor_FileEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.prefix.length !== 0) {
@@ -147,7 +147,7 @@ export const ModuleSchemaDescriptor = {
             break;
           }
 
-          message.schemaFile.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32()));
+          message.schema_file.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -167,8 +167,8 @@ export const ModuleSchemaDescriptor = {
 
   fromJSON(object: any): ModuleSchemaDescriptor {
     return {
-      schemaFile: Array.isArray(object?.schemaFile)
-        ? object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e))
+      schema_file: Array.isArray(object?.schema_file)
+        ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e))
         : [],
       prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(0),
     };
@@ -176,8 +176,8 @@ export const ModuleSchemaDescriptor = {
 
   toJSON(message: ModuleSchemaDescriptor): unknown {
     const obj: any = {};
-    if (message.schemaFile?.length) {
-      obj.schemaFile = message.schemaFile.map((e) => ModuleSchemaDescriptor_FileEntry.toJSON(e));
+    if (message.schema_file?.length) {
+      obj.schema_file = message.schema_file.map((e) => ModuleSchemaDescriptor_FileEntry.toJSON(e));
     }
     if (message.prefix.length !== 0) {
       obj.prefix = base64FromBytes(message.prefix);
@@ -190,14 +190,14 @@ export const ModuleSchemaDescriptor = {
   },
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
-    message.schemaFile = object.schemaFile?.map((e) => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
+    message.schema_file = object.schema_file?.map((e) => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
     message.prefix = object.prefix ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_FileEntry {
-  return { id: 0, protoFileName: "", storageType: 0 };
+  return { id: 0, proto_file_name: "", storage_type: 0 };
 }
 
 export const ModuleSchemaDescriptor_FileEntry = {
@@ -207,11 +207,11 @@ export const ModuleSchemaDescriptor_FileEntry = {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
     }
-    if (message.protoFileName !== "") {
-      writer.uint32(18).string(message.protoFileName);
+    if (message.proto_file_name !== "") {
+      writer.uint32(18).string(message.proto_file_name);
     }
-    if (message.storageType !== 0) {
-      writer.uint32(24).int32(message.storageType);
+    if (message.storage_type !== 0) {
+      writer.uint32(24).int32(message.storage_type);
     }
     return writer;
   },
@@ -235,14 +235,14 @@ export const ModuleSchemaDescriptor_FileEntry = {
             break;
           }
 
-          message.protoFileName = reader.string();
+          message.proto_file_name = reader.string();
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.storageType = reader.int32() as any;
+          message.storage_type = reader.int32() as any;
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -256,8 +256,8 @@ export const ModuleSchemaDescriptor_FileEntry = {
   fromJSON(object: any): ModuleSchemaDescriptor_FileEntry {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
-      protoFileName: isSet(object.protoFileName) ? String(object.protoFileName) : "",
-      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : 0,
+      proto_file_name: isSet(object.proto_file_name) ? String(object.proto_file_name) : "",
+      storage_type: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : 0,
     };
   },
 
@@ -266,11 +266,11 @@ export const ModuleSchemaDescriptor_FileEntry = {
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.protoFileName !== "") {
-      obj.protoFileName = message.protoFileName;
+    if (message.proto_file_name !== "") {
+      obj.proto_file_name = message.proto_file_name;
     }
-    if (message.storageType !== 0) {
-      obj.storageType = storageTypeToJSON(message.storageType);
+    if (message.storage_type !== 0) {
+      obj.storage_type = storageTypeToJSON(message.storage_type);
     }
     return obj;
   },
@@ -281,8 +281,8 @@ export const ModuleSchemaDescriptor_FileEntry = {
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {
     const message = createBaseModuleSchemaDescriptor_FileEntry();
     message.id = object.id ?? 0;
-    message.protoFileName = object.protoFileName ?? "";
-    message.storageType = object.storageType ?? 0;
+    message.proto_file_name = object.proto_file_name ?? "";
+    message.storage_type = object.storage_type ?? 0;
     return message;
   },
 };

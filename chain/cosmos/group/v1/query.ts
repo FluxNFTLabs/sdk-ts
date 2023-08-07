@@ -11,7 +11,7 @@ import { GroupInfo, GroupMember, GroupPolicyInfo, Proposal, TallyResult, Vote } 
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  group_id: string;
 }
 
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
@@ -35,7 +35,7 @@ export interface QueryGroupPolicyInfoResponse {
 /** QueryGroupMembersRequest is the Query/GroupMembers request type. */
 export interface QueryGroupMembersRequest {
   /** group_id is the unique ID of the group. */
-  groupId: string;
+  group_id: string;
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest | undefined;
 }
@@ -67,7 +67,7 @@ export interface QueryGroupsByAdminResponse {
 /** QueryGroupPoliciesByGroupRequest is the Query/GroupPoliciesByGroup request type. */
 export interface QueryGroupPoliciesByGroupRequest {
   /** group_id is the unique ID of the group policy's group. */
-  groupId: string;
+  group_id: string;
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest | undefined;
 }
@@ -75,7 +75,7 @@ export interface QueryGroupPoliciesByGroupRequest {
 /** QueryGroupPoliciesByGroupResponse is the Query/GroupPoliciesByGroup response type. */
 export interface QueryGroupPoliciesByGroupResponse {
   /** group_policies are the group policies info associated with the provided group. */
-  groupPolicies: GroupPolicyInfo[];
+  group_policies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -91,7 +91,7 @@ export interface QueryGroupPoliciesByAdminRequest {
 /** QueryGroupPoliciesByAdminResponse is the Query/GroupPoliciesByAdmin response type. */
 export interface QueryGroupPoliciesByAdminResponse {
   /** group_policies are the group policies info with provided admin. */
-  groupPolicies: GroupPolicyInfo[];
+  group_policies: GroupPolicyInfo[];
   /** pagination defines the pagination in the response. */
   pagination: PageResponse | undefined;
 }
@@ -99,7 +99,7 @@ export interface QueryGroupPoliciesByAdminResponse {
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposal_id: string;
 }
 
 /** QueryProposalResponse is the Query/Proposal response type. */
@@ -127,7 +127,7 @@ export interface QueryProposalsByGroupPolicyResponse {
 /** QueryVoteByProposalVoterRequest is the Query/VoteByProposalVoter request type. */
 export interface QueryVoteByProposalVoterRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposal_id: string;
   /** voter is a proposal voter account address. */
   voter: string;
 }
@@ -141,7 +141,7 @@ export interface QueryVoteByProposalVoterResponse {
 /** QueryVotesByProposalRequest is the Query/VotesByProposal request type. */
 export interface QueryVotesByProposalRequest {
   /** proposal_id is the unique ID of a proposal. */
-  proposalId: string;
+  proposal_id: string;
   /** pagination defines an optional pagination for the request. */
   pagination: PageRequest | undefined;
 }
@@ -189,7 +189,7 @@ export interface QueryGroupsByMemberResponse {
 /** QueryTallyResultRequest is the Query/TallyResult request type. */
 export interface QueryTallyResultRequest {
   /** proposal_id is the unique id of a proposal. */
-  proposalId: string;
+  proposal_id: string;
 }
 
 /** QueryTallyResultResponse is the Query/TallyResult response type. */
@@ -199,15 +199,15 @@ export interface QueryTallyResultResponse {
 }
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
-  return { groupId: "0" };
+  return { group_id: "0" };
 }
 
 export const QueryGroupInfoRequest = {
   $type: "cosmos.group.v1.QueryGroupInfoRequest" as const,
 
   encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.group_id !== "0") {
+      writer.uint32(8).uint64(message.group_id);
     }
     return writer;
   },
@@ -224,7 +224,7 @@ export const QueryGroupInfoRequest = {
             break;
           }
 
-          message.groupId = longToString(reader.uint64() as Long);
+          message.group_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -236,13 +236,13 @@ export const QueryGroupInfoRequest = {
   },
 
   fromJSON(object: any): QueryGroupInfoRequest {
-    return { groupId: isSet(object.groupId) ? String(object.groupId) : "0" };
+    return { group_id: isSet(object.group_id) ? String(object.group_id) : "0" };
   },
 
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
-    if (message.groupId !== "0") {
-      obj.groupId = message.groupId;
+    if (message.group_id !== "0") {
+      obj.group_id = message.group_id;
     }
     return obj;
   },
@@ -252,7 +252,7 @@ export const QueryGroupInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId = object.groupId ?? "0";
+    message.group_id = object.group_id ?? "0";
     return message;
   },
 };
@@ -437,15 +437,15 @@ export const QueryGroupPolicyInfoResponse = {
 };
 
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
-  return { groupId: "0", pagination: undefined };
+  return { group_id: "0", pagination: undefined };
 }
 
 export const QueryGroupMembersRequest = {
   $type: "cosmos.group.v1.QueryGroupMembersRequest" as const,
 
   encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.group_id !== "0") {
+      writer.uint32(8).uint64(message.group_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -465,7 +465,7 @@ export const QueryGroupMembersRequest = {
             break;
           }
 
-          message.groupId = longToString(reader.uint64() as Long);
+          message.group_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -485,15 +485,15 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
-    if (message.groupId !== "0") {
-      obj.groupId = message.groupId;
+    if (message.group_id !== "0") {
+      obj.group_id = message.group_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -506,7 +506,7 @@ export const QueryGroupMembersRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId = object.groupId ?? "0";
+    message.group_id = object.group_id ?? "0";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -749,15 +749,15 @@ export const QueryGroupsByAdminResponse = {
 };
 
 function createBaseQueryGroupPoliciesByGroupRequest(): QueryGroupPoliciesByGroupRequest {
-  return { groupId: "0", pagination: undefined };
+  return { group_id: "0", pagination: undefined };
 }
 
 export const QueryGroupPoliciesByGroupRequest = {
   $type: "cosmos.group.v1.QueryGroupPoliciesByGroupRequest" as const,
 
   encode(message: QueryGroupPoliciesByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupId !== "0") {
-      writer.uint32(8).uint64(message.groupId);
+    if (message.group_id !== "0") {
+      writer.uint32(8).uint64(message.group_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -777,7 +777,7 @@ export const QueryGroupPoliciesByGroupRequest = {
             break;
           }
 
-          message.groupId = longToString(reader.uint64() as Long);
+          message.group_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -797,15 +797,15 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      groupId: isSet(object.groupId) ? String(object.groupId) : "0",
+      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
     const obj: any = {};
-    if (message.groupId !== "0") {
-      obj.groupId = message.groupId;
+    if (message.group_id !== "0") {
+      obj.group_id = message.group_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -818,7 +818,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
-    message.groupId = object.groupId ?? "0";
+    message.group_id = object.group_id ?? "0";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -827,14 +827,14 @@ export const QueryGroupPoliciesByGroupRequest = {
 };
 
 function createBaseQueryGroupPoliciesByGroupResponse(): QueryGroupPoliciesByGroupResponse {
-  return { groupPolicies: [], pagination: undefined };
+  return { group_policies: [], pagination: undefined };
 }
 
 export const QueryGroupPoliciesByGroupResponse = {
   $type: "cosmos.group.v1.QueryGroupPoliciesByGroupResponse" as const,
 
   encode(message: QueryGroupPoliciesByGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.groupPolicies) {
+    for (const v of message.group_policies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -855,7 +855,7 @@ export const QueryGroupPoliciesByGroupResponse = {
             break;
           }
 
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
+          message.group_policies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -875,8 +875,8 @@ export const QueryGroupPoliciesByGroupResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupResponse {
     return {
-      groupPolicies: Array.isArray(object?.groupPolicies)
-        ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e))
+      group_policies: Array.isArray(object?.group_policies)
+        ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -884,8 +884,8 @@ export const QueryGroupPoliciesByGroupResponse = {
 
   toJSON(message: QueryGroupPoliciesByGroupResponse): unknown {
     const obj: any = {};
-    if (message.groupPolicies?.length) {
-      obj.groupPolicies = message.groupPolicies.map((e) => GroupPolicyInfo.toJSON(e));
+    if (message.group_policies?.length) {
+      obj.group_policies = message.group_policies.map((e) => GroupPolicyInfo.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -898,7 +898,7 @@ export const QueryGroupPoliciesByGroupResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
     const message = createBaseQueryGroupPoliciesByGroupResponse();
-    message.groupPolicies = object.groupPolicies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
+    message.group_policies = object.group_policies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -985,14 +985,14 @@ export const QueryGroupPoliciesByAdminRequest = {
 };
 
 function createBaseQueryGroupPoliciesByAdminResponse(): QueryGroupPoliciesByAdminResponse {
-  return { groupPolicies: [], pagination: undefined };
+  return { group_policies: [], pagination: undefined };
 }
 
 export const QueryGroupPoliciesByAdminResponse = {
   $type: "cosmos.group.v1.QueryGroupPoliciesByAdminResponse" as const,
 
   encode(message: QueryGroupPoliciesByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.groupPolicies) {
+    for (const v of message.group_policies) {
       GroupPolicyInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -1013,7 +1013,7 @@ export const QueryGroupPoliciesByAdminResponse = {
             break;
           }
 
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
+          message.group_policies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -1033,8 +1033,8 @@ export const QueryGroupPoliciesByAdminResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByAdminResponse {
     return {
-      groupPolicies: Array.isArray(object?.groupPolicies)
-        ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e))
+      group_policies: Array.isArray(object?.group_policies)
+        ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -1042,8 +1042,8 @@ export const QueryGroupPoliciesByAdminResponse = {
 
   toJSON(message: QueryGroupPoliciesByAdminResponse): unknown {
     const obj: any = {};
-    if (message.groupPolicies?.length) {
-      obj.groupPolicies = message.groupPolicies.map((e) => GroupPolicyInfo.toJSON(e));
+    if (message.group_policies?.length) {
+      obj.group_policies = message.group_policies.map((e) => GroupPolicyInfo.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -1056,7 +1056,7 @@ export const QueryGroupPoliciesByAdminResponse = {
   },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     const message = createBaseQueryGroupPoliciesByAdminResponse();
-    message.groupPolicies = object.groupPolicies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
+    message.group_policies = object.group_policies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -1065,15 +1065,15 @@ export const QueryGroupPoliciesByAdminResponse = {
 };
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
-  return { proposalId: "0" };
+  return { proposal_id: "0" };
 }
 
 export const QueryProposalRequest = {
   $type: "cosmos.group.v1.QueryProposalRequest" as const,
 
   encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     return writer;
   },
@@ -1090,7 +1090,7 @@ export const QueryProposalRequest = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1102,13 +1102,13 @@ export const QueryProposalRequest = {
   },
 
   fromJSON(object: any): QueryProposalRequest {
-    return { proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     return obj;
   },
@@ -1118,7 +1118,7 @@ export const QueryProposalRequest = {
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     return message;
   },
 };
@@ -1341,15 +1341,15 @@ export const QueryProposalsByGroupPolicyResponse = {
 };
 
 function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
-  return { proposalId: "0", voter: "" };
+  return { proposal_id: "0", voter: "" };
 }
 
 export const QueryVoteByProposalVoterRequest = {
   $type: "cosmos.group.v1.QueryVoteByProposalVoterRequest" as const,
 
   encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
@@ -1369,7 +1369,7 @@ export const QueryVoteByProposalVoterRequest = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -1389,15 +1389,15 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
       voter: isSet(object.voter) ? String(object.voter) : "",
     };
   },
 
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     if (message.voter !== "") {
       obj.voter = message.voter;
@@ -1410,7 +1410,7 @@ export const QueryVoteByProposalVoterRequest = {
   },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     message.voter = object.voter ?? "";
     return message;
   },
@@ -1476,15 +1476,15 @@ export const QueryVoteByProposalVoterResponse = {
 };
 
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
-  return { proposalId: "0", pagination: undefined };
+  return { proposal_id: "0", pagination: undefined };
 }
 
 export const QueryVotesByProposalRequest = {
   $type: "cosmos.group.v1.QueryVotesByProposalRequest" as const,
 
   encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -1504,7 +1504,7 @@ export const QueryVotesByProposalRequest = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -1524,15 +1524,15 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0",
+      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -1545,7 +1545,7 @@ export const QueryVotesByProposalRequest = {
   },
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -1944,15 +1944,15 @@ export const QueryGroupsByMemberResponse = {
 };
 
 function createBaseQueryTallyResultRequest(): QueryTallyResultRequest {
-  return { proposalId: "0" };
+  return { proposal_id: "0" };
 }
 
 export const QueryTallyResultRequest = {
   $type: "cosmos.group.v1.QueryTallyResultRequest" as const,
 
   encode(message: QueryTallyResultRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.proposalId !== "0") {
-      writer.uint32(8).uint64(message.proposalId);
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
     }
     return writer;
   },
@@ -1969,7 +1969,7 @@ export const QueryTallyResultRequest = {
             break;
           }
 
-          message.proposalId = longToString(reader.uint64() as Long);
+          message.proposal_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1981,13 +1981,13 @@ export const QueryTallyResultRequest = {
   },
 
   fromJSON(object: any): QueryTallyResultRequest {
-    return { proposalId: isSet(object.proposalId) ? String(object.proposalId) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    if (message.proposalId !== "0") {
-      obj.proposalId = message.proposalId;
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
     }
     return obj;
   },
@@ -1997,7 +1997,7 @@ export const QueryTallyResultRequest = {
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
-    message.proposalId = object.proposalId ?? "0";
+    message.proposal_id = object.proposal_id ?? "0";
     return message;
   },
 };

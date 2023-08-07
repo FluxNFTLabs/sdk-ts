@@ -11,7 +11,7 @@ export interface AppOptionsRequest {
 /** AppOptionsResponse is the RemoteInfoService/AppOptions response type. */
 export interface AppOptionsResponse {
   /** module_options is a map of module name to autocli module options. */
-  moduleOptions: { [key: string]: ModuleOptions };
+  module_options: { [key: string]: ModuleOptions };
 }
 
 export interface AppOptionsResponse_ModuleOptionsEntry {
@@ -65,14 +65,14 @@ export const AppOptionsRequest = {
 };
 
 function createBaseAppOptionsResponse(): AppOptionsResponse {
-  return { moduleOptions: {} };
+  return { module_options: {} };
 }
 
 export const AppOptionsResponse = {
   $type: "cosmos.autocli.v1.AppOptionsResponse" as const,
 
   encode(message: AppOptionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    Object.entries(message.moduleOptions).forEach(([key, value]) => {
+    Object.entries(message.module_options).forEach(([key, value]) => {
       AppOptionsResponse_ModuleOptionsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
@@ -92,7 +92,7 @@ export const AppOptionsResponse = {
 
           const entry1 = AppOptionsResponse_ModuleOptionsEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
-            message.moduleOptions[entry1.key] = entry1.value;
+            message.module_options[entry1.key] = entry1.value;
           }
           continue;
       }
@@ -106,8 +106,8 @@ export const AppOptionsResponse = {
 
   fromJSON(object: any): AppOptionsResponse {
     return {
-      moduleOptions: isObject(object.moduleOptions)
-        ? Object.entries(object.moduleOptions).reduce<{ [key: string]: ModuleOptions }>((acc, [key, value]) => {
+      module_options: isObject(object.module_options)
+        ? Object.entries(object.module_options).reduce<{ [key: string]: ModuleOptions }>((acc, [key, value]) => {
           acc[key] = ModuleOptions.fromJSON(value);
           return acc;
         }, {})
@@ -117,12 +117,12 @@ export const AppOptionsResponse = {
 
   toJSON(message: AppOptionsResponse): unknown {
     const obj: any = {};
-    if (message.moduleOptions) {
-      const entries = Object.entries(message.moduleOptions);
+    if (message.module_options) {
+      const entries = Object.entries(message.module_options);
       if (entries.length > 0) {
-        obj.moduleOptions = {};
+        obj.module_options = {};
         entries.forEach(([k, v]) => {
-          obj.moduleOptions[k] = ModuleOptions.toJSON(v);
+          obj.module_options[k] = ModuleOptions.toJSON(v);
         });
       }
     }
@@ -134,7 +134,7 @@ export const AppOptionsResponse = {
   },
   fromPartial(object: DeepPartial<AppOptionsResponse>): AppOptionsResponse {
     const message = createBaseAppOptionsResponse();
-    message.moduleOptions = Object.entries(object.moduleOptions ?? {}).reduce<{ [key: string]: ModuleOptions }>(
+    message.module_options = Object.entries(object.module_options ?? {}).reduce<{ [key: string]: ModuleOptions }>(
       (acc, [key, value]) => {
         if (value !== undefined) {
           acc[key] = ModuleOptions.fromPartial(value);

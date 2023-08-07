@@ -20,7 +20,7 @@ export interface QueryParamsResponse {
  */
 export interface QuerySigningInfoRequest {
   /** cons_address is the address to query signing info of */
-  consAddress: string;
+  cons_address: string;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface QuerySigningInfoRequest {
  */
 export interface QuerySigningInfoResponse {
   /** val_signing_info is the signing info of requested val cons address */
-  valSigningInfo: ValidatorSigningInfo | undefined;
+  val_signing_info: ValidatorSigningInfo | undefined;
 }
 
 /**
@@ -157,15 +157,15 @@ export const QueryParamsResponse = {
 };
 
 function createBaseQuerySigningInfoRequest(): QuerySigningInfoRequest {
-  return { consAddress: "" };
+  return { cons_address: "" };
 }
 
 export const QuerySigningInfoRequest = {
   $type: "cosmos.slashing.v1beta1.QuerySigningInfoRequest" as const,
 
   encode(message: QuerySigningInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.consAddress !== "") {
-      writer.uint32(10).string(message.consAddress);
+    if (message.cons_address !== "") {
+      writer.uint32(10).string(message.cons_address);
     }
     return writer;
   },
@@ -182,7 +182,7 @@ export const QuerySigningInfoRequest = {
             break;
           }
 
-          message.consAddress = reader.string();
+          message.cons_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -194,13 +194,13 @@ export const QuerySigningInfoRequest = {
   },
 
   fromJSON(object: any): QuerySigningInfoRequest {
-    return { consAddress: isSet(object.consAddress) ? String(object.consAddress) : "" };
+    return { cons_address: isSet(object.cons_address) ? String(object.cons_address) : "" };
   },
 
   toJSON(message: QuerySigningInfoRequest): unknown {
     const obj: any = {};
-    if (message.consAddress !== "") {
-      obj.consAddress = message.consAddress;
+    if (message.cons_address !== "") {
+      obj.cons_address = message.cons_address;
     }
     return obj;
   },
@@ -210,21 +210,21 @@ export const QuerySigningInfoRequest = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfoRequest>): QuerySigningInfoRequest {
     const message = createBaseQuerySigningInfoRequest();
-    message.consAddress = object.consAddress ?? "";
+    message.cons_address = object.cons_address ?? "";
     return message;
   },
 };
 
 function createBaseQuerySigningInfoResponse(): QuerySigningInfoResponse {
-  return { valSigningInfo: undefined };
+  return { val_signing_info: undefined };
 }
 
 export const QuerySigningInfoResponse = {
   $type: "cosmos.slashing.v1beta1.QuerySigningInfoResponse" as const,
 
   encode(message: QuerySigningInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.valSigningInfo !== undefined) {
-      ValidatorSigningInfo.encode(message.valSigningInfo, writer.uint32(10).fork()).ldelim();
+    if (message.val_signing_info !== undefined) {
+      ValidatorSigningInfo.encode(message.val_signing_info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -241,7 +241,7 @@ export const QuerySigningInfoResponse = {
             break;
           }
 
-          message.valSigningInfo = ValidatorSigningInfo.decode(reader, reader.uint32());
+          message.val_signing_info = ValidatorSigningInfo.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -254,14 +254,16 @@ export const QuerySigningInfoResponse = {
 
   fromJSON(object: any): QuerySigningInfoResponse {
     return {
-      valSigningInfo: isSet(object.valSigningInfo) ? ValidatorSigningInfo.fromJSON(object.valSigningInfo) : undefined,
+      val_signing_info: isSet(object.val_signing_info)
+        ? ValidatorSigningInfo.fromJSON(object.val_signing_info)
+        : undefined,
     };
   },
 
   toJSON(message: QuerySigningInfoResponse): unknown {
     const obj: any = {};
-    if (message.valSigningInfo !== undefined) {
-      obj.valSigningInfo = ValidatorSigningInfo.toJSON(message.valSigningInfo);
+    if (message.val_signing_info !== undefined) {
+      obj.val_signing_info = ValidatorSigningInfo.toJSON(message.val_signing_info);
     }
     return obj;
   },
@@ -271,8 +273,8 @@ export const QuerySigningInfoResponse = {
   },
   fromPartial(object: DeepPartial<QuerySigningInfoResponse>): QuerySigningInfoResponse {
     const message = createBaseQuerySigningInfoResponse();
-    message.valSigningInfo = (object.valSigningInfo !== undefined && object.valSigningInfo !== null)
-      ? ValidatorSigningInfo.fromPartial(object.valSigningInfo)
+    message.val_signing_info = (object.val_signing_info !== undefined && object.val_signing_info !== null)
+      ? ValidatorSigningInfo.fromPartial(object.val_signing_info)
       : undefined;
     return message;
   },

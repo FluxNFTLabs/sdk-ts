@@ -14,35 +14,35 @@ import { MerkleRoot } from "../../../core/commitment/v1/commitment";
  * and a possible frozen height.
  */
 export interface ClientState {
-  chainId: string;
-  trustLevel:
+  chain_id: string;
+  trust_level:
     | Fraction
     | undefined;
   /**
    * duration of the period since the LastestTimestamp during which the
    * submitted headers are valid for upgrade
    */
-  trustingPeriod:
+  trusting_period:
     | Duration
     | undefined;
   /** duration of the staking unbonding period */
-  unbondingPeriod:
+  unbonding_period:
     | Duration
     | undefined;
   /** defines how much new (untrusted) header's Time can drift into the future. */
-  maxClockDrift:
+  max_clock_drift:
     | Duration
     | undefined;
   /** Block height when the client was frozen due to a misbehaviour */
-  frozenHeight:
+  frozen_height:
     | Height
     | undefined;
   /** Latest height the client was updated to */
-  latestHeight:
+  latest_height:
     | Height
     | undefined;
   /** Proof specifications used in verifying counterparty state */
-  proofSpecs: ProofSpec[];
+  proof_specs: ProofSpec[];
   /**
    * Path at which next upgraded client will be committed.
    * Each element corresponds to the key for a single CommitmentProof in the
@@ -52,19 +52,19 @@ export interface ClientState {
    * the default upgrade module, upgrade_path should be []string{"upgrade",
    * "upgradedIBCState"}`
    */
-  upgradePath: string[];
+  upgrade_path: string[];
   /**
    * allow_update_after_expiry is deprecated
    *
    * @deprecated
    */
-  allowUpdateAfterExpiry: boolean;
+  allow_update_after_expiry: boolean;
   /**
    * allow_update_after_misbehaviour is deprecated
    *
    * @deprecated
    */
-  allowUpdateAfterMisbehaviour: boolean;
+  allow_update_after_misbehaviour: boolean;
 }
 
 /** ConsensusState defines the consensus state from Tendermint. */
@@ -78,7 +78,7 @@ export interface ConsensusState {
     | undefined;
   /** commitment root (i.e app hash) */
   root: MerkleRoot | undefined;
-  nextValidatorsHash: Uint8Array;
+  next_validators_hash: Uint8Array;
 }
 
 /**
@@ -91,9 +91,9 @@ export interface Misbehaviour {
    *
    * @deprecated
    */
-  clientId: string;
-  header1: Header | undefined;
-  header2: Header | undefined;
+  client_id: string;
+  header_1: Header | undefined;
+  header_2: Header | undefined;
 }
 
 /**
@@ -111,10 +111,10 @@ export interface Misbehaviour {
  * trusted validator set at the TrustedHeight.
  */
 export interface Header {
-  signedHeader: SignedHeader | undefined;
-  validatorSet: ValidatorSet | undefined;
-  trustedHeight: Height | undefined;
-  trustedValidators: ValidatorSet | undefined;
+  signed_header: SignedHeader | undefined;
+  validator_set: ValidatorSet | undefined;
+  trusted_height: Height | undefined;
+  trusted_validators: ValidatorSet | undefined;
 }
 
 /**
@@ -128,17 +128,17 @@ export interface Fraction {
 
 function createBaseClientState(): ClientState {
   return {
-    chainId: "",
-    trustLevel: undefined,
-    trustingPeriod: undefined,
-    unbondingPeriod: undefined,
-    maxClockDrift: undefined,
-    frozenHeight: undefined,
-    latestHeight: undefined,
-    proofSpecs: [],
-    upgradePath: [],
-    allowUpdateAfterExpiry: false,
-    allowUpdateAfterMisbehaviour: false,
+    chain_id: "",
+    trust_level: undefined,
+    trusting_period: undefined,
+    unbonding_period: undefined,
+    max_clock_drift: undefined,
+    frozen_height: undefined,
+    latest_height: undefined,
+    proof_specs: [],
+    upgrade_path: [],
+    allow_update_after_expiry: false,
+    allow_update_after_misbehaviour: false,
   };
 }
 
@@ -146,38 +146,38 @@ export const ClientState = {
   $type: "ibc.lightclients.tendermint.v1.ClientState" as const,
 
   encode(message: ClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.chainId !== "") {
-      writer.uint32(10).string(message.chainId);
+    if (message.chain_id !== "") {
+      writer.uint32(10).string(message.chain_id);
     }
-    if (message.trustLevel !== undefined) {
-      Fraction.encode(message.trustLevel, writer.uint32(18).fork()).ldelim();
+    if (message.trust_level !== undefined) {
+      Fraction.encode(message.trust_level, writer.uint32(18).fork()).ldelim();
     }
-    if (message.trustingPeriod !== undefined) {
-      Duration.encode(message.trustingPeriod, writer.uint32(26).fork()).ldelim();
+    if (message.trusting_period !== undefined) {
+      Duration.encode(message.trusting_period, writer.uint32(26).fork()).ldelim();
     }
-    if (message.unbondingPeriod !== undefined) {
-      Duration.encode(message.unbondingPeriod, writer.uint32(34).fork()).ldelim();
+    if (message.unbonding_period !== undefined) {
+      Duration.encode(message.unbonding_period, writer.uint32(34).fork()).ldelim();
     }
-    if (message.maxClockDrift !== undefined) {
-      Duration.encode(message.maxClockDrift, writer.uint32(42).fork()).ldelim();
+    if (message.max_clock_drift !== undefined) {
+      Duration.encode(message.max_clock_drift, writer.uint32(42).fork()).ldelim();
     }
-    if (message.frozenHeight !== undefined) {
-      Height.encode(message.frozenHeight, writer.uint32(50).fork()).ldelim();
+    if (message.frozen_height !== undefined) {
+      Height.encode(message.frozen_height, writer.uint32(50).fork()).ldelim();
     }
-    if (message.latestHeight !== undefined) {
-      Height.encode(message.latestHeight, writer.uint32(58).fork()).ldelim();
+    if (message.latest_height !== undefined) {
+      Height.encode(message.latest_height, writer.uint32(58).fork()).ldelim();
     }
-    for (const v of message.proofSpecs) {
+    for (const v of message.proof_specs) {
       ProofSpec.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-    for (const v of message.upgradePath) {
+    for (const v of message.upgrade_path) {
       writer.uint32(74).string(v!);
     }
-    if (message.allowUpdateAfterExpiry === true) {
-      writer.uint32(80).bool(message.allowUpdateAfterExpiry);
+    if (message.allow_update_after_expiry === true) {
+      writer.uint32(80).bool(message.allow_update_after_expiry);
     }
-    if (message.allowUpdateAfterMisbehaviour === true) {
-      writer.uint32(88).bool(message.allowUpdateAfterMisbehaviour);
+    if (message.allow_update_after_misbehaviour === true) {
+      writer.uint32(88).bool(message.allow_update_after_misbehaviour);
     }
     return writer;
   },
@@ -194,77 +194,77 @@ export const ClientState = {
             break;
           }
 
-          message.chainId = reader.string();
+          message.chain_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.trustLevel = Fraction.decode(reader, reader.uint32());
+          message.trust_level = Fraction.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.trustingPeriod = Duration.decode(reader, reader.uint32());
+          message.trusting_period = Duration.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.unbondingPeriod = Duration.decode(reader, reader.uint32());
+          message.unbonding_period = Duration.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.maxClockDrift = Duration.decode(reader, reader.uint32());
+          message.max_clock_drift = Duration.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.frozenHeight = Height.decode(reader, reader.uint32());
+          message.frozen_height = Height.decode(reader, reader.uint32());
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.latestHeight = Height.decode(reader, reader.uint32());
+          message.latest_height = Height.decode(reader, reader.uint32());
           continue;
         case 8:
           if (tag !== 66) {
             break;
           }
 
-          message.proofSpecs.push(ProofSpec.decode(reader, reader.uint32()));
+          message.proof_specs.push(ProofSpec.decode(reader, reader.uint32()));
           continue;
         case 9:
           if (tag !== 74) {
             break;
           }
 
-          message.upgradePath.push(reader.string());
+          message.upgrade_path.push(reader.string());
           continue;
         case 10:
           if (tag !== 80) {
             break;
           }
 
-          message.allowUpdateAfterExpiry = reader.bool();
+          message.allow_update_after_expiry = reader.bool();
           continue;
         case 11:
           if (tag !== 88) {
             break;
           }
 
-          message.allowUpdateAfterMisbehaviour = reader.bool();
+          message.allow_update_after_misbehaviour = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -277,56 +277,58 @@ export const ClientState = {
 
   fromJSON(object: any): ClientState {
     return {
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
-      trustLevel: isSet(object.trustLevel) ? Fraction.fromJSON(object.trustLevel) : undefined,
-      trustingPeriod: isSet(object.trustingPeriod) ? Duration.fromJSON(object.trustingPeriod) : undefined,
-      unbondingPeriod: isSet(object.unbondingPeriod) ? Duration.fromJSON(object.unbondingPeriod) : undefined,
-      maxClockDrift: isSet(object.maxClockDrift) ? Duration.fromJSON(object.maxClockDrift) : undefined,
-      frozenHeight: isSet(object.frozenHeight) ? Height.fromJSON(object.frozenHeight) : undefined,
-      latestHeight: isSet(object.latestHeight) ? Height.fromJSON(object.latestHeight) : undefined,
-      proofSpecs: Array.isArray(object?.proofSpecs) ? object.proofSpecs.map((e: any) => ProofSpec.fromJSON(e)) : [],
-      upgradePath: Array.isArray(object?.upgradePath) ? object.upgradePath.map((e: any) => String(e)) : [],
-      allowUpdateAfterExpiry: isSet(object.allowUpdateAfterExpiry) ? Boolean(object.allowUpdateAfterExpiry) : false,
-      allowUpdateAfterMisbehaviour: isSet(object.allowUpdateAfterMisbehaviour)
-        ? Boolean(object.allowUpdateAfterMisbehaviour)
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      trust_level: isSet(object.trust_level) ? Fraction.fromJSON(object.trust_level) : undefined,
+      trusting_period: isSet(object.trusting_period) ? Duration.fromJSON(object.trusting_period) : undefined,
+      unbonding_period: isSet(object.unbonding_period) ? Duration.fromJSON(object.unbonding_period) : undefined,
+      max_clock_drift: isSet(object.max_clock_drift) ? Duration.fromJSON(object.max_clock_drift) : undefined,
+      frozen_height: isSet(object.frozen_height) ? Height.fromJSON(object.frozen_height) : undefined,
+      latest_height: isSet(object.latest_height) ? Height.fromJSON(object.latest_height) : undefined,
+      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromJSON(e)) : [],
+      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      allow_update_after_expiry: isSet(object.allow_update_after_expiry)
+        ? Boolean(object.allow_update_after_expiry)
+        : false,
+      allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour)
+        ? Boolean(object.allow_update_after_misbehaviour)
         : false,
     };
   },
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.chainId !== "") {
-      obj.chainId = message.chainId;
+    if (message.chain_id !== "") {
+      obj.chain_id = message.chain_id;
     }
-    if (message.trustLevel !== undefined) {
-      obj.trustLevel = Fraction.toJSON(message.trustLevel);
+    if (message.trust_level !== undefined) {
+      obj.trust_level = Fraction.toJSON(message.trust_level);
     }
-    if (message.trustingPeriod !== undefined) {
-      obj.trustingPeriod = Duration.toJSON(message.trustingPeriod);
+    if (message.trusting_period !== undefined) {
+      obj.trusting_period = Duration.toJSON(message.trusting_period);
     }
-    if (message.unbondingPeriod !== undefined) {
-      obj.unbondingPeriod = Duration.toJSON(message.unbondingPeriod);
+    if (message.unbonding_period !== undefined) {
+      obj.unbonding_period = Duration.toJSON(message.unbonding_period);
     }
-    if (message.maxClockDrift !== undefined) {
-      obj.maxClockDrift = Duration.toJSON(message.maxClockDrift);
+    if (message.max_clock_drift !== undefined) {
+      obj.max_clock_drift = Duration.toJSON(message.max_clock_drift);
     }
-    if (message.frozenHeight !== undefined) {
-      obj.frozenHeight = Height.toJSON(message.frozenHeight);
+    if (message.frozen_height !== undefined) {
+      obj.frozen_height = Height.toJSON(message.frozen_height);
     }
-    if (message.latestHeight !== undefined) {
-      obj.latestHeight = Height.toJSON(message.latestHeight);
+    if (message.latest_height !== undefined) {
+      obj.latest_height = Height.toJSON(message.latest_height);
     }
-    if (message.proofSpecs?.length) {
-      obj.proofSpecs = message.proofSpecs.map((e) => ProofSpec.toJSON(e));
+    if (message.proof_specs?.length) {
+      obj.proof_specs = message.proof_specs.map((e) => ProofSpec.toJSON(e));
     }
-    if (message.upgradePath?.length) {
-      obj.upgradePath = message.upgradePath;
+    if (message.upgrade_path?.length) {
+      obj.upgrade_path = message.upgrade_path;
     }
-    if (message.allowUpdateAfterExpiry === true) {
-      obj.allowUpdateAfterExpiry = message.allowUpdateAfterExpiry;
+    if (message.allow_update_after_expiry === true) {
+      obj.allow_update_after_expiry = message.allow_update_after_expiry;
     }
-    if (message.allowUpdateAfterMisbehaviour === true) {
-      obj.allowUpdateAfterMisbehaviour = message.allowUpdateAfterMisbehaviour;
+    if (message.allow_update_after_misbehaviour === true) {
+      obj.allow_update_after_misbehaviour = message.allow_update_after_misbehaviour;
     }
     return obj;
   },
@@ -336,35 +338,35 @@ export const ClientState = {
   },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
-    message.chainId = object.chainId ?? "";
-    message.trustLevel = (object.trustLevel !== undefined && object.trustLevel !== null)
-      ? Fraction.fromPartial(object.trustLevel)
+    message.chain_id = object.chain_id ?? "";
+    message.trust_level = (object.trust_level !== undefined && object.trust_level !== null)
+      ? Fraction.fromPartial(object.trust_level)
       : undefined;
-    message.trustingPeriod = (object.trustingPeriod !== undefined && object.trustingPeriod !== null)
-      ? Duration.fromPartial(object.trustingPeriod)
+    message.trusting_period = (object.trusting_period !== undefined && object.trusting_period !== null)
+      ? Duration.fromPartial(object.trusting_period)
       : undefined;
-    message.unbondingPeriod = (object.unbondingPeriod !== undefined && object.unbondingPeriod !== null)
-      ? Duration.fromPartial(object.unbondingPeriod)
+    message.unbonding_period = (object.unbonding_period !== undefined && object.unbonding_period !== null)
+      ? Duration.fromPartial(object.unbonding_period)
       : undefined;
-    message.maxClockDrift = (object.maxClockDrift !== undefined && object.maxClockDrift !== null)
-      ? Duration.fromPartial(object.maxClockDrift)
+    message.max_clock_drift = (object.max_clock_drift !== undefined && object.max_clock_drift !== null)
+      ? Duration.fromPartial(object.max_clock_drift)
       : undefined;
-    message.frozenHeight = (object.frozenHeight !== undefined && object.frozenHeight !== null)
-      ? Height.fromPartial(object.frozenHeight)
+    message.frozen_height = (object.frozen_height !== undefined && object.frozen_height !== null)
+      ? Height.fromPartial(object.frozen_height)
       : undefined;
-    message.latestHeight = (object.latestHeight !== undefined && object.latestHeight !== null)
-      ? Height.fromPartial(object.latestHeight)
+    message.latest_height = (object.latest_height !== undefined && object.latest_height !== null)
+      ? Height.fromPartial(object.latest_height)
       : undefined;
-    message.proofSpecs = object.proofSpecs?.map((e) => ProofSpec.fromPartial(e)) || [];
-    message.upgradePath = object.upgradePath?.map((e) => e) || [];
-    message.allowUpdateAfterExpiry = object.allowUpdateAfterExpiry ?? false;
-    message.allowUpdateAfterMisbehaviour = object.allowUpdateAfterMisbehaviour ?? false;
+    message.proof_specs = object.proof_specs?.map((e) => ProofSpec.fromPartial(e)) || [];
+    message.upgrade_path = object.upgrade_path?.map((e) => e) || [];
+    message.allow_update_after_expiry = object.allow_update_after_expiry ?? false;
+    message.allow_update_after_misbehaviour = object.allow_update_after_misbehaviour ?? false;
     return message;
   },
 };
 
 function createBaseConsensusState(): ConsensusState {
-  return { timestamp: undefined, root: undefined, nextValidatorsHash: new Uint8Array(0) };
+  return { timestamp: undefined, root: undefined, next_validators_hash: new Uint8Array(0) };
 }
 
 export const ConsensusState = {
@@ -377,8 +379,8 @@ export const ConsensusState = {
     if (message.root !== undefined) {
       MerkleRoot.encode(message.root, writer.uint32(18).fork()).ldelim();
     }
-    if (message.nextValidatorsHash.length !== 0) {
-      writer.uint32(26).bytes(message.nextValidatorsHash);
+    if (message.next_validators_hash.length !== 0) {
+      writer.uint32(26).bytes(message.next_validators_hash);
     }
     return writer;
   },
@@ -409,7 +411,7 @@ export const ConsensusState = {
             break;
           }
 
-          message.nextValidatorsHash = reader.bytes();
+          message.next_validators_hash = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -424,8 +426,8 @@ export const ConsensusState = {
     return {
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       root: isSet(object.root) ? MerkleRoot.fromJSON(object.root) : undefined,
-      nextValidatorsHash: isSet(object.nextValidatorsHash)
-        ? bytesFromBase64(object.nextValidatorsHash)
+      next_validators_hash: isSet(object.next_validators_hash)
+        ? bytesFromBase64(object.next_validators_hash)
         : new Uint8Array(0),
     };
   },
@@ -438,8 +440,8 @@ export const ConsensusState = {
     if (message.root !== undefined) {
       obj.root = MerkleRoot.toJSON(message.root);
     }
-    if (message.nextValidatorsHash.length !== 0) {
-      obj.nextValidatorsHash = base64FromBytes(message.nextValidatorsHash);
+    if (message.next_validators_hash.length !== 0) {
+      obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
     return obj;
   },
@@ -453,27 +455,27 @@ export const ConsensusState = {
     message.root = (object.root !== undefined && object.root !== null)
       ? MerkleRoot.fromPartial(object.root)
       : undefined;
-    message.nextValidatorsHash = object.nextValidatorsHash ?? new Uint8Array(0);
+    message.next_validators_hash = object.next_validators_hash ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseMisbehaviour(): Misbehaviour {
-  return { clientId: "", header1: undefined, header2: undefined };
+  return { client_id: "", header_1: undefined, header_2: undefined };
 }
 
 export const Misbehaviour = {
   $type: "ibc.lightclients.tendermint.v1.Misbehaviour" as const,
 
   encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    if (message.header1 !== undefined) {
-      Header.encode(message.header1, writer.uint32(18).fork()).ldelim();
+    if (message.header_1 !== undefined) {
+      Header.encode(message.header_1, writer.uint32(18).fork()).ldelim();
     }
-    if (message.header2 !== undefined) {
-      Header.encode(message.header2, writer.uint32(26).fork()).ldelim();
+    if (message.header_2 !== undefined) {
+      Header.encode(message.header_2, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -490,21 +492,21 @@ export const Misbehaviour = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.header1 = Header.decode(reader, reader.uint32());
+          message.header_1 = Header.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.header2 = Header.decode(reader, reader.uint32());
+          message.header_2 = Header.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -517,22 +519,22 @@ export const Misbehaviour = {
 
   fromJSON(object: any): Misbehaviour {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      header1: isSet(object.header1) ? Header.fromJSON(object.header1) : undefined,
-      header2: isSet(object.header2) ? Header.fromJSON(object.header2) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      header_1: isSet(object.header_1) ? Header.fromJSON(object.header_1) : undefined,
+      header_2: isSet(object.header_2) ? Header.fromJSON(object.header_2) : undefined,
     };
   },
 
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.header1 !== undefined) {
-      obj.header1 = Header.toJSON(message.header1);
+    if (message.header_1 !== undefined) {
+      obj.header_1 = Header.toJSON(message.header_1);
     }
-    if (message.header2 !== undefined) {
-      obj.header2 = Header.toJSON(message.header2);
+    if (message.header_2 !== undefined) {
+      obj.header_2 = Header.toJSON(message.header_2);
     }
     return obj;
   },
@@ -542,36 +544,41 @@ export const Misbehaviour = {
   },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
-    message.clientId = object.clientId ?? "";
-    message.header1 = (object.header1 !== undefined && object.header1 !== null)
-      ? Header.fromPartial(object.header1)
+    message.client_id = object.client_id ?? "";
+    message.header_1 = (object.header_1 !== undefined && object.header_1 !== null)
+      ? Header.fromPartial(object.header_1)
       : undefined;
-    message.header2 = (object.header2 !== undefined && object.header2 !== null)
-      ? Header.fromPartial(object.header2)
+    message.header_2 = (object.header_2 !== undefined && object.header_2 !== null)
+      ? Header.fromPartial(object.header_2)
       : undefined;
     return message;
   },
 };
 
 function createBaseHeader(): Header {
-  return { signedHeader: undefined, validatorSet: undefined, trustedHeight: undefined, trustedValidators: undefined };
+  return {
+    signed_header: undefined,
+    validator_set: undefined,
+    trusted_height: undefined,
+    trusted_validators: undefined,
+  };
 }
 
 export const Header = {
   $type: "ibc.lightclients.tendermint.v1.Header" as const,
 
   encode(message: Header, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.signedHeader !== undefined) {
-      SignedHeader.encode(message.signedHeader, writer.uint32(10).fork()).ldelim();
+    if (message.signed_header !== undefined) {
+      SignedHeader.encode(message.signed_header, writer.uint32(10).fork()).ldelim();
     }
-    if (message.validatorSet !== undefined) {
-      ValidatorSet.encode(message.validatorSet, writer.uint32(18).fork()).ldelim();
+    if (message.validator_set !== undefined) {
+      ValidatorSet.encode(message.validator_set, writer.uint32(18).fork()).ldelim();
     }
-    if (message.trustedHeight !== undefined) {
-      Height.encode(message.trustedHeight, writer.uint32(26).fork()).ldelim();
+    if (message.trusted_height !== undefined) {
+      Height.encode(message.trusted_height, writer.uint32(26).fork()).ldelim();
     }
-    if (message.trustedValidators !== undefined) {
-      ValidatorSet.encode(message.trustedValidators, writer.uint32(34).fork()).ldelim();
+    if (message.trusted_validators !== undefined) {
+      ValidatorSet.encode(message.trusted_validators, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -588,28 +595,28 @@ export const Header = {
             break;
           }
 
-          message.signedHeader = SignedHeader.decode(reader, reader.uint32());
+          message.signed_header = SignedHeader.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorSet = ValidatorSet.decode(reader, reader.uint32());
+          message.validator_set = ValidatorSet.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.trustedHeight = Height.decode(reader, reader.uint32());
+          message.trusted_height = Height.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.trustedValidators = ValidatorSet.decode(reader, reader.uint32());
+          message.trusted_validators = ValidatorSet.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -622,26 +629,28 @@ export const Header = {
 
   fromJSON(object: any): Header {
     return {
-      signedHeader: isSet(object.signedHeader) ? SignedHeader.fromJSON(object.signedHeader) : undefined,
-      validatorSet: isSet(object.validatorSet) ? ValidatorSet.fromJSON(object.validatorSet) : undefined,
-      trustedHeight: isSet(object.trustedHeight) ? Height.fromJSON(object.trustedHeight) : undefined,
-      trustedValidators: isSet(object.trustedValidators) ? ValidatorSet.fromJSON(object.trustedValidators) : undefined,
+      signed_header: isSet(object.signed_header) ? SignedHeader.fromJSON(object.signed_header) : undefined,
+      validator_set: isSet(object.validator_set) ? ValidatorSet.fromJSON(object.validator_set) : undefined,
+      trusted_height: isSet(object.trusted_height) ? Height.fromJSON(object.trusted_height) : undefined,
+      trusted_validators: isSet(object.trusted_validators)
+        ? ValidatorSet.fromJSON(object.trusted_validators)
+        : undefined,
     };
   },
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    if (message.signedHeader !== undefined) {
-      obj.signedHeader = SignedHeader.toJSON(message.signedHeader);
+    if (message.signed_header !== undefined) {
+      obj.signed_header = SignedHeader.toJSON(message.signed_header);
     }
-    if (message.validatorSet !== undefined) {
-      obj.validatorSet = ValidatorSet.toJSON(message.validatorSet);
+    if (message.validator_set !== undefined) {
+      obj.validator_set = ValidatorSet.toJSON(message.validator_set);
     }
-    if (message.trustedHeight !== undefined) {
-      obj.trustedHeight = Height.toJSON(message.trustedHeight);
+    if (message.trusted_height !== undefined) {
+      obj.trusted_height = Height.toJSON(message.trusted_height);
     }
-    if (message.trustedValidators !== undefined) {
-      obj.trustedValidators = ValidatorSet.toJSON(message.trustedValidators);
+    if (message.trusted_validators !== undefined) {
+      obj.trusted_validators = ValidatorSet.toJSON(message.trusted_validators);
     }
     return obj;
   },
@@ -651,17 +660,17 @@ export const Header = {
   },
   fromPartial(object: DeepPartial<Header>): Header {
     const message = createBaseHeader();
-    message.signedHeader = (object.signedHeader !== undefined && object.signedHeader !== null)
-      ? SignedHeader.fromPartial(object.signedHeader)
+    message.signed_header = (object.signed_header !== undefined && object.signed_header !== null)
+      ? SignedHeader.fromPartial(object.signed_header)
       : undefined;
-    message.validatorSet = (object.validatorSet !== undefined && object.validatorSet !== null)
-      ? ValidatorSet.fromPartial(object.validatorSet)
+    message.validator_set = (object.validator_set !== undefined && object.validator_set !== null)
+      ? ValidatorSet.fromPartial(object.validator_set)
       : undefined;
-    message.trustedHeight = (object.trustedHeight !== undefined && object.trustedHeight !== null)
-      ? Height.fromPartial(object.trustedHeight)
+    message.trusted_height = (object.trusted_height !== undefined && object.trusted_height !== null)
+      ? Height.fromPartial(object.trusted_height)
       : undefined;
-    message.trustedValidators = (object.trustedValidators !== undefined && object.trustedValidators !== null)
-      ? ValidatorSet.fromPartial(object.trustedValidators)
+    message.trusted_validators = (object.trusted_validators !== undefined && object.trusted_validators !== null)
+      ? ValidatorSet.fromPartial(object.trusted_validators)
       : undefined;
     return message;
   },

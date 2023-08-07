@@ -35,7 +35,7 @@ export interface PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-  countTotal: boolean;
+  count_total: boolean;
   /**
    * reverse is set to true if results are to be returned in the descending order.
    *
@@ -59,7 +59,7 @@ export interface PageResponse {
    * query the next page most efficiently. It will be empty if
    * there are no more results.
    */
-  nextKey: Uint8Array;
+  next_key: Uint8Array;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
@@ -68,7 +68,7 @@ export interface PageResponse {
 }
 
 function createBasePageRequest(): PageRequest {
-  return { key: new Uint8Array(0), offset: "0", limit: "0", countTotal: false, reverse: false };
+  return { key: new Uint8Array(0), offset: "0", limit: "0", count_total: false, reverse: false };
 }
 
 export const PageRequest = {
@@ -84,8 +84,8 @@ export const PageRequest = {
     if (message.limit !== "0") {
       writer.uint32(24).uint64(message.limit);
     }
-    if (message.countTotal === true) {
-      writer.uint32(32).bool(message.countTotal);
+    if (message.count_total === true) {
+      writer.uint32(32).bool(message.count_total);
     }
     if (message.reverse === true) {
       writer.uint32(40).bool(message.reverse);
@@ -126,7 +126,7 @@ export const PageRequest = {
             break;
           }
 
-          message.countTotal = reader.bool();
+          message.count_total = reader.bool();
           continue;
         case 5:
           if (tag !== 40) {
@@ -149,7 +149,7 @@ export const PageRequest = {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
       offset: isSet(object.offset) ? String(object.offset) : "0",
       limit: isSet(object.limit) ? String(object.limit) : "0",
-      countTotal: isSet(object.countTotal) ? Boolean(object.countTotal) : false,
+      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false,
     };
   },
@@ -165,8 +165,8 @@ export const PageRequest = {
     if (message.limit !== "0") {
       obj.limit = message.limit;
     }
-    if (message.countTotal === true) {
-      obj.countTotal = message.countTotal;
+    if (message.count_total === true) {
+      obj.count_total = message.count_total;
     }
     if (message.reverse === true) {
       obj.reverse = message.reverse;
@@ -182,22 +182,22 @@ export const PageRequest = {
     message.key = object.key ?? new Uint8Array(0);
     message.offset = object.offset ?? "0";
     message.limit = object.limit ?? "0";
-    message.countTotal = object.countTotal ?? false;
+    message.count_total = object.count_total ?? false;
     message.reverse = object.reverse ?? false;
     return message;
   },
 };
 
 function createBasePageResponse(): PageResponse {
-  return { nextKey: new Uint8Array(0), total: "0" };
+  return { next_key: new Uint8Array(0), total: "0" };
 }
 
 export const PageResponse = {
   $type: "cosmos.base.query.v1beta1.PageResponse" as const,
 
   encode(message: PageResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.nextKey.length !== 0) {
-      writer.uint32(10).bytes(message.nextKey);
+    if (message.next_key.length !== 0) {
+      writer.uint32(10).bytes(message.next_key);
     }
     if (message.total !== "0") {
       writer.uint32(16).uint64(message.total);
@@ -217,7 +217,7 @@ export const PageResponse = {
             break;
           }
 
-          message.nextKey = reader.bytes();
+          message.next_key = reader.bytes();
           continue;
         case 2:
           if (tag !== 16) {
@@ -237,15 +237,15 @@ export const PageResponse = {
 
   fromJSON(object: any): PageResponse {
     return {
-      nextKey: isSet(object.nextKey) ? bytesFromBase64(object.nextKey) : new Uint8Array(0),
+      next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(0),
       total: isSet(object.total) ? String(object.total) : "0",
     };
   },
 
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
-    if (message.nextKey.length !== 0) {
-      obj.nextKey = base64FromBytes(message.nextKey);
+    if (message.next_key.length !== 0) {
+      obj.next_key = base64FromBytes(message.next_key);
     }
     if (message.total !== "0") {
       obj.total = message.total;
@@ -258,7 +258,7 @@ export const PageResponse = {
   },
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {
     const message = createBasePageResponse();
-    message.nextKey = object.nextKey ?? new Uint8Array(0);
+    message.next_key = object.next_key ?? new Uint8Array(0);
     message.total = object.total ?? "0";
     return message;
   },

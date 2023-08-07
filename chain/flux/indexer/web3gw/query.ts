@@ -10,8 +10,8 @@ export interface GetMetaDataRequest {
 export interface GetMetaDataResponse {
   address: string;
   pubkey: Uint8Array;
-  maxGasLimit: string;
-  maxGasPrice: string;
+  max_gas_limit: string;
+  max_gas_price: string;
 }
 
 export interface SignProtoRequest {
@@ -78,7 +78,7 @@ export const GetMetaDataRequest = {
 };
 
 function createBaseGetMetaDataResponse(): GetMetaDataResponse {
-  return { address: "", pubkey: new Uint8Array(0), maxGasLimit: "0", maxGasPrice: "" };
+  return { address: "", pubkey: new Uint8Array(0), max_gas_limit: "0", max_gas_price: "" };
 }
 
 export const GetMetaDataResponse = {
@@ -91,11 +91,11 @@ export const GetMetaDataResponse = {
     if (message.pubkey.length !== 0) {
       writer.uint32(18).bytes(message.pubkey);
     }
-    if (message.maxGasLimit !== "0") {
-      writer.uint32(24).uint64(message.maxGasLimit);
+    if (message.max_gas_limit !== "0") {
+      writer.uint32(24).uint64(message.max_gas_limit);
     }
-    if (message.maxGasPrice !== "") {
-      writer.uint32(34).string(message.maxGasPrice);
+    if (message.max_gas_price !== "") {
+      writer.uint32(34).string(message.max_gas_price);
     }
     return writer;
   },
@@ -126,14 +126,14 @@ export const GetMetaDataResponse = {
             break;
           }
 
-          message.maxGasLimit = longToString(reader.uint64() as Long);
+          message.max_gas_limit = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.maxGasPrice = reader.string();
+          message.max_gas_price = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -148,8 +148,8 @@ export const GetMetaDataResponse = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubkey: isSet(object.pubkey) ? bytesFromBase64(object.pubkey) : new Uint8Array(0),
-      maxGasLimit: isSet(object.maxGasLimit) ? String(object.maxGasLimit) : "0",
-      maxGasPrice: isSet(object.maxGasPrice) ? String(object.maxGasPrice) : "",
+      max_gas_limit: isSet(object.max_gas_limit) ? String(object.max_gas_limit) : "0",
+      max_gas_price: isSet(object.max_gas_price) ? String(object.max_gas_price) : "",
     };
   },
 
@@ -161,11 +161,11 @@ export const GetMetaDataResponse = {
     if (message.pubkey.length !== 0) {
       obj.pubkey = base64FromBytes(message.pubkey);
     }
-    if (message.maxGasLimit !== "0") {
-      obj.maxGasLimit = message.maxGasLimit;
+    if (message.max_gas_limit !== "0") {
+      obj.max_gas_limit = message.max_gas_limit;
     }
-    if (message.maxGasPrice !== "") {
-      obj.maxGasPrice = message.maxGasPrice;
+    if (message.max_gas_price !== "") {
+      obj.max_gas_price = message.max_gas_price;
     }
     return obj;
   },
@@ -177,8 +177,8 @@ export const GetMetaDataResponse = {
     const message = createBaseGetMetaDataResponse();
     message.address = object.address ?? "";
     message.pubkey = object.pubkey ?? new Uint8Array(0);
-    message.maxGasLimit = object.maxGasLimit ?? "0";
-    message.maxGasPrice = object.maxGasPrice ?? "";
+    message.max_gas_limit = object.max_gas_limit ?? "0";
+    message.max_gas_price = object.max_gas_price ?? "";
     return message;
   },
 };

@@ -7,24 +7,24 @@ import _m0 from "protobufjs/minimal";
  */
 export interface Metadata {
   /** fee_version defines the ICS29 fee version */
-  feeVersion: string;
+  fee_version: string;
   /** app_version defines the underlying application version, which may or may not be a JSON encoded bytestring */
-  appVersion: string;
+  app_version: string;
 }
 
 function createBaseMetadata(): Metadata {
-  return { feeVersion: "", appVersion: "" };
+  return { fee_version: "", app_version: "" };
 }
 
 export const Metadata = {
   $type: "ibc.applications.fee.v1.Metadata" as const,
 
   encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.feeVersion !== "") {
-      writer.uint32(10).string(message.feeVersion);
+    if (message.fee_version !== "") {
+      writer.uint32(10).string(message.fee_version);
     }
-    if (message.appVersion !== "") {
-      writer.uint32(18).string(message.appVersion);
+    if (message.app_version !== "") {
+      writer.uint32(18).string(message.app_version);
     }
     return writer;
   },
@@ -41,14 +41,14 @@ export const Metadata = {
             break;
           }
 
-          message.feeVersion = reader.string();
+          message.fee_version = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.appVersion = reader.string();
+          message.app_version = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -61,18 +61,18 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      feeVersion: isSet(object.feeVersion) ? String(object.feeVersion) : "",
-      appVersion: isSet(object.appVersion) ? String(object.appVersion) : "",
+      fee_version: isSet(object.fee_version) ? String(object.fee_version) : "",
+      app_version: isSet(object.app_version) ? String(object.app_version) : "",
     };
   },
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    if (message.feeVersion !== "") {
-      obj.feeVersion = message.feeVersion;
+    if (message.fee_version !== "") {
+      obj.fee_version = message.fee_version;
     }
-    if (message.appVersion !== "") {
-      obj.appVersion = message.appVersion;
+    if (message.app_version !== "") {
+      obj.app_version = message.app_version;
     }
     return obj;
   },
@@ -82,8 +82,8 @@ export const Metadata = {
   },
   fromPartial(object: DeepPartial<Metadata>): Metadata {
     const message = createBaseMetadata();
-    message.feeVersion = object.feeVersion ?? "";
-    message.appVersion = object.appVersion ?? "";
+    message.fee_version = object.fee_version ?? "";
+    message.app_version = object.app_version ?? "";
     return message;
   },
 };

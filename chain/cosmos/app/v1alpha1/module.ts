@@ -8,14 +8,14 @@ export interface ModuleDescriptor {
    * module in the runtime module registry. It is required to make debugging
    * of configuration errors easier for users.
    */
-  goImport: string;
+  go_import: string;
   /**
    * use_package refers to a protobuf package that this module
    * uses and exposes to the world. In an app, only one module should "use"
    * or own a single protobuf package. It is assumed that the module uses
    * all of the .proto files in a single package.
    */
-  usePackage: PackageReference[];
+  use_package: PackageReference[];
   /**
    * can_migrate_from defines which module versions this module can migrate
    * state from. The framework will check that one module version is able to
@@ -25,7 +25,7 @@ export interface ModuleDescriptor {
    * declares it can migrate from v1, the framework knows how to migrate
    * from v1 to v3, assuming all 3 module versions are registered at runtime.
    */
-  canMigrateFrom: MigrateFromInfo[];
+  can_migrate_from: MigrateFromInfo[];
 }
 
 /** PackageReference is a reference to a protobuf package used by a module. */
@@ -85,20 +85,20 @@ export interface MigrateFromInfo {
 }
 
 function createBaseModuleDescriptor(): ModuleDescriptor {
-  return { goImport: "", usePackage: [], canMigrateFrom: [] };
+  return { go_import: "", use_package: [], can_migrate_from: [] };
 }
 
 export const ModuleDescriptor = {
   $type: "cosmos.app.v1alpha1.ModuleDescriptor" as const,
 
   encode(message: ModuleDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.goImport !== "") {
-      writer.uint32(10).string(message.goImport);
+    if (message.go_import !== "") {
+      writer.uint32(10).string(message.go_import);
     }
-    for (const v of message.usePackage) {
+    for (const v of message.use_package) {
       PackageReference.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.canMigrateFrom) {
+    for (const v of message.can_migrate_from) {
       MigrateFromInfo.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
@@ -116,21 +116,21 @@ export const ModuleDescriptor = {
             break;
           }
 
-          message.goImport = reader.string();
+          message.go_import = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.usePackage.push(PackageReference.decode(reader, reader.uint32()));
+          message.use_package.push(PackageReference.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.canMigrateFrom.push(MigrateFromInfo.decode(reader, reader.uint32()));
+          message.can_migrate_from.push(MigrateFromInfo.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -143,26 +143,26 @@ export const ModuleDescriptor = {
 
   fromJSON(object: any): ModuleDescriptor {
     return {
-      goImport: isSet(object.goImport) ? String(object.goImport) : "",
-      usePackage: Array.isArray(object?.usePackage)
-        ? object.usePackage.map((e: any) => PackageReference.fromJSON(e))
+      go_import: isSet(object.go_import) ? String(object.go_import) : "",
+      use_package: Array.isArray(object?.use_package)
+        ? object.use_package.map((e: any) => PackageReference.fromJSON(e))
         : [],
-      canMigrateFrom: Array.isArray(object?.canMigrateFrom)
-        ? object.canMigrateFrom.map((e: any) => MigrateFromInfo.fromJSON(e))
+      can_migrate_from: Array.isArray(object?.can_migrate_from)
+        ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: ModuleDescriptor): unknown {
     const obj: any = {};
-    if (message.goImport !== "") {
-      obj.goImport = message.goImport;
+    if (message.go_import !== "") {
+      obj.go_import = message.go_import;
     }
-    if (message.usePackage?.length) {
-      obj.usePackage = message.usePackage.map((e) => PackageReference.toJSON(e));
+    if (message.use_package?.length) {
+      obj.use_package = message.use_package.map((e) => PackageReference.toJSON(e));
     }
-    if (message.canMigrateFrom?.length) {
-      obj.canMigrateFrom = message.canMigrateFrom.map((e) => MigrateFromInfo.toJSON(e));
+    if (message.can_migrate_from?.length) {
+      obj.can_migrate_from = message.can_migrate_from.map((e) => MigrateFromInfo.toJSON(e));
     }
     return obj;
   },
@@ -172,9 +172,9 @@ export const ModuleDescriptor = {
   },
   fromPartial(object: DeepPartial<ModuleDescriptor>): ModuleDescriptor {
     const message = createBaseModuleDescriptor();
-    message.goImport = object.goImport ?? "";
-    message.usePackage = object.usePackage?.map((e) => PackageReference.fromPartial(e)) || [];
-    message.canMigrateFrom = object.canMigrateFrom?.map((e) => MigrateFromInfo.fromPartial(e)) || [];
+    message.go_import = object.go_import ?? "";
+    message.use_package = object.use_package?.map((e) => PackageReference.fromPartial(e)) || [];
+    message.can_migrate_from = object.can_migrate_from?.map((e) => MigrateFromInfo.fromPartial(e)) || [];
     return message;
   },
 };

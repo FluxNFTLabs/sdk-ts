@@ -5,8 +5,8 @@ import { DenomTrace, Params } from "./transfer";
 
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisState {
-  portId: string;
-  denomTraces: DenomTrace[];
+  port_id: string;
+  denom_traces: DenomTrace[];
   params:
     | Params
     | undefined;
@@ -14,27 +14,27 @@ export interface GenesisState {
    * total_escrowed contains the total amount of tokens escrowed
    * by the transfer module
    */
-  totalEscrowed: Coin[];
+  total_escrowed: Coin[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { portId: "", denomTraces: [], params: undefined, totalEscrowed: [] };
+  return { port_id: "", denom_traces: [], params: undefined, total_escrowed: [] };
 }
 
 export const GenesisState = {
   $type: "ibc.applications.transfer.v1.GenesisState" as const,
 
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.portId !== "") {
-      writer.uint32(10).string(message.portId);
+    if (message.port_id !== "") {
+      writer.uint32(10).string(message.port_id);
     }
-    for (const v of message.denomTraces) {
+    for (const v of message.denom_traces) {
       DenomTrace.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(26).fork()).ldelim();
     }
-    for (const v of message.totalEscrowed) {
+    for (const v of message.total_escrowed) {
       Coin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
@@ -52,14 +52,14 @@ export const GenesisState = {
             break;
           }
 
-          message.portId = reader.string();
+          message.port_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.denomTraces.push(DenomTrace.decode(reader, reader.uint32()));
+          message.denom_traces.push(DenomTrace.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
@@ -73,7 +73,7 @@ export const GenesisState = {
             break;
           }
 
-          message.totalEscrowed.push(Coin.decode(reader, reader.uint32()));
+          message.total_escrowed.push(Coin.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -86,26 +86,30 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      denomTraces: Array.isArray(object?.denomTraces) ? object.denomTraces.map((e: any) => DenomTrace.fromJSON(e)) : [],
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      denom_traces: Array.isArray(object?.denom_traces)
+        ? object.denom_traces.map((e: any) => DenomTrace.fromJSON(e))
+        : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      totalEscrowed: Array.isArray(object?.totalEscrowed) ? object.totalEscrowed.map((e: any) => Coin.fromJSON(e)) : [],
+      total_escrowed: Array.isArray(object?.total_escrowed)
+        ? object.total_escrowed.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.portId !== "") {
-      obj.portId = message.portId;
+    if (message.port_id !== "") {
+      obj.port_id = message.port_id;
     }
-    if (message.denomTraces?.length) {
-      obj.denomTraces = message.denomTraces.map((e) => DenomTrace.toJSON(e));
+    if (message.denom_traces?.length) {
+      obj.denom_traces = message.denom_traces.map((e) => DenomTrace.toJSON(e));
     }
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
-    if (message.totalEscrowed?.length) {
-      obj.totalEscrowed = message.totalEscrowed.map((e) => Coin.toJSON(e));
+    if (message.total_escrowed?.length) {
+      obj.total_escrowed = message.total_escrowed.map((e) => Coin.toJSON(e));
     }
     return obj;
   },
@@ -115,12 +119,12 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.portId = object.portId ?? "";
-    message.denomTraces = object.denomTraces?.map((e) => DenomTrace.fromPartial(e)) || [];
+    message.port_id = object.port_id ?? "";
+    message.denom_traces = object.denom_traces?.map((e) => DenomTrace.fromPartial(e)) || [];
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
-    message.totalEscrowed = object.totalEscrowed?.map((e) => Coin.fromPartial(e)) || [];
+    message.total_escrowed = object.total_escrowed?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
 };

@@ -108,15 +108,15 @@ export interface ClientState {
   /** latest sequence of the client state */
   sequence: string;
   /** frozen sequence of the solo machine */
-  isFrozen: boolean;
-  consensusState:
+  is_frozen: boolean;
+  consensus_state:
     | ConsensusState
     | undefined;
   /**
    * when set to true, will allow governance to update a solo machine client.
    * The client will be unfrozen if it is frozen.
    */
-  allowUpdateAfterProposal: boolean;
+  allow_update_after_proposal: boolean;
 }
 
 /**
@@ -126,7 +126,7 @@ export interface ClientState {
  */
 export interface ConsensusState {
   /** public key of the solo machine */
-  publicKey:
+  public_key:
     | Any
     | undefined;
   /**
@@ -144,8 +144,8 @@ export interface Header {
   sequence: string;
   timestamp: string;
   signature: Uint8Array;
-  newPublicKey: Any | undefined;
-  newDiversifier: string;
+  new_public_key: Any | undefined;
+  new_diversifier: string;
 }
 
 /**
@@ -153,10 +153,10 @@ export interface Header {
  * of a sequence and two signatures over different messages at that sequence.
  */
 export interface Misbehaviour {
-  clientId: string;
+  client_id: string;
   sequence: string;
-  signatureOne: SignatureAndData | undefined;
-  signatureTwo: SignatureAndData | undefined;
+  signature_one: SignatureAndData | undefined;
+  signature_two: SignatureAndData | undefined;
 }
 
 /**
@@ -165,7 +165,7 @@ export interface Misbehaviour {
  */
 export interface SignatureAndData {
   signature: Uint8Array;
-  dataType: DataType;
+  data_type: DataType;
   data: Uint8Array;
   timestamp: string;
 }
@@ -175,7 +175,7 @@ export interface SignatureAndData {
  * signature.
  */
 export interface TimestampedSignatureData {
-  signatureData: Uint8Array;
+  signature_data: Uint8Array;
   timestamp: string;
 }
 
@@ -185,7 +185,7 @@ export interface SignBytes {
   timestamp: string;
   diversifier: string;
   /** type of the data used */
-  dataType: DataType;
+  data_type: DataType;
   /** marshaled data */
   data: Uint8Array;
 }
@@ -193,17 +193,17 @@ export interface SignBytes {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
-  newPubKey:
+  new_pub_key:
     | Any
     | undefined;
   /** header diversifier */
-  newDiversifier: string;
+  new_diversifier: string;
 }
 
 /** ClientStateData returns the SignBytes data for client state verification. */
 export interface ClientStateData {
   path: Uint8Array;
-  clientState: Any | undefined;
+  client_state: Any | undefined;
 }
 
 /**
@@ -212,7 +212,7 @@ export interface ClientStateData {
  */
 export interface ConsensusStateData {
   path: Uint8Array;
-  consensusState: Any | undefined;
+  consensus_state: Any | undefined;
 }
 
 /**
@@ -265,11 +265,11 @@ export interface PacketReceiptAbsenceData {
  */
 export interface NextSequenceRecvData {
   path: Uint8Array;
-  nextSeqRecv: string;
+  next_seq_recv: string;
 }
 
 function createBaseClientState(): ClientState {
-  return { sequence: "0", isFrozen: false, consensusState: undefined, allowUpdateAfterProposal: false };
+  return { sequence: "0", is_frozen: false, consensus_state: undefined, allow_update_after_proposal: false };
 }
 
 export const ClientState = {
@@ -279,14 +279,14 @@ export const ClientState = {
     if (message.sequence !== "0") {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.isFrozen === true) {
-      writer.uint32(16).bool(message.isFrozen);
+    if (message.is_frozen === true) {
+      writer.uint32(16).bool(message.is_frozen);
     }
-    if (message.consensusState !== undefined) {
-      ConsensusState.encode(message.consensusState, writer.uint32(26).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      ConsensusState.encode(message.consensus_state, writer.uint32(26).fork()).ldelim();
     }
-    if (message.allowUpdateAfterProposal === true) {
-      writer.uint32(32).bool(message.allowUpdateAfterProposal);
+    if (message.allow_update_after_proposal === true) {
+      writer.uint32(32).bool(message.allow_update_after_proposal);
     }
     return writer;
   },
@@ -310,21 +310,21 @@ export const ClientState = {
             break;
           }
 
-          message.isFrozen = reader.bool();
+          message.is_frozen = reader.bool();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.consensusState = ConsensusState.decode(reader, reader.uint32());
+          message.consensus_state = ConsensusState.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.allowUpdateAfterProposal = reader.bool();
+          message.allow_update_after_proposal = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -338,10 +338,10 @@ export const ClientState = {
   fromJSON(object: any): ClientState {
     return {
       sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      isFrozen: isSet(object.isFrozen) ? Boolean(object.isFrozen) : false,
-      consensusState: isSet(object.consensusState) ? ConsensusState.fromJSON(object.consensusState) : undefined,
-      allowUpdateAfterProposal: isSet(object.allowUpdateAfterProposal)
-        ? Boolean(object.allowUpdateAfterProposal)
+      is_frozen: isSet(object.is_frozen) ? Boolean(object.is_frozen) : false,
+      consensus_state: isSet(object.consensus_state) ? ConsensusState.fromJSON(object.consensus_state) : undefined,
+      allow_update_after_proposal: isSet(object.allow_update_after_proposal)
+        ? Boolean(object.allow_update_after_proposal)
         : false,
     };
   },
@@ -351,14 +351,14 @@ export const ClientState = {
     if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
-    if (message.isFrozen === true) {
-      obj.isFrozen = message.isFrozen;
+    if (message.is_frozen === true) {
+      obj.is_frozen = message.is_frozen;
     }
-    if (message.consensusState !== undefined) {
-      obj.consensusState = ConsensusState.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = ConsensusState.toJSON(message.consensus_state);
     }
-    if (message.allowUpdateAfterProposal === true) {
-      obj.allowUpdateAfterProposal = message.allowUpdateAfterProposal;
+    if (message.allow_update_after_proposal === true) {
+      obj.allow_update_after_proposal = message.allow_update_after_proposal;
     }
     return obj;
   },
@@ -369,25 +369,25 @@ export const ClientState = {
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.sequence = object.sequence ?? "0";
-    message.isFrozen = object.isFrozen ?? false;
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? ConsensusState.fromPartial(object.consensusState)
+    message.is_frozen = object.is_frozen ?? false;
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? ConsensusState.fromPartial(object.consensus_state)
       : undefined;
-    message.allowUpdateAfterProposal = object.allowUpdateAfterProposal ?? false;
+    message.allow_update_after_proposal = object.allow_update_after_proposal ?? false;
     return message;
   },
 };
 
 function createBaseConsensusState(): ConsensusState {
-  return { publicKey: undefined, diversifier: "", timestamp: "0" };
+  return { public_key: undefined, diversifier: "", timestamp: "0" };
 }
 
 export const ConsensusState = {
   $type: "ibc.lightclients.solomachine.v2.ConsensusState" as const,
 
   encode(message: ConsensusState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.publicKey !== undefined) {
-      Any.encode(message.publicKey, writer.uint32(10).fork()).ldelim();
+    if (message.public_key !== undefined) {
+      Any.encode(message.public_key, writer.uint32(10).fork()).ldelim();
     }
     if (message.diversifier !== "") {
       writer.uint32(18).string(message.diversifier);
@@ -410,7 +410,7 @@ export const ConsensusState = {
             break;
           }
 
-          message.publicKey = Any.decode(reader, reader.uint32());
+          message.public_key = Any.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -437,7 +437,7 @@ export const ConsensusState = {
 
   fromJSON(object: any): ConsensusState {
     return {
-      publicKey: isSet(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
+      public_key: isSet(object.public_key) ? Any.fromJSON(object.public_key) : undefined,
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
     };
@@ -445,8 +445,8 @@ export const ConsensusState = {
 
   toJSON(message: ConsensusState): unknown {
     const obj: any = {};
-    if (message.publicKey !== undefined) {
-      obj.publicKey = Any.toJSON(message.publicKey);
+    if (message.public_key !== undefined) {
+      obj.public_key = Any.toJSON(message.public_key);
     }
     if (message.diversifier !== "") {
       obj.diversifier = message.diversifier;
@@ -462,8 +462,8 @@ export const ConsensusState = {
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
     const message = createBaseConsensusState();
-    message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
-      ? Any.fromPartial(object.publicKey)
+    message.public_key = (object.public_key !== undefined && object.public_key !== null)
+      ? Any.fromPartial(object.public_key)
       : undefined;
     message.diversifier = object.diversifier ?? "";
     message.timestamp = object.timestamp ?? "0";
@@ -472,7 +472,13 @@ export const ConsensusState = {
 };
 
 function createBaseHeader(): Header {
-  return { sequence: "0", timestamp: "0", signature: new Uint8Array(0), newPublicKey: undefined, newDiversifier: "" };
+  return {
+    sequence: "0",
+    timestamp: "0",
+    signature: new Uint8Array(0),
+    new_public_key: undefined,
+    new_diversifier: "",
+  };
 }
 
 export const Header = {
@@ -488,11 +494,11 @@ export const Header = {
     if (message.signature.length !== 0) {
       writer.uint32(26).bytes(message.signature);
     }
-    if (message.newPublicKey !== undefined) {
-      Any.encode(message.newPublicKey, writer.uint32(34).fork()).ldelim();
+    if (message.new_public_key !== undefined) {
+      Any.encode(message.new_public_key, writer.uint32(34).fork()).ldelim();
     }
-    if (message.newDiversifier !== "") {
-      writer.uint32(42).string(message.newDiversifier);
+    if (message.new_diversifier !== "") {
+      writer.uint32(42).string(message.new_diversifier);
     }
     return writer;
   },
@@ -530,14 +536,14 @@ export const Header = {
             break;
           }
 
-          message.newPublicKey = Any.decode(reader, reader.uint32());
+          message.new_public_key = Any.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.newDiversifier = reader.string();
+          message.new_diversifier = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -553,8 +559,8 @@ export const Header = {
       sequence: isSet(object.sequence) ? String(object.sequence) : "0",
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
-      newPublicKey: isSet(object.newPublicKey) ? Any.fromJSON(object.newPublicKey) : undefined,
-      newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : "",
+      new_public_key: isSet(object.new_public_key) ? Any.fromJSON(object.new_public_key) : undefined,
+      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : "",
     };
   },
 
@@ -569,11 +575,11 @@ export const Header = {
     if (message.signature.length !== 0) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.newPublicKey !== undefined) {
-      obj.newPublicKey = Any.toJSON(message.newPublicKey);
+    if (message.new_public_key !== undefined) {
+      obj.new_public_key = Any.toJSON(message.new_public_key);
     }
-    if (message.newDiversifier !== "") {
-      obj.newDiversifier = message.newDiversifier;
+    if (message.new_diversifier !== "") {
+      obj.new_diversifier = message.new_diversifier;
     }
     return obj;
   },
@@ -586,33 +592,33 @@ export const Header = {
     message.sequence = object.sequence ?? "0";
     message.timestamp = object.timestamp ?? "0";
     message.signature = object.signature ?? new Uint8Array(0);
-    message.newPublicKey = (object.newPublicKey !== undefined && object.newPublicKey !== null)
-      ? Any.fromPartial(object.newPublicKey)
+    message.new_public_key = (object.new_public_key !== undefined && object.new_public_key !== null)
+      ? Any.fromPartial(object.new_public_key)
       : undefined;
-    message.newDiversifier = object.newDiversifier ?? "";
+    message.new_diversifier = object.new_diversifier ?? "";
     return message;
   },
 };
 
 function createBaseMisbehaviour(): Misbehaviour {
-  return { clientId: "", sequence: "0", signatureOne: undefined, signatureTwo: undefined };
+  return { client_id: "", sequence: "0", signature_one: undefined, signature_two: undefined };
 }
 
 export const Misbehaviour = {
   $type: "ibc.lightclients.solomachine.v2.Misbehaviour" as const,
 
   encode(message: Misbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     if (message.sequence !== "0") {
       writer.uint32(16).uint64(message.sequence);
     }
-    if (message.signatureOne !== undefined) {
-      SignatureAndData.encode(message.signatureOne, writer.uint32(26).fork()).ldelim();
+    if (message.signature_one !== undefined) {
+      SignatureAndData.encode(message.signature_one, writer.uint32(26).fork()).ldelim();
     }
-    if (message.signatureTwo !== undefined) {
-      SignatureAndData.encode(message.signatureTwo, writer.uint32(34).fork()).ldelim();
+    if (message.signature_two !== undefined) {
+      SignatureAndData.encode(message.signature_two, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -629,7 +635,7 @@ export const Misbehaviour = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
@@ -643,14 +649,14 @@ export const Misbehaviour = {
             break;
           }
 
-          message.signatureOne = SignatureAndData.decode(reader, reader.uint32());
+          message.signature_one = SignatureAndData.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.signatureTwo = SignatureAndData.decode(reader, reader.uint32());
+          message.signature_two = SignatureAndData.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -663,26 +669,26 @@ export const Misbehaviour = {
 
   fromJSON(object: any): Misbehaviour {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
       sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      signatureOne: isSet(object.signatureOne) ? SignatureAndData.fromJSON(object.signatureOne) : undefined,
-      signatureTwo: isSet(object.signatureTwo) ? SignatureAndData.fromJSON(object.signatureTwo) : undefined,
+      signature_one: isSet(object.signature_one) ? SignatureAndData.fromJSON(object.signature_one) : undefined,
+      signature_two: isSet(object.signature_two) ? SignatureAndData.fromJSON(object.signature_two) : undefined,
     };
   },
 
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
-    if (message.signatureOne !== undefined) {
-      obj.signatureOne = SignatureAndData.toJSON(message.signatureOne);
+    if (message.signature_one !== undefined) {
+      obj.signature_one = SignatureAndData.toJSON(message.signature_one);
     }
-    if (message.signatureTwo !== undefined) {
-      obj.signatureTwo = SignatureAndData.toJSON(message.signatureTwo);
+    if (message.signature_two !== undefined) {
+      obj.signature_two = SignatureAndData.toJSON(message.signature_two);
     }
     return obj;
   },
@@ -692,20 +698,20 @@ export const Misbehaviour = {
   },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     message.sequence = object.sequence ?? "0";
-    message.signatureOne = (object.signatureOne !== undefined && object.signatureOne !== null)
-      ? SignatureAndData.fromPartial(object.signatureOne)
+    message.signature_one = (object.signature_one !== undefined && object.signature_one !== null)
+      ? SignatureAndData.fromPartial(object.signature_one)
       : undefined;
-    message.signatureTwo = (object.signatureTwo !== undefined && object.signatureTwo !== null)
-      ? SignatureAndData.fromPartial(object.signatureTwo)
+    message.signature_two = (object.signature_two !== undefined && object.signature_two !== null)
+      ? SignatureAndData.fromPartial(object.signature_two)
       : undefined;
     return message;
   },
 };
 
 function createBaseSignatureAndData(): SignatureAndData {
-  return { signature: new Uint8Array(0), dataType: 0, data: new Uint8Array(0), timestamp: "0" };
+  return { signature: new Uint8Array(0), data_type: 0, data: new Uint8Array(0), timestamp: "0" };
 }
 
 export const SignatureAndData = {
@@ -715,8 +721,8 @@ export const SignatureAndData = {
     if (message.signature.length !== 0) {
       writer.uint32(10).bytes(message.signature);
     }
-    if (message.dataType !== 0) {
-      writer.uint32(16).int32(message.dataType);
+    if (message.data_type !== 0) {
+      writer.uint32(16).int32(message.data_type);
     }
     if (message.data.length !== 0) {
       writer.uint32(26).bytes(message.data);
@@ -746,7 +752,7 @@ export const SignatureAndData = {
             break;
           }
 
-          message.dataType = reader.int32() as any;
+          message.data_type = reader.int32() as any;
           continue;
         case 3:
           if (tag !== 26) {
@@ -774,7 +780,7 @@ export const SignatureAndData = {
   fromJSON(object: any): SignatureAndData {
     return {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
     };
@@ -785,8 +791,8 @@ export const SignatureAndData = {
     if (message.signature.length !== 0) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.dataType !== 0) {
-      obj.dataType = dataTypeToJSON(message.dataType);
+    if (message.data_type !== 0) {
+      obj.data_type = dataTypeToJSON(message.data_type);
     }
     if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
@@ -803,7 +809,7 @@ export const SignatureAndData = {
   fromPartial(object: DeepPartial<SignatureAndData>): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array(0);
-    message.dataType = object.dataType ?? 0;
+    message.data_type = object.data_type ?? 0;
     message.data = object.data ?? new Uint8Array(0);
     message.timestamp = object.timestamp ?? "0";
     return message;
@@ -811,15 +817,15 @@ export const SignatureAndData = {
 };
 
 function createBaseTimestampedSignatureData(): TimestampedSignatureData {
-  return { signatureData: new Uint8Array(0), timestamp: "0" };
+  return { signature_data: new Uint8Array(0), timestamp: "0" };
 }
 
 export const TimestampedSignatureData = {
   $type: "ibc.lightclients.solomachine.v2.TimestampedSignatureData" as const,
 
   encode(message: TimestampedSignatureData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.signatureData.length !== 0) {
-      writer.uint32(10).bytes(message.signatureData);
+    if (message.signature_data.length !== 0) {
+      writer.uint32(10).bytes(message.signature_data);
     }
     if (message.timestamp !== "0") {
       writer.uint32(16).uint64(message.timestamp);
@@ -839,7 +845,7 @@ export const TimestampedSignatureData = {
             break;
           }
 
-          message.signatureData = reader.bytes();
+          message.signature_data = reader.bytes();
           continue;
         case 2:
           if (tag !== 16) {
@@ -859,15 +865,15 @@ export const TimestampedSignatureData = {
 
   fromJSON(object: any): TimestampedSignatureData {
     return {
-      signatureData: isSet(object.signatureData) ? bytesFromBase64(object.signatureData) : new Uint8Array(0),
+      signature_data: isSet(object.signature_data) ? bytesFromBase64(object.signature_data) : new Uint8Array(0),
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
     };
   },
 
   toJSON(message: TimestampedSignatureData): unknown {
     const obj: any = {};
-    if (message.signatureData.length !== 0) {
-      obj.signatureData = base64FromBytes(message.signatureData);
+    if (message.signature_data.length !== 0) {
+      obj.signature_data = base64FromBytes(message.signature_data);
     }
     if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
@@ -880,14 +886,14 @@ export const TimestampedSignatureData = {
   },
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
     const message = createBaseTimestampedSignatureData();
-    message.signatureData = object.signatureData ?? new Uint8Array(0);
+    message.signature_data = object.signature_data ?? new Uint8Array(0);
     message.timestamp = object.timestamp ?? "0";
     return message;
   },
 };
 
 function createBaseSignBytes(): SignBytes {
-  return { sequence: "0", timestamp: "0", diversifier: "", dataType: 0, data: new Uint8Array(0) };
+  return { sequence: "0", timestamp: "0", diversifier: "", data_type: 0, data: new Uint8Array(0) };
 }
 
 export const SignBytes = {
@@ -903,8 +909,8 @@ export const SignBytes = {
     if (message.diversifier !== "") {
       writer.uint32(26).string(message.diversifier);
     }
-    if (message.dataType !== 0) {
-      writer.uint32(32).int32(message.dataType);
+    if (message.data_type !== 0) {
+      writer.uint32(32).int32(message.data_type);
     }
     if (message.data.length !== 0) {
       writer.uint32(42).bytes(message.data);
@@ -945,7 +951,7 @@ export const SignBytes = {
             break;
           }
 
-          message.dataType = reader.int32() as any;
+          message.data_type = reader.int32() as any;
           continue;
         case 5:
           if (tag !== 42) {
@@ -968,7 +974,7 @@ export const SignBytes = {
       sequence: isSet(object.sequence) ? String(object.sequence) : "0",
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
       diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      dataType: isSet(object.dataType) ? dataTypeFromJSON(object.dataType) : 0,
+      data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
@@ -984,8 +990,8 @@ export const SignBytes = {
     if (message.diversifier !== "") {
       obj.diversifier = message.diversifier;
     }
-    if (message.dataType !== 0) {
-      obj.dataType = dataTypeToJSON(message.dataType);
+    if (message.data_type !== 0) {
+      obj.data_type = dataTypeToJSON(message.data_type);
     }
     if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
@@ -1001,25 +1007,25 @@ export const SignBytes = {
     message.sequence = object.sequence ?? "0";
     message.timestamp = object.timestamp ?? "0";
     message.diversifier = object.diversifier ?? "";
-    message.dataType = object.dataType ?? 0;
+    message.data_type = object.data_type ?? 0;
     message.data = object.data ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseHeaderData(): HeaderData {
-  return { newPubKey: undefined, newDiversifier: "" };
+  return { new_pub_key: undefined, new_diversifier: "" };
 }
 
 export const HeaderData = {
   $type: "ibc.lightclients.solomachine.v2.HeaderData" as const,
 
   encode(message: HeaderData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.newPubKey !== undefined) {
-      Any.encode(message.newPubKey, writer.uint32(10).fork()).ldelim();
+    if (message.new_pub_key !== undefined) {
+      Any.encode(message.new_pub_key, writer.uint32(10).fork()).ldelim();
     }
-    if (message.newDiversifier !== "") {
-      writer.uint32(18).string(message.newDiversifier);
+    if (message.new_diversifier !== "") {
+      writer.uint32(18).string(message.new_diversifier);
     }
     return writer;
   },
@@ -1036,14 +1042,14 @@ export const HeaderData = {
             break;
           }
 
-          message.newPubKey = Any.decode(reader, reader.uint32());
+          message.new_pub_key = Any.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.newDiversifier = reader.string();
+          message.new_diversifier = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1056,18 +1062,18 @@ export const HeaderData = {
 
   fromJSON(object: any): HeaderData {
     return {
-      newPubKey: isSet(object.newPubKey) ? Any.fromJSON(object.newPubKey) : undefined,
-      newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : "",
+      new_pub_key: isSet(object.new_pub_key) ? Any.fromJSON(object.new_pub_key) : undefined,
+      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : "",
     };
   },
 
   toJSON(message: HeaderData): unknown {
     const obj: any = {};
-    if (message.newPubKey !== undefined) {
-      obj.newPubKey = Any.toJSON(message.newPubKey);
+    if (message.new_pub_key !== undefined) {
+      obj.new_pub_key = Any.toJSON(message.new_pub_key);
     }
-    if (message.newDiversifier !== "") {
-      obj.newDiversifier = message.newDiversifier;
+    if (message.new_diversifier !== "") {
+      obj.new_diversifier = message.new_diversifier;
     }
     return obj;
   },
@@ -1077,16 +1083,16 @@ export const HeaderData = {
   },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
-    message.newPubKey = (object.newPubKey !== undefined && object.newPubKey !== null)
-      ? Any.fromPartial(object.newPubKey)
+    message.new_pub_key = (object.new_pub_key !== undefined && object.new_pub_key !== null)
+      ? Any.fromPartial(object.new_pub_key)
       : undefined;
-    message.newDiversifier = object.newDiversifier ?? "";
+    message.new_diversifier = object.new_diversifier ?? "";
     return message;
   },
 };
 
 function createBaseClientStateData(): ClientStateData {
-  return { path: new Uint8Array(0), clientState: undefined };
+  return { path: new Uint8Array(0), client_state: undefined };
 }
 
 export const ClientStateData = {
@@ -1096,8 +1102,8 @@ export const ClientStateData = {
     if (message.path.length !== 0) {
       writer.uint32(10).bytes(message.path);
     }
-    if (message.clientState !== undefined) {
-      Any.encode(message.clientState, writer.uint32(18).fork()).ldelim();
+    if (message.client_state !== undefined) {
+      Any.encode(message.client_state, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1121,7 +1127,7 @@ export const ClientStateData = {
             break;
           }
 
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.client_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1135,7 +1141,7 @@ export const ClientStateData = {
   fromJSON(object: any): ClientStateData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(0),
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
+      client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
     };
   },
 
@@ -1144,8 +1150,8 @@ export const ClientStateData = {
     if (message.path.length !== 0) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.clientState !== undefined) {
-      obj.clientState = Any.toJSON(message.clientState);
+    if (message.client_state !== undefined) {
+      obj.client_state = Any.toJSON(message.client_state);
     }
     return obj;
   },
@@ -1156,15 +1162,15 @@ export const ClientStateData = {
   fromPartial(object: DeepPartial<ClientStateData>): ClientStateData {
     const message = createBaseClientStateData();
     message.path = object.path ?? new Uint8Array(0);
-    message.clientState = (object.clientState !== undefined && object.clientState !== null)
-      ? Any.fromPartial(object.clientState)
+    message.client_state = (object.client_state !== undefined && object.client_state !== null)
+      ? Any.fromPartial(object.client_state)
       : undefined;
     return message;
   },
 };
 
 function createBaseConsensusStateData(): ConsensusStateData {
-  return { path: new Uint8Array(0), consensusState: undefined };
+  return { path: new Uint8Array(0), consensus_state: undefined };
 }
 
 export const ConsensusStateData = {
@@ -1174,8 +1180,8 @@ export const ConsensusStateData = {
     if (message.path.length !== 0) {
       writer.uint32(10).bytes(message.path);
     }
-    if (message.consensusState !== undefined) {
-      Any.encode(message.consensusState, writer.uint32(18).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      Any.encode(message.consensus_state, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -1199,7 +1205,7 @@ export const ConsensusStateData = {
             break;
           }
 
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensus_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1213,7 +1219,7 @@ export const ConsensusStateData = {
   fromJSON(object: any): ConsensusStateData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(0),
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
     };
   },
 
@@ -1222,8 +1228,8 @@ export const ConsensusStateData = {
     if (message.path.length !== 0) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.consensusState !== undefined) {
-      obj.consensusState = Any.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = Any.toJSON(message.consensus_state);
     }
     return obj;
   },
@@ -1234,8 +1240,8 @@ export const ConsensusStateData = {
   fromPartial(object: DeepPartial<ConsensusStateData>): ConsensusStateData {
     const message = createBaseConsensusStateData();
     message.path = object.path ?? new Uint8Array(0);
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? Any.fromPartial(object.consensusState)
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? Any.fromPartial(object.consensus_state)
       : undefined;
     return message;
   },
@@ -1609,7 +1615,7 @@ export const PacketReceiptAbsenceData = {
 };
 
 function createBaseNextSequenceRecvData(): NextSequenceRecvData {
-  return { path: new Uint8Array(0), nextSeqRecv: "0" };
+  return { path: new Uint8Array(0), next_seq_recv: "0" };
 }
 
 export const NextSequenceRecvData = {
@@ -1619,8 +1625,8 @@ export const NextSequenceRecvData = {
     if (message.path.length !== 0) {
       writer.uint32(10).bytes(message.path);
     }
-    if (message.nextSeqRecv !== "0") {
-      writer.uint32(16).uint64(message.nextSeqRecv);
+    if (message.next_seq_recv !== "0") {
+      writer.uint32(16).uint64(message.next_seq_recv);
     }
     return writer;
   },
@@ -1644,7 +1650,7 @@ export const NextSequenceRecvData = {
             break;
           }
 
-          message.nextSeqRecv = longToString(reader.uint64() as Long);
+          message.next_seq_recv = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1658,7 +1664,7 @@ export const NextSequenceRecvData = {
   fromJSON(object: any): NextSequenceRecvData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(0),
-      nextSeqRecv: isSet(object.nextSeqRecv) ? String(object.nextSeqRecv) : "0",
+      next_seq_recv: isSet(object.next_seq_recv) ? String(object.next_seq_recv) : "0",
     };
   },
 
@@ -1667,8 +1673,8 @@ export const NextSequenceRecvData = {
     if (message.path.length !== 0) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.nextSeqRecv !== "0") {
-      obj.nextSeqRecv = message.nextSeqRecv;
+    if (message.next_seq_recv !== "0") {
+      obj.next_seq_recv = message.next_seq_recv;
     }
     return obj;
   },
@@ -1679,7 +1685,7 @@ export const NextSequenceRecvData = {
   fromPartial(object: DeepPartial<NextSequenceRecvData>): NextSequenceRecvData {
     const message = createBaseNextSequenceRecvData();
     message.path = object.path ?? new Uint8Array(0);
-    message.nextSeqRecv = object.nextSeqRecv ?? "0";
+    message.next_seq_recv = object.next_seq_recv ?? "0";
     return message;
   },
 };

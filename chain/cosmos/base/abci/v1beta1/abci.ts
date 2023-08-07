@@ -23,15 +23,15 @@ export interface TxResponse {
    * The output of the application's logger (raw string). May be
    * non-deterministic.
    */
-  rawLog: string;
+  raw_log: string;
   /** The output of the application's logger (typed). May be non-deterministic. */
   logs: ABCIMessageLog[];
   /** Additional information. May be non-deterministic. */
   info: string;
   /** Amount of gas requested for transaction. */
-  gasWanted: string;
+  gas_wanted: string;
   /** Amount of gas consumed by transaction. */
-  gasUsed: string;
+  gas_used: string;
   /** The request transaction bytes. */
   tx:
     | Any
@@ -55,7 +55,7 @@ export interface TxResponse {
 
 /** ABCIMessageLog defines a structure containing an indexed tx ABCI message log. */
 export interface ABCIMessageLog {
-  msgIndex: number;
+  msg_index: number;
   log: string;
   /**
    * Events contains a slice of Event objects that were emitted during some
@@ -85,9 +85,9 @@ export interface Attribute {
 /** GasInfo defines tx execution gas context. */
 export interface GasInfo {
   /** GasWanted is the maximum units of work we allow this tx to perform. */
-  gasWanted: string;
+  gas_wanted: string;
   /** GasUsed is the amount of gas actually consumed. */
-  gasUsed: string;
+  gas_used: string;
 }
 
 /** Result is the union of ResponseFormat and ResponseCheckTx. */
@@ -113,7 +113,7 @@ export interface Result {
    *
    * Since: cosmos-sdk 0.46
    */
-  msgResponses: Any[];
+  msg_responses: Any[];
 }
 
 /**
@@ -121,7 +121,7 @@ export interface Result {
  * successfully simulated.
  */
 export interface SimulationResponse {
-  gasInfo: GasInfo | undefined;
+  gas_info: GasInfo | undefined;
   result: Result | undefined;
 }
 
@@ -132,7 +132,7 @@ export interface SimulationResponse {
  * @deprecated
  */
 export interface MsgData {
-  msgType: string;
+  msg_type: string;
   data: Uint8Array;
 }
 
@@ -152,19 +152,19 @@ export interface TxMsgData {
    *
    * Since: cosmos-sdk 0.46
    */
-  msgResponses: Any[];
+  msg_responses: Any[];
 }
 
 /** SearchTxsResult defines a structure for querying txs pageable */
 export interface SearchTxsResult {
   /** Count of all txs */
-  totalCount: string;
+  total_count: string;
   /** Count of txs in current page */
   count: string;
   /** Index of current page, start from 1 */
-  pageNumber: string;
+  page_number: string;
   /** Count of total pages */
-  pageTotal: string;
+  page_total: string;
   /** Max count txs per page */
   limit: string;
   /** List of txs in current page */
@@ -178,11 +178,11 @@ function createBaseTxResponse(): TxResponse {
     codespace: "",
     code: 0,
     data: "",
-    rawLog: "",
+    raw_log: "",
     logs: [],
     info: "",
-    gasWanted: "0",
-    gasUsed: "0",
+    gas_wanted: "0",
+    gas_used: "0",
     tx: undefined,
     timestamp: "",
     events: [],
@@ -208,8 +208,8 @@ export const TxResponse = {
     if (message.data !== "") {
       writer.uint32(42).string(message.data);
     }
-    if (message.rawLog !== "") {
-      writer.uint32(50).string(message.rawLog);
+    if (message.raw_log !== "") {
+      writer.uint32(50).string(message.raw_log);
     }
     for (const v of message.logs) {
       ABCIMessageLog.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -217,11 +217,11 @@ export const TxResponse = {
     if (message.info !== "") {
       writer.uint32(66).string(message.info);
     }
-    if (message.gasWanted !== "0") {
-      writer.uint32(72).int64(message.gasWanted);
+    if (message.gas_wanted !== "0") {
+      writer.uint32(72).int64(message.gas_wanted);
     }
-    if (message.gasUsed !== "0") {
-      writer.uint32(80).int64(message.gasUsed);
+    if (message.gas_used !== "0") {
+      writer.uint32(80).int64(message.gas_used);
     }
     if (message.tx !== undefined) {
       Any.encode(message.tx, writer.uint32(90).fork()).ldelim();
@@ -282,7 +282,7 @@ export const TxResponse = {
             break;
           }
 
-          message.rawLog = reader.string();
+          message.raw_log = reader.string();
           continue;
         case 7:
           if (tag !== 58) {
@@ -303,14 +303,14 @@ export const TxResponse = {
             break;
           }
 
-          message.gasWanted = longToString(reader.int64() as Long);
+          message.gas_wanted = longToString(reader.int64() as Long);
           continue;
         case 10:
           if (tag !== 80) {
             break;
           }
 
-          message.gasUsed = longToString(reader.int64() as Long);
+          message.gas_used = longToString(reader.int64() as Long);
           continue;
         case 11:
           if (tag !== 90) {
@@ -349,11 +349,11 @@ export const TxResponse = {
       codespace: isSet(object.codespace) ? String(object.codespace) : "",
       code: isSet(object.code) ? Number(object.code) : 0,
       data: isSet(object.data) ? String(object.data) : "",
-      rawLog: isSet(object.rawLog) ? String(object.rawLog) : "",
+      raw_log: isSet(object.raw_log) ? String(object.raw_log) : "",
       logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => ABCIMessageLog.fromJSON(e)) : [],
       info: isSet(object.info) ? String(object.info) : "",
-      gasWanted: isSet(object.gasWanted) ? String(object.gasWanted) : "0",
-      gasUsed: isSet(object.gasUsed) ? String(object.gasUsed) : "0",
+      gas_wanted: isSet(object.gas_wanted) ? String(object.gas_wanted) : "0",
+      gas_used: isSet(object.gas_used) ? String(object.gas_used) : "0",
       tx: isSet(object.tx) ? Any.fromJSON(object.tx) : undefined,
       timestamp: isSet(object.timestamp) ? String(object.timestamp) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
@@ -377,8 +377,8 @@ export const TxResponse = {
     if (message.data !== "") {
       obj.data = message.data;
     }
-    if (message.rawLog !== "") {
-      obj.rawLog = message.rawLog;
+    if (message.raw_log !== "") {
+      obj.raw_log = message.raw_log;
     }
     if (message.logs?.length) {
       obj.logs = message.logs.map((e) => ABCIMessageLog.toJSON(e));
@@ -386,11 +386,11 @@ export const TxResponse = {
     if (message.info !== "") {
       obj.info = message.info;
     }
-    if (message.gasWanted !== "0") {
-      obj.gasWanted = message.gasWanted;
+    if (message.gas_wanted !== "0") {
+      obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gasUsed !== "0") {
-      obj.gasUsed = message.gasUsed;
+    if (message.gas_used !== "0") {
+      obj.gas_used = message.gas_used;
     }
     if (message.tx !== undefined) {
       obj.tx = Any.toJSON(message.tx);
@@ -414,11 +414,11 @@ export const TxResponse = {
     message.codespace = object.codespace ?? "";
     message.code = object.code ?? 0;
     message.data = object.data ?? "";
-    message.rawLog = object.rawLog ?? "";
+    message.raw_log = object.raw_log ?? "";
     message.logs = object.logs?.map((e) => ABCIMessageLog.fromPartial(e)) || [];
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted ?? "0";
-    message.gasUsed = object.gasUsed ?? "0";
+    message.gas_wanted = object.gas_wanted ?? "0";
+    message.gas_used = object.gas_used ?? "0";
     message.tx = (object.tx !== undefined && object.tx !== null) ? Any.fromPartial(object.tx) : undefined;
     message.timestamp = object.timestamp ?? "";
     message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
@@ -427,15 +427,15 @@ export const TxResponse = {
 };
 
 function createBaseABCIMessageLog(): ABCIMessageLog {
-  return { msgIndex: 0, log: "", events: [] };
+  return { msg_index: 0, log: "", events: [] };
 }
 
 export const ABCIMessageLog = {
   $type: "cosmos.base.abci.v1beta1.ABCIMessageLog" as const,
 
   encode(message: ABCIMessageLog, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.msgIndex !== 0) {
-      writer.uint32(8).uint32(message.msgIndex);
+    if (message.msg_index !== 0) {
+      writer.uint32(8).uint32(message.msg_index);
     }
     if (message.log !== "") {
       writer.uint32(18).string(message.log);
@@ -458,7 +458,7 @@ export const ABCIMessageLog = {
             break;
           }
 
-          message.msgIndex = reader.uint32();
+          message.msg_index = reader.uint32();
           continue;
         case 2:
           if (tag !== 18) {
@@ -485,7 +485,7 @@ export const ABCIMessageLog = {
 
   fromJSON(object: any): ABCIMessageLog {
     return {
-      msgIndex: isSet(object.msgIndex) ? Number(object.msgIndex) : 0,
+      msg_index: isSet(object.msg_index) ? Number(object.msg_index) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => StringEvent.fromJSON(e)) : [],
     };
@@ -493,8 +493,8 @@ export const ABCIMessageLog = {
 
   toJSON(message: ABCIMessageLog): unknown {
     const obj: any = {};
-    if (message.msgIndex !== 0) {
-      obj.msgIndex = Math.round(message.msgIndex);
+    if (message.msg_index !== 0) {
+      obj.msg_index = Math.round(message.msg_index);
     }
     if (message.log !== "") {
       obj.log = message.log;
@@ -510,7 +510,7 @@ export const ABCIMessageLog = {
   },
   fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
-    message.msgIndex = object.msgIndex ?? 0;
+    message.msg_index = object.msg_index ?? 0;
     message.log = object.log ?? "";
     message.events = object.events?.map((e) => StringEvent.fromPartial(e)) || [];
     return message;
@@ -667,18 +667,18 @@ export const Attribute = {
 };
 
 function createBaseGasInfo(): GasInfo {
-  return { gasWanted: "0", gasUsed: "0" };
+  return { gas_wanted: "0", gas_used: "0" };
 }
 
 export const GasInfo = {
   $type: "cosmos.base.abci.v1beta1.GasInfo" as const,
 
   encode(message: GasInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.gasWanted !== "0") {
-      writer.uint32(8).uint64(message.gasWanted);
+    if (message.gas_wanted !== "0") {
+      writer.uint32(8).uint64(message.gas_wanted);
     }
-    if (message.gasUsed !== "0") {
-      writer.uint32(16).uint64(message.gasUsed);
+    if (message.gas_used !== "0") {
+      writer.uint32(16).uint64(message.gas_used);
     }
     return writer;
   },
@@ -695,14 +695,14 @@ export const GasInfo = {
             break;
           }
 
-          message.gasWanted = longToString(reader.uint64() as Long);
+          message.gas_wanted = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.gasUsed = longToString(reader.uint64() as Long);
+          message.gas_used = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -715,18 +715,18 @@ export const GasInfo = {
 
   fromJSON(object: any): GasInfo {
     return {
-      gasWanted: isSet(object.gasWanted) ? String(object.gasWanted) : "0",
-      gasUsed: isSet(object.gasUsed) ? String(object.gasUsed) : "0",
+      gas_wanted: isSet(object.gas_wanted) ? String(object.gas_wanted) : "0",
+      gas_used: isSet(object.gas_used) ? String(object.gas_used) : "0",
     };
   },
 
   toJSON(message: GasInfo): unknown {
     const obj: any = {};
-    if (message.gasWanted !== "0") {
-      obj.gasWanted = message.gasWanted;
+    if (message.gas_wanted !== "0") {
+      obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gasUsed !== "0") {
-      obj.gasUsed = message.gasUsed;
+    if (message.gas_used !== "0") {
+      obj.gas_used = message.gas_used;
     }
     return obj;
   },
@@ -736,14 +736,14 @@ export const GasInfo = {
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = createBaseGasInfo();
-    message.gasWanted = object.gasWanted ?? "0";
-    message.gasUsed = object.gasUsed ?? "0";
+    message.gas_wanted = object.gas_wanted ?? "0";
+    message.gas_used = object.gas_used ?? "0";
     return message;
   },
 };
 
 function createBaseResult(): Result {
-  return { data: new Uint8Array(0), log: "", events: [], msgResponses: [] };
+  return { data: new Uint8Array(0), log: "", events: [], msg_responses: [] };
 }
 
 export const Result = {
@@ -759,7 +759,7 @@ export const Result = {
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    for (const v of message.msgResponses) {
+    for (const v of message.msg_responses) {
       Any.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
@@ -798,7 +798,7 @@ export const Result = {
             break;
           }
 
-          message.msgResponses.push(Any.decode(reader, reader.uint32()));
+          message.msg_responses.push(Any.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -814,7 +814,7 @@ export const Result = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
       log: isSet(object.log) ? String(object.log) : "",
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
-      msgResponses: Array.isArray(object?.msgResponses) ? object.msgResponses.map((e: any) => Any.fromJSON(e)) : [],
+      msg_responses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromJSON(e)) : [],
     };
   },
 
@@ -829,8 +829,8 @@ export const Result = {
     if (message.events?.length) {
       obj.events = message.events.map((e) => Event.toJSON(e));
     }
-    if (message.msgResponses?.length) {
-      obj.msgResponses = message.msgResponses.map((e) => Any.toJSON(e));
+    if (message.msg_responses?.length) {
+      obj.msg_responses = message.msg_responses.map((e) => Any.toJSON(e));
     }
     return obj;
   },
@@ -843,21 +843,21 @@ export const Result = {
     message.data = object.data ?? new Uint8Array(0);
     message.log = object.log ?? "";
     message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
-    message.msgResponses = object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
+    message.msg_responses = object.msg_responses?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseSimulationResponse(): SimulationResponse {
-  return { gasInfo: undefined, result: undefined };
+  return { gas_info: undefined, result: undefined };
 }
 
 export const SimulationResponse = {
   $type: "cosmos.base.abci.v1beta1.SimulationResponse" as const,
 
   encode(message: SimulationResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.gasInfo !== undefined) {
-      GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
+    if (message.gas_info !== undefined) {
+      GasInfo.encode(message.gas_info, writer.uint32(10).fork()).ldelim();
     }
     if (message.result !== undefined) {
       Result.encode(message.result, writer.uint32(18).fork()).ldelim();
@@ -877,7 +877,7 @@ export const SimulationResponse = {
             break;
           }
 
-          message.gasInfo = GasInfo.decode(reader, reader.uint32());
+          message.gas_info = GasInfo.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -897,15 +897,15 @@ export const SimulationResponse = {
 
   fromJSON(object: any): SimulationResponse {
     return {
-      gasInfo: isSet(object.gasInfo) ? GasInfo.fromJSON(object.gasInfo) : undefined,
+      gas_info: isSet(object.gas_info) ? GasInfo.fromJSON(object.gas_info) : undefined,
       result: isSet(object.result) ? Result.fromJSON(object.result) : undefined,
     };
   },
 
   toJSON(message: SimulationResponse): unknown {
     const obj: any = {};
-    if (message.gasInfo !== undefined) {
-      obj.gasInfo = GasInfo.toJSON(message.gasInfo);
+    if (message.gas_info !== undefined) {
+      obj.gas_info = GasInfo.toJSON(message.gas_info);
     }
     if (message.result !== undefined) {
       obj.result = Result.toJSON(message.result);
@@ -918,8 +918,8 @@ export const SimulationResponse = {
   },
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
-    message.gasInfo = (object.gasInfo !== undefined && object.gasInfo !== null)
-      ? GasInfo.fromPartial(object.gasInfo)
+    message.gas_info = (object.gas_info !== undefined && object.gas_info !== null)
+      ? GasInfo.fromPartial(object.gas_info)
       : undefined;
     message.result = (object.result !== undefined && object.result !== null)
       ? Result.fromPartial(object.result)
@@ -929,15 +929,15 @@ export const SimulationResponse = {
 };
 
 function createBaseMsgData(): MsgData {
-  return { msgType: "", data: new Uint8Array(0) };
+  return { msg_type: "", data: new Uint8Array(0) };
 }
 
 export const MsgData = {
   $type: "cosmos.base.abci.v1beta1.MsgData" as const,
 
   encode(message: MsgData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.msgType !== "") {
-      writer.uint32(10).string(message.msgType);
+    if (message.msg_type !== "") {
+      writer.uint32(10).string(message.msg_type);
     }
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
@@ -957,7 +957,7 @@ export const MsgData = {
             break;
           }
 
-          message.msgType = reader.string();
+          message.msg_type = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -977,15 +977,15 @@ export const MsgData = {
 
   fromJSON(object: any): MsgData {
     return {
-      msgType: isSet(object.msgType) ? String(object.msgType) : "",
+      msg_type: isSet(object.msg_type) ? String(object.msg_type) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
 
   toJSON(message: MsgData): unknown {
     const obj: any = {};
-    if (message.msgType !== "") {
-      obj.msgType = message.msgType;
+    if (message.msg_type !== "") {
+      obj.msg_type = message.msg_type;
     }
     if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
@@ -998,14 +998,14 @@ export const MsgData = {
   },
   fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
-    message.msgType = object.msgType ?? "";
+    message.msg_type = object.msg_type ?? "";
     message.data = object.data ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseTxMsgData(): TxMsgData {
-  return { data: [], msgResponses: [] };
+  return { data: [], msg_responses: [] };
 }
 
 export const TxMsgData = {
@@ -1015,7 +1015,7 @@ export const TxMsgData = {
     for (const v of message.data) {
       MsgData.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.msgResponses) {
+    for (const v of message.msg_responses) {
       Any.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -1040,7 +1040,7 @@ export const TxMsgData = {
             break;
           }
 
-          message.msgResponses.push(Any.decode(reader, reader.uint32()));
+          message.msg_responses.push(Any.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1054,7 +1054,7 @@ export const TxMsgData = {
   fromJSON(object: any): TxMsgData {
     return {
       data: Array.isArray(object?.data) ? object.data.map((e: any) => MsgData.fromJSON(e)) : [],
-      msgResponses: Array.isArray(object?.msgResponses) ? object.msgResponses.map((e: any) => Any.fromJSON(e)) : [],
+      msg_responses: Array.isArray(object?.msg_responses) ? object.msg_responses.map((e: any) => Any.fromJSON(e)) : [],
     };
   },
 
@@ -1063,8 +1063,8 @@ export const TxMsgData = {
     if (message.data?.length) {
       obj.data = message.data.map((e) => MsgData.toJSON(e));
     }
-    if (message.msgResponses?.length) {
-      obj.msgResponses = message.msgResponses.map((e) => Any.toJSON(e));
+    if (message.msg_responses?.length) {
+      obj.msg_responses = message.msg_responses.map((e) => Any.toJSON(e));
     }
     return obj;
   },
@@ -1075,30 +1075,30 @@ export const TxMsgData = {
   fromPartial(object: DeepPartial<TxMsgData>): TxMsgData {
     const message = createBaseTxMsgData();
     message.data = object.data?.map((e) => MsgData.fromPartial(e)) || [];
-    message.msgResponses = object.msgResponses?.map((e) => Any.fromPartial(e)) || [];
+    message.msg_responses = object.msg_responses?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseSearchTxsResult(): SearchTxsResult {
-  return { totalCount: "0", count: "0", pageNumber: "0", pageTotal: "0", limit: "0", txs: [] };
+  return { total_count: "0", count: "0", page_number: "0", page_total: "0", limit: "0", txs: [] };
 }
 
 export const SearchTxsResult = {
   $type: "cosmos.base.abci.v1beta1.SearchTxsResult" as const,
 
   encode(message: SearchTxsResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.totalCount !== "0") {
-      writer.uint32(8).uint64(message.totalCount);
+    if (message.total_count !== "0") {
+      writer.uint32(8).uint64(message.total_count);
     }
     if (message.count !== "0") {
       writer.uint32(16).uint64(message.count);
     }
-    if (message.pageNumber !== "0") {
-      writer.uint32(24).uint64(message.pageNumber);
+    if (message.page_number !== "0") {
+      writer.uint32(24).uint64(message.page_number);
     }
-    if (message.pageTotal !== "0") {
-      writer.uint32(32).uint64(message.pageTotal);
+    if (message.page_total !== "0") {
+      writer.uint32(32).uint64(message.page_total);
     }
     if (message.limit !== "0") {
       writer.uint32(40).uint64(message.limit);
@@ -1121,7 +1121,7 @@ export const SearchTxsResult = {
             break;
           }
 
-          message.totalCount = longToString(reader.uint64() as Long);
+          message.total_count = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 16) {
@@ -1135,14 +1135,14 @@ export const SearchTxsResult = {
             break;
           }
 
-          message.pageNumber = longToString(reader.uint64() as Long);
+          message.page_number = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.pageTotal = longToString(reader.uint64() as Long);
+          message.page_total = longToString(reader.uint64() as Long);
           continue;
         case 5:
           if (tag !== 40) {
@@ -1169,10 +1169,10 @@ export const SearchTxsResult = {
 
   fromJSON(object: any): SearchTxsResult {
     return {
-      totalCount: isSet(object.totalCount) ? String(object.totalCount) : "0",
+      total_count: isSet(object.total_count) ? String(object.total_count) : "0",
       count: isSet(object.count) ? String(object.count) : "0",
-      pageNumber: isSet(object.pageNumber) ? String(object.pageNumber) : "0",
-      pageTotal: isSet(object.pageTotal) ? String(object.pageTotal) : "0",
+      page_number: isSet(object.page_number) ? String(object.page_number) : "0",
+      page_total: isSet(object.page_total) ? String(object.page_total) : "0",
       limit: isSet(object.limit) ? String(object.limit) : "0",
       txs: Array.isArray(object?.txs) ? object.txs.map((e: any) => TxResponse.fromJSON(e)) : [],
     };
@@ -1180,17 +1180,17 @@ export const SearchTxsResult = {
 
   toJSON(message: SearchTxsResult): unknown {
     const obj: any = {};
-    if (message.totalCount !== "0") {
-      obj.totalCount = message.totalCount;
+    if (message.total_count !== "0") {
+      obj.total_count = message.total_count;
     }
     if (message.count !== "0") {
       obj.count = message.count;
     }
-    if (message.pageNumber !== "0") {
-      obj.pageNumber = message.pageNumber;
+    if (message.page_number !== "0") {
+      obj.page_number = message.page_number;
     }
-    if (message.pageTotal !== "0") {
-      obj.pageTotal = message.pageTotal;
+    if (message.page_total !== "0") {
+      obj.page_total = message.page_total;
     }
     if (message.limit !== "0") {
       obj.limit = message.limit;
@@ -1206,10 +1206,10 @@ export const SearchTxsResult = {
   },
   fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {
     const message = createBaseSearchTxsResult();
-    message.totalCount = object.totalCount ?? "0";
+    message.total_count = object.total_count ?? "0";
     message.count = object.count ?? "0";
-    message.pageNumber = object.pageNumber ?? "0";
-    message.pageTotal = object.pageTotal ?? "0";
+    message.page_number = object.page_number ?? "0";
+    message.page_total = object.page_total ?? "0";
     message.limit = object.limit ?? "0";
     message.txs = object.txs?.map((e) => TxResponse.fromPartial(e)) || [];
     return message;

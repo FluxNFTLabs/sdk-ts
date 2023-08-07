@@ -20,19 +20,19 @@ export interface BlockParams {
    * Max block size, in bytes.
    * Note: must be greater than 0
    */
-  maxBytes: string;
+  max_bytes: string;
   /**
    * Max gas per block.
    * Note: must be greater or equal to -1
    */
-  maxGas: string;
+  max_gas: string;
   /**
    * Minimum time increment between consecutive blocks (in milliseconds) If the
    * block header timestamp is ahead of the system clock, decrease this value.
    *
    * Not exposed to the application.
    */
-  timeIotaMs: string;
+  time_iota_ms: string;
 }
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
@@ -43,7 +43,7 @@ export interface EvidenceParams {
    * The basic formula for calculating this is: MaxAgeDuration / {average block
    * time}.
    */
-  maxAgeNumBlocks: string;
+  max_age_num_blocks: string;
   /**
    * Max age of evidence, in time.
    *
@@ -51,7 +51,7 @@ export interface EvidenceParams {
    * mechanism for handling [Nothing-At-Stake
    * attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
    */
-  maxAgeDuration:
+  max_age_duration:
     | Duration
     | undefined;
   /**
@@ -59,7 +59,7 @@ export interface EvidenceParams {
    * and should fall comfortably under the max block bytes.
    * Default is 1048576 or 1MB
    */
-  maxBytes: string;
+  max_bytes: string;
 }
 
 /**
@@ -67,12 +67,12 @@ export interface EvidenceParams {
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
 export interface ValidatorParams {
-  pubKeyTypes: string[];
+  pub_key_types: string[];
 }
 
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
-  appVersion: string;
+  app_version: string;
 }
 
 /**
@@ -81,8 +81,8 @@ export interface VersionParams {
  * It is hashed into the Header.ConsensusHash.
  */
 export interface HashedParams {
-  blockMaxBytes: string;
-  blockMaxGas: string;
+  block_max_bytes: string;
+  block_max_gas: string;
 }
 
 function createBaseConsensusParams(): ConsensusParams {
@@ -200,21 +200,21 @@ export const ConsensusParams = {
 };
 
 function createBaseBlockParams(): BlockParams {
-  return { maxBytes: "0", maxGas: "0", timeIotaMs: "0" };
+  return { max_bytes: "0", max_gas: "0", time_iota_ms: "0" };
 }
 
 export const BlockParams = {
   $type: "tendermint.types.BlockParams" as const,
 
   encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.maxBytes !== "0") {
-      writer.uint32(8).int64(message.maxBytes);
+    if (message.max_bytes !== "0") {
+      writer.uint32(8).int64(message.max_bytes);
     }
-    if (message.maxGas !== "0") {
-      writer.uint32(16).int64(message.maxGas);
+    if (message.max_gas !== "0") {
+      writer.uint32(16).int64(message.max_gas);
     }
-    if (message.timeIotaMs !== "0") {
-      writer.uint32(24).int64(message.timeIotaMs);
+    if (message.time_iota_ms !== "0") {
+      writer.uint32(24).int64(message.time_iota_ms);
     }
     return writer;
   },
@@ -231,21 +231,21 @@ export const BlockParams = {
             break;
           }
 
-          message.maxBytes = longToString(reader.int64() as Long);
+          message.max_bytes = longToString(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.maxGas = longToString(reader.int64() as Long);
+          message.max_gas = longToString(reader.int64() as Long);
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.timeIotaMs = longToString(reader.int64() as Long);
+          message.time_iota_ms = longToString(reader.int64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -258,22 +258,22 @@ export const BlockParams = {
 
   fromJSON(object: any): BlockParams {
     return {
-      maxBytes: isSet(object.maxBytes) ? String(object.maxBytes) : "0",
-      maxGas: isSet(object.maxGas) ? String(object.maxGas) : "0",
-      timeIotaMs: isSet(object.timeIotaMs) ? String(object.timeIotaMs) : "0",
+      max_bytes: isSet(object.max_bytes) ? String(object.max_bytes) : "0",
+      max_gas: isSet(object.max_gas) ? String(object.max_gas) : "0",
+      time_iota_ms: isSet(object.time_iota_ms) ? String(object.time_iota_ms) : "0",
     };
   },
 
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    if (message.maxBytes !== "0") {
-      obj.maxBytes = message.maxBytes;
+    if (message.max_bytes !== "0") {
+      obj.max_bytes = message.max_bytes;
     }
-    if (message.maxGas !== "0") {
-      obj.maxGas = message.maxGas;
+    if (message.max_gas !== "0") {
+      obj.max_gas = message.max_gas;
     }
-    if (message.timeIotaMs !== "0") {
-      obj.timeIotaMs = message.timeIotaMs;
+    if (message.time_iota_ms !== "0") {
+      obj.time_iota_ms = message.time_iota_ms;
     }
     return obj;
   },
@@ -283,29 +283,29 @@ export const BlockParams = {
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes ?? "0";
-    message.maxGas = object.maxGas ?? "0";
-    message.timeIotaMs = object.timeIotaMs ?? "0";
+    message.max_bytes = object.max_bytes ?? "0";
+    message.max_gas = object.max_gas ?? "0";
+    message.time_iota_ms = object.time_iota_ms ?? "0";
     return message;
   },
 };
 
 function createBaseEvidenceParams(): EvidenceParams {
-  return { maxAgeNumBlocks: "0", maxAgeDuration: undefined, maxBytes: "0" };
+  return { max_age_num_blocks: "0", max_age_duration: undefined, max_bytes: "0" };
 }
 
 export const EvidenceParams = {
   $type: "tendermint.types.EvidenceParams" as const,
 
   encode(message: EvidenceParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.maxAgeNumBlocks !== "0") {
-      writer.uint32(8).int64(message.maxAgeNumBlocks);
+    if (message.max_age_num_blocks !== "0") {
+      writer.uint32(8).int64(message.max_age_num_blocks);
     }
-    if (message.maxAgeDuration !== undefined) {
-      Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
+    if (message.max_age_duration !== undefined) {
+      Duration.encode(message.max_age_duration, writer.uint32(18).fork()).ldelim();
     }
-    if (message.maxBytes !== "0") {
-      writer.uint32(24).int64(message.maxBytes);
+    if (message.max_bytes !== "0") {
+      writer.uint32(24).int64(message.max_bytes);
     }
     return writer;
   },
@@ -322,21 +322,21 @@ export const EvidenceParams = {
             break;
           }
 
-          message.maxAgeNumBlocks = longToString(reader.int64() as Long);
+          message.max_age_num_blocks = longToString(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.maxAgeDuration = Duration.decode(reader, reader.uint32());
+          message.max_age_duration = Duration.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.maxBytes = longToString(reader.int64() as Long);
+          message.max_bytes = longToString(reader.int64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -349,22 +349,22 @@ export const EvidenceParams = {
 
   fromJSON(object: any): EvidenceParams {
     return {
-      maxAgeNumBlocks: isSet(object.maxAgeNumBlocks) ? String(object.maxAgeNumBlocks) : "0",
-      maxAgeDuration: isSet(object.maxAgeDuration) ? Duration.fromJSON(object.maxAgeDuration) : undefined,
-      maxBytes: isSet(object.maxBytes) ? String(object.maxBytes) : "0",
+      max_age_num_blocks: isSet(object.max_age_num_blocks) ? String(object.max_age_num_blocks) : "0",
+      max_age_duration: isSet(object.max_age_duration) ? Duration.fromJSON(object.max_age_duration) : undefined,
+      max_bytes: isSet(object.max_bytes) ? String(object.max_bytes) : "0",
     };
   },
 
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
-    if (message.maxAgeNumBlocks !== "0") {
-      obj.maxAgeNumBlocks = message.maxAgeNumBlocks;
+    if (message.max_age_num_blocks !== "0") {
+      obj.max_age_num_blocks = message.max_age_num_blocks;
     }
-    if (message.maxAgeDuration !== undefined) {
-      obj.maxAgeDuration = Duration.toJSON(message.maxAgeDuration);
+    if (message.max_age_duration !== undefined) {
+      obj.max_age_duration = Duration.toJSON(message.max_age_duration);
     }
-    if (message.maxBytes !== "0") {
-      obj.maxBytes = message.maxBytes;
+    if (message.max_bytes !== "0") {
+      obj.max_bytes = message.max_bytes;
     }
     return obj;
   },
@@ -374,24 +374,24 @@ export const EvidenceParams = {
   },
   fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams {
     const message = createBaseEvidenceParams();
-    message.maxAgeNumBlocks = object.maxAgeNumBlocks ?? "0";
-    message.maxAgeDuration = (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null)
-      ? Duration.fromPartial(object.maxAgeDuration)
+    message.max_age_num_blocks = object.max_age_num_blocks ?? "0";
+    message.max_age_duration = (object.max_age_duration !== undefined && object.max_age_duration !== null)
+      ? Duration.fromPartial(object.max_age_duration)
       : undefined;
-    message.maxBytes = object.maxBytes ?? "0";
+    message.max_bytes = object.max_bytes ?? "0";
     return message;
   },
 };
 
 function createBaseValidatorParams(): ValidatorParams {
-  return { pubKeyTypes: [] };
+  return { pub_key_types: [] };
 }
 
 export const ValidatorParams = {
   $type: "tendermint.types.ValidatorParams" as const,
 
   encode(message: ValidatorParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.pubKeyTypes) {
+    for (const v of message.pub_key_types) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -409,7 +409,7 @@ export const ValidatorParams = {
             break;
           }
 
-          message.pubKeyTypes.push(reader.string());
+          message.pub_key_types.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -421,13 +421,15 @@ export const ValidatorParams = {
   },
 
   fromJSON(object: any): ValidatorParams {
-    return { pubKeyTypes: Array.isArray(object?.pubKeyTypes) ? object.pubKeyTypes.map((e: any) => String(e)) : [] };
+    return {
+      pub_key_types: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => String(e)) : [],
+    };
   },
 
   toJSON(message: ValidatorParams): unknown {
     const obj: any = {};
-    if (message.pubKeyTypes?.length) {
-      obj.pubKeyTypes = message.pubKeyTypes;
+    if (message.pub_key_types?.length) {
+      obj.pub_key_types = message.pub_key_types;
     }
     return obj;
   },
@@ -437,21 +439,21 @@ export const ValidatorParams = {
   },
   fromPartial(object: DeepPartial<ValidatorParams>): ValidatorParams {
     const message = createBaseValidatorParams();
-    message.pubKeyTypes = object.pubKeyTypes?.map((e) => e) || [];
+    message.pub_key_types = object.pub_key_types?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseVersionParams(): VersionParams {
-  return { appVersion: "0" };
+  return { app_version: "0" };
 }
 
 export const VersionParams = {
   $type: "tendermint.types.VersionParams" as const,
 
   encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.appVersion !== "0") {
-      writer.uint32(8).uint64(message.appVersion);
+    if (message.app_version !== "0") {
+      writer.uint32(8).uint64(message.app_version);
     }
     return writer;
   },
@@ -468,7 +470,7 @@ export const VersionParams = {
             break;
           }
 
-          message.appVersion = longToString(reader.uint64() as Long);
+          message.app_version = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -480,13 +482,13 @@ export const VersionParams = {
   },
 
   fromJSON(object: any): VersionParams {
-    return { appVersion: isSet(object.appVersion) ? String(object.appVersion) : "0" };
+    return { app_version: isSet(object.app_version) ? String(object.app_version) : "0" };
   },
 
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
-    if (message.appVersion !== "0") {
-      obj.appVersion = message.appVersion;
+    if (message.app_version !== "0") {
+      obj.app_version = message.app_version;
     }
     return obj;
   },
@@ -496,24 +498,24 @@ export const VersionParams = {
   },
   fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = createBaseVersionParams();
-    message.appVersion = object.appVersion ?? "0";
+    message.app_version = object.app_version ?? "0";
     return message;
   },
 };
 
 function createBaseHashedParams(): HashedParams {
-  return { blockMaxBytes: "0", blockMaxGas: "0" };
+  return { block_max_bytes: "0", block_max_gas: "0" };
 }
 
 export const HashedParams = {
   $type: "tendermint.types.HashedParams" as const,
 
   encode(message: HashedParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.blockMaxBytes !== "0") {
-      writer.uint32(8).int64(message.blockMaxBytes);
+    if (message.block_max_bytes !== "0") {
+      writer.uint32(8).int64(message.block_max_bytes);
     }
-    if (message.blockMaxGas !== "0") {
-      writer.uint32(16).int64(message.blockMaxGas);
+    if (message.block_max_gas !== "0") {
+      writer.uint32(16).int64(message.block_max_gas);
     }
     return writer;
   },
@@ -530,14 +532,14 @@ export const HashedParams = {
             break;
           }
 
-          message.blockMaxBytes = longToString(reader.int64() as Long);
+          message.block_max_bytes = longToString(reader.int64() as Long);
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.blockMaxGas = longToString(reader.int64() as Long);
+          message.block_max_gas = longToString(reader.int64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -550,18 +552,18 @@ export const HashedParams = {
 
   fromJSON(object: any): HashedParams {
     return {
-      blockMaxBytes: isSet(object.blockMaxBytes) ? String(object.blockMaxBytes) : "0",
-      blockMaxGas: isSet(object.blockMaxGas) ? String(object.blockMaxGas) : "0",
+      block_max_bytes: isSet(object.block_max_bytes) ? String(object.block_max_bytes) : "0",
+      block_max_gas: isSet(object.block_max_gas) ? String(object.block_max_gas) : "0",
     };
   },
 
   toJSON(message: HashedParams): unknown {
     const obj: any = {};
-    if (message.blockMaxBytes !== "0") {
-      obj.blockMaxBytes = message.blockMaxBytes;
+    if (message.block_max_bytes !== "0") {
+      obj.block_max_bytes = message.block_max_bytes;
     }
-    if (message.blockMaxGas !== "0") {
-      obj.blockMaxGas = message.blockMaxGas;
+    if (message.block_max_gas !== "0") {
+      obj.block_max_gas = message.block_max_gas;
     }
     return obj;
   },
@@ -571,8 +573,8 @@ export const HashedParams = {
   },
   fromPartial(object: DeepPartial<HashedParams>): HashedParams {
     const message = createBaseHashedParams();
-    message.blockMaxBytes = object.blockMaxBytes ?? "0";
-    message.blockMaxGas = object.blockMaxGas ?? "0";
+    message.block_max_bytes = object.block_max_bytes ?? "0";
+    message.block_max_gas = object.block_max_gas ?? "0";
     return message;
   },
 };

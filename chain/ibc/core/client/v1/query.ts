@@ -13,7 +13,7 @@ import { ConsensusStateWithHeight, Height, IdentifiedClientState, Params } from 
  */
 export interface QueryClientStateRequest {
   /** client state unique identifier */
-  clientId: string;
+  client_id: string;
 }
 
 /**
@@ -23,13 +23,13 @@ export interface QueryClientStateRequest {
  */
 export interface QueryClientStateResponse {
   /** client state associated with the request identifier */
-  clientState:
+  client_state:
     | Any
     | undefined;
   /** merkle proof of existence */
   proof: Uint8Array;
   /** height at which the proof was retrieved */
-  proofHeight: Height | undefined;
+  proof_height: Height | undefined;
 }
 
 /**
@@ -47,7 +47,7 @@ export interface QueryClientStatesRequest {
  */
 export interface QueryClientStatesResponse {
   /** list of stored ClientStates of the chain. */
-  clientStates: IdentifiedClientState[];
+  client_states: IdentifiedClientState[];
   /** pagination response */
   pagination: PageResponse | undefined;
 }
@@ -59,16 +59,16 @@ export interface QueryClientStatesResponse {
  */
 export interface QueryConsensusStateRequest {
   /** client identifier */
-  clientId: string;
+  client_id: string;
   /** consensus state revision number */
-  revisionNumber: string;
+  revision_number: string;
   /** consensus state revision height */
-  revisionHeight: string;
+  revision_height: string;
   /**
    * latest_height overrrides the height field and queries the latest stored
    * ConsensusState
    */
-  latestHeight: boolean;
+  latest_height: boolean;
 }
 
 /**
@@ -77,13 +77,13 @@ export interface QueryConsensusStateRequest {
  */
 export interface QueryConsensusStateResponse {
   /** consensus state associated with the client identifier at the given height */
-  consensusState:
+  consensus_state:
     | Any
     | undefined;
   /** merkle proof of existence */
   proof: Uint8Array;
   /** height at which the proof was retrieved */
-  proofHeight: Height | undefined;
+  proof_height: Height | undefined;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface QueryConsensusStateResponse {
  */
 export interface QueryConsensusStatesRequest {
   /** client identifier */
-  clientId: string;
+  client_id: string;
   /** pagination request */
   pagination: PageRequest | undefined;
 }
@@ -103,7 +103,7 @@ export interface QueryConsensusStatesRequest {
  */
 export interface QueryConsensusStatesResponse {
   /** consensus states associated with the identifier */
-  consensusStates: ConsensusStateWithHeight[];
+  consensus_states: ConsensusStateWithHeight[];
   /** pagination response */
   pagination: PageResponse | undefined;
 }
@@ -114,7 +114,7 @@ export interface QueryConsensusStatesResponse {
  */
 export interface QueryConsensusStateHeightsRequest {
   /** client identifier */
-  clientId: string;
+  client_id: string;
   /** pagination request */
   pagination: PageRequest | undefined;
 }
@@ -125,7 +125,7 @@ export interface QueryConsensusStateHeightsRequest {
  */
 export interface QueryConsensusStateHeightsResponse {
   /** consensus state heights */
-  consensusStateHeights: Height[];
+  consensus_state_heights: Height[];
   /** pagination response */
   pagination: PageResponse | undefined;
 }
@@ -136,7 +136,7 @@ export interface QueryConsensusStateHeightsResponse {
  */
 export interface QueryClientStatusRequest {
   /** client unique identifier */
-  clientId: string;
+  client_id: string;
 }
 
 /**
@@ -176,7 +176,7 @@ export interface QueryUpgradedClientStateRequest {
  */
 export interface QueryUpgradedClientStateResponse {
   /** client state associated with the request identifier */
-  upgradedClientState: Any | undefined;
+  upgraded_client_state: Any | undefined;
 }
 
 /**
@@ -192,19 +192,19 @@ export interface QueryUpgradedConsensusStateRequest {
  */
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
-  upgradedConsensusState: Any | undefined;
+  upgraded_consensus_state: Any | undefined;
 }
 
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
-  return { clientId: "" };
+  return { client_id: "" };
 }
 
 export const QueryClientStateRequest = {
   $type: "ibc.core.client.v1.QueryClientStateRequest" as const,
 
   encode(message: QueryClientStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     return writer;
   },
@@ -221,7 +221,7 @@ export const QueryClientStateRequest = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -233,13 +233,13 @@ export const QueryClientStateRequest = {
   },
 
   fromJSON(object: any): QueryClientStateRequest {
-    return { clientId: isSet(object.clientId) ? String(object.clientId) : "" };
+    return { client_id: isSet(object.client_id) ? String(object.client_id) : "" };
   },
 
   toJSON(message: QueryClientStateRequest): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     return obj;
   },
@@ -249,27 +249,27 @@ export const QueryClientStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     return message;
   },
 };
 
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
-  return { clientState: undefined, proof: new Uint8Array(0), proofHeight: undefined };
+  return { client_state: undefined, proof: new Uint8Array(0), proof_height: undefined };
 }
 
 export const QueryClientStateResponse = {
   $type: "ibc.core.client.v1.QueryClientStateResponse" as const,
 
   encode(message: QueryClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientState !== undefined) {
-      Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
+    if (message.client_state !== undefined) {
+      Any.encode(message.client_state, writer.uint32(10).fork()).ldelim();
     }
     if (message.proof.length !== 0) {
       writer.uint32(18).bytes(message.proof);
     }
-    if (message.proofHeight !== undefined) {
-      Height.encode(message.proofHeight, writer.uint32(26).fork()).ldelim();
+    if (message.proof_height !== undefined) {
+      Height.encode(message.proof_height, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -286,7 +286,7 @@ export const QueryClientStateResponse = {
             break;
           }
 
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.client_state = Any.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -300,7 +300,7 @@ export const QueryClientStateResponse = {
             break;
           }
 
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proof_height = Height.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -313,22 +313,22 @@ export const QueryClientStateResponse = {
 
   fromJSON(object: any): QueryClientStateResponse {
     return {
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
+      client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(0),
-      proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
+      proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
     };
   },
 
   toJSON(message: QueryClientStateResponse): unknown {
     const obj: any = {};
-    if (message.clientState !== undefined) {
-      obj.clientState = Any.toJSON(message.clientState);
+    if (message.client_state !== undefined) {
+      obj.client_state = Any.toJSON(message.client_state);
     }
     if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
-    if (message.proofHeight !== undefined) {
-      obj.proofHeight = Height.toJSON(message.proofHeight);
+    if (message.proof_height !== undefined) {
+      obj.proof_height = Height.toJSON(message.proof_height);
     }
     return obj;
   },
@@ -338,12 +338,12 @@ export const QueryClientStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
-    message.clientState = (object.clientState !== undefined && object.clientState !== null)
-      ? Any.fromPartial(object.clientState)
+    message.client_state = (object.client_state !== undefined && object.client_state !== null)
+      ? Any.fromPartial(object.client_state)
       : undefined;
     message.proof = object.proof ?? new Uint8Array(0);
-    message.proofHeight = (object.proofHeight !== undefined && object.proofHeight !== null)
-      ? Height.fromPartial(object.proofHeight)
+    message.proof_height = (object.proof_height !== undefined && object.proof_height !== null)
+      ? Height.fromPartial(object.proof_height)
       : undefined;
     return message;
   },
@@ -411,14 +411,14 @@ export const QueryClientStatesRequest = {
 };
 
 function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
-  return { clientStates: [], pagination: undefined };
+  return { client_states: [], pagination: undefined };
 }
 
 export const QueryClientStatesResponse = {
   $type: "ibc.core.client.v1.QueryClientStatesResponse" as const,
 
   encode(message: QueryClientStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.clientStates) {
+    for (const v of message.client_states) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -439,7 +439,7 @@ export const QueryClientStatesResponse = {
             break;
           }
 
-          message.clientStates.push(IdentifiedClientState.decode(reader, reader.uint32()));
+          message.client_states.push(IdentifiedClientState.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -459,8 +459,8 @@ export const QueryClientStatesResponse = {
 
   fromJSON(object: any): QueryClientStatesResponse {
     return {
-      clientStates: Array.isArray(object?.clientStates)
-        ? object.clientStates.map((e: any) => IdentifiedClientState.fromJSON(e))
+      client_states: Array.isArray(object?.client_states)
+        ? object.client_states.map((e: any) => IdentifiedClientState.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -468,8 +468,8 @@ export const QueryClientStatesResponse = {
 
   toJSON(message: QueryClientStatesResponse): unknown {
     const obj: any = {};
-    if (message.clientStates?.length) {
-      obj.clientStates = message.clientStates.map((e) => IdentifiedClientState.toJSON(e));
+    if (message.client_states?.length) {
+      obj.client_states = message.client_states.map((e) => IdentifiedClientState.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -482,7 +482,7 @@ export const QueryClientStatesResponse = {
   },
   fromPartial(object: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
-    message.clientStates = object.clientStates?.map((e) => IdentifiedClientState.fromPartial(e)) || [];
+    message.client_states = object.client_states?.map((e) => IdentifiedClientState.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -491,24 +491,24 @@ export const QueryClientStatesResponse = {
 };
 
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
-  return { clientId: "", revisionNumber: "0", revisionHeight: "0", latestHeight: false };
+  return { client_id: "", revision_number: "0", revision_height: "0", latest_height: false };
 }
 
 export const QueryConsensusStateRequest = {
   $type: "ibc.core.client.v1.QueryConsensusStateRequest" as const,
 
   encode(message: QueryConsensusStateRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    if (message.revisionNumber !== "0") {
-      writer.uint32(16).uint64(message.revisionNumber);
+    if (message.revision_number !== "0") {
+      writer.uint32(16).uint64(message.revision_number);
     }
-    if (message.revisionHeight !== "0") {
-      writer.uint32(24).uint64(message.revisionHeight);
+    if (message.revision_height !== "0") {
+      writer.uint32(24).uint64(message.revision_height);
     }
-    if (message.latestHeight === true) {
-      writer.uint32(32).bool(message.latestHeight);
+    if (message.latest_height === true) {
+      writer.uint32(32).bool(message.latest_height);
     }
     return writer;
   },
@@ -525,28 +525,28 @@ export const QueryConsensusStateRequest = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.revisionNumber = longToString(reader.uint64() as Long);
+          message.revision_number = longToString(reader.uint64() as Long);
           continue;
         case 3:
           if (tag !== 24) {
             break;
           }
 
-          message.revisionHeight = longToString(reader.uint64() as Long);
+          message.revision_height = longToString(reader.uint64() as Long);
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.latestHeight = reader.bool();
+          message.latest_height = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -559,26 +559,26 @@ export const QueryConsensusStateRequest = {
 
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      revisionNumber: isSet(object.revisionNumber) ? String(object.revisionNumber) : "0",
-      revisionHeight: isSet(object.revisionHeight) ? String(object.revisionHeight) : "0",
-      latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      revision_number: isSet(object.revision_number) ? String(object.revision_number) : "0",
+      revision_height: isSet(object.revision_height) ? String(object.revision_height) : "0",
+      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false,
     };
   },
 
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.revisionNumber !== "0") {
-      obj.revisionNumber = message.revisionNumber;
+    if (message.revision_number !== "0") {
+      obj.revision_number = message.revision_number;
     }
-    if (message.revisionHeight !== "0") {
-      obj.revisionHeight = message.revisionHeight;
+    if (message.revision_height !== "0") {
+      obj.revision_height = message.revision_height;
     }
-    if (message.latestHeight === true) {
-      obj.latestHeight = message.latestHeight;
+    if (message.latest_height === true) {
+      obj.latest_height = message.latest_height;
     }
     return obj;
   },
@@ -588,30 +588,30 @@ export const QueryConsensusStateRequest = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
-    message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber ?? "0";
-    message.revisionHeight = object.revisionHeight ?? "0";
-    message.latestHeight = object.latestHeight ?? false;
+    message.client_id = object.client_id ?? "";
+    message.revision_number = object.revision_number ?? "0";
+    message.revision_height = object.revision_height ?? "0";
+    message.latest_height = object.latest_height ?? false;
     return message;
   },
 };
 
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
-  return { consensusState: undefined, proof: new Uint8Array(0), proofHeight: undefined };
+  return { consensus_state: undefined, proof: new Uint8Array(0), proof_height: undefined };
 }
 
 export const QueryConsensusStateResponse = {
   $type: "ibc.core.client.v1.QueryConsensusStateResponse" as const,
 
   encode(message: QueryConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.consensusState !== undefined) {
-      Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      Any.encode(message.consensus_state, writer.uint32(10).fork()).ldelim();
     }
     if (message.proof.length !== 0) {
       writer.uint32(18).bytes(message.proof);
     }
-    if (message.proofHeight !== undefined) {
-      Height.encode(message.proofHeight, writer.uint32(26).fork()).ldelim();
+    if (message.proof_height !== undefined) {
+      Height.encode(message.proof_height, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -628,7 +628,7 @@ export const QueryConsensusStateResponse = {
             break;
           }
 
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensus_state = Any.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -642,7 +642,7 @@ export const QueryConsensusStateResponse = {
             break;
           }
 
-          message.proofHeight = Height.decode(reader, reader.uint32());
+          message.proof_height = Height.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -655,22 +655,22 @@ export const QueryConsensusStateResponse = {
 
   fromJSON(object: any): QueryConsensusStateResponse {
     return {
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(0),
-      proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined,
+      proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
     };
   },
 
   toJSON(message: QueryConsensusStateResponse): unknown {
     const obj: any = {};
-    if (message.consensusState !== undefined) {
-      obj.consensusState = Any.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = Any.toJSON(message.consensus_state);
     }
     if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
-    if (message.proofHeight !== undefined) {
-      obj.proofHeight = Height.toJSON(message.proofHeight);
+    if (message.proof_height !== undefined) {
+      obj.proof_height = Height.toJSON(message.proof_height);
     }
     return obj;
   },
@@ -680,27 +680,27 @@ export const QueryConsensusStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? Any.fromPartial(object.consensusState)
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? Any.fromPartial(object.consensus_state)
       : undefined;
     message.proof = object.proof ?? new Uint8Array(0);
-    message.proofHeight = (object.proofHeight !== undefined && object.proofHeight !== null)
-      ? Height.fromPartial(object.proofHeight)
+    message.proof_height = (object.proof_height !== undefined && object.proof_height !== null)
+      ? Height.fromPartial(object.proof_height)
       : undefined;
     return message;
   },
 };
 
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
-  return { clientId: "", pagination: undefined };
+  return { client_id: "", pagination: undefined };
 }
 
 export const QueryConsensusStatesRequest = {
   $type: "ibc.core.client.v1.QueryConsensusStatesRequest" as const,
 
   encode(message: QueryConsensusStatesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -720,7 +720,7 @@ export const QueryConsensusStatesRequest = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -740,15 +740,15 @@ export const QueryConsensusStatesRequest = {
 
   fromJSON(object: any): QueryConsensusStatesRequest {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryConsensusStatesRequest): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -761,7 +761,7 @@ export const QueryConsensusStatesRequest = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -770,14 +770,14 @@ export const QueryConsensusStatesRequest = {
 };
 
 function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse {
-  return { consensusStates: [], pagination: undefined };
+  return { consensus_states: [], pagination: undefined };
 }
 
 export const QueryConsensusStatesResponse = {
   $type: "ibc.core.client.v1.QueryConsensusStatesResponse" as const,
 
   encode(message: QueryConsensusStatesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.consensusStates) {
+    for (const v of message.consensus_states) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -798,7 +798,7 @@ export const QueryConsensusStatesResponse = {
             break;
           }
 
-          message.consensusStates.push(ConsensusStateWithHeight.decode(reader, reader.uint32()));
+          message.consensus_states.push(ConsensusStateWithHeight.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -818,8 +818,8 @@ export const QueryConsensusStatesResponse = {
 
   fromJSON(object: any): QueryConsensusStatesResponse {
     return {
-      consensusStates: Array.isArray(object?.consensusStates)
-        ? object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e))
+      consensus_states: Array.isArray(object?.consensus_states)
+        ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -827,8 +827,8 @@ export const QueryConsensusStatesResponse = {
 
   toJSON(message: QueryConsensusStatesResponse): unknown {
     const obj: any = {};
-    if (message.consensusStates?.length) {
-      obj.consensusStates = message.consensusStates.map((e) => ConsensusStateWithHeight.toJSON(e));
+    if (message.consensus_states?.length) {
+      obj.consensus_states = message.consensus_states.map((e) => ConsensusStateWithHeight.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -841,7 +841,7 @@ export const QueryConsensusStatesResponse = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
-    message.consensusStates = object.consensusStates?.map((e) => ConsensusStateWithHeight.fromPartial(e)) || [];
+    message.consensus_states = object.consensus_states?.map((e) => ConsensusStateWithHeight.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -850,15 +850,15 @@ export const QueryConsensusStatesResponse = {
 };
 
 function createBaseQueryConsensusStateHeightsRequest(): QueryConsensusStateHeightsRequest {
-  return { clientId: "", pagination: undefined };
+  return { client_id: "", pagination: undefined };
 }
 
 export const QueryConsensusStateHeightsRequest = {
   $type: "ibc.core.client.v1.QueryConsensusStateHeightsRequest" as const,
 
   encode(message: QueryConsensusStateHeightsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -878,7 +878,7 @@ export const QueryConsensusStateHeightsRequest = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -898,15 +898,15 @@ export const QueryConsensusStateHeightsRequest = {
 
   fromJSON(object: any): QueryConsensusStateHeightsRequest {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryConsensusStateHeightsRequest): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
@@ -919,7 +919,7 @@ export const QueryConsensusStateHeightsRequest = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStateHeightsRequest>): QueryConsensusStateHeightsRequest {
     const message = createBaseQueryConsensusStateHeightsRequest();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageRequest.fromPartial(object.pagination)
       : undefined;
@@ -928,14 +928,14 @@ export const QueryConsensusStateHeightsRequest = {
 };
 
 function createBaseQueryConsensusStateHeightsResponse(): QueryConsensusStateHeightsResponse {
-  return { consensusStateHeights: [], pagination: undefined };
+  return { consensus_state_heights: [], pagination: undefined };
 }
 
 export const QueryConsensusStateHeightsResponse = {
   $type: "ibc.core.client.v1.QueryConsensusStateHeightsResponse" as const,
 
   encode(message: QueryConsensusStateHeightsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.consensusStateHeights) {
+    for (const v of message.consensus_state_heights) {
       Height.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
@@ -956,7 +956,7 @@ export const QueryConsensusStateHeightsResponse = {
             break;
           }
 
-          message.consensusStateHeights.push(Height.decode(reader, reader.uint32()));
+          message.consensus_state_heights.push(Height.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
@@ -976,8 +976,8 @@ export const QueryConsensusStateHeightsResponse = {
 
   fromJSON(object: any): QueryConsensusStateHeightsResponse {
     return {
-      consensusStateHeights: Array.isArray(object?.consensusStateHeights)
-        ? object.consensusStateHeights.map((e: any) => Height.fromJSON(e))
+      consensus_state_heights: Array.isArray(object?.consensus_state_heights)
+        ? object.consensus_state_heights.map((e: any) => Height.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -985,8 +985,8 @@ export const QueryConsensusStateHeightsResponse = {
 
   toJSON(message: QueryConsensusStateHeightsResponse): unknown {
     const obj: any = {};
-    if (message.consensusStateHeights?.length) {
-      obj.consensusStateHeights = message.consensusStateHeights.map((e) => Height.toJSON(e));
+    if (message.consensus_state_heights?.length) {
+      obj.consensus_state_heights = message.consensus_state_heights.map((e) => Height.toJSON(e));
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
@@ -999,7 +999,7 @@ export const QueryConsensusStateHeightsResponse = {
   },
   fromPartial(object: DeepPartial<QueryConsensusStateHeightsResponse>): QueryConsensusStateHeightsResponse {
     const message = createBaseQueryConsensusStateHeightsResponse();
-    message.consensusStateHeights = object.consensusStateHeights?.map((e) => Height.fromPartial(e)) || [];
+    message.consensus_state_heights = object.consensus_state_heights?.map((e) => Height.fromPartial(e)) || [];
     message.pagination = (object.pagination !== undefined && object.pagination !== null)
       ? PageResponse.fromPartial(object.pagination)
       : undefined;
@@ -1008,15 +1008,15 @@ export const QueryConsensusStateHeightsResponse = {
 };
 
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
-  return { clientId: "" };
+  return { client_id: "" };
 }
 
 export const QueryClientStatusRequest = {
   $type: "ibc.core.client.v1.QueryClientStatusRequest" as const,
 
   encode(message: QueryClientStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     return writer;
   },
@@ -1033,7 +1033,7 @@ export const QueryClientStatusRequest = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1045,13 +1045,13 @@ export const QueryClientStatusRequest = {
   },
 
   fromJSON(object: any): QueryClientStatusRequest {
-    return { clientId: isSet(object.clientId) ? String(object.clientId) : "" };
+    return { client_id: isSet(object.client_id) ? String(object.client_id) : "" };
   },
 
   toJSON(message: QueryClientStatusRequest): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     return obj;
   },
@@ -1061,7 +1061,7 @@ export const QueryClientStatusRequest = {
   },
   fromPartial(object: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     return message;
   },
 };
@@ -1277,15 +1277,15 @@ export const QueryUpgradedClientStateRequest = {
 };
 
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
-  return { upgradedClientState: undefined };
+  return { upgraded_client_state: undefined };
 }
 
 export const QueryUpgradedClientStateResponse = {
   $type: "ibc.core.client.v1.QueryUpgradedClientStateResponse" as const,
 
   encode(message: QueryUpgradedClientStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.upgradedClientState !== undefined) {
-      Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
+    if (message.upgraded_client_state !== undefined) {
+      Any.encode(message.upgraded_client_state, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1302,7 +1302,7 @@ export const QueryUpgradedClientStateResponse = {
             break;
           }
 
-          message.upgradedClientState = Any.decode(reader, reader.uint32());
+          message.upgraded_client_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1315,14 +1315,16 @@ export const QueryUpgradedClientStateResponse = {
 
   fromJSON(object: any): QueryUpgradedClientStateResponse {
     return {
-      upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state)
+        ? Any.fromJSON(object.upgraded_client_state)
+        : undefined,
     };
   },
 
   toJSON(message: QueryUpgradedClientStateResponse): unknown {
     const obj: any = {};
-    if (message.upgradedClientState !== undefined) {
-      obj.upgradedClientState = Any.toJSON(message.upgradedClientState);
+    if (message.upgraded_client_state !== undefined) {
+      obj.upgraded_client_state = Any.toJSON(message.upgraded_client_state);
     }
     return obj;
   },
@@ -1332,9 +1334,10 @@ export const QueryUpgradedClientStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
-    message.upgradedClientState = (object.upgradedClientState !== undefined && object.upgradedClientState !== null)
-      ? Any.fromPartial(object.upgradedClientState)
-      : undefined;
+    message.upgraded_client_state =
+      (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null)
+        ? Any.fromPartial(object.upgraded_client_state)
+        : undefined;
     return message;
   },
 };
@@ -1385,15 +1388,15 @@ export const QueryUpgradedConsensusStateRequest = {
 };
 
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
-  return { upgradedConsensusState: undefined };
+  return { upgraded_consensus_state: undefined };
 }
 
 export const QueryUpgradedConsensusStateResponse = {
   $type: "ibc.core.client.v1.QueryUpgradedConsensusStateResponse" as const,
 
   encode(message: QueryUpgradedConsensusStateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.upgradedConsensusState !== undefined) {
-      Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
+    if (message.upgraded_consensus_state !== undefined) {
+      Any.encode(message.upgraded_consensus_state, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1410,7 +1413,7 @@ export const QueryUpgradedConsensusStateResponse = {
             break;
           }
 
-          message.upgradedConsensusState = Any.decode(reader, reader.uint32());
+          message.upgraded_consensus_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1423,16 +1426,16 @@ export const QueryUpgradedConsensusStateResponse = {
 
   fromJSON(object: any): QueryUpgradedConsensusStateResponse {
     return {
-      upgradedConsensusState: isSet(object.upgradedConsensusState)
-        ? Any.fromJSON(object.upgradedConsensusState)
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state)
+        ? Any.fromJSON(object.upgraded_consensus_state)
         : undefined,
     };
   },
 
   toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
     const obj: any = {};
-    if (message.upgradedConsensusState !== undefined) {
-      obj.upgradedConsensusState = Any.toJSON(message.upgradedConsensusState);
+    if (message.upgraded_consensus_state !== undefined) {
+      obj.upgraded_consensus_state = Any.toJSON(message.upgraded_consensus_state);
     }
     return obj;
   },
@@ -1442,9 +1445,9 @@ export const QueryUpgradedConsensusStateResponse = {
   },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
-    message.upgradedConsensusState =
-      (object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null)
-        ? Any.fromPartial(object.upgradedConsensusState)
+    message.upgraded_consensus_state =
+      (object.upgraded_consensus_state !== undefined && object.upgraded_consensus_state !== null)
+        ? Any.fromPartial(object.upgraded_consensus_state)
         : undefined;
     return message;
   },

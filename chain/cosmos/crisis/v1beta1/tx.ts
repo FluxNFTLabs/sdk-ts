@@ -9,9 +9,9 @@ export interface MsgVerifyInvariant {
   /** sender is the account address of private key to send coins to fee collector account. */
   sender: string;
   /** name of the invariant module. */
-  invariantModuleName: string;
+  invariant_module_name: string;
   /** invariant_route is the msg's invariant route. */
-  invariantRoute: string;
+  invariant_route: string;
 }
 
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
@@ -27,7 +27,7 @@ export interface MsgUpdateParams {
   /** authority is the address that controls the module (defaults to x/gov unless overwritten). */
   authority: string;
   /** constant_fee defines the x/crisis parameter. */
-  constantFee: Coin | undefined;
+  constant_fee: Coin | undefined;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
-  return { sender: "", invariantModuleName: "", invariantRoute: "" };
+  return { sender: "", invariant_module_name: "", invariant_route: "" };
 }
 
 export const MsgVerifyInvariant = {
@@ -50,11 +50,11 @@ export const MsgVerifyInvariant = {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.invariantModuleName !== "") {
-      writer.uint32(18).string(message.invariantModuleName);
+    if (message.invariant_module_name !== "") {
+      writer.uint32(18).string(message.invariant_module_name);
     }
-    if (message.invariantRoute !== "") {
-      writer.uint32(26).string(message.invariantRoute);
+    if (message.invariant_route !== "") {
+      writer.uint32(26).string(message.invariant_route);
     }
     return writer;
   },
@@ -78,14 +78,14 @@ export const MsgVerifyInvariant = {
             break;
           }
 
-          message.invariantModuleName = reader.string();
+          message.invariant_module_name = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.invariantRoute = reader.string();
+          message.invariant_route = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -99,8 +99,8 @@ export const MsgVerifyInvariant = {
   fromJSON(object: any): MsgVerifyInvariant {
     return {
       sender: isSet(object.sender) ? String(object.sender) : "",
-      invariantModuleName: isSet(object.invariantModuleName) ? String(object.invariantModuleName) : "",
-      invariantRoute: isSet(object.invariantRoute) ? String(object.invariantRoute) : "",
+      invariant_module_name: isSet(object.invariant_module_name) ? String(object.invariant_module_name) : "",
+      invariant_route: isSet(object.invariant_route) ? String(object.invariant_route) : "",
     };
   },
 
@@ -109,11 +109,11 @@ export const MsgVerifyInvariant = {
     if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.invariantModuleName !== "") {
-      obj.invariantModuleName = message.invariantModuleName;
+    if (message.invariant_module_name !== "") {
+      obj.invariant_module_name = message.invariant_module_name;
     }
-    if (message.invariantRoute !== "") {
-      obj.invariantRoute = message.invariantRoute;
+    if (message.invariant_route !== "") {
+      obj.invariant_route = message.invariant_route;
     }
     return obj;
   },
@@ -124,8 +124,8 @@ export const MsgVerifyInvariant = {
   fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
     const message = createBaseMsgVerifyInvariant();
     message.sender = object.sender ?? "";
-    message.invariantModuleName = object.invariantModuleName ?? "";
-    message.invariantRoute = object.invariantRoute ?? "";
+    message.invariant_module_name = object.invariant_module_name ?? "";
+    message.invariant_route = object.invariant_route ?? "";
     return message;
   },
 };
@@ -176,7 +176,7 @@ export const MsgVerifyInvariantResponse = {
 };
 
 function createBaseMsgUpdateParams(): MsgUpdateParams {
-  return { authority: "", constantFee: undefined };
+  return { authority: "", constant_fee: undefined };
 }
 
 export const MsgUpdateParams = {
@@ -186,8 +186,8 @@ export const MsgUpdateParams = {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
-    if (message.constantFee !== undefined) {
-      Coin.encode(message.constantFee, writer.uint32(18).fork()).ldelim();
+    if (message.constant_fee !== undefined) {
+      Coin.encode(message.constant_fee, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -211,7 +211,7 @@ export const MsgUpdateParams = {
             break;
           }
 
-          message.constantFee = Coin.decode(reader, reader.uint32());
+          message.constant_fee = Coin.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -225,7 +225,7 @@ export const MsgUpdateParams = {
   fromJSON(object: any): MsgUpdateParams {
     return {
       authority: isSet(object.authority) ? String(object.authority) : "",
-      constantFee: isSet(object.constantFee) ? Coin.fromJSON(object.constantFee) : undefined,
+      constant_fee: isSet(object.constant_fee) ? Coin.fromJSON(object.constant_fee) : undefined,
     };
   },
 
@@ -234,8 +234,8 @@ export const MsgUpdateParams = {
     if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.constantFee !== undefined) {
-      obj.constantFee = Coin.toJSON(message.constantFee);
+    if (message.constant_fee !== undefined) {
+      obj.constant_fee = Coin.toJSON(message.constant_fee);
     }
     return obj;
   },
@@ -246,8 +246,8 @@ export const MsgUpdateParams = {
   fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
-    message.constantFee = (object.constantFee !== undefined && object.constantFee !== null)
-      ? Coin.fromPartial(object.constantFee)
+    message.constant_fee = (object.constant_fee !== undefined && object.constant_fee !== null)
+      ? Coin.fromPartial(object.constant_fee)
       : undefined;
     return message;
   },

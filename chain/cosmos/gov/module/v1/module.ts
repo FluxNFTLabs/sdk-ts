@@ -8,21 +8,21 @@ export interface Module {
    * max_metadata_len defines the maximum proposal metadata length.
    * Defaults to 255 if not explicitly set.
    */
-  maxMetadataLen: string;
+  max_metadata_len: string;
   /** authority defines the custom module authority. If not set, defaults to the governance module. */
   authority: string;
 }
 
 function createBaseModule(): Module {
-  return { maxMetadataLen: "0", authority: "" };
+  return { max_metadata_len: "0", authority: "" };
 }
 
 export const Module = {
   $type: "cosmos.gov.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.maxMetadataLen !== "0") {
-      writer.uint32(8).uint64(message.maxMetadataLen);
+    if (message.max_metadata_len !== "0") {
+      writer.uint32(8).uint64(message.max_metadata_len);
     }
     if (message.authority !== "") {
       writer.uint32(18).string(message.authority);
@@ -42,7 +42,7 @@ export const Module = {
             break;
           }
 
-          message.maxMetadataLen = longToString(reader.uint64() as Long);
+          message.max_metadata_len = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -62,15 +62,15 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      maxMetadataLen: isSet(object.maxMetadataLen) ? String(object.maxMetadataLen) : "0",
+      max_metadata_len: isSet(object.max_metadata_len) ? String(object.max_metadata_len) : "0",
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.maxMetadataLen !== "0") {
-      obj.maxMetadataLen = message.maxMetadataLen;
+    if (message.max_metadata_len !== "0") {
+      obj.max_metadata_len = message.max_metadata_len;
     }
     if (message.authority !== "") {
       obj.authority = message.authority;
@@ -83,7 +83,7 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.maxMetadataLen = object.maxMetadataLen ?? "0";
+    message.max_metadata_len = object.max_metadata_len ?? "0";
     message.authority = object.authority ?? "";
     return message;
   },

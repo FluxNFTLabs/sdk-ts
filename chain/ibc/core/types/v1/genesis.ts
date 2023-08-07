@@ -7,33 +7,33 @@ import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
   /** ICS002 - Clients genesis state */
-  clientGenesis:
+  client_genesis:
     | GenesisState1
     | undefined;
   /** ICS003 - Connections genesis state */
-  connectionGenesis:
+  connection_genesis:
     | GenesisState2
     | undefined;
   /** ICS004 - Channel genesis state */
-  channelGenesis: GenesisState3 | undefined;
+  channel_genesis: GenesisState3 | undefined;
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { clientGenesis: undefined, connectionGenesis: undefined, channelGenesis: undefined };
+  return { client_genesis: undefined, connection_genesis: undefined, channel_genesis: undefined };
 }
 
 export const GenesisState = {
   $type: "ibc.core.types.v1.GenesisState" as const,
 
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientGenesis !== undefined) {
-      GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
+    if (message.client_genesis !== undefined) {
+      GenesisState1.encode(message.client_genesis, writer.uint32(10).fork()).ldelim();
     }
-    if (message.connectionGenesis !== undefined) {
-      GenesisState2.encode(message.connectionGenesis, writer.uint32(18).fork()).ldelim();
+    if (message.connection_genesis !== undefined) {
+      GenesisState2.encode(message.connection_genesis, writer.uint32(18).fork()).ldelim();
     }
-    if (message.channelGenesis !== undefined) {
-      GenesisState3.encode(message.channelGenesis, writer.uint32(26).fork()).ldelim();
+    if (message.channel_genesis !== undefined) {
+      GenesisState3.encode(message.channel_genesis, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -50,21 +50,21 @@ export const GenesisState = {
             break;
           }
 
-          message.clientGenesis = GenesisState1.decode(reader, reader.uint32());
+          message.client_genesis = GenesisState1.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32());
+          message.connection_genesis = GenesisState2.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.channelGenesis = GenesisState3.decode(reader, reader.uint32());
+          message.channel_genesis = GenesisState3.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -77,22 +77,24 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      clientGenesis: isSet(object.clientGenesis) ? GenesisState1.fromJSON(object.clientGenesis) : undefined,
-      connectionGenesis: isSet(object.connectionGenesis) ? GenesisState2.fromJSON(object.connectionGenesis) : undefined,
-      channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined,
+      client_genesis: isSet(object.client_genesis) ? GenesisState1.fromJSON(object.client_genesis) : undefined,
+      connection_genesis: isSet(object.connection_genesis)
+        ? GenesisState2.fromJSON(object.connection_genesis)
+        : undefined,
+      channel_genesis: isSet(object.channel_genesis) ? GenesisState3.fromJSON(object.channel_genesis) : undefined,
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.clientGenesis !== undefined) {
-      obj.clientGenesis = GenesisState1.toJSON(message.clientGenesis);
+    if (message.client_genesis !== undefined) {
+      obj.client_genesis = GenesisState1.toJSON(message.client_genesis);
     }
-    if (message.connectionGenesis !== undefined) {
-      obj.connectionGenesis = GenesisState2.toJSON(message.connectionGenesis);
+    if (message.connection_genesis !== undefined) {
+      obj.connection_genesis = GenesisState2.toJSON(message.connection_genesis);
     }
-    if (message.channelGenesis !== undefined) {
-      obj.channelGenesis = GenesisState3.toJSON(message.channelGenesis);
+    if (message.channel_genesis !== undefined) {
+      obj.channel_genesis = GenesisState3.toJSON(message.channel_genesis);
     }
     return obj;
   },
@@ -102,14 +104,14 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.clientGenesis = (object.clientGenesis !== undefined && object.clientGenesis !== null)
-      ? GenesisState1.fromPartial(object.clientGenesis)
+    message.client_genesis = (object.client_genesis !== undefined && object.client_genesis !== null)
+      ? GenesisState1.fromPartial(object.client_genesis)
       : undefined;
-    message.connectionGenesis = (object.connectionGenesis !== undefined && object.connectionGenesis !== null)
-      ? GenesisState2.fromPartial(object.connectionGenesis)
+    message.connection_genesis = (object.connection_genesis !== undefined && object.connection_genesis !== null)
+      ? GenesisState2.fromPartial(object.connection_genesis)
       : undefined;
-    message.channelGenesis = (object.channelGenesis !== undefined && object.channelGenesis !== null)
-      ? GenesisState3.fromPartial(object.channelGenesis)
+    message.channel_genesis = (object.channel_genesis !== undefined && object.channel_genesis !== null)
+      ? GenesisState3.fromPartial(object.channel_genesis)
       : undefined;
     return message;
   },

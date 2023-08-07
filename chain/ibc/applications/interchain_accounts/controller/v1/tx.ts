@@ -9,28 +9,28 @@ import { Params } from "./controller";
 /** MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccount {
   owner: string;
-  connectionId: string;
+  connection_id: string;
   version: string;
 }
 
 /** MsgRegisterInterchainAccountResponse defines the response for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccountResponse {
-  channelId: string;
-  portId: string;
+  channel_id: string;
+  port_id: string;
 }
 
 /** MsgSendTx defines the payload for Msg/SendTx */
 export interface MsgSendTx {
   owner: string;
-  connectionId: string;
-  packetData:
+  connection_id: string;
+  packet_data:
     | InterchainAccountPacketData
     | undefined;
   /**
    * Relative timeout timestamp provided will be added to the current block time during transaction execution.
    * The timeout timestamp must be non-zero.
    */
-  relativeTimeout: string;
+  relative_timeout: string;
 }
 
 /** MsgSendTxResponse defines the response for MsgSendTx */
@@ -55,7 +55,7 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgRegisterInterchainAccount(): MsgRegisterInterchainAccount {
-  return { owner: "", connectionId: "", version: "" };
+  return { owner: "", connection_id: "", version: "" };
 }
 
 export const MsgRegisterInterchainAccount = {
@@ -65,8 +65,8 @@ export const MsgRegisterInterchainAccount = {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.connectionId !== "") {
-      writer.uint32(18).string(message.connectionId);
+    if (message.connection_id !== "") {
+      writer.uint32(18).string(message.connection_id);
     }
     if (message.version !== "") {
       writer.uint32(26).string(message.version);
@@ -93,7 +93,7 @@ export const MsgRegisterInterchainAccount = {
             break;
           }
 
-          message.connectionId = reader.string();
+          message.connection_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -114,7 +114,7 @@ export const MsgRegisterInterchainAccount = {
   fromJSON(object: any): MsgRegisterInterchainAccount {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
       version: isSet(object.version) ? String(object.version) : "",
     };
   },
@@ -124,8 +124,8 @@ export const MsgRegisterInterchainAccount = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.connectionId !== "") {
-      obj.connectionId = message.connectionId;
+    if (message.connection_id !== "") {
+      obj.connection_id = message.connection_id;
     }
     if (message.version !== "") {
       obj.version = message.version;
@@ -139,25 +139,25 @@ export const MsgRegisterInterchainAccount = {
   fromPartial(object: DeepPartial<MsgRegisterInterchainAccount>): MsgRegisterInterchainAccount {
     const message = createBaseMsgRegisterInterchainAccount();
     message.owner = object.owner ?? "";
-    message.connectionId = object.connectionId ?? "";
+    message.connection_id = object.connection_id ?? "";
     message.version = object.version ?? "";
     return message;
   },
 };
 
 function createBaseMsgRegisterInterchainAccountResponse(): MsgRegisterInterchainAccountResponse {
-  return { channelId: "", portId: "" };
+  return { channel_id: "", port_id: "" };
 }
 
 export const MsgRegisterInterchainAccountResponse = {
   $type: "ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse" as const,
 
   encode(message: MsgRegisterInterchainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.channelId !== "") {
-      writer.uint32(10).string(message.channelId);
+    if (message.channel_id !== "") {
+      writer.uint32(10).string(message.channel_id);
     }
-    if (message.portId !== "") {
-      writer.uint32(18).string(message.portId);
+    if (message.port_id !== "") {
+      writer.uint32(18).string(message.port_id);
     }
     return writer;
   },
@@ -174,14 +174,14 @@ export const MsgRegisterInterchainAccountResponse = {
             break;
           }
 
-          message.channelId = reader.string();
+          message.channel_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.portId = reader.string();
+          message.port_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -194,18 +194,18 @@ export const MsgRegisterInterchainAccountResponse = {
 
   fromJSON(object: any): MsgRegisterInterchainAccountResponse {
     return {
-      channelId: isSet(object.channelId) ? String(object.channelId) : "",
-      portId: isSet(object.portId) ? String(object.portId) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
     };
   },
 
   toJSON(message: MsgRegisterInterchainAccountResponse): unknown {
     const obj: any = {};
-    if (message.channelId !== "") {
-      obj.channelId = message.channelId;
+    if (message.channel_id !== "") {
+      obj.channel_id = message.channel_id;
     }
-    if (message.portId !== "") {
-      obj.portId = message.portId;
+    if (message.port_id !== "") {
+      obj.port_id = message.port_id;
     }
     return obj;
   },
@@ -215,14 +215,14 @@ export const MsgRegisterInterchainAccountResponse = {
   },
   fromPartial(object: DeepPartial<MsgRegisterInterchainAccountResponse>): MsgRegisterInterchainAccountResponse {
     const message = createBaseMsgRegisterInterchainAccountResponse();
-    message.channelId = object.channelId ?? "";
-    message.portId = object.portId ?? "";
+    message.channel_id = object.channel_id ?? "";
+    message.port_id = object.port_id ?? "";
     return message;
   },
 };
 
 function createBaseMsgSendTx(): MsgSendTx {
-  return { owner: "", connectionId: "", packetData: undefined, relativeTimeout: "0" };
+  return { owner: "", connection_id: "", packet_data: undefined, relative_timeout: "0" };
 }
 
 export const MsgSendTx = {
@@ -232,14 +232,14 @@ export const MsgSendTx = {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.connectionId !== "") {
-      writer.uint32(18).string(message.connectionId);
+    if (message.connection_id !== "") {
+      writer.uint32(18).string(message.connection_id);
     }
-    if (message.packetData !== undefined) {
-      InterchainAccountPacketData.encode(message.packetData, writer.uint32(26).fork()).ldelim();
+    if (message.packet_data !== undefined) {
+      InterchainAccountPacketData.encode(message.packet_data, writer.uint32(26).fork()).ldelim();
     }
-    if (message.relativeTimeout !== "0") {
-      writer.uint32(32).uint64(message.relativeTimeout);
+    if (message.relative_timeout !== "0") {
+      writer.uint32(32).uint64(message.relative_timeout);
     }
     return writer;
   },
@@ -263,21 +263,21 @@ export const MsgSendTx = {
             break;
           }
 
-          message.connectionId = reader.string();
+          message.connection_id = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.packetData = InterchainAccountPacketData.decode(reader, reader.uint32());
+          message.packet_data = InterchainAccountPacketData.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.relativeTimeout = longToString(reader.uint64() as Long);
+          message.relative_timeout = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -291,9 +291,9 @@ export const MsgSendTx = {
   fromJSON(object: any): MsgSendTx {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      packetData: isSet(object.packetData) ? InterchainAccountPacketData.fromJSON(object.packetData) : undefined,
-      relativeTimeout: isSet(object.relativeTimeout) ? String(object.relativeTimeout) : "0",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      packet_data: isSet(object.packet_data) ? InterchainAccountPacketData.fromJSON(object.packet_data) : undefined,
+      relative_timeout: isSet(object.relative_timeout) ? String(object.relative_timeout) : "0",
     };
   },
 
@@ -302,14 +302,14 @@ export const MsgSendTx = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.connectionId !== "") {
-      obj.connectionId = message.connectionId;
+    if (message.connection_id !== "") {
+      obj.connection_id = message.connection_id;
     }
-    if (message.packetData !== undefined) {
-      obj.packetData = InterchainAccountPacketData.toJSON(message.packetData);
+    if (message.packet_data !== undefined) {
+      obj.packet_data = InterchainAccountPacketData.toJSON(message.packet_data);
     }
-    if (message.relativeTimeout !== "0") {
-      obj.relativeTimeout = message.relativeTimeout;
+    if (message.relative_timeout !== "0") {
+      obj.relative_timeout = message.relative_timeout;
     }
     return obj;
   },
@@ -320,11 +320,11 @@ export const MsgSendTx = {
   fromPartial(object: DeepPartial<MsgSendTx>): MsgSendTx {
     const message = createBaseMsgSendTx();
     message.owner = object.owner ?? "";
-    message.connectionId = object.connectionId ?? "";
-    message.packetData = (object.packetData !== undefined && object.packetData !== null)
-      ? InterchainAccountPacketData.fromPartial(object.packetData)
+    message.connection_id = object.connection_id ?? "";
+    message.packet_data = (object.packet_data !== undefined && object.packet_data !== null)
+      ? InterchainAccountPacketData.fromPartial(object.packet_data)
       : undefined;
-    message.relativeTimeout = object.relativeTimeout ?? "0";
+    message.relative_timeout = object.relative_timeout ?? "0";
     return message;
   },
 };

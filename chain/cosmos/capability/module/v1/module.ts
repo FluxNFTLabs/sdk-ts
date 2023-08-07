@@ -7,19 +7,19 @@ export interface Module {
    * seal_keeper defines if keeper.Seal() will run on BeginBlock() to prevent further modules from creating a scoped
    * keeper. For more details check x/capability/keeper.go.
    */
-  sealKeeper: boolean;
+  seal_keeper: boolean;
 }
 
 function createBaseModule(): Module {
-  return { sealKeeper: false };
+  return { seal_keeper: false };
 }
 
 export const Module = {
   $type: "cosmos.capability.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sealKeeper === true) {
-      writer.uint32(8).bool(message.sealKeeper);
+    if (message.seal_keeper === true) {
+      writer.uint32(8).bool(message.seal_keeper);
     }
     return writer;
   },
@@ -36,7 +36,7 @@ export const Module = {
             break;
           }
 
-          message.sealKeeper = reader.bool();
+          message.seal_keeper = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -48,13 +48,13 @@ export const Module = {
   },
 
   fromJSON(object: any): Module {
-    return { sealKeeper: isSet(object.sealKeeper) ? Boolean(object.sealKeeper) : false };
+    return { seal_keeper: isSet(object.seal_keeper) ? Boolean(object.seal_keeper) : false };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.sealKeeper === true) {
-      obj.sealKeeper = message.sealKeeper;
+    if (message.seal_keeper === true) {
+      obj.seal_keeper = message.seal_keeper;
     }
     return obj;
   },
@@ -64,7 +64,7 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.sealKeeper = object.sealKeeper ?? false;
+    message.seal_keeper = object.seal_keeper ?? false;
     return message;
   },
 };

@@ -17,13 +17,13 @@ export interface GenesisState {
    */
   supply: Coin[];
   /** denom_metadata defines the metadata of the different coins. */
-  denomMetadata: Metadata[];
+  denom_metadata: Metadata[];
   /**
    * send_enabled defines the denoms where send is enabled or disabled.
    *
    * Since: cosmos-sdk 0.47
    */
-  sendEnabled: SendEnabled[];
+  send_enabled: SendEnabled[];
 }
 
 /**
@@ -38,7 +38,7 @@ export interface Balance {
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { params: undefined, balances: [], supply: [], denomMetadata: [], sendEnabled: [] };
+  return { params: undefined, balances: [], supply: [], denom_metadata: [], send_enabled: [] };
 }
 
 export const GenesisState = {
@@ -54,10 +54,10 @@ export const GenesisState = {
     for (const v of message.supply) {
       Coin.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    for (const v of message.denomMetadata) {
+    for (const v of message.denom_metadata) {
       Metadata.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    for (const v of message.sendEnabled) {
+    for (const v of message.send_enabled) {
       SendEnabled.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
@@ -96,14 +96,14 @@ export const GenesisState = {
             break;
           }
 
-          message.denomMetadata.push(Metadata.decode(reader, reader.uint32()));
+          message.denom_metadata.push(Metadata.decode(reader, reader.uint32()));
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.sendEnabled.push(SendEnabled.decode(reader, reader.uint32()));
+          message.send_enabled.push(SendEnabled.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -119,11 +119,11 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
       supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
-      denomMetadata: Array.isArray(object?.denomMetadata)
-        ? object.denomMetadata.map((e: any) => Metadata.fromJSON(e))
+      denom_metadata: Array.isArray(object?.denom_metadata)
+        ? object.denom_metadata.map((e: any) => Metadata.fromJSON(e))
         : [],
-      sendEnabled: Array.isArray(object?.sendEnabled)
-        ? object.sendEnabled.map((e: any) => SendEnabled.fromJSON(e))
+      send_enabled: Array.isArray(object?.send_enabled)
+        ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
     };
   },
@@ -139,11 +139,11 @@ export const GenesisState = {
     if (message.supply?.length) {
       obj.supply = message.supply.map((e) => Coin.toJSON(e));
     }
-    if (message.denomMetadata?.length) {
-      obj.denomMetadata = message.denomMetadata.map((e) => Metadata.toJSON(e));
+    if (message.denom_metadata?.length) {
+      obj.denom_metadata = message.denom_metadata.map((e) => Metadata.toJSON(e));
     }
-    if (message.sendEnabled?.length) {
-      obj.sendEnabled = message.sendEnabled.map((e) => SendEnabled.toJSON(e));
+    if (message.send_enabled?.length) {
+      obj.send_enabled = message.send_enabled.map((e) => SendEnabled.toJSON(e));
     }
     return obj;
   },
@@ -158,8 +158,8 @@ export const GenesisState = {
       : undefined;
     message.balances = object.balances?.map((e) => Balance.fromPartial(e)) || [];
     message.supply = object.supply?.map((e) => Coin.fromPartial(e)) || [];
-    message.denomMetadata = object.denomMetadata?.map((e) => Metadata.fromPartial(e)) || [];
-    message.sendEnabled = object.sendEnabled?.map((e) => SendEnabled.fromPartial(e)) || [];
+    message.denom_metadata = object.denom_metadata?.map((e) => Metadata.fromPartial(e)) || [];
+    message.send_enabled = object.send_enabled?.map((e) => SendEnabled.fromPartial(e)) || [];
     return message;
   },
 };

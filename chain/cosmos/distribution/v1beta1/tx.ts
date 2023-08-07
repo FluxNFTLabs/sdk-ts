@@ -10,8 +10,8 @@ import { Params } from "./distribution";
  * a delegator (or validator self-delegation).
  */
 export interface MsgSetWithdrawAddress {
-  delegatorAddress: string;
-  withdrawAddress: string;
+  delegator_address: string;
+  withdraw_address: string;
 }
 
 /**
@@ -26,8 +26,8 @@ export interface MsgSetWithdrawAddressResponse {
  * from a single validator.
  */
 export interface MsgWithdrawDelegatorReward {
-  delegatorAddress: string;
-  validatorAddress: string;
+  delegator_address: string;
+  validator_address: string;
 }
 
 /**
@@ -44,7 +44,7 @@ export interface MsgWithdrawDelegatorRewardResponse {
  * address.
  */
 export interface MsgWithdrawValidatorCommission {
-  validatorAddress: string;
+  validator_address: string;
 }
 
 /**
@@ -118,18 +118,18 @@ export interface MsgCommunityPoolSpendResponse {
 }
 
 function createBaseMsgSetWithdrawAddress(): MsgSetWithdrawAddress {
-  return { delegatorAddress: "", withdrawAddress: "" };
+  return { delegator_address: "", withdraw_address: "" };
 }
 
 export const MsgSetWithdrawAddress = {
   $type: "cosmos.distribution.v1beta1.MsgSetWithdrawAddress" as const,
 
   encode(message: MsgSetWithdrawAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.withdrawAddress !== "") {
-      writer.uint32(18).string(message.withdrawAddress);
+    if (message.withdraw_address !== "") {
+      writer.uint32(18).string(message.withdraw_address);
     }
     return writer;
   },
@@ -146,14 +146,14 @@ export const MsgSetWithdrawAddress = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.withdrawAddress = reader.string();
+          message.withdraw_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -166,18 +166,18 @@ export const MsgSetWithdrawAddress = {
 
   fromJSON(object: any): MsgSetWithdrawAddress {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
     };
   },
 
   toJSON(message: MsgSetWithdrawAddress): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.withdrawAddress !== "") {
-      obj.withdrawAddress = message.withdrawAddress;
+    if (message.withdraw_address !== "") {
+      obj.withdraw_address = message.withdraw_address;
     }
     return obj;
   },
@@ -187,8 +187,8 @@ export const MsgSetWithdrawAddress = {
   },
   fromPartial(object: DeepPartial<MsgSetWithdrawAddress>): MsgSetWithdrawAddress {
     const message = createBaseMsgSetWithdrawAddress();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.withdrawAddress = object.withdrawAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.withdraw_address = object.withdraw_address ?? "";
     return message;
   },
 };
@@ -239,18 +239,18 @@ export const MsgSetWithdrawAddressResponse = {
 };
 
 function createBaseMsgWithdrawDelegatorReward(): MsgWithdrawDelegatorReward {
-  return { delegatorAddress: "", validatorAddress: "" };
+  return { delegator_address: "", validator_address: "" };
 }
 
 export const MsgWithdrawDelegatorReward = {
   $type: "cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward" as const,
 
   encode(message: MsgWithdrawDelegatorReward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.delegatorAddress !== "") {
-      writer.uint32(10).string(message.delegatorAddress);
+    if (message.delegator_address !== "") {
+      writer.uint32(10).string(message.delegator_address);
     }
-    if (message.validatorAddress !== "") {
-      writer.uint32(18).string(message.validatorAddress);
+    if (message.validator_address !== "") {
+      writer.uint32(18).string(message.validator_address);
     }
     return writer;
   },
@@ -267,14 +267,14 @@ export const MsgWithdrawDelegatorReward = {
             break;
           }
 
-          message.delegatorAddress = reader.string();
+          message.delegator_address = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.validatorAddress = reader.string();
+          message.validator_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -287,18 +287,18 @@ export const MsgWithdrawDelegatorReward = {
 
   fromJSON(object: any): MsgWithdrawDelegatorReward {
     return {
-      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
-      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
     };
   },
 
   toJSON(message: MsgWithdrawDelegatorReward): unknown {
     const obj: any = {};
-    if (message.delegatorAddress !== "") {
-      obj.delegatorAddress = message.delegatorAddress;
+    if (message.delegator_address !== "") {
+      obj.delegator_address = message.delegator_address;
     }
-    if (message.validatorAddress !== "") {
-      obj.validatorAddress = message.validatorAddress;
+    if (message.validator_address !== "") {
+      obj.validator_address = message.validator_address;
     }
     return obj;
   },
@@ -308,8 +308,8 @@ export const MsgWithdrawDelegatorReward = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorReward>): MsgWithdrawDelegatorReward {
     const message = createBaseMsgWithdrawDelegatorReward();
-    message.delegatorAddress = object.delegatorAddress ?? "";
-    message.validatorAddress = object.validatorAddress ?? "";
+    message.delegator_address = object.delegator_address ?? "";
+    message.validator_address = object.validator_address ?? "";
     return message;
   },
 };
@@ -374,15 +374,15 @@ export const MsgWithdrawDelegatorRewardResponse = {
 };
 
 function createBaseMsgWithdrawValidatorCommission(): MsgWithdrawValidatorCommission {
-  return { validatorAddress: "" };
+  return { validator_address: "" };
 }
 
 export const MsgWithdrawValidatorCommission = {
   $type: "cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission" as const,
 
   encode(message: MsgWithdrawValidatorCommission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.validatorAddress !== "") {
-      writer.uint32(10).string(message.validatorAddress);
+    if (message.validator_address !== "") {
+      writer.uint32(10).string(message.validator_address);
     }
     return writer;
   },
@@ -399,7 +399,7 @@ export const MsgWithdrawValidatorCommission = {
             break;
           }
 
-          message.validatorAddress = reader.string();
+          message.validator_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -411,13 +411,13 @@ export const MsgWithdrawValidatorCommission = {
   },
 
   fromJSON(object: any): MsgWithdrawValidatorCommission {
-    return { validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "" };
+    return { validator_address: isSet(object.validator_address) ? String(object.validator_address) : "" };
   },
 
   toJSON(message: MsgWithdrawValidatorCommission): unknown {
     const obj: any = {};
-    if (message.validatorAddress !== "") {
-      obj.validatorAddress = message.validatorAddress;
+    if (message.validator_address !== "") {
+      obj.validator_address = message.validator_address;
     }
     return obj;
   },
@@ -427,7 +427,7 @@ export const MsgWithdrawValidatorCommission = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommission>): MsgWithdrawValidatorCommission {
     const message = createBaseMsgWithdrawValidatorCommission();
-    message.validatorAddress = object.validatorAddress ?? "";
+    message.validator_address = object.validator_address ?? "";
     return message;
   },
 };

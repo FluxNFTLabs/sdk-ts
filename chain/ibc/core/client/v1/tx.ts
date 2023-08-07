@@ -8,14 +8,14 @@ import { Params } from "./client";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
   /** light client state */
-  clientState:
+  client_state:
     | Any
     | undefined;
   /**
    * consensus state associated with the client that corresponds to a given
    * height.
    */
-  consensusState:
+  consensus_state:
     | Any
     | undefined;
   /** signer address */
@@ -32,9 +32,9 @@ export interface MsgCreateClientResponse {
  */
 export interface MsgUpdateClient {
   /** client unique identifier */
-  clientId: string;
+  client_id: string;
   /** client message to update the light client */
-  clientMessage:
+  client_message:
     | Any
     | undefined;
   /** signer address */
@@ -51,22 +51,22 @@ export interface MsgUpdateClientResponse {
  */
 export interface MsgUpgradeClient {
   /** client unique identifier */
-  clientId: string;
+  client_id: string;
   /** upgraded client state */
-  clientState:
+  client_state:
     | Any
     | undefined;
   /**
    * upgraded consensus state, only contains enough information to serve as a
    * basis of trust in update logic
    */
-  consensusState:
+  consensus_state:
     | Any
     | undefined;
   /** proof that old chain committed to new client */
-  proofUpgradeClient: Uint8Array;
+  proof_upgrade_client: Uint8Array;
   /** proof that old chain committed to new consensus state */
-  proofUpgradeConsensusState: Uint8Array;
+  proof_upgrade_consensus_state: Uint8Array;
   /** signer address */
   signer: string;
 }
@@ -84,7 +84,7 @@ export interface MsgUpgradeClientResponse {
  */
 export interface MsgSubmitMisbehaviour {
   /** client unique identifier */
-  clientId: string;
+  client_id: string;
   /** misbehaviour used for freezing the light client */
   misbehaviour:
     | Any
@@ -117,18 +117,18 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgCreateClient(): MsgCreateClient {
-  return { clientState: undefined, consensusState: undefined, signer: "" };
+  return { client_state: undefined, consensus_state: undefined, signer: "" };
 }
 
 export const MsgCreateClient = {
   $type: "ibc.core.client.v1.MsgCreateClient" as const,
 
   encode(message: MsgCreateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientState !== undefined) {
-      Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
+    if (message.client_state !== undefined) {
+      Any.encode(message.client_state, writer.uint32(10).fork()).ldelim();
     }
-    if (message.consensusState !== undefined) {
-      Any.encode(message.consensusState, writer.uint32(18).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      Any.encode(message.consensus_state, writer.uint32(18).fork()).ldelim();
     }
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
@@ -148,14 +148,14 @@ export const MsgCreateClient = {
             break;
           }
 
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.client_state = Any.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensus_state = Any.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
@@ -175,19 +175,19 @@ export const MsgCreateClient = {
 
   fromJSON(object: any): MsgCreateClient {
     return {
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
+      client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgCreateClient): unknown {
     const obj: any = {};
-    if (message.clientState !== undefined) {
-      obj.clientState = Any.toJSON(message.clientState);
+    if (message.client_state !== undefined) {
+      obj.client_state = Any.toJSON(message.client_state);
     }
-    if (message.consensusState !== undefined) {
-      obj.consensusState = Any.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = Any.toJSON(message.consensus_state);
     }
     if (message.signer !== "") {
       obj.signer = message.signer;
@@ -200,11 +200,11 @@ export const MsgCreateClient = {
   },
   fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
     const message = createBaseMsgCreateClient();
-    message.clientState = (object.clientState !== undefined && object.clientState !== null)
-      ? Any.fromPartial(object.clientState)
+    message.client_state = (object.client_state !== undefined && object.client_state !== null)
+      ? Any.fromPartial(object.client_state)
       : undefined;
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? Any.fromPartial(object.consensusState)
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? Any.fromPartial(object.consensus_state)
       : undefined;
     message.signer = object.signer ?? "";
     return message;
@@ -257,18 +257,18 @@ export const MsgCreateClientResponse = {
 };
 
 function createBaseMsgUpdateClient(): MsgUpdateClient {
-  return { clientId: "", clientMessage: undefined, signer: "" };
+  return { client_id: "", client_message: undefined, signer: "" };
 }
 
 export const MsgUpdateClient = {
   $type: "ibc.core.client.v1.MsgUpdateClient" as const,
 
   encode(message: MsgUpdateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    if (message.clientMessage !== undefined) {
-      Any.encode(message.clientMessage, writer.uint32(18).fork()).ldelim();
+    if (message.client_message !== undefined) {
+      Any.encode(message.client_message, writer.uint32(18).fork()).ldelim();
     }
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
@@ -288,14 +288,14 @@ export const MsgUpdateClient = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.clientMessage = Any.decode(reader, reader.uint32());
+          message.client_message = Any.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
@@ -315,19 +315,19 @@ export const MsgUpdateClient = {
 
   fromJSON(object: any): MsgUpdateClient {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientMessage: isSet(object.clientMessage) ? Any.fromJSON(object.clientMessage) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_message: isSet(object.client_message) ? Any.fromJSON(object.client_message) : undefined,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgUpdateClient): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.clientMessage !== undefined) {
-      obj.clientMessage = Any.toJSON(message.clientMessage);
+    if (message.client_message !== undefined) {
+      obj.client_message = Any.toJSON(message.client_message);
     }
     if (message.signer !== "") {
       obj.signer = message.signer;
@@ -340,9 +340,9 @@ export const MsgUpdateClient = {
   },
   fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
-    message.clientId = object.clientId ?? "";
-    message.clientMessage = (object.clientMessage !== undefined && object.clientMessage !== null)
-      ? Any.fromPartial(object.clientMessage)
+    message.client_id = object.client_id ?? "";
+    message.client_message = (object.client_message !== undefined && object.client_message !== null)
+      ? Any.fromPartial(object.client_message)
       : undefined;
     message.signer = object.signer ?? "";
     return message;
@@ -396,11 +396,11 @@ export const MsgUpdateClientResponse = {
 
 function createBaseMsgUpgradeClient(): MsgUpgradeClient {
   return {
-    clientId: "",
-    clientState: undefined,
-    consensusState: undefined,
-    proofUpgradeClient: new Uint8Array(0),
-    proofUpgradeConsensusState: new Uint8Array(0),
+    client_id: "",
+    client_state: undefined,
+    consensus_state: undefined,
+    proof_upgrade_client: new Uint8Array(0),
+    proof_upgrade_consensus_state: new Uint8Array(0),
     signer: "",
   };
 }
@@ -409,20 +409,20 @@ export const MsgUpgradeClient = {
   $type: "ibc.core.client.v1.MsgUpgradeClient" as const,
 
   encode(message: MsgUpgradeClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    if (message.clientState !== undefined) {
-      Any.encode(message.clientState, writer.uint32(18).fork()).ldelim();
+    if (message.client_state !== undefined) {
+      Any.encode(message.client_state, writer.uint32(18).fork()).ldelim();
     }
-    if (message.consensusState !== undefined) {
-      Any.encode(message.consensusState, writer.uint32(26).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      Any.encode(message.consensus_state, writer.uint32(26).fork()).ldelim();
     }
-    if (message.proofUpgradeClient.length !== 0) {
-      writer.uint32(34).bytes(message.proofUpgradeClient);
+    if (message.proof_upgrade_client.length !== 0) {
+      writer.uint32(34).bytes(message.proof_upgrade_client);
     }
-    if (message.proofUpgradeConsensusState.length !== 0) {
-      writer.uint32(42).bytes(message.proofUpgradeConsensusState);
+    if (message.proof_upgrade_consensus_state.length !== 0) {
+      writer.uint32(42).bytes(message.proof_upgrade_consensus_state);
     }
     if (message.signer !== "") {
       writer.uint32(50).string(message.signer);
@@ -442,35 +442,35 @@ export const MsgUpgradeClient = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.client_state = Any.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensus_state = Any.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.proofUpgradeClient = reader.bytes();
+          message.proof_upgrade_client = reader.bytes();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.proofUpgradeConsensusState = reader.bytes();
+          message.proof_upgrade_consensus_state = reader.bytes();
           continue;
         case 6:
           if (tag !== 50) {
@@ -490,14 +490,14 @@ export const MsgUpgradeClient = {
 
   fromJSON(object: any): MsgUpgradeClient {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
-      proofUpgradeClient: isSet(object.proofUpgradeClient)
-        ? bytesFromBase64(object.proofUpgradeClient)
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
+      proof_upgrade_client: isSet(object.proof_upgrade_client)
+        ? bytesFromBase64(object.proof_upgrade_client)
         : new Uint8Array(0),
-      proofUpgradeConsensusState: isSet(object.proofUpgradeConsensusState)
-        ? bytesFromBase64(object.proofUpgradeConsensusState)
+      proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state)
+        ? bytesFromBase64(object.proof_upgrade_consensus_state)
         : new Uint8Array(0),
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
@@ -505,20 +505,20 @@ export const MsgUpgradeClient = {
 
   toJSON(message: MsgUpgradeClient): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.clientState !== undefined) {
-      obj.clientState = Any.toJSON(message.clientState);
+    if (message.client_state !== undefined) {
+      obj.client_state = Any.toJSON(message.client_state);
     }
-    if (message.consensusState !== undefined) {
-      obj.consensusState = Any.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.proofUpgradeClient.length !== 0) {
-      obj.proofUpgradeClient = base64FromBytes(message.proofUpgradeClient);
+    if (message.proof_upgrade_client.length !== 0) {
+      obj.proof_upgrade_client = base64FromBytes(message.proof_upgrade_client);
     }
-    if (message.proofUpgradeConsensusState.length !== 0) {
-      obj.proofUpgradeConsensusState = base64FromBytes(message.proofUpgradeConsensusState);
+    if (message.proof_upgrade_consensus_state.length !== 0) {
+      obj.proof_upgrade_consensus_state = base64FromBytes(message.proof_upgrade_consensus_state);
     }
     if (message.signer !== "") {
       obj.signer = message.signer;
@@ -531,15 +531,15 @@ export const MsgUpgradeClient = {
   },
   fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
-    message.clientId = object.clientId ?? "";
-    message.clientState = (object.clientState !== undefined && object.clientState !== null)
-      ? Any.fromPartial(object.clientState)
+    message.client_id = object.client_id ?? "";
+    message.client_state = (object.client_state !== undefined && object.client_state !== null)
+      ? Any.fromPartial(object.client_state)
       : undefined;
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? Any.fromPartial(object.consensusState)
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? Any.fromPartial(object.consensus_state)
       : undefined;
-    message.proofUpgradeClient = object.proofUpgradeClient ?? new Uint8Array(0);
-    message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array(0);
+    message.proof_upgrade_client = object.proof_upgrade_client ?? new Uint8Array(0);
+    message.proof_upgrade_consensus_state = object.proof_upgrade_consensus_state ?? new Uint8Array(0);
     message.signer = object.signer ?? "";
     return message;
   },
@@ -591,15 +591,15 @@ export const MsgUpgradeClientResponse = {
 };
 
 function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
-  return { clientId: "", misbehaviour: undefined, signer: "" };
+  return { client_id: "", misbehaviour: undefined, signer: "" };
 }
 
 export const MsgSubmitMisbehaviour = {
   $type: "ibc.core.client.v1.MsgSubmitMisbehaviour" as const,
 
   encode(message: MsgSubmitMisbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
     if (message.misbehaviour !== undefined) {
       Any.encode(message.misbehaviour, writer.uint32(18).fork()).ldelim();
@@ -622,7 +622,7 @@ export const MsgSubmitMisbehaviour = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -649,7 +649,7 @@ export const MsgSubmitMisbehaviour = {
 
   fromJSON(object: any): MsgSubmitMisbehaviour {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
       misbehaviour: isSet(object.misbehaviour) ? Any.fromJSON(object.misbehaviour) : undefined,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
@@ -657,8 +657,8 @@ export const MsgSubmitMisbehaviour = {
 
   toJSON(message: MsgSubmitMisbehaviour): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
     if (message.misbehaviour !== undefined) {
       obj.misbehaviour = Any.toJSON(message.misbehaviour);
@@ -674,7 +674,7 @@ export const MsgSubmitMisbehaviour = {
   },
   fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
-    message.clientId = object.clientId ?? "";
+    message.client_id = object.client_id ?? "";
     message.misbehaviour = (object.misbehaviour !== undefined && object.misbehaviour !== null)
       ? Any.fromPartial(object.misbehaviour)
       : undefined;

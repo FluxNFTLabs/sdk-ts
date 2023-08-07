@@ -12,7 +12,7 @@ export interface DenomTrace {
    */
   path: string;
   /** base denomination of the relayed fungible token. */
-  baseDenom: string;
+  base_denom: string;
 }
 
 /**
@@ -26,16 +26,16 @@ export interface Params {
    * send_enabled enables or disables all cross-chain token transfers from this
    * chain.
    */
-  sendEnabled: boolean;
+  send_enabled: boolean;
   /**
    * receive_enabled enables or disables all cross-chain token transfers to this
    * chain.
    */
-  receiveEnabled: boolean;
+  receive_enabled: boolean;
 }
 
 function createBaseDenomTrace(): DenomTrace {
-  return { path: "", baseDenom: "" };
+  return { path: "", base_denom: "" };
 }
 
 export const DenomTrace = {
@@ -45,8 +45,8 @@ export const DenomTrace = {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
-    if (message.baseDenom !== "") {
-      writer.uint32(18).string(message.baseDenom);
+    if (message.base_denom !== "") {
+      writer.uint32(18).string(message.base_denom);
     }
     return writer;
   },
@@ -70,7 +70,7 @@ export const DenomTrace = {
             break;
           }
 
-          message.baseDenom = reader.string();
+          message.base_denom = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -84,7 +84,7 @@ export const DenomTrace = {
   fromJSON(object: any): DenomTrace {
     return {
       path: isSet(object.path) ? String(object.path) : "",
-      baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : "",
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : "",
     };
   },
 
@@ -93,8 +93,8 @@ export const DenomTrace = {
     if (message.path !== "") {
       obj.path = message.path;
     }
-    if (message.baseDenom !== "") {
-      obj.baseDenom = message.baseDenom;
+    if (message.base_denom !== "") {
+      obj.base_denom = message.base_denom;
     }
     return obj;
   },
@@ -105,24 +105,24 @@ export const DenomTrace = {
   fromPartial(object: DeepPartial<DenomTrace>): DenomTrace {
     const message = createBaseDenomTrace();
     message.path = object.path ?? "";
-    message.baseDenom = object.baseDenom ?? "";
+    message.base_denom = object.base_denom ?? "";
     return message;
   },
 };
 
 function createBaseParams(): Params {
-  return { sendEnabled: false, receiveEnabled: false };
+  return { send_enabled: false, receive_enabled: false };
 }
 
 export const Params = {
   $type: "ibc.applications.transfer.v1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.sendEnabled === true) {
-      writer.uint32(8).bool(message.sendEnabled);
+    if (message.send_enabled === true) {
+      writer.uint32(8).bool(message.send_enabled);
     }
-    if (message.receiveEnabled === true) {
-      writer.uint32(16).bool(message.receiveEnabled);
+    if (message.receive_enabled === true) {
+      writer.uint32(16).bool(message.receive_enabled);
     }
     return writer;
   },
@@ -139,14 +139,14 @@ export const Params = {
             break;
           }
 
-          message.sendEnabled = reader.bool();
+          message.send_enabled = reader.bool();
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.receiveEnabled = reader.bool();
+          message.receive_enabled = reader.bool();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -159,18 +159,18 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      sendEnabled: isSet(object.sendEnabled) ? Boolean(object.sendEnabled) : false,
-      receiveEnabled: isSet(object.receiveEnabled) ? Boolean(object.receiveEnabled) : false,
+      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
+      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false,
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.sendEnabled === true) {
-      obj.sendEnabled = message.sendEnabled;
+    if (message.send_enabled === true) {
+      obj.send_enabled = message.send_enabled;
     }
-    if (message.receiveEnabled === true) {
-      obj.receiveEnabled = message.receiveEnabled;
+    if (message.receive_enabled === true) {
+      obj.receive_enabled = message.receive_enabled;
     }
     return obj;
   },
@@ -180,8 +180,8 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.sendEnabled = object.sendEnabled ?? false;
-    message.receiveEnabled = object.receiveEnabled ?? false;
+    message.send_enabled = object.send_enabled ?? false;
+    message.receive_enabled = object.receive_enabled ?? false;
     return message;
   },
 };

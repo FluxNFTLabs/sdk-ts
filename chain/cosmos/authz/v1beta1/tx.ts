@@ -48,7 +48,7 @@ export interface MsgGrantResponse {
 export interface MsgRevoke {
   granter: string;
   grantee: string;
-  msgTypeUrl: string;
+  msg_type_url: string;
 }
 
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
@@ -327,7 +327,7 @@ export const MsgGrantResponse = {
 };
 
 function createBaseMsgRevoke(): MsgRevoke {
-  return { granter: "", grantee: "", msgTypeUrl: "" };
+  return { granter: "", grantee: "", msg_type_url: "" };
 }
 
 export const MsgRevoke = {
@@ -340,8 +340,8 @@ export const MsgRevoke = {
     if (message.grantee !== "") {
       writer.uint32(18).string(message.grantee);
     }
-    if (message.msgTypeUrl !== "") {
-      writer.uint32(26).string(message.msgTypeUrl);
+    if (message.msg_type_url !== "") {
+      writer.uint32(26).string(message.msg_type_url);
     }
     return writer;
   },
@@ -372,7 +372,7 @@ export const MsgRevoke = {
             break;
           }
 
-          message.msgTypeUrl = reader.string();
+          message.msg_type_url = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -387,7 +387,7 @@ export const MsgRevoke = {
     return {
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
     };
   },
 
@@ -399,8 +399,8 @@ export const MsgRevoke = {
     if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
-    if (message.msgTypeUrl !== "") {
-      obj.msgTypeUrl = message.msgTypeUrl;
+    if (message.msg_type_url !== "") {
+      obj.msg_type_url = message.msg_type_url;
     }
     return obj;
   },
@@ -412,7 +412,7 @@ export const MsgRevoke = {
     const message = createBaseMsgRevoke();
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
-    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    message.msg_type_url = object.msg_type_url ?? "";
     return message;
   },
 };

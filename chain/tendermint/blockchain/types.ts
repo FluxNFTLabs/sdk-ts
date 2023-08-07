@@ -29,11 +29,11 @@ export interface StatusResponse {
 }
 
 export interface Message {
-  blockRequest?: BlockRequest | undefined;
-  noBlockResponse?: NoBlockResponse | undefined;
-  blockResponse?: BlockResponse | undefined;
-  statusRequest?: StatusRequest | undefined;
-  statusResponse?: StatusResponse | undefined;
+  block_request?: BlockRequest | undefined;
+  no_block_response?: NoBlockResponse | undefined;
+  block_response?: BlockResponse | undefined;
+  status_request?: StatusRequest | undefined;
+  status_response?: StatusResponse | undefined;
 }
 
 function createBaseBlockRequest(): BlockRequest {
@@ -336,11 +336,11 @@ export const StatusResponse = {
 
 function createBaseMessage(): Message {
   return {
-    blockRequest: undefined,
-    noBlockResponse: undefined,
-    blockResponse: undefined,
-    statusRequest: undefined,
-    statusResponse: undefined,
+    block_request: undefined,
+    no_block_response: undefined,
+    block_response: undefined,
+    status_request: undefined,
+    status_response: undefined,
   };
 }
 
@@ -348,20 +348,20 @@ export const Message = {
   $type: "tendermint.blockchain.Message" as const,
 
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.blockRequest !== undefined) {
-      BlockRequest.encode(message.blockRequest, writer.uint32(10).fork()).ldelim();
+    if (message.block_request !== undefined) {
+      BlockRequest.encode(message.block_request, writer.uint32(10).fork()).ldelim();
     }
-    if (message.noBlockResponse !== undefined) {
-      NoBlockResponse.encode(message.noBlockResponse, writer.uint32(18).fork()).ldelim();
+    if (message.no_block_response !== undefined) {
+      NoBlockResponse.encode(message.no_block_response, writer.uint32(18).fork()).ldelim();
     }
-    if (message.blockResponse !== undefined) {
-      BlockResponse.encode(message.blockResponse, writer.uint32(26).fork()).ldelim();
+    if (message.block_response !== undefined) {
+      BlockResponse.encode(message.block_response, writer.uint32(26).fork()).ldelim();
     }
-    if (message.statusRequest !== undefined) {
-      StatusRequest.encode(message.statusRequest, writer.uint32(34).fork()).ldelim();
+    if (message.status_request !== undefined) {
+      StatusRequest.encode(message.status_request, writer.uint32(34).fork()).ldelim();
     }
-    if (message.statusResponse !== undefined) {
-      StatusResponse.encode(message.statusResponse, writer.uint32(42).fork()).ldelim();
+    if (message.status_response !== undefined) {
+      StatusResponse.encode(message.status_response, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -378,35 +378,35 @@ export const Message = {
             break;
           }
 
-          message.blockRequest = BlockRequest.decode(reader, reader.uint32());
+          message.block_request = BlockRequest.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.noBlockResponse = NoBlockResponse.decode(reader, reader.uint32());
+          message.no_block_response = NoBlockResponse.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.blockResponse = BlockResponse.decode(reader, reader.uint32());
+          message.block_response = BlockResponse.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.statusRequest = StatusRequest.decode(reader, reader.uint32());
+          message.status_request = StatusRequest.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.statusResponse = StatusResponse.decode(reader, reader.uint32());
+          message.status_response = StatusResponse.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -419,30 +419,32 @@ export const Message = {
 
   fromJSON(object: any): Message {
     return {
-      blockRequest: isSet(object.blockRequest) ? BlockRequest.fromJSON(object.blockRequest) : undefined,
-      noBlockResponse: isSet(object.noBlockResponse) ? NoBlockResponse.fromJSON(object.noBlockResponse) : undefined,
-      blockResponse: isSet(object.blockResponse) ? BlockResponse.fromJSON(object.blockResponse) : undefined,
-      statusRequest: isSet(object.statusRequest) ? StatusRequest.fromJSON(object.statusRequest) : undefined,
-      statusResponse: isSet(object.statusResponse) ? StatusResponse.fromJSON(object.statusResponse) : undefined,
+      block_request: isSet(object.block_request) ? BlockRequest.fromJSON(object.block_request) : undefined,
+      no_block_response: isSet(object.no_block_response)
+        ? NoBlockResponse.fromJSON(object.no_block_response)
+        : undefined,
+      block_response: isSet(object.block_response) ? BlockResponse.fromJSON(object.block_response) : undefined,
+      status_request: isSet(object.status_request) ? StatusRequest.fromJSON(object.status_request) : undefined,
+      status_response: isSet(object.status_response) ? StatusResponse.fromJSON(object.status_response) : undefined,
     };
   },
 
   toJSON(message: Message): unknown {
     const obj: any = {};
-    if (message.blockRequest !== undefined) {
-      obj.blockRequest = BlockRequest.toJSON(message.blockRequest);
+    if (message.block_request !== undefined) {
+      obj.block_request = BlockRequest.toJSON(message.block_request);
     }
-    if (message.noBlockResponse !== undefined) {
-      obj.noBlockResponse = NoBlockResponse.toJSON(message.noBlockResponse);
+    if (message.no_block_response !== undefined) {
+      obj.no_block_response = NoBlockResponse.toJSON(message.no_block_response);
     }
-    if (message.blockResponse !== undefined) {
-      obj.blockResponse = BlockResponse.toJSON(message.blockResponse);
+    if (message.block_response !== undefined) {
+      obj.block_response = BlockResponse.toJSON(message.block_response);
     }
-    if (message.statusRequest !== undefined) {
-      obj.statusRequest = StatusRequest.toJSON(message.statusRequest);
+    if (message.status_request !== undefined) {
+      obj.status_request = StatusRequest.toJSON(message.status_request);
     }
-    if (message.statusResponse !== undefined) {
-      obj.statusResponse = StatusResponse.toJSON(message.statusResponse);
+    if (message.status_response !== undefined) {
+      obj.status_response = StatusResponse.toJSON(message.status_response);
     }
     return obj;
   },
@@ -452,20 +454,20 @@ export const Message = {
   },
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
-    message.blockRequest = (object.blockRequest !== undefined && object.blockRequest !== null)
-      ? BlockRequest.fromPartial(object.blockRequest)
+    message.block_request = (object.block_request !== undefined && object.block_request !== null)
+      ? BlockRequest.fromPartial(object.block_request)
       : undefined;
-    message.noBlockResponse = (object.noBlockResponse !== undefined && object.noBlockResponse !== null)
-      ? NoBlockResponse.fromPartial(object.noBlockResponse)
+    message.no_block_response = (object.no_block_response !== undefined && object.no_block_response !== null)
+      ? NoBlockResponse.fromPartial(object.no_block_response)
       : undefined;
-    message.blockResponse = (object.blockResponse !== undefined && object.blockResponse !== null)
-      ? BlockResponse.fromPartial(object.blockResponse)
+    message.block_response = (object.block_response !== undefined && object.block_response !== null)
+      ? BlockResponse.fromPartial(object.block_response)
       : undefined;
-    message.statusRequest = (object.statusRequest !== undefined && object.statusRequest !== null)
-      ? StatusRequest.fromPartial(object.statusRequest)
+    message.status_request = (object.status_request !== undefined && object.status_request !== null)
+      ? StatusRequest.fromPartial(object.status_request)
       : undefined;
-    message.statusResponse = (object.statusResponse !== undefined && object.statusResponse !== null)
-      ? StatusResponse.fromPartial(object.statusResponse)
+    message.status_response = (object.status_response !== undefined && object.status_response !== null)
+      ? StatusResponse.fromPartial(object.status_response)
       : undefined;
     return message;
   },

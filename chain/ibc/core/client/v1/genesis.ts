@@ -8,9 +8,9 @@ export interface GenesisState {
   /** client states with their corresponding identifiers */
   clients: IdentifiedClientState[];
   /** consensus states from each client */
-  clientsConsensus: ClientConsensusStates[];
+  clients_consensus: ClientConsensusStates[];
   /** metadata from each client */
-  clientsMetadata: IdentifiedGenesisMetadata[];
+  clients_metadata: IdentifiedGenesisMetadata[];
   params:
     | Params
     | undefined;
@@ -20,9 +20,9 @@ export interface GenesisState {
    *
    * @deprecated
    */
-  createLocalhost: boolean;
+  create_localhost: boolean;
   /** the sequence for the next generated client identifier */
-  nextClientSequence: string;
+  next_client_sequence: string;
 }
 
 /**
@@ -41,18 +41,18 @@ export interface GenesisMetadata {
  * client id.
  */
 export interface IdentifiedGenesisMetadata {
-  clientId: string;
-  clientMetadata: GenesisMetadata[];
+  client_id: string;
+  client_metadata: GenesisMetadata[];
 }
 
 function createBaseGenesisState(): GenesisState {
   return {
     clients: [],
-    clientsConsensus: [],
-    clientsMetadata: [],
+    clients_consensus: [],
+    clients_metadata: [],
     params: undefined,
-    createLocalhost: false,
-    nextClientSequence: "0",
+    create_localhost: false,
+    next_client_sequence: "0",
   };
 }
 
@@ -63,20 +63,20 @@ export const GenesisState = {
     for (const v of message.clients) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.clientsConsensus) {
+    for (const v of message.clients_consensus) {
       ClientConsensusStates.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.clientsMetadata) {
+    for (const v of message.clients_metadata) {
       IdentifiedGenesisMetadata.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(34).fork()).ldelim();
     }
-    if (message.createLocalhost === true) {
-      writer.uint32(40).bool(message.createLocalhost);
+    if (message.create_localhost === true) {
+      writer.uint32(40).bool(message.create_localhost);
     }
-    if (message.nextClientSequence !== "0") {
-      writer.uint32(48).uint64(message.nextClientSequence);
+    if (message.next_client_sequence !== "0") {
+      writer.uint32(48).uint64(message.next_client_sequence);
     }
     return writer;
   },
@@ -100,14 +100,14 @@ export const GenesisState = {
             break;
           }
 
-          message.clientsConsensus.push(ClientConsensusStates.decode(reader, reader.uint32()));
+          message.clients_consensus.push(ClientConsensusStates.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.clientsMetadata.push(IdentifiedGenesisMetadata.decode(reader, reader.uint32()));
+          message.clients_metadata.push(IdentifiedGenesisMetadata.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 34) {
@@ -121,14 +121,14 @@ export const GenesisState = {
             break;
           }
 
-          message.createLocalhost = reader.bool();
+          message.create_localhost = reader.bool();
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.nextClientSequence = longToString(reader.uint64() as Long);
+          message.next_client_sequence = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -142,15 +142,15 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromJSON(e)) : [],
-      clientsConsensus: Array.isArray(object?.clientsConsensus)
-        ? object.clientsConsensus.map((e: any) => ClientConsensusStates.fromJSON(e))
+      clients_consensus: Array.isArray(object?.clients_consensus)
+        ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromJSON(e))
         : [],
-      clientsMetadata: Array.isArray(object?.clientsMetadata)
-        ? object.clientsMetadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e))
+      clients_metadata: Array.isArray(object?.clients_metadata)
+        ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e))
         : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      createLocalhost: isSet(object.createLocalhost) ? Boolean(object.createLocalhost) : false,
-      nextClientSequence: isSet(object.nextClientSequence) ? String(object.nextClientSequence) : "0",
+      create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
+      next_client_sequence: isSet(object.next_client_sequence) ? String(object.next_client_sequence) : "0",
     };
   },
 
@@ -159,20 +159,20 @@ export const GenesisState = {
     if (message.clients?.length) {
       obj.clients = message.clients.map((e) => IdentifiedClientState.toJSON(e));
     }
-    if (message.clientsConsensus?.length) {
-      obj.clientsConsensus = message.clientsConsensus.map((e) => ClientConsensusStates.toJSON(e));
+    if (message.clients_consensus?.length) {
+      obj.clients_consensus = message.clients_consensus.map((e) => ClientConsensusStates.toJSON(e));
     }
-    if (message.clientsMetadata?.length) {
-      obj.clientsMetadata = message.clientsMetadata.map((e) => IdentifiedGenesisMetadata.toJSON(e));
+    if (message.clients_metadata?.length) {
+      obj.clients_metadata = message.clients_metadata.map((e) => IdentifiedGenesisMetadata.toJSON(e));
     }
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
-    if (message.createLocalhost === true) {
-      obj.createLocalhost = message.createLocalhost;
+    if (message.create_localhost === true) {
+      obj.create_localhost = message.create_localhost;
     }
-    if (message.nextClientSequence !== "0") {
-      obj.nextClientSequence = message.nextClientSequence;
+    if (message.next_client_sequence !== "0") {
+      obj.next_client_sequence = message.next_client_sequence;
     }
     return obj;
   },
@@ -183,13 +183,13 @@ export const GenesisState = {
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clients = object.clients?.map((e) => IdentifiedClientState.fromPartial(e)) || [];
-    message.clientsConsensus = object.clientsConsensus?.map((e) => ClientConsensusStates.fromPartial(e)) || [];
-    message.clientsMetadata = object.clientsMetadata?.map((e) => IdentifiedGenesisMetadata.fromPartial(e)) || [];
+    message.clients_consensus = object.clients_consensus?.map((e) => ClientConsensusStates.fromPartial(e)) || [];
+    message.clients_metadata = object.clients_metadata?.map((e) => IdentifiedGenesisMetadata.fromPartial(e)) || [];
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
-    message.createLocalhost = object.createLocalhost ?? false;
-    message.nextClientSequence = object.nextClientSequence ?? "0";
+    message.create_localhost = object.create_localhost ?? false;
+    message.next_client_sequence = object.next_client_sequence ?? "0";
     return message;
   },
 };
@@ -271,17 +271,17 @@ export const GenesisMetadata = {
 };
 
 function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
-  return { clientId: "", clientMetadata: [] };
+  return { client_id: "", client_metadata: [] };
 }
 
 export const IdentifiedGenesisMetadata = {
   $type: "ibc.core.client.v1.IdentifiedGenesisMetadata" as const,
 
   encode(message: IdentifiedGenesisMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    for (const v of message.clientMetadata) {
+    for (const v of message.client_metadata) {
       GenesisMetadata.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -299,14 +299,14 @@ export const IdentifiedGenesisMetadata = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.clientMetadata.push(GenesisMetadata.decode(reader, reader.uint32()));
+          message.client_metadata.push(GenesisMetadata.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -319,20 +319,20 @@ export const IdentifiedGenesisMetadata = {
 
   fromJSON(object: any): IdentifiedGenesisMetadata {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientMetadata: Array.isArray(object?.clientMetadata)
-        ? object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e))
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_metadata: Array.isArray(object?.client_metadata)
+        ? object.client_metadata.map((e: any) => GenesisMetadata.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: IdentifiedGenesisMetadata): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.clientMetadata?.length) {
-      obj.clientMetadata = message.clientMetadata.map((e) => GenesisMetadata.toJSON(e));
+    if (message.client_metadata?.length) {
+      obj.client_metadata = message.client_metadata.map((e) => GenesisMetadata.toJSON(e));
     }
     return obj;
   },
@@ -342,8 +342,8 @@ export const IdentifiedGenesisMetadata = {
   },
   fromPartial(object: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {
     const message = createBaseIdentifiedGenesisMetadata();
-    message.clientId = object.clientId ?? "";
-    message.clientMetadata = object.clientMetadata?.map((e) => GenesisMetadata.fromPartial(e)) || [];
+    message.client_id = object.client_id ?? "";
+    message.client_metadata = object.client_metadata?.map((e) => GenesisMetadata.fromPartial(e)) || [];
     return message;
   },
 };

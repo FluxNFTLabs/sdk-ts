@@ -9,7 +9,7 @@ export interface ConfigRequest {
 
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponse {
-  minimumGasPrice: string;
+  minimum_gas_price: string;
 }
 
 function createBaseConfigRequest(): ConfigRequest {
@@ -58,15 +58,15 @@ export const ConfigRequest = {
 };
 
 function createBaseConfigResponse(): ConfigResponse {
-  return { minimumGasPrice: "" };
+  return { minimum_gas_price: "" };
 }
 
 export const ConfigResponse = {
   $type: "cosmos.base.node.v1beta1.ConfigResponse" as const,
 
   encode(message: ConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.minimumGasPrice !== "") {
-      writer.uint32(10).string(message.minimumGasPrice);
+    if (message.minimum_gas_price !== "") {
+      writer.uint32(10).string(message.minimum_gas_price);
     }
     return writer;
   },
@@ -83,7 +83,7 @@ export const ConfigResponse = {
             break;
           }
 
-          message.minimumGasPrice = reader.string();
+          message.minimum_gas_price = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -95,13 +95,13 @@ export const ConfigResponse = {
   },
 
   fromJSON(object: any): ConfigResponse {
-    return { minimumGasPrice: isSet(object.minimumGasPrice) ? String(object.minimumGasPrice) : "" };
+    return { minimum_gas_price: isSet(object.minimum_gas_price) ? String(object.minimum_gas_price) : "" };
   },
 
   toJSON(message: ConfigResponse): unknown {
     const obj: any = {};
-    if (message.minimumGasPrice !== "") {
-      obj.minimumGasPrice = message.minimumGasPrice;
+    if (message.minimum_gas_price !== "") {
+      obj.minimum_gas_price = message.minimum_gas_price;
     }
     return obj;
   },
@@ -111,7 +111,7 @@ export const ConfigResponse = {
   },
   fromPartial(object: DeepPartial<ConfigResponse>): ConfigResponse {
     const message = createBaseConfigResponse();
-    message.minimumGasPrice = object.minimumGasPrice ?? "";
+    message.minimum_gas_price = object.minimum_gas_price ?? "";
     return message;
   },
 };

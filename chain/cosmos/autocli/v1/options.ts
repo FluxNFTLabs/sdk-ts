@@ -24,13 +24,13 @@ export interface ServiceCommandDescriptor {
    * If no options are specified for a given rpc method on the service, a
    * command will be generated for that method with the default options.
    */
-  rpcCommandOptions: RpcCommandOptions[];
+  rpc_command_options: RpcCommandOptions[];
   /**
    * sub_commands is a map of optional sub-commands for this command based on
    * different protobuf services. The map key is used as the name of the
    * sub-command.
    */
-  subCommands: { [key: string]: ServiceCommandDescriptor };
+  sub_commands: { [key: string]: ServiceCommandDescriptor };
 }
 
 export interface ServiceCommandDescriptor_SubCommandsEntry {
@@ -47,7 +47,7 @@ export interface RpcCommandOptions {
    * rpc_method is short name of the protobuf rpc method that this command is
    * generated from.
    */
-  rpcMethod: string;
+  rpc_method: string;
   /**
    * use is the one-line usage method. It also allows specifying an alternate
    * name for the command as the first word of the usage text.
@@ -68,7 +68,7 @@ export interface RpcCommandOptions {
    * suggest_for is an array of command names for which this command will be suggested -
    * similar to aliases but only suggests.
    */
-  suggestFor: string[];
+  suggest_for: string[];
   /** deprecated defines, if this command is deprecated and should print this string when used. */
   deprecated: string;
   /**
@@ -83,9 +83,9 @@ export interface RpcCommandOptions {
    * By default all request fields are configured as flags. They can
    * also be configured as positional args instead using positional_args.
    */
-  flagOptions: { [key: string]: FlagOptions };
+  flag_options: { [key: string]: FlagOptions };
   /** positional_args specifies positional arguments for the command. */
-  positionalArgs: PositionalArgDescriptor[];
+  positional_args: PositionalArgDescriptor[];
   /** skip specifies whether to skip this rpc method when generating commands. */
   skip: boolean;
 }
@@ -109,13 +109,13 @@ export interface FlagOptions {
   /** usage is the help message. */
   usage: string;
   /** default_value is the default value as text. */
-  defaultValue: string;
+  default_value: string;
   /** default value is the default value as text if the flag is used without any value. */
-  noOptDefaultValue: string;
+  no_opt_default_value: string;
   /** deprecated is the usage text to show if this flag is deprecated. */
   deprecated: string;
   /** shorthand_deprecated is the usage text to show if the shorthand of this flag is deprecated. */
-  shorthandDeprecated: string;
+  shorthand_deprecated: string;
   /** hidden hides the flag from help/usage text */
   hidden: boolean;
 }
@@ -126,7 +126,7 @@ export interface PositionalArgDescriptor {
    * proto_field specifies the proto field to use as the positional arg. Any
    * fields used as positional args will not have a flag generated.
    */
-  protoField: string;
+  proto_field: string;
   /**
    * varargs makes a positional parameter a varargs parameter. This can only be
    * applied to last positional parameter and the proto_field must a repeated
@@ -216,7 +216,7 @@ export const ModuleOptions = {
 };
 
 function createBaseServiceCommandDescriptor(): ServiceCommandDescriptor {
-  return { service: "", rpcCommandOptions: [], subCommands: {} };
+  return { service: "", rpc_command_options: [], sub_commands: {} };
 }
 
 export const ServiceCommandDescriptor = {
@@ -226,10 +226,10 @@ export const ServiceCommandDescriptor = {
     if (message.service !== "") {
       writer.uint32(10).string(message.service);
     }
-    for (const v of message.rpcCommandOptions) {
+    for (const v of message.rpc_command_options) {
       RpcCommandOptions.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    Object.entries(message.subCommands).forEach(([key, value]) => {
+    Object.entries(message.sub_commands).forEach(([key, value]) => {
       ServiceCommandDescriptor_SubCommandsEntry.encode({ key: key as any, value }, writer.uint32(26).fork()).ldelim();
     });
     return writer;
@@ -254,7 +254,7 @@ export const ServiceCommandDescriptor = {
             break;
           }
 
-          message.rpcCommandOptions.push(RpcCommandOptions.decode(reader, reader.uint32()));
+          message.rpc_command_options.push(RpcCommandOptions.decode(reader, reader.uint32()));
           continue;
         case 3:
           if (tag !== 26) {
@@ -263,7 +263,7 @@ export const ServiceCommandDescriptor = {
 
           const entry3 = ServiceCommandDescriptor_SubCommandsEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
-            message.subCommands[entry3.key] = entry3.value;
+            message.sub_commands[entry3.key] = entry3.value;
           }
           continue;
       }
@@ -278,11 +278,11 @@ export const ServiceCommandDescriptor = {
   fromJSON(object: any): ServiceCommandDescriptor {
     return {
       service: isSet(object.service) ? String(object.service) : "",
-      rpcCommandOptions: Array.isArray(object?.rpcCommandOptions)
-        ? object.rpcCommandOptions.map((e: any) => RpcCommandOptions.fromJSON(e))
+      rpc_command_options: Array.isArray(object?.rpc_command_options)
+        ? object.rpc_command_options.map((e: any) => RpcCommandOptions.fromJSON(e))
         : [],
-      subCommands: isObject(object.subCommands)
-        ? Object.entries(object.subCommands).reduce<{ [key: string]: ServiceCommandDescriptor }>(
+      sub_commands: isObject(object.sub_commands)
+        ? Object.entries(object.sub_commands).reduce<{ [key: string]: ServiceCommandDescriptor }>(
           (acc, [key, value]) => {
             acc[key] = ServiceCommandDescriptor.fromJSON(value);
             return acc;
@@ -298,15 +298,15 @@ export const ServiceCommandDescriptor = {
     if (message.service !== "") {
       obj.service = message.service;
     }
-    if (message.rpcCommandOptions?.length) {
-      obj.rpcCommandOptions = message.rpcCommandOptions.map((e) => RpcCommandOptions.toJSON(e));
+    if (message.rpc_command_options?.length) {
+      obj.rpc_command_options = message.rpc_command_options.map((e) => RpcCommandOptions.toJSON(e));
     }
-    if (message.subCommands) {
-      const entries = Object.entries(message.subCommands);
+    if (message.sub_commands) {
+      const entries = Object.entries(message.sub_commands);
       if (entries.length > 0) {
-        obj.subCommands = {};
+        obj.sub_commands = {};
         entries.forEach(([k, v]) => {
-          obj.subCommands[k] = ServiceCommandDescriptor.toJSON(v);
+          obj.sub_commands[k] = ServiceCommandDescriptor.toJSON(v);
         });
       }
     }
@@ -319,16 +319,15 @@ export const ServiceCommandDescriptor = {
   fromPartial(object: DeepPartial<ServiceCommandDescriptor>): ServiceCommandDescriptor {
     const message = createBaseServiceCommandDescriptor();
     message.service = object.service ?? "";
-    message.rpcCommandOptions = object.rpcCommandOptions?.map((e) => RpcCommandOptions.fromPartial(e)) || [];
-    message.subCommands = Object.entries(object.subCommands ?? {}).reduce<{ [key: string]: ServiceCommandDescriptor }>(
-      (acc, [key, value]) => {
-        if (value !== undefined) {
-          acc[key] = ServiceCommandDescriptor.fromPartial(value);
-        }
-        return acc;
-      },
-      {},
-    );
+    message.rpc_command_options = object.rpc_command_options?.map((e) => RpcCommandOptions.fromPartial(e)) || [];
+    message.sub_commands = Object.entries(object.sub_commands ?? {}).reduce<
+      { [key: string]: ServiceCommandDescriptor }
+    >((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = ServiceCommandDescriptor.fromPartial(value);
+      }
+      return acc;
+    }, {});
     return message;
   },
 };
@@ -415,17 +414,17 @@ export const ServiceCommandDescriptor_SubCommandsEntry = {
 
 function createBaseRpcCommandOptions(): RpcCommandOptions {
   return {
-    rpcMethod: "",
+    rpc_method: "",
     use: "",
     long: "",
     short: "",
     example: "",
     alias: [],
-    suggestFor: [],
+    suggest_for: [],
     deprecated: "",
     version: "",
-    flagOptions: {},
-    positionalArgs: [],
+    flag_options: {},
+    positional_args: [],
     skip: false,
   };
 }
@@ -434,8 +433,8 @@ export const RpcCommandOptions = {
   $type: "cosmos.autocli.v1.RpcCommandOptions" as const,
 
   encode(message: RpcCommandOptions, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.rpcMethod !== "") {
-      writer.uint32(10).string(message.rpcMethod);
+    if (message.rpc_method !== "") {
+      writer.uint32(10).string(message.rpc_method);
     }
     if (message.use !== "") {
       writer.uint32(18).string(message.use);
@@ -452,7 +451,7 @@ export const RpcCommandOptions = {
     for (const v of message.alias) {
       writer.uint32(50).string(v!);
     }
-    for (const v of message.suggestFor) {
+    for (const v of message.suggest_for) {
       writer.uint32(58).string(v!);
     }
     if (message.deprecated !== "") {
@@ -461,10 +460,10 @@ export const RpcCommandOptions = {
     if (message.version !== "") {
       writer.uint32(74).string(message.version);
     }
-    Object.entries(message.flagOptions).forEach(([key, value]) => {
+    Object.entries(message.flag_options).forEach(([key, value]) => {
       RpcCommandOptions_FlagOptionsEntry.encode({ key: key as any, value }, writer.uint32(82).fork()).ldelim();
     });
-    for (const v of message.positionalArgs) {
+    for (const v of message.positional_args) {
       PositionalArgDescriptor.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     if (message.skip === true) {
@@ -485,7 +484,7 @@ export const RpcCommandOptions = {
             break;
           }
 
-          message.rpcMethod = reader.string();
+          message.rpc_method = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -527,7 +526,7 @@ export const RpcCommandOptions = {
             break;
           }
 
-          message.suggestFor.push(reader.string());
+          message.suggest_for.push(reader.string());
           continue;
         case 8:
           if (tag !== 66) {
@@ -550,7 +549,7 @@ export const RpcCommandOptions = {
 
           const entry10 = RpcCommandOptions_FlagOptionsEntry.decode(reader, reader.uint32());
           if (entry10.value !== undefined) {
-            message.flagOptions[entry10.key] = entry10.value;
+            message.flag_options[entry10.key] = entry10.value;
           }
           continue;
         case 11:
@@ -558,7 +557,7 @@ export const RpcCommandOptions = {
             break;
           }
 
-          message.positionalArgs.push(PositionalArgDescriptor.decode(reader, reader.uint32()));
+          message.positional_args.push(PositionalArgDescriptor.decode(reader, reader.uint32()));
           continue;
         case 12:
           if (tag !== 96) {
@@ -578,23 +577,23 @@ export const RpcCommandOptions = {
 
   fromJSON(object: any): RpcCommandOptions {
     return {
-      rpcMethod: isSet(object.rpcMethod) ? String(object.rpcMethod) : "",
+      rpc_method: isSet(object.rpc_method) ? String(object.rpc_method) : "",
       use: isSet(object.use) ? String(object.use) : "",
       long: isSet(object.long) ? String(object.long) : "",
       short: isSet(object.short) ? String(object.short) : "",
       example: isSet(object.example) ? String(object.example) : "",
       alias: Array.isArray(object?.alias) ? object.alias.map((e: any) => String(e)) : [],
-      suggestFor: Array.isArray(object?.suggestFor) ? object.suggestFor.map((e: any) => String(e)) : [],
+      suggest_for: Array.isArray(object?.suggest_for) ? object.suggest_for.map((e: any) => String(e)) : [],
       deprecated: isSet(object.deprecated) ? String(object.deprecated) : "",
       version: isSet(object.version) ? String(object.version) : "",
-      flagOptions: isObject(object.flagOptions)
-        ? Object.entries(object.flagOptions).reduce<{ [key: string]: FlagOptions }>((acc, [key, value]) => {
+      flag_options: isObject(object.flag_options)
+        ? Object.entries(object.flag_options).reduce<{ [key: string]: FlagOptions }>((acc, [key, value]) => {
           acc[key] = FlagOptions.fromJSON(value);
           return acc;
         }, {})
         : {},
-      positionalArgs: Array.isArray(object?.positionalArgs)
-        ? object.positionalArgs.map((e: any) => PositionalArgDescriptor.fromJSON(e))
+      positional_args: Array.isArray(object?.positional_args)
+        ? object.positional_args.map((e: any) => PositionalArgDescriptor.fromJSON(e))
         : [],
       skip: isSet(object.skip) ? Boolean(object.skip) : false,
     };
@@ -602,8 +601,8 @@ export const RpcCommandOptions = {
 
   toJSON(message: RpcCommandOptions): unknown {
     const obj: any = {};
-    if (message.rpcMethod !== "") {
-      obj.rpcMethod = message.rpcMethod;
+    if (message.rpc_method !== "") {
+      obj.rpc_method = message.rpc_method;
     }
     if (message.use !== "") {
       obj.use = message.use;
@@ -620,8 +619,8 @@ export const RpcCommandOptions = {
     if (message.alias?.length) {
       obj.alias = message.alias;
     }
-    if (message.suggestFor?.length) {
-      obj.suggestFor = message.suggestFor;
+    if (message.suggest_for?.length) {
+      obj.suggest_for = message.suggest_for;
     }
     if (message.deprecated !== "") {
       obj.deprecated = message.deprecated;
@@ -629,17 +628,17 @@ export const RpcCommandOptions = {
     if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.flagOptions) {
-      const entries = Object.entries(message.flagOptions);
+    if (message.flag_options) {
+      const entries = Object.entries(message.flag_options);
       if (entries.length > 0) {
-        obj.flagOptions = {};
+        obj.flag_options = {};
         entries.forEach(([k, v]) => {
-          obj.flagOptions[k] = FlagOptions.toJSON(v);
+          obj.flag_options[k] = FlagOptions.toJSON(v);
         });
       }
     }
-    if (message.positionalArgs?.length) {
-      obj.positionalArgs = message.positionalArgs.map((e) => PositionalArgDescriptor.toJSON(e));
+    if (message.positional_args?.length) {
+      obj.positional_args = message.positional_args.map((e) => PositionalArgDescriptor.toJSON(e));
     }
     if (message.skip === true) {
       obj.skip = message.skip;
@@ -652,16 +651,16 @@ export const RpcCommandOptions = {
   },
   fromPartial(object: DeepPartial<RpcCommandOptions>): RpcCommandOptions {
     const message = createBaseRpcCommandOptions();
-    message.rpcMethod = object.rpcMethod ?? "";
+    message.rpc_method = object.rpc_method ?? "";
     message.use = object.use ?? "";
     message.long = object.long ?? "";
     message.short = object.short ?? "";
     message.example = object.example ?? "";
     message.alias = object.alias?.map((e) => e) || [];
-    message.suggestFor = object.suggestFor?.map((e) => e) || [];
+    message.suggest_for = object.suggest_for?.map((e) => e) || [];
     message.deprecated = object.deprecated ?? "";
     message.version = object.version ?? "";
-    message.flagOptions = Object.entries(object.flagOptions ?? {}).reduce<{ [key: string]: FlagOptions }>(
+    message.flag_options = Object.entries(object.flag_options ?? {}).reduce<{ [key: string]: FlagOptions }>(
       (acc, [key, value]) => {
         if (value !== undefined) {
           acc[key] = FlagOptions.fromPartial(value);
@@ -670,7 +669,7 @@ export const RpcCommandOptions = {
       },
       {},
     );
-    message.positionalArgs = object.positionalArgs?.map((e) => PositionalArgDescriptor.fromPartial(e)) || [];
+    message.positional_args = object.positional_args?.map((e) => PositionalArgDescriptor.fromPartial(e)) || [];
     message.skip = object.skip ?? false;
     return message;
   },
@@ -759,10 +758,10 @@ function createBaseFlagOptions(): FlagOptions {
     name: "",
     shorthand: "",
     usage: "",
-    defaultValue: "",
-    noOptDefaultValue: "",
+    default_value: "",
+    no_opt_default_value: "",
     deprecated: "",
-    shorthandDeprecated: "",
+    shorthand_deprecated: "",
     hidden: false,
   };
 }
@@ -780,17 +779,17 @@ export const FlagOptions = {
     if (message.usage !== "") {
       writer.uint32(26).string(message.usage);
     }
-    if (message.defaultValue !== "") {
-      writer.uint32(34).string(message.defaultValue);
+    if (message.default_value !== "") {
+      writer.uint32(34).string(message.default_value);
     }
-    if (message.noOptDefaultValue !== "") {
-      writer.uint32(42).string(message.noOptDefaultValue);
+    if (message.no_opt_default_value !== "") {
+      writer.uint32(42).string(message.no_opt_default_value);
     }
     if (message.deprecated !== "") {
       writer.uint32(50).string(message.deprecated);
     }
-    if (message.shorthandDeprecated !== "") {
-      writer.uint32(58).string(message.shorthandDeprecated);
+    if (message.shorthand_deprecated !== "") {
+      writer.uint32(58).string(message.shorthand_deprecated);
     }
     if (message.hidden === true) {
       writer.uint32(64).bool(message.hidden);
@@ -831,14 +830,14 @@ export const FlagOptions = {
             break;
           }
 
-          message.defaultValue = reader.string();
+          message.default_value = reader.string();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.noOptDefaultValue = reader.string();
+          message.no_opt_default_value = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
@@ -852,7 +851,7 @@ export const FlagOptions = {
             break;
           }
 
-          message.shorthandDeprecated = reader.string();
+          message.shorthand_deprecated = reader.string();
           continue;
         case 8:
           if (tag !== 64) {
@@ -875,10 +874,10 @@ export const FlagOptions = {
       name: isSet(object.name) ? String(object.name) : "",
       shorthand: isSet(object.shorthand) ? String(object.shorthand) : "",
       usage: isSet(object.usage) ? String(object.usage) : "",
-      defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : "",
-      noOptDefaultValue: isSet(object.noOptDefaultValue) ? String(object.noOptDefaultValue) : "",
+      default_value: isSet(object.default_value) ? String(object.default_value) : "",
+      no_opt_default_value: isSet(object.no_opt_default_value) ? String(object.no_opt_default_value) : "",
       deprecated: isSet(object.deprecated) ? String(object.deprecated) : "",
-      shorthandDeprecated: isSet(object.shorthandDeprecated) ? String(object.shorthandDeprecated) : "",
+      shorthand_deprecated: isSet(object.shorthand_deprecated) ? String(object.shorthand_deprecated) : "",
       hidden: isSet(object.hidden) ? Boolean(object.hidden) : false,
     };
   },
@@ -894,17 +893,17 @@ export const FlagOptions = {
     if (message.usage !== "") {
       obj.usage = message.usage;
     }
-    if (message.defaultValue !== "") {
-      obj.defaultValue = message.defaultValue;
+    if (message.default_value !== "") {
+      obj.default_value = message.default_value;
     }
-    if (message.noOptDefaultValue !== "") {
-      obj.noOptDefaultValue = message.noOptDefaultValue;
+    if (message.no_opt_default_value !== "") {
+      obj.no_opt_default_value = message.no_opt_default_value;
     }
     if (message.deprecated !== "") {
       obj.deprecated = message.deprecated;
     }
-    if (message.shorthandDeprecated !== "") {
-      obj.shorthandDeprecated = message.shorthandDeprecated;
+    if (message.shorthand_deprecated !== "") {
+      obj.shorthand_deprecated = message.shorthand_deprecated;
     }
     if (message.hidden === true) {
       obj.hidden = message.hidden;
@@ -920,25 +919,25 @@ export const FlagOptions = {
     message.name = object.name ?? "";
     message.shorthand = object.shorthand ?? "";
     message.usage = object.usage ?? "";
-    message.defaultValue = object.defaultValue ?? "";
-    message.noOptDefaultValue = object.noOptDefaultValue ?? "";
+    message.default_value = object.default_value ?? "";
+    message.no_opt_default_value = object.no_opt_default_value ?? "";
     message.deprecated = object.deprecated ?? "";
-    message.shorthandDeprecated = object.shorthandDeprecated ?? "";
+    message.shorthand_deprecated = object.shorthand_deprecated ?? "";
     message.hidden = object.hidden ?? false;
     return message;
   },
 };
 
 function createBasePositionalArgDescriptor(): PositionalArgDescriptor {
-  return { protoField: "", varargs: false };
+  return { proto_field: "", varargs: false };
 }
 
 export const PositionalArgDescriptor = {
   $type: "cosmos.autocli.v1.PositionalArgDescriptor" as const,
 
   encode(message: PositionalArgDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.protoField !== "") {
-      writer.uint32(10).string(message.protoField);
+    if (message.proto_field !== "") {
+      writer.uint32(10).string(message.proto_field);
     }
     if (message.varargs === true) {
       writer.uint32(16).bool(message.varargs);
@@ -958,7 +957,7 @@ export const PositionalArgDescriptor = {
             break;
           }
 
-          message.protoField = reader.string();
+          message.proto_field = reader.string();
           continue;
         case 2:
           if (tag !== 16) {
@@ -978,15 +977,15 @@ export const PositionalArgDescriptor = {
 
   fromJSON(object: any): PositionalArgDescriptor {
     return {
-      protoField: isSet(object.protoField) ? String(object.protoField) : "",
+      proto_field: isSet(object.proto_field) ? String(object.proto_field) : "",
       varargs: isSet(object.varargs) ? Boolean(object.varargs) : false,
     };
   },
 
   toJSON(message: PositionalArgDescriptor): unknown {
     const obj: any = {};
-    if (message.protoField !== "") {
-      obj.protoField = message.protoField;
+    if (message.proto_field !== "") {
+      obj.proto_field = message.proto_field;
     }
     if (message.varargs === true) {
       obj.varargs = message.varargs;
@@ -999,7 +998,7 @@ export const PositionalArgDescriptor = {
   },
   fromPartial(object: DeepPartial<PositionalArgDescriptor>): PositionalArgDescriptor {
     const message = createBasePositionalArgDescriptor();
-    message.protoField = object.protoField ?? "";
+    message.proto_field = object.proto_field ?? "";
     message.varargs = object.varargs ?? false;
     return message;
   },

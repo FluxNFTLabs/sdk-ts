@@ -10,9 +10,9 @@ import { Any } from "../../../../google/protobuf/any";
  */
 export interface IdentifiedClientState {
   /** client identifier */
-  clientId: string;
+  client_id: string;
   /** client state */
-  clientState: Any | undefined;
+  client_state: Any | undefined;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface ConsensusStateWithHeight {
     | Height
     | undefined;
   /** consensus state */
-  consensusState: Any | undefined;
+  consensus_state: Any | undefined;
 }
 
 /**
@@ -34,9 +34,9 @@ export interface ConsensusStateWithHeight {
  */
 export interface ClientConsensusStates {
   /** client identifier */
-  clientId: string;
+  client_id: string;
   /** consensus states and their heights associated with the client */
-  consensusStates: ConsensusStateWithHeight[];
+  consensus_states: ConsensusStateWithHeight[];
 }
 
 /**
@@ -51,12 +51,12 @@ export interface ClientUpdateProposal {
   /** the description of the proposal */
   description: string;
   /** the client identifier for the client to be updated if the proposal passes */
-  subjectClientId: string;
+  subject_client_id: string;
   /**
    * the substitute client identifier for the client standing in for the subject
    * client
    */
-  substituteClientId: string;
+  substitute_client_id: string;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface UpgradeProposal {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgradedClientState: Any | undefined;
+  upgraded_client_state: Any | undefined;
 }
 
 /**
@@ -94,9 +94,9 @@ export interface UpgradeProposal {
  */
 export interface Height {
   /** the revision that the client is currently on */
-  revisionNumber: string;
+  revision_number: string;
   /** the height within the given revision */
-  revisionHeight: string;
+  revision_height: string;
 }
 
 /** Params defines the set of IBC light client parameters. */
@@ -106,22 +106,22 @@ export interface Params {
    * and interacted with. If a client type is removed from the allowed clients list, usage
    * of this client will be disabled until it is added again to the list.
    */
-  allowedClients: string[];
+  allowed_clients: string[];
 }
 
 function createBaseIdentifiedClientState(): IdentifiedClientState {
-  return { clientId: "", clientState: undefined };
+  return { client_id: "", client_state: undefined };
 }
 
 export const IdentifiedClientState = {
   $type: "ibc.core.client.v1.IdentifiedClientState" as const,
 
   encode(message: IdentifiedClientState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    if (message.clientState !== undefined) {
-      Any.encode(message.clientState, writer.uint32(18).fork()).ldelim();
+    if (message.client_state !== undefined) {
+      Any.encode(message.client_state, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -138,14 +138,14 @@ export const IdentifiedClientState = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.clientState = Any.decode(reader, reader.uint32());
+          message.client_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -158,18 +158,18 @@ export const IdentifiedClientState = {
 
   fromJSON(object: any): IdentifiedClientState {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
     };
   },
 
   toJSON(message: IdentifiedClientState): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.clientState !== undefined) {
-      obj.clientState = Any.toJSON(message.clientState);
+    if (message.client_state !== undefined) {
+      obj.client_state = Any.toJSON(message.client_state);
     }
     return obj;
   },
@@ -179,16 +179,16 @@ export const IdentifiedClientState = {
   },
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
-    message.clientId = object.clientId ?? "";
-    message.clientState = (object.clientState !== undefined && object.clientState !== null)
-      ? Any.fromPartial(object.clientState)
+    message.client_id = object.client_id ?? "";
+    message.client_state = (object.client_state !== undefined && object.client_state !== null)
+      ? Any.fromPartial(object.client_state)
       : undefined;
     return message;
   },
 };
 
 function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
-  return { height: undefined, consensusState: undefined };
+  return { height: undefined, consensus_state: undefined };
 }
 
 export const ConsensusStateWithHeight = {
@@ -198,8 +198,8 @@ export const ConsensusStateWithHeight = {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
     }
-    if (message.consensusState !== undefined) {
-      Any.encode(message.consensusState, writer.uint32(18).fork()).ldelim();
+    if (message.consensus_state !== undefined) {
+      Any.encode(message.consensus_state, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -223,7 +223,7 @@ export const ConsensusStateWithHeight = {
             break;
           }
 
-          message.consensusState = Any.decode(reader, reader.uint32());
+          message.consensus_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -237,7 +237,7 @@ export const ConsensusStateWithHeight = {
   fromJSON(object: any): ConsensusStateWithHeight {
     return {
       height: isSet(object.height) ? Height.fromJSON(object.height) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
     };
   },
 
@@ -246,8 +246,8 @@ export const ConsensusStateWithHeight = {
     if (message.height !== undefined) {
       obj.height = Height.toJSON(message.height);
     }
-    if (message.consensusState !== undefined) {
-      obj.consensusState = Any.toJSON(message.consensusState);
+    if (message.consensus_state !== undefined) {
+      obj.consensus_state = Any.toJSON(message.consensus_state);
     }
     return obj;
   },
@@ -260,25 +260,25 @@ export const ConsensusStateWithHeight = {
     message.height = (object.height !== undefined && object.height !== null)
       ? Height.fromPartial(object.height)
       : undefined;
-    message.consensusState = (object.consensusState !== undefined && object.consensusState !== null)
-      ? Any.fromPartial(object.consensusState)
+    message.consensus_state = (object.consensus_state !== undefined && object.consensus_state !== null)
+      ? Any.fromPartial(object.consensus_state)
       : undefined;
     return message;
   },
 };
 
 function createBaseClientConsensusStates(): ClientConsensusStates {
-  return { clientId: "", consensusStates: [] };
+  return { client_id: "", consensus_states: [] };
 }
 
 export const ClientConsensusStates = {
   $type: "ibc.core.client.v1.ClientConsensusStates" as const,
 
   encode(message: ClientConsensusStates, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.clientId !== "") {
-      writer.uint32(10).string(message.clientId);
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
     }
-    for (const v of message.consensusStates) {
+    for (const v of message.consensus_states) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -296,14 +296,14 @@ export const ClientConsensusStates = {
             break;
           }
 
-          message.clientId = reader.string();
+          message.client_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.consensusStates.push(ConsensusStateWithHeight.decode(reader, reader.uint32()));
+          message.consensus_states.push(ConsensusStateWithHeight.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -316,20 +316,20 @@ export const ClientConsensusStates = {
 
   fromJSON(object: any): ClientConsensusStates {
     return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      consensusStates: Array.isArray(object?.consensusStates)
-        ? object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e))
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      consensus_states: Array.isArray(object?.consensus_states)
+        ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: ClientConsensusStates): unknown {
     const obj: any = {};
-    if (message.clientId !== "") {
-      obj.clientId = message.clientId;
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
     }
-    if (message.consensusStates?.length) {
-      obj.consensusStates = message.consensusStates.map((e) => ConsensusStateWithHeight.toJSON(e));
+    if (message.consensus_states?.length) {
+      obj.consensus_states = message.consensus_states.map((e) => ConsensusStateWithHeight.toJSON(e));
     }
     return obj;
   },
@@ -339,14 +339,14 @@ export const ClientConsensusStates = {
   },
   fromPartial(object: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
-    message.clientId = object.clientId ?? "";
-    message.consensusStates = object.consensusStates?.map((e) => ConsensusStateWithHeight.fromPartial(e)) || [];
+    message.client_id = object.client_id ?? "";
+    message.consensus_states = object.consensus_states?.map((e) => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseClientUpdateProposal(): ClientUpdateProposal {
-  return { title: "", description: "", subjectClientId: "", substituteClientId: "" };
+  return { title: "", description: "", subject_client_id: "", substitute_client_id: "" };
 }
 
 export const ClientUpdateProposal = {
@@ -359,11 +359,11 @@ export const ClientUpdateProposal = {
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.subjectClientId !== "") {
-      writer.uint32(26).string(message.subjectClientId);
+    if (message.subject_client_id !== "") {
+      writer.uint32(26).string(message.subject_client_id);
     }
-    if (message.substituteClientId !== "") {
-      writer.uint32(34).string(message.substituteClientId);
+    if (message.substitute_client_id !== "") {
+      writer.uint32(34).string(message.substitute_client_id);
     }
     return writer;
   },
@@ -394,14 +394,14 @@ export const ClientUpdateProposal = {
             break;
           }
 
-          message.subjectClientId = reader.string();
+          message.subject_client_id = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.substituteClientId = reader.string();
+          message.substitute_client_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -416,8 +416,8 @@ export const ClientUpdateProposal = {
     return {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      subjectClientId: isSet(object.subjectClientId) ? String(object.subjectClientId) : "",
-      substituteClientId: isSet(object.substituteClientId) ? String(object.substituteClientId) : "",
+      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
+      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : "",
     };
   },
 
@@ -429,11 +429,11 @@ export const ClientUpdateProposal = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.subjectClientId !== "") {
-      obj.subjectClientId = message.subjectClientId;
+    if (message.subject_client_id !== "") {
+      obj.subject_client_id = message.subject_client_id;
     }
-    if (message.substituteClientId !== "") {
-      obj.substituteClientId = message.substituteClientId;
+    if (message.substitute_client_id !== "") {
+      obj.substitute_client_id = message.substitute_client_id;
     }
     return obj;
   },
@@ -445,14 +445,14 @@ export const ClientUpdateProposal = {
     const message = createBaseClientUpdateProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.subjectClientId = object.subjectClientId ?? "";
-    message.substituteClientId = object.substituteClientId ?? "";
+    message.subject_client_id = object.subject_client_id ?? "";
+    message.substitute_client_id = object.substitute_client_id ?? "";
     return message;
   },
 };
 
 function createBaseUpgradeProposal(): UpgradeProposal {
-  return { title: "", description: "", plan: undefined, upgradedClientState: undefined };
+  return { title: "", description: "", plan: undefined, upgraded_client_state: undefined };
 }
 
 export const UpgradeProposal = {
@@ -468,8 +468,8 @@ export const UpgradeProposal = {
     if (message.plan !== undefined) {
       Plan.encode(message.plan, writer.uint32(26).fork()).ldelim();
     }
-    if (message.upgradedClientState !== undefined) {
-      Any.encode(message.upgradedClientState, writer.uint32(34).fork()).ldelim();
+    if (message.upgraded_client_state !== undefined) {
+      Any.encode(message.upgraded_client_state, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -507,7 +507,7 @@ export const UpgradeProposal = {
             break;
           }
 
-          message.upgradedClientState = Any.decode(reader, reader.uint32());
+          message.upgraded_client_state = Any.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -523,7 +523,9 @@ export const UpgradeProposal = {
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
-      upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state)
+        ? Any.fromJSON(object.upgraded_client_state)
+        : undefined,
     };
   },
 
@@ -538,8 +540,8 @@ export const UpgradeProposal = {
     if (message.plan !== undefined) {
       obj.plan = Plan.toJSON(message.plan);
     }
-    if (message.upgradedClientState !== undefined) {
-      obj.upgradedClientState = Any.toJSON(message.upgradedClientState);
+    if (message.upgraded_client_state !== undefined) {
+      obj.upgraded_client_state = Any.toJSON(message.upgraded_client_state);
     }
     return obj;
   },
@@ -552,26 +554,27 @@ export const UpgradeProposal = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.plan = (object.plan !== undefined && object.plan !== null) ? Plan.fromPartial(object.plan) : undefined;
-    message.upgradedClientState = (object.upgradedClientState !== undefined && object.upgradedClientState !== null)
-      ? Any.fromPartial(object.upgradedClientState)
-      : undefined;
+    message.upgraded_client_state =
+      (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null)
+        ? Any.fromPartial(object.upgraded_client_state)
+        : undefined;
     return message;
   },
 };
 
 function createBaseHeight(): Height {
-  return { revisionNumber: "0", revisionHeight: "0" };
+  return { revision_number: "0", revision_height: "0" };
 }
 
 export const Height = {
   $type: "ibc.core.client.v1.Height" as const,
 
   encode(message: Height, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.revisionNumber !== "0") {
-      writer.uint32(8).uint64(message.revisionNumber);
+    if (message.revision_number !== "0") {
+      writer.uint32(8).uint64(message.revision_number);
     }
-    if (message.revisionHeight !== "0") {
-      writer.uint32(16).uint64(message.revisionHeight);
+    if (message.revision_height !== "0") {
+      writer.uint32(16).uint64(message.revision_height);
     }
     return writer;
   },
@@ -588,14 +591,14 @@ export const Height = {
             break;
           }
 
-          message.revisionNumber = longToString(reader.uint64() as Long);
+          message.revision_number = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 16) {
             break;
           }
 
-          message.revisionHeight = longToString(reader.uint64() as Long);
+          message.revision_height = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -608,18 +611,18 @@ export const Height = {
 
   fromJSON(object: any): Height {
     return {
-      revisionNumber: isSet(object.revisionNumber) ? String(object.revisionNumber) : "0",
-      revisionHeight: isSet(object.revisionHeight) ? String(object.revisionHeight) : "0",
+      revision_number: isSet(object.revision_number) ? String(object.revision_number) : "0",
+      revision_height: isSet(object.revision_height) ? String(object.revision_height) : "0",
     };
   },
 
   toJSON(message: Height): unknown {
     const obj: any = {};
-    if (message.revisionNumber !== "0") {
-      obj.revisionNumber = message.revisionNumber;
+    if (message.revision_number !== "0") {
+      obj.revision_number = message.revision_number;
     }
-    if (message.revisionHeight !== "0") {
-      obj.revisionHeight = message.revisionHeight;
+    if (message.revision_height !== "0") {
+      obj.revision_height = message.revision_height;
     }
     return obj;
   },
@@ -629,21 +632,21 @@ export const Height = {
   },
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
-    message.revisionNumber = object.revisionNumber ?? "0";
-    message.revisionHeight = object.revisionHeight ?? "0";
+    message.revision_number = object.revision_number ?? "0";
+    message.revision_height = object.revision_height ?? "0";
     return message;
   },
 };
 
 function createBaseParams(): Params {
-  return { allowedClients: [] };
+  return { allowed_clients: [] };
 }
 
 export const Params = {
   $type: "ibc.core.client.v1.Params" as const,
 
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.allowedClients) {
+    for (const v of message.allowed_clients) {
       writer.uint32(10).string(v!);
     }
     return writer;
@@ -661,7 +664,7 @@ export const Params = {
             break;
           }
 
-          message.allowedClients.push(reader.string());
+          message.allowed_clients.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -674,14 +677,14 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      allowedClients: Array.isArray(object?.allowedClients) ? object.allowedClients.map((e: any) => String(e)) : [],
+      allowed_clients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.allowedClients?.length) {
-      obj.allowedClients = message.allowedClients;
+    if (message.allowed_clients?.length) {
+      obj.allowed_clients = message.allowed_clients;
     }
     return obj;
   },
@@ -691,7 +694,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.allowedClients = object.allowedClients?.map((e) => e) || [];
+    message.allowed_clients = object.allowed_clients?.map((e) => e) || [];
     return message;
   },
 };

@@ -4,36 +4,36 @@ import _m0 from "protobufjs/minimal";
 /** Module is the config object for the runtime module. */
 export interface Module {
   /** app_name is the name of the app. */
-  appName: string;
+  app_name: string;
   /**
    * begin_blockers specifies the module names of begin blockers
    * to call in the order in which they should be called. If this is left empty
    * no begin blocker will be registered.
    */
-  beginBlockers: string[];
+  begin_blockers: string[];
   /**
    * end_blockers specifies the module names of the end blockers
    * to call in the order in which they should be called. If this is left empty
    * no end blocker will be registered.
    */
-  endBlockers: string[];
+  end_blockers: string[];
   /**
    * init_genesis specifies the module names of init genesis functions
    * to call in the order in which they should be called. If this is left empty
    * no init genesis function will be registered.
    */
-  initGenesis: string[];
+  init_genesis: string[];
   /**
    * export_genesis specifies the order in which to export module genesis data.
    * If this is left empty, the init_genesis order will be used for export genesis
    * if it is specified.
    */
-  exportGenesis: string[];
+  export_genesis: string[];
   /**
    * override_store_keys is an optional list of overrides for the module store keys
    * to be used in keeper construction.
    */
-  overrideStoreKeys: StoreKeyConfig[];
+  override_store_keys: StoreKeyConfig[];
 }
 
 /**
@@ -42,35 +42,42 @@ export interface Module {
  */
 export interface StoreKeyConfig {
   /** name of the module to override the store key of */
-  moduleName: string;
+  module_name: string;
   /** the kv store key to use instead of the module name. */
-  kvStoreKey: string;
+  kv_store_key: string;
 }
 
 function createBaseModule(): Module {
-  return { appName: "", beginBlockers: [], endBlockers: [], initGenesis: [], exportGenesis: [], overrideStoreKeys: [] };
+  return {
+    app_name: "",
+    begin_blockers: [],
+    end_blockers: [],
+    init_genesis: [],
+    export_genesis: [],
+    override_store_keys: [],
+  };
 }
 
 export const Module = {
   $type: "cosmos.app.runtime.v1alpha1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.appName !== "") {
-      writer.uint32(10).string(message.appName);
+    if (message.app_name !== "") {
+      writer.uint32(10).string(message.app_name);
     }
-    for (const v of message.beginBlockers) {
+    for (const v of message.begin_blockers) {
       writer.uint32(18).string(v!);
     }
-    for (const v of message.endBlockers) {
+    for (const v of message.end_blockers) {
       writer.uint32(26).string(v!);
     }
-    for (const v of message.initGenesis) {
+    for (const v of message.init_genesis) {
       writer.uint32(34).string(v!);
     }
-    for (const v of message.exportGenesis) {
+    for (const v of message.export_genesis) {
       writer.uint32(42).string(v!);
     }
-    for (const v of message.overrideStoreKeys) {
+    for (const v of message.override_store_keys) {
       StoreKeyConfig.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     return writer;
@@ -88,42 +95,42 @@ export const Module = {
             break;
           }
 
-          message.appName = reader.string();
+          message.app_name = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.beginBlockers.push(reader.string());
+          message.begin_blockers.push(reader.string());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.endBlockers.push(reader.string());
+          message.end_blockers.push(reader.string());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.initGenesis.push(reader.string());
+          message.init_genesis.push(reader.string());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.exportGenesis.push(reader.string());
+          message.export_genesis.push(reader.string());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.overrideStoreKeys.push(StoreKeyConfig.decode(reader, reader.uint32()));
+          message.override_store_keys.push(StoreKeyConfig.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -136,36 +143,36 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      appName: isSet(object.appName) ? String(object.appName) : "",
-      beginBlockers: Array.isArray(object?.beginBlockers) ? object.beginBlockers.map((e: any) => String(e)) : [],
-      endBlockers: Array.isArray(object?.endBlockers) ? object.endBlockers.map((e: any) => String(e)) : [],
-      initGenesis: Array.isArray(object?.initGenesis) ? object.initGenesis.map((e: any) => String(e)) : [],
-      exportGenesis: Array.isArray(object?.exportGenesis) ? object.exportGenesis.map((e: any) => String(e)) : [],
-      overrideStoreKeys: Array.isArray(object?.overrideStoreKeys)
-        ? object.overrideStoreKeys.map((e: any) => StoreKeyConfig.fromJSON(e))
+      app_name: isSet(object.app_name) ? String(object.app_name) : "",
+      begin_blockers: Array.isArray(object?.begin_blockers) ? object.begin_blockers.map((e: any) => String(e)) : [],
+      end_blockers: Array.isArray(object?.end_blockers) ? object.end_blockers.map((e: any) => String(e)) : [],
+      init_genesis: Array.isArray(object?.init_genesis) ? object.init_genesis.map((e: any) => String(e)) : [],
+      export_genesis: Array.isArray(object?.export_genesis) ? object.export_genesis.map((e: any) => String(e)) : [],
+      override_store_keys: Array.isArray(object?.override_store_keys)
+        ? object.override_store_keys.map((e: any) => StoreKeyConfig.fromJSON(e))
         : [],
     };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.appName !== "") {
-      obj.appName = message.appName;
+    if (message.app_name !== "") {
+      obj.app_name = message.app_name;
     }
-    if (message.beginBlockers?.length) {
-      obj.beginBlockers = message.beginBlockers;
+    if (message.begin_blockers?.length) {
+      obj.begin_blockers = message.begin_blockers;
     }
-    if (message.endBlockers?.length) {
-      obj.endBlockers = message.endBlockers;
+    if (message.end_blockers?.length) {
+      obj.end_blockers = message.end_blockers;
     }
-    if (message.initGenesis?.length) {
-      obj.initGenesis = message.initGenesis;
+    if (message.init_genesis?.length) {
+      obj.init_genesis = message.init_genesis;
     }
-    if (message.exportGenesis?.length) {
-      obj.exportGenesis = message.exportGenesis;
+    if (message.export_genesis?.length) {
+      obj.export_genesis = message.export_genesis;
     }
-    if (message.overrideStoreKeys?.length) {
-      obj.overrideStoreKeys = message.overrideStoreKeys.map((e) => StoreKeyConfig.toJSON(e));
+    if (message.override_store_keys?.length) {
+      obj.override_store_keys = message.override_store_keys.map((e) => StoreKeyConfig.toJSON(e));
     }
     return obj;
   },
@@ -175,29 +182,29 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.appName = object.appName ?? "";
-    message.beginBlockers = object.beginBlockers?.map((e) => e) || [];
-    message.endBlockers = object.endBlockers?.map((e) => e) || [];
-    message.initGenesis = object.initGenesis?.map((e) => e) || [];
-    message.exportGenesis = object.exportGenesis?.map((e) => e) || [];
-    message.overrideStoreKeys = object.overrideStoreKeys?.map((e) => StoreKeyConfig.fromPartial(e)) || [];
+    message.app_name = object.app_name ?? "";
+    message.begin_blockers = object.begin_blockers?.map((e) => e) || [];
+    message.end_blockers = object.end_blockers?.map((e) => e) || [];
+    message.init_genesis = object.init_genesis?.map((e) => e) || [];
+    message.export_genesis = object.export_genesis?.map((e) => e) || [];
+    message.override_store_keys = object.override_store_keys?.map((e) => StoreKeyConfig.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseStoreKeyConfig(): StoreKeyConfig {
-  return { moduleName: "", kvStoreKey: "" };
+  return { module_name: "", kv_store_key: "" };
 }
 
 export const StoreKeyConfig = {
   $type: "cosmos.app.runtime.v1alpha1.StoreKeyConfig" as const,
 
   encode(message: StoreKeyConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.moduleName !== "") {
-      writer.uint32(10).string(message.moduleName);
+    if (message.module_name !== "") {
+      writer.uint32(10).string(message.module_name);
     }
-    if (message.kvStoreKey !== "") {
-      writer.uint32(18).string(message.kvStoreKey);
+    if (message.kv_store_key !== "") {
+      writer.uint32(18).string(message.kv_store_key);
     }
     return writer;
   },
@@ -214,14 +221,14 @@ export const StoreKeyConfig = {
             break;
           }
 
-          message.moduleName = reader.string();
+          message.module_name = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.kvStoreKey = reader.string();
+          message.kv_store_key = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -234,18 +241,18 @@ export const StoreKeyConfig = {
 
   fromJSON(object: any): StoreKeyConfig {
     return {
-      moduleName: isSet(object.moduleName) ? String(object.moduleName) : "",
-      kvStoreKey: isSet(object.kvStoreKey) ? String(object.kvStoreKey) : "",
+      module_name: isSet(object.module_name) ? String(object.module_name) : "",
+      kv_store_key: isSet(object.kv_store_key) ? String(object.kv_store_key) : "",
     };
   },
 
   toJSON(message: StoreKeyConfig): unknown {
     const obj: any = {};
-    if (message.moduleName !== "") {
-      obj.moduleName = message.moduleName;
+    if (message.module_name !== "") {
+      obj.module_name = message.module_name;
     }
-    if (message.kvStoreKey !== "") {
-      obj.kvStoreKey = message.kvStoreKey;
+    if (message.kv_store_key !== "") {
+      obj.kv_store_key = message.kv_store_key;
     }
     return obj;
   },
@@ -255,8 +262,8 @@ export const StoreKeyConfig = {
   },
   fromPartial(object: DeepPartial<StoreKeyConfig>): StoreKeyConfig {
     const message = createBaseStoreKeyConfig();
-    message.moduleName = object.moduleName ?? "";
-    message.kvStoreKey = object.kvStoreKey ?? "";
+    message.module_name = object.module_name ?? "";
+    message.kv_store_key = object.kv_store_key ?? "";
     return message;
   },
 };

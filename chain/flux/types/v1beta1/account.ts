@@ -7,23 +7,23 @@ import { BaseAccount } from "../../../cosmos/auth/v1beta1/auth";
  * authtypes.BaseAccount type. It is compatible with the auth AccountKeeper.
  */
 export interface EthAccount {
-  baseAccount: BaseAccount | undefined;
-  codeHash: Uint8Array;
+  base_account: BaseAccount | undefined;
+  code_hash: Uint8Array;
 }
 
 function createBaseEthAccount(): EthAccount {
-  return { baseAccount: undefined, codeHash: new Uint8Array(0) };
+  return { base_account: undefined, code_hash: new Uint8Array(0) };
 }
 
 export const EthAccount = {
   $type: "flux.types.v1beta1.EthAccount" as const,
 
   encode(message: EthAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.baseAccount !== undefined) {
-      BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
+    if (message.base_account !== undefined) {
+      BaseAccount.encode(message.base_account, writer.uint32(10).fork()).ldelim();
     }
-    if (message.codeHash.length !== 0) {
-      writer.uint32(18).bytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      writer.uint32(18).bytes(message.code_hash);
     }
     return writer;
   },
@@ -40,14 +40,14 @@ export const EthAccount = {
             break;
           }
 
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
+          message.base_account = BaseAccount.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.codeHash = reader.bytes();
+          message.code_hash = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -60,18 +60,18 @@ export const EthAccount = {
 
   fromJSON(object: any): EthAccount {
     return {
-      baseAccount: isSet(object.baseAccount) ? BaseAccount.fromJSON(object.baseAccount) : undefined,
-      codeHash: isSet(object.codeHash) ? bytesFromBase64(object.codeHash) : new Uint8Array(0),
+      base_account: isSet(object.base_account) ? BaseAccount.fromJSON(object.base_account) : undefined,
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
 
   toJSON(message: EthAccount): unknown {
     const obj: any = {};
-    if (message.baseAccount !== undefined) {
-      obj.baseAccount = BaseAccount.toJSON(message.baseAccount);
+    if (message.base_account !== undefined) {
+      obj.base_account = BaseAccount.toJSON(message.base_account);
     }
-    if (message.codeHash.length !== 0) {
-      obj.codeHash = base64FromBytes(message.codeHash);
+    if (message.code_hash.length !== 0) {
+      obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;
   },
@@ -81,10 +81,10 @@ export const EthAccount = {
   },
   fromPartial(object: DeepPartial<EthAccount>): EthAccount {
     const message = createBaseEthAccount();
-    message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)
-      ? BaseAccount.fromPartial(object.baseAccount)
+    message.base_account = (object.base_account !== undefined && object.base_account !== null)
+      ? BaseAccount.fromPartial(object.base_account)
       : undefined;
-    message.codeHash = object.codeHash ?? new Uint8Array(0);
+    message.code_hash = object.code_hash ?? new Uint8Array(0);
     return message;
   },
 };

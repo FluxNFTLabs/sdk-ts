@@ -92,7 +92,7 @@ export interface Bech32PrefixRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface Bech32PrefixResponse {
-  bech32Prefix: string;
+  bech32_prefix: string;
 }
 
 /**
@@ -101,7 +101,7 @@ export interface Bech32PrefixResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringRequest {
-  addressBytes: Uint8Array;
+  address_bytes: Uint8Array;
 }
 
 /**
@@ -110,7 +110,7 @@ export interface AddressBytesToStringRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringResponse {
-  addressString: string;
+  address_string: string;
 }
 
 /**
@@ -119,7 +119,7 @@ export interface AddressBytesToStringResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesRequest {
-  addressString: string;
+  address_string: string;
 }
 
 /**
@@ -128,7 +128,7 @@ export interface AddressStringToBytesRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesResponse {
-  addressBytes: Uint8Array;
+  address_bytes: Uint8Array;
 }
 
 /**
@@ -152,7 +152,7 @@ export interface QueryAccountAddressByIDRequest {
    *
    * Since: cosmos-sdk 0.47
    */
-  accountId: string;
+  account_id: string;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface QueryAccountAddressByIDRequest {
  * Since: cosmos-sdk 0.46.2
  */
 export interface QueryAccountAddressByIDResponse {
-  accountAddress: string;
+  account_address: string;
 }
 
 /**
@@ -819,15 +819,15 @@ export const Bech32PrefixRequest = {
 };
 
 function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
-  return { bech32Prefix: "" };
+  return { bech32_prefix: "" };
 }
 
 export const Bech32PrefixResponse = {
   $type: "cosmos.auth.v1beta1.Bech32PrefixResponse" as const,
 
   encode(message: Bech32PrefixResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.bech32Prefix !== "") {
-      writer.uint32(10).string(message.bech32Prefix);
+    if (message.bech32_prefix !== "") {
+      writer.uint32(10).string(message.bech32_prefix);
     }
     return writer;
   },
@@ -844,7 +844,7 @@ export const Bech32PrefixResponse = {
             break;
           }
 
-          message.bech32Prefix = reader.string();
+          message.bech32_prefix = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -856,13 +856,13 @@ export const Bech32PrefixResponse = {
   },
 
   fromJSON(object: any): Bech32PrefixResponse {
-    return { bech32Prefix: isSet(object.bech32Prefix) ? String(object.bech32Prefix) : "" };
+    return { bech32_prefix: isSet(object.bech32_prefix) ? String(object.bech32_prefix) : "" };
   },
 
   toJSON(message: Bech32PrefixResponse): unknown {
     const obj: any = {};
-    if (message.bech32Prefix !== "") {
-      obj.bech32Prefix = message.bech32Prefix;
+    if (message.bech32_prefix !== "") {
+      obj.bech32_prefix = message.bech32_prefix;
     }
     return obj;
   },
@@ -872,21 +872,21 @@ export const Bech32PrefixResponse = {
   },
   fromPartial(object: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
     const message = createBaseBech32PrefixResponse();
-    message.bech32Prefix = object.bech32Prefix ?? "";
+    message.bech32_prefix = object.bech32_prefix ?? "";
     return message;
   },
 };
 
 function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
-  return { addressBytes: new Uint8Array(0) };
+  return { address_bytes: new Uint8Array(0) };
 }
 
 export const AddressBytesToStringRequest = {
   $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest" as const,
 
   encode(message: AddressBytesToStringRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.addressBytes.length !== 0) {
-      writer.uint32(10).bytes(message.addressBytes);
+    if (message.address_bytes.length !== 0) {
+      writer.uint32(10).bytes(message.address_bytes);
     }
     return writer;
   },
@@ -903,7 +903,7 @@ export const AddressBytesToStringRequest = {
             break;
           }
 
-          message.addressBytes = reader.bytes();
+          message.address_bytes = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -915,13 +915,13 @@ export const AddressBytesToStringRequest = {
   },
 
   fromJSON(object: any): AddressBytesToStringRequest {
-    return { addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array(0) };
+    return { address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array(0) };
   },
 
   toJSON(message: AddressBytesToStringRequest): unknown {
     const obj: any = {};
-    if (message.addressBytes.length !== 0) {
-      obj.addressBytes = base64FromBytes(message.addressBytes);
+    if (message.address_bytes.length !== 0) {
+      obj.address_bytes = base64FromBytes(message.address_bytes);
     }
     return obj;
   },
@@ -931,21 +931,21 @@ export const AddressBytesToStringRequest = {
   },
   fromPartial(object: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
     const message = createBaseAddressBytesToStringRequest();
-    message.addressBytes = object.addressBytes ?? new Uint8Array(0);
+    message.address_bytes = object.address_bytes ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse {
-  return { addressString: "" };
+  return { address_string: "" };
 }
 
 export const AddressBytesToStringResponse = {
   $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse" as const,
 
   encode(message: AddressBytesToStringResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.addressString !== "") {
-      writer.uint32(10).string(message.addressString);
+    if (message.address_string !== "") {
+      writer.uint32(10).string(message.address_string);
     }
     return writer;
   },
@@ -962,7 +962,7 @@ export const AddressBytesToStringResponse = {
             break;
           }
 
-          message.addressString = reader.string();
+          message.address_string = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -974,13 +974,13 @@ export const AddressBytesToStringResponse = {
   },
 
   fromJSON(object: any): AddressBytesToStringResponse {
-    return { addressString: isSet(object.addressString) ? String(object.addressString) : "" };
+    return { address_string: isSet(object.address_string) ? String(object.address_string) : "" };
   },
 
   toJSON(message: AddressBytesToStringResponse): unknown {
     const obj: any = {};
-    if (message.addressString !== "") {
-      obj.addressString = message.addressString;
+    if (message.address_string !== "") {
+      obj.address_string = message.address_string;
     }
     return obj;
   },
@@ -990,21 +990,21 @@ export const AddressBytesToStringResponse = {
   },
   fromPartial(object: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
     const message = createBaseAddressBytesToStringResponse();
-    message.addressString = object.addressString ?? "";
+    message.address_string = object.address_string ?? "";
     return message;
   },
 };
 
 function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
-  return { addressString: "" };
+  return { address_string: "" };
 }
 
 export const AddressStringToBytesRequest = {
   $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest" as const,
 
   encode(message: AddressStringToBytesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.addressString !== "") {
-      writer.uint32(10).string(message.addressString);
+    if (message.address_string !== "") {
+      writer.uint32(10).string(message.address_string);
     }
     return writer;
   },
@@ -1021,7 +1021,7 @@ export const AddressStringToBytesRequest = {
             break;
           }
 
-          message.addressString = reader.string();
+          message.address_string = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1033,13 +1033,13 @@ export const AddressStringToBytesRequest = {
   },
 
   fromJSON(object: any): AddressStringToBytesRequest {
-    return { addressString: isSet(object.addressString) ? String(object.addressString) : "" };
+    return { address_string: isSet(object.address_string) ? String(object.address_string) : "" };
   },
 
   toJSON(message: AddressStringToBytesRequest): unknown {
     const obj: any = {};
-    if (message.addressString !== "") {
-      obj.addressString = message.addressString;
+    if (message.address_string !== "") {
+      obj.address_string = message.address_string;
     }
     return obj;
   },
@@ -1049,21 +1049,21 @@ export const AddressStringToBytesRequest = {
   },
   fromPartial(object: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
     const message = createBaseAddressStringToBytesRequest();
-    message.addressString = object.addressString ?? "";
+    message.address_string = object.address_string ?? "";
     return message;
   },
 };
 
 function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse {
-  return { addressBytes: new Uint8Array(0) };
+  return { address_bytes: new Uint8Array(0) };
 }
 
 export const AddressStringToBytesResponse = {
   $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse" as const,
 
   encode(message: AddressStringToBytesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.addressBytes.length !== 0) {
-      writer.uint32(10).bytes(message.addressBytes);
+    if (message.address_bytes.length !== 0) {
+      writer.uint32(10).bytes(message.address_bytes);
     }
     return writer;
   },
@@ -1080,7 +1080,7 @@ export const AddressStringToBytesResponse = {
             break;
           }
 
-          message.addressBytes = reader.bytes();
+          message.address_bytes = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1092,13 +1092,13 @@ export const AddressStringToBytesResponse = {
   },
 
   fromJSON(object: any): AddressStringToBytesResponse {
-    return { addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array(0) };
+    return { address_bytes: isSet(object.address_bytes) ? bytesFromBase64(object.address_bytes) : new Uint8Array(0) };
   },
 
   toJSON(message: AddressStringToBytesResponse): unknown {
     const obj: any = {};
-    if (message.addressBytes.length !== 0) {
-      obj.addressBytes = base64FromBytes(message.addressBytes);
+    if (message.address_bytes.length !== 0) {
+      obj.address_bytes = base64FromBytes(message.address_bytes);
     }
     return obj;
   },
@@ -1108,13 +1108,13 @@ export const AddressStringToBytesResponse = {
   },
   fromPartial(object: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {
     const message = createBaseAddressStringToBytesResponse();
-    message.addressBytes = object.addressBytes ?? new Uint8Array(0);
+    message.address_bytes = object.address_bytes ?? new Uint8Array(0);
     return message;
   },
 };
 
 function createBaseQueryAccountAddressByIDRequest(): QueryAccountAddressByIDRequest {
-  return { id: "0", accountId: "0" };
+  return { id: "0", account_id: "0" };
 }
 
 export const QueryAccountAddressByIDRequest = {
@@ -1124,8 +1124,8 @@ export const QueryAccountAddressByIDRequest = {
     if (message.id !== "0") {
       writer.uint32(8).int64(message.id);
     }
-    if (message.accountId !== "0") {
-      writer.uint32(16).uint64(message.accountId);
+    if (message.account_id !== "0") {
+      writer.uint32(16).uint64(message.account_id);
     }
     return writer;
   },
@@ -1149,7 +1149,7 @@ export const QueryAccountAddressByIDRequest = {
             break;
           }
 
-          message.accountId = longToString(reader.uint64() as Long);
+          message.account_id = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1163,7 +1163,7 @@ export const QueryAccountAddressByIDRequest = {
   fromJSON(object: any): QueryAccountAddressByIDRequest {
     return {
       id: isSet(object.id) ? String(object.id) : "0",
-      accountId: isSet(object.accountId) ? String(object.accountId) : "0",
+      account_id: isSet(object.account_id) ? String(object.account_id) : "0",
     };
   },
 
@@ -1172,8 +1172,8 @@ export const QueryAccountAddressByIDRequest = {
     if (message.id !== "0") {
       obj.id = message.id;
     }
-    if (message.accountId !== "0") {
-      obj.accountId = message.accountId;
+    if (message.account_id !== "0") {
+      obj.account_id = message.account_id;
     }
     return obj;
   },
@@ -1184,21 +1184,21 @@ export const QueryAccountAddressByIDRequest = {
   fromPartial(object: DeepPartial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest {
     const message = createBaseQueryAccountAddressByIDRequest();
     message.id = object.id ?? "0";
-    message.accountId = object.accountId ?? "0";
+    message.account_id = object.account_id ?? "0";
     return message;
   },
 };
 
 function createBaseQueryAccountAddressByIDResponse(): QueryAccountAddressByIDResponse {
-  return { accountAddress: "" };
+  return { account_address: "" };
 }
 
 export const QueryAccountAddressByIDResponse = {
   $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDResponse" as const,
 
   encode(message: QueryAccountAddressByIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.accountAddress !== "") {
-      writer.uint32(10).string(message.accountAddress);
+    if (message.account_address !== "") {
+      writer.uint32(10).string(message.account_address);
     }
     return writer;
   },
@@ -1215,7 +1215,7 @@ export const QueryAccountAddressByIDResponse = {
             break;
           }
 
-          message.accountAddress = reader.string();
+          message.account_address = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -1227,13 +1227,13 @@ export const QueryAccountAddressByIDResponse = {
   },
 
   fromJSON(object: any): QueryAccountAddressByIDResponse {
-    return { accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : "" };
+    return { account_address: isSet(object.account_address) ? String(object.account_address) : "" };
   },
 
   toJSON(message: QueryAccountAddressByIDResponse): unknown {
     const obj: any = {};
-    if (message.accountAddress !== "") {
-      obj.accountAddress = message.accountAddress;
+    if (message.account_address !== "") {
+      obj.account_address = message.account_address;
     }
     return obj;
   },
@@ -1243,7 +1243,7 @@ export const QueryAccountAddressByIDResponse = {
   },
   fromPartial(object: DeepPartial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse {
     const message = createBaseQueryAccountAddressByIDResponse();
-    message.accountAddress = object.accountAddress ?? "";
+    message.account_address = object.account_address ?? "";
     return message;
   },
 };

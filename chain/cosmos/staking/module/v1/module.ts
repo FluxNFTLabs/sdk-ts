@@ -8,20 +8,20 @@ export interface Module {
    * of module names which provide a staking hooks instance. If no order is
    * provided, then hooks will be applied in alphabetical order of module names.
    */
-  hooksOrder: string[];
+  hooks_order: string[];
   /** authority defines the custom module authority. If not set, defaults to the governance module. */
   authority: string;
 }
 
 function createBaseModule(): Module {
-  return { hooksOrder: [], authority: "" };
+  return { hooks_order: [], authority: "" };
 }
 
 export const Module = {
   $type: "cosmos.staking.module.v1.Module" as const,
 
   encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.hooksOrder) {
+    for (const v of message.hooks_order) {
       writer.uint32(10).string(v!);
     }
     if (message.authority !== "") {
@@ -42,7 +42,7 @@ export const Module = {
             break;
           }
 
-          message.hooksOrder.push(reader.string());
+          message.hooks_order.push(reader.string());
           continue;
         case 2:
           if (tag !== 18) {
@@ -62,15 +62,15 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      hooksOrder: Array.isArray(object?.hooksOrder) ? object.hooksOrder.map((e: any) => String(e)) : [],
+      hooks_order: Array.isArray(object?.hooks_order) ? object.hooks_order.map((e: any) => String(e)) : [],
       authority: isSet(object.authority) ? String(object.authority) : "",
     };
   },
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.hooksOrder?.length) {
-      obj.hooksOrder = message.hooksOrder;
+    if (message.hooks_order?.length) {
+      obj.hooks_order = message.hooks_order;
     }
     if (message.authority !== "") {
       obj.authority = message.authority;
@@ -83,7 +83,7 @@ export const Module = {
   },
   fromPartial(object: DeepPartial<Module>): Module {
     const message = createBaseModule();
-    message.hooksOrder = object.hooksOrder?.map((e) => e) || [];
+    message.hooks_order = object.hooks_order?.map((e) => e) || [];
     message.authority = object.authority ?? "";
     return message;
   },

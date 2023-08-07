@@ -4,23 +4,23 @@ import { BaseAccount } from "../../../../cosmos/auth/v1beta1/auth";
 
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccount {
-  baseAccount: BaseAccount | undefined;
-  accountOwner: string;
+  base_account: BaseAccount | undefined;
+  account_owner: string;
 }
 
 function createBaseInterchainAccount(): InterchainAccount {
-  return { baseAccount: undefined, accountOwner: "" };
+  return { base_account: undefined, account_owner: "" };
 }
 
 export const InterchainAccount = {
   $type: "ibc.applications.interchain_accounts.v1.InterchainAccount" as const,
 
   encode(message: InterchainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.baseAccount !== undefined) {
-      BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
+    if (message.base_account !== undefined) {
+      BaseAccount.encode(message.base_account, writer.uint32(10).fork()).ldelim();
     }
-    if (message.accountOwner !== "") {
-      writer.uint32(18).string(message.accountOwner);
+    if (message.account_owner !== "") {
+      writer.uint32(18).string(message.account_owner);
     }
     return writer;
   },
@@ -37,14 +37,14 @@ export const InterchainAccount = {
             break;
           }
 
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
+          message.base_account = BaseAccount.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.accountOwner = reader.string();
+          message.account_owner = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -57,18 +57,18 @@ export const InterchainAccount = {
 
   fromJSON(object: any): InterchainAccount {
     return {
-      baseAccount: isSet(object.baseAccount) ? BaseAccount.fromJSON(object.baseAccount) : undefined,
-      accountOwner: isSet(object.accountOwner) ? String(object.accountOwner) : "",
+      base_account: isSet(object.base_account) ? BaseAccount.fromJSON(object.base_account) : undefined,
+      account_owner: isSet(object.account_owner) ? String(object.account_owner) : "",
     };
   },
 
   toJSON(message: InterchainAccount): unknown {
     const obj: any = {};
-    if (message.baseAccount !== undefined) {
-      obj.baseAccount = BaseAccount.toJSON(message.baseAccount);
+    if (message.base_account !== undefined) {
+      obj.base_account = BaseAccount.toJSON(message.base_account);
     }
-    if (message.accountOwner !== "") {
-      obj.accountOwner = message.accountOwner;
+    if (message.account_owner !== "") {
+      obj.account_owner = message.account_owner;
     }
     return obj;
   },
@@ -78,10 +78,10 @@ export const InterchainAccount = {
   },
   fromPartial(object: DeepPartial<InterchainAccount>): InterchainAccount {
     const message = createBaseInterchainAccount();
-    message.baseAccount = (object.baseAccount !== undefined && object.baseAccount !== null)
-      ? BaseAccount.fromPartial(object.baseAccount)
+    message.base_account = (object.base_account !== undefined && object.base_account !== null)
+      ? BaseAccount.fromPartial(object.base_account)
       : undefined;
-    message.accountOwner = object.accountOwner ?? "";
+    message.account_owner = object.account_owner ?? "";
     return message;
   },
 };

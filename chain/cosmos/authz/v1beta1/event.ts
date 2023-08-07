@@ -6,7 +6,7 @@ import _m0 from "protobufjs/minimal";
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrant {
   /** Msg type URL for which an autorization is granted */
-  msgTypeUrl: string;
+  msg_type_url: string;
   /** Granter account address */
   granter: string;
   /** Grantee account address */
@@ -16,7 +16,7 @@ export interface EventGrant {
 /** EventRevoke is emitted on Msg/Revoke */
 export interface EventRevoke {
   /** Msg type URL for which an autorization is revoked */
-  msgTypeUrl: string;
+  msg_type_url: string;
   /** Granter account address */
   granter: string;
   /** Grantee account address */
@@ -24,15 +24,15 @@ export interface EventRevoke {
 }
 
 function createBaseEventGrant(): EventGrant {
-  return { msgTypeUrl: "", granter: "", grantee: "" };
+  return { msg_type_url: "", granter: "", grantee: "" };
 }
 
 export const EventGrant = {
   $type: "cosmos.authz.v1beta1.EventGrant" as const,
 
   encode(message: EventGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.msgTypeUrl !== "") {
-      writer.uint32(18).string(message.msgTypeUrl);
+    if (message.msg_type_url !== "") {
+      writer.uint32(18).string(message.msg_type_url);
     }
     if (message.granter !== "") {
       writer.uint32(26).string(message.granter);
@@ -55,7 +55,7 @@ export const EventGrant = {
             break;
           }
 
-          message.msgTypeUrl = reader.string();
+          message.msg_type_url = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -82,7 +82,7 @@ export const EventGrant = {
 
   fromJSON(object: any): EventGrant {
     return {
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
@@ -90,8 +90,8 @@ export const EventGrant = {
 
   toJSON(message: EventGrant): unknown {
     const obj: any = {};
-    if (message.msgTypeUrl !== "") {
-      obj.msgTypeUrl = message.msgTypeUrl;
+    if (message.msg_type_url !== "") {
+      obj.msg_type_url = message.msg_type_url;
     }
     if (message.granter !== "") {
       obj.granter = message.granter;
@@ -107,7 +107,7 @@ export const EventGrant = {
   },
   fromPartial(object: DeepPartial<EventGrant>): EventGrant {
     const message = createBaseEventGrant();
-    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    message.msg_type_url = object.msg_type_url ?? "";
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     return message;
@@ -115,15 +115,15 @@ export const EventGrant = {
 };
 
 function createBaseEventRevoke(): EventRevoke {
-  return { msgTypeUrl: "", granter: "", grantee: "" };
+  return { msg_type_url: "", granter: "", grantee: "" };
 }
 
 export const EventRevoke = {
   $type: "cosmos.authz.v1beta1.EventRevoke" as const,
 
   encode(message: EventRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.msgTypeUrl !== "") {
-      writer.uint32(18).string(message.msgTypeUrl);
+    if (message.msg_type_url !== "") {
+      writer.uint32(18).string(message.msg_type_url);
     }
     if (message.granter !== "") {
       writer.uint32(26).string(message.granter);
@@ -146,7 +146,7 @@ export const EventRevoke = {
             break;
           }
 
-          message.msgTypeUrl = reader.string();
+          message.msg_type_url = reader.string();
           continue;
         case 3:
           if (tag !== 26) {
@@ -173,7 +173,7 @@ export const EventRevoke = {
 
   fromJSON(object: any): EventRevoke {
     return {
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
       granter: isSet(object.granter) ? String(object.granter) : "",
       grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
@@ -181,8 +181,8 @@ export const EventRevoke = {
 
   toJSON(message: EventRevoke): unknown {
     const obj: any = {};
-    if (message.msgTypeUrl !== "") {
-      obj.msgTypeUrl = message.msgTypeUrl;
+    if (message.msg_type_url !== "") {
+      obj.msg_type_url = message.msg_type_url;
     }
     if (message.granter !== "") {
       obj.granter = message.granter;
@@ -198,7 +198,7 @@ export const EventRevoke = {
   },
   fromPartial(object: DeepPartial<EventRevoke>): EventRevoke {
     const message = createBaseEventRevoke();
-    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    message.msg_type_url = object.msg_type_url ?? "";
     message.granter = object.granter ?? "";
     message.grantee = object.grantee ?? "";
     return message;

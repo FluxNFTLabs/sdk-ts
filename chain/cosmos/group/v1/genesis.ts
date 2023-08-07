@@ -11,23 +11,23 @@ export interface GenesisState {
    * group_seq is the group table orm.Sequence,
    * it is used to get the next group ID.
    */
-  groupSeq: string;
+  group_seq: string;
   /** groups is the list of groups info. */
   groups: GroupInfo[];
   /** group_members is the list of groups members. */
-  groupMembers: GroupMember[];
+  group_members: GroupMember[];
   /**
    * group_policy_seq is the group policy table orm.Sequence,
    * it is used to generate the next group policy account address.
    */
-  groupPolicySeq: string;
+  group_policy_seq: string;
   /** group_policies is the list of group policies info. */
-  groupPolicies: GroupPolicyInfo[];
+  group_policies: GroupPolicyInfo[];
   /**
    * proposal_seq is the proposal table orm.Sequence,
    * it is used to get the next proposal ID.
    */
-  proposalSeq: string;
+  proposal_seq: string;
   /** proposals is the list of proposals. */
   proposals: Proposal[];
   /** votes is the list of votes. */
@@ -36,12 +36,12 @@ export interface GenesisState {
 
 function createBaseGenesisState(): GenesisState {
   return {
-    groupSeq: "0",
+    group_seq: "0",
     groups: [],
-    groupMembers: [],
-    groupPolicySeq: "0",
-    groupPolicies: [],
-    proposalSeq: "0",
+    group_members: [],
+    group_policy_seq: "0",
+    group_policies: [],
+    proposal_seq: "0",
     proposals: [],
     votes: [],
   };
@@ -51,23 +51,23 @@ export const GenesisState = {
   $type: "cosmos.group.v1.GenesisState" as const,
 
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.groupSeq !== "0") {
-      writer.uint32(8).uint64(message.groupSeq);
+    if (message.group_seq !== "0") {
+      writer.uint32(8).uint64(message.group_seq);
     }
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    for (const v of message.groupMembers) {
+    for (const v of message.group_members) {
       GroupMember.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.groupPolicySeq !== "0") {
-      writer.uint32(32).uint64(message.groupPolicySeq);
+    if (message.group_policy_seq !== "0") {
+      writer.uint32(32).uint64(message.group_policy_seq);
     }
-    for (const v of message.groupPolicies) {
+    for (const v of message.group_policies) {
       GroupPolicyInfo.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.proposalSeq !== "0") {
-      writer.uint32(48).uint64(message.proposalSeq);
+    if (message.proposal_seq !== "0") {
+      writer.uint32(48).uint64(message.proposal_seq);
     }
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -90,7 +90,7 @@ export const GenesisState = {
             break;
           }
 
-          message.groupSeq = longToString(reader.uint64() as Long);
+          message.group_seq = longToString(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
@@ -104,28 +104,28 @@ export const GenesisState = {
             break;
           }
 
-          message.groupMembers.push(GroupMember.decode(reader, reader.uint32()));
+          message.group_members.push(GroupMember.decode(reader, reader.uint32()));
           continue;
         case 4:
           if (tag !== 32) {
             break;
           }
 
-          message.groupPolicySeq = longToString(reader.uint64() as Long);
+          message.group_policy_seq = longToString(reader.uint64() as Long);
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
+          message.group_policies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.proposalSeq = longToString(reader.uint64() as Long);
+          message.proposal_seq = longToString(reader.uint64() as Long);
           continue;
         case 7:
           if (tag !== 58) {
@@ -152,16 +152,16 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      groupSeq: isSet(object.groupSeq) ? String(object.groupSeq) : "0",
+      group_seq: isSet(object.group_seq) ? String(object.group_seq) : "0",
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
-      groupMembers: Array.isArray(object?.groupMembers)
-        ? object.groupMembers.map((e: any) => GroupMember.fromJSON(e))
+      group_members: Array.isArray(object?.group_members)
+        ? object.group_members.map((e: any) => GroupMember.fromJSON(e))
         : [],
-      groupPolicySeq: isSet(object.groupPolicySeq) ? String(object.groupPolicySeq) : "0",
-      groupPolicies: Array.isArray(object?.groupPolicies)
-        ? object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e))
+      group_policy_seq: isSet(object.group_policy_seq) ? String(object.group_policy_seq) : "0",
+      group_policies: Array.isArray(object?.group_policies)
+        ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
-      proposalSeq: isSet(object.proposalSeq) ? String(object.proposalSeq) : "0",
+      proposal_seq: isSet(object.proposal_seq) ? String(object.proposal_seq) : "0",
       proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
     };
@@ -169,23 +169,23 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.groupSeq !== "0") {
-      obj.groupSeq = message.groupSeq;
+    if (message.group_seq !== "0") {
+      obj.group_seq = message.group_seq;
     }
     if (message.groups?.length) {
       obj.groups = message.groups.map((e) => GroupInfo.toJSON(e));
     }
-    if (message.groupMembers?.length) {
-      obj.groupMembers = message.groupMembers.map((e) => GroupMember.toJSON(e));
+    if (message.group_members?.length) {
+      obj.group_members = message.group_members.map((e) => GroupMember.toJSON(e));
     }
-    if (message.groupPolicySeq !== "0") {
-      obj.groupPolicySeq = message.groupPolicySeq;
+    if (message.group_policy_seq !== "0") {
+      obj.group_policy_seq = message.group_policy_seq;
     }
-    if (message.groupPolicies?.length) {
-      obj.groupPolicies = message.groupPolicies.map((e) => GroupPolicyInfo.toJSON(e));
+    if (message.group_policies?.length) {
+      obj.group_policies = message.group_policies.map((e) => GroupPolicyInfo.toJSON(e));
     }
-    if (message.proposalSeq !== "0") {
-      obj.proposalSeq = message.proposalSeq;
+    if (message.proposal_seq !== "0") {
+      obj.proposal_seq = message.proposal_seq;
     }
     if (message.proposals?.length) {
       obj.proposals = message.proposals.map((e) => Proposal.toJSON(e));
@@ -201,12 +201,12 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq = object.groupSeq ?? "0";
+    message.group_seq = object.group_seq ?? "0";
     message.groups = object.groups?.map((e) => GroupInfo.fromPartial(e)) || [];
-    message.groupMembers = object.groupMembers?.map((e) => GroupMember.fromPartial(e)) || [];
-    message.groupPolicySeq = object.groupPolicySeq ?? "0";
-    message.groupPolicies = object.groupPolicies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
-    message.proposalSeq = object.proposalSeq ?? "0";
+    message.group_members = object.group_members?.map((e) => GroupMember.fromPartial(e)) || [];
+    message.group_policy_seq = object.group_policy_seq ?? "0";
+    message.group_policies = object.group_policies?.map((e) => GroupPolicyInfo.fromPartial(e)) || [];
+    message.proposal_seq = object.proposal_seq ?? "0";
     message.proposals = object.proposals?.map((e) => Proposal.fromPartial(e)) || [];
     message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
     return message;

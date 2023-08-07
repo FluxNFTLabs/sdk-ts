@@ -7,7 +7,7 @@ import { Params } from "./controller";
 /** QueryInterchainAccountRequest is the request type for the Query/InterchainAccount RPC method. */
 export interface QueryInterchainAccountRequest {
   owner: string;
-  connectionId: string;
+  connection_id: string;
 }
 
 /** QueryInterchainAccountResponse the response type for the Query/InterchainAccount RPC method. */
@@ -26,7 +26,7 @@ export interface QueryParamsResponse {
 }
 
 function createBaseQueryInterchainAccountRequest(): QueryInterchainAccountRequest {
-  return { owner: "", connectionId: "" };
+  return { owner: "", connection_id: "" };
 }
 
 export const QueryInterchainAccountRequest = {
@@ -36,8 +36,8 @@ export const QueryInterchainAccountRequest = {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.connectionId !== "") {
-      writer.uint32(18).string(message.connectionId);
+    if (message.connection_id !== "") {
+      writer.uint32(18).string(message.connection_id);
     }
     return writer;
   },
@@ -61,7 +61,7 @@ export const QueryInterchainAccountRequest = {
             break;
           }
 
-          message.connectionId = reader.string();
+          message.connection_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -75,7 +75,7 @@ export const QueryInterchainAccountRequest = {
   fromJSON(object: any): QueryInterchainAccountRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
-      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
+      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
     };
   },
 
@@ -84,8 +84,8 @@ export const QueryInterchainAccountRequest = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.connectionId !== "") {
-      obj.connectionId = message.connectionId;
+    if (message.connection_id !== "") {
+      obj.connection_id = message.connection_id;
     }
     return obj;
   },
@@ -96,7 +96,7 @@ export const QueryInterchainAccountRequest = {
   fromPartial(object: DeepPartial<QueryInterchainAccountRequest>): QueryInterchainAccountRequest {
     const message = createBaseQueryInterchainAccountRequest();
     message.owner = object.owner ?? "";
-    message.connectionId = object.connectionId ?? "";
+    message.connection_id = object.connection_id ?? "";
     return message;
   },
 };

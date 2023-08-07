@@ -67,19 +67,19 @@ export interface RemoteSignerError {
 
 /** PubKeyRequest requests the consensus public key from the remote signer. */
 export interface PubKeyRequest {
-  chainId: string;
+  chain_id: string;
 }
 
 /** PubKeyResponse is a response message containing the public key. */
 export interface PubKeyResponse {
-  pubKey: PublicKey | undefined;
+  pub_key: PublicKey | undefined;
   error: RemoteSignerError | undefined;
 }
 
 /** SignVoteRequest is a request to sign a vote */
 export interface SignVoteRequest {
   vote: Vote | undefined;
-  chainId: string;
+  chain_id: string;
 }
 
 /** SignedVoteResponse is a response containing a signed vote or an error */
@@ -91,7 +91,7 @@ export interface SignedVoteResponse {
 /** SignProposalRequest is a request to sign a proposal */
 export interface SignProposalRequest {
   proposal: Proposal | undefined;
-  chainId: string;
+  chain_id: string;
 }
 
 /** SignedProposalResponse is response containing a signed proposal or an error */
@@ -109,14 +109,14 @@ export interface PingResponse {
 }
 
 export interface Message {
-  pubKeyRequest?: PubKeyRequest | undefined;
-  pubKeyResponse?: PubKeyResponse | undefined;
-  signVoteRequest?: SignVoteRequest | undefined;
-  signedVoteResponse?: SignedVoteResponse | undefined;
-  signProposalRequest?: SignProposalRequest | undefined;
-  signedProposalResponse?: SignedProposalResponse | undefined;
-  pingRequest?: PingRequest | undefined;
-  pingResponse?: PingResponse | undefined;
+  pub_key_request?: PubKeyRequest | undefined;
+  pub_key_response?: PubKeyResponse | undefined;
+  sign_vote_request?: SignVoteRequest | undefined;
+  signed_vote_response?: SignedVoteResponse | undefined;
+  sign_proposal_request?: SignProposalRequest | undefined;
+  signed_proposal_response?: SignedProposalResponse | undefined;
+  ping_request?: PingRequest | undefined;
+  ping_response?: PingResponse | undefined;
 }
 
 function createBaseRemoteSignerError(): RemoteSignerError {
@@ -196,15 +196,15 @@ export const RemoteSignerError = {
 };
 
 function createBasePubKeyRequest(): PubKeyRequest {
-  return { chainId: "" };
+  return { chain_id: "" };
 }
 
 export const PubKeyRequest = {
   $type: "tendermint.privval.PubKeyRequest" as const,
 
   encode(message: PubKeyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.chainId !== "") {
-      writer.uint32(10).string(message.chainId);
+    if (message.chain_id !== "") {
+      writer.uint32(10).string(message.chain_id);
     }
     return writer;
   },
@@ -221,7 +221,7 @@ export const PubKeyRequest = {
             break;
           }
 
-          message.chainId = reader.string();
+          message.chain_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -233,13 +233,13 @@ export const PubKeyRequest = {
   },
 
   fromJSON(object: any): PubKeyRequest {
-    return { chainId: isSet(object.chainId) ? String(object.chainId) : "" };
+    return { chain_id: isSet(object.chain_id) ? String(object.chain_id) : "" };
   },
 
   toJSON(message: PubKeyRequest): unknown {
     const obj: any = {};
-    if (message.chainId !== "") {
-      obj.chainId = message.chainId;
+    if (message.chain_id !== "") {
+      obj.chain_id = message.chain_id;
     }
     return obj;
   },
@@ -249,21 +249,21 @@ export const PubKeyRequest = {
   },
   fromPartial(object: DeepPartial<PubKeyRequest>): PubKeyRequest {
     const message = createBasePubKeyRequest();
-    message.chainId = object.chainId ?? "";
+    message.chain_id = object.chain_id ?? "";
     return message;
   },
 };
 
 function createBasePubKeyResponse(): PubKeyResponse {
-  return { pubKey: undefined, error: undefined };
+  return { pub_key: undefined, error: undefined };
 }
 
 export const PubKeyResponse = {
   $type: "tendermint.privval.PubKeyResponse" as const,
 
   encode(message: PubKeyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pubKey !== undefined) {
-      PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
+    if (message.pub_key !== undefined) {
+      PublicKey.encode(message.pub_key, writer.uint32(10).fork()).ldelim();
     }
     if (message.error !== undefined) {
       RemoteSignerError.encode(message.error, writer.uint32(18).fork()).ldelim();
@@ -283,7 +283,7 @@ export const PubKeyResponse = {
             break;
           }
 
-          message.pubKey = PublicKey.decode(reader, reader.uint32());
+          message.pub_key = PublicKey.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
@@ -303,15 +303,15 @@ export const PubKeyResponse = {
 
   fromJSON(object: any): PubKeyResponse {
     return {
-      pubKey: isSet(object.pubKey) ? PublicKey.fromJSON(object.pubKey) : undefined,
+      pub_key: isSet(object.pub_key) ? PublicKey.fromJSON(object.pub_key) : undefined,
       error: isSet(object.error) ? RemoteSignerError.fromJSON(object.error) : undefined,
     };
   },
 
   toJSON(message: PubKeyResponse): unknown {
     const obj: any = {};
-    if (message.pubKey !== undefined) {
-      obj.pubKey = PublicKey.toJSON(message.pubKey);
+    if (message.pub_key !== undefined) {
+      obj.pub_key = PublicKey.toJSON(message.pub_key);
     }
     if (message.error !== undefined) {
       obj.error = RemoteSignerError.toJSON(message.error);
@@ -324,8 +324,8 @@ export const PubKeyResponse = {
   },
   fromPartial(object: DeepPartial<PubKeyResponse>): PubKeyResponse {
     const message = createBasePubKeyResponse();
-    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
-      ? PublicKey.fromPartial(object.pubKey)
+    message.pub_key = (object.pub_key !== undefined && object.pub_key !== null)
+      ? PublicKey.fromPartial(object.pub_key)
       : undefined;
     message.error = (object.error !== undefined && object.error !== null)
       ? RemoteSignerError.fromPartial(object.error)
@@ -335,7 +335,7 @@ export const PubKeyResponse = {
 };
 
 function createBaseSignVoteRequest(): SignVoteRequest {
-  return { vote: undefined, chainId: "" };
+  return { vote: undefined, chain_id: "" };
 }
 
 export const SignVoteRequest = {
@@ -345,8 +345,8 @@ export const SignVoteRequest = {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
     }
-    if (message.chainId !== "") {
-      writer.uint32(18).string(message.chainId);
+    if (message.chain_id !== "") {
+      writer.uint32(18).string(message.chain_id);
     }
     return writer;
   },
@@ -370,7 +370,7 @@ export const SignVoteRequest = {
             break;
           }
 
-          message.chainId = reader.string();
+          message.chain_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -384,7 +384,7 @@ export const SignVoteRequest = {
   fromJSON(object: any): SignVoteRequest {
     return {
       vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined,
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
     };
   },
 
@@ -393,8 +393,8 @@ export const SignVoteRequest = {
     if (message.vote !== undefined) {
       obj.vote = Vote.toJSON(message.vote);
     }
-    if (message.chainId !== "") {
-      obj.chainId = message.chainId;
+    if (message.chain_id !== "") {
+      obj.chain_id = message.chain_id;
     }
     return obj;
   },
@@ -405,7 +405,7 @@ export const SignVoteRequest = {
   fromPartial(object: DeepPartial<SignVoteRequest>): SignVoteRequest {
     const message = createBaseSignVoteRequest();
     message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
-    message.chainId = object.chainId ?? "";
+    message.chain_id = object.chain_id ?? "";
     return message;
   },
 };
@@ -489,7 +489,7 @@ export const SignedVoteResponse = {
 };
 
 function createBaseSignProposalRequest(): SignProposalRequest {
-  return { proposal: undefined, chainId: "" };
+  return { proposal: undefined, chain_id: "" };
 }
 
 export const SignProposalRequest = {
@@ -499,8 +499,8 @@ export const SignProposalRequest = {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
     }
-    if (message.chainId !== "") {
-      writer.uint32(18).string(message.chainId);
+    if (message.chain_id !== "") {
+      writer.uint32(18).string(message.chain_id);
     }
     return writer;
   },
@@ -524,7 +524,7 @@ export const SignProposalRequest = {
             break;
           }
 
-          message.chainId = reader.string();
+          message.chain_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -538,7 +538,7 @@ export const SignProposalRequest = {
   fromJSON(object: any): SignProposalRequest {
     return {
       proposal: isSet(object.proposal) ? Proposal.fromJSON(object.proposal) : undefined,
-      chainId: isSet(object.chainId) ? String(object.chainId) : "",
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
     };
   },
 
@@ -547,8 +547,8 @@ export const SignProposalRequest = {
     if (message.proposal !== undefined) {
       obj.proposal = Proposal.toJSON(message.proposal);
     }
-    if (message.chainId !== "") {
-      obj.chainId = message.chainId;
+    if (message.chain_id !== "") {
+      obj.chain_id = message.chain_id;
     }
     return obj;
   },
@@ -561,7 +561,7 @@ export const SignProposalRequest = {
     message.proposal = (object.proposal !== undefined && object.proposal !== null)
       ? Proposal.fromPartial(object.proposal)
       : undefined;
-    message.chainId = object.chainId ?? "";
+    message.chain_id = object.chain_id ?? "";
     return message;
   },
 };
@@ -738,14 +738,14 @@ export const PingResponse = {
 
 function createBaseMessage(): Message {
   return {
-    pubKeyRequest: undefined,
-    pubKeyResponse: undefined,
-    signVoteRequest: undefined,
-    signedVoteResponse: undefined,
-    signProposalRequest: undefined,
-    signedProposalResponse: undefined,
-    pingRequest: undefined,
-    pingResponse: undefined,
+    pub_key_request: undefined,
+    pub_key_response: undefined,
+    sign_vote_request: undefined,
+    signed_vote_response: undefined,
+    sign_proposal_request: undefined,
+    signed_proposal_response: undefined,
+    ping_request: undefined,
+    ping_response: undefined,
   };
 }
 
@@ -753,29 +753,29 @@ export const Message = {
   $type: "tendermint.privval.Message" as const,
 
   encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.pubKeyRequest !== undefined) {
-      PubKeyRequest.encode(message.pubKeyRequest, writer.uint32(10).fork()).ldelim();
+    if (message.pub_key_request !== undefined) {
+      PubKeyRequest.encode(message.pub_key_request, writer.uint32(10).fork()).ldelim();
     }
-    if (message.pubKeyResponse !== undefined) {
-      PubKeyResponse.encode(message.pubKeyResponse, writer.uint32(18).fork()).ldelim();
+    if (message.pub_key_response !== undefined) {
+      PubKeyResponse.encode(message.pub_key_response, writer.uint32(18).fork()).ldelim();
     }
-    if (message.signVoteRequest !== undefined) {
-      SignVoteRequest.encode(message.signVoteRequest, writer.uint32(26).fork()).ldelim();
+    if (message.sign_vote_request !== undefined) {
+      SignVoteRequest.encode(message.sign_vote_request, writer.uint32(26).fork()).ldelim();
     }
-    if (message.signedVoteResponse !== undefined) {
-      SignedVoteResponse.encode(message.signedVoteResponse, writer.uint32(34).fork()).ldelim();
+    if (message.signed_vote_response !== undefined) {
+      SignedVoteResponse.encode(message.signed_vote_response, writer.uint32(34).fork()).ldelim();
     }
-    if (message.signProposalRequest !== undefined) {
-      SignProposalRequest.encode(message.signProposalRequest, writer.uint32(42).fork()).ldelim();
+    if (message.sign_proposal_request !== undefined) {
+      SignProposalRequest.encode(message.sign_proposal_request, writer.uint32(42).fork()).ldelim();
     }
-    if (message.signedProposalResponse !== undefined) {
-      SignedProposalResponse.encode(message.signedProposalResponse, writer.uint32(50).fork()).ldelim();
+    if (message.signed_proposal_response !== undefined) {
+      SignedProposalResponse.encode(message.signed_proposal_response, writer.uint32(50).fork()).ldelim();
     }
-    if (message.pingRequest !== undefined) {
-      PingRequest.encode(message.pingRequest, writer.uint32(58).fork()).ldelim();
+    if (message.ping_request !== undefined) {
+      PingRequest.encode(message.ping_request, writer.uint32(58).fork()).ldelim();
     }
-    if (message.pingResponse !== undefined) {
-      PingResponse.encode(message.pingResponse, writer.uint32(66).fork()).ldelim();
+    if (message.ping_response !== undefined) {
+      PingResponse.encode(message.ping_response, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -792,56 +792,56 @@ export const Message = {
             break;
           }
 
-          message.pubKeyRequest = PubKeyRequest.decode(reader, reader.uint32());
+          message.pub_key_request = PubKeyRequest.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.pubKeyResponse = PubKeyResponse.decode(reader, reader.uint32());
+          message.pub_key_response = PubKeyResponse.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.signVoteRequest = SignVoteRequest.decode(reader, reader.uint32());
+          message.sign_vote_request = SignVoteRequest.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.signedVoteResponse = SignedVoteResponse.decode(reader, reader.uint32());
+          message.signed_vote_response = SignedVoteResponse.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.signProposalRequest = SignProposalRequest.decode(reader, reader.uint32());
+          message.sign_proposal_request = SignProposalRequest.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.signedProposalResponse = SignedProposalResponse.decode(reader, reader.uint32());
+          message.signed_proposal_response = SignedProposalResponse.decode(reader, reader.uint32());
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.pingRequest = PingRequest.decode(reader, reader.uint32());
+          message.ping_request = PingRequest.decode(reader, reader.uint32());
           continue;
         case 8:
           if (tag !== 66) {
             break;
           }
 
-          message.pingResponse = PingResponse.decode(reader, reader.uint32());
+          message.ping_response = PingResponse.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -854,48 +854,50 @@ export const Message = {
 
   fromJSON(object: any): Message {
     return {
-      pubKeyRequest: isSet(object.pubKeyRequest) ? PubKeyRequest.fromJSON(object.pubKeyRequest) : undefined,
-      pubKeyResponse: isSet(object.pubKeyResponse) ? PubKeyResponse.fromJSON(object.pubKeyResponse) : undefined,
-      signVoteRequest: isSet(object.signVoteRequest) ? SignVoteRequest.fromJSON(object.signVoteRequest) : undefined,
-      signedVoteResponse: isSet(object.signedVoteResponse)
-        ? SignedVoteResponse.fromJSON(object.signedVoteResponse)
+      pub_key_request: isSet(object.pub_key_request) ? PubKeyRequest.fromJSON(object.pub_key_request) : undefined,
+      pub_key_response: isSet(object.pub_key_response) ? PubKeyResponse.fromJSON(object.pub_key_response) : undefined,
+      sign_vote_request: isSet(object.sign_vote_request)
+        ? SignVoteRequest.fromJSON(object.sign_vote_request)
         : undefined,
-      signProposalRequest: isSet(object.signProposalRequest)
-        ? SignProposalRequest.fromJSON(object.signProposalRequest)
+      signed_vote_response: isSet(object.signed_vote_response)
+        ? SignedVoteResponse.fromJSON(object.signed_vote_response)
         : undefined,
-      signedProposalResponse: isSet(object.signedProposalResponse)
-        ? SignedProposalResponse.fromJSON(object.signedProposalResponse)
+      sign_proposal_request: isSet(object.sign_proposal_request)
+        ? SignProposalRequest.fromJSON(object.sign_proposal_request)
         : undefined,
-      pingRequest: isSet(object.pingRequest) ? PingRequest.fromJSON(object.pingRequest) : undefined,
-      pingResponse: isSet(object.pingResponse) ? PingResponse.fromJSON(object.pingResponse) : undefined,
+      signed_proposal_response: isSet(object.signed_proposal_response)
+        ? SignedProposalResponse.fromJSON(object.signed_proposal_response)
+        : undefined,
+      ping_request: isSet(object.ping_request) ? PingRequest.fromJSON(object.ping_request) : undefined,
+      ping_response: isSet(object.ping_response) ? PingResponse.fromJSON(object.ping_response) : undefined,
     };
   },
 
   toJSON(message: Message): unknown {
     const obj: any = {};
-    if (message.pubKeyRequest !== undefined) {
-      obj.pubKeyRequest = PubKeyRequest.toJSON(message.pubKeyRequest);
+    if (message.pub_key_request !== undefined) {
+      obj.pub_key_request = PubKeyRequest.toJSON(message.pub_key_request);
     }
-    if (message.pubKeyResponse !== undefined) {
-      obj.pubKeyResponse = PubKeyResponse.toJSON(message.pubKeyResponse);
+    if (message.pub_key_response !== undefined) {
+      obj.pub_key_response = PubKeyResponse.toJSON(message.pub_key_response);
     }
-    if (message.signVoteRequest !== undefined) {
-      obj.signVoteRequest = SignVoteRequest.toJSON(message.signVoteRequest);
+    if (message.sign_vote_request !== undefined) {
+      obj.sign_vote_request = SignVoteRequest.toJSON(message.sign_vote_request);
     }
-    if (message.signedVoteResponse !== undefined) {
-      obj.signedVoteResponse = SignedVoteResponse.toJSON(message.signedVoteResponse);
+    if (message.signed_vote_response !== undefined) {
+      obj.signed_vote_response = SignedVoteResponse.toJSON(message.signed_vote_response);
     }
-    if (message.signProposalRequest !== undefined) {
-      obj.signProposalRequest = SignProposalRequest.toJSON(message.signProposalRequest);
+    if (message.sign_proposal_request !== undefined) {
+      obj.sign_proposal_request = SignProposalRequest.toJSON(message.sign_proposal_request);
     }
-    if (message.signedProposalResponse !== undefined) {
-      obj.signedProposalResponse = SignedProposalResponse.toJSON(message.signedProposalResponse);
+    if (message.signed_proposal_response !== undefined) {
+      obj.signed_proposal_response = SignedProposalResponse.toJSON(message.signed_proposal_response);
     }
-    if (message.pingRequest !== undefined) {
-      obj.pingRequest = PingRequest.toJSON(message.pingRequest);
+    if (message.ping_request !== undefined) {
+      obj.ping_request = PingRequest.toJSON(message.ping_request);
     }
-    if (message.pingResponse !== undefined) {
-      obj.pingResponse = PingResponse.toJSON(message.pingResponse);
+    if (message.ping_response !== undefined) {
+      obj.ping_response = PingResponse.toJSON(message.ping_response);
     }
     return obj;
   },
@@ -905,30 +907,31 @@ export const Message = {
   },
   fromPartial(object: DeepPartial<Message>): Message {
     const message = createBaseMessage();
-    message.pubKeyRequest = (object.pubKeyRequest !== undefined && object.pubKeyRequest !== null)
-      ? PubKeyRequest.fromPartial(object.pubKeyRequest)
+    message.pub_key_request = (object.pub_key_request !== undefined && object.pub_key_request !== null)
+      ? PubKeyRequest.fromPartial(object.pub_key_request)
       : undefined;
-    message.pubKeyResponse = (object.pubKeyResponse !== undefined && object.pubKeyResponse !== null)
-      ? PubKeyResponse.fromPartial(object.pubKeyResponse)
+    message.pub_key_response = (object.pub_key_response !== undefined && object.pub_key_response !== null)
+      ? PubKeyResponse.fromPartial(object.pub_key_response)
       : undefined;
-    message.signVoteRequest = (object.signVoteRequest !== undefined && object.signVoteRequest !== null)
-      ? SignVoteRequest.fromPartial(object.signVoteRequest)
+    message.sign_vote_request = (object.sign_vote_request !== undefined && object.sign_vote_request !== null)
+      ? SignVoteRequest.fromPartial(object.sign_vote_request)
       : undefined;
-    message.signedVoteResponse = (object.signedVoteResponse !== undefined && object.signedVoteResponse !== null)
-      ? SignedVoteResponse.fromPartial(object.signedVoteResponse)
+    message.signed_vote_response = (object.signed_vote_response !== undefined && object.signed_vote_response !== null)
+      ? SignedVoteResponse.fromPartial(object.signed_vote_response)
       : undefined;
-    message.signProposalRequest = (object.signProposalRequest !== undefined && object.signProposalRequest !== null)
-      ? SignProposalRequest.fromPartial(object.signProposalRequest)
-      : undefined;
-    message.signedProposalResponse =
-      (object.signedProposalResponse !== undefined && object.signedProposalResponse !== null)
-        ? SignedProposalResponse.fromPartial(object.signedProposalResponse)
+    message.sign_proposal_request =
+      (object.sign_proposal_request !== undefined && object.sign_proposal_request !== null)
+        ? SignProposalRequest.fromPartial(object.sign_proposal_request)
         : undefined;
-    message.pingRequest = (object.pingRequest !== undefined && object.pingRequest !== null)
-      ? PingRequest.fromPartial(object.pingRequest)
+    message.signed_proposal_response =
+      (object.signed_proposal_response !== undefined && object.signed_proposal_response !== null)
+        ? SignedProposalResponse.fromPartial(object.signed_proposal_response)
+        : undefined;
+    message.ping_request = (object.ping_request !== undefined && object.ping_request !== null)
+      ? PingRequest.fromPartial(object.ping_request)
       : undefined;
-    message.pingResponse = (object.pingResponse !== undefined && object.pingResponse !== null)
-      ? PingResponse.fromPartial(object.pingResponse)
+    message.ping_response = (object.ping_response !== undefined && object.ping_response !== null)
+      ? PingResponse.fromPartial(object.ping_response)
       : undefined;
     return message;
   },

@@ -4,7 +4,7 @@ import _m0 from "protobufjs/minimal";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the nft */
   id: string;
   /** sender is the address of the owner of nft */
@@ -16,7 +16,7 @@ export interface EventSend {
 /** EventMint is emitted on Mint */
 export interface EventMint {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the nft */
   id: string;
   /** owner is the owner address of the nft */
@@ -26,7 +26,7 @@ export interface EventMint {
 /** EventBurn is emitted on Burn */
 export interface EventBurn {
   /** class_id associated with the nft */
-  classId: string;
+  class_id: string;
   /** id is a unique identifier of the nft */
   id: string;
   /** owner is the owner address of the nft */
@@ -34,15 +34,15 @@ export interface EventBurn {
 }
 
 function createBaseEventSend(): EventSend {
-  return { classId: "", id: "", sender: "", receiver: "" };
+  return { class_id: "", id: "", sender: "", receiver: "" };
 }
 
 export const EventSend = {
   $type: "cosmos.nft.v1beta1.EventSend" as const,
 
   encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -68,7 +68,7 @@ export const EventSend = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -102,7 +102,7 @@ export const EventSend = {
 
   fromJSON(object: any): EventSend {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       sender: isSet(object.sender) ? String(object.sender) : "",
       receiver: isSet(object.receiver) ? String(object.receiver) : "",
@@ -111,8 +111,8 @@ export const EventSend = {
 
   toJSON(message: EventSend): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -131,7 +131,7 @@ export const EventSend = {
   },
   fromPartial(object: DeepPartial<EventSend>): EventSend {
     const message = createBaseEventSend();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
@@ -140,15 +140,15 @@ export const EventSend = {
 };
 
 function createBaseEventMint(): EventMint {
-  return { classId: "", id: "", owner: "" };
+  return { class_id: "", id: "", owner: "" };
 }
 
 export const EventMint = {
   $type: "cosmos.nft.v1beta1.EventMint" as const,
 
   encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -171,7 +171,7 @@ export const EventMint = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -198,7 +198,7 @@ export const EventMint = {
 
   fromJSON(object: any): EventMint {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
@@ -206,8 +206,8 @@ export const EventMint = {
 
   toJSON(message: EventMint): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -223,7 +223,7 @@ export const EventMint = {
   },
   fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     return message;
@@ -231,15 +231,15 @@ export const EventMint = {
 };
 
 function createBaseEventBurn(): EventBurn {
-  return { classId: "", id: "", owner: "" };
+  return { class_id: "", id: "", owner: "" };
 }
 
 export const EventBurn = {
   $type: "cosmos.nft.v1beta1.EventBurn" as const,
 
   encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== "") {
-      writer.uint32(10).string(message.classId);
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
@@ -262,7 +262,7 @@ export const EventBurn = {
             break;
           }
 
-          message.classId = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -289,7 +289,7 @@ export const EventBurn = {
 
   fromJSON(object: any): EventBurn {
     return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
       id: isSet(object.id) ? String(object.id) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
     };
@@ -297,8 +297,8 @@ export const EventBurn = {
 
   toJSON(message: EventBurn): unknown {
     const obj: any = {};
-    if (message.classId !== "") {
-      obj.classId = message.classId;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
     if (message.id !== "") {
       obj.id = message.id;
@@ -314,7 +314,7 @@ export const EventBurn = {
   },
   fromPartial(object: DeepPartial<EventBurn>): EventBurn {
     const message = createBaseEventBurn();
-    message.classId = object.classId ?? "";
+    message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     return message;

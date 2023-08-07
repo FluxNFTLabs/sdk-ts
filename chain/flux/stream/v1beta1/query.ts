@@ -10,7 +10,7 @@ import { Any } from "../../../google/protobuf/any";
 export interface EventsRequest {
   height: string;
   modules: string[];
-  tmQueries: string[];
+  tm_queries: string[];
 }
 
 export interface EventsResponse {
@@ -18,16 +18,16 @@ export interface EventsResponse {
   time: string;
   modules: string[];
   events: Events[];
-  tmQueries: string[];
-  tmData: string[];
+  tm_queries: string[];
+  tm_data: string[];
 }
 
 export interface Events {
-  rawEvents: Any[];
+  raw_events: Any[];
 }
 
 function createBaseEventsRequest(): EventsRequest {
-  return { height: "0", modules: [], tmQueries: [] };
+  return { height: "0", modules: [], tm_queries: [] };
 }
 
 export const EventsRequest = {
@@ -40,7 +40,7 @@ export const EventsRequest = {
     for (const v of message.modules) {
       writer.uint32(18).string(v!);
     }
-    for (const v of message.tmQueries) {
+    for (const v of message.tm_queries) {
       writer.uint32(26).string(v!);
     }
     return writer;
@@ -72,7 +72,7 @@ export const EventsRequest = {
             break;
           }
 
-          message.tmQueries.push(reader.string());
+          message.tm_queries.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -87,7 +87,7 @@ export const EventsRequest = {
     return {
       height: isSet(object.height) ? String(object.height) : "0",
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
-      tmQueries: Array.isArray(object?.tmQueries) ? object.tmQueries.map((e: any) => String(e)) : [],
+      tm_queries: Array.isArray(object?.tm_queries) ? object.tm_queries.map((e: any) => String(e)) : [],
     };
   },
 
@@ -99,8 +99,8 @@ export const EventsRequest = {
     if (message.modules?.length) {
       obj.modules = message.modules;
     }
-    if (message.tmQueries?.length) {
-      obj.tmQueries = message.tmQueries;
+    if (message.tm_queries?.length) {
+      obj.tm_queries = message.tm_queries;
     }
     return obj;
   },
@@ -112,13 +112,13 @@ export const EventsRequest = {
     const message = createBaseEventsRequest();
     message.height = object.height ?? "0";
     message.modules = object.modules?.map((e) => e) || [];
-    message.tmQueries = object.tmQueries?.map((e) => e) || [];
+    message.tm_queries = object.tm_queries?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseEventsResponse(): EventsResponse {
-  return { height: "0", time: "0", modules: [], events: [], tmQueries: [], tmData: [] };
+  return { height: "0", time: "0", modules: [], events: [], tm_queries: [], tm_data: [] };
 }
 
 export const EventsResponse = {
@@ -137,10 +137,10 @@ export const EventsResponse = {
     for (const v of message.events) {
       Events.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    for (const v of message.tmQueries) {
+    for (const v of message.tm_queries) {
       writer.uint32(42).string(v!);
     }
-    for (const v of message.tmData) {
+    for (const v of message.tm_data) {
       writer.uint32(50).string(v!);
     }
     return writer;
@@ -186,14 +186,14 @@ export const EventsResponse = {
             break;
           }
 
-          message.tmQueries.push(reader.string());
+          message.tm_queries.push(reader.string());
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.tmData.push(reader.string());
+          message.tm_data.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -210,8 +210,8 @@ export const EventsResponse = {
       time: isSet(object.time) ? String(object.time) : "0",
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
       events: Array.isArray(object?.events) ? object.events.map((e: any) => Events.fromJSON(e)) : [],
-      tmQueries: Array.isArray(object?.tmQueries) ? object.tmQueries.map((e: any) => String(e)) : [],
-      tmData: Array.isArray(object?.tmData) ? object.tmData.map((e: any) => String(e)) : [],
+      tm_queries: Array.isArray(object?.tm_queries) ? object.tm_queries.map((e: any) => String(e)) : [],
+      tm_data: Array.isArray(object?.tm_data) ? object.tm_data.map((e: any) => String(e)) : [],
     };
   },
 
@@ -229,11 +229,11 @@ export const EventsResponse = {
     if (message.events?.length) {
       obj.events = message.events.map((e) => Events.toJSON(e));
     }
-    if (message.tmQueries?.length) {
-      obj.tmQueries = message.tmQueries;
+    if (message.tm_queries?.length) {
+      obj.tm_queries = message.tm_queries;
     }
-    if (message.tmData?.length) {
-      obj.tmData = message.tmData;
+    if (message.tm_data?.length) {
+      obj.tm_data = message.tm_data;
     }
     return obj;
   },
@@ -247,21 +247,21 @@ export const EventsResponse = {
     message.time = object.time ?? "0";
     message.modules = object.modules?.map((e) => e) || [];
     message.events = object.events?.map((e) => Events.fromPartial(e)) || [];
-    message.tmQueries = object.tmQueries?.map((e) => e) || [];
-    message.tmData = object.tmData?.map((e) => e) || [];
+    message.tm_queries = object.tm_queries?.map((e) => e) || [];
+    message.tm_data = object.tm_data?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseEvents(): Events {
-  return { rawEvents: [] };
+  return { raw_events: [] };
 }
 
 export const Events = {
   $type: "flux.stream.v1beta1.Events" as const,
 
   encode(message: Events, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.rawEvents) {
+    for (const v of message.raw_events) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
@@ -279,7 +279,7 @@ export const Events = {
             break;
           }
 
-          message.rawEvents.push(Any.decode(reader, reader.uint32()));
+          message.raw_events.push(Any.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -291,13 +291,13 @@ export const Events = {
   },
 
   fromJSON(object: any): Events {
-    return { rawEvents: Array.isArray(object?.rawEvents) ? object.rawEvents.map((e: any) => Any.fromJSON(e)) : [] };
+    return { raw_events: Array.isArray(object?.raw_events) ? object.raw_events.map((e: any) => Any.fromJSON(e)) : [] };
   },
 
   toJSON(message: Events): unknown {
     const obj: any = {};
-    if (message.rawEvents?.length) {
-      obj.rawEvents = message.rawEvents.map((e) => Any.toJSON(e));
+    if (message.raw_events?.length) {
+      obj.raw_events = message.raw_events.map((e) => Any.toJSON(e));
     }
     return obj;
   },
@@ -307,7 +307,7 @@ export const Events = {
   },
   fromPartial(object: DeepPartial<Events>): Events {
     const message = createBaseEvents();
-    message.rawEvents = object.rawEvents?.map((e) => Any.fromPartial(e)) || [];
+    message.raw_events = object.raw_events?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };

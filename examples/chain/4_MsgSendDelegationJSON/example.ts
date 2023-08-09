@@ -1,11 +1,12 @@
 import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
+import { getMessage } from 'eip-712';
 
-import { keccak256 } from 'ethereum-cryptography/keccak.js'
 import * as bech32 from 'bech32'
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
 import * as anytypes from '../../../chain/google/protobuf/any'
+import * as chaintypes from '../../../chain/flux/types/v1beta1/tx_ext'
 import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
@@ -14,8 +15,7 @@ import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
 
-import { extractEIP712Types } from './eip712';
-
+import {deepSortObject, extractEIP712Types} from './eip712';
 
 function hexToBech32(hexBytes: ArrayLike<number>, prefix: string): string {
   const words = bech32.bech32.toWords(hexBytes);
@@ -29,7 +29,7 @@ function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   return Buffer.concat([yParityByte, xCoord])
 }
 
-function getEIP712SignBytes(signDoc: txtypes.SignDoc): any {
+function getEIP712SignBytes(signDoc: txtypes.SignDoc, feePayerAddr: string): any {
   const txBody = txtypes.TxBody.decode(signDoc.body_bytes)
   const authInfo = txtypes.AuthInfo.decode(signDoc.auth_info_bytes)
 
@@ -43,21 +43,21 @@ function getEIP712SignBytes(signDoc: txtypes.SignDoc): any {
   }
 
   // set tx
-  const jsonMsgs: unknown[] = []
+  const jsonMsgs = []
   for (let msg of txBody.messages) {
-    const jsonMsg: unknown = {
-      type: msg.type_url,
+    const jsonMsg = {
+      type: 'cosmos-sdk/MsgSend',
       value: banktypes.MsgSend.toJSON(banktypes.MsgSend.decode(msg.value))
     }
     jsonMsgs.push(jsonMsg)
   }
-  const tx = {
+  let tx = {
     account_number: signDoc.account_number,
     chain_id: signDoc.chain_id,
     fee: {
       amount: authInfo.fee!.amount,
+      feePayer: feePayerAddr,
       gas: authInfo.fee!.gas_limit,
-      feePayer: authInfo.fee!.payer
     },
     memo: txBody.memo,
     msgs: jsonMsgs,
@@ -66,13 +66,14 @@ function getEIP712SignBytes(signDoc: txtypes.SignDoc): any {
   }
 
   const txTypes = extractEIP712Types(tx)
+  tx = deepSortObject(tx)
 
-  return JSON.stringify({
+  return {
     types:       txTypes,
     primaryType: 'Tx',
     domain:      domain,
     message:     tx,
-  })
+  }
 }
 
 const main = async () => {
@@ -112,18 +113,15 @@ const main = async () => {
     value: secp256k1.PubKey.encode(feePayerPubKey).finish()
   }
   const feePayerAddr = metadata.address
-  const feePayerInfo = await authClient.AccountInfo({address: feePayerAddr})
-  const feePayerAccNum = feePayerInfo.info!.account_number!
-  const feePayerAccSeq = feePayerInfo.info!.sequence!
 
   // init msg
   const msg: banktypes.MsgSend = {
     from_address: senderAddr,
     to_address: receiverAddr,
-    amount: [{  amount: '1', denom: 'lux'}],
+    amount: [{  amount: '77', denom: 'lux'}],
   }
   const msgAny: anytypes.Any = {
-    type_url: 'cosmos-sdk/MsgSend',
+    type_url: '/' + banktypes.MsgSend.$type,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
 
@@ -147,22 +145,13 @@ const main = async () => {
         },
         sequence: senderAccSeq,
       },
-      {
-        public_key: feePayerPubKeyAny,
-        mode_info: {
-          single: {
-            mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-          },
-        },
-        sequence: feePayerAccSeq,
-      },
     ],
     fee: {
       amount: [
-        {denom: 'lux', amount: '100000000000000'}
+        {denom: 'lux', amount: '100000000000'}
       ],
       gas_limit: '200000',
-      payer: feePayerAddr,
+      payer: '',
       granter: ''
     },
     tip: undefined,
@@ -175,31 +164,46 @@ const main = async () => {
     chain_id: 'flux-1',
     account_number: senderAccNum,
   }
-  let signBytes = Uint8Array.from(getEIP712SignBytes(signDoc))
-  const msgHash = Buffer.from(keccak256(signBytes))
+
+  let eip712SignDoc = getEIP712SignBytes(signDoc, feePayerAddr)
+  const msgHash = Buffer.from(getMessage(eip712SignDoc, true, {verifyDomain: false}))
+
+  const encoder = new TextEncoder();
+  let signBytes =  encoder.encode(JSON.stringify(eip712SignDoc))
 
   const senderSign = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))
   const senderCosmosSig = Uint8Array.from(Buffer.concat([senderSign.r, senderSign.s, Buffer.from([0])]))
 
   const res = await web3gwClient.SignJSON({data: signBytes})
-  // const feePayerCosmosSig = res.signature
-  //
-  // // broadcast tx
-  // const txRaw: txtypes.TxRaw = {
-  //   body_bytes: txtypes.TxBody.encode(txBody).finish(),
-  //   auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
-  //   signatures: [senderCosmosSig, feePayerCosmosSig],
-  // }
-  // const broadcastReq: txservice.BroadcastTxRequest = {
-  //   tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
-  //   mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
-  // }
-  // try {
-  //   const res = await txClient.BroadcastTx(broadcastReq)
-  //   console.log(res)
-  // } catch (err) {
-  //   console.log(err)
-  // }
+  const feePayerCosmosSig = res.signature
+
+  // broadcast tx
+  const extOpts: chaintypes.ExtensionOptionsWeb3Tx = {
+    typedDataChainID: '1',
+    feePayer:         feePayerAddr,
+    feePayerSig:      feePayerCosmosSig,
+  }
+  const extOptsAny: anytypes.Any = {
+    type_url: '/' + chaintypes.ExtensionOptionsWeb3Tx.$type,
+    value: chaintypes.ExtensionOptionsWeb3Tx.encode(extOpts).finish()
+  }
+  txBody.extension_options = [extOptsAny]
+
+  const txRaw: txtypes.TxRaw = {
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    signatures: [senderCosmosSig],
+  }
+  const broadcastReq: txservice.BroadcastTxRequest = {
+    tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
+    mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
+  }
+  try {
+    const res = await txClient.BroadcastTx(broadcastReq)
+    console.log(res)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 main()

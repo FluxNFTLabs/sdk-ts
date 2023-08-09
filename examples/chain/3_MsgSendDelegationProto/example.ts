@@ -43,7 +43,7 @@ const main = async () => {
   const senderPrivKey: secp256k1.PrivKey = {key: wallet.getPrivateKey()}
   const senderPubkey: secp256k1.PubKey = {key: compressPublicKey(Buffer.from(wallet.getPublicKey()))}
   const senderPubkeyAny: anytypes.Any = {
-    typeUrl: '/' + secp256k1.PubKey.$type,
+    type_url: '/' + secp256k1.PubKey.$type,
     value: secp256k1.PubKey.encode(senderPubkey).finish()
   }
   const senderAddr = hexToBech32(wallet.getAddress(), 'lux')
@@ -51,29 +51,29 @@ const main = async () => {
 
   // fetch account num, seq
   const senderInfo = await authClient.AccountInfo({address: senderAddr})
-  const senderAccNum = senderInfo.info!.accountNumber!
+  const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
   // fetch web3gw metadata
   const metadata = await web3gwClient.GetMetaData({})
   const feePayerPubKey: secp256k1.PubKey = {key: metadata.pubkey}
   const feePayerPubKeyAny: anytypes.Any = {
-    typeUrl: '/' + secp256k1.PubKey.$type,
+    type_url: '/' + secp256k1.PubKey.$type,
     value: secp256k1.PubKey.encode(feePayerPubKey).finish()
   }
   const feePayerAddr = metadata.address
   const feePayerInfo = await authClient.AccountInfo({address: feePayerAddr})
-  const feePayerAccNum = feePayerInfo.info!.accountNumber!
+  const feePayerAccNum = feePayerInfo.info!.account_number!
   const feePayerAccSeq = feePayerInfo.info!.sequence!
 
   // init msg
   const msg: banktypes.MsgSend = {
-    fromAddress: senderAddr,
-    toAddress: receiverAddr,
+    from_address: senderAddr,
+    to_address: receiverAddr,
     amount: [{ denom: 'lux', amount: '1' }],
   }
   const msgAny: anytypes.Any = {
-    typeUrl: '/' + banktypes.MsgSend.$type,
+    type_url: '/' + banktypes.MsgSend.$type,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
 
@@ -81,16 +81,16 @@ const main = async () => {
   const txBody: txtypes.TxBody = {
     messages: [msgAny],
     memo: 'abc',
-    timeoutHeight: "30000",
-    extensionOptions: [],
-    nonCriticalExtensionOptions: []
+    timeout_height: "300000",
+    extension_options: [],
+    non_critical_extension_options: []
   }
 
   const authInfo: txtypes.AuthInfo = {
-    signerInfos: [
+    signer_infos: [
       {
-        publicKey: senderPubkeyAny,
-        modeInfo: {
+        public_key: senderPubkeyAny,
+        mode_info: {
           single: {
             mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
           },
@@ -98,8 +98,8 @@ const main = async () => {
         sequence: senderAccSeq,
       },
       {
-        publicKey: feePayerPubKeyAny,
-        modeInfo: {
+        public_key: feePayerPubKeyAny,
+        mode_info: {
           single: {
             mode: signingtypes.SignMode.SIGN_MODE_DIRECT,
           },
@@ -111,7 +111,7 @@ const main = async () => {
       amount: [
         {denom: "lux", amount: "100000000000000"}
       ],
-      gasLimit: "200000",
+      gas_limit: "200000",
       payer: feePayerAddr,
       granter: ""
     },
@@ -120,10 +120,10 @@ const main = async () => {
 
   // get signatures
   let signDoc: txtypes.SignDoc = {
-    bodyBytes: txtypes.TxBody.encode(txBody).finish(),
-    authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
-    chainId: 'flux-1',
-    accountNumber: senderAccNum,
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    chain_id: 'flux-1',
+    account_number: senderAccNum,
   }
   let signBytes = txtypes.SignDoc.encode(signDoc).finish()
   const msgHash = Buffer.from(keccak256(signBytes))
@@ -132,10 +132,10 @@ const main = async () => {
   const senderCosmosSig = Uint8Array.from(Buffer.concat([senderSign.r, senderSign.s, Buffer.from([0])]))
 
   signDoc = {
-    bodyBytes: txtypes.TxBody.encode(txBody).finish(),
-    authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
-    chainId: 'flux-1',
-    accountNumber: feePayerAccNum,
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    chain_id: 'flux-1',
+    account_number: feePayerAccNum,
   }
   signBytes = txtypes.SignDoc.encode(signDoc).finish()
   const res = await web3gwClient.SignProto({data: signBytes})
@@ -143,12 +143,12 @@ const main = async () => {
 
   // broadcast tx
   const txRaw: txtypes.TxRaw = {
-    bodyBytes: txtypes.TxBody.encode(txBody).finish(),
-    authInfoBytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
     signatures: [senderCosmosSig, feePayerCosmosSig],
   }
   const broadcastReq: txservice.BroadcastTxRequest = {
-    txBytes: txtypes.TxRaw.encode(txRaw).finish(),
+    tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
     mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
   }
   try {

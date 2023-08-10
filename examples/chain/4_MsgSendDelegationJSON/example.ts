@@ -14,6 +14,7 @@ import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
 import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys'
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
+import * as codectypemap from '../../../chain/codec_type_map.json'
 
 import {deepSortObject, extractEIP712Types} from './eip712';
 
@@ -46,7 +47,7 @@ function getEIP712SignBytes(signDoc: txtypes.SignDoc, feePayerAddr: string): any
   const jsonMsgs = []
   for (let msg of txBody.messages) {
     const jsonMsg = {
-      type: 'cosmos-sdk/MsgSend',
+      type: codectypemap['/' + banktypes.MsgSend.$type],
       value: banktypes.MsgSend.toJSON(banktypes.MsgSend.decode(msg.value))
     }
     jsonMsgs.push(jsonMsg)

@@ -10,7 +10,6 @@ const main = async () => {
 
   const req: providertypes.ProviderEventsRequest = {
     height: "0",
-    time: "0",
     modules: ["fnft"],
   };
 

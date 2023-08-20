@@ -8,12 +8,13 @@ const main = async () => {
   })
   const client = new providertypes.ProviderClientImpl(cc)
 
-  const req: providertypes.ProviderBlockRequest = {
-    height: "1",
+  const req: providertypes.ProviderEventsRequest = {
+    height: "47990",
+    modules: ["fnft", "auction"]
   };
 
   try {
-    const res = await client.GetBlock(req)
+    const res = await client.GetEvents(req)
     console.log(res)
   } catch(err) {
     console.log(err)

@@ -18,8 +18,9 @@ export interface MsgCreate {
   initial_price: string;
   /** iso_timestamp defines when iso period is over */
   ISO_timestamp: string;
+  ISO_success_percent: string;
   /** accepted_sponsorship_denoms defines accepted denoms for sponsorship */
-  accepted_sponsorship_denom: string;
+  accepted_payment_denom: string;
   /** dividend_interval defines period to distribute dividend to shareholders */
   dividend_interval: string;
 }
@@ -122,7 +123,8 @@ function createBaseMsgCreate(): MsgCreate {
     supply: "",
     initial_price: "",
     ISO_timestamp: "0",
-    accepted_sponsorship_denom: "",
+    ISO_success_percent: "0",
+    accepted_payment_denom: "",
     dividend_interval: "0",
   };
 }
@@ -149,11 +151,14 @@ export const MsgCreate = {
     if (message.ISO_timestamp !== "0") {
       writer.uint32(48).uint64(message.ISO_timestamp);
     }
-    if (message.accepted_sponsorship_denom !== "") {
-      writer.uint32(58).string(message.accepted_sponsorship_denom);
+    if (message.ISO_success_percent !== "0") {
+      writer.uint32(56).uint64(message.ISO_success_percent);
+    }
+    if (message.accepted_payment_denom !== "") {
+      writer.uint32(66).string(message.accepted_payment_denom);
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(64).uint64(message.dividend_interval);
+      writer.uint32(72).uint64(message.dividend_interval);
     }
     return writer;
   },
@@ -208,14 +213,21 @@ export const MsgCreate = {
           message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 7:
-          if (tag !== 58) {
+          if (tag !== 56) {
             break;
           }
 
-          message.accepted_sponsorship_denom = reader.string();
+          message.ISO_success_percent = longToString(reader.uint64() as Long);
           continue;
         case 8:
-          if (tag !== 64) {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.accepted_payment_denom = reader.string();
+          continue;
+        case 9:
+          if (tag !== 72) {
             break;
           }
 
@@ -238,9 +250,8 @@ export const MsgCreate = {
       supply: isSet(object.supply) ? String(object.supply) : "",
       initial_price: isSet(object.initial_price) ? String(object.initial_price) : "",
       ISO_timestamp: isSet(object.ISO_timestamp) ? String(object.ISO_timestamp) : "0",
-      accepted_sponsorship_denom: isSet(object.accepted_sponsorship_denom)
-        ? String(object.accepted_sponsorship_denom)
-        : "",
+      ISO_success_percent: isSet(object.ISO_success_percent) ? String(object.ISO_success_percent) : "0",
+      accepted_payment_denom: isSet(object.accepted_payment_denom) ? String(object.accepted_payment_denom) : "",
       dividend_interval: isSet(object.dividend_interval) ? String(object.dividend_interval) : "0",
     };
   },
@@ -265,8 +276,11 @@ export const MsgCreate = {
     if (message.ISO_timestamp !== "0") {
       obj.ISO_timestamp = message.ISO_timestamp;
     }
-    if (message.accepted_sponsorship_denom !== "") {
-      obj.accepted_sponsorship_denom = message.accepted_sponsorship_denom;
+    if (message.ISO_success_percent !== "0") {
+      obj.ISO_success_percent = message.ISO_success_percent;
+    }
+    if (message.accepted_payment_denom !== "") {
+      obj.accepted_payment_denom = message.accepted_payment_denom;
     }
     if (message.dividend_interval !== "0") {
       obj.dividend_interval = message.dividend_interval;
@@ -285,7 +299,8 @@ export const MsgCreate = {
     message.supply = object.supply ?? "";
     message.initial_price = object.initial_price ?? "";
     message.ISO_timestamp = object.ISO_timestamp ?? "0";
-    message.accepted_sponsorship_denom = object.accepted_sponsorship_denom ?? "";
+    message.ISO_success_percent = object.ISO_success_percent ?? "0";
+    message.accepted_payment_denom = object.accepted_payment_denom ?? "";
     message.dividend_interval = object.dividend_interval ?? "0";
     return message;
   },

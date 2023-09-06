@@ -2,45 +2,40 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
-import { Params } from "./host";
 
-/** MsgUpdateParams defines the payload for Msg/UpdateParams */
-export interface MsgUpdateParams {
-  /** signer address (it may be the the address that controls the module, which defaults to x/gov unless overwritten). */
-  signer: string;
-  /**
-   * params defines the 27-interchain-accounts/host parameters to update.
-   *
-   * NOTE: All parameters must be supplied.
-   */
-  params: Params | undefined;
+export interface QueryProductRequest {
+  class_id: string;
+  id: string;
+  product_id: string;
 }
 
-/** MsgUpdateParamsResponse defines the response for Msg/UpdateParams */
-export interface MsgUpdateParamsResponse {
+export interface QueryProductResponse {
 }
 
-function createBaseMsgUpdateParams(): MsgUpdateParams {
-  return { signer: "", params: undefined };
+function createBaseQueryProductRequest(): QueryProductRequest {
+  return { class_id: "", id: "", product_id: "" };
 }
 
-export const MsgUpdateParams = {
-  $type: "ibc.applications.interchain_accounts.host.v1.MsgUpdateParams" as const,
+export const QueryProductRequest = {
+  $type: "flux.bazaar.v1beta1.QueryProductRequest" as const,
 
-  encode(message: MsgUpdateParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.signer !== "") {
-      writer.uint32(10).string(message.signer);
+  encode(message: QueryProductRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
     }
-    if (message.params !== undefined) {
-      Params.encode(message.params, writer.uint32(18).fork()).ldelim();
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    if (message.product_id !== "") {
+      writer.uint32(26).string(message.product_id);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProductRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateParams();
+    const message = createBaseQueryProductRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -49,14 +44,21 @@ export const MsgUpdateParams = {
             break;
           }
 
-          message.signer = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.params = Params.decode(reader, reader.uint32());
+          message.id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.product_id = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -67,52 +69,55 @@ export const MsgUpdateParams = {
     return message;
   },
 
-  fromJSON(object: any): MsgUpdateParams {
+  fromJSON(object: any): QueryProductRequest {
     return {
-      signer: isSet(object.signer) ? String(object.signer) : "",
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      product_id: isSet(object.product_id) ? String(object.product_id) : "",
     };
   },
 
-  toJSON(message: MsgUpdateParams): unknown {
+  toJSON(message: QueryProductRequest): unknown {
     const obj: any = {};
-    if (message.signer !== "") {
-      obj.signer = message.signer;
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
     }
-    if (message.params !== undefined) {
-      obj.params = Params.toJSON(message.params);
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.product_id !== "") {
+      obj.product_id = message.product_id;
     }
     return obj;
   },
 
-  create(base?: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
-    return MsgUpdateParams.fromPartial(base ?? {});
+  create(base?: DeepPartial<QueryProductRequest>): QueryProductRequest {
+    return QueryProductRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<MsgUpdateParams>): MsgUpdateParams {
-    const message = createBaseMsgUpdateParams();
-    message.signer = object.signer ?? "";
-    message.params = (object.params !== undefined && object.params !== null)
-      ? Params.fromPartial(object.params)
-      : undefined;
+  fromPartial(object: DeepPartial<QueryProductRequest>): QueryProductRequest {
+    const message = createBaseQueryProductRequest();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    message.product_id = object.product_id ?? "";
     return message;
   },
 };
 
-function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
+function createBaseQueryProductResponse(): QueryProductResponse {
   return {};
 }
 
-export const MsgUpdateParamsResponse = {
-  $type: "ibc.applications.interchain_accounts.host.v1.MsgUpdateParamsResponse" as const,
+export const QueryProductResponse = {
+  $type: "flux.bazaar.v1beta1.QueryProductResponse" as const,
 
-  encode(_: MsgUpdateParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: QueryProductResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProductResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMsgUpdateParamsResponse();
+    const message = createBaseQueryProductResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -125,58 +130,57 @@ export const MsgUpdateParamsResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgUpdateParamsResponse {
+  fromJSON(_: any): QueryProductResponse {
     return {};
   },
 
-  toJSON(_: MsgUpdateParamsResponse): unknown {
+  toJSON(_: QueryProductResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create(base?: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
-    return MsgUpdateParamsResponse.fromPartial(base ?? {});
+  create(base?: DeepPartial<QueryProductResponse>): QueryProductResponse {
+    return QueryProductResponse.fromPartial(base ?? {});
   },
-  fromPartial(_: DeepPartial<MsgUpdateParamsResponse>): MsgUpdateParamsResponse {
-    const message = createBaseMsgUpdateParamsResponse();
+  fromPartial(_: DeepPartial<QueryProductResponse>): QueryProductResponse {
+    const message = createBaseQueryProductResponse();
     return message;
   },
 };
 
-/** Msg defines the 27-interchain-accounts/host Msg service. */
-export interface Msg {
-  /** UpdateParams defines a rpc handler for MsgUpdateParams. */
-  UpdateParams(request: DeepPartial<MsgUpdateParams>, metadata?: grpc.Metadata): Promise<MsgUpdateParamsResponse>;
+/** Query defines the gRPC querier service. */
+export interface Query {
+  Product(request: DeepPartial<QueryProductRequest>, metadata?: grpc.Metadata): Promise<QueryProductResponse>;
 }
 
-export class MsgClientImpl implements Msg {
+export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.UpdateParams = this.UpdateParams.bind(this);
+    this.Product = this.Product.bind(this);
   }
 
-  UpdateParams(request: DeepPartial<MsgUpdateParams>, metadata?: grpc.Metadata): Promise<MsgUpdateParamsResponse> {
-    return this.rpc.unary(MsgUpdateParamsDesc, MsgUpdateParams.fromPartial(request), metadata);
+  Product(request: DeepPartial<QueryProductRequest>, metadata?: grpc.Metadata): Promise<QueryProductResponse> {
+    return this.rpc.unary(QueryProductDesc, QueryProductRequest.fromPartial(request), metadata);
   }
 }
 
-export const MsgDesc = { serviceName: "ibc.applications.interchain_accounts.host.v1.Msg" };
+export const QueryDesc = { serviceName: "flux.bazaar.v1beta1.Query" };
 
-export const MsgUpdateParamsDesc: UnaryMethodDefinitionish = {
-  methodName: "UpdateParams",
-  service: MsgDesc,
+export const QueryProductDesc: UnaryMethodDefinitionish = {
+  methodName: "Product",
+  service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return MsgUpdateParams.encode(this).finish();
+      return QueryProductRequest.encode(this).finish();
     },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = MsgUpdateParamsResponse.decode(data);
+      const value = QueryProductResponse.decode(data);
       return {
         ...value,
         toObject() {

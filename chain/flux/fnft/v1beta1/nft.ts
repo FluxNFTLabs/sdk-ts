@@ -40,8 +40,9 @@ export interface NFT {
   initial_price: string;
   /** timestamp when iso period is over */
   ISO_timestamp: string;
+  ISO_success_percent: string;
   /** sponsorships must use this denom */
-  accepted_sponsorship_denom: string;
+  accepted_payment_denom: string;
   /** array of sponsorship in this dividend period */
   sponsorships: Sponsorship[];
   /** sponsorship coins will be accumulated in revenue */
@@ -54,6 +55,7 @@ export interface NFT {
   last_dividend_timestamp: string;
   /** nft owner */
   owner: string;
+  holders: Holder[];
   /** indicate if nft passes iso or not */
   active: boolean;
   /** data is an app specific data of the NFT. Optional */
@@ -231,12 +233,14 @@ function createBaseNFT(): NFT {
     available_shares: "",
     initial_price: "",
     ISO_timestamp: "0",
-    accepted_sponsorship_denom: "",
+    ISO_success_percent: "0",
+    accepted_payment_denom: "",
     sponsorships: [],
     revenue: undefined,
     dividend_interval: "0",
     last_dividend_timestamp: "0",
     owner: "",
+    holders: [],
     active: false,
     data: undefined,
   };
@@ -270,29 +274,35 @@ export const NFT = {
     if (message.ISO_timestamp !== "0") {
       writer.uint32(64).uint64(message.ISO_timestamp);
     }
-    if (message.accepted_sponsorship_denom !== "") {
-      writer.uint32(74).string(message.accepted_sponsorship_denom);
+    if (message.ISO_success_percent !== "0") {
+      writer.uint32(72).uint64(message.ISO_success_percent);
+    }
+    if (message.accepted_payment_denom !== "") {
+      writer.uint32(82).string(message.accepted_payment_denom);
     }
     for (const v of message.sponsorships) {
-      Sponsorship.encode(v!, writer.uint32(82).fork()).ldelim();
+      Sponsorship.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     if (message.revenue !== undefined) {
-      Coin.encode(message.revenue, writer.uint32(90).fork()).ldelim();
+      Coin.encode(message.revenue, writer.uint32(98).fork()).ldelim();
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(96).uint64(message.dividend_interval);
+      writer.uint32(104).uint64(message.dividend_interval);
     }
     if (message.last_dividend_timestamp !== "0") {
-      writer.uint32(104).uint64(message.last_dividend_timestamp);
+      writer.uint32(112).uint64(message.last_dividend_timestamp);
     }
     if (message.owner !== "") {
-      writer.uint32(114).string(message.owner);
+      writer.uint32(122).string(message.owner);
+    }
+    for (const v of message.holders) {
+      Holder.encode(v!, writer.uint32(130).fork()).ldelim();
     }
     if (message.active === true) {
-      writer.uint32(120).bool(message.active);
+      writer.uint32(136).bool(message.active);
     }
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(130).fork()).ldelim();
+      Any.encode(message.data, writer.uint32(146).fork()).ldelim();
     }
     return writer;
   },
@@ -361,56 +371,70 @@ export const NFT = {
           message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 9:
-          if (tag !== 74) {
+          if (tag !== 72) {
             break;
           }
 
-          message.accepted_sponsorship_denom = reader.string();
+          message.ISO_success_percent = longToString(reader.uint64() as Long);
           continue;
         case 10:
           if (tag !== 82) {
             break;
           }
 
-          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
+          message.accepted_payment_denom = reader.string();
           continue;
         case 11:
           if (tag !== 90) {
             break;
           }
 
-          message.revenue = Coin.decode(reader, reader.uint32());
+          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
           continue;
         case 12:
-          if (tag !== 96) {
+          if (tag !== 98) {
             break;
           }
 
-          message.dividend_interval = longToString(reader.uint64() as Long);
+          message.revenue = Coin.decode(reader, reader.uint32());
           continue;
         case 13:
           if (tag !== 104) {
             break;
           }
 
-          message.last_dividend_timestamp = longToString(reader.uint64() as Long);
+          message.dividend_interval = longToString(reader.uint64() as Long);
           continue;
         case 14:
-          if (tag !== 114) {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.last_dividend_timestamp = longToString(reader.uint64() as Long);
+          continue;
+        case 15:
+          if (tag !== 122) {
             break;
           }
 
           message.owner = reader.string();
           continue;
-        case 15:
-          if (tag !== 120) {
+        case 16:
+          if (tag !== 130) {
+            break;
+          }
+
+          message.holders.push(Holder.decode(reader, reader.uint32()));
+          continue;
+        case 17:
+          if (tag !== 136) {
             break;
           }
 
           message.active = reader.bool();
           continue;
-        case 16:
-          if (tag !== 130) {
+        case 18:
+          if (tag !== 146) {
             break;
           }
 
@@ -435,9 +459,8 @@ export const NFT = {
       available_shares: isSet(object.available_shares) ? String(object.available_shares) : "",
       initial_price: isSet(object.initial_price) ? String(object.initial_price) : "",
       ISO_timestamp: isSet(object.ISO_timestamp) ? String(object.ISO_timestamp) : "0",
-      accepted_sponsorship_denom: isSet(object.accepted_sponsorship_denom)
-        ? String(object.accepted_sponsorship_denom)
-        : "",
+      ISO_success_percent: isSet(object.ISO_success_percent) ? String(object.ISO_success_percent) : "0",
+      accepted_payment_denom: isSet(object.accepted_payment_denom) ? String(object.accepted_payment_denom) : "",
       sponsorships: Array.isArray(object?.sponsorships)
         ? object.sponsorships.map((e: any) => Sponsorship.fromJSON(e))
         : [],
@@ -445,6 +468,7 @@ export const NFT = {
       dividend_interval: isSet(object.dividend_interval) ? String(object.dividend_interval) : "0",
       last_dividend_timestamp: isSet(object.last_dividend_timestamp) ? String(object.last_dividend_timestamp) : "0",
       owner: isSet(object.owner) ? String(object.owner) : "",
+      holders: Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
       active: isSet(object.active) ? Boolean(object.active) : false,
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
@@ -476,8 +500,11 @@ export const NFT = {
     if (message.ISO_timestamp !== "0") {
       obj.ISO_timestamp = message.ISO_timestamp;
     }
-    if (message.accepted_sponsorship_denom !== "") {
-      obj.accepted_sponsorship_denom = message.accepted_sponsorship_denom;
+    if (message.ISO_success_percent !== "0") {
+      obj.ISO_success_percent = message.ISO_success_percent;
+    }
+    if (message.accepted_payment_denom !== "") {
+      obj.accepted_payment_denom = message.accepted_payment_denom;
     }
     if (message.sponsorships?.length) {
       obj.sponsorships = message.sponsorships.map((e) => Sponsorship.toJSON(e));
@@ -493,6 +520,9 @@ export const NFT = {
     }
     if (message.owner !== "") {
       obj.owner = message.owner;
+    }
+    if (message.holders?.length) {
+      obj.holders = message.holders.map((e) => Holder.toJSON(e));
     }
     if (message.active === true) {
       obj.active = message.active;
@@ -516,7 +546,8 @@ export const NFT = {
     message.available_shares = object.available_shares ?? "";
     message.initial_price = object.initial_price ?? "";
     message.ISO_timestamp = object.ISO_timestamp ?? "0";
-    message.accepted_sponsorship_denom = object.accepted_sponsorship_denom ?? "";
+    message.ISO_success_percent = object.ISO_success_percent ?? "0";
+    message.accepted_payment_denom = object.accepted_payment_denom ?? "";
     message.sponsorships = object.sponsorships?.map((e) => Sponsorship.fromPartial(e)) || [];
     message.revenue = (object.revenue !== undefined && object.revenue !== null)
       ? Coin.fromPartial(object.revenue)
@@ -524,6 +555,7 @@ export const NFT = {
     message.dividend_interval = object.dividend_interval ?? "0";
     message.last_dividend_timestamp = object.last_dividend_timestamp ?? "0";
     message.owner = object.owner ?? "";
+    message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     message.active = object.active ?? false;
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;

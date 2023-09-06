@@ -1,25 +1,26 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Class, NFT } from "./nft";
+import { ClassCommission, Product } from "./product";
 
+/** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
-  classes: Class[];
-  nfts: NFT[];
+  products: Product[];
+  commissions: ClassCommission[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { classes: [], nfts: [] };
+  return { products: [], commissions: [] };
 }
 
 export const GenesisState = {
-  $type: "flux.fnft.v1beta1.GenesisState" as const,
+  $type: "flux.bazaar.v1beta1.GenesisState" as const,
 
   encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.classes) {
-      Class.encode(v!, writer.uint32(10).fork()).ldelim();
+    for (const v of message.products) {
+      Product.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.nfts) {
-      NFT.encode(v!, writer.uint32(18).fork()).ldelim();
+    for (const v of message.commissions) {
+      ClassCommission.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -36,14 +37,14 @@ export const GenesisState = {
             break;
           }
 
-          message.classes.push(Class.decode(reader, reader.uint32()));
+          message.products.push(Product.decode(reader, reader.uint32()));
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.nfts.push(NFT.decode(reader, reader.uint32()));
+          message.commissions.push(ClassCommission.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -56,18 +57,20 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
+      products: Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
+      commissions: Array.isArray(object?.commissions)
+        ? object.commissions.map((e: any) => ClassCommission.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.classes?.length) {
-      obj.classes = message.classes.map((e) => Class.toJSON(e));
+    if (message.products?.length) {
+      obj.products = message.products.map((e) => Product.toJSON(e));
     }
-    if (message.nfts?.length) {
-      obj.nfts = message.nfts.map((e) => NFT.toJSON(e));
+    if (message.commissions?.length) {
+      obj.commissions = message.commissions.map((e) => ClassCommission.toJSON(e));
     }
     return obj;
   },
@@ -77,8 +80,8 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.classes = object.classes?.map((e) => Class.fromPartial(e)) || [];
-    message.nfts = object.nfts?.map((e) => NFT.fromPartial(e)) || [];
+    message.products = object.products?.map((e) => Product.fromPartial(e)) || [];
+    message.commissions = object.commissions?.map((e) => ClassCommission.fromPartial(e)) || [];
     return message;
   },
 };

@@ -1,6 +1,7 @@
 import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712';
+import { createAddress } from '@tendermint/sig';
 
 import * as bech32 from 'bech32'
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
@@ -11,17 +12,12 @@ import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
 import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys'
+import * as secp256k1 from '../../../chain/cosmos/crypto/secp256k1/keys'
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
 import * as codectypemap from '../../../chain/codec_type_map.json'
 
 import {deepSortObject, extractEIP712Types} from './eip712';
-
-function hexToBech32(hexBytes: ArrayLike<number>, prefix: string): string {
-  const words = bech32.bech32.toWords(hexBytes);
-  return bech32.bech32.encode(prefix, words);
-}
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);
@@ -79,7 +75,7 @@ function getEIP712SignBytes(signDoc: txtypes.SignDoc, feePayerAddr: string): any
 
 const main = async () => {
   // init clients
-  const cc = new txservice.GrpcWebImpl('http://localhost:9091', {
+  const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
     transport: NodeHttpTransport(),
   })
   const txClient = new txservice.ServiceClientImpl(cc)
@@ -98,7 +94,7 @@ const main = async () => {
     type_url: '/' + secp256k1.PubKey.$type,
     value: secp256k1.PubKey.encode(senderPubkey).finish()
   }
-  const senderAddr = hexToBech32(wallet.getAddress(), 'lux')
+  const senderAddr = createAddress(senderPubkey.key, 'lux')
   const receiverAddr = 'lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx'
 
   // fetch account num, seq
@@ -130,7 +126,7 @@ const main = async () => {
   const txBody: txtypes.TxBody = {
     messages: [msgAny],
     memo: 'abc',
-    timeout_height: '300000',
+    timeout_height: '19000',
     extension_options: [],
     non_critical_extension_options: []
   }
@@ -149,7 +145,7 @@ const main = async () => {
     ],
     fee: {
       amount: [
-        {denom: 'lux', amount: '100000000000'}
+        {denom: 'lux', amount: '100000000000000'}
       ],
       gas_limit: '200000',
       payer: '',
@@ -195,6 +191,7 @@ const main = async () => {
     auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
     signatures: [senderCosmosSig],
   }
+
   const broadcastReq: txservice.BroadcastTxRequest = {
     tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
     mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,

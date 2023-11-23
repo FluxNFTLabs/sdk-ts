@@ -1,6 +1,7 @@
 import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
-import { keccak256 } from 'ethereum-cryptography/keccak.js'
+import { sha256 } from "ethereum-cryptography/sha256.js";
+import { createAddress } from '@tendermint/sig';
 import * as bech32 from 'bech32'
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
@@ -9,14 +10,9 @@ import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
 import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../chain/flux/crypto/v1beta1/ethsecp256k1/keys'
+import * as secp256k1 from '../../../chain/cosmos/crypto/secp256k1/keys'
 import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
-
-function hexToBech32(hexBytes: ArrayLike<number>, prefix: string): string {
-  const words = bech32.bech32.toWords(hexBytes);
-  return bech32.bech32.encode(prefix, words);
-}
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);
@@ -27,7 +23,7 @@ function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
 
 const main = async () => {
   // init clients
-  const cc = new txservice.GrpcWebImpl('http://localhost:9091', {
+  const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
     transport: NodeHttpTransport(),
   })
   const txClient = new txservice.ServiceClientImpl(cc)
@@ -46,7 +42,7 @@ const main = async () => {
     type_url: '/' + secp256k1.PubKey.$type,
     value: secp256k1.PubKey.encode(senderPubkey).finish()
   }
-  const senderAddr = hexToBech32(wallet.getAddress(), 'lux')
+  const senderAddr = createAddress(senderPubkey.key, 'lux')
   const receiverAddr = 'lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx'
 
   // fetch account num, seq
@@ -126,10 +122,9 @@ const main = async () => {
     account_number: senderAccNum,
   }
   let signBytes = txtypes.SignDoc.encode(signDoc).finish()
-  const msgHash = Buffer.from(keccak256(signBytes))
-
-  const senderSign = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))
-  const senderCosmosSig = Uint8Array.from(Buffer.concat([senderSign.r, senderSign.s, Buffer.from([0])]))
+  const msgHash = Buffer.from(sha256(signBytes))
+  const senderSigParts = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))
+  const senderSig = Uint8Array.from(Buffer.concat([senderSigParts.r, senderSigParts.s]))
 
   signDoc = {
     body_bytes: txtypes.TxBody.encode(txBody).finish(),
@@ -139,13 +134,13 @@ const main = async () => {
   }
   signBytes = txtypes.SignDoc.encode(signDoc).finish()
   const res = await web3gwClient.SignProto({data: signBytes})
-  const feePayerCosmosSig = res.signature
+  const feePayerSig = res.signature
 
   // broadcast tx
   const txRaw: txtypes.TxRaw = {
     body_bytes: txtypes.TxBody.encode(txBody).finish(),
     auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
-    signatures: [senderCosmosSig, feePayerCosmosSig],
+    signatures: [senderSig, feePayerSig],
   }
   const broadcastReq: txservice.BroadcastTxRequest = {
     tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),

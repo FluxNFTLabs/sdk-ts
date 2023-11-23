@@ -5,7 +5,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Observable } from "rxjs";
 import { share } from "rxjs/operators";
-import { Events } from "../../stream/v1beta1/query";
+import { Event } from "../../stream/v1beta1/query";
 
 export interface ProviderBlockRequest {
   height: string;
@@ -28,7 +28,7 @@ export interface ProviderEventsResponse {
   height: string;
   time: string;
   modules: string[];
-  events: Events[];
+  events: Event[];
 }
 
 function createBaseProviderBlockRequest(): ProviderBlockRequest {
@@ -69,7 +69,7 @@ export const ProviderBlockRequest = {
   },
 
   fromJSON(object: any): ProviderBlockRequest {
-    return { height: isSet(object.height) ? String(object.height) : "0" };
+    return { height: isSet(object.height) ? globalThis.String(object.height) : "0" };
   },
 
   toJSON(message: ProviderBlockRequest): unknown {
@@ -169,11 +169,11 @@ export const ProviderBlockResponse = {
 
   fromJSON(object: any): ProviderBlockResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      time: isSet(object.time) ? String(object.time) : "0",
-      block: isSet(object.block) ? String(object.block) : "",
-      block_results: isSet(object.block_results) ? String(object.block_results) : "",
-      validators: isSet(object.validators) ? String(object.validators) : "",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      time: isSet(object.time) ? globalThis.String(object.time) : "0",
+      block: isSet(object.block) ? globalThis.String(object.block) : "",
+      block_results: isSet(object.block_results) ? globalThis.String(object.block_results) : "",
+      validators: isSet(object.validators) ? globalThis.String(object.validators) : "",
     };
   },
 
@@ -260,8 +260,8 @@ export const ProviderEventsRequest = {
 
   fromJSON(object: any): ProviderEventsRequest {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      modules: globalThis.Array.isArray(object?.modules) ? object.modules.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -305,7 +305,7 @@ export const ProviderEventsResponse = {
       writer.uint32(26).string(v!);
     }
     for (const v of message.events) {
-      Events.encode(v!, writer.uint32(34).fork()).ldelim();
+      Event.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -343,7 +343,7 @@ export const ProviderEventsResponse = {
             break;
           }
 
-          message.events.push(Events.decode(reader, reader.uint32()));
+          message.events.push(Event.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -356,10 +356,10 @@ export const ProviderEventsResponse = {
 
   fromJSON(object: any): ProviderEventsResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      time: isSet(object.time) ? String(object.time) : "0",
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Events.fromJSON(e)) : [],
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      time: isSet(object.time) ? globalThis.String(object.time) : "0",
+      modules: globalThis.Array.isArray(object?.modules) ? object.modules.map((e: any) => globalThis.String(e)) : [],
+      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
     };
   },
 
@@ -375,7 +375,7 @@ export const ProviderEventsResponse = {
       obj.modules = message.modules;
     }
     if (message.events?.length) {
-      obj.events = message.events.map((e) => Events.toJSON(e));
+      obj.events = message.events.map((e) => Event.toJSON(e));
     }
     return obj;
   },
@@ -388,7 +388,7 @@ export const ProviderEventsResponse = {
     message.height = object.height ?? "0";
     message.time = object.time ?? "0";
     message.modules = object.modules?.map((e) => e) || [];
-    message.events = object.events?.map((e) => Events.fromPartial(e)) || [];
+    message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
     return message;
   },
 };
@@ -613,7 +613,7 @@ export class GrpcWebImpl {
       ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
       : metadata ?? this.options.metadata;
     return new Observable((observer) => {
-      const upStream = (() => {
+      const upStream = () => {
         const client = grpc.invoke(methodDesc, {
           host: this.host,
           request,
@@ -637,35 +637,17 @@ export class GrpcWebImpl {
         observer.add(() => {
           return client.close();
         });
-      });
+      };
       upStream();
     }).pipe(share());
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -682,7 +664,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

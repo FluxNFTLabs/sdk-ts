@@ -2,7 +2,7 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
-import { NFT } from "../../fnft/v1beta1/nft";
+import { Holder, NFT } from "../../fnft/v1beta1/nft";
 
 export interface GetNFTsRequest {
   class_id: string;
@@ -12,6 +12,16 @@ export interface GetNFTsRequest {
 
 export interface GetNFTsResponse {
   nft: NFT[];
+}
+
+export interface GetHoldersRequest {
+  class_id: string;
+  id: string;
+  address: string;
+}
+
+export interface GetHoldersResponse {
+  holders: Holder[];
 }
 
 function createBaseGetNFTsRequest(): GetNFTsRequest {
@@ -73,9 +83,9 @@ export const GetNFTsRequest = {
 
   fromJSON(object: any): GetNFTsRequest {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
     };
   },
 
@@ -143,7 +153,7 @@ export const GetNFTsResponse = {
   },
 
   fromJSON(object: any): GetNFTsResponse {
-    return { nft: Array.isArray(object?.nft) ? object.nft.map((e: any) => NFT.fromJSON(e)) : [] };
+    return { nft: globalThis.Array.isArray(object?.nft) ? object.nft.map((e: any) => NFT.fromJSON(e)) : [] };
   },
 
   toJSON(message: GetNFTsResponse): unknown {
@@ -164,28 +174,186 @@ export const GetNFTsResponse = {
   },
 };
 
-export interface FNFT {
-  GetNFTs(request: DeepPartial<GetNFTsRequest>, metadata?: grpc.Metadata): Promise<GetNFTsResponse>;
+function createBaseGetHoldersRequest(): GetHoldersRequest {
+  return { class_id: "", id: "", address: "" };
 }
 
-export class FNFTClientImpl implements FNFT {
+export const GetHoldersRequest = {
+  $type: "flux.indexer.fnft.GetHoldersRequest" as const,
+
+  encode(message: GetHoldersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    if (message.address !== "") {
+      writer.uint32(26).string(message.address);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetHoldersRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetHoldersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.class_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.address = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetHoldersRequest {
+    return {
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+    };
+  },
+
+  toJSON(message: GetHoldersRequest): unknown {
+    const obj: any = {};
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.address !== "") {
+      obj.address = message.address;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<GetHoldersRequest>): GetHoldersRequest {
+    return GetHoldersRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<GetHoldersRequest>): GetHoldersRequest {
+    const message = createBaseGetHoldersRequest();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    message.address = object.address ?? "";
+    return message;
+  },
+};
+
+function createBaseGetHoldersResponse(): GetHoldersResponse {
+  return { holders: [] };
+}
+
+export const GetHoldersResponse = {
+  $type: "flux.indexer.fnft.GetHoldersResponse" as const,
+
+  encode(message: GetHoldersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.holders) {
+      Holder.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetHoldersResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetHoldersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.holders.push(Holder.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetHoldersResponse {
+    return {
+      holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: GetHoldersResponse): unknown {
+    const obj: any = {};
+    if (message.holders?.length) {
+      obj.holders = message.holders.map((e) => Holder.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<GetHoldersResponse>): GetHoldersResponse {
+    return GetHoldersResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<GetHoldersResponse>): GetHoldersResponse {
+    const message = createBaseGetHoldersResponse();
+    message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+export interface API {
+  GetNFTs(request: DeepPartial<GetNFTsRequest>, metadata?: grpc.Metadata): Promise<GetNFTsResponse>;
+  GetHolders(request: DeepPartial<GetHoldersRequest>, metadata?: grpc.Metadata): Promise<GetHoldersResponse>;
+}
+
+export class APIClientImpl implements API {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.GetNFTs = this.GetNFTs.bind(this);
+    this.GetHolders = this.GetHolders.bind(this);
   }
 
   GetNFTs(request: DeepPartial<GetNFTsRequest>, metadata?: grpc.Metadata): Promise<GetNFTsResponse> {
-    return this.rpc.unary(FNFTGetNFTsDesc, GetNFTsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APIGetNFTsDesc, GetNFTsRequest.fromPartial(request), metadata);
+  }
+
+  GetHolders(request: DeepPartial<GetHoldersRequest>, metadata?: grpc.Metadata): Promise<GetHoldersResponse> {
+    return this.rpc.unary(APIGetHoldersDesc, GetHoldersRequest.fromPartial(request), metadata);
   }
 }
 
-export const FNFTDesc = { serviceName: "flux.indexer.fnft.FNFT" };
+export const APIDesc = { serviceName: "flux.indexer.fnft.API" };
 
-export const FNFTGetNFTsDesc: UnaryMethodDefinitionish = {
+export const APIGetNFTsDesc: UnaryMethodDefinitionish = {
   methodName: "GetNFTs",
-  service: FNFTDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -196,6 +364,29 @@ export const FNFTGetNFTsDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = GetNFTsResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const APIGetHoldersDesc: UnaryMethodDefinitionish = {
+  methodName: "GetHolders",
+  service: APIDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return GetHoldersRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = GetHoldersResponse.decode(data);
       return {
         ...value,
         toObject() {
@@ -274,29 +465,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -304,7 +477,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

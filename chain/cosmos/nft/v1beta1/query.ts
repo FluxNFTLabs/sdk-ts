@@ -153,8 +153,8 @@ export const QueryBalanceRequest = {
 
   fromJSON(object: any): QueryBalanceRequest {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
     };
   },
 
@@ -218,7 +218,7 @@ export const QueryBalanceResponse = {
   },
 
   fromJSON(object: any): QueryBalanceResponse {
-    return { amount: isSet(object.amount) ? String(object.amount) : "0" };
+    return { amount: isSet(object.amount) ? globalThis.String(object.amount) : "0" };
   },
 
   toJSON(message: QueryBalanceResponse): unknown {
@@ -288,8 +288,8 @@ export const QueryOwnerRequest = {
 
   fromJSON(object: any): QueryOwnerRequest {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
@@ -353,7 +353,7 @@ export const QueryOwnerResponse = {
   },
 
   fromJSON(object: any): QueryOwnerResponse {
-    return { owner: isSet(object.owner) ? String(object.owner) : "" };
+    return { owner: isSet(object.owner) ? globalThis.String(object.owner) : "" };
   },
 
   toJSON(message: QueryOwnerResponse): unknown {
@@ -412,7 +412,7 @@ export const QuerySupplyRequest = {
   },
 
   fromJSON(object: any): QuerySupplyRequest {
-    return { class_id: isSet(object.class_id) ? String(object.class_id) : "" };
+    return { class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "" };
   },
 
   toJSON(message: QuerySupplyRequest): unknown {
@@ -471,7 +471,7 @@ export const QuerySupplyResponse = {
   },
 
   fromJSON(object: any): QuerySupplyResponse {
-    return { amount: isSet(object.amount) ? String(object.amount) : "0" };
+    return { amount: isSet(object.amount) ? globalThis.String(object.amount) : "0" };
   },
 
   toJSON(message: QuerySupplyResponse): unknown {
@@ -551,8 +551,8 @@ export const QueryNFTsRequest = {
 
   fromJSON(object: any): QueryNFTsRequest {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -634,7 +634,7 @@ export const QueryNFTsResponse = {
 
   fromJSON(object: any): QueryNFTsResponse {
     return {
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
+      nfts: globalThis.Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -712,8 +712,8 @@ export const QueryNFTRequest = {
 
   fromJSON(object: any): QueryNFTRequest {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
     };
   },
 
@@ -836,7 +836,7 @@ export const QueryClassRequest = {
   },
 
   fromJSON(object: any): QueryClassRequest {
-    return { class_id: isSet(object.class_id) ? String(object.class_id) : "" };
+    return { class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "" };
   },
 
   toJSON(message: QueryClassRequest): unknown {
@@ -1026,7 +1026,7 @@ export const QueryClassesResponse = {
 
   fromJSON(object: any): QueryClassesResponse {
     return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
+      classes: globalThis.Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1350,29 +1350,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1389,7 +1371,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

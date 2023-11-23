@@ -71,7 +71,7 @@ export const GenesisOwners = {
 
   fromJSON(object: any): GenesisOwners {
     return {
-      index: isSet(object.index) ? String(object.index) : "0",
+      index: isSet(object.index) ? globalThis.String(object.index) : "0",
       index_owners: isSet(object.index_owners) ? CapabilityOwners.fromJSON(object.index_owners) : undefined,
     };
   },
@@ -149,8 +149,8 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      index: isSet(object.index) ? String(object.index) : "0",
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : [],
+      index: isSet(object.index) ? globalThis.String(object.index) : "0",
+      owners: globalThis.Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : [],
     };
   },
 
@@ -179,7 +179,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

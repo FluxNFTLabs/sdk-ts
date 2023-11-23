@@ -100,9 +100,11 @@ export const Fee = {
 
   fromJSON(object: any): Fee {
     return {
-      recv_fee: Array.isArray(object?.recv_fee) ? object.recv_fee.map((e: any) => Coin.fromJSON(e)) : [],
-      ack_fee: Array.isArray(object?.ack_fee) ? object.ack_fee.map((e: any) => Coin.fromJSON(e)) : [],
-      timeout_fee: Array.isArray(object?.timeout_fee) ? object.timeout_fee.map((e: any) => Coin.fromJSON(e)) : [],
+      recv_fee: globalThis.Array.isArray(object?.recv_fee) ? object.recv_fee.map((e: any) => Coin.fromJSON(e)) : [],
+      ack_fee: globalThis.Array.isArray(object?.ack_fee) ? object.ack_fee.map((e: any) => Coin.fromJSON(e)) : [],
+      timeout_fee: globalThis.Array.isArray(object?.timeout_fee)
+        ? object.timeout_fee.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -192,8 +194,8 @@ export const PacketFee = {
   fromJSON(object: any): PacketFee {
     return {
       fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
-      refund_address: isSet(object.refund_address) ? String(object.refund_address) : "",
-      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : [],
+      refund_address: isSet(object.refund_address) ? globalThis.String(object.refund_address) : "",
+      relayers: globalThis.Array.isArray(object?.relayers) ? object.relayers.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -262,7 +264,9 @@ export const PacketFees = {
 
   fromJSON(object: any): PacketFees {
     return {
-      packet_fees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e)) : [],
+      packet_fees: globalThis.Array.isArray(object?.packet_fees)
+        ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e))
+        : [],
     };
   },
 
@@ -334,7 +338,9 @@ export const IdentifiedPacketFees = {
   fromJSON(object: any): IdentifiedPacketFees {
     return {
       packet_id: isSet(object.packet_id) ? PacketId.fromJSON(object.packet_id) : undefined,
-      packet_fees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e)) : [],
+      packet_fees: globalThis.Array.isArray(object?.packet_fees)
+        ? object.packet_fees.map((e: any) => PacketFee.fromJSON(e))
+        : [],
     };
   },
 
@@ -365,7 +371,8 @@ export const IdentifiedPacketFees = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

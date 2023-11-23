@@ -154,8 +154,10 @@ export const TableDescriptor = {
   fromJSON(object: any): TableDescriptor {
     return {
       primary_key: isSet(object.primary_key) ? PrimaryKeyDescriptor.fromJSON(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e)) : [],
-      id: isSet(object.id) ? Number(object.id) : 0,
+      index: globalThis.Array.isArray(object?.index)
+        ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e))
+        : [],
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
     };
   },
 
@@ -236,8 +238,8 @@ export const PrimaryKeyDescriptor = {
 
   fromJSON(object: any): PrimaryKeyDescriptor {
     return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      auto_increment: isSet(object.auto_increment) ? Boolean(object.auto_increment) : false,
+      fields: isSet(object.fields) ? globalThis.String(object.fields) : "",
+      auto_increment: isSet(object.auto_increment) ? globalThis.Boolean(object.auto_increment) : false,
     };
   },
 
@@ -322,9 +324,9 @@ export const SecondaryIndexDescriptor = {
 
   fromJSON(object: any): SecondaryIndexDescriptor {
     return {
-      fields: isSet(object.fields) ? String(object.fields) : "",
-      id: isSet(object.id) ? Number(object.id) : 0,
-      unique: isSet(object.unique) ? Boolean(object.unique) : false,
+      fields: isSet(object.fields) ? globalThis.String(object.fields) : "",
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
     };
   },
 
@@ -392,7 +394,7 @@ export const SingletonDescriptor = {
   },
 
   fromJSON(object: any): SingletonDescriptor {
-    return { id: isSet(object.id) ? Number(object.id) : 0 };
+    return { id: isSet(object.id) ? globalThis.Number(object.id) : 0 };
   },
 
   toJSON(message: SingletonDescriptor): unknown {
@@ -416,7 +418,8 @@ export const SingletonDescriptor = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

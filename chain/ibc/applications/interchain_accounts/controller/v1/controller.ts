@@ -48,7 +48,9 @@ export const Params = {
   },
 
   fromJSON(object: any): Params {
-    return { controller_enabled: isSet(object.controller_enabled) ? Boolean(object.controller_enabled) : false };
+    return {
+      controller_enabled: isSet(object.controller_enabled) ? globalThis.Boolean(object.controller_enabled) : false,
+    };
   },
 
   toJSON(message: Params): unknown {
@@ -72,7 +74,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

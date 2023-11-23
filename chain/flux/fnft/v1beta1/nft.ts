@@ -14,10 +14,8 @@ export interface Class {
   symbol: string;
   /** description is a brief description of nft classification. Optional */
   description: string;
-  /** uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
-  uri: string;
-  /** uri_hash is a hash of the document pointed by uri. Optional */
-  uri_hash: string;
+  /** url for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
+  url: string;
   /** data is the app specific metadata of the NFT class. Optional */
   data: Any | undefined;
 }
@@ -28,10 +26,8 @@ export interface NFT {
   class_id: string;
   /** id is a unique identifier of the NFT */
   id: string;
-  /** uri for the NFT metadata stored off chain */
-  uri: string;
-  /** uri_hash is a hash of the document pointed by uri */
-  uri_hash: string;
+  /** url for the NFT metadata stored off chain */
+  url: string;
   /** supply is shares supply for this nft */
   supply: string;
   /** available shares to purchase within iso period */
@@ -55,7 +51,6 @@ export interface NFT {
   last_dividend_timestamp: string;
   /** nft owner */
   owner: string;
-  holders: Holder[];
   /** indicate if nft passes iso or not */
   active: boolean;
   /** data is an app specific data of the NFT. Optional */
@@ -64,16 +59,18 @@ export interface NFT {
 
 export interface Sponsorship {
   description: string;
-  uri: string;
+  url: string;
 }
 
 export interface Holder {
+  class_id: string;
+  id: string;
   address: string;
   shares: string;
 }
 
 function createBaseClass(): Class {
-  return { id: "", name: "", symbol: "", description: "", uri: "", uri_hash: "", data: undefined };
+  return { id: "", name: "", symbol: "", description: "", url: "", data: undefined };
 }
 
 export const Class = {
@@ -92,14 +89,11 @@ export const Class = {
     if (message.description !== "") {
       writer.uint32(34).string(message.description);
     }
-    if (message.uri !== "") {
-      writer.uint32(42).string(message.uri);
-    }
-    if (message.uri_hash !== "") {
-      writer.uint32(50).string(message.uri_hash);
+    if (message.url !== "") {
+      writer.uint32(42).string(message.url);
     }
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(58).fork()).ldelim();
+      Any.encode(message.data, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -144,17 +138,10 @@ export const Class = {
             break;
           }
 
-          message.uri = reader.string();
+          message.url = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
-            break;
-          }
-
-          message.uri_hash = reader.string();
-          continue;
-        case 7:
-          if (tag !== 58) {
             break;
           }
 
@@ -171,12 +158,11 @@ export const Class = {
 
   fromJSON(object: any): Class {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -195,11 +181,8 @@ export const Class = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.uri !== "") {
-      obj.uri = message.uri;
-    }
-    if (message.uri_hash !== "") {
-      obj.uri_hash = message.uri_hash;
+    if (message.url !== "") {
+      obj.url = message.url;
     }
     if (message.data !== undefined) {
       obj.data = Any.toJSON(message.data);
@@ -216,8 +199,7 @@ export const Class = {
     message.name = object.name ?? "";
     message.symbol = object.symbol ?? "";
     message.description = object.description ?? "";
-    message.uri = object.uri ?? "";
-    message.uri_hash = object.uri_hash ?? "";
+    message.url = object.url ?? "";
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },
@@ -227,8 +209,7 @@ function createBaseNFT(): NFT {
   return {
     class_id: "",
     id: "",
-    uri: "",
-    uri_hash: "",
+    url: "",
     supply: "",
     available_shares: "",
     initial_price: "",
@@ -240,7 +221,6 @@ function createBaseNFT(): NFT {
     dividend_interval: "0",
     last_dividend_timestamp: "0",
     owner: "",
-    holders: [],
     active: false,
     data: undefined,
   };
@@ -256,53 +236,47 @@ export const NFT = {
     if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.uri !== "") {
-      writer.uint32(26).string(message.uri);
-    }
-    if (message.uri_hash !== "") {
-      writer.uint32(34).string(message.uri_hash);
+    if (message.url !== "") {
+      writer.uint32(26).string(message.url);
     }
     if (message.supply !== "") {
-      writer.uint32(42).string(message.supply);
+      writer.uint32(34).string(message.supply);
     }
     if (message.available_shares !== "") {
-      writer.uint32(50).string(message.available_shares);
+      writer.uint32(42).string(message.available_shares);
     }
     if (message.initial_price !== "") {
-      writer.uint32(58).string(message.initial_price);
+      writer.uint32(50).string(message.initial_price);
     }
     if (message.ISO_timestamp !== "0") {
-      writer.uint32(64).uint64(message.ISO_timestamp);
+      writer.uint32(56).uint64(message.ISO_timestamp);
     }
     if (message.ISO_success_percent !== "0") {
-      writer.uint32(72).uint64(message.ISO_success_percent);
+      writer.uint32(64).uint64(message.ISO_success_percent);
     }
     if (message.accepted_payment_denom !== "") {
-      writer.uint32(82).string(message.accepted_payment_denom);
+      writer.uint32(74).string(message.accepted_payment_denom);
     }
     for (const v of message.sponsorships) {
-      Sponsorship.encode(v!, writer.uint32(90).fork()).ldelim();
+      Sponsorship.encode(v!, writer.uint32(82).fork()).ldelim();
     }
     if (message.revenue !== undefined) {
-      Coin.encode(message.revenue, writer.uint32(98).fork()).ldelim();
+      Coin.encode(message.revenue, writer.uint32(90).fork()).ldelim();
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(104).uint64(message.dividend_interval);
+      writer.uint32(96).uint64(message.dividend_interval);
     }
     if (message.last_dividend_timestamp !== "0") {
-      writer.uint32(112).uint64(message.last_dividend_timestamp);
+      writer.uint32(104).uint64(message.last_dividend_timestamp);
     }
     if (message.owner !== "") {
-      writer.uint32(122).string(message.owner);
-    }
-    for (const v of message.holders) {
-      Holder.encode(v!, writer.uint32(130).fork()).ldelim();
+      writer.uint32(114).string(message.owner);
     }
     if (message.active === true) {
-      writer.uint32(136).bool(message.active);
+      writer.uint32(120).bool(message.active);
     }
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(146).fork()).ldelim();
+      Any.encode(message.data, writer.uint32(130).fork()).ldelim();
     }
     return writer;
   },
@@ -333,108 +307,94 @@ export const NFT = {
             break;
           }
 
-          message.uri = reader.string();
+          message.url = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.uri_hash = reader.string();
+          message.supply = reader.string();
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.supply = reader.string();
+          message.available_shares = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.available_shares = reader.string();
+          message.initial_price = reader.string();
           continue;
         case 7:
-          if (tag !== 58) {
+          if (tag !== 56) {
             break;
           }
 
-          message.initial_price = reader.string();
+          message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.ISO_timestamp = longToString(reader.uint64() as Long);
+          message.ISO_success_percent = longToString(reader.uint64() as Long);
           continue;
         case 9:
-          if (tag !== 72) {
+          if (tag !== 74) {
             break;
           }
 
-          message.ISO_success_percent = longToString(reader.uint64() as Long);
+          message.accepted_payment_denom = reader.string();
           continue;
         case 10:
           if (tag !== 82) {
             break;
           }
 
-          message.accepted_payment_denom = reader.string();
+          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
           continue;
         case 11:
           if (tag !== 90) {
             break;
           }
 
-          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
+          message.revenue = Coin.decode(reader, reader.uint32());
           continue;
         case 12:
-          if (tag !== 98) {
+          if (tag !== 96) {
             break;
           }
 
-          message.revenue = Coin.decode(reader, reader.uint32());
+          message.dividend_interval = longToString(reader.uint64() as Long);
           continue;
         case 13:
           if (tag !== 104) {
             break;
           }
 
-          message.dividend_interval = longToString(reader.uint64() as Long);
-          continue;
-        case 14:
-          if (tag !== 112) {
-            break;
-          }
-
           message.last_dividend_timestamp = longToString(reader.uint64() as Long);
           continue;
-        case 15:
-          if (tag !== 122) {
+        case 14:
+          if (tag !== 114) {
             break;
           }
 
           message.owner = reader.string();
           continue;
-        case 16:
-          if (tag !== 130) {
-            break;
-          }
-
-          message.holders.push(Holder.decode(reader, reader.uint32()));
-          continue;
-        case 17:
-          if (tag !== 136) {
+        case 15:
+          if (tag !== 120) {
             break;
           }
 
           message.active = reader.bool();
           continue;
-        case 18:
-          if (tag !== 146) {
+        case 16:
+          if (tag !== 130) {
             break;
           }
 
@@ -451,25 +411,27 @@ export const NFT = {
 
   fromJSON(object: any): NFT {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
-      supply: isSet(object.supply) ? String(object.supply) : "",
-      available_shares: isSet(object.available_shares) ? String(object.available_shares) : "",
-      initial_price: isSet(object.initial_price) ? String(object.initial_price) : "",
-      ISO_timestamp: isSet(object.ISO_timestamp) ? String(object.ISO_timestamp) : "0",
-      ISO_success_percent: isSet(object.ISO_success_percent) ? String(object.ISO_success_percent) : "0",
-      accepted_payment_denom: isSet(object.accepted_payment_denom) ? String(object.accepted_payment_denom) : "",
-      sponsorships: Array.isArray(object?.sponsorships)
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
+      supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
+      available_shares: isSet(object.available_shares) ? globalThis.String(object.available_shares) : "",
+      initial_price: isSet(object.initial_price) ? globalThis.String(object.initial_price) : "",
+      ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
+      ISO_success_percent: isSet(object.ISO_success_percent) ? globalThis.String(object.ISO_success_percent) : "0",
+      accepted_payment_denom: isSet(object.accepted_payment_denom)
+        ? globalThis.String(object.accepted_payment_denom)
+        : "",
+      sponsorships: globalThis.Array.isArray(object?.sponsorships)
         ? object.sponsorships.map((e: any) => Sponsorship.fromJSON(e))
         : [],
       revenue: isSet(object.revenue) ? Coin.fromJSON(object.revenue) : undefined,
-      dividend_interval: isSet(object.dividend_interval) ? String(object.dividend_interval) : "0",
-      last_dividend_timestamp: isSet(object.last_dividend_timestamp) ? String(object.last_dividend_timestamp) : "0",
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      holders: Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
-      active: isSet(object.active) ? Boolean(object.active) : false,
+      dividend_interval: isSet(object.dividend_interval) ? globalThis.String(object.dividend_interval) : "0",
+      last_dividend_timestamp: isSet(object.last_dividend_timestamp)
+        ? globalThis.String(object.last_dividend_timestamp)
+        : "0",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -482,11 +444,8 @@ export const NFT = {
     if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.uri !== "") {
-      obj.uri = message.uri;
-    }
-    if (message.uri_hash !== "") {
-      obj.uri_hash = message.uri_hash;
+    if (message.url !== "") {
+      obj.url = message.url;
     }
     if (message.supply !== "") {
       obj.supply = message.supply;
@@ -521,9 +480,6 @@ export const NFT = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.holders?.length) {
-      obj.holders = message.holders.map((e) => Holder.toJSON(e));
-    }
     if (message.active === true) {
       obj.active = message.active;
     }
@@ -540,8 +496,7 @@ export const NFT = {
     const message = createBaseNFT();
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
-    message.uri = object.uri ?? "";
-    message.uri_hash = object.uri_hash ?? "";
+    message.url = object.url ?? "";
     message.supply = object.supply ?? "";
     message.available_shares = object.available_shares ?? "";
     message.initial_price = object.initial_price ?? "";
@@ -555,7 +510,6 @@ export const NFT = {
     message.dividend_interval = object.dividend_interval ?? "0";
     message.last_dividend_timestamp = object.last_dividend_timestamp ?? "0";
     message.owner = object.owner ?? "";
-    message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     message.active = object.active ?? false;
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
@@ -563,7 +517,7 @@ export const NFT = {
 };
 
 function createBaseSponsorship(): Sponsorship {
-  return { description: "", uri: "" };
+  return { description: "", url: "" };
 }
 
 export const Sponsorship = {
@@ -573,8 +527,8 @@ export const Sponsorship = {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
-    if (message.uri !== "") {
-      writer.uint32(18).string(message.uri);
+    if (message.url !== "") {
+      writer.uint32(18).string(message.url);
     }
     return writer;
   },
@@ -598,7 +552,7 @@ export const Sponsorship = {
             break;
           }
 
-          message.uri = reader.string();
+          message.url = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -611,8 +565,8 @@ export const Sponsorship = {
 
   fromJSON(object: any): Sponsorship {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
     };
   },
 
@@ -621,8 +575,8 @@ export const Sponsorship = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.uri !== "") {
-      obj.uri = message.uri;
+    if (message.url !== "") {
+      obj.url = message.url;
     }
     return obj;
   },
@@ -633,24 +587,30 @@ export const Sponsorship = {
   fromPartial(object: DeepPartial<Sponsorship>): Sponsorship {
     const message = createBaseSponsorship();
     message.description = object.description ?? "";
-    message.uri = object.uri ?? "";
+    message.url = object.url ?? "";
     return message;
   },
 };
 
 function createBaseHolder(): Holder {
-  return { address: "", shares: "" };
+  return { class_id: "", id: "", address: "", shares: "" };
 }
 
 export const Holder = {
   $type: "flux.fnft.v1beta1.Holder" as const,
 
   encode(message: Holder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
     if (message.address !== "") {
-      writer.uint32(10).string(message.address);
+      writer.uint32(26).string(message.address);
     }
     if (message.shares !== "") {
-      writer.uint32(18).string(message.shares);
+      writer.uint32(34).string(message.shares);
     }
     return writer;
   },
@@ -667,10 +627,24 @@ export const Holder = {
             break;
           }
 
-          message.address = reader.string();
+          message.class_id = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.address = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
             break;
           }
 
@@ -687,13 +661,21 @@ export const Holder = {
 
   fromJSON(object: any): Holder {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      shares: isSet(object.shares) ? String(object.shares) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      shares: isSet(object.shares) ? globalThis.String(object.shares) : "",
     };
   },
 
   toJSON(message: Holder): unknown {
     const obj: any = {};
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
     if (message.address !== "") {
       obj.address = message.address;
     }
@@ -708,6 +690,8 @@ export const Holder = {
   },
   fromPartial(object: DeepPartial<Holder>): Holder {
     const message = createBaseHolder();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
     message.address = object.address ?? "";
     message.shares = object.shares ?? "";
     return message;
@@ -717,7 +701,8 @@ export const Holder = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

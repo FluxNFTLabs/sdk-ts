@@ -2,6 +2,7 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
+import { Plan } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import { Any } from "../../../../google/protobuf/any";
 import { Params } from "./client";
 
@@ -100,9 +101,52 @@ export interface MsgSubmitMisbehaviour {
 export interface MsgSubmitMisbehaviourResponse {
 }
 
+/** MsgRecoverClient defines the message used to recover a frozen or expired client. */
+export interface MsgRecoverClient {
+  /** the client identifier for the client to be updated if the proposal passes */
+  subject_client_id: string;
+  /**
+   * the substitute client identifier for the client which will replace the subject
+   * client
+   */
+  substitute_client_id: string;
+  /** signer address */
+  signer: string;
+}
+
+/** MsgRecoverClientResponse defines the Msg/RecoverClient response type. */
+export interface MsgRecoverClientResponse {
+}
+
+/** MsgIBCSoftwareUpgrade defines the message used to schedule an upgrade of an IBC client using a v1 governance proposal */
+export interface MsgIBCSoftwareUpgrade {
+  plan:
+    | Plan
+    | undefined;
+  /**
+   * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
+   * This will make the chain commit to the correct upgraded (self) client state
+   * before the upgrade occurs, so that connecting chains can verify that the
+   * new upgraded client is valid by verifying a proof on the previous version
+   * of the chain. This will allow IBC connections to persist smoothly across
+   * planned chain upgrades. Correspondingly, the UpgradedClientState field has been
+   * deprecated in the Cosmos SDK to allow for this logic to exist solely in
+   * the 02-client module.
+   */
+  upgraded_client_state:
+    | Any
+    | undefined;
+  /** signer address */
+  signer: string;
+}
+
+/** MsgIBCSoftwareUpgradeResponse defines the Msg/IBCSoftwareUpgrade response type. */
+export interface MsgIBCSoftwareUpgradeResponse {
+}
+
 /** MsgUpdateParams defines the sdk.Msg type to update the client parameters. */
 export interface MsgUpdateParams {
-  /** signer address (it may be the the address that controls the module, which defaults to x/gov unless overwritten). */
+  /** signer address */
   signer: string;
   /**
    * params defines the client parameters to update.
@@ -177,7 +221,7 @@ export const MsgCreateClient = {
     return {
       client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
       consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -315,9 +359,9 @@ export const MsgUpdateClient = {
 
   fromJSON(object: any): MsgUpdateClient {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       client_message: isSet(object.client_message) ? Any.fromJSON(object.client_message) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -490,7 +534,7 @@ export const MsgUpgradeClient = {
 
   fromJSON(object: any): MsgUpgradeClient {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
       consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
       proof_upgrade_client: isSet(object.proof_upgrade_client)
@@ -499,7 +543,7 @@ export const MsgUpgradeClient = {
       proof_upgrade_consensus_state: isSet(object.proof_upgrade_consensus_state)
         ? bytesFromBase64(object.proof_upgrade_consensus_state)
         : new Uint8Array(0),
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -649,9 +693,9 @@ export const MsgSubmitMisbehaviour = {
 
   fromJSON(object: any): MsgSubmitMisbehaviour {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       misbehaviour: isSet(object.misbehaviour) ? Any.fromJSON(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -728,6 +772,283 @@ export const MsgSubmitMisbehaviourResponse = {
   },
 };
 
+function createBaseMsgRecoverClient(): MsgRecoverClient {
+  return { subject_client_id: "", substitute_client_id: "", signer: "" };
+}
+
+export const MsgRecoverClient = {
+  $type: "ibc.core.client.v1.MsgRecoverClient" as const,
+
+  encode(message: MsgRecoverClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.subject_client_id !== "") {
+      writer.uint32(10).string(message.subject_client_id);
+    }
+    if (message.substitute_client_id !== "") {
+      writer.uint32(18).string(message.substitute_client_id);
+    }
+    if (message.signer !== "") {
+      writer.uint32(26).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecoverClient {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRecoverClient();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.subject_client_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.substitute_client_id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.signer = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRecoverClient {
+    return {
+      subject_client_id: isSet(object.subject_client_id) ? globalThis.String(object.subject_client_id) : "",
+      substitute_client_id: isSet(object.substitute_client_id) ? globalThis.String(object.substitute_client_id) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgRecoverClient): unknown {
+    const obj: any = {};
+    if (message.subject_client_id !== "") {
+      obj.subject_client_id = message.subject_client_id;
+    }
+    if (message.substitute_client_id !== "") {
+      obj.substitute_client_id = message.substitute_client_id;
+    }
+    if (message.signer !== "") {
+      obj.signer = message.signer;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgRecoverClient>): MsgRecoverClient {
+    return MsgRecoverClient.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgRecoverClient>): MsgRecoverClient {
+    const message = createBaseMsgRecoverClient();
+    message.subject_client_id = object.subject_client_id ?? "";
+    message.substitute_client_id = object.substitute_client_id ?? "";
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgRecoverClientResponse(): MsgRecoverClientResponse {
+  return {};
+}
+
+export const MsgRecoverClientResponse = {
+  $type: "ibc.core.client.v1.MsgRecoverClientResponse" as const,
+
+  encode(_: MsgRecoverClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRecoverClientResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRecoverClientResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRecoverClientResponse {
+    return {};
+  },
+
+  toJSON(_: MsgRecoverClientResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgRecoverClientResponse>): MsgRecoverClientResponse {
+    return MsgRecoverClientResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgRecoverClientResponse>): MsgRecoverClientResponse {
+    const message = createBaseMsgRecoverClientResponse();
+    return message;
+  },
+};
+
+function createBaseMsgIBCSoftwareUpgrade(): MsgIBCSoftwareUpgrade {
+  return { plan: undefined, upgraded_client_state: undefined, signer: "" };
+}
+
+export const MsgIBCSoftwareUpgrade = {
+  $type: "ibc.core.client.v1.MsgIBCSoftwareUpgrade" as const,
+
+  encode(message: MsgIBCSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.plan !== undefined) {
+      Plan.encode(message.plan, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.upgraded_client_state !== undefined) {
+      Any.encode(message.upgraded_client_state, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.signer !== "") {
+      writer.uint32(26).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgIBCSoftwareUpgrade {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgIBCSoftwareUpgrade();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.plan = Plan.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.upgraded_client_state = Any.decode(reader, reader.uint32());
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.signer = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgIBCSoftwareUpgrade {
+    return {
+      plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state)
+        ? Any.fromJSON(object.upgraded_client_state)
+        : undefined,
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgIBCSoftwareUpgrade): unknown {
+    const obj: any = {};
+    if (message.plan !== undefined) {
+      obj.plan = Plan.toJSON(message.plan);
+    }
+    if (message.upgraded_client_state !== undefined) {
+      obj.upgraded_client_state = Any.toJSON(message.upgraded_client_state);
+    }
+    if (message.signer !== "") {
+      obj.signer = message.signer;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgIBCSoftwareUpgrade>): MsgIBCSoftwareUpgrade {
+    return MsgIBCSoftwareUpgrade.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgIBCSoftwareUpgrade>): MsgIBCSoftwareUpgrade {
+    const message = createBaseMsgIBCSoftwareUpgrade();
+    message.plan = (object.plan !== undefined && object.plan !== null) ? Plan.fromPartial(object.plan) : undefined;
+    message.upgraded_client_state =
+      (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null)
+        ? Any.fromPartial(object.upgraded_client_state)
+        : undefined;
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgIBCSoftwareUpgradeResponse(): MsgIBCSoftwareUpgradeResponse {
+  return {};
+}
+
+export const MsgIBCSoftwareUpgradeResponse = {
+  $type: "ibc.core.client.v1.MsgIBCSoftwareUpgradeResponse" as const,
+
+  encode(_: MsgIBCSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgIBCSoftwareUpgradeResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgIBCSoftwareUpgradeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgIBCSoftwareUpgradeResponse {
+    return {};
+  },
+
+  toJSON(_: MsgIBCSoftwareUpgradeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgIBCSoftwareUpgradeResponse>): MsgIBCSoftwareUpgradeResponse {
+    return MsgIBCSoftwareUpgradeResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgIBCSoftwareUpgradeResponse>): MsgIBCSoftwareUpgradeResponse {
+    const message = createBaseMsgIBCSoftwareUpgradeResponse();
+    return message;
+  },
+};
+
 function createBaseMsgUpdateParams(): MsgUpdateParams {
   return { signer: "", params: undefined };
 }
@@ -777,7 +1098,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -864,6 +1185,13 @@ export interface Msg {
     request: DeepPartial<MsgSubmitMisbehaviour>,
     metadata?: grpc.Metadata,
   ): Promise<MsgSubmitMisbehaviourResponse>;
+  /** RecoverClient defines a rpc handler method for MsgRecoverClient. */
+  RecoverClient(request: DeepPartial<MsgRecoverClient>, metadata?: grpc.Metadata): Promise<MsgRecoverClientResponse>;
+  /** IBCSoftwareUpgrade defines a rpc handler method for MsgIBCSoftwareUpgrade. */
+  IBCSoftwareUpgrade(
+    request: DeepPartial<MsgIBCSoftwareUpgrade>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgIBCSoftwareUpgradeResponse>;
   /** UpdateClientParams defines a rpc handler method for MsgUpdateParams. */
   UpdateClientParams(request: DeepPartial<MsgUpdateParams>, metadata?: grpc.Metadata): Promise<MsgUpdateParamsResponse>;
 }
@@ -877,6 +1205,8 @@ export class MsgClientImpl implements Msg {
     this.UpdateClient = this.UpdateClient.bind(this);
     this.UpgradeClient = this.UpgradeClient.bind(this);
     this.SubmitMisbehaviour = this.SubmitMisbehaviour.bind(this);
+    this.RecoverClient = this.RecoverClient.bind(this);
+    this.IBCSoftwareUpgrade = this.IBCSoftwareUpgrade.bind(this);
     this.UpdateClientParams = this.UpdateClientParams.bind(this);
   }
 
@@ -897,6 +1227,17 @@ export class MsgClientImpl implements Msg {
     metadata?: grpc.Metadata,
   ): Promise<MsgSubmitMisbehaviourResponse> {
     return this.rpc.unary(MsgSubmitMisbehaviourDesc, MsgSubmitMisbehaviour.fromPartial(request), metadata);
+  }
+
+  RecoverClient(request: DeepPartial<MsgRecoverClient>, metadata?: grpc.Metadata): Promise<MsgRecoverClientResponse> {
+    return this.rpc.unary(MsgRecoverClientDesc, MsgRecoverClient.fromPartial(request), metadata);
+  }
+
+  IBCSoftwareUpgrade(
+    request: DeepPartial<MsgIBCSoftwareUpgrade>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgIBCSoftwareUpgradeResponse> {
+    return this.rpc.unary(MsgIBCSoftwareUpgradeDesc, MsgIBCSoftwareUpgrade.fromPartial(request), metadata);
   }
 
   UpdateClientParams(
@@ -1001,6 +1342,52 @@ export const MsgSubmitMisbehaviourDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
+export const MsgRecoverClientDesc: UnaryMethodDefinitionish = {
+  methodName: "RecoverClient",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgRecoverClient.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgRecoverClientResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgIBCSoftwareUpgradeDesc: UnaryMethodDefinitionish = {
+  methodName: "IBCSoftwareUpgrade",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgIBCSoftwareUpgrade.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgIBCSoftwareUpgradeResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
 export const MsgUpdateClientParamsDesc: UnaryMethodDefinitionish = {
   methodName: "UpdateClientParams",
   service: MsgDesc,
@@ -1092,30 +1479,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1125,21 +1493,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1147,7 +1516,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

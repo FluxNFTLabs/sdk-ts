@@ -10,8 +10,6 @@ export interface MsgCreate {
   sender: string;
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
   class_id: string;
-  /** uri defines uri link for this nft */
-  uri: string;
   /** shares defines the number of shares this nft holds */
   supply: string;
   /** initial_price defines initial price of a share */
@@ -107,8 +105,6 @@ export interface MsgSponsor {
   coin: string;
   /** description defines nft sponsorship description */
   description: string;
-  /** uri defines sponsorship content to display */
-  uri: string;
 }
 
 /** MsgSponsorResponse defines the Msg/Sponsor response type. */
@@ -119,7 +115,6 @@ function createBaseMsgCreate(): MsgCreate {
   return {
     sender: "",
     class_id: "",
-    uri: "",
     supply: "",
     initial_price: "",
     ISO_timestamp: "0",
@@ -139,26 +134,23 @@ export const MsgCreate = {
     if (message.class_id !== "") {
       writer.uint32(18).string(message.class_id);
     }
-    if (message.uri !== "") {
-      writer.uint32(26).string(message.uri);
-    }
     if (message.supply !== "") {
-      writer.uint32(34).string(message.supply);
+      writer.uint32(26).string(message.supply);
     }
     if (message.initial_price !== "") {
-      writer.uint32(42).string(message.initial_price);
+      writer.uint32(34).string(message.initial_price);
     }
     if (message.ISO_timestamp !== "0") {
-      writer.uint32(48).uint64(message.ISO_timestamp);
+      writer.uint32(40).uint64(message.ISO_timestamp);
     }
     if (message.ISO_success_percent !== "0") {
-      writer.uint32(56).uint64(message.ISO_success_percent);
+      writer.uint32(48).uint64(message.ISO_success_percent);
     }
     if (message.accepted_payment_denom !== "") {
-      writer.uint32(66).string(message.accepted_payment_denom);
+      writer.uint32(58).string(message.accepted_payment_denom);
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(72).uint64(message.dividend_interval);
+      writer.uint32(64).uint64(message.dividend_interval);
     }
     return writer;
   },
@@ -189,45 +181,38 @@ export const MsgCreate = {
             break;
           }
 
-          message.uri = reader.string();
+          message.supply = reader.string();
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.supply = reader.string();
+          message.initial_price = reader.string();
           continue;
         case 5:
-          if (tag !== 42) {
+          if (tag !== 40) {
             break;
           }
 
-          message.initial_price = reader.string();
+          message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.ISO_timestamp = longToString(reader.uint64() as Long);
-          continue;
-        case 7:
-          if (tag !== 56) {
-            break;
-          }
-
           message.ISO_success_percent = longToString(reader.uint64() as Long);
           continue;
-        case 8:
-          if (tag !== 66) {
+        case 7:
+          if (tag !== 58) {
             break;
           }
 
           message.accepted_payment_denom = reader.string();
           continue;
-        case 9:
-          if (tag !== 72) {
+        case 8:
+          if (tag !== 64) {
             break;
           }
 
@@ -244,15 +229,16 @@ export const MsgCreate = {
 
   fromJSON(object: any): MsgCreate {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      supply: isSet(object.supply) ? String(object.supply) : "",
-      initial_price: isSet(object.initial_price) ? String(object.initial_price) : "",
-      ISO_timestamp: isSet(object.ISO_timestamp) ? String(object.ISO_timestamp) : "0",
-      ISO_success_percent: isSet(object.ISO_success_percent) ? String(object.ISO_success_percent) : "0",
-      accepted_payment_denom: isSet(object.accepted_payment_denom) ? String(object.accepted_payment_denom) : "",
-      dividend_interval: isSet(object.dividend_interval) ? String(object.dividend_interval) : "0",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
+      initial_price: isSet(object.initial_price) ? globalThis.String(object.initial_price) : "",
+      ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
+      ISO_success_percent: isSet(object.ISO_success_percent) ? globalThis.String(object.ISO_success_percent) : "0",
+      accepted_payment_denom: isSet(object.accepted_payment_denom)
+        ? globalThis.String(object.accepted_payment_denom)
+        : "",
+      dividend_interval: isSet(object.dividend_interval) ? globalThis.String(object.dividend_interval) : "0",
     };
   },
 
@@ -263,9 +249,6 @@ export const MsgCreate = {
     }
     if (message.class_id !== "") {
       obj.class_id = message.class_id;
-    }
-    if (message.uri !== "") {
-      obj.uri = message.uri;
     }
     if (message.supply !== "") {
       obj.supply = message.supply;
@@ -295,7 +278,6 @@ export const MsgCreate = {
     const message = createBaseMsgCreate();
     message.sender = object.sender ?? "";
     message.class_id = object.class_id ?? "";
-    message.uri = object.uri ?? "";
     message.supply = object.supply ?? "";
     message.initial_price = object.initial_price ?? "";
     message.ISO_timestamp = object.ISO_timestamp ?? "0";
@@ -420,10 +402,10 @@ export const MsgPurchaseShares = {
 
   fromJSON(object: any): MsgPurchaseShares {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      shares: isSet(object.shares) ? String(object.shares) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      shares: isSet(object.shares) ? globalThis.String(object.shares) : "",
     };
   },
 
@@ -581,11 +563,11 @@ export const MsgTransferShares = {
 
   fromJSON(object: any): MsgTransferShares {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      shares: isSet(object.shares) ? String(object.shares) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      receiver: isSet(object.receiver) ? globalThis.String(object.receiver) : "",
+      shares: isSet(object.shares) ? globalThis.String(object.shares) : "",
     };
   },
 
@@ -737,10 +719,10 @@ export const MsgDepositShares = {
 
   fromJSON(object: any): MsgDepositShares {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      shares: isSet(object.shares) ? String(object.shares) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      shares: isSet(object.shares) ? globalThis.String(object.shares) : "",
     };
   },
 
@@ -888,10 +870,10 @@ export const MsgWithdrawShares = {
 
   fromJSON(object: any): MsgWithdrawShares {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      shares: isSet(object.shares) ? String(object.shares) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      shares: isSet(object.shares) ? globalThis.String(object.shares) : "",
     };
   },
 
@@ -971,7 +953,7 @@ export const MsgWithdrawSharesResponse = {
 };
 
 function createBaseMsgSponsor(): MsgSponsor {
-  return { sender: "", class_id: "", id: "", coin: "", description: "", uri: "" };
+  return { sender: "", class_id: "", id: "", coin: "", description: "" };
 }
 
 export const MsgSponsor = {
@@ -992,9 +974,6 @@ export const MsgSponsor = {
     }
     if (message.description !== "") {
       writer.uint32(42).string(message.description);
-    }
-    if (message.uri !== "") {
-      writer.uint32(50).string(message.uri);
     }
     return writer;
   },
@@ -1041,13 +1020,6 @@ export const MsgSponsor = {
 
           message.description = reader.string();
           continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.uri = reader.string();
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1059,12 +1031,11 @@ export const MsgSponsor = {
 
   fromJSON(object: any): MsgSponsor {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      coin: isSet(object.coin) ? String(object.coin) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      coin: isSet(object.coin) ? globalThis.String(object.coin) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -1085,9 +1056,6 @@ export const MsgSponsor = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.uri !== "") {
-      obj.uri = message.uri;
-    }
     return obj;
   },
 
@@ -1101,7 +1069,6 @@ export const MsgSponsor = {
     message.id = object.id ?? "";
     message.coin = object.coin ?? "";
     message.description = object.description ?? "";
-    message.uri = object.uri ?? "";
     return message;
   },
 };
@@ -1422,29 +1389,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1461,7 +1410,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

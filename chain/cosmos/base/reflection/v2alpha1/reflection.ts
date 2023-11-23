@@ -436,8 +436,8 @@ export const TxDescriptor = {
 
   fromJSON(object: any): TxDescriptor {
     return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromJSON(e)) : [],
+      fullname: isSet(object.fullname) ? globalThis.String(object.fullname) : "",
+      msgs: globalThis.Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromJSON(e)) : [],
     };
   },
 
@@ -502,7 +502,7 @@ export const AuthnDescriptor = {
 
   fromJSON(object: any): AuthnDescriptor {
     return {
-      sign_modes: Array.isArray(object?.sign_modes)
+      sign_modes: globalThis.Array.isArray(object?.sign_modes)
         ? object.sign_modes.map((e: any) => SigningModeDescriptor.fromJSON(e))
         : [],
     };
@@ -585,10 +585,10 @@ export const SigningModeDescriptor = {
 
   fromJSON(object: any): SigningModeDescriptor {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      number: isSet(object.number) ? globalThis.Number(object.number) : 0,
       authn_info_provider_method_fullname: isSet(object.authn_info_provider_method_fullname)
-        ? String(object.authn_info_provider_method_fullname)
+        ? globalThis.String(object.authn_info_provider_method_fullname)
         : "",
     };
   },
@@ -657,7 +657,7 @@ export const ChainDescriptor = {
   },
 
   fromJSON(object: any): ChainDescriptor {
-    return { id: isSet(object.id) ? String(object.id) : "" };
+    return { id: isSet(object.id) ? globalThis.String(object.id) : "" };
   },
 
   toJSON(message: ChainDescriptor): unknown {
@@ -717,7 +717,7 @@ export const CodecDescriptor = {
 
   fromJSON(object: any): CodecDescriptor {
     return {
-      interfaces: Array.isArray(object?.interfaces)
+      interfaces: globalThis.Array.isArray(object?.interfaces)
         ? object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e))
         : [],
     };
@@ -802,11 +802,11 @@ export const InterfaceDescriptor = {
 
   fromJSON(object: any): InterfaceDescriptor {
     return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      interface_accepting_messages: Array.isArray(object?.interface_accepting_messages)
+      fullname: isSet(object.fullname) ? globalThis.String(object.fullname) : "",
+      interface_accepting_messages: globalThis.Array.isArray(object?.interface_accepting_messages)
         ? object.interface_accepting_messages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e))
         : [],
-      interface_implementers: Array.isArray(object?.interface_implementers)
+      interface_implementers: globalThis.Array.isArray(object?.interface_implementers)
         ? object.interface_implementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e))
         : [],
     };
@@ -891,8 +891,8 @@ export const InterfaceImplementerDescriptor = {
 
   fromJSON(object: any): InterfaceImplementerDescriptor {
     return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      fullname: isSet(object.fullname) ? globalThis.String(object.fullname) : "",
+      type_url: isSet(object.type_url) ? globalThis.String(object.type_url) : "",
     };
   },
 
@@ -967,9 +967,9 @@ export const InterfaceAcceptingMessageDescriptor = {
 
   fromJSON(object: any): InterfaceAcceptingMessageDescriptor {
     return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      field_descriptor_names: Array.isArray(object?.field_descriptor_names)
-        ? object.field_descriptor_names.map((e: any) => String(e))
+      fullname: isSet(object.fullname) ? globalThis.String(object.fullname) : "",
+      field_descriptor_names: globalThis.Array.isArray(object?.field_descriptor_names)
+        ? object.field_descriptor_names.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1036,7 +1036,7 @@ export const ConfigurationDescriptor = {
   fromJSON(object: any): ConfigurationDescriptor {
     return {
       bech32_account_address_prefix: isSet(object.bech32_account_address_prefix)
-        ? String(object.bech32_account_address_prefix)
+        ? globalThis.String(object.bech32_account_address_prefix)
         : "",
     };
   },
@@ -1097,7 +1097,7 @@ export const MsgDescriptor = {
   },
 
   fromJSON(object: any): MsgDescriptor {
-    return { msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "" };
+    return { msg_type_url: isSet(object.msg_type_url) ? globalThis.String(object.msg_type_url) : "" };
   },
 
   toJSON(message: MsgDescriptor): unknown {
@@ -1791,7 +1791,7 @@ export const QueryServicesDescriptor = {
 
   fromJSON(object: any): QueryServicesDescriptor {
     return {
-      query_services: Array.isArray(object?.query_services)
+      query_services: globalThis.Array.isArray(object?.query_services)
         ? object.query_services.map((e: any) => QueryServiceDescriptor.fromJSON(e))
         : [],
     };
@@ -1874,9 +1874,11 @@ export const QueryServiceDescriptor = {
 
   fromJSON(object: any): QueryServiceDescriptor {
     return {
-      fullname: isSet(object.fullname) ? String(object.fullname) : "",
-      is_module: isSet(object.is_module) ? Boolean(object.is_module) : false,
-      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e)) : [],
+      fullname: isSet(object.fullname) ? globalThis.String(object.fullname) : "",
+      is_module: isSet(object.is_module) ? globalThis.Boolean(object.is_module) : false,
+      methods: globalThis.Array.isArray(object?.methods)
+        ? object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e))
+        : [],
     };
   },
 
@@ -1955,8 +1957,8 @@ export const QueryMethodDescriptor = {
 
   fromJSON(object: any): QueryMethodDescriptor {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      full_query_path: isSet(object.full_query_path) ? String(object.full_query_path) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      full_query_path: isSet(object.full_query_path) ? globalThis.String(object.full_query_path) : "",
     };
   },
 
@@ -2304,29 +2306,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2334,7 +2318,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

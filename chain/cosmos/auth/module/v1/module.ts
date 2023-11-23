@@ -81,11 +81,11 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      bech32_prefix: isSet(object.bech32_prefix) ? String(object.bech32_prefix) : "",
-      module_account_permissions: Array.isArray(object?.module_account_permissions)
+      bech32_prefix: isSet(object.bech32_prefix) ? globalThis.String(object.bech32_prefix) : "",
+      module_account_permissions: globalThis.Array.isArray(object?.module_account_permissions)
         ? object.module_account_permissions.map((e: any) => ModuleAccountPermission.fromJSON(e))
         : [],
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
     };
   },
 
@@ -165,8 +165,10 @@ export const ModuleAccountPermission = {
 
   fromJSON(object: any): ModuleAccountPermission {
     return {
-      account: isSet(object.account) ? String(object.account) : "",
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : [],
+      account: isSet(object.account) ? globalThis.String(object.account) : "",
+      permissions: globalThis.Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -195,7 +197,8 @@ export const ModuleAccountPermission = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

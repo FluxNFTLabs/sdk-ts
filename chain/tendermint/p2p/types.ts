@@ -89,9 +89,9 @@ export const NetAddress = {
 
   fromJSON(object: any): NetAddress {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? Number(object.port) : 0,
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      ip: isSet(object.ip) ? globalThis.String(object.ip) : "",
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
     };
   },
 
@@ -180,9 +180,9 @@ export const ProtocolVersion = {
 
   fromJSON(object: any): ProtocolVersion {
     return {
-      p2p: isSet(object.p2p) ? String(object.p2p) : "0",
-      block: isSet(object.block) ? String(object.block) : "0",
-      app: isSet(object.app) ? String(object.app) : "0",
+      p2p: isSet(object.p2p) ? globalThis.String(object.p2p) : "0",
+      block: isSet(object.block) ? globalThis.String(object.block) : "0",
+      app: isSet(object.app) ? globalThis.String(object.app) : "0",
     };
   },
 
@@ -331,12 +331,12 @@ export const DefaultNodeInfo = {
   fromJSON(object: any): DefaultNodeInfo {
     return {
       protocol_version: isSet(object.protocol_version) ? ProtocolVersion.fromJSON(object.protocol_version) : undefined,
-      default_node_id: isSet(object.default_node_id) ? String(object.default_node_id) : "",
-      listen_addr: isSet(object.listen_addr) ? String(object.listen_addr) : "",
-      network: isSet(object.network) ? String(object.network) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      default_node_id: isSet(object.default_node_id) ? globalThis.String(object.default_node_id) : "",
+      listen_addr: isSet(object.listen_addr) ? globalThis.String(object.listen_addr) : "",
+      network: isSet(object.network) ? globalThis.String(object.network) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
       channels: isSet(object.channels) ? bytesFromBase64(object.channels) : new Uint8Array(0),
-      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      moniker: isSet(object.moniker) ? globalThis.String(object.moniker) : "",
       other: isSet(object.other) ? DefaultNodeInfoOther.fromJSON(object.other) : undefined,
     };
   },
@@ -440,8 +440,8 @@ export const DefaultNodeInfoOther = {
 
   fromJSON(object: any): DefaultNodeInfoOther {
     return {
-      tx_index: isSet(object.tx_index) ? String(object.tx_index) : "",
-      rpc_address: isSet(object.rpc_address) ? String(object.rpc_address) : "",
+      tx_index: isSet(object.tx_index) ? globalThis.String(object.tx_index) : "",
+      rpc_address: isSet(object.rpc_address) ? globalThis.String(object.rpc_address) : "",
     };
   },
 
@@ -467,30 +467,11 @@ export const DefaultNodeInfoOther = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -500,21 +481,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

@@ -440,16 +440,16 @@ export const StoreCodeProposal = {
 
   fromJSON(object: any): StoreCodeProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      run_as: isSet(object.run_as) ? globalThis.String(object.run_as) : "",
       wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
-      source: isSet(object.source) ? String(object.source) : "",
-      builder: isSet(object.builder) ? String(object.builder) : "",
+      unpin_code: isSet(object.unpin_code) ? globalThis.Boolean(object.unpin_code) : false,
+      source: isSet(object.source) ? globalThis.String(object.source) : "",
+      builder: isSet(object.builder) ? globalThis.String(object.builder) : "",
       code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
@@ -625,14 +625,14 @@ export const InstantiateContractProposal = {
 
   fromJSON(object: any): InstantiateContractProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      label: isSet(object.label) ? String(object.label) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      run_as: isSet(object.run_as) ? globalThis.String(object.run_as) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -822,16 +822,16 @@ export const InstantiateContract2Proposal = {
 
   fromJSON(object: any): InstantiateContract2Proposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      label: isSet(object.label) ? String(object.label) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      run_as: isSet(object.run_as) ? globalThis.String(object.run_as) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(0),
-      fix_msg: isSet(object.fix_msg) ? Boolean(object.fix_msg) : false,
+      fix_msg: isSet(object.fix_msg) ? globalThis.Boolean(object.fix_msg) : false,
     };
   },
 
@@ -968,10 +968,10 @@ export const MigrateContractProposal = {
 
   fromJSON(object: any): MigrateContractProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -1079,9 +1079,9 @@ export const SudoContractProposal = {
 
   fromJSON(object: any): SudoContractProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -1205,12 +1205,12 @@ export const ExecuteContractProposal = {
 
   fromJSON(object: any): ExecuteContractProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      run_as: isSet(object.run_as) ? globalThis.String(object.run_as) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -1321,10 +1321,10 @@ export const UpdateAdminProposal = {
 
   fromJSON(object: any): UpdateAdminProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      new_admin: isSet(object.new_admin) ? globalThis.String(object.new_admin) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
     };
   },
 
@@ -1417,9 +1417,9 @@ export const ClearAdminProposal = {
 
   fromJSON(object: any): ClearAdminProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
     };
   },
 
@@ -1520,9 +1520,9 @@ export const PinCodesProposal = {
 
   fromJSON(object: any): PinCodesProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      code_ids: globalThis.Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -1623,9 +1623,9 @@ export const UnpinCodesProposal = {
 
   fromJSON(object: any): UnpinCodesProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      code_ids: globalThis.Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -1704,7 +1704,7 @@ export const AccessConfigUpdate = {
 
   fromJSON(object: any): AccessConfigUpdate {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
@@ -1795,9 +1795,9 @@ export const UpdateInstantiateConfigProposal = {
 
   fromJSON(object: any): UpdateInstantiateConfigProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      access_config_updates: Array.isArray(object?.access_config_updates)
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      access_config_updates: globalThis.Array.isArray(object?.access_config_updates)
         ? object.access_config_updates.map((e: any) => AccessConfigUpdate.fromJSON(e))
         : [],
     };
@@ -2002,20 +2002,20 @@ export const StoreAndInstantiateContractProposal = {
 
   fromJSON(object: any): StoreAndInstantiateContractProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      run_as: isSet(object.run_as) ? String(object.run_as) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      run_as: isSet(object.run_as) ? globalThis.String(object.run_as) : "",
       wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      label: isSet(object.label) ? String(object.label) : "",
+      unpin_code: isSet(object.unpin_code) ? globalThis.Boolean(object.unpin_code) : false,
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
-      source: isSet(object.source) ? String(object.source) : "",
-      builder: isSet(object.builder) ? String(object.builder) : "",
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      source: isSet(object.source) ? globalThis.String(object.source) : "",
+      builder: isSet(object.builder) ? globalThis.String(object.builder) : "",
       code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
@@ -2089,30 +2089,11 @@ export const StoreAndInstantiateContractProposal = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -2122,21 +2103,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

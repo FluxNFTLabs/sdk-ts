@@ -147,10 +147,10 @@ export const MsgRegisterPayee = {
 
   fromJSON(object: any): MsgRegisterPayee {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      payee: isSet(object.payee) ? String(object.payee) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
+      payee: isSet(object.payee) ? globalThis.String(object.payee) : "",
     };
   },
 
@@ -298,10 +298,10 @@ export const MsgRegisterCounterpartyPayee = {
 
   fromJSON(object: any): MsgRegisterCounterpartyPayee {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      counterparty_payee: isSet(object.counterparty_payee) ? String(object.counterparty_payee) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
+      counterparty_payee: isSet(object.counterparty_payee) ? globalThis.String(object.counterparty_payee) : "",
     };
   },
 
@@ -460,10 +460,10 @@ export const MsgPayPacketFee = {
   fromJSON(object: any): MsgPayPacketFee {
     return {
       fee: isSet(object.fee) ? Fee.fromJSON(object.fee) : undefined,
-      source_port_id: isSet(object.source_port_id) ? String(object.source_port_id) : "",
-      source_channel_id: isSet(object.source_channel_id) ? String(object.source_channel_id) : "",
-      signer: isSet(object.signer) ? String(object.signer) : "",
-      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : [],
+      source_port_id: isSet(object.source_port_id) ? globalThis.String(object.source_port_id) : "",
+      source_channel_id: isSet(object.source_channel_id) ? globalThis.String(object.source_channel_id) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
+      relayers: globalThis.Array.isArray(object?.relayers) ? object.relayers.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -911,29 +911,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -941,7 +923,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

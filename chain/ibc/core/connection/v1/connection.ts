@@ -241,11 +241,11 @@ export const ConnectionEnd = {
 
   fromJSON(object: any): ConnectionEnd {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      versions: globalThis.Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? String(object.delay_period) : "0",
+      delay_period: isSet(object.delay_period) ? globalThis.String(object.delay_period) : "0",
     };
   },
 
@@ -374,12 +374,12 @@ export const IdentifiedConnection = {
 
   fromJSON(object: any): IdentifiedConnection {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      versions: Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      versions: globalThis.Array.isArray(object?.versions) ? object.versions.map((e: any) => Version.fromJSON(e)) : [],
       state: isSet(object.state) ? stateFromJSON(object.state) : 0,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? String(object.delay_period) : "0",
+      delay_period: isSet(object.delay_period) ? globalThis.String(object.delay_period) : "0",
     };
   },
 
@@ -482,8 +482,8 @@ export const Counterparty = {
 
   fromJSON(object: any): Counterparty {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
       prefix: isSet(object.prefix) ? MerklePrefix.fromJSON(object.prefix) : undefined,
     };
   },
@@ -554,7 +554,7 @@ export const ClientPaths = {
   },
 
   fromJSON(object: any): ClientPaths {
-    return { paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : [] };
+    return { paths: globalThis.Array.isArray(object?.paths) ? object.paths.map((e: any) => globalThis.String(e)) : [] };
   },
 
   toJSON(message: ClientPaths): unknown {
@@ -624,8 +624,8 @@ export const ConnectionPaths = {
 
   fromJSON(object: any): ConnectionPaths {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : [],
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      paths: globalThis.Array.isArray(object?.paths) ? object.paths.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -700,8 +700,8 @@ export const Version = {
 
   fromJSON(object: any): Version {
     return {
-      identifier: isSet(object.identifier) ? String(object.identifier) : "",
-      features: Array.isArray(object?.features) ? object.features.map((e: any) => String(e)) : [],
+      identifier: isSet(object.identifier) ? globalThis.String(object.identifier) : "",
+      features: globalThis.Array.isArray(object?.features) ? object.features.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -767,7 +767,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       max_expected_time_per_block: isSet(object.max_expected_time_per_block)
-        ? String(object.max_expected_time_per_block)
+        ? globalThis.String(object.max_expected_time_per_block)
         : "0",
     };
   },
@@ -793,7 +793,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

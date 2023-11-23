@@ -251,7 +251,7 @@ export const QueryContractInfoRequest = {
   },
 
   fromJSON(object: any): QueryContractInfoRequest {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: QueryContractInfoRequest): unknown {
@@ -321,7 +321,7 @@ export const QueryContractInfoResponse = {
 
   fromJSON(object: any): QueryContractInfoResponse {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       contract_info: isSet(object.contract_info) ? ContractInfo.fromJSON(object.contract_info) : undefined,
     };
   },
@@ -399,7 +399,7 @@ export const QueryContractHistoryRequest = {
 
   fromJSON(object: any): QueryContractHistoryRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -477,7 +477,7 @@ export const QueryContractHistoryResponse = {
 
   fromJSON(object: any): QueryContractHistoryResponse {
     return {
-      entries: Array.isArray(object?.entries)
+      entries: globalThis.Array.isArray(object?.entries)
         ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -557,7 +557,7 @@ export const QueryContractsByCodeRequest = {
 
   fromJSON(object: any): QueryContractsByCodeRequest {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -635,7 +635,9 @@ export const QueryContractsByCodeResponse = {
 
   fromJSON(object: any): QueryContractsByCodeResponse {
     return {
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => String(e)) : [],
+      contracts: globalThis.Array.isArray(object?.contracts)
+        ? object.contracts.map((e: any) => globalThis.String(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -713,7 +715,7 @@ export const QueryAllContractStateRequest = {
 
   fromJSON(object: any): QueryAllContractStateRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -791,7 +793,7 @@ export const QueryAllContractStateResponse = {
 
   fromJSON(object: any): QueryAllContractStateResponse {
     return {
-      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromJSON(e)) : [],
+      models: globalThis.Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -869,7 +871,7 @@ export const QueryRawContractStateRequest = {
 
   fromJSON(object: any): QueryRawContractStateRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array(0),
     };
   },
@@ -1004,7 +1006,7 @@ export const QuerySmartContractStateRequest = {
 
   fromJSON(object: any): QuerySmartContractStateRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       query_data: isSet(object.query_data) ? bytesFromBase64(object.query_data) : new Uint8Array(0),
     };
   },
@@ -1128,7 +1130,7 @@ export const QueryCodeRequest = {
   },
 
   fromJSON(object: any): QueryCodeRequest {
-    return { code_id: isSet(object.code_id) ? String(object.code_id) : "0" };
+    return { code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0" };
   },
 
   toJSON(message: QueryCodeRequest): unknown {
@@ -1218,8 +1220,8 @@ export const CodeInfoResponse = {
 
   fromJSON(object: any): CodeInfoResponse {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      creator: isSet(object.creator) ? String(object.creator) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      creator: isSet(object.creator) ? globalThis.String(object.creator) : "",
       data_hash: isSet(object.data_hash) ? bytesFromBase64(object.data_hash) : new Uint8Array(0),
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
@@ -1448,7 +1450,7 @@ export const QueryCodesResponse = {
 
   fromJSON(object: any): QueryCodesResponse {
     return {
-      code_infos: Array.isArray(object?.code_infos)
+      code_infos: globalThis.Array.isArray(object?.code_infos)
         ? object.code_infos.map((e: any) => CodeInfoResponse.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1601,7 +1603,7 @@ export const QueryPinnedCodesResponse = {
 
   fromJSON(object: any): QueryPinnedCodesResponse {
     return {
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
+      code_ids: globalThis.Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => globalThis.String(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1785,7 +1787,7 @@ export const QueryContractsByCreatorRequest = {
 
   fromJSON(object: any): QueryContractsByCreatorRequest {
     return {
-      creator_address: isSet(object.creator_address) ? String(object.creator_address) : "",
+      creator_address: isSet(object.creator_address) ? globalThis.String(object.creator_address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1863,8 +1865,8 @@ export const QueryContractsByCreatorResponse = {
 
   fromJSON(object: any): QueryContractsByCreatorResponse {
     return {
-      contract_addresses: Array.isArray(object?.contract_addresses)
-        ? object.contract_addresses.map((e: any) => String(e))
+      contract_addresses: globalThis.Array.isArray(object?.contract_addresses)
+        ? object.contract_addresses.map((e: any) => globalThis.String(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
@@ -2354,30 +2356,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -2387,21 +2370,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2418,7 +2402,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

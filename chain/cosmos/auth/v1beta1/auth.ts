@@ -115,10 +115,10 @@ export const BaseAccount = {
 
   fromJSON(object: any): BaseAccount {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromJSON(object.pub_key) : undefined,
-      account_number: isSet(object.account_number) ? String(object.account_number) : "0",
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
+      account_number: isSet(object.account_number) ? globalThis.String(object.account_number) : "0",
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
     };
   },
 
@@ -214,8 +214,10 @@ export const ModuleAccount = {
   fromJSON(object: any): ModuleAccount {
     return {
       base_account: isSet(object.base_account) ? BaseAccount.fromJSON(object.base_account) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : [],
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      permissions: globalThis.Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -296,8 +298,8 @@ export const ModuleCredential = {
 
   fromJSON(object: any): ModuleCredential {
     return {
-      module_name: isSet(object.module_name) ? String(object.module_name) : "",
-      derivation_keys: Array.isArray(object?.derivation_keys)
+      module_name: isSet(object.module_name) ? globalThis.String(object.module_name) : "",
+      derivation_keys: globalThis.Array.isArray(object?.derivation_keys)
         ? object.derivation_keys.map((e: any) => bytesFromBase64(e))
         : [],
     };
@@ -410,12 +412,16 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      max_memo_characters: isSet(object.max_memo_characters) ? String(object.max_memo_characters) : "0",
-      tx_sig_limit: isSet(object.tx_sig_limit) ? String(object.tx_sig_limit) : "0",
-      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? String(object.tx_size_cost_per_byte) : "0",
-      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? String(object.sig_verify_cost_ed25519) : "0",
+      max_memo_characters: isSet(object.max_memo_characters) ? globalThis.String(object.max_memo_characters) : "0",
+      tx_sig_limit: isSet(object.tx_sig_limit) ? globalThis.String(object.tx_sig_limit) : "0",
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte)
+        ? globalThis.String(object.tx_size_cost_per_byte)
+        : "0",
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519)
+        ? globalThis.String(object.sig_verify_cost_ed25519)
+        : "0",
       sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1)
-        ? String(object.sig_verify_cost_secp256k1)
+        ? globalThis.String(object.sig_verify_cost_secp256k1)
         : "0",
     };
   },
@@ -454,30 +460,11 @@ export const Params = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -487,21 +474,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

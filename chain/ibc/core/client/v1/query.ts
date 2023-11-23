@@ -233,7 +233,7 @@ export const QueryClientStateRequest = {
   },
 
   fromJSON(object: any): QueryClientStateRequest {
-    return { client_id: isSet(object.client_id) ? String(object.client_id) : "" };
+    return { client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "" };
   },
 
   toJSON(message: QueryClientStateRequest): unknown {
@@ -459,7 +459,7 @@ export const QueryClientStatesResponse = {
 
   fromJSON(object: any): QueryClientStatesResponse {
     return {
-      client_states: Array.isArray(object?.client_states)
+      client_states: globalThis.Array.isArray(object?.client_states)
         ? object.client_states.map((e: any) => IdentifiedClientState.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -559,10 +559,10 @@ export const QueryConsensusStateRequest = {
 
   fromJSON(object: any): QueryConsensusStateRequest {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      revision_number: isSet(object.revision_number) ? String(object.revision_number) : "0",
-      revision_height: isSet(object.revision_height) ? String(object.revision_height) : "0",
-      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false,
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      revision_number: isSet(object.revision_number) ? globalThis.String(object.revision_number) : "0",
+      revision_height: isSet(object.revision_height) ? globalThis.String(object.revision_height) : "0",
+      latest_height: isSet(object.latest_height) ? globalThis.Boolean(object.latest_height) : false,
     };
   },
 
@@ -740,7 +740,7 @@ export const QueryConsensusStatesRequest = {
 
   fromJSON(object: any): QueryConsensusStatesRequest {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -818,7 +818,7 @@ export const QueryConsensusStatesResponse = {
 
   fromJSON(object: any): QueryConsensusStatesResponse {
     return {
-      consensus_states: Array.isArray(object?.consensus_states)
+      consensus_states: globalThis.Array.isArray(object?.consensus_states)
         ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -898,7 +898,7 @@ export const QueryConsensusStateHeightsRequest = {
 
   fromJSON(object: any): QueryConsensusStateHeightsRequest {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -976,7 +976,7 @@ export const QueryConsensusStateHeightsResponse = {
 
   fromJSON(object: any): QueryConsensusStateHeightsResponse {
     return {
-      consensus_state_heights: Array.isArray(object?.consensus_state_heights)
+      consensus_state_heights: globalThis.Array.isArray(object?.consensus_state_heights)
         ? object.consensus_state_heights.map((e: any) => Height.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1045,7 +1045,7 @@ export const QueryClientStatusRequest = {
   },
 
   fromJSON(object: any): QueryClientStatusRequest {
-    return { client_id: isSet(object.client_id) ? String(object.client_id) : "" };
+    return { client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "" };
   },
 
   toJSON(message: QueryClientStatusRequest): unknown {
@@ -1104,7 +1104,7 @@ export const QueryClientStatusResponse = {
   },
 
   fromJSON(object: any): QueryClientStatusResponse {
-    return { status: isSet(object.status) ? String(object.status) : "" };
+    return { status: isSet(object.status) ? globalThis.String(object.status) : "" };
   },
 
   toJSON(message: QueryClientStatusResponse): unknown {
@@ -1873,30 +1873,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1906,21 +1887,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1937,7 +1919,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

@@ -116,7 +116,7 @@ export interface MsgConnectionOpenConfirmResponse {
 
 /** MsgUpdateParams defines the sdk.Msg type to update the connection parameters. */
 export interface MsgUpdateParams {
-  /** signer address (it may be the the address that controls the module, which defaults to x/gov unless overwritten). */
+  /** signer address */
   signer: string;
   /**
    * params defines the connection parameters to update.
@@ -209,11 +209,11 @@ export const MsgConnectionOpenInit = {
 
   fromJSON(object: any): MsgConnectionOpenInit {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      delay_period: isSet(object.delay_period) ? String(object.delay_period) : "0",
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      delay_period: isSet(object.delay_period) ? globalThis.String(object.delay_period) : "0",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -473,12 +473,14 @@ export const MsgConnectionOpenTry = {
 
   fromJSON(object: any): MsgConnectionOpenTry {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      previous_connection_id: isSet(object.previous_connection_id) ? String(object.previous_connection_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      previous_connection_id: isSet(object.previous_connection_id)
+        ? globalThis.String(object.previous_connection_id)
+        : "",
       client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
       counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      delay_period: isSet(object.delay_period) ? String(object.delay_period) : "0",
-      counterparty_versions: Array.isArray(object?.counterparty_versions)
+      delay_period: isSet(object.delay_period) ? globalThis.String(object.delay_period) : "0",
+      counterparty_versions: globalThis.Array.isArray(object?.counterparty_versions)
         ? object.counterparty_versions.map((e: any) => Version.fromJSON(e))
         : [],
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
@@ -486,7 +488,7 @@ export const MsgConnectionOpenTry = {
       proof_client: isSet(object.proof_client) ? bytesFromBase64(object.proof_client) : new Uint8Array(0),
       proof_consensus: isSet(object.proof_consensus) ? bytesFromBase64(object.proof_consensus) : new Uint8Array(0),
       consensus_height: isSet(object.consensus_height) ? Height.fromJSON(object.consensus_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       host_consensus_state_proof: isSet(object.host_consensus_state_proof)
         ? bytesFromBase64(object.host_consensus_state_proof)
         : new Uint8Array(0),
@@ -763,9 +765,9 @@ export const MsgConnectionOpenAck = {
 
   fromJSON(object: any): MsgConnectionOpenAck {
     return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
       counterparty_connection_id: isSet(object.counterparty_connection_id)
-        ? String(object.counterparty_connection_id)
+        ? globalThis.String(object.counterparty_connection_id)
         : "",
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
       client_state: isSet(object.client_state) ? Any.fromJSON(object.client_state) : undefined,
@@ -774,7 +776,7 @@ export const MsgConnectionOpenAck = {
       proof_client: isSet(object.proof_client) ? bytesFromBase64(object.proof_client) : new Uint8Array(0),
       proof_consensus: isSet(object.proof_consensus) ? bytesFromBase64(object.proof_consensus) : new Uint8Array(0),
       consensus_height: isSet(object.consensus_height) ? Height.fromJSON(object.consensus_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       host_consensus_state_proof: isSet(object.host_consensus_state_proof)
         ? bytesFromBase64(object.host_consensus_state_proof)
         : new Uint8Array(0),
@@ -961,10 +963,10 @@ export const MsgConnectionOpenConfirm = {
 
   fromJSON(object: any): MsgConnectionOpenConfirm {
     return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
       proof_ack: isSet(object.proof_ack) ? bytesFromBase64(object.proof_ack) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1094,7 +1096,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -1436,30 +1438,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1469,21 +1452,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1500,7 +1484,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

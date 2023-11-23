@@ -365,9 +365,11 @@ export const MsgCreateGroup = {
 
   fromJSON(object: any): MsgCreateGroup {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => MemberRequest.fromJSON(e)) : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      members: globalThis.Array.isArray(object?.members)
+        ? object.members.map((e: any) => MemberRequest.fromJSON(e))
+        : [],
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
     };
   },
 
@@ -435,7 +437,7 @@ export const MsgCreateGroupResponse = {
   },
 
   fromJSON(object: any): MsgCreateGroupResponse {
-    return { group_id: isSet(object.group_id) ? String(object.group_id) : "0" };
+    return { group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0" };
   },
 
   toJSON(message: MsgCreateGroupResponse): unknown {
@@ -515,9 +517,9 @@ export const MsgUpdateGroupMembers = {
 
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      member_updates: Array.isArray(object?.member_updates)
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      member_updates: globalThis.Array.isArray(object?.member_updates)
         ? object.member_updates.map((e: any) => MemberRequest.fromJSON(e))
         : [],
     };
@@ -653,9 +655,9 @@ export const MsgUpdateGroupAdmin = {
 
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      new_admin: isSet(object.new_admin) ? globalThis.String(object.new_admin) : "",
     };
   },
 
@@ -789,9 +791,9 @@ export const MsgUpdateGroupMetadata = {
 
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
     };
   },
 
@@ -935,9 +937,9 @@ export const MsgCreateGroupPolicy = {
 
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
       decision_policy: isSet(object.decision_policy) ? Any.fromJSON(object.decision_policy) : undefined,
     };
   },
@@ -1012,7 +1014,7 @@ export const MsgCreateGroupPolicyResponse = {
   },
 
   fromJSON(object: any): MsgCreateGroupPolicyResponse {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: MsgCreateGroupPolicyResponse): unknown {
@@ -1092,9 +1094,9 @@ export const MsgUpdateGroupPolicyAdmin = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyAdmin {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
+      new_admin: isSet(object.new_admin) ? globalThis.String(object.new_admin) : "",
     };
   },
 
@@ -1265,11 +1267,15 @@ export const MsgCreateGroupWithPolicy = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicy {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => MemberRequest.fromJSON(e)) : [],
-      group_metadata: isSet(object.group_metadata) ? String(object.group_metadata) : "",
-      group_policy_metadata: isSet(object.group_policy_metadata) ? String(object.group_policy_metadata) : "",
-      group_policy_as_admin: isSet(object.group_policy_as_admin) ? Boolean(object.group_policy_as_admin) : false,
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      members: globalThis.Array.isArray(object?.members)
+        ? object.members.map((e: any) => MemberRequest.fromJSON(e))
+        : [],
+      group_metadata: isSet(object.group_metadata) ? globalThis.String(object.group_metadata) : "",
+      group_policy_metadata: isSet(object.group_policy_metadata) ? globalThis.String(object.group_policy_metadata) : "",
+      group_policy_as_admin: isSet(object.group_policy_as_admin)
+        ? globalThis.Boolean(object.group_policy_as_admin)
+        : false,
       decision_policy: isSet(object.decision_policy) ? Any.fromJSON(object.decision_policy) : undefined,
     };
   },
@@ -1363,8 +1369,8 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
     };
   },
 
@@ -1449,8 +1455,8 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicy {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
       decision_policy: isSet(object.decision_policy) ? Any.fromJSON(object.decision_policy) : undefined,
     };
   },
@@ -1587,9 +1593,9 @@ export const MsgUpdateGroupPolicyMetadata = {
 
   fromJSON(object: any): MsgUpdateGroupPolicyMetadata {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
     };
   },
 
@@ -1763,13 +1769,15 @@ export const MsgSubmitProposal = {
 
   fromJSON(object: any): MsgSubmitProposal {
     return {
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
-      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
+      proposers: globalThis.Array.isArray(object?.proposers)
+        ? object.proposers.map((e: any) => globalThis.String(e))
+        : [],
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
-      title: isSet(object.title) ? String(object.title) : "",
-      summary: isSet(object.summary) ? String(object.summary) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
     };
   },
 
@@ -1853,7 +1861,7 @@ export const MsgSubmitProposalResponse = {
   },
 
   fromJSON(object: any): MsgSubmitProposalResponse {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
@@ -1923,8 +1931,8 @@ export const MsgWithdrawProposal = {
 
   fromJSON(object: any): MsgWithdrawProposal {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      address: isSet(object.address) ? String(object.address) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
     };
   },
 
@@ -2074,10 +2082,10 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
     };
   },
@@ -2210,8 +2218,8 @@ export const MsgExec = {
 
   fromJSON(object: any): MsgExec {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      executor: isSet(object.executor) ? String(object.executor) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      executor: isSet(object.executor) ? globalThis.String(object.executor) : "",
     };
   },
 
@@ -2345,8 +2353,8 @@ export const MsgLeaveGroup = {
 
   fromJSON(object: any): MsgLeaveGroup {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
     };
   },
 
@@ -2984,29 +2992,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -3023,7 +3013,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

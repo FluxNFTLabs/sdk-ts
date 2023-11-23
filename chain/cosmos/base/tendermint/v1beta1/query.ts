@@ -223,7 +223,7 @@ export const GetValidatorSetByHeightRequest = {
 
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -311,8 +311,10 @@ export const GetValidatorSetByHeightResponse = {
 
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     return {
-      block_height: isSet(object.block_height) ? String(object.block_height) : "0",
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      block_height: isSet(object.block_height) ? globalThis.String(object.block_height) : "0",
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => Validator.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -465,8 +467,10 @@ export const GetLatestValidatorSetResponse = {
 
   fromJSON(object: any): GetLatestValidatorSetResponse {
     return {
-      block_height: isSet(object.block_height) ? String(object.block_height) : "0",
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      block_height: isSet(object.block_height) ? globalThis.String(object.block_height) : "0",
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => Validator.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -568,10 +572,10 @@ export const Validator = {
 
   fromJSON(object: any): Validator {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pub_key: isSet(object.pub_key) ? Any.fromJSON(object.pub_key) : undefined,
-      voting_power: isSet(object.voting_power) ? String(object.voting_power) : "0",
-      proposer_priority: isSet(object.proposer_priority) ? String(object.proposer_priority) : "0",
+      voting_power: isSet(object.voting_power) ? globalThis.String(object.voting_power) : "0",
+      proposer_priority: isSet(object.proposer_priority) ? globalThis.String(object.proposer_priority) : "0",
     };
   },
 
@@ -645,7 +649,7 @@ export const GetBlockByHeightRequest = {
   },
 
   fromJSON(object: any): GetBlockByHeightRequest {
-    return { height: isSet(object.height) ? String(object.height) : "0" };
+    return { height: isSet(object.height) ? globalThis.String(object.height) : "0" };
   },
 
   toJSON(message: GetBlockByHeightRequest): unknown {
@@ -984,7 +988,7 @@ export const GetSyncingResponse = {
   },
 
   fromJSON(object: any): GetSyncingResponse {
-    return { syncing: isSet(object.syncing) ? Boolean(object.syncing) : false };
+    return { syncing: isSet(object.syncing) ? globalThis.Boolean(object.syncing) : false };
   },
 
   toJSON(message: GetSyncingResponse): unknown {
@@ -1252,14 +1256,16 @@ export const VersionInfo = {
 
   fromJSON(object: any): VersionInfo {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      app_name: isSet(object.app_name) ? String(object.app_name) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      git_commit: isSet(object.git_commit) ? String(object.git_commit) : "",
-      build_tags: isSet(object.build_tags) ? String(object.build_tags) : "",
-      go_version: isSet(object.go_version) ? String(object.go_version) : "",
-      build_deps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromJSON(e)) : [],
-      cosmos_sdk_version: isSet(object.cosmos_sdk_version) ? String(object.cosmos_sdk_version) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      app_name: isSet(object.app_name) ? globalThis.String(object.app_name) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      git_commit: isSet(object.git_commit) ? globalThis.String(object.git_commit) : "",
+      build_tags: isSet(object.build_tags) ? globalThis.String(object.build_tags) : "",
+      go_version: isSet(object.go_version) ? globalThis.String(object.go_version) : "",
+      build_deps: globalThis.Array.isArray(object?.build_deps)
+        ? object.build_deps.map((e: any) => Module.fromJSON(e))
+        : [],
+      cosmos_sdk_version: isSet(object.cosmos_sdk_version) ? globalThis.String(object.cosmos_sdk_version) : "",
     };
   },
 
@@ -1368,9 +1374,9 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      path: isSet(object.path) ? String(object.path) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      sum: isSet(object.sum) ? String(object.sum) : "",
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      sum: isSet(object.sum) ? globalThis.String(object.sum) : "",
     };
   },
 
@@ -1470,9 +1476,9 @@ export const ABCIQueryRequest = {
   fromJSON(object: any): ABCIQueryRequest {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
-      path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? String(object.height) : "0",
-      prove: isSet(object.prove) ? Boolean(object.prove) : false,
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      prove: isSet(object.prove) ? globalThis.Boolean(object.prove) : false,
     };
   },
 
@@ -1635,15 +1641,15 @@ export const ABCIQueryResponse = {
 
   fromJSON(object: any): ABCIQueryResponse {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      log: isSet(object.log) ? String(object.log) : "",
-      info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? String(object.index) : "0",
+      code: isSet(object.code) ? globalThis.Number(object.code) : 0,
+      log: isSet(object.log) ? globalThis.String(object.log) : "",
+      info: isSet(object.info) ? globalThis.String(object.info) : "",
+      index: isSet(object.index) ? globalThis.String(object.index) : "0",
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
       proof_ops: isSet(object.proof_ops) ? ProofOps.fromJSON(object.proof_ops) : undefined,
-      height: isSet(object.height) ? String(object.height) : "0",
-      codespace: isSet(object.codespace) ? String(object.codespace) : "",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      codespace: isSet(object.codespace) ? globalThis.String(object.codespace) : "",
     };
   },
 
@@ -1758,7 +1764,7 @@ export const ProofOp = {
 
   fromJSON(object: any): ProofOp {
     return {
-      type: isSet(object.type) ? String(object.type) : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : "",
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
@@ -1828,7 +1834,7 @@ export const ProofOps = {
   },
 
   fromJSON(object: any): ProofOps {
-    return { ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromJSON(e)) : [] };
+    return { ops: globalThis.Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromJSON(e)) : [] };
   },
 
   toJSON(message: ProofOps): unknown {
@@ -2179,30 +2185,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -2212,21 +2199,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2243,7 +2231,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

@@ -75,8 +75,8 @@ export const Minter = {
 
   fromJSON(object: any): Minter {
     return {
-      inflation: isSet(object.inflation) ? String(object.inflation) : "",
-      annual_provisions: isSet(object.annual_provisions) ? String(object.annual_provisions) : "",
+      inflation: isSet(object.inflation) ? globalThis.String(object.inflation) : "",
+      annual_provisions: isSet(object.annual_provisions) ? globalThis.String(object.annual_provisions) : "",
     };
   },
 
@@ -198,12 +198,12 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      mint_denom: isSet(object.mint_denom) ? String(object.mint_denom) : "",
-      inflation_rate_change: isSet(object.inflation_rate_change) ? String(object.inflation_rate_change) : "",
-      inflation_max: isSet(object.inflation_max) ? String(object.inflation_max) : "",
-      inflation_min: isSet(object.inflation_min) ? String(object.inflation_min) : "",
-      goal_bonded: isSet(object.goal_bonded) ? String(object.goal_bonded) : "",
-      blocks_per_year: isSet(object.blocks_per_year) ? String(object.blocks_per_year) : "0",
+      mint_denom: isSet(object.mint_denom) ? globalThis.String(object.mint_denom) : "",
+      inflation_rate_change: isSet(object.inflation_rate_change) ? globalThis.String(object.inflation_rate_change) : "",
+      inflation_max: isSet(object.inflation_max) ? globalThis.String(object.inflation_max) : "",
+      inflation_min: isSet(object.inflation_min) ? globalThis.String(object.inflation_min) : "",
+      goal_bonded: isSet(object.goal_bonded) ? globalThis.String(object.goal_bonded) : "",
+      blocks_per_year: isSet(object.blocks_per_year) ? globalThis.String(object.blocks_per_year) : "0",
     };
   },
 
@@ -248,7 +248,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

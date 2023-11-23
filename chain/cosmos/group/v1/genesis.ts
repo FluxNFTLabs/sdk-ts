@@ -152,18 +152,20 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      group_seq: isSet(object.group_seq) ? String(object.group_seq) : "0",
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
-      group_members: Array.isArray(object?.group_members)
+      group_seq: isSet(object.group_seq) ? globalThis.String(object.group_seq) : "0",
+      groups: globalThis.Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
+      group_members: globalThis.Array.isArray(object?.group_members)
         ? object.group_members.map((e: any) => GroupMember.fromJSON(e))
         : [],
-      group_policy_seq: isSet(object.group_policy_seq) ? String(object.group_policy_seq) : "0",
-      group_policies: Array.isArray(object?.group_policies)
+      group_policy_seq: isSet(object.group_policy_seq) ? globalThis.String(object.group_policy_seq) : "0",
+      group_policies: globalThis.Array.isArray(object?.group_policies)
         ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
-      proposal_seq: isSet(object.proposal_seq) ? String(object.proposal_seq) : "0",
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      proposal_seq: isSet(object.proposal_seq) ? globalThis.String(object.proposal_seq) : "0",
+      proposals: globalThis.Array.isArray(object?.proposals)
+        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
+        : [],
+      votes: globalThis.Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
     };
   },
 
@@ -216,7 +218,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

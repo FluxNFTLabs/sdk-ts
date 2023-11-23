@@ -141,16 +141,18 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromJSON(e)) : [],
-      clients_consensus: Array.isArray(object?.clients_consensus)
+      clients: globalThis.Array.isArray(object?.clients)
+        ? object.clients.map((e: any) => IdentifiedClientState.fromJSON(e))
+        : [],
+      clients_consensus: globalThis.Array.isArray(object?.clients_consensus)
         ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromJSON(e))
         : [],
-      clients_metadata: Array.isArray(object?.clients_metadata)
+      clients_metadata: globalThis.Array.isArray(object?.clients_metadata)
         ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromJSON(e))
         : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      create_localhost: isSet(object.create_localhost) ? Boolean(object.create_localhost) : false,
-      next_client_sequence: isSet(object.next_client_sequence) ? String(object.next_client_sequence) : "0",
+      create_localhost: isSet(object.create_localhost) ? globalThis.Boolean(object.create_localhost) : false,
+      next_client_sequence: isSet(object.next_client_sequence) ? globalThis.String(object.next_client_sequence) : "0",
     };
   },
 
@@ -319,8 +321,8 @@ export const IdentifiedGenesisMetadata = {
 
   fromJSON(object: any): IdentifiedGenesisMetadata {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      client_metadata: Array.isArray(object?.client_metadata)
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      client_metadata: globalThis.Array.isArray(object?.client_metadata)
         ? object.client_metadata.map((e: any) => GenesisMetadata.fromJSON(e))
         : [],
     };
@@ -348,30 +350,11 @@ export const IdentifiedGenesisMetadata = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -381,21 +364,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

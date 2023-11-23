@@ -351,6 +351,56 @@ export interface MsgRemoveCodeUploadParamsAddresses {
 export interface MsgRemoveCodeUploadParamsAddressesResponse {
 }
 
+/**
+ * MsgStoreAndMigrateContract is the MsgStoreAndMigrateContract
+ * request type.
+ *
+ * Since: 0.42
+ */
+export interface MsgStoreAndMigrateContract {
+  /** Authority is the address of the governance account. */
+  authority: string;
+  /** WASMByteCode can be raw or gzip compressed */
+  wasm_byte_code: Uint8Array;
+  /** InstantiatePermission to apply on contract creation, optional */
+  instantiate_permission:
+    | AccessConfig
+    | undefined;
+  /** Contract is the address of the smart contract */
+  contract: string;
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg: Uint8Array;
+}
+
+/**
+ * MsgStoreAndMigrateContractResponse defines the response structure
+ * for executing a MsgStoreAndMigrateContract message.
+ *
+ * Since: 0.42
+ */
+export interface MsgStoreAndMigrateContractResponse {
+  /** CodeID is the reference to the stored WASM code */
+  code_id: string;
+  /** Checksum is the sha256 hash of the stored code */
+  checksum: Uint8Array;
+  /** Data contains bytes to returned from the contract */
+  data: Uint8Array;
+}
+
+/** MsgUpdateContractLabel sets a new label for a smart contract */
+export interface MsgUpdateContractLabel {
+  /** Sender is the that actor that signed the messages */
+  sender: string;
+  /** NewLabel string to be set */
+  new_label: string;
+  /** Contract is the address of the smart contract */
+  contract: string;
+}
+
+/** MsgUpdateContractLabelResponse returns empty data */
+export interface MsgUpdateContractLabelResponse {
+}
+
 function createBaseMsgStoreCode(): MsgStoreCode {
   return { sender: "", wasm_byte_code: new Uint8Array(0), instantiate_permission: undefined };
 }
@@ -410,7 +460,7 @@ export const MsgStoreCode = {
 
   fromJSON(object: any): MsgStoreCode {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
@@ -496,7 +546,7 @@ export const MsgStoreCodeResponse = {
 
   fromJSON(object: any): MsgStoreCodeResponse {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
     };
   },
@@ -612,12 +662,12 @@ export const MsgInstantiateContract = {
 
   fromJSON(object: any): MsgInstantiateContract {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      label: isSet(object.label) ? String(object.label) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -708,7 +758,7 @@ export const MsgInstantiateContractResponse = {
 
   fromJSON(object: any): MsgInstantiateContractResponse {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
@@ -853,14 +903,14 @@ export const MsgInstantiateContract2 = {
 
   fromJSON(object: any): MsgInstantiateContract2 {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      label: isSet(object.label) ? String(object.label) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
       salt: isSet(object.salt) ? bytesFromBase64(object.salt) : new Uint8Array(0),
-      fix_msg: isSet(object.fix_msg) ? Boolean(object.fix_msg) : false,
+      fix_msg: isSet(object.fix_msg) ? globalThis.Boolean(object.fix_msg) : false,
     };
   },
 
@@ -959,7 +1009,7 @@ export const MsgInstantiateContract2Response = {
 
   fromJSON(object: any): MsgInstantiateContract2Response {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
@@ -1055,10 +1105,10 @@ export const MsgExecuteContract = {
 
   fromJSON(object: any): MsgExecuteContract {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -1220,9 +1270,9 @@ export const MsgMigrateContract = {
 
   fromJSON(object: any): MsgMigrateContract {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -1375,9 +1425,9 @@ export const MsgUpdateAdmin = {
 
   fromJSON(object: any): MsgUpdateAdmin {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      new_admin: isSet(object.new_admin) ? String(object.new_admin) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      new_admin: isSet(object.new_admin) ? globalThis.String(object.new_admin) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
     };
   },
 
@@ -1501,8 +1551,8 @@ export const MsgClearAdmin = {
 
   fromJSON(object: any): MsgClearAdmin {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
     };
   },
 
@@ -1632,8 +1682,8 @@ export const MsgUpdateInstantiateConfig = {
 
   fromJSON(object: any): MsgUpdateInstantiateConfig {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       new_instantiate_permission: isSet(object.new_instantiate_permission)
         ? AccessConfig.fromJSON(object.new_instantiate_permission)
         : undefined,
@@ -1763,7 +1813,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -1896,8 +1946,8 @@ export const MsgSudoContract = {
 
   fromJSON(object: any): MsgSudoContract {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
   },
@@ -2048,8 +2098,8 @@ export const MsgPinCodes = {
 
   fromJSON(object: any): MsgPinCodes {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      code_ids: globalThis.Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -2181,8 +2231,8 @@ export const MsgUnpinCodes = {
 
   fromJSON(object: any): MsgUnpinCodes {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      code_ids: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => String(e)) : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      code_ids: globalThis.Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -2404,18 +2454,18 @@ export const MsgStoreAndInstantiateContract = {
 
   fromJSON(object: any): MsgStoreAndInstantiateContract {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
       wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
       instantiate_permission: isSet(object.instantiate_permission)
         ? AccessConfig.fromJSON(object.instantiate_permission)
         : undefined,
-      unpin_code: isSet(object.unpin_code) ? Boolean(object.unpin_code) : false,
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      label: isSet(object.label) ? String(object.label) : "",
+      unpin_code: isSet(object.unpin_code) ? globalThis.Boolean(object.unpin_code) : false,
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
-      source: isSet(object.source) ? String(object.source) : "",
-      builder: isSet(object.builder) ? String(object.builder) : "",
+      funds: globalThis.Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : [],
+      source: isSet(object.source) ? globalThis.String(object.source) : "",
+      builder: isSet(object.builder) ? globalThis.String(object.builder) : "",
       code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
     };
   },
@@ -2530,7 +2580,7 @@ export const MsgStoreAndInstantiateContractResponse = {
 
   fromJSON(object: any): MsgStoreAndInstantiateContractResponse {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
   },
@@ -2606,8 +2656,10 @@ export const MsgAddCodeUploadParamsAddresses = {
 
   fromJSON(object: any): MsgAddCodeUploadParamsAddresses {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      addresses: globalThis.Array.isArray(object?.addresses)
+        ? object.addresses.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -2727,8 +2779,10 @@ export const MsgRemoveCodeUploadParamsAddresses = {
 
   fromJSON(object: any): MsgRemoveCodeUploadParamsAddresses {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      addresses: globalThis.Array.isArray(object?.addresses)
+        ? object.addresses.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -2799,6 +2853,365 @@ export const MsgRemoveCodeUploadParamsAddressesResponse = {
   },
 };
 
+function createBaseMsgStoreAndMigrateContract(): MsgStoreAndMigrateContract {
+  return {
+    authority: "",
+    wasm_byte_code: new Uint8Array(0),
+    instantiate_permission: undefined,
+    contract: "",
+    msg: new Uint8Array(0),
+  };
+}
+
+export const MsgStoreAndMigrateContract = {
+  $type: "cosmwasm.wasm.v1.MsgStoreAndMigrateContract" as const,
+
+  encode(message: MsgStoreAndMigrateContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.wasm_byte_code.length !== 0) {
+      writer.uint32(18).bytes(message.wasm_byte_code);
+    }
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.contract !== "") {
+      writer.uint32(34).string(message.contract);
+    }
+    if (message.msg.length !== 0) {
+      writer.uint32(42).bytes(message.msg);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreAndMigrateContract {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreAndMigrateContract();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authority = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.wasm_byte_code = reader.bytes();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.contract = reader.string();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.msg = reader.bytes();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgStoreAndMigrateContract {
+    return {
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      wasm_byte_code: isSet(object.wasm_byte_code) ? bytesFromBase64(object.wasm_byte_code) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
+        : undefined,
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: MsgStoreAndMigrateContract): unknown {
+    const obj: any = {};
+    if (message.authority !== "") {
+      obj.authority = message.authority;
+    }
+    if (message.wasm_byte_code.length !== 0) {
+      obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
+    }
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
+    }
+    if (message.contract !== "") {
+      obj.contract = message.contract;
+    }
+    if (message.msg.length !== 0) {
+      obj.msg = base64FromBytes(message.msg);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgStoreAndMigrateContract>): MsgStoreAndMigrateContract {
+    return MsgStoreAndMigrateContract.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgStoreAndMigrateContract>): MsgStoreAndMigrateContract {
+    const message = createBaseMsgStoreAndMigrateContract();
+    message.authority = object.authority ?? "";
+    message.wasm_byte_code = object.wasm_byte_code ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
+        : undefined;
+    message.contract = object.contract ?? "";
+    message.msg = object.msg ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseMsgStoreAndMigrateContractResponse(): MsgStoreAndMigrateContractResponse {
+  return { code_id: "0", checksum: new Uint8Array(0), data: new Uint8Array(0) };
+}
+
+export const MsgStoreAndMigrateContractResponse = {
+  $type: "cosmwasm.wasm.v1.MsgStoreAndMigrateContractResponse" as const,
+
+  encode(message: MsgStoreAndMigrateContractResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.code_id !== "0") {
+      writer.uint32(8).uint64(message.code_id);
+    }
+    if (message.checksum.length !== 0) {
+      writer.uint32(18).bytes(message.checksum);
+    }
+    if (message.data.length !== 0) {
+      writer.uint32(26).bytes(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreAndMigrateContractResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreAndMigrateContractResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.code_id = longToString(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.checksum = reader.bytes();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.data = reader.bytes();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgStoreAndMigrateContractResponse {
+    return {
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      checksum: isSet(object.checksum) ? bytesFromBase64(object.checksum) : new Uint8Array(0),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: MsgStoreAndMigrateContractResponse): unknown {
+    const obj: any = {};
+    if (message.code_id !== "0") {
+      obj.code_id = message.code_id;
+    }
+    if (message.checksum.length !== 0) {
+      obj.checksum = base64FromBytes(message.checksum);
+    }
+    if (message.data.length !== 0) {
+      obj.data = base64FromBytes(message.data);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgStoreAndMigrateContractResponse>): MsgStoreAndMigrateContractResponse {
+    return MsgStoreAndMigrateContractResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgStoreAndMigrateContractResponse>): MsgStoreAndMigrateContractResponse {
+    const message = createBaseMsgStoreAndMigrateContractResponse();
+    message.code_id = object.code_id ?? "0";
+    message.checksum = object.checksum ?? new Uint8Array(0);
+    message.data = object.data ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseMsgUpdateContractLabel(): MsgUpdateContractLabel {
+  return { sender: "", new_label: "", contract: "" };
+}
+
+export const MsgUpdateContractLabel = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateContractLabel" as const,
+
+  encode(message: MsgUpdateContractLabel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
+    }
+    if (message.new_label !== "") {
+      writer.uint32(18).string(message.new_label);
+    }
+    if (message.contract !== "") {
+      writer.uint32(26).string(message.contract);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateContractLabel {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateContractLabel();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sender = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.new_label = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.contract = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateContractLabel {
+    return {
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      new_label: isSet(object.new_label) ? globalThis.String(object.new_label) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
+    };
+  },
+
+  toJSON(message: MsgUpdateContractLabel): unknown {
+    const obj: any = {};
+    if (message.sender !== "") {
+      obj.sender = message.sender;
+    }
+    if (message.new_label !== "") {
+      obj.new_label = message.new_label;
+    }
+    if (message.contract !== "") {
+      obj.contract = message.contract;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgUpdateContractLabel>): MsgUpdateContractLabel {
+    return MsgUpdateContractLabel.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgUpdateContractLabel>): MsgUpdateContractLabel {
+    const message = createBaseMsgUpdateContractLabel();
+    message.sender = object.sender ?? "";
+    message.new_label = object.new_label ?? "";
+    message.contract = object.contract ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgUpdateContractLabelResponse(): MsgUpdateContractLabelResponse {
+  return {};
+}
+
+export const MsgUpdateContractLabelResponse = {
+  $type: "cosmwasm.wasm.v1.MsgUpdateContractLabelResponse" as const,
+
+  encode(_: MsgUpdateContractLabelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateContractLabelResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateContractLabelResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateContractLabelResponse {
+    return {};
+  },
+
+  toJSON(_: MsgUpdateContractLabelResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgUpdateContractLabelResponse>): MsgUpdateContractLabelResponse {
+    return MsgUpdateContractLabelResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgUpdateContractLabelResponse>): MsgUpdateContractLabelResponse {
+    const message = createBaseMsgUpdateContractLabelResponse();
+    return message;
+  },
+};
+
 /** Msg defines the wasm Msg service. */
 export interface Msg {
   /** StoreCode to submit Wasm code to the system */
@@ -2829,7 +3242,7 @@ export interface Msg {
     request: DeepPartial<MsgMigrateContract>,
     metadata?: grpc.Metadata,
   ): Promise<MsgMigrateContractResponse>;
-  /** UpdateAdmin sets a new   admin for a smart contract */
+  /** UpdateAdmin sets a new admin for a smart contract */
   UpdateAdmin(request: DeepPartial<MsgUpdateAdmin>, metadata?: grpc.Metadata): Promise<MsgUpdateAdminResponse>;
   /** ClearAdmin removes any admin stored for a smart contract */
   ClearAdmin(request: DeepPartial<MsgClearAdmin>, metadata?: grpc.Metadata): Promise<MsgClearAdminResponse>;
@@ -2894,6 +3307,25 @@ export interface Msg {
     request: DeepPartial<MsgAddCodeUploadParamsAddresses>,
     metadata?: grpc.Metadata,
   ): Promise<MsgAddCodeUploadParamsAddressesResponse>;
+  /**
+   * StoreAndMigrateContract defines a governance operation for storing
+   * and migrating the contract. The authority is defined in the keeper.
+   *
+   * Since: 0.42
+   */
+  StoreAndMigrateContract(
+    request: DeepPartial<MsgStoreAndMigrateContract>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgStoreAndMigrateContractResponse>;
+  /**
+   * UpdateContractLabel sets a new label for a smart contract
+   *
+   * Since: 0.43
+   */
+  UpdateContractLabel(
+    request: DeepPartial<MsgUpdateContractLabel>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgUpdateContractLabelResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -2916,6 +3348,8 @@ export class MsgClientImpl implements Msg {
     this.StoreAndInstantiateContract = this.StoreAndInstantiateContract.bind(this);
     this.RemoveCodeUploadParamsAddresses = this.RemoveCodeUploadParamsAddresses.bind(this);
     this.AddCodeUploadParamsAddresses = this.AddCodeUploadParamsAddresses.bind(this);
+    this.StoreAndMigrateContract = this.StoreAndMigrateContract.bind(this);
+    this.UpdateContractLabel = this.UpdateContractLabel.bind(this);
   }
 
   StoreCode(request: DeepPartial<MsgStoreCode>, metadata?: grpc.Metadata): Promise<MsgStoreCodeResponse> {
@@ -3012,6 +3446,20 @@ export class MsgClientImpl implements Msg {
       MsgAddCodeUploadParamsAddresses.fromPartial(request),
       metadata,
     );
+  }
+
+  StoreAndMigrateContract(
+    request: DeepPartial<MsgStoreAndMigrateContract>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgStoreAndMigrateContractResponse> {
+    return this.rpc.unary(MsgStoreAndMigrateContractDesc, MsgStoreAndMigrateContract.fromPartial(request), metadata);
+  }
+
+  UpdateContractLabel(
+    request: DeepPartial<MsgUpdateContractLabel>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgUpdateContractLabelResponse> {
+    return this.rpc.unary(MsgUpdateContractLabelDesc, MsgUpdateContractLabel.fromPartial(request), metadata);
   }
 }
 
@@ -3362,6 +3810,52 @@ export const MsgAddCodeUploadParamsAddressesDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
+export const MsgStoreAndMigrateContractDesc: UnaryMethodDefinitionish = {
+  methodName: "StoreAndMigrateContract",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgStoreAndMigrateContract.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgStoreAndMigrateContractResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgUpdateContractLabelDesc: UnaryMethodDefinitionish = {
+  methodName: "UpdateContractLabel",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgUpdateContractLabel.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgUpdateContractLabelResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
 interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
@@ -3430,30 +3924,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -3463,21 +3938,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -3494,7 +3970,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

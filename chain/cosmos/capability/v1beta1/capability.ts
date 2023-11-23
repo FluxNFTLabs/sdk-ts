@@ -65,7 +65,7 @@ export const Capability = {
   },
 
   fromJSON(object: any): Capability {
-    return { index: isSet(object.index) ? String(object.index) : "0" };
+    return { index: isSet(object.index) ? globalThis.String(object.index) : "0" };
   },
 
   toJSON(message: Capability): unknown {
@@ -135,8 +135,8 @@ export const Owner = {
 
   fromJSON(object: any): Owner {
     return {
-      module: isSet(object.module) ? String(object.module) : "",
-      name: isSet(object.name) ? String(object.name) : "",
+      module: isSet(object.module) ? globalThis.String(object.module) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
     };
   },
 
@@ -200,7 +200,7 @@ export const CapabilityOwners = {
   },
 
   fromJSON(object: any): CapabilityOwners {
-    return { owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : [] };
+    return { owners: globalThis.Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : [] };
   },
 
   toJSON(message: CapabilityOwners): unknown {
@@ -224,7 +224,8 @@ export const CapabilityOwners = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

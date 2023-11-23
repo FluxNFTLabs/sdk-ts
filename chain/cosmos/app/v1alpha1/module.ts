@@ -143,11 +143,11 @@ export const ModuleDescriptor = {
 
   fromJSON(object: any): ModuleDescriptor {
     return {
-      go_import: isSet(object.go_import) ? String(object.go_import) : "",
-      use_package: Array.isArray(object?.use_package)
+      go_import: isSet(object.go_import) ? globalThis.String(object.go_import) : "",
+      use_package: globalThis.Array.isArray(object?.use_package)
         ? object.use_package.map((e: any) => PackageReference.fromJSON(e))
         : [],
-      can_migrate_from: Array.isArray(object?.can_migrate_from)
+      can_migrate_from: globalThis.Array.isArray(object?.can_migrate_from)
         ? object.can_migrate_from.map((e: any) => MigrateFromInfo.fromJSON(e))
         : [],
     };
@@ -228,8 +228,8 @@ export const PackageReference = {
 
   fromJSON(object: any): PackageReference {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      revision: isSet(object.revision) ? Number(object.revision) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      revision: isSet(object.revision) ? globalThis.Number(object.revision) : 0,
     };
   },
 
@@ -293,7 +293,7 @@ export const MigrateFromInfo = {
   },
 
   fromJSON(object: any): MigrateFromInfo {
-    return { module: isSet(object.module) ? String(object.module) : "" };
+    return { module: isSet(object.module) ? globalThis.String(object.module) : "" };
   },
 
   toJSON(message: MigrateFromInfo): unknown {
@@ -317,7 +317,8 @@ export const MigrateFromInfo = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

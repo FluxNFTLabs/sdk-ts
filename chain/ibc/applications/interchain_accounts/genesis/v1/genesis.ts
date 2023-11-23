@@ -197,13 +197,13 @@ export const ControllerGenesisState = {
 
   fromJSON(object: any): ControllerGenesisState {
     return {
-      active_channels: Array.isArray(object?.active_channels)
+      active_channels: globalThis.Array.isArray(object?.active_channels)
         ? object.active_channels.map((e: any) => ActiveChannel.fromJSON(e))
         : [],
-      interchain_accounts: Array.isArray(object?.interchain_accounts)
+      interchain_accounts: globalThis.Array.isArray(object?.interchain_accounts)
         ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e))
         : [],
-      ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => String(e)) : [],
+      ports: globalThis.Array.isArray(object?.ports) ? object.ports.map((e: any) => globalThis.String(e)) : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -310,13 +310,13 @@ export const HostGenesisState = {
 
   fromJSON(object: any): HostGenesisState {
     return {
-      active_channels: Array.isArray(object?.active_channels)
+      active_channels: globalThis.Array.isArray(object?.active_channels)
         ? object.active_channels.map((e: any) => ActiveChannel.fromJSON(e))
         : [],
-      interchain_accounts: Array.isArray(object?.interchain_accounts)
+      interchain_accounts: globalThis.Array.isArray(object?.interchain_accounts)
         ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromJSON(e))
         : [],
-      port: isSet(object.port) ? String(object.port) : "",
+      port: isSet(object.port) ? globalThis.String(object.port) : "",
       params: isSet(object.params) ? Params1.fromJSON(object.params) : undefined,
     };
   },
@@ -423,10 +423,12 @@ export const ActiveChannel = {
 
   fromJSON(object: any): ActiveChannel {
     return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      is_middleware_enabled: isSet(object.is_middleware_enabled) ? Boolean(object.is_middleware_enabled) : false,
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      is_middleware_enabled: isSet(object.is_middleware_enabled)
+        ? globalThis.Boolean(object.is_middleware_enabled)
+        : false,
     };
   },
 
@@ -519,9 +521,9 @@ export const RegisteredInterchainAccount = {
 
   fromJSON(object: any): RegisteredInterchainAccount {
     return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      account_address: isSet(object.account_address) ? String(object.account_address) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      account_address: isSet(object.account_address) ? globalThis.String(object.account_address) : "",
     };
   },
 
@@ -554,7 +556,8 @@ export const RegisteredInterchainAccount = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

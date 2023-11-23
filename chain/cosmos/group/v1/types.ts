@@ -500,9 +500,9 @@ export const Member = {
 
   fromJSON(object: any): Member {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      weight: isSet(object.weight) ? String(object.weight) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      weight: isSet(object.weight) ? globalThis.String(object.weight) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
       added_at: isSet(object.added_at) ? fromJsonTimestamp(object.added_at) : undefined,
     };
   },
@@ -596,9 +596,9 @@ export const MemberRequest = {
 
   fromJSON(object: any): MemberRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      weight: isSet(object.weight) ? String(object.weight) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      weight: isSet(object.weight) ? globalThis.String(object.weight) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
     };
   },
 
@@ -677,7 +677,7 @@ export const ThresholdDecisionPolicy = {
 
   fromJSON(object: any): ThresholdDecisionPolicy {
     return {
-      threshold: isSet(object.threshold) ? String(object.threshold) : "",
+      threshold: isSet(object.threshold) ? globalThis.String(object.threshold) : "",
       windows: isSet(object.windows) ? DecisionPolicyWindows.fromJSON(object.windows) : undefined,
     };
   },
@@ -755,7 +755,7 @@ export const PercentageDecisionPolicy = {
 
   fromJSON(object: any): PercentageDecisionPolicy {
     return {
-      percentage: isSet(object.percentage) ? String(object.percentage) : "",
+      percentage: isSet(object.percentage) ? globalThis.String(object.percentage) : "",
       windows: isSet(object.windows) ? DecisionPolicyWindows.fromJSON(object.windows) : undefined,
     };
   },
@@ -955,11 +955,11 @@ export const GroupInfo = {
 
   fromJSON(object: any): GroupInfo {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? String(object.version) : "0",
-      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "0",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "0",
+      total_weight: isSet(object.total_weight) ? globalThis.String(object.total_weight) : "",
       created_at: isSet(object.created_at) ? fromJsonTimestamp(object.created_at) : undefined,
     };
   },
@@ -1051,7 +1051,7 @@ export const GroupMember = {
 
   fromJSON(object: any): GroupMember {
     return {
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
       member: isSet(object.member) ? Member.fromJSON(object.member) : undefined,
     };
   },
@@ -1187,11 +1187,11 @@ export const GroupPolicyInfo = {
 
   fromJSON(object: any): GroupPolicyInfo {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      version: isSet(object.version) ? String(object.version) : "0",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "0",
       decision_policy: isSet(object.decision_policy) ? Any.fromJSON(object.decision_policy) : undefined,
       created_at: isSet(object.created_at) ? fromJsonTimestamp(object.created_at) : undefined,
     };
@@ -1425,22 +1425,24 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
-      group_policy_address: isSet(object.group_policy_address) ? String(object.group_policy_address) : "",
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "0",
+      group_policy_address: isSet(object.group_policy_address) ? globalThis.String(object.group_policy_address) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
+      proposers: globalThis.Array.isArray(object?.proposers)
+        ? object.proposers.map((e: any) => globalThis.String(e))
+        : [],
       submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined,
-      group_version: isSet(object.group_version) ? String(object.group_version) : "0",
-      group_policy_version: isSet(object.group_policy_version) ? String(object.group_policy_version) : "0",
+      group_version: isSet(object.group_version) ? globalThis.String(object.group_version) : "0",
+      group_policy_version: isSet(object.group_policy_version) ? globalThis.String(object.group_policy_version) : "0",
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       final_tally_result: isSet(object.final_tally_result)
         ? TallyResult.fromJSON(object.final_tally_result)
         : undefined,
       voting_period_end: isSet(object.voting_period_end) ? fromJsonTimestamp(object.voting_period_end) : undefined,
       executor_result: isSet(object.executor_result) ? proposalExecutorResultFromJSON(object.executor_result) : 0,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
-      title: isSet(object.title) ? String(object.title) : "",
-      summary: isSet(object.summary) ? String(object.summary) : "",
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
     };
   },
 
@@ -1585,10 +1587,10 @@ export const TallyResult = {
 
   fromJSON(object: any): TallyResult {
     return {
-      yes_count: isSet(object.yes_count) ? String(object.yes_count) : "",
-      abstain_count: isSet(object.abstain_count) ? String(object.abstain_count) : "",
-      no_count: isSet(object.no_count) ? String(object.no_count) : "",
-      no_with_veto_count: isSet(object.no_with_veto_count) ? String(object.no_with_veto_count) : "",
+      yes_count: isSet(object.yes_count) ? globalThis.String(object.yes_count) : "",
+      abstain_count: isSet(object.abstain_count) ? globalThis.String(object.abstain_count) : "",
+      no_count: isSet(object.no_count) ? globalThis.String(object.no_count) : "",
+      no_with_veto_count: isSet(object.no_with_veto_count) ? globalThis.String(object.no_with_veto_count) : "",
     };
   },
 
@@ -1701,10 +1703,10 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
       submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined,
     };
   },
@@ -1746,7 +1748,8 @@ export const Vote = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1757,16 +1760,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

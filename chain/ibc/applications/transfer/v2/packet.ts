@@ -98,11 +98,11 @@ export const FungibleTokenPacketData = {
 
   fromJSON(object: any): FungibleTokenPacketData {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      memo: isSet(object.memo) ? String(object.memo) : "",
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      receiver: isSet(object.receiver) ? globalThis.String(object.receiver) : "",
+      memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
     };
   },
 
@@ -143,7 +143,8 @@ export const FungibleTokenPacketData = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

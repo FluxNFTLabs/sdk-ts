@@ -178,11 +178,13 @@ export const NewRoundStep = {
 
   fromJSON(object: any): NewRoundStep {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
-      step: isSet(object.step) ? Number(object.step) : 0,
-      seconds_since_start_time: isSet(object.seconds_since_start_time) ? String(object.seconds_since_start_time) : "0",
-      last_commit_round: isSet(object.last_commit_round) ? Number(object.last_commit_round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
+      step: isSet(object.step) ? globalThis.Number(object.step) : 0,
+      seconds_since_start_time: isSet(object.seconds_since_start_time)
+        ? globalThis.String(object.seconds_since_start_time)
+        : "0",
+      last_commit_round: isSet(object.last_commit_round) ? globalThis.Number(object.last_commit_round) : 0,
     };
   },
 
@@ -299,13 +301,13 @@ export const NewValidBlock = {
 
   fromJSON(object: any): NewValidBlock {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
       block_part_set_header: isSet(object.block_part_set_header)
         ? PartSetHeader.fromJSON(object.block_part_set_header)
         : undefined,
       block_parts: isSet(object.block_parts) ? BitArray.fromJSON(object.block_parts) : undefined,
-      is_commit: isSet(object.is_commit) ? Boolean(object.is_commit) : false,
+      is_commit: isSet(object.is_commit) ? globalThis.Boolean(object.is_commit) : false,
     };
   },
 
@@ -468,8 +470,8 @@ export const ProposalPOL = {
 
   fromJSON(object: any): ProposalPOL {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      proposal_pol_round: isSet(object.proposal_pol_round) ? Number(object.proposal_pol_round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      proposal_pol_round: isSet(object.proposal_pol_round) ? globalThis.Number(object.proposal_pol_round) : 0,
       proposal_pol: isSet(object.proposal_pol) ? BitArray.fromJSON(object.proposal_pol) : undefined,
     };
   },
@@ -561,8 +563,8 @@ export const BlockPart = {
 
   fromJSON(object: any): BlockPart {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
       part: isSet(object.part) ? Part.fromJSON(object.part) : undefined,
     };
   },
@@ -721,10 +723,10 @@ export const HasVote = {
 
   fromJSON(object: any): HasVote {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
-      index: isSet(object.index) ? Number(object.index) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
     };
   },
 
@@ -827,8 +829,8 @@ export const VoteSetMaj23 = {
 
   fromJSON(object: any): VoteSetMaj23 {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromJSON(object.block_id) : undefined,
     };
@@ -945,8 +947,8 @@ export const VoteSetBits = {
 
   fromJSON(object: any): VoteSetBits {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
       type: isSet(object.type) ? signedMsgTypeFromJSON(object.type) : 0,
       block_id: isSet(object.block_id) ? BlockID.fromJSON(object.block_id) : undefined,
       votes: isSet(object.votes) ? BitArray.fromJSON(object.votes) : undefined,
@@ -1201,7 +1203,8 @@ export const Message = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

@@ -212,10 +212,12 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      community_tax: isSet(object.community_tax) ? String(object.community_tax) : "",
-      base_proposer_reward: isSet(object.base_proposer_reward) ? String(object.base_proposer_reward) : "",
-      bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? String(object.bonus_proposer_reward) : "",
-      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled) ? Boolean(object.withdraw_addr_enabled) : false,
+      community_tax: isSet(object.community_tax) ? globalThis.String(object.community_tax) : "",
+      base_proposer_reward: isSet(object.base_proposer_reward) ? globalThis.String(object.base_proposer_reward) : "",
+      bonus_proposer_reward: isSet(object.bonus_proposer_reward) ? globalThis.String(object.bonus_proposer_reward) : "",
+      withdraw_addr_enabled: isSet(object.withdraw_addr_enabled)
+        ? globalThis.Boolean(object.withdraw_addr_enabled)
+        : false,
     };
   },
 
@@ -298,10 +300,10 @@ export const ValidatorHistoricalRewards = {
 
   fromJSON(object: any): ValidatorHistoricalRewards {
     return {
-      cumulative_reward_ratio: Array.isArray(object?.cumulative_reward_ratio)
+      cumulative_reward_ratio: globalThis.Array.isArray(object?.cumulative_reward_ratio)
         ? object.cumulative_reward_ratio.map((e: any) => DecCoin.fromJSON(e))
         : [],
-      reference_count: isSet(object.reference_count) ? Number(object.reference_count) : 0,
+      reference_count: isSet(object.reference_count) ? globalThis.Number(object.reference_count) : 0,
     };
   },
 
@@ -376,8 +378,8 @@ export const ValidatorCurrentRewards = {
 
   fromJSON(object: any): ValidatorCurrentRewards {
     return {
-      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
-      period: isSet(object.period) ? String(object.period) : "0",
+      rewards: globalThis.Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
+      period: isSet(object.period) ? globalThis.String(object.period) : "0",
     };
   },
 
@@ -442,7 +444,9 @@ export const ValidatorAccumulatedCommission = {
 
   fromJSON(object: any): ValidatorAccumulatedCommission {
     return {
-      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromJSON(e)) : [],
+      commission: globalThis.Array.isArray(object?.commission)
+        ? object.commission.map((e: any) => DecCoin.fromJSON(e))
+        : [],
     };
   },
 
@@ -502,7 +506,9 @@ export const ValidatorOutstandingRewards = {
   },
 
   fromJSON(object: any): ValidatorOutstandingRewards {
-    return { rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [] };
+    return {
+      rewards: globalThis.Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: ValidatorOutstandingRewards): unknown {
@@ -572,8 +578,8 @@ export const ValidatorSlashEvent = {
 
   fromJSON(object: any): ValidatorSlashEvent {
     return {
-      validator_period: isSet(object.validator_period) ? String(object.validator_period) : "0",
-      fraction: isSet(object.fraction) ? String(object.fraction) : "",
+      validator_period: isSet(object.validator_period) ? globalThis.String(object.validator_period) : "0",
+      fraction: isSet(object.fraction) ? globalThis.String(object.fraction) : "",
     };
   },
 
@@ -638,7 +644,7 @@ export const ValidatorSlashEvents = {
 
   fromJSON(object: any): ValidatorSlashEvents {
     return {
-      validator_slash_events: Array.isArray(object?.validator_slash_events)
+      validator_slash_events: globalThis.Array.isArray(object?.validator_slash_events)
         ? object.validator_slash_events.map((e: any) => ValidatorSlashEvent.fromJSON(e))
         : [],
     };
@@ -702,7 +708,7 @@ export const FeePool = {
 
   fromJSON(object: any): FeePool {
     return {
-      community_pool: Array.isArray(object?.community_pool)
+      community_pool: globalThis.Array.isArray(object?.community_pool)
         ? object.community_pool.map((e: any) => DecCoin.fromJSON(e))
         : [],
     };
@@ -795,10 +801,10 @@ export const CommunityPoolSpendProposal = {
 
   fromJSON(object: any): CommunityPoolSpendProposal {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      recipient: isSet(object.recipient) ? globalThis.String(object.recipient) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -891,9 +897,9 @@ export const DelegatorStartingInfo = {
 
   fromJSON(object: any): DelegatorStartingInfo {
     return {
-      previous_period: isSet(object.previous_period) ? String(object.previous_period) : "0",
-      stake: isSet(object.stake) ? String(object.stake) : "",
-      height: isSet(object.height) ? String(object.height) : "0",
+      previous_period: isSet(object.previous_period) ? globalThis.String(object.previous_period) : "0",
+      stake: isSet(object.stake) ? globalThis.String(object.stake) : "",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
     };
   },
 
@@ -972,8 +978,8 @@ export const DelegationDelegatorReward = {
 
   fromJSON(object: any): DelegationDelegatorReward {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      reward: Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromJSON(e)) : [],
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      reward: globalThis.Array.isArray(object?.reward) ? object.reward.map((e: any) => DecCoin.fromJSON(e)) : [],
     };
   },
 
@@ -1078,11 +1084,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
 
   fromJSON(object: any): CommunityPoolSpendProposalWithDeposit {
     return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      amount: isSet(object.amount) ? String(object.amount) : "",
-      deposit: isSet(object.deposit) ? String(object.deposit) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      recipient: isSet(object.recipient) ? globalThis.String(object.recipient) : "",
+      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      deposit: isSet(object.deposit) ? globalThis.String(object.deposit) : "",
     };
   },
 
@@ -1123,7 +1129,8 @@ export const CommunityPoolSpendProposalWithDeposit = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

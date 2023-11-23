@@ -168,10 +168,12 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      starting_proposal_id: isSet(object.starting_proposal_id) ? String(object.starting_proposal_id) : "0",
-      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      starting_proposal_id: isSet(object.starting_proposal_id) ? globalThis.String(object.starting_proposal_id) : "0",
+      deposits: globalThis.Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
+      votes: globalThis.Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      proposals: globalThis.Array.isArray(object?.proposals)
+        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
+        : [],
       deposit_params: isSet(object.deposit_params) ? DepositParams.fromJSON(object.deposit_params) : undefined,
       voting_params: isSet(object.voting_params) ? VotingParams.fromJSON(object.voting_params) : undefined,
       tally_params: isSet(object.tally_params) ? TallyParams.fromJSON(object.tally_params) : undefined,
@@ -236,7 +238,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

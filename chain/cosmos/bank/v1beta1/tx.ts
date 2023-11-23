@@ -144,9 +144,9 @@ export const MsgSend = {
 
   fromJSON(object: any): MsgSend {
     return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      from_address: isSet(object.from_address) ? globalThis.String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? globalThis.String(object.to_address) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -270,8 +270,8 @@ export const MsgMultiSend = {
 
   fromJSON(object: any): MsgMultiSend {
     return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromJSON(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromJSON(e)) : [],
+      inputs: globalThis.Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromJSON(e)) : [],
+      outputs: globalThis.Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromJSON(e)) : [],
     };
   },
 
@@ -391,7 +391,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -524,11 +524,13 @@ export const MsgSetSendEnabled = {
 
   fromJSON(object: any): MsgSetSendEnabled {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      send_enabled: Array.isArray(object?.send_enabled)
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      send_enabled: globalThis.Array.isArray(object?.send_enabled)
         ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
-      use_default_for: Array.isArray(object?.use_default_for) ? object.use_default_for.map((e: any) => String(e)) : [],
+      use_default_for: globalThis.Array.isArray(object?.use_default_for)
+        ? object.use_default_for.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -820,29 +822,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -850,7 +834,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

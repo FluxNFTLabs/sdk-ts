@@ -277,8 +277,8 @@ export const ServiceCommandDescriptor = {
 
   fromJSON(object: any): ServiceCommandDescriptor {
     return {
-      service: isSet(object.service) ? String(object.service) : "",
-      rpc_command_options: Array.isArray(object?.rpc_command_options)
+      service: isSet(object.service) ? globalThis.String(object.service) : "",
+      rpc_command_options: globalThis.Array.isArray(object?.rpc_command_options)
         ? object.rpc_command_options.map((e: any) => RpcCommandOptions.fromJSON(e))
         : [],
       sub_commands: isObject(object.sub_commands)
@@ -381,7 +381,7 @@ export const ServiceCommandDescriptor_SubCommandsEntry = {
 
   fromJSON(object: any): ServiceCommandDescriptor_SubCommandsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? ServiceCommandDescriptor.fromJSON(object.value) : undefined,
     };
   },
@@ -577,25 +577,27 @@ export const RpcCommandOptions = {
 
   fromJSON(object: any): RpcCommandOptions {
     return {
-      rpc_method: isSet(object.rpc_method) ? String(object.rpc_method) : "",
-      use: isSet(object.use) ? String(object.use) : "",
-      long: isSet(object.long) ? String(object.long) : "",
-      short: isSet(object.short) ? String(object.short) : "",
-      example: isSet(object.example) ? String(object.example) : "",
-      alias: Array.isArray(object?.alias) ? object.alias.map((e: any) => String(e)) : [],
-      suggest_for: Array.isArray(object?.suggest_for) ? object.suggest_for.map((e: any) => String(e)) : [],
-      deprecated: isSet(object.deprecated) ? String(object.deprecated) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      rpc_method: isSet(object.rpc_method) ? globalThis.String(object.rpc_method) : "",
+      use: isSet(object.use) ? globalThis.String(object.use) : "",
+      long: isSet(object.long) ? globalThis.String(object.long) : "",
+      short: isSet(object.short) ? globalThis.String(object.short) : "",
+      example: isSet(object.example) ? globalThis.String(object.example) : "",
+      alias: globalThis.Array.isArray(object?.alias) ? object.alias.map((e: any) => globalThis.String(e)) : [],
+      suggest_for: globalThis.Array.isArray(object?.suggest_for)
+        ? object.suggest_for.map((e: any) => globalThis.String(e))
+        : [],
+      deprecated: isSet(object.deprecated) ? globalThis.String(object.deprecated) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
       flag_options: isObject(object.flag_options)
         ? Object.entries(object.flag_options).reduce<{ [key: string]: FlagOptions }>((acc, [key, value]) => {
           acc[key] = FlagOptions.fromJSON(value);
           return acc;
         }, {})
         : {},
-      positional_args: Array.isArray(object?.positional_args)
+      positional_args: globalThis.Array.isArray(object?.positional_args)
         ? object.positional_args.map((e: any) => PositionalArgDescriptor.fromJSON(e))
         : [],
-      skip: isSet(object.skip) ? Boolean(object.skip) : false,
+      skip: isSet(object.skip) ? globalThis.Boolean(object.skip) : false,
     };
   },
 
@@ -724,7 +726,7 @@ export const RpcCommandOptions_FlagOptionsEntry = {
 
   fromJSON(object: any): RpcCommandOptions_FlagOptionsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? FlagOptions.fromJSON(object.value) : undefined,
     };
   },
@@ -871,14 +873,14 @@ export const FlagOptions = {
 
   fromJSON(object: any): FlagOptions {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      shorthand: isSet(object.shorthand) ? String(object.shorthand) : "",
-      usage: isSet(object.usage) ? String(object.usage) : "",
-      default_value: isSet(object.default_value) ? String(object.default_value) : "",
-      no_opt_default_value: isSet(object.no_opt_default_value) ? String(object.no_opt_default_value) : "",
-      deprecated: isSet(object.deprecated) ? String(object.deprecated) : "",
-      shorthand_deprecated: isSet(object.shorthand_deprecated) ? String(object.shorthand_deprecated) : "",
-      hidden: isSet(object.hidden) ? Boolean(object.hidden) : false,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      shorthand: isSet(object.shorthand) ? globalThis.String(object.shorthand) : "",
+      usage: isSet(object.usage) ? globalThis.String(object.usage) : "",
+      default_value: isSet(object.default_value) ? globalThis.String(object.default_value) : "",
+      no_opt_default_value: isSet(object.no_opt_default_value) ? globalThis.String(object.no_opt_default_value) : "",
+      deprecated: isSet(object.deprecated) ? globalThis.String(object.deprecated) : "",
+      shorthand_deprecated: isSet(object.shorthand_deprecated) ? globalThis.String(object.shorthand_deprecated) : "",
+      hidden: isSet(object.hidden) ? globalThis.Boolean(object.hidden) : false,
     };
   },
 
@@ -977,8 +979,8 @@ export const PositionalArgDescriptor = {
 
   fromJSON(object: any): PositionalArgDescriptor {
     return {
-      proto_field: isSet(object.proto_field) ? String(object.proto_field) : "",
-      varargs: isSet(object.varargs) ? Boolean(object.varargs) : false,
+      proto_field: isSet(object.proto_field) ? globalThis.String(object.proto_field) : "",
+      varargs: isSet(object.varargs) ? globalThis.Boolean(object.varargs) : false,
     };
   },
 
@@ -1007,7 +1009,8 @@ export const PositionalArgDescriptor = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

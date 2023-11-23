@@ -83,8 +83,8 @@ export const DenomTrace = {
 
   fromJSON(object: any): DenomTrace {
     return {
-      path: isSet(object.path) ? String(object.path) : "",
-      base_denom: isSet(object.base_denom) ? String(object.base_denom) : "",
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      base_denom: isSet(object.base_denom) ? globalThis.String(object.base_denom) : "",
     };
   },
 
@@ -159,8 +159,8 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
-      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false,
+      send_enabled: isSet(object.send_enabled) ? globalThis.Boolean(object.send_enabled) : false,
+      receive_enabled: isSet(object.receive_enabled) ? globalThis.Boolean(object.receive_enabled) : false,
     };
   },
 
@@ -189,7 +189,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

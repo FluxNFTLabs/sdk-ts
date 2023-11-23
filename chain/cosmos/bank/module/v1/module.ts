@@ -62,10 +62,10 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      blocked_module_accounts_override: Array.isArray(object?.blocked_module_accounts_override)
-        ? object.blocked_module_accounts_override.map((e: any) => String(e))
+      blocked_module_accounts_override: globalThis.Array.isArray(object?.blocked_module_accounts_override)
+        ? object.blocked_module_accounts_override.map((e: any) => globalThis.String(e))
         : [],
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
     };
   },
 
@@ -94,7 +94,8 @@ export const Module = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

@@ -143,11 +143,11 @@ export const MsgCreateVestingAccount = {
 
   fromJSON(object: any): MsgCreateVestingAccount {
     return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      end_time: isSet(object.end_time) ? String(object.end_time) : "0",
-      delayed: isSet(object.delayed) ? Boolean(object.delayed) : false,
+      from_address: isSet(object.from_address) ? globalThis.String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? globalThis.String(object.to_address) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      end_time: isSet(object.end_time) ? globalThis.String(object.end_time) : "0",
+      delayed: isSet(object.delayed) ? globalThis.Boolean(object.delayed) : false,
     };
   },
 
@@ -289,9 +289,9 @@ export const MsgCreatePermanentLockedAccount = {
 
   fromJSON(object: any): MsgCreatePermanentLockedAccount {
     return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      from_address: isSet(object.from_address) ? globalThis.String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? globalThis.String(object.to_address) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -435,10 +435,10 @@ export const MsgCreatePeriodicVestingAccount = {
 
   fromJSON(object: any): MsgCreatePeriodicVestingAccount {
     return {
-      from_address: isSet(object.from_address) ? String(object.from_address) : "",
-      to_address: isSet(object.to_address) ? String(object.to_address) : "",
-      start_time: isSet(object.start_time) ? String(object.start_time) : "0",
-      vesting_periods: Array.isArray(object?.vesting_periods)
+      from_address: isSet(object.from_address) ? globalThis.String(object.from_address) : "",
+      to_address: isSet(object.to_address) ? globalThis.String(object.to_address) : "",
+      start_time: isSet(object.start_time) ? globalThis.String(object.start_time) : "0",
+      vesting_periods: globalThis.Array.isArray(object?.vesting_periods)
         ? object.vesting_periods.map((e: any) => Period.fromJSON(e))
         : [],
     };
@@ -730,29 +730,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -769,7 +751,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

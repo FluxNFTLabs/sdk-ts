@@ -49,7 +49,7 @@ export interface MsgTransferResponse {
 
 /** MsgUpdateParams is the Msg/UpdateParams request type. */
 export interface MsgUpdateParams {
-  /** signer address (it may be the the address that controls the module, which defaults to x/gov unless overwritten). */
+  /** signer address */
   signer: string;
   /**
    * params defines the transfer parameters to update.
@@ -184,14 +184,14 @@ export const MsgTransfer = {
 
   fromJSON(object: any): MsgTransfer {
     return {
-      source_port: isSet(object.source_port) ? String(object.source_port) : "",
-      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      source_port: isSet(object.source_port) ? globalThis.String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? globalThis.String(object.source_channel) : "",
       token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      receiver: isSet(object.receiver) ? globalThis.String(object.receiver) : "",
       timeout_height: isSet(object.timeout_height) ? Height.fromJSON(object.timeout_height) : undefined,
-      timeout_timestamp: isSet(object.timeout_timestamp) ? String(object.timeout_timestamp) : "0",
-      memo: isSet(object.memo) ? String(object.memo) : "",
+      timeout_timestamp: isSet(object.timeout_timestamp) ? globalThis.String(object.timeout_timestamp) : "0",
+      memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
     };
   },
 
@@ -281,7 +281,7 @@ export const MsgTransferResponse = {
   },
 
   fromJSON(object: any): MsgTransferResponse {
-    return { sequence: isSet(object.sequence) ? String(object.sequence) : "0" };
+    return { sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0" };
   },
 
   toJSON(message: MsgTransferResponse): unknown {
@@ -351,7 +351,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -567,29 +567,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -606,7 +588,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

@@ -91,7 +91,7 @@ export const MsgInfo = {
   fromJSON(object: any): MsgInfo {
     return {
       msg: isSet(object.msg) ? Message.fromJSON(object.msg) : undefined,
-      peer_id: isSet(object.peer_id) ? String(object.peer_id) : "",
+      peer_id: isSet(object.peer_id) ? globalThis.String(object.peer_id) : "",
     };
   },
 
@@ -187,9 +187,9 @@ export const TimeoutInfo = {
   fromJSON(object: any): TimeoutInfo {
     return {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      height: isSet(object.height) ? String(object.height) : "0",
-      round: isSet(object.round) ? Number(object.round) : 0,
-      step: isSet(object.step) ? Number(object.step) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
+      step: isSet(object.step) ? globalThis.Number(object.step) : 0,
     };
   },
 
@@ -263,7 +263,7 @@ export const EndHeight = {
   },
 
   fromJSON(object: any): EndHeight {
-    return { height: isSet(object.height) ? String(object.height) : "0" };
+    return { height: isSet(object.height) ? globalThis.String(object.height) : "0" };
   },
 
   toJSON(message: EndHeight): unknown {
@@ -480,7 +480,8 @@ export const TimedWALMessage = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -491,16 +492,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

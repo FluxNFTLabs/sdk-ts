@@ -81,13 +81,15 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      connections: Array.isArray(object?.connections)
+      connections: globalThis.Array.isArray(object?.connections)
         ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e))
         : [],
-      client_connection_paths: Array.isArray(object?.client_connection_paths)
+      client_connection_paths: globalThis.Array.isArray(object?.client_connection_paths)
         ? object.client_connection_paths.map((e: any) => ConnectionPaths.fromJSON(e))
         : [],
-      next_connection_sequence: isSet(object.next_connection_sequence) ? String(object.next_connection_sequence) : "0",
+      next_connection_sequence: isSet(object.next_connection_sequence)
+        ? globalThis.String(object.next_connection_sequence)
+        : "0",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -127,7 +129,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

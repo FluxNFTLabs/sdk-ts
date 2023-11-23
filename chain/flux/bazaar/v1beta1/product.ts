@@ -24,6 +24,8 @@ export interface Product {
     | undefined;
   /** tags */
   tags: string[];
+  /** verified */
+  verified: boolean;
 }
 
 export interface Offering {
@@ -49,6 +51,7 @@ function createBaseProduct(): Product {
     offerings: [],
     revenue: undefined,
     tags: [],
+    verified: false,
   };
 }
 
@@ -82,6 +85,9 @@ export const Product = {
     }
     for (const v of message.tags) {
       writer.uint32(74).string(v!);
+    }
+    if (message.verified === true) {
+      writer.uint32(80).bool(message.verified);
     }
     return writer;
   },
@@ -156,6 +162,13 @@ export const Product = {
 
           message.tags.push(reader.string());
           continue;
+        case 10:
+          if (tag !== 80) {
+            break;
+          }
+
+          message.verified = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -167,15 +180,18 @@ export const Product = {
 
   fromJSON(object: any): Product {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      product_id: isSet(object.product_id) ? String(object.product_id) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      content_url: isSet(object.content_url) ? String(object.content_url) : "",
-      offerings: Array.isArray(object?.offerings) ? object.offerings.map((e: any) => Offering.fromJSON(e)) : [],
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      product_id: isSet(object.product_id) ? globalThis.String(object.product_id) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      content_url: isSet(object.content_url) ? globalThis.String(object.content_url) : "",
+      offerings: globalThis.Array.isArray(object?.offerings)
+        ? object.offerings.map((e: any) => Offering.fromJSON(e))
+        : [],
       revenue: isSet(object.revenue) ? Coin.fromJSON(object.revenue) : undefined,
-      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
+      tags: globalThis.Array.isArray(object?.tags) ? object.tags.map((e: any) => globalThis.String(e)) : [],
+      verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
     };
   },
 
@@ -208,6 +224,9 @@ export const Product = {
     if (message.tags?.length) {
       obj.tags = message.tags;
     }
+    if (message.verified === true) {
+      obj.verified = message.verified;
+    }
     return obj;
   },
 
@@ -227,6 +246,7 @@ export const Product = {
       ? Coin.fromPartial(object.revenue)
       : undefined;
     message.tags = object.tags?.map((e) => e) || [];
+    message.verified = object.verified ?? false;
     return message;
   },
 };
@@ -290,9 +310,9 @@ export const Offering = {
 
   fromJSON(object: any): Offering {
     return {
-      url: isSet(object.url) ? String(object.url) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : "",
       price: isSet(object.price) ? Coin.fromJSON(object.price) : undefined,
-      purchase_count: isSet(object.purchase_count) ? String(object.purchase_count) : "0",
+      purchase_count: isSet(object.purchase_count) ? globalThis.String(object.purchase_count) : "0",
     };
   },
 
@@ -381,9 +401,9 @@ export const ClassCommission = {
 
   fromJSON(object: any): ClassCommission {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      commission_mul: isSet(object.commission_mul) ? String(object.commission_mul) : "0",
-      commission_div: isSet(object.commission_div) ? String(object.commission_div) : "0",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      commission_mul: isSet(object.commission_mul) ? globalThis.String(object.commission_mul) : "0",
+      commission_div: isSet(object.commission_div) ? globalThis.String(object.commission_div) : "0",
     };
   },
 
@@ -416,7 +436,8 @@ export const ClassCommission = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

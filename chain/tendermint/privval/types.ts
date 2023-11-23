@@ -168,8 +168,8 @@ export const RemoteSignerError = {
 
   fromJSON(object: any): RemoteSignerError {
     return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      description: isSet(object.description) ? String(object.description) : "",
+      code: isSet(object.code) ? globalThis.Number(object.code) : 0,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -233,7 +233,7 @@ export const PubKeyRequest = {
   },
 
   fromJSON(object: any): PubKeyRequest {
-    return { chain_id: isSet(object.chain_id) ? String(object.chain_id) : "" };
+    return { chain_id: isSet(object.chain_id) ? globalThis.String(object.chain_id) : "" };
   },
 
   toJSON(message: PubKeyRequest): unknown {
@@ -384,7 +384,7 @@ export const SignVoteRequest = {
   fromJSON(object: any): SignVoteRequest {
     return {
       vote: isSet(object.vote) ? Vote.fromJSON(object.vote) : undefined,
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      chain_id: isSet(object.chain_id) ? globalThis.String(object.chain_id) : "",
     };
   },
 
@@ -538,7 +538,7 @@ export const SignProposalRequest = {
   fromJSON(object: any): SignProposalRequest {
     return {
       proposal: isSet(object.proposal) ? Proposal.fromJSON(object.proposal) : undefined,
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      chain_id: isSet(object.chain_id) ? globalThis.String(object.chain_id) : "",
     };
   },
 
@@ -940,7 +940,8 @@ export const Message = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

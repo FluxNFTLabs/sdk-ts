@@ -337,11 +337,11 @@ export const ClientState = {
 
   fromJSON(object: any): ClientState {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      is_frozen: isSet(object.is_frozen) ? Boolean(object.is_frozen) : false,
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
+      is_frozen: isSet(object.is_frozen) ? globalThis.Boolean(object.is_frozen) : false,
       consensus_state: isSet(object.consensus_state) ? ConsensusState.fromJSON(object.consensus_state) : undefined,
       allow_update_after_proposal: isSet(object.allow_update_after_proposal)
-        ? Boolean(object.allow_update_after_proposal)
+        ? globalThis.Boolean(object.allow_update_after_proposal)
         : false,
     };
   },
@@ -438,8 +438,8 @@ export const ConsensusState = {
   fromJSON(object: any): ConsensusState {
     return {
       public_key: isSet(object.public_key) ? Any.fromJSON(object.public_key) : undefined,
-      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      diversifier: isSet(object.diversifier) ? globalThis.String(object.diversifier) : "",
+      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "0",
     };
   },
 
@@ -556,11 +556,11 @@ export const Header = {
 
   fromJSON(object: any): Header {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
+      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "0",
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
       new_public_key: isSet(object.new_public_key) ? Any.fromJSON(object.new_public_key) : undefined,
-      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : "",
+      new_diversifier: isSet(object.new_diversifier) ? globalThis.String(object.new_diversifier) : "",
     };
   },
 
@@ -669,8 +669,8 @@ export const Misbehaviour = {
 
   fromJSON(object: any): Misbehaviour {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
       signature_one: isSet(object.signature_one) ? SignatureAndData.fromJSON(object.signature_one) : undefined,
       signature_two: isSet(object.signature_two) ? SignatureAndData.fromJSON(object.signature_two) : undefined,
     };
@@ -782,7 +782,7 @@ export const SignatureAndData = {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
       data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "0",
     };
   },
 
@@ -866,7 +866,7 @@ export const TimestampedSignatureData = {
   fromJSON(object: any): TimestampedSignatureData {
     return {
       signature_data: isSet(object.signature_data) ? bytesFromBase64(object.signature_data) : new Uint8Array(0),
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
+      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "0",
     };
   },
 
@@ -971,9 +971,9 @@ export const SignBytes = {
 
   fromJSON(object: any): SignBytes {
     return {
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
-      timestamp: isSet(object.timestamp) ? String(object.timestamp) : "0",
-      diversifier: isSet(object.diversifier) ? String(object.diversifier) : "",
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
+      timestamp: isSet(object.timestamp) ? globalThis.String(object.timestamp) : "0",
+      diversifier: isSet(object.diversifier) ? globalThis.String(object.diversifier) : "",
       data_type: isSet(object.data_type) ? dataTypeFromJSON(object.data_type) : 0,
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
     };
@@ -1063,7 +1063,7 @@ export const HeaderData = {
   fromJSON(object: any): HeaderData {
     return {
       new_pub_key: isSet(object.new_pub_key) ? Any.fromJSON(object.new_pub_key) : undefined,
-      new_diversifier: isSet(object.new_diversifier) ? String(object.new_diversifier) : "",
+      new_diversifier: isSet(object.new_diversifier) ? globalThis.String(object.new_diversifier) : "",
     };
   },
 
@@ -1664,7 +1664,7 @@ export const NextSequenceRecvData = {
   fromJSON(object: any): NextSequenceRecvData {
     return {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array(0),
-      next_seq_recv: isSet(object.next_seq_recv) ? String(object.next_seq_recv) : "0",
+      next_seq_recv: isSet(object.next_seq_recv) ? globalThis.String(object.next_seq_recv) : "0",
     };
   },
 
@@ -1690,30 +1690,11 @@ export const NextSequenceRecvData = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1723,21 +1704,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

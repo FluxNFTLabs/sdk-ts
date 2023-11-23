@@ -144,24 +144,30 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      channels: Array.isArray(object?.channels) ? object.channels.map((e: any) => IdentifiedChannel.fromJSON(e)) : [],
-      acknowledgements: Array.isArray(object?.acknowledgements)
+      channels: globalThis.Array.isArray(object?.channels)
+        ? object.channels.map((e: any) => IdentifiedChannel.fromJSON(e))
+        : [],
+      acknowledgements: globalThis.Array.isArray(object?.acknowledgements)
         ? object.acknowledgements.map((e: any) => PacketState.fromJSON(e))
         : [],
-      commitments: Array.isArray(object?.commitments)
+      commitments: globalThis.Array.isArray(object?.commitments)
         ? object.commitments.map((e: any) => PacketState.fromJSON(e))
         : [],
-      receipts: Array.isArray(object?.receipts) ? object.receipts.map((e: any) => PacketState.fromJSON(e)) : [],
-      send_sequences: Array.isArray(object?.send_sequences)
+      receipts: globalThis.Array.isArray(object?.receipts)
+        ? object.receipts.map((e: any) => PacketState.fromJSON(e))
+        : [],
+      send_sequences: globalThis.Array.isArray(object?.send_sequences)
         ? object.send_sequences.map((e: any) => PacketSequence.fromJSON(e))
         : [],
-      recv_sequences: Array.isArray(object?.recv_sequences)
+      recv_sequences: globalThis.Array.isArray(object?.recv_sequences)
         ? object.recv_sequences.map((e: any) => PacketSequence.fromJSON(e))
         : [],
-      ack_sequences: Array.isArray(object?.ack_sequences)
+      ack_sequences: globalThis.Array.isArray(object?.ack_sequences)
         ? object.ack_sequences.map((e: any) => PacketSequence.fromJSON(e))
         : [],
-      next_channel_sequence: isSet(object.next_channel_sequence) ? String(object.next_channel_sequence) : "0",
+      next_channel_sequence: isSet(object.next_channel_sequence)
+        ? globalThis.String(object.next_channel_sequence)
+        : "0",
     };
   },
 
@@ -270,9 +276,9 @@ export const PacketSequence = {
 
   fromJSON(object: any): PacketSequence {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      sequence: isSet(object.sequence) ? String(object.sequence) : "0",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0",
     };
   },
 
@@ -305,7 +311,8 @@ export const PacketSequence = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

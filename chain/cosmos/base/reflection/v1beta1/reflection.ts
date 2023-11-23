@@ -114,7 +114,9 @@ export const ListAllInterfacesResponse = {
 
   fromJSON(object: any): ListAllInterfacesResponse {
     return {
-      interface_names: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => String(e)) : [],
+      interface_names: globalThis.Array.isArray(object?.interface_names)
+        ? object.interface_names.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -174,7 +176,7 @@ export const ListImplementationsRequest = {
   },
 
   fromJSON(object: any): ListImplementationsRequest {
-    return { interface_name: isSet(object.interface_name) ? String(object.interface_name) : "" };
+    return { interface_name: isSet(object.interface_name) ? globalThis.String(object.interface_name) : "" };
   },
 
   toJSON(message: ListImplementationsRequest): unknown {
@@ -234,8 +236,8 @@ export const ListImplementationsResponse = {
 
   fromJSON(object: any): ListImplementationsResponse {
     return {
-      implementation_message_names: Array.isArray(object?.implementation_message_names)
-        ? object.implementation_message_names.map((e: any) => String(e))
+      implementation_message_names: globalThis.Array.isArray(object?.implementation_message_names)
+        ? object.implementation_message_names.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -426,29 +428,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -456,7 +440,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

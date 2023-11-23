@@ -3,6 +3,16 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
+import { AccessConfig } from "./types";
+
+/**
+ * StoreCodeAuthorization defines authorization for wasm code upload.
+ * Since: wasmd 0.42
+ */
+export interface StoreCodeAuthorization {
+  /** Grants for code upload */
+  grants: CodeGrant[];
+}
 
 /**
  * ContractExecutionAuthorization defines authorization for wasm execute.
@@ -20,6 +30,21 @@ export interface ContractExecutionAuthorization {
 export interface ContractMigrationAuthorization {
   /** Grants for contract migrations */
   grants: ContractGrant[];
+}
+
+/** CodeGrant a granted permission for a single code */
+export interface CodeGrant {
+  /**
+   * CodeHash is the unique identifier created by wasmvm
+   * Wildcard "*" is used to specify any kind of grant.
+   */
+  code_hash: Uint8Array;
+  /**
+   * InstantiatePermission is the superset access control to apply
+   * on contract creation.
+   * Optional
+   */
+  instantiate_permission: AccessConfig | undefined;
 }
 
 /**
@@ -102,6 +127,67 @@ export interface AcceptedMessagesFilter {
   messages: Uint8Array[];
 }
 
+function createBaseStoreCodeAuthorization(): StoreCodeAuthorization {
+  return { grants: [] };
+}
+
+export const StoreCodeAuthorization = {
+  $type: "cosmwasm.wasm.v1.StoreCodeAuthorization" as const,
+
+  encode(message: StoreCodeAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.grants) {
+      CodeGrant.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): StoreCodeAuthorization {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseStoreCodeAuthorization();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.grants.push(CodeGrant.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): StoreCodeAuthorization {
+    return {
+      grants: globalThis.Array.isArray(object?.grants) ? object.grants.map((e: any) => CodeGrant.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: StoreCodeAuthorization): unknown {
+    const obj: any = {};
+    if (message.grants?.length) {
+      obj.grants = message.grants.map((e) => CodeGrant.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<StoreCodeAuthorization>): StoreCodeAuthorization {
+    return StoreCodeAuthorization.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<StoreCodeAuthorization>): StoreCodeAuthorization {
+    const message = createBaseStoreCodeAuthorization();
+    message.grants = object.grants?.map((e) => CodeGrant.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 function createBaseContractExecutionAuthorization(): ContractExecutionAuthorization {
   return { grants: [] };
 }
@@ -140,7 +226,9 @@ export const ContractExecutionAuthorization = {
   },
 
   fromJSON(object: any): ContractExecutionAuthorization {
-    return { grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : [] };
+    return {
+      grants: globalThis.Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: ContractExecutionAuthorization): unknown {
@@ -199,7 +287,9 @@ export const ContractMigrationAuthorization = {
   },
 
   fromJSON(object: any): ContractMigrationAuthorization {
-    return { grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : [] };
+    return {
+      grants: globalThis.Array.isArray(object?.grants) ? object.grants.map((e: any) => ContractGrant.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: ContractMigrationAuthorization): unknown {
@@ -216,6 +306,87 @@ export const ContractMigrationAuthorization = {
   fromPartial(object: DeepPartial<ContractMigrationAuthorization>): ContractMigrationAuthorization {
     const message = createBaseContractMigrationAuthorization();
     message.grants = object.grants?.map((e) => ContractGrant.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseCodeGrant(): CodeGrant {
+  return { code_hash: new Uint8Array(0), instantiate_permission: undefined };
+}
+
+export const CodeGrant = {
+  $type: "cosmwasm.wasm.v1.CodeGrant" as const,
+
+  encode(message: CodeGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.code_hash.length !== 0) {
+      writer.uint32(10).bytes(message.code_hash);
+    }
+    if (message.instantiate_permission !== undefined) {
+      AccessConfig.encode(message.instantiate_permission, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CodeGrant {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCodeGrant();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.code_hash = reader.bytes();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.instantiate_permission = AccessConfig.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CodeGrant {
+    return {
+      code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
+      instantiate_permission: isSet(object.instantiate_permission)
+        ? AccessConfig.fromJSON(object.instantiate_permission)
+        : undefined,
+    };
+  },
+
+  toJSON(message: CodeGrant): unknown {
+    const obj: any = {};
+    if (message.code_hash.length !== 0) {
+      obj.code_hash = base64FromBytes(message.code_hash);
+    }
+    if (message.instantiate_permission !== undefined) {
+      obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<CodeGrant>): CodeGrant {
+    return CodeGrant.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<CodeGrant>): CodeGrant {
+    const message = createBaseCodeGrant();
+    message.code_hash = object.code_hash ?? new Uint8Array(0);
+    message.instantiate_permission =
+      (object.instantiate_permission !== undefined && object.instantiate_permission !== null)
+        ? AccessConfig.fromPartial(object.instantiate_permission)
+        : undefined;
     return message;
   },
 };
@@ -279,7 +450,7 @@ export const ContractGrant = {
 
   fromJSON(object: any): ContractGrant {
     return {
-      contract: isSet(object.contract) ? String(object.contract) : "",
+      contract: isSet(object.contract) ? globalThis.String(object.contract) : "",
       limit: isSet(object.limit) ? Any.fromJSON(object.limit) : undefined,
       filter: isSet(object.filter) ? Any.fromJSON(object.filter) : undefined,
     };
@@ -351,7 +522,7 @@ export const MaxCallsLimit = {
   },
 
   fromJSON(object: any): MaxCallsLimit {
-    return { remaining: isSet(object.remaining) ? String(object.remaining) : "0" };
+    return { remaining: isSet(object.remaining) ? globalThis.String(object.remaining) : "0" };
   },
 
   toJSON(message: MaxCallsLimit): unknown {
@@ -410,7 +581,9 @@ export const MaxFundsLimit = {
   },
 
   fromJSON(object: any): MaxFundsLimit {
-    return { amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : [] };
+    return {
+      amounts: globalThis.Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: MaxFundsLimit): unknown {
@@ -480,8 +653,8 @@ export const CombinedLimit = {
 
   fromJSON(object: any): CombinedLimit {
     return {
-      calls_remaining: isSet(object.calls_remaining) ? String(object.calls_remaining) : "0",
-      amounts: Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : [],
+      calls_remaining: isSet(object.calls_remaining) ? globalThis.String(object.calls_remaining) : "0",
+      amounts: globalThis.Array.isArray(object?.amounts) ? object.amounts.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -590,7 +763,7 @@ export const AcceptedMessageKeysFilter = {
   },
 
   fromJSON(object: any): AcceptedMessageKeysFilter {
-    return { keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : [] };
+    return { keys: globalThis.Array.isArray(object?.keys) ? object.keys.map((e: any) => globalThis.String(e)) : [] };
   },
 
   toJSON(message: AcceptedMessageKeysFilter): unknown {
@@ -649,7 +822,9 @@ export const AcceptedMessagesFilter = {
   },
 
   fromJSON(object: any): AcceptedMessagesFilter {
-    return { messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => bytesFromBase64(e)) : [] };
+    return {
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => bytesFromBase64(e)) : [],
+    };
   },
 
   toJSON(message: AcceptedMessagesFilter): unknown {
@@ -670,30 +845,11 @@ export const AcceptedMessagesFilter = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -703,21 +859,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

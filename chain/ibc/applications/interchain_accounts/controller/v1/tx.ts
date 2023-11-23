@@ -40,7 +40,7 @@ export interface MsgSendTxResponse {
 
 /** MsgUpdateParams defines the payload for Msg/UpdateParams */
 export interface MsgUpdateParams {
-  /** signer address (it may be the the address that controls the module, which defaults to x/gov unless overwritten). */
+  /** signer address */
   signer: string;
   /**
    * params defines the 27-interchain-accounts/controller parameters to update.
@@ -113,9 +113,9 @@ export const MsgRegisterInterchainAccount = {
 
   fromJSON(object: any): MsgRegisterInterchainAccount {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
     };
   },
 
@@ -194,8 +194,8 @@ export const MsgRegisterInterchainAccountResponse = {
 
   fromJSON(object: any): MsgRegisterInterchainAccountResponse {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
     };
   },
 
@@ -290,10 +290,10 @@ export const MsgSendTx = {
 
   fromJSON(object: any): MsgSendTx {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
       packet_data: isSet(object.packet_data) ? InterchainAccountPacketData.fromJSON(object.packet_data) : undefined,
-      relative_timeout: isSet(object.relative_timeout) ? String(object.relative_timeout) : "0",
+      relative_timeout: isSet(object.relative_timeout) ? globalThis.String(object.relative_timeout) : "0",
     };
   },
 
@@ -367,7 +367,7 @@ export const MsgSendTxResponse = {
   },
 
   fromJSON(object: any): MsgSendTxResponse {
-    return { sequence: isSet(object.sequence) ? String(object.sequence) : "0" };
+    return { sequence: isSet(object.sequence) ? globalThis.String(object.sequence) : "0" };
   },
 
   toJSON(message: MsgSendTxResponse): unknown {
@@ -437,7 +437,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -693,29 +693,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -732,7 +714,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

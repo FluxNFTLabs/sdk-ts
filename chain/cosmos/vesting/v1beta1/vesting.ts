@@ -141,16 +141,16 @@ export const BaseVestingAccount = {
   fromJSON(object: any): BaseVestingAccount {
     return {
       base_account: isSet(object.base_account) ? BaseAccount.fromJSON(object.base_account) : undefined,
-      original_vesting: Array.isArray(object?.original_vesting)
+      original_vesting: globalThis.Array.isArray(object?.original_vesting)
         ? object.original_vesting.map((e: any) => Coin.fromJSON(e))
         : [],
-      delegated_free: Array.isArray(object?.delegated_free)
+      delegated_free: globalThis.Array.isArray(object?.delegated_free)
         ? object.delegated_free.map((e: any) => Coin.fromJSON(e))
         : [],
-      delegated_vesting: Array.isArray(object?.delegated_vesting)
+      delegated_vesting: globalThis.Array.isArray(object?.delegated_vesting)
         ? object.delegated_vesting.map((e: any) => Coin.fromJSON(e))
         : [],
-      end_time: isSet(object.end_time) ? String(object.end_time) : "0",
+      end_time: isSet(object.end_time) ? globalThis.String(object.end_time) : "0",
     };
   },
 
@@ -242,7 +242,7 @@ export const ContinuousVestingAccount = {
       base_vesting_account: isSet(object.base_vesting_account)
         ? BaseVestingAccount.fromJSON(object.base_vesting_account)
         : undefined,
-      start_time: isSet(object.start_time) ? String(object.start_time) : "0",
+      start_time: isSet(object.start_time) ? globalThis.String(object.start_time) : "0",
     };
   },
 
@@ -384,8 +384,8 @@ export const Period = {
 
   fromJSON(object: any): Period {
     return {
-      length: isSet(object.length) ? String(object.length) : "0",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      length: isSet(object.length) ? globalThis.String(object.length) : "0",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -473,8 +473,8 @@ export const PeriodicVestingAccount = {
       base_vesting_account: isSet(object.base_vesting_account)
         ? BaseVestingAccount.fromJSON(object.base_vesting_account)
         : undefined,
-      start_time: isSet(object.start_time) ? String(object.start_time) : "0",
-      vesting_periods: Array.isArray(object?.vesting_periods)
+      start_time: isSet(object.start_time) ? globalThis.String(object.start_time) : "0",
+      vesting_periods: globalThis.Array.isArray(object?.vesting_periods)
         ? object.vesting_periods.map((e: any) => Period.fromJSON(e))
         : [],
     };
@@ -576,7 +576,8 @@ export const PermanentLockedAccount = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

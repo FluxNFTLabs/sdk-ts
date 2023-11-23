@@ -61,8 +61,10 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      host_enabled: isSet(object.host_enabled) ? Boolean(object.host_enabled) : false,
-      allow_messages: Array.isArray(object?.allow_messages) ? object.allow_messages.map((e: any) => String(e)) : [],
+      host_enabled: isSet(object.host_enabled) ? globalThis.Boolean(object.host_enabled) : false,
+      allow_messages: globalThis.Array.isArray(object?.allow_messages)
+        ? object.allow_messages.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -91,7 +93,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

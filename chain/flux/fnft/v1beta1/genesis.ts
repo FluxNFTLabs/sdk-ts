@@ -1,14 +1,15 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Class, NFT } from "./nft";
+import { Class, Holder, NFT } from "./nft";
 
 export interface GenesisState {
   classes: Class[];
   nfts: NFT[];
+  holders: Holder[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { classes: [], nfts: [] };
+  return { classes: [], nfts: [], holders: [] };
 }
 
 export const GenesisState = {
@@ -20,6 +21,9 @@ export const GenesisState = {
     }
     for (const v of message.nfts) {
       NFT.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.holders) {
+      Holder.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -45,6 +49,13 @@ export const GenesisState = {
 
           message.nfts.push(NFT.decode(reader, reader.uint32()));
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.holders.push(Holder.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -56,8 +67,9 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
+      classes: globalThis.Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
+      nfts: globalThis.Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
+      holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
     };
   },
 
@@ -69,6 +81,9 @@ export const GenesisState = {
     if (message.nfts?.length) {
       obj.nfts = message.nfts.map((e) => NFT.toJSON(e));
     }
+    if (message.holders?.length) {
+      obj.holders = message.holders.map((e) => Holder.toJSON(e));
+    }
     return obj;
   },
 
@@ -79,6 +94,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.classes = object.classes?.map((e) => Class.fromPartial(e)) || [];
     message.nfts = object.nfts?.map((e) => NFT.fromPartial(e)) || [];
+    message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     return message;
   },
 };
@@ -86,6 +102,7 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

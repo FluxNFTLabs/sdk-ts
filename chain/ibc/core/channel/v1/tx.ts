@@ -277,9 +277,9 @@ export const MsgChannelOpenInit = {
 
   fromJSON(object: any): MsgChannelOpenInit {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
       channel: isSet(object.channel) ? Channel.fromJSON(object.channel) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -360,8 +360,8 @@ export const MsgChannelOpenInitResponse = {
 
   fromJSON(object: any): MsgChannelOpenInitResponse {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      version: isSet(object.version) ? String(object.version) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
     };
   },
 
@@ -494,13 +494,13 @@ export const MsgChannelOpenTry = {
 
   fromJSON(object: any): MsgChannelOpenTry {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      previous_channel_id: isSet(object.previous_channel_id) ? String(object.previous_channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      previous_channel_id: isSet(object.previous_channel_id) ? globalThis.String(object.previous_channel_id) : "",
       channel: isSet(object.channel) ? Channel.fromJSON(object.channel) : undefined,
-      counterparty_version: isSet(object.counterparty_version) ? String(object.counterparty_version) : "",
+      counterparty_version: isSet(object.counterparty_version) ? globalThis.String(object.counterparty_version) : "",
       proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -599,8 +599,8 @@ export const MsgChannelOpenTryResponse = {
 
   fromJSON(object: any): MsgChannelOpenTryResponse {
     return {
-      version: isSet(object.version) ? String(object.version) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
     };
   },
 
@@ -733,13 +733,15 @@ export const MsgChannelOpenAck = {
 
   fromJSON(object: any): MsgChannelOpenAck {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      counterparty_channel_id: isSet(object.counterparty_channel_id) ? String(object.counterparty_channel_id) : "",
-      counterparty_version: isSet(object.counterparty_version) ? String(object.counterparty_version) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      counterparty_channel_id: isSet(object.counterparty_channel_id)
+        ? globalThis.String(object.counterparty_channel_id)
+        : "",
+      counterparty_version: isSet(object.counterparty_version) ? globalThis.String(object.counterparty_version) : "",
       proof_try: isSet(object.proof_try) ? bytesFromBase64(object.proof_try) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -911,11 +913,11 @@ export const MsgChannelOpenConfirm = {
 
   fromJSON(object: any): MsgChannelOpenConfirm {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
       proof_ack: isSet(object.proof_ack) ? bytesFromBase64(object.proof_ack) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1059,9 +1061,9 @@ export const MsgChannelCloseInit = {
 
   fromJSON(object: any): MsgChannelCloseInit {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1215,11 +1217,11 @@ export const MsgChannelCloseConfirm = {
 
   fromJSON(object: any): MsgChannelCloseConfirm {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
       proof_init: isSet(object.proof_init) ? bytesFromBase64(object.proof_init) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1376,7 +1378,7 @@ export const MsgRecvPacket = {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
       proof_commitment: isSet(object.proof_commitment) ? bytesFromBase64(object.proof_commitment) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1561,8 +1563,8 @@ export const MsgTimeout = {
       packet: isSet(object.packet) ? Packet.fromJSON(object.packet) : undefined,
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? String(object.next_sequence_recv) : "0",
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      next_sequence_recv: isSet(object.next_sequence_recv) ? globalThis.String(object.next_sequence_recv) : "0",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1763,8 +1765,8 @@ export const MsgTimeoutOnClose = {
       proof_unreceived: isSet(object.proof_unreceived) ? bytesFromBase64(object.proof_unreceived) : new Uint8Array(0),
       proof_close: isSet(object.proof_close) ? bytesFromBase64(object.proof_close) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      next_sequence_recv: isSet(object.next_sequence_recv) ? String(object.next_sequence_recv) : "0",
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      next_sequence_recv: isSet(object.next_sequence_recv) ? globalThis.String(object.next_sequence_recv) : "0",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -1958,7 +1960,7 @@ export const MsgAcknowledgement = {
       acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array(0),
       proof_acked: isSet(object.proof_acked) ? bytesFromBase64(object.proof_acked) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : "",
+      signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
     };
   },
 
@@ -2483,30 +2485,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -2516,21 +2499,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2547,7 +2531,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

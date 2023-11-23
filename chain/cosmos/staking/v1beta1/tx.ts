@@ -244,9 +244,9 @@ export const MsgCreateValidator = {
     return {
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
       commission: isSet(object.commission) ? CommissionRates.fromJSON(object.commission) : undefined,
-      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      min_self_delegation: isSet(object.min_self_delegation) ? globalThis.String(object.min_self_delegation) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       pubkey: isSet(object.pubkey) ? Any.fromJSON(object.pubkey) : undefined,
       value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined,
     };
@@ -415,9 +415,9 @@ export const MsgEditValidator = {
   fromJSON(object: any): MsgEditValidator {
     return {
       description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      commission_rate: isSet(object.commission_rate) ? String(object.commission_rate) : "",
-      min_self_delegation: isSet(object.min_self_delegation) ? String(object.min_self_delegation) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      commission_rate: isSet(object.commission_rate) ? globalThis.String(object.commission_rate) : "",
+      min_self_delegation: isSet(object.min_self_delegation) ? globalThis.String(object.min_self_delegation) : "",
     };
   },
 
@@ -557,8 +557,8 @@ export const MsgDelegate = {
 
   fromJSON(object: any): MsgDelegate {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -705,9 +705,9 @@ export const MsgBeginRedelegate = {
 
   fromJSON(object: any): MsgBeginRedelegate {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_src_address: isSet(object.validator_src_address) ? String(object.validator_src_address) : "",
-      validator_dst_address: isSet(object.validator_dst_address) ? String(object.validator_dst_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_src_address: isSet(object.validator_src_address) ? globalThis.String(object.validator_src_address) : "",
+      validator_dst_address: isSet(object.validator_dst_address) ? globalThis.String(object.validator_dst_address) : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -862,8 +862,8 @@ export const MsgUndelegate = {
 
   fromJSON(object: any): MsgUndelegate {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
     };
   },
@@ -1024,10 +1024,10 @@ export const MsgCancelUnbondingDelegation = {
 
   fromJSON(object: any): MsgCancelUnbondingDelegation {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
-      creation_height: isSet(object.creation_height) ? String(object.creation_height) : "0",
+      creation_height: isSet(object.creation_height) ? globalThis.String(object.creation_height) : "0",
     };
   },
 
@@ -1157,7 +1157,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -1563,29 +1563,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1596,16 +1578,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
@@ -1624,7 +1606,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

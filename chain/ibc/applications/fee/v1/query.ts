@@ -210,7 +210,7 @@ export const QueryIncentivizedPacketsRequest = {
   fromJSON(object: any): QueryIncentivizedPacketsRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      query_height: isSet(object.query_height) ? String(object.query_height) : "0",
+      query_height: isSet(object.query_height) ? globalThis.String(object.query_height) : "0",
     };
   },
 
@@ -287,7 +287,7 @@ export const QueryIncentivizedPacketsResponse = {
 
   fromJSON(object: any): QueryIncentivizedPacketsResponse {
     return {
-      incentivized_packets: Array.isArray(object?.incentivized_packets)
+      incentivized_packets: globalThis.Array.isArray(object?.incentivized_packets)
         ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -368,7 +368,7 @@ export const QueryIncentivizedPacketRequest = {
   fromJSON(object: any): QueryIncentivizedPacketRequest {
     return {
       packet_id: isSet(object.packet_id) ? PacketId.fromJSON(object.packet_id) : undefined,
-      query_height: isSet(object.query_height) ? String(object.query_height) : "0",
+      query_height: isSet(object.query_height) ? globalThis.String(object.query_height) : "0",
     };
   },
 
@@ -531,9 +531,9 @@ export const QueryIncentivizedPacketsForChannelRequest = {
   fromJSON(object: any): QueryIncentivizedPacketsForChannelRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      query_height: isSet(object.query_height) ? String(object.query_height) : "0",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      query_height: isSet(object.query_height) ? globalThis.String(object.query_height) : "0",
     };
   },
 
@@ -620,7 +620,7 @@ export const QueryIncentivizedPacketsForChannelResponse = {
 
   fromJSON(object: any): QueryIncentivizedPacketsForChannelResponse {
     return {
-      incentivized_packets: Array.isArray(object?.incentivized_packets)
+      incentivized_packets: globalThis.Array.isArray(object?.incentivized_packets)
         ? object.incentivized_packets.map((e: any) => IdentifiedPacketFees.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -752,7 +752,9 @@ export const QueryTotalRecvFeesResponse = {
   },
 
   fromJSON(object: any): QueryTotalRecvFeesResponse {
-    return { recv_fees: Array.isArray(object?.recv_fees) ? object.recv_fees.map((e: any) => Coin.fromJSON(e)) : [] };
+    return {
+      recv_fees: globalThis.Array.isArray(object?.recv_fees) ? object.recv_fees.map((e: any) => Coin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: QueryTotalRecvFeesResponse): unknown {
@@ -872,7 +874,9 @@ export const QueryTotalAckFeesResponse = {
   },
 
   fromJSON(object: any): QueryTotalAckFeesResponse {
-    return { ack_fees: Array.isArray(object?.ack_fees) ? object.ack_fees.map((e: any) => Coin.fromJSON(e)) : [] };
+    return {
+      ack_fees: globalThis.Array.isArray(object?.ack_fees) ? object.ack_fees.map((e: any) => Coin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: QueryTotalAckFeesResponse): unknown {
@@ -993,7 +997,9 @@ export const QueryTotalTimeoutFeesResponse = {
 
   fromJSON(object: any): QueryTotalTimeoutFeesResponse {
     return {
-      timeout_fees: Array.isArray(object?.timeout_fees) ? object.timeout_fees.map((e: any) => Coin.fromJSON(e)) : [],
+      timeout_fees: globalThis.Array.isArray(object?.timeout_fees)
+        ? object.timeout_fees.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
@@ -1064,8 +1070,8 @@ export const QueryPayeeRequest = {
 
   fromJSON(object: any): QueryPayeeRequest {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
     };
   },
 
@@ -1129,7 +1135,7 @@ export const QueryPayeeResponse = {
   },
 
   fromJSON(object: any): QueryPayeeResponse {
-    return { payee_address: isSet(object.payee_address) ? String(object.payee_address) : "" };
+    return { payee_address: isSet(object.payee_address) ? globalThis.String(object.payee_address) : "" };
   },
 
   toJSON(message: QueryPayeeResponse): unknown {
@@ -1199,8 +1205,8 @@ export const QueryCounterpartyPayeeRequest = {
 
   fromJSON(object: any): QueryCounterpartyPayeeRequest {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
     };
   },
 
@@ -1264,7 +1270,7 @@ export const QueryCounterpartyPayeeResponse = {
   },
 
   fromJSON(object: any): QueryCounterpartyPayeeResponse {
-    return { counterparty_payee: isSet(object.counterparty_payee) ? String(object.counterparty_payee) : "" };
+    return { counterparty_payee: isSet(object.counterparty_payee) ? globalThis.String(object.counterparty_payee) : "" };
   },
 
   toJSON(message: QueryCounterpartyPayeeResponse): unknown {
@@ -1335,7 +1341,7 @@ export const QueryFeeEnabledChannelsRequest = {
   fromJSON(object: any): QueryFeeEnabledChannelsRequest {
     return {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
-      query_height: isSet(object.query_height) ? String(object.query_height) : "0",
+      query_height: isSet(object.query_height) ? globalThis.String(object.query_height) : "0",
     };
   },
 
@@ -1412,7 +1418,7 @@ export const QueryFeeEnabledChannelsResponse = {
 
   fromJSON(object: any): QueryFeeEnabledChannelsResponse {
     return {
-      fee_enabled_channels: Array.isArray(object?.fee_enabled_channels)
+      fee_enabled_channels: globalThis.Array.isArray(object?.fee_enabled_channels)
         ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1492,8 +1498,8 @@ export const QueryFeeEnabledChannelRequest = {
 
   fromJSON(object: any): QueryFeeEnabledChannelRequest {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
     };
   },
 
@@ -1557,7 +1563,7 @@ export const QueryFeeEnabledChannelResponse = {
   },
 
   fromJSON(object: any): QueryFeeEnabledChannelResponse {
-    return { fee_enabled: isSet(object.fee_enabled) ? Boolean(object.fee_enabled) : false };
+    return { fee_enabled: isSet(object.fee_enabled) ? globalThis.Boolean(object.fee_enabled) : false };
   },
 
   toJSON(message: QueryFeeEnabledChannelResponse): unknown {
@@ -2018,29 +2024,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2057,7 +2045,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

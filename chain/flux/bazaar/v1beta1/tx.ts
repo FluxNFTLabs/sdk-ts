@@ -11,7 +11,6 @@ export interface MsgCreateProduct {
   id: string;
   title: string;
   description: string;
-  content_url: string;
   offerings: Offering[];
   tags: string[];
 }
@@ -31,8 +30,18 @@ export interface MsgPurchaseOffering {
 export interface MsgPurchaseOfferingResponse {
 }
 
+export interface MsgVerifyProduct {
+  sender: string;
+  class_id: string;
+  id: string;
+  product_id: string;
+}
+
+export interface MsgVerifyProductResponse {
+}
+
 function createBaseMsgCreateProduct(): MsgCreateProduct {
-  return { sender: "", class_id: "", id: "", title: "", description: "", content_url: "", offerings: [], tags: [] };
+  return { sender: "", class_id: "", id: "", title: "", description: "", offerings: [], tags: [] };
 }
 
 export const MsgCreateProduct = {
@@ -54,14 +63,11 @@ export const MsgCreateProduct = {
     if (message.description !== "") {
       writer.uint32(42).string(message.description);
     }
-    if (message.content_url !== "") {
-      writer.uint32(50).string(message.content_url);
-    }
     for (const v of message.offerings) {
-      Offering.encode(v!, writer.uint32(58).fork()).ldelim();
+      Offering.encode(v!, writer.uint32(50).fork()).ldelim();
     }
     for (const v of message.tags) {
-      writer.uint32(66).string(v!);
+      writer.uint32(58).string(v!);
     }
     return writer;
   },
@@ -113,17 +119,10 @@ export const MsgCreateProduct = {
             break;
           }
 
-          message.content_url = reader.string();
+          message.offerings.push(Offering.decode(reader, reader.uint32()));
           continue;
         case 7:
           if (tag !== 58) {
-            break;
-          }
-
-          message.offerings.push(Offering.decode(reader, reader.uint32()));
-          continue;
-        case 8:
-          if (tag !== 66) {
             break;
           }
 
@@ -140,14 +139,15 @@ export const MsgCreateProduct = {
 
   fromJSON(object: any): MsgCreateProduct {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      content_url: isSet(object.content_url) ? String(object.content_url) : "",
-      offerings: Array.isArray(object?.offerings) ? object.offerings.map((e: any) => Offering.fromJSON(e)) : [],
-      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      offerings: globalThis.Array.isArray(object?.offerings)
+        ? object.offerings.map((e: any) => Offering.fromJSON(e))
+        : [],
+      tags: globalThis.Array.isArray(object?.tags) ? object.tags.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -168,9 +168,6 @@ export const MsgCreateProduct = {
     if (message.description !== "") {
       obj.description = message.description;
     }
-    if (message.content_url !== "") {
-      obj.content_url = message.content_url;
-    }
     if (message.offerings?.length) {
       obj.offerings = message.offerings.map((e) => Offering.toJSON(e));
     }
@@ -190,7 +187,6 @@ export const MsgCreateProduct = {
     message.id = object.id ?? "";
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.content_url = object.content_url ?? "";
     message.offerings = object.offerings?.map((e) => Offering.fromPartial(e)) || [];
     message.tags = object.tags?.map((e) => e) || [];
     return message;
@@ -355,13 +351,15 @@ export const MsgPurchaseOffering = {
 
   fromJSON(object: any): MsgPurchaseOffering {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      product_id: isSet(object.product_id) ? String(object.product_id) : "",
-      offering_idx: Array.isArray(object?.offering_idx) ? object.offering_idx.map((e: any) => String(e)) : [],
-      offering_quantity: Array.isArray(object?.offering_quantity)
-        ? object.offering_quantity.map((e: any) => String(e))
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      product_id: isSet(object.product_id) ? globalThis.String(object.product_id) : "",
+      offering_idx: globalThis.Array.isArray(object?.offering_idx)
+        ? object.offering_idx.map((e: any) => globalThis.String(e))
+        : [],
+      offering_quantity: globalThis.Array.isArray(object?.offering_quantity)
+        ? object.offering_quantity.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -449,12 +447,164 @@ export const MsgPurchaseOfferingResponse = {
   },
 };
 
+function createBaseMsgVerifyProduct(): MsgVerifyProduct {
+  return { sender: "", class_id: "", id: "", product_id: "" };
+}
+
+export const MsgVerifyProduct = {
+  $type: "flux.bazaar.v1beta1.MsgVerifyProduct" as const,
+
+  encode(message: MsgVerifyProduct, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
+    }
+    if (message.class_id !== "") {
+      writer.uint32(18).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(26).string(message.id);
+    }
+    if (message.product_id !== "") {
+      writer.uint32(34).string(message.product_id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyProduct {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgVerifyProduct();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sender = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.class_id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.product_id = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgVerifyProduct {
+    return {
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      product_id: isSet(object.product_id) ? globalThis.String(object.product_id) : "",
+    };
+  },
+
+  toJSON(message: MsgVerifyProduct): unknown {
+    const obj: any = {};
+    if (message.sender !== "") {
+      obj.sender = message.sender;
+    }
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.product_id !== "") {
+      obj.product_id = message.product_id;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgVerifyProduct>): MsgVerifyProduct {
+    return MsgVerifyProduct.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgVerifyProduct>): MsgVerifyProduct {
+    const message = createBaseMsgVerifyProduct();
+    message.sender = object.sender ?? "";
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    message.product_id = object.product_id ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgVerifyProductResponse(): MsgVerifyProductResponse {
+  return {};
+}
+
+export const MsgVerifyProductResponse = {
+  $type: "flux.bazaar.v1beta1.MsgVerifyProductResponse" as const,
+
+  encode(_: MsgVerifyProductResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyProductResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgVerifyProductResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgVerifyProductResponse {
+    return {};
+  },
+
+  toJSON(_: MsgVerifyProductResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgVerifyProductResponse>): MsgVerifyProductResponse {
+    return MsgVerifyProductResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgVerifyProductResponse>): MsgVerifyProductResponse {
+    const message = createBaseMsgVerifyProductResponse();
+    return message;
+  },
+};
+
 export interface Msg {
   CreateProduct(request: DeepPartial<MsgCreateProduct>, metadata?: grpc.Metadata): Promise<MsgCreateProductResponse>;
   PurchaseOffering(
     request: DeepPartial<MsgPurchaseOffering>,
     metadata?: grpc.Metadata,
   ): Promise<MsgPurchaseOfferingResponse>;
+  VerifyProduct(request: DeepPartial<MsgVerifyProduct>, metadata?: grpc.Metadata): Promise<MsgVerifyProductResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -464,6 +614,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.CreateProduct = this.CreateProduct.bind(this);
     this.PurchaseOffering = this.PurchaseOffering.bind(this);
+    this.VerifyProduct = this.VerifyProduct.bind(this);
   }
 
   CreateProduct(request: DeepPartial<MsgCreateProduct>, metadata?: grpc.Metadata): Promise<MsgCreateProductResponse> {
@@ -475,6 +626,10 @@ export class MsgClientImpl implements Msg {
     metadata?: grpc.Metadata,
   ): Promise<MsgPurchaseOfferingResponse> {
     return this.rpc.unary(MsgPurchaseOfferingDesc, MsgPurchaseOffering.fromPartial(request), metadata);
+  }
+
+  VerifyProduct(request: DeepPartial<MsgVerifyProduct>, metadata?: grpc.Metadata): Promise<MsgVerifyProductResponse> {
+    return this.rpc.unary(MsgVerifyProductDesc, MsgVerifyProduct.fromPartial(request), metadata);
   }
 }
 
@@ -516,6 +671,29 @@ export const MsgPurchaseOfferingDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = MsgPurchaseOfferingResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgVerifyProductDesc: UnaryMethodDefinitionish = {
+  methodName: "VerifyProduct",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgVerifyProduct.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgVerifyProductResponse.decode(data);
       return {
         ...value,
         toObject() {
@@ -594,29 +772,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -633,7 +793,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

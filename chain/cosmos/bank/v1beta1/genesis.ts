@@ -117,12 +117,12 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
-      denom_metadata: Array.isArray(object?.denom_metadata)
+      balances: globalThis.Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
+      supply: globalThis.Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
+      denom_metadata: globalThis.Array.isArray(object?.denom_metadata)
         ? object.denom_metadata.map((e: any) => Metadata.fromJSON(e))
         : [],
-      send_enabled: Array.isArray(object?.send_enabled)
+      send_enabled: globalThis.Array.isArray(object?.send_enabled)
         ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
     };
@@ -213,8 +213,8 @@ export const Balance = {
 
   fromJSON(object: any): Balance {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      coins: globalThis.Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -243,7 +243,8 @@ export const Balance = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

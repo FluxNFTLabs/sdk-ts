@@ -104,9 +104,13 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromJSON(e)) : [],
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromJSON(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromJSON(e)) : [],
+      codes: globalThis.Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromJSON(e)) : [],
+      contracts: globalThis.Array.isArray(object?.contracts)
+        ? object.contracts.map((e: any) => Contract.fromJSON(e))
+        : [],
+      sequences: globalThis.Array.isArray(object?.sequences)
+        ? object.sequences.map((e: any) => Sequence.fromJSON(e))
+        : [],
     };
   },
 
@@ -211,10 +215,10 @@ export const Code = {
 
   fromJSON(object: any): Code {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       code_info: isSet(object.code_info) ? CodeInfo.fromJSON(object.code_info) : undefined,
       code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(0),
-      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false,
+      pinned: isSet(object.pinned) ? globalThis.Boolean(object.pinned) : false,
     };
   },
 
@@ -319,12 +323,12 @@ export const Contract = {
 
   fromJSON(object: any): Contract {
     return {
-      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      contract_address: isSet(object.contract_address) ? globalThis.String(object.contract_address) : "",
       contract_info: isSet(object.contract_info) ? ContractInfo.fromJSON(object.contract_info) : undefined,
-      contract_state: Array.isArray(object?.contract_state)
+      contract_state: globalThis.Array.isArray(object?.contract_state)
         ? object.contract_state.map((e: any) => Model.fromJSON(e))
         : [],
-      contract_code_history: Array.isArray(object?.contract_code_history)
+      contract_code_history: globalThis.Array.isArray(object?.contract_code_history)
         ? object.contract_code_history.map((e: any) => ContractCodeHistoryEntry.fromJSON(e))
         : [],
     };
@@ -413,7 +417,7 @@ export const Sequence = {
   fromJSON(object: any): Sequence {
     return {
       id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(0),
-      value: isSet(object.value) ? String(object.value) : "0",
+      value: isSet(object.value) ? globalThis.String(object.value) : "0",
     };
   },
 
@@ -439,30 +443,11 @@ export const Sequence = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -472,21 +457,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

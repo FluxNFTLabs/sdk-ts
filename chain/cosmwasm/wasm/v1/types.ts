@@ -291,7 +291,9 @@ export const AccessConfig = {
   fromJSON(object: any): AccessConfig {
     return {
       permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : 0,
-      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : [],
+      addresses: globalThis.Array.isArray(object?.addresses)
+        ? object.addresses.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -459,7 +461,7 @@ export const CodeInfo = {
   fromJSON(object: any): CodeInfo {
     return {
       code_hash: isSet(object.code_hash) ? bytesFromBase64(object.code_hash) : new Uint8Array(0),
-      creator: isSet(object.creator) ? String(object.creator) : "",
+      creator: isSet(object.creator) ? globalThis.String(object.creator) : "",
       instantiate_config: isSet(object.instantiate_config)
         ? AccessConfig.fromJSON(object.instantiate_config)
         : undefined,
@@ -593,12 +595,12 @@ export const ContractInfo = {
 
   fromJSON(object: any): ContractInfo {
     return {
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
-      creator: isSet(object.creator) ? String(object.creator) : "",
-      admin: isSet(object.admin) ? String(object.admin) : "",
-      label: isSet(object.label) ? String(object.label) : "",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
+      creator: isSet(object.creator) ? globalThis.String(object.creator) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
+      label: isSet(object.label) ? globalThis.String(object.label) : "",
       created: isSet(object.created) ? AbsoluteTxPosition.fromJSON(object.created) : undefined,
-      ibc_port_id: isSet(object.ibc_port_id) ? String(object.ibc_port_id) : "",
+      ibc_port_id: isSet(object.ibc_port_id) ? globalThis.String(object.ibc_port_id) : "",
       extension: isSet(object.extension) ? Any.fromJSON(object.extension) : undefined,
     };
   },
@@ -719,7 +721,7 @@ export const ContractCodeHistoryEntry = {
   fromJSON(object: any): ContractCodeHistoryEntry {
     return {
       operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : 0,
-      code_id: isSet(object.code_id) ? String(object.code_id) : "0",
+      code_id: isSet(object.code_id) ? globalThis.String(object.code_id) : "0",
       updated: isSet(object.updated) ? AbsoluteTxPosition.fromJSON(object.updated) : undefined,
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
     };
@@ -806,8 +808,8 @@ export const AbsoluteTxPosition = {
 
   fromJSON(object: any): AbsoluteTxPosition {
     return {
-      block_height: isSet(object.block_height) ? String(object.block_height) : "0",
-      tx_index: isSet(object.tx_index) ? String(object.tx_index) : "0",
+      block_height: isSet(object.block_height) ? globalThis.String(object.block_height) : "0",
+      tx_index: isSet(object.tx_index) ? globalThis.String(object.tx_index) : "0",
     };
   },
 
@@ -909,30 +911,11 @@ export const Model = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -942,21 +925,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

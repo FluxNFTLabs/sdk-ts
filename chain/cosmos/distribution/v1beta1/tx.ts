@@ -166,8 +166,8 @@ export const MsgSetWithdrawAddress = {
 
   fromJSON(object: any): MsgSetWithdrawAddress {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? globalThis.String(object.withdraw_address) : "",
     };
   },
 
@@ -287,8 +287,8 @@ export const MsgWithdrawDelegatorReward = {
 
   fromJSON(object: any): MsgWithdrawDelegatorReward {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
     };
   },
 
@@ -352,7 +352,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
   },
 
   fromJSON(object: any): MsgWithdrawDelegatorRewardResponse {
-    return { amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [] };
+    return { amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [] };
   },
 
   toJSON(message: MsgWithdrawDelegatorRewardResponse): unknown {
@@ -411,7 +411,7 @@ export const MsgWithdrawValidatorCommission = {
   },
 
   fromJSON(object: any): MsgWithdrawValidatorCommission {
-    return { validator_address: isSet(object.validator_address) ? String(object.validator_address) : "" };
+    return { validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "" };
   },
 
   toJSON(message: MsgWithdrawValidatorCommission): unknown {
@@ -470,7 +470,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
   },
 
   fromJSON(object: any): MsgWithdrawValidatorCommissionResponse {
-    return { amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [] };
+    return { amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [] };
   },
 
   toJSON(message: MsgWithdrawValidatorCommissionResponse): unknown {
@@ -540,8 +540,8 @@ export const MsgFundCommunityPool = {
 
   fromJSON(object: any): MsgFundCommunityPool {
     return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      depositor: isSet(object.depositor) ? globalThis.String(object.depositor) : "",
     };
   },
 
@@ -661,7 +661,7 @@ export const MsgUpdateParams = {
 
   fromJSON(object: any): MsgUpdateParams {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
@@ -794,9 +794,9 @@ export const MsgCommunityPoolSpend = {
 
   fromJSON(object: any): MsgCommunityPoolSpend {
     return {
-      authority: isSet(object.authority) ? String(object.authority) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
+      recipient: isSet(object.recipient) ? globalThis.String(object.recipient) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -1191,29 +1191,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1221,7 +1203,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

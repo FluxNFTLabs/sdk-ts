@@ -124,9 +124,9 @@ export const QueryGrantsRequest = {
 
   fromJSON(object: any): QueryGrantsRequest {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
-      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? globalThis.String(object.msg_type_url) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -212,7 +212,7 @@ export const QueryGrantsResponse = {
 
   fromJSON(object: any): QueryGrantsResponse {
     return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromJSON(e)) : [],
+      grants: globalThis.Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -290,7 +290,7 @@ export const QueryGranterGrantsRequest = {
 
   fromJSON(object: any): QueryGranterGrantsRequest {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -368,7 +368,9 @@ export const QueryGranterGrantsResponse = {
 
   fromJSON(object: any): QueryGranterGrantsResponse {
     return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e)) : [],
+      grants: globalThis.Array.isArray(object?.grants)
+        ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -446,7 +448,7 @@ export const QueryGranteeGrantsRequest = {
 
   fromJSON(object: any): QueryGranteeGrantsRequest {
     return {
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -524,7 +526,9 @@ export const QueryGranteeGrantsResponse = {
 
   fromJSON(object: any): QueryGranteeGrantsResponse {
     return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e)) : [],
+      grants: globalThis.Array.isArray(object?.grants)
+        ? object.grants.map((e: any) => GrantAuthorization.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -745,29 +749,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -775,7 +761,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

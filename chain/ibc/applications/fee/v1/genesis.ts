@@ -141,19 +141,19 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      identified_fees: Array.isArray(object?.identified_fees)
+      identified_fees: globalThis.Array.isArray(object?.identified_fees)
         ? object.identified_fees.map((e: any) => IdentifiedPacketFees.fromJSON(e))
         : [],
-      fee_enabled_channels: Array.isArray(object?.fee_enabled_channels)
+      fee_enabled_channels: globalThis.Array.isArray(object?.fee_enabled_channels)
         ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromJSON(e))
         : [],
-      registered_payees: Array.isArray(object?.registered_payees)
+      registered_payees: globalThis.Array.isArray(object?.registered_payees)
         ? object.registered_payees.map((e: any) => RegisteredPayee.fromJSON(e))
         : [],
-      registered_counterparty_payees: Array.isArray(object?.registered_counterparty_payees)
+      registered_counterparty_payees: globalThis.Array.isArray(object?.registered_counterparty_payees)
         ? object.registered_counterparty_payees.map((e: any) => RegisteredCounterpartyPayee.fromJSON(e))
         : [],
-      forward_relayers: Array.isArray(object?.forward_relayers)
+      forward_relayers: globalThis.Array.isArray(object?.forward_relayers)
         ? object.forward_relayers.map((e: any) => ForwardRelayerAddress.fromJSON(e))
         : [],
     };
@@ -245,8 +245,8 @@ export const FeeEnabledChannel = {
 
   fromJSON(object: any): FeeEnabledChannel {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
     };
   },
 
@@ -331,9 +331,9 @@ export const RegisteredPayee = {
 
   fromJSON(object: any): RegisteredPayee {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      payee: isSet(object.payee) ? String(object.payee) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
+      payee: isSet(object.payee) ? globalThis.String(object.payee) : "",
     };
   },
 
@@ -422,9 +422,9 @@ export const RegisteredCounterpartyPayee = {
 
   fromJSON(object: any): RegisteredCounterpartyPayee {
     return {
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
-      relayer: isSet(object.relayer) ? String(object.relayer) : "",
-      counterparty_payee: isSet(object.counterparty_payee) ? String(object.counterparty_payee) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
+      relayer: isSet(object.relayer) ? globalThis.String(object.relayer) : "",
+      counterparty_payee: isSet(object.counterparty_payee) ? globalThis.String(object.counterparty_payee) : "",
     };
   },
 
@@ -503,7 +503,7 @@ export const ForwardRelayerAddress = {
 
   fromJSON(object: any): ForwardRelayerAddress {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       packet_id: isSet(object.packet_id) ? PacketId.fromJSON(object.packet_id) : undefined,
     };
   },
@@ -535,7 +535,8 @@ export const ForwardRelayerAddress = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

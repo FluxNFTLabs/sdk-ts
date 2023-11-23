@@ -86,12 +86,12 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      denom_traces: Array.isArray(object?.denom_traces)
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      denom_traces: globalThis.Array.isArray(object?.denom_traces)
         ? object.denom_traces.map((e: any) => DenomTrace.fromJSON(e))
         : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      total_escrowed: Array.isArray(object?.total_escrowed)
+      total_escrowed: globalThis.Array.isArray(object?.total_escrowed)
         ? object.total_escrowed.map((e: any) => Coin.fromJSON(e))
         : [],
     };
@@ -132,7 +132,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

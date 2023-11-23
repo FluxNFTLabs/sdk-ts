@@ -160,10 +160,12 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      send_enabled: Array.isArray(object?.send_enabled)
+      send_enabled: globalThis.Array.isArray(object?.send_enabled)
         ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
-      default_send_enabled: isSet(object.default_send_enabled) ? Boolean(object.default_send_enabled) : false,
+      default_send_enabled: isSet(object.default_send_enabled)
+        ? globalThis.Boolean(object.default_send_enabled)
+        : false,
     };
   },
 
@@ -238,8 +240,8 @@ export const SendEnabled = {
 
   fromJSON(object: any): SendEnabled {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
     };
   },
 
@@ -314,8 +316,8 @@ export const Input = {
 
   fromJSON(object: any): Input {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      coins: globalThis.Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -390,8 +392,8 @@ export const Output = {
 
   fromJSON(object: any): Output {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      coins: globalThis.Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -455,7 +457,7 @@ export const Supply = {
   },
 
   fromJSON(object: any): Supply {
-    return { total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromJSON(e)) : [] };
+    return { total: globalThis.Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromJSON(e)) : [] };
   },
 
   toJSON(message: Supply): unknown {
@@ -535,9 +537,9 @@ export const DenomUnit = {
 
   fromJSON(object: any): DenomUnit {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      exponent: isSet(object.exponent) ? globalThis.Number(object.exponent) : 0,
+      aliases: globalThis.Array.isArray(object?.aliases) ? object.aliases.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -676,14 +678,16 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      description: isSet(object.description) ? String(object.description) : "",
-      denom_units: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromJSON(e)) : [],
-      base: isSet(object.base) ? String(object.base) : "",
-      display: isSet(object.display) ? String(object.display) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      denom_units: globalThis.Array.isArray(object?.denom_units)
+        ? object.denom_units.map((e: any) => DenomUnit.fromJSON(e))
+        : [],
+      base: isSet(object.base) ? globalThis.String(object.base) : "",
+      display: isSet(object.display) ? globalThis.String(object.display) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
+      uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+      uri_hash: isSet(object.uri_hash) ? globalThis.String(object.uri_hash) : "",
     };
   },
 
@@ -736,7 +740,8 @@ export const Metadata = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

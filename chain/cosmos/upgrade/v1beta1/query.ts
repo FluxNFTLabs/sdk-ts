@@ -249,7 +249,7 @@ export const QueryAppliedPlanRequest = {
   },
 
   fromJSON(object: any): QueryAppliedPlanRequest {
-    return { name: isSet(object.name) ? String(object.name) : "" };
+    return { name: isSet(object.name) ? globalThis.String(object.name) : "" };
   },
 
   toJSON(message: QueryAppliedPlanRequest): unknown {
@@ -308,7 +308,7 @@ export const QueryAppliedPlanResponse = {
   },
 
   fromJSON(object: any): QueryAppliedPlanResponse {
-    return { height: isSet(object.height) ? String(object.height) : "0" };
+    return { height: isSet(object.height) ? globalThis.String(object.height) : "0" };
   },
 
   toJSON(message: QueryAppliedPlanResponse): unknown {
@@ -367,7 +367,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
 
   fromJSON(object: any): QueryUpgradedConsensusStateRequest {
-    return { last_height: isSet(object.last_height) ? String(object.last_height) : "0" };
+    return { last_height: isSet(object.last_height) ? globalThis.String(object.last_height) : "0" };
   },
 
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
@@ -489,7 +489,7 @@ export const QueryModuleVersionsRequest = {
   },
 
   fromJSON(object: any): QueryModuleVersionsRequest {
-    return { module_name: isSet(object.module_name) ? String(object.module_name) : "" };
+    return { module_name: isSet(object.module_name) ? globalThis.String(object.module_name) : "" };
   },
 
   toJSON(message: QueryModuleVersionsRequest): unknown {
@@ -549,7 +549,7 @@ export const QueryModuleVersionsResponse = {
 
   fromJSON(object: any): QueryModuleVersionsResponse {
     return {
-      module_versions: Array.isArray(object?.module_versions)
+      module_versions: globalThis.Array.isArray(object?.module_versions)
         ? object.module_versions.map((e: any) => ModuleVersion.fromJSON(e))
         : [],
     };
@@ -656,7 +656,7 @@ export const QueryAuthorityResponse = {
   },
 
   fromJSON(object: any): QueryAuthorityResponse {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: QueryAuthorityResponse): unknown {
@@ -954,30 +954,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -987,21 +968,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1018,7 +1000,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

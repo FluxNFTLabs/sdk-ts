@@ -67,8 +67,8 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromJSON(e)) : [],
+      classes: globalThis.Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
+      entries: globalThis.Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromJSON(e)) : [],
     };
   },
 
@@ -143,8 +143,8 @@ export const Entry = {
 
   fromJSON(object: any): Entry {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      nfts: globalThis.Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
     };
   },
 
@@ -173,7 +173,8 @@ export const Entry = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

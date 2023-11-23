@@ -68,8 +68,8 @@ export const BitArray = {
 
   fromJSON(object: any): BitArray {
     return {
-      bits: isSet(object.bits) ? String(object.bits) : "0",
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => String(e)) : [],
+      bits: isSet(object.bits) ? globalThis.String(object.bits) : "0",
+      elems: globalThis.Array.isArray(object?.elems) ? object.elems.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -98,7 +98,8 @@ export const BitArray = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

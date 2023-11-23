@@ -61,8 +61,8 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      fee_version: isSet(object.fee_version) ? String(object.fee_version) : "",
-      app_version: isSet(object.app_version) ? String(object.app_version) : "",
+      fee_version: isSet(object.fee_version) ? globalThis.String(object.fee_version) : "",
+      app_version: isSet(object.app_version) ? globalThis.String(object.app_version) : "",
     };
   },
 
@@ -91,7 +91,8 @@ export const Metadata = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

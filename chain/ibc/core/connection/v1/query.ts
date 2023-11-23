@@ -178,7 +178,7 @@ export const QueryConnectionRequest = {
   },
 
   fromJSON(object: any): QueryConnectionRequest {
-    return { connection_id: isSet(object.connection_id) ? String(object.connection_id) : "" };
+    return { connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "" };
   },
 
   toJSON(message: QueryConnectionRequest): unknown {
@@ -414,7 +414,7 @@ export const QueryConnectionsResponse = {
 
   fromJSON(object: any): QueryConnectionsResponse {
     return {
-      connections: Array.isArray(object?.connections)
+      connections: globalThis.Array.isArray(object?.connections)
         ? object.connections.map((e: any) => IdentifiedConnection.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -490,7 +490,7 @@ export const QueryClientConnectionsRequest = {
   },
 
   fromJSON(object: any): QueryClientConnectionsRequest {
-    return { client_id: isSet(object.client_id) ? String(object.client_id) : "" };
+    return { client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "" };
   },
 
   toJSON(message: QueryClientConnectionsRequest): unknown {
@@ -570,8 +570,8 @@ export const QueryClientConnectionsResponse = {
 
   fromJSON(object: any): QueryClientConnectionsResponse {
     return {
-      connection_paths: Array.isArray(object?.connection_paths)
-        ? object.connection_paths.map((e: any) => String(e))
+      connection_paths: globalThis.Array.isArray(object?.connection_paths)
+        ? object.connection_paths.map((e: any) => globalThis.String(e))
         : [],
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
@@ -644,7 +644,7 @@ export const QueryConnectionClientStateRequest = {
   },
 
   fromJSON(object: any): QueryConnectionClientStateRequest {
-    return { connection_id: isSet(object.connection_id) ? String(object.connection_id) : "" };
+    return { connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "" };
   },
 
   toJSON(message: QueryConnectionClientStateRequest): unknown {
@@ -822,9 +822,9 @@ export const QueryConnectionConsensusStateRequest = {
 
   fromJSON(object: any): QueryConnectionConsensusStateRequest {
     return {
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
-      revision_number: isSet(object.revision_number) ? String(object.revision_number) : "0",
-      revision_height: isSet(object.revision_height) ? String(object.revision_height) : "0",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
+      revision_number: isSet(object.revision_number) ? globalThis.String(object.revision_number) : "0",
+      revision_height: isSet(object.revision_height) ? globalThis.String(object.revision_height) : "0",
     };
   },
 
@@ -924,7 +924,7 @@ export const QueryConnectionConsensusStateResponse = {
   fromJSON(object: any): QueryConnectionConsensusStateResponse {
     return {
       consensus_state: isSet(object.consensus_state) ? Any.fromJSON(object.consensus_state) : undefined,
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
     };
@@ -1379,30 +1379,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1412,21 +1393,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1443,7 +1425,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

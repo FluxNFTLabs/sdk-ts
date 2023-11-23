@@ -61,8 +61,10 @@ export const LegacyAminoPubKey = {
 
   fromJSON(object: any): LegacyAminoPubKey {
     return {
-      threshold: isSet(object.threshold) ? Number(object.threshold) : 0,
-      public_keys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromJSON(e)) : [],
+      threshold: isSet(object.threshold) ? globalThis.Number(object.threshold) : 0,
+      public_keys: globalThis.Array.isArray(object?.public_keys)
+        ? object.public_keys.map((e: any) => Any.fromJSON(e))
+        : [],
     };
   },
 
@@ -91,7 +93,8 @@ export const LegacyAminoPubKey = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

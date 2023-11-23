@@ -236,7 +236,7 @@ export const QueryGroupInfoRequest = {
   },
 
   fromJSON(object: any): QueryGroupInfoRequest {
-    return { group_id: isSet(object.group_id) ? String(object.group_id) : "0" };
+    return { group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0" };
   },
 
   toJSON(message: QueryGroupInfoRequest): unknown {
@@ -354,7 +354,7 @@ export const QueryGroupPolicyInfoRequest = {
   },
 
   fromJSON(object: any): QueryGroupPolicyInfoRequest {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: QueryGroupPolicyInfoRequest): unknown {
@@ -485,7 +485,7 @@ export const QueryGroupMembersRequest = {
 
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -563,7 +563,7 @@ export const QueryGroupMembersResponse = {
 
   fromJSON(object: any): QueryGroupMembersResponse {
     return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromJSON(e)) : [],
+      members: globalThis.Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -641,7 +641,7 @@ export const QueryGroupsByAdminRequest = {
 
   fromJSON(object: any): QueryGroupsByAdminRequest {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -719,7 +719,7 @@ export const QueryGroupsByAdminResponse = {
 
   fromJSON(object: any): QueryGroupsByAdminResponse {
     return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
+      groups: globalThis.Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -797,7 +797,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupRequest {
     return {
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -875,7 +875,7 @@ export const QueryGroupPoliciesByGroupResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByGroupResponse {
     return {
-      group_policies: Array.isArray(object?.group_policies)
+      group_policies: globalThis.Array.isArray(object?.group_policies)
         ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -955,7 +955,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 
   fromJSON(object: any): QueryGroupPoliciesByAdminRequest {
     return {
-      admin: isSet(object.admin) ? String(object.admin) : "",
+      admin: isSet(object.admin) ? globalThis.String(object.admin) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1033,7 +1033,7 @@ export const QueryGroupPoliciesByAdminResponse = {
 
   fromJSON(object: any): QueryGroupPoliciesByAdminResponse {
     return {
-      group_policies: Array.isArray(object?.group_policies)
+      group_policies: globalThis.Array.isArray(object?.group_policies)
         ? object.group_policies.map((e: any) => GroupPolicyInfo.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1102,7 +1102,7 @@ export const QueryProposalRequest = {
   },
 
   fromJSON(object: any): QueryProposalRequest {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
@@ -1233,7 +1233,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 
   fromJSON(object: any): QueryProposalsByGroupPolicyRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1311,7 +1311,9 @@ export const QueryProposalsByGroupPolicyResponse = {
 
   fromJSON(object: any): QueryProposalsByGroupPolicyResponse {
     return {
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      proposals: globalThis.Array.isArray(object?.proposals)
+        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1389,8 +1391,8 @@ export const QueryVoteByProposalVoterRequest = {
 
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
     };
   },
 
@@ -1524,7 +1526,7 @@ export const QueryVotesByProposalRequest = {
 
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1602,7 +1604,7 @@ export const QueryVotesByProposalResponse = {
 
   fromJSON(object: any): QueryVotesByProposalResponse {
     return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      votes: globalThis.Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1680,7 +1682,7 @@ export const QueryVotesByVoterRequest = {
 
   fromJSON(object: any): QueryVotesByVoterRequest {
     return {
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1758,7 +1760,7 @@ export const QueryVotesByVoterResponse = {
 
   fromJSON(object: any): QueryVotesByVoterResponse {
     return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      votes: globalThis.Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1836,7 +1838,7 @@ export const QueryGroupsByMemberRequest = {
 
   fromJSON(object: any): QueryGroupsByMemberRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1914,7 +1916,7 @@ export const QueryGroupsByMemberResponse = {
 
   fromJSON(object: any): QueryGroupsByMemberResponse {
     return {
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
+      groups: globalThis.Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1981,7 +1983,7 @@ export const QueryTallyResultRequest = {
   },
 
   fromJSON(object: any): QueryTallyResultRequest {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryTallyResultRequest): unknown {
@@ -2619,29 +2621,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2658,7 +2642,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

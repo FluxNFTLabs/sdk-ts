@@ -74,8 +74,8 @@ export const QueryInterchainAccountRequest = {
 
   fromJSON(object: any): QueryInterchainAccountRequest {
     return {
-      owner: isSet(object.owner) ? String(object.owner) : "",
-      connection_id: isSet(object.connection_id) ? String(object.connection_id) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
     };
   },
 
@@ -139,7 +139,7 @@ export const QueryInterchainAccountResponse = {
   },
 
   fromJSON(object: any): QueryInterchainAccountResponse {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: QueryInterchainAccountResponse): unknown {
@@ -414,29 +414,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -444,7 +426,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

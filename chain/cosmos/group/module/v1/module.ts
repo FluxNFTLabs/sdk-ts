@@ -71,7 +71,7 @@ export const Module = {
       max_execution_period: isSet(object.max_execution_period)
         ? Duration.fromJSON(object.max_execution_period)
         : undefined,
-      max_metadata_len: isSet(object.max_metadata_len) ? String(object.max_metadata_len) : "0",
+      max_metadata_len: isSet(object.max_metadata_len) ? globalThis.String(object.max_metadata_len) : "0",
     };
   },
 
@@ -102,7 +102,8 @@ export const Module = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

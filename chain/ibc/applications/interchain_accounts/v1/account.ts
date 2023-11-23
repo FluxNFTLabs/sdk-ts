@@ -58,7 +58,7 @@ export const InterchainAccount = {
   fromJSON(object: any): InterchainAccount {
     return {
       base_account: isSet(object.base_account) ? BaseAccount.fromJSON(object.base_account) : undefined,
-      account_owner: isSet(object.account_owner) ? String(object.account_owner) : "",
+      account_owner: isSet(object.account_owner) ? globalThis.String(object.account_owner) : "",
     };
   },
 
@@ -89,7 +89,8 @@ export const InterchainAccount = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

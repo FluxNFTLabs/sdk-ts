@@ -139,7 +139,7 @@ export const Record = {
 
   fromJSON(object: any): Record {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       pub_key: isSet(object.pub_key) ? Any.fromJSON(object.pub_key) : undefined,
       local: isSet(object.local) ? Record_Local.fromJSON(object.local) : undefined,
       ledger: isSet(object.ledger) ? Record_Ledger.fromJSON(object.ledger) : undefined,
@@ -411,7 +411,8 @@ export const Record_Offline = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

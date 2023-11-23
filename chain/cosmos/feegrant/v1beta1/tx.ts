@@ -94,8 +94,8 @@ export const MsgGrantAllowance = {
 
   fromJSON(object: any): MsgGrantAllowance {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
       allowance: isSet(object.allowance) ? Any.fromJSON(object.allowance) : undefined,
     };
   },
@@ -222,8 +222,8 @@ export const MsgRevokeAllowance = {
 
   fromJSON(object: any): MsgRevokeAllowance {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
     };
   },
 
@@ -451,29 +451,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -481,7 +463,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

@@ -133,12 +133,12 @@ export const Class = {
 
   fromJSON(object: any): Class {
     return {
-      id: isSet(object.id) ? String(object.id) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      symbol: isSet(object.symbol) ? String(object.symbol) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      symbol: isSet(object.symbol) ? globalThis.String(object.symbol) : "",
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+      uri_hash: isSet(object.uri_hash) ? globalThis.String(object.uri_hash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -264,10 +264,10 @@ export const NFT = {
 
   fromJSON(object: any): NFT {
     return {
-      class_id: isSet(object.class_id) ? String(object.class_id) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      uri: isSet(object.uri) ? String(object.uri) : "",
-      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      uri: isSet(object.uri) ? globalThis.String(object.uri) : "",
+      uri_hash: isSet(object.uri_hash) ? globalThis.String(object.uri_hash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -309,7 +309,8 @@ export const NFT = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

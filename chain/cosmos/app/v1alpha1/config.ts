@@ -109,8 +109,10 @@ export const Config = {
 
   fromJSON(object: any): Config {
     return {
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromJSON(e)) : [],
-      golang_bindings: Array.isArray(object?.golang_bindings)
+      modules: globalThis.Array.isArray(object?.modules)
+        ? object.modules.map((e: any) => ModuleConfig.fromJSON(e))
+        : [],
+      golang_bindings: globalThis.Array.isArray(object?.golang_bindings)
         ? object.golang_bindings.map((e: any) => GolangBinding.fromJSON(e))
         : [],
     };
@@ -197,9 +199,9 @@ export const ModuleConfig = {
 
   fromJSON(object: any): ModuleConfig {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       config: isSet(object.config) ? Any.fromJSON(object.config) : undefined,
-      golang_bindings: Array.isArray(object?.golang_bindings)
+      golang_bindings: globalThis.Array.isArray(object?.golang_bindings)
         ? object.golang_bindings.map((e: any) => GolangBinding.fromJSON(e))
         : [],
     };
@@ -282,8 +284,8 @@ export const GolangBinding = {
 
   fromJSON(object: any): GolangBinding {
     return {
-      interface_type: isSet(object.interface_type) ? String(object.interface_type) : "",
-      implementation: isSet(object.implementation) ? String(object.implementation) : "",
+      interface_type: isSet(object.interface_type) ? globalThis.String(object.interface_type) : "",
+      implementation: isSet(object.implementation) ? globalThis.String(object.implementation) : "",
     };
   },
 
@@ -312,7 +314,8 @@ export const GolangBinding = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

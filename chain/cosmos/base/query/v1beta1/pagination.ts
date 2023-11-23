@@ -147,10 +147,10 @@ export const PageRequest = {
   fromJSON(object: any): PageRequest {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(0),
-      offset: isSet(object.offset) ? String(object.offset) : "0",
-      limit: isSet(object.limit) ? String(object.limit) : "0",
-      count_total: isSet(object.count_total) ? Boolean(object.count_total) : false,
-      reverse: isSet(object.reverse) ? Boolean(object.reverse) : false,
+      offset: isSet(object.offset) ? globalThis.String(object.offset) : "0",
+      limit: isSet(object.limit) ? globalThis.String(object.limit) : "0",
+      count_total: isSet(object.count_total) ? globalThis.Boolean(object.count_total) : false,
+      reverse: isSet(object.reverse) ? globalThis.Boolean(object.reverse) : false,
     };
   },
 
@@ -238,7 +238,7 @@ export const PageResponse = {
   fromJSON(object: any): PageResponse {
     return {
       next_key: isSet(object.next_key) ? bytesFromBase64(object.next_key) : new Uint8Array(0),
-      total: isSet(object.total) ? String(object.total) : "0",
+      total: isSet(object.total) ? globalThis.String(object.total) : "0",
     };
   },
 
@@ -264,30 +264,11 @@ export const PageResponse = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -297,21 +278,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

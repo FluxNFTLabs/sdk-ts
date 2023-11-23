@@ -137,7 +137,7 @@ export const ABCIResponses = {
 
   fromJSON(object: any): ABCIResponses {
     return {
-      deliver_txs: Array.isArray(object?.deliver_txs)
+      deliver_txs: globalThis.Array.isArray(object?.deliver_txs)
         ? object.deliver_txs.map((e: any) => ResponseDeliverTx.fromJSON(e))
         : [],
       end_block: isSet(object.end_block) ? ResponseEndBlock.fromJSON(object.end_block) : undefined,
@@ -225,7 +225,7 @@ export const ValidatorsInfo = {
   fromJSON(object: any): ValidatorsInfo {
     return {
       validator_set: isSet(object.validator_set) ? ValidatorSet.fromJSON(object.validator_set) : undefined,
-      last_height_changed: isSet(object.last_height_changed) ? String(object.last_height_changed) : "0",
+      last_height_changed: isSet(object.last_height_changed) ? globalThis.String(object.last_height_changed) : "0",
     };
   },
 
@@ -303,7 +303,7 @@ export const ConsensusParamsInfo = {
   fromJSON(object: any): ConsensusParamsInfo {
     return {
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromJSON(object.consensus_params) : undefined,
-      last_height_changed: isSet(object.last_height_changed) ? String(object.last_height_changed) : "0",
+      last_height_changed: isSet(object.last_height_changed) ? globalThis.String(object.last_height_changed) : "0",
     };
   },
 
@@ -381,7 +381,7 @@ export const ABCIResponsesInfo = {
   fromJSON(object: any): ABCIResponsesInfo {
     return {
       abci_responses: isSet(object.abci_responses) ? ABCIResponses.fromJSON(object.abci_responses) : undefined,
-      height: isSet(object.height) ? String(object.height) : "0",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
     };
   },
 
@@ -459,7 +459,7 @@ export const Version = {
   fromJSON(object: any): Version {
     return {
       consensus: isSet(object.consensus) ? Consensus.fromJSON(object.consensus) : undefined,
-      software: isSet(object.software) ? String(object.software) : "",
+      software: isSet(object.software) ? globalThis.String(object.software) : "",
     };
   },
 
@@ -672,20 +672,20 @@ export const State = {
   fromJSON(object: any): State {
     return {
       version: isSet(object.version) ? Version.fromJSON(object.version) : undefined,
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
-      initial_height: isSet(object.initial_height) ? String(object.initial_height) : "0",
-      last_block_height: isSet(object.last_block_height) ? String(object.last_block_height) : "0",
+      chain_id: isSet(object.chain_id) ? globalThis.String(object.chain_id) : "",
+      initial_height: isSet(object.initial_height) ? globalThis.String(object.initial_height) : "0",
+      last_block_height: isSet(object.last_block_height) ? globalThis.String(object.last_block_height) : "0",
       last_block_id: isSet(object.last_block_id) ? BlockID.fromJSON(object.last_block_id) : undefined,
       last_block_time: isSet(object.last_block_time) ? fromJsonTimestamp(object.last_block_time) : undefined,
       next_validators: isSet(object.next_validators) ? ValidatorSet.fromJSON(object.next_validators) : undefined,
       validators: isSet(object.validators) ? ValidatorSet.fromJSON(object.validators) : undefined,
       last_validators: isSet(object.last_validators) ? ValidatorSet.fromJSON(object.last_validators) : undefined,
       last_height_validators_changed: isSet(object.last_height_validators_changed)
-        ? String(object.last_height_validators_changed)
+        ? globalThis.String(object.last_height_validators_changed)
         : "0",
       consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromJSON(object.consensus_params) : undefined,
       last_height_consensus_params_changed: isSet(object.last_height_consensus_params_changed)
-        ? String(object.last_height_consensus_params_changed)
+        ? globalThis.String(object.last_height_consensus_params_changed)
         : "0",
       last_results_hash: isSet(object.last_results_hash)
         ? bytesFromBase64(object.last_results_hash)
@@ -776,30 +776,11 @@ export const State = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -809,21 +790,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -834,16 +816,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

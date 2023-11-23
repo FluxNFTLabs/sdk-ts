@@ -416,9 +416,9 @@ export const Http = {
 
   fromJSON(object: any): Http {
     return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
+      rules: globalThis.Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
       fully_decode_reserved_expansion: isSet(object.fully_decode_reserved_expansion)
-        ? Boolean(object.fully_decode_reserved_expansion)
+        ? globalThis.Boolean(object.fully_decode_reserved_expansion)
         : false,
     };
   },
@@ -585,16 +585,16 @@ export const HttpRule = {
 
   fromJSON(object: any): HttpRule {
     return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      get: isSet(object.get) ? String(object.get) : undefined,
-      put: isSet(object.put) ? String(object.put) : undefined,
-      post: isSet(object.post) ? String(object.post) : undefined,
-      delete: isSet(object.delete) ? String(object.delete) : undefined,
-      patch: isSet(object.patch) ? String(object.patch) : undefined,
+      selector: isSet(object.selector) ? globalThis.String(object.selector) : "",
+      get: isSet(object.get) ? globalThis.String(object.get) : undefined,
+      put: isSet(object.put) ? globalThis.String(object.put) : undefined,
+      post: isSet(object.post) ? globalThis.String(object.post) : undefined,
+      delete: isSet(object.delete) ? globalThis.String(object.delete) : undefined,
+      patch: isSet(object.patch) ? globalThis.String(object.patch) : undefined,
       custom: isSet(object.custom) ? CustomHttpPattern.fromJSON(object.custom) : undefined,
-      body: isSet(object.body) ? String(object.body) : "",
-      response_body: isSet(object.response_body) ? String(object.response_body) : "",
-      additional_bindings: Array.isArray(object?.additional_bindings)
+      body: isSet(object.body) ? globalThis.String(object.body) : "",
+      response_body: isSet(object.response_body) ? globalThis.String(object.response_body) : "",
+      additional_bindings: globalThis.Array.isArray(object?.additional_bindings)
         ? object.additional_bindings.map((e: any) => HttpRule.fromJSON(e))
         : [],
     };
@@ -704,7 +704,10 @@ export const CustomHttpPattern = {
   },
 
   fromJSON(object: any): CustomHttpPattern {
-    return { kind: isSet(object.kind) ? String(object.kind) : "", path: isSet(object.path) ? String(object.path) : "" };
+    return {
+      kind: isSet(object.kind) ? globalThis.String(object.kind) : "",
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+    };
   },
 
   toJSON(message: CustomHttpPattern): unknown {
@@ -732,7 +735,8 @@ export const CustomHttpPattern = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

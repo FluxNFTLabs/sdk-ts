@@ -108,8 +108,8 @@ export const QueryAllowanceRequest = {
 
   fromJSON(object: any): QueryAllowanceRequest {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
     };
   },
 
@@ -245,7 +245,7 @@ export const QueryAllowancesRequest = {
 
   fromJSON(object: any): QueryAllowancesRequest {
     return {
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -323,7 +323,9 @@ export const QueryAllowancesResponse = {
 
   fromJSON(object: any): QueryAllowancesResponse {
     return {
-      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromJSON(e)) : [],
+      allowances: globalThis.Array.isArray(object?.allowances)
+        ? object.allowances.map((e: any) => Grant.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -401,7 +403,7 @@ export const QueryAllowancesByGranterRequest = {
 
   fromJSON(object: any): QueryAllowancesByGranterRequest {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -479,7 +481,9 @@ export const QueryAllowancesByGranterResponse = {
 
   fromJSON(object: any): QueryAllowancesByGranterResponse {
     return {
-      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromJSON(e)) : [],
+      allowances: globalThis.Array.isArray(object?.allowances)
+        ? object.allowances.map((e: any) => Grant.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -690,29 +694,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -720,7 +706,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

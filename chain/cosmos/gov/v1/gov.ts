@@ -372,7 +372,7 @@ export const WeightedVoteOption = {
   fromJSON(object: any): WeightedVoteOption {
     return {
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? String(object.weight) : "",
+      weight: isSet(object.weight) ? globalThis.String(object.weight) : "",
     };
   },
 
@@ -457,9 +457,9 @@ export const Deposit = {
 
   fromJSON(object: any): Deposit {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      depositor: isSet(object.depositor) ? globalThis.String(object.depositor) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -662,21 +662,23 @@ export const Proposal = {
 
   fromJSON(object: any): Proposal {
     return {
-      id: isSet(object.id) ? String(object.id) : "0",
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
+      id: isSet(object.id) ? globalThis.String(object.id) : "0",
+      messages: globalThis.Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
       final_tally_result: isSet(object.final_tally_result)
         ? TallyResult.fromJSON(object.final_tally_result)
         : undefined,
       submit_time: isSet(object.submit_time) ? fromJsonTimestamp(object.submit_time) : undefined,
       deposit_end_time: isSet(object.deposit_end_time) ? fromJsonTimestamp(object.deposit_end_time) : undefined,
-      total_deposit: Array.isArray(object?.total_deposit) ? object.total_deposit.map((e: any) => Coin.fromJSON(e)) : [],
+      total_deposit: globalThis.Array.isArray(object?.total_deposit)
+        ? object.total_deposit.map((e: any) => Coin.fromJSON(e))
+        : [],
       voting_start_time: isSet(object.voting_start_time) ? fromJsonTimestamp(object.voting_start_time) : undefined,
       voting_end_time: isSet(object.voting_end_time) ? fromJsonTimestamp(object.voting_end_time) : undefined,
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      summary: isSet(object.summary) ? String(object.summary) : "",
-      proposer: isSet(object.proposer) ? String(object.proposer) : "",
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
+      proposer: isSet(object.proposer) ? globalThis.String(object.proposer) : "",
     };
   },
 
@@ -817,10 +819,10 @@ export const TallyResult = {
 
   fromJSON(object: any): TallyResult {
     return {
-      yes_count: isSet(object.yes_count) ? String(object.yes_count) : "",
-      abstain_count: isSet(object.abstain_count) ? String(object.abstain_count) : "",
-      no_count: isSet(object.no_count) ? String(object.no_count) : "",
-      no_with_veto_count: isSet(object.no_with_veto_count) ? String(object.no_with_veto_count) : "",
+      yes_count: isSet(object.yes_count) ? globalThis.String(object.yes_count) : "",
+      abstain_count: isSet(object.abstain_count) ? globalThis.String(object.abstain_count) : "",
+      no_count: isSet(object.no_count) ? globalThis.String(object.no_count) : "",
+      no_with_veto_count: isSet(object.no_with_veto_count) ? globalThis.String(object.no_with_veto_count) : "",
     };
   },
 
@@ -923,10 +925,12 @@ export const Vote = {
 
   fromJSON(object: any): Vote {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
+      options: globalThis.Array.isArray(object?.options)
+        ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e))
+        : [],
+      metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
     };
   },
 
@@ -1009,7 +1013,9 @@ export const DepositParams = {
 
   fromJSON(object: any): DepositParams {
     return {
-      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromJSON(e)) : [],
+      min_deposit: globalThis.Array.isArray(object?.min_deposit)
+        ? object.min_deposit.map((e: any) => Coin.fromJSON(e))
+        : [],
       max_deposit_period: isSet(object.max_deposit_period) ? Duration.fromJSON(object.max_deposit_period) : undefined,
     };
   },
@@ -1158,9 +1164,9 @@ export const TallyParams = {
 
   fromJSON(object: any): TallyParams {
     return {
-      quorum: isSet(object.quorum) ? String(object.quorum) : "",
-      threshold: isSet(object.threshold) ? String(object.threshold) : "",
-      veto_threshold: isSet(object.veto_threshold) ? String(object.veto_threshold) : "",
+      quorum: isSet(object.quorum) ? globalThis.String(object.quorum) : "",
+      threshold: isSet(object.threshold) ? globalThis.String(object.threshold) : "",
+      veto_threshold: isSet(object.veto_threshold) ? globalThis.String(object.veto_threshold) : "",
     };
   },
 
@@ -1330,20 +1336,22 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      min_deposit: Array.isArray(object?.min_deposit) ? object.min_deposit.map((e: any) => Coin.fromJSON(e)) : [],
+      min_deposit: globalThis.Array.isArray(object?.min_deposit)
+        ? object.min_deposit.map((e: any) => Coin.fromJSON(e))
+        : [],
       max_deposit_period: isSet(object.max_deposit_period) ? Duration.fromJSON(object.max_deposit_period) : undefined,
       voting_period: isSet(object.voting_period) ? Duration.fromJSON(object.voting_period) : undefined,
-      quorum: isSet(object.quorum) ? String(object.quorum) : "",
-      threshold: isSet(object.threshold) ? String(object.threshold) : "",
-      veto_threshold: isSet(object.veto_threshold) ? String(object.veto_threshold) : "",
+      quorum: isSet(object.quorum) ? globalThis.String(object.quorum) : "",
+      threshold: isSet(object.threshold) ? globalThis.String(object.threshold) : "",
+      veto_threshold: isSet(object.veto_threshold) ? globalThis.String(object.veto_threshold) : "",
       min_initial_deposit_ratio: isSet(object.min_initial_deposit_ratio)
-        ? String(object.min_initial_deposit_ratio)
+        ? globalThis.String(object.min_initial_deposit_ratio)
         : "",
-      burn_vote_quorum: isSet(object.burn_vote_quorum) ? Boolean(object.burn_vote_quorum) : false,
+      burn_vote_quorum: isSet(object.burn_vote_quorum) ? globalThis.Boolean(object.burn_vote_quorum) : false,
       burn_proposal_deposit_prevote: isSet(object.burn_proposal_deposit_prevote)
-        ? Boolean(object.burn_proposal_deposit_prevote)
+        ? globalThis.Boolean(object.burn_proposal_deposit_prevote)
         : false,
-      burn_vote_veto: isSet(object.burn_vote_veto) ? Boolean(object.burn_vote_veto) : false,
+      burn_vote_veto: isSet(object.burn_vote_veto) ? globalThis.Boolean(object.burn_vote_veto) : false,
     };
   },
 
@@ -1408,7 +1416,8 @@ export const Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1419,16 +1428,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

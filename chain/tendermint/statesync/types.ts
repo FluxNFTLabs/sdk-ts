@@ -281,9 +281,9 @@ export const SnapshotsResponse = {
 
   fromJSON(object: any): SnapshotsResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      format: isSet(object.format) ? Number(object.format) : 0,
-      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      format: isSet(object.format) ? globalThis.Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? globalThis.Number(object.chunks) : 0,
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(0),
       metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(0),
     };
@@ -382,9 +382,9 @@ export const ChunkRequest = {
 
   fromJSON(object: any): ChunkRequest {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      format: isSet(object.format) ? Number(object.format) : 0,
-      index: isSet(object.index) ? Number(object.index) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      format: isSet(object.format) ? globalThis.Number(object.format) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
     };
   },
 
@@ -493,11 +493,11 @@ export const ChunkResponse = {
 
   fromJSON(object: any): ChunkResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      format: isSet(object.format) ? Number(object.format) : 0,
-      index: isSet(object.index) ? Number(object.index) : 0,
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      format: isSet(object.format) ? globalThis.Number(object.format) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
       chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array(0),
-      missing: isSet(object.missing) ? Boolean(object.missing) : false,
+      missing: isSet(object.missing) ? globalThis.Boolean(object.missing) : false,
     };
   },
 
@@ -535,30 +535,11 @@ export const ChunkResponse = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -568,21 +549,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

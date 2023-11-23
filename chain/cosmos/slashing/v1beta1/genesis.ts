@@ -108,10 +108,10 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      signing_infos: Array.isArray(object?.signing_infos)
+      signing_infos: globalThis.Array.isArray(object?.signing_infos)
         ? object.signing_infos.map((e: any) => SigningInfo.fromJSON(e))
         : [],
-      missed_blocks: Array.isArray(object?.missed_blocks)
+      missed_blocks: globalThis.Array.isArray(object?.missed_blocks)
         ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e))
         : [],
     };
@@ -194,7 +194,7 @@ export const SigningInfo = {
 
   fromJSON(object: any): SigningInfo {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       validator_signing_info: isSet(object.validator_signing_info)
         ? ValidatorSigningInfo.fromJSON(object.validator_signing_info)
         : undefined,
@@ -275,8 +275,8 @@ export const ValidatorMissedBlocks = {
 
   fromJSON(object: any): ValidatorMissedBlocks {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      missed_blocks: Array.isArray(object?.missed_blocks)
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      missed_blocks: globalThis.Array.isArray(object?.missed_blocks)
         ? object.missed_blocks.map((e: any) => MissedBlock.fromJSON(e))
         : [],
     };
@@ -353,8 +353,8 @@ export const MissedBlock = {
 
   fromJSON(object: any): MissedBlock {
     return {
-      index: isSet(object.index) ? String(object.index) : "0",
-      missed: isSet(object.missed) ? Boolean(object.missed) : false,
+      index: isSet(object.index) ? globalThis.String(object.index) : "0",
+      missed: isSet(object.missed) ? globalThis.Boolean(object.missed) : false,
     };
   },
 
@@ -383,7 +383,8 @@ export const MissedBlock = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

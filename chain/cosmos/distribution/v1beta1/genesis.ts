@@ -163,8 +163,8 @@ export const DelegatorWithdrawInfo = {
 
   fromJSON(object: any): DelegatorWithdrawInfo {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      withdraw_address: isSet(object.withdraw_address) ? globalThis.String(object.withdraw_address) : "",
     };
   },
 
@@ -239,8 +239,8 @@ export const ValidatorOutstandingRewardsRecord = {
 
   fromJSON(object: any): ValidatorOutstandingRewardsRecord {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      outstanding_rewards: Array.isArray(object?.outstanding_rewards)
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      outstanding_rewards: globalThis.Array.isArray(object?.outstanding_rewards)
         ? object.outstanding_rewards.map((e: any) => DecCoin.fromJSON(e))
         : [],
     };
@@ -317,7 +317,7 @@ export const ValidatorAccumulatedCommissionRecord = {
 
   fromJSON(object: any): ValidatorAccumulatedCommissionRecord {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromJSON(object.accumulated) : undefined,
     };
   },
@@ -405,8 +405,8 @@ export const ValidatorHistoricalRewardsRecord = {
 
   fromJSON(object: any): ValidatorHistoricalRewardsRecord {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      period: isSet(object.period) ? String(object.period) : "0",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      period: isSet(object.period) ? globalThis.String(object.period) : "0",
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined,
     };
   },
@@ -488,7 +488,7 @@ export const ValidatorCurrentRewardsRecord = {
 
   fromJSON(object: any): ValidatorCurrentRewardsRecord {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromJSON(object.rewards) : undefined,
     };
   },
@@ -576,8 +576,8 @@ export const DelegatorStartingInfoRecord = {
 
   fromJSON(object: any): DelegatorStartingInfoRecord {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
       starting_info: isSet(object.starting_info) ? DelegatorStartingInfo.fromJSON(object.starting_info) : undefined,
     };
   },
@@ -679,9 +679,9 @@ export const ValidatorSlashEventRecord = {
 
   fromJSON(object: any): ValidatorSlashEventRecord {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      height: isSet(object.height) ? String(object.height) : "0",
-      period: isSet(object.period) ? String(object.period) : "0",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      period: isSet(object.period) ? globalThis.String(object.period) : "0",
       validator_slash_event: isSet(object.validator_slash_event)
         ? ValidatorSlashEvent.fromJSON(object.validator_slash_event)
         : undefined,
@@ -865,26 +865,26 @@ export const GenesisState = {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       fee_pool: isSet(object.fee_pool) ? FeePool.fromJSON(object.fee_pool) : undefined,
-      delegator_withdraw_infos: Array.isArray(object?.delegator_withdraw_infos)
+      delegator_withdraw_infos: globalThis.Array.isArray(object?.delegator_withdraw_infos)
         ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromJSON(e))
         : [],
-      previous_proposer: isSet(object.previous_proposer) ? String(object.previous_proposer) : "",
-      outstanding_rewards: Array.isArray(object?.outstanding_rewards)
+      previous_proposer: isSet(object.previous_proposer) ? globalThis.String(object.previous_proposer) : "",
+      outstanding_rewards: globalThis.Array.isArray(object?.outstanding_rewards)
         ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromJSON(e))
         : [],
-      validator_accumulated_commissions: Array.isArray(object?.validator_accumulated_commissions)
+      validator_accumulated_commissions: globalThis.Array.isArray(object?.validator_accumulated_commissions)
         ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromJSON(e))
         : [],
-      validator_historical_rewards: Array.isArray(object?.validator_historical_rewards)
+      validator_historical_rewards: globalThis.Array.isArray(object?.validator_historical_rewards)
         ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromJSON(e))
         : [],
-      validator_current_rewards: Array.isArray(object?.validator_current_rewards)
+      validator_current_rewards: globalThis.Array.isArray(object?.validator_current_rewards)
         ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromJSON(e))
         : [],
-      delegator_starting_infos: Array.isArray(object?.delegator_starting_infos)
+      delegator_starting_infos: globalThis.Array.isArray(object?.delegator_starting_infos)
         ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromJSON(e))
         : [],
-      validator_slash_events: Array.isArray(object?.validator_slash_events)
+      validator_slash_events: globalThis.Array.isArray(object?.validator_slash_events)
         ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromJSON(e))
         : [],
     };
@@ -964,7 +964,8 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

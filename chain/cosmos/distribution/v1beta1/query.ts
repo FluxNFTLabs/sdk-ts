@@ -336,7 +336,7 @@ export const QueryValidatorDistributionInfoRequest = {
   },
 
   fromJSON(object: any): QueryValidatorDistributionInfoRequest {
-    return { validator_address: isSet(object.validator_address) ? String(object.validator_address) : "" };
+    return { validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "" };
   },
 
   toJSON(message: QueryValidatorDistributionInfoRequest): unknown {
@@ -416,11 +416,13 @@ export const QueryValidatorDistributionInfoResponse = {
 
   fromJSON(object: any): QueryValidatorDistributionInfoResponse {
     return {
-      operator_address: isSet(object.operator_address) ? String(object.operator_address) : "",
-      self_bond_rewards: Array.isArray(object?.self_bond_rewards)
+      operator_address: isSet(object.operator_address) ? globalThis.String(object.operator_address) : "",
+      self_bond_rewards: globalThis.Array.isArray(object?.self_bond_rewards)
         ? object.self_bond_rewards.map((e: any) => DecCoin.fromJSON(e))
         : [],
-      commission: Array.isArray(object?.commission) ? object.commission.map((e: any) => DecCoin.fromJSON(e)) : [],
+      commission: globalThis.Array.isArray(object?.commission)
+        ? object.commission.map((e: any) => DecCoin.fromJSON(e))
+        : [],
     };
   },
 
@@ -488,7 +490,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
   },
 
   fromJSON(object: any): QueryValidatorOutstandingRewardsRequest {
-    return { validator_address: isSet(object.validator_address) ? String(object.validator_address) : "" };
+    return { validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "" };
   },
 
   toJSON(message: QueryValidatorOutstandingRewardsRequest): unknown {
@@ -608,7 +610,7 @@ export const QueryValidatorCommissionRequest = {
   },
 
   fromJSON(object: any): QueryValidatorCommissionRequest {
-    return { validator_address: isSet(object.validator_address) ? String(object.validator_address) : "" };
+    return { validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "" };
   },
 
   toJSON(message: QueryValidatorCommissionRequest): unknown {
@@ -761,9 +763,9 @@ export const QueryValidatorSlashesRequest = {
 
   fromJSON(object: any): QueryValidatorSlashesRequest {
     return {
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
-      starting_height: isSet(object.starting_height) ? String(object.starting_height) : "0",
-      ending_height: isSet(object.ending_height) ? String(object.ending_height) : "0",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
+      starting_height: isSet(object.starting_height) ? globalThis.String(object.starting_height) : "0",
+      ending_height: isSet(object.ending_height) ? globalThis.String(object.ending_height) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -849,7 +851,9 @@ export const QueryValidatorSlashesResponse = {
 
   fromJSON(object: any): QueryValidatorSlashesResponse {
     return {
-      slashes: Array.isArray(object?.slashes) ? object.slashes.map((e: any) => ValidatorSlashEvent.fromJSON(e)) : [],
+      slashes: globalThis.Array.isArray(object?.slashes)
+        ? object.slashes.map((e: any) => ValidatorSlashEvent.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -927,8 +931,8 @@ export const QueryDelegationRewardsRequest = {
 
   fromJSON(object: any): QueryDelegationRewardsRequest {
     return {
-      delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "",
-      validator_address: isSet(object.validator_address) ? String(object.validator_address) : "",
+      delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "",
+      validator_address: isSet(object.validator_address) ? globalThis.String(object.validator_address) : "",
     };
   },
 
@@ -992,7 +996,9 @@ export const QueryDelegationRewardsResponse = {
   },
 
   fromJSON(object: any): QueryDelegationRewardsResponse {
-    return { rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [] };
+    return {
+      rewards: globalThis.Array.isArray(object?.rewards) ? object.rewards.map((e: any) => DecCoin.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: QueryDelegationRewardsResponse): unknown {
@@ -1051,7 +1057,7 @@ export const QueryDelegationTotalRewardsRequest = {
   },
 
   fromJSON(object: any): QueryDelegationTotalRewardsRequest {
-    return { delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "" };
+    return { delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "" };
   },
 
   toJSON(message: QueryDelegationTotalRewardsRequest): unknown {
@@ -1121,10 +1127,10 @@ export const QueryDelegationTotalRewardsResponse = {
 
   fromJSON(object: any): QueryDelegationTotalRewardsResponse {
     return {
-      rewards: Array.isArray(object?.rewards)
+      rewards: globalThis.Array.isArray(object?.rewards)
         ? object.rewards.map((e: any) => DelegationDelegatorReward.fromJSON(e))
         : [],
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => DecCoin.fromJSON(e)) : [],
+      total: globalThis.Array.isArray(object?.total) ? object.total.map((e: any) => DecCoin.fromJSON(e)) : [],
     };
   },
 
@@ -1188,7 +1194,7 @@ export const QueryDelegatorValidatorsRequest = {
   },
 
   fromJSON(object: any): QueryDelegatorValidatorsRequest {
-    return { delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "" };
+    return { delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "" };
   },
 
   toJSON(message: QueryDelegatorValidatorsRequest): unknown {
@@ -1247,7 +1253,11 @@ export const QueryDelegatorValidatorsResponse = {
   },
 
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
-    return { validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => String(e)) : [] };
+    return {
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => globalThis.String(e))
+        : [],
+    };
   },
 
   toJSON(message: QueryDelegatorValidatorsResponse): unknown {
@@ -1306,7 +1316,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
   },
 
   fromJSON(object: any): QueryDelegatorWithdrawAddressRequest {
-    return { delegator_address: isSet(object.delegator_address) ? String(object.delegator_address) : "" };
+    return { delegator_address: isSet(object.delegator_address) ? globalThis.String(object.delegator_address) : "" };
   },
 
   toJSON(message: QueryDelegatorWithdrawAddressRequest): unknown {
@@ -1365,7 +1375,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
   },
 
   fromJSON(object: any): QueryDelegatorWithdrawAddressResponse {
-    return { withdraw_address: isSet(object.withdraw_address) ? String(object.withdraw_address) : "" };
+    return { withdraw_address: isSet(object.withdraw_address) ? globalThis.String(object.withdraw_address) : "" };
   },
 
   toJSON(message: QueryDelegatorWithdrawAddressResponse): unknown {
@@ -1469,7 +1479,7 @@ export const QueryCommunityPoolResponse = {
   },
 
   fromJSON(object: any): QueryCommunityPoolResponse {
-    return { pool: Array.isArray(object?.pool) ? object.pool.map((e: any) => DecCoin.fromJSON(e)) : [] };
+    return { pool: globalThis.Array.isArray(object?.pool) ? object.pool.map((e: any) => DecCoin.fromJSON(e)) : [] };
   },
 
   toJSON(message: QueryCommunityPoolResponse): unknown {
@@ -1945,29 +1955,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1984,7 +1976,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

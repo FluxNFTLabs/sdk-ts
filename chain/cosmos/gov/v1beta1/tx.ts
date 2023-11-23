@@ -138,10 +138,10 @@ export const MsgSubmitProposal = {
   fromJSON(object: any): MsgSubmitProposal {
     return {
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
-      initial_deposit: Array.isArray(object?.initial_deposit)
+      initial_deposit: globalThis.Array.isArray(object?.initial_deposit)
         ? object.initial_deposit.map((e: any) => Coin.fromJSON(e))
         : [],
-      proposer: isSet(object.proposer) ? String(object.proposer) : "",
+      proposer: isSet(object.proposer) ? globalThis.String(object.proposer) : "",
     };
   },
 
@@ -211,7 +211,7 @@ export const MsgSubmitProposalResponse = {
   },
 
   fromJSON(object: any): MsgSubmitProposalResponse {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
@@ -291,8 +291,8 @@ export const MsgVote = {
 
   fromJSON(object: any): MsgVote {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
     };
   },
@@ -427,9 +427,11 @@ export const MsgVoteWeighted = {
 
   fromJSON(object: any): MsgVoteWeighted {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
+      options: globalThis.Array.isArray(object?.options)
+        ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e))
+        : [],
     };
   },
 
@@ -563,9 +565,9 @@ export const MsgDeposit = {
 
   fromJSON(object: any): MsgDeposit {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      depositor: isSet(object.depositor) ? globalThis.String(object.depositor) : "",
+      amount: globalThis.Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -849,29 +851,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -888,7 +872,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

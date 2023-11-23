@@ -277,20 +277,24 @@ export const ClientState = {
 
   fromJSON(object: any): ClientState {
     return {
-      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      chain_id: isSet(object.chain_id) ? globalThis.String(object.chain_id) : "",
       trust_level: isSet(object.trust_level) ? Fraction.fromJSON(object.trust_level) : undefined,
       trusting_period: isSet(object.trusting_period) ? Duration.fromJSON(object.trusting_period) : undefined,
       unbonding_period: isSet(object.unbonding_period) ? Duration.fromJSON(object.unbonding_period) : undefined,
       max_clock_drift: isSet(object.max_clock_drift) ? Duration.fromJSON(object.max_clock_drift) : undefined,
       frozen_height: isSet(object.frozen_height) ? Height.fromJSON(object.frozen_height) : undefined,
       latest_height: isSet(object.latest_height) ? Height.fromJSON(object.latest_height) : undefined,
-      proof_specs: Array.isArray(object?.proof_specs) ? object.proof_specs.map((e: any) => ProofSpec.fromJSON(e)) : [],
-      upgrade_path: Array.isArray(object?.upgrade_path) ? object.upgrade_path.map((e: any) => String(e)) : [],
+      proof_specs: globalThis.Array.isArray(object?.proof_specs)
+        ? object.proof_specs.map((e: any) => ProofSpec.fromJSON(e))
+        : [],
+      upgrade_path: globalThis.Array.isArray(object?.upgrade_path)
+        ? object.upgrade_path.map((e: any) => globalThis.String(e))
+        : [],
       allow_update_after_expiry: isSet(object.allow_update_after_expiry)
-        ? Boolean(object.allow_update_after_expiry)
+        ? globalThis.Boolean(object.allow_update_after_expiry)
         : false,
       allow_update_after_misbehaviour: isSet(object.allow_update_after_misbehaviour)
-        ? Boolean(object.allow_update_after_misbehaviour)
+        ? globalThis.Boolean(object.allow_update_after_misbehaviour)
         : false,
     };
   },
@@ -519,7 +523,7 @@ export const Misbehaviour = {
 
   fromJSON(object: any): Misbehaviour {
     return {
-      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
       header_1: isSet(object.header_1) ? Header.fromJSON(object.header_1) : undefined,
       header_2: isSet(object.header_2) ? Header.fromJSON(object.header_2) : undefined,
     };
@@ -725,8 +729,8 @@ export const Fraction = {
 
   fromJSON(object: any): Fraction {
     return {
-      numerator: isSet(object.numerator) ? String(object.numerator) : "0",
-      denominator: isSet(object.denominator) ? String(object.denominator) : "0",
+      numerator: isSet(object.numerator) ? globalThis.String(object.numerator) : "0",
+      denominator: isSet(object.denominator) ? globalThis.String(object.denominator) : "0",
     };
   },
 
@@ -752,30 +756,11 @@ export const Fraction = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -785,21 +770,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -810,16 +796,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

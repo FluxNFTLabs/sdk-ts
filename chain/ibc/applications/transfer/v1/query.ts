@@ -134,7 +134,7 @@ export const QueryDenomTraceRequest = {
   },
 
   fromJSON(object: any): QueryDenomTraceRequest {
-    return { hash: isSet(object.hash) ? String(object.hash) : "" };
+    return { hash: isSet(object.hash) ? globalThis.String(object.hash) : "" };
   },
 
   toJSON(message: QueryDenomTraceRequest): unknown {
@@ -326,7 +326,7 @@ export const QueryDenomTracesResponse = {
 
   fromJSON(object: any): QueryDenomTracesResponse {
     return {
-      denom_traces: Array.isArray(object?.denom_traces)
+      denom_traces: globalThis.Array.isArray(object?.denom_traces)
         ? object.denom_traces.map((e: any) => DenomTrace.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -501,7 +501,7 @@ export const QueryDenomHashRequest = {
   },
 
   fromJSON(object: any): QueryDenomHashRequest {
-    return { trace: isSet(object.trace) ? String(object.trace) : "" };
+    return { trace: isSet(object.trace) ? globalThis.String(object.trace) : "" };
   },
 
   toJSON(message: QueryDenomHashRequest): unknown {
@@ -560,7 +560,7 @@ export const QueryDenomHashResponse = {
   },
 
   fromJSON(object: any): QueryDenomHashResponse {
-    return { hash: isSet(object.hash) ? String(object.hash) : "" };
+    return { hash: isSet(object.hash) ? globalThis.String(object.hash) : "" };
   },
 
   toJSON(message: QueryDenomHashResponse): unknown {
@@ -630,8 +630,8 @@ export const QueryEscrowAddressRequest = {
 
   fromJSON(object: any): QueryEscrowAddressRequest {
     return {
-      port_id: isSet(object.port_id) ? String(object.port_id) : "",
-      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      port_id: isSet(object.port_id) ? globalThis.String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? globalThis.String(object.channel_id) : "",
     };
   },
 
@@ -695,7 +695,7 @@ export const QueryEscrowAddressResponse = {
   },
 
   fromJSON(object: any): QueryEscrowAddressResponse {
-    return { escrow_address: isSet(object.escrow_address) ? String(object.escrow_address) : "" };
+    return { escrow_address: isSet(object.escrow_address) ? globalThis.String(object.escrow_address) : "" };
   },
 
   toJSON(message: QueryEscrowAddressResponse): unknown {
@@ -754,7 +754,7 @@ export const QueryTotalEscrowForDenomRequest = {
   },
 
   fromJSON(object: any): QueryTotalEscrowForDenomRequest {
-    return { denom: isSet(object.denom) ? String(object.denom) : "" };
+    return { denom: isSet(object.denom) ? globalThis.String(object.denom) : "" };
   },
 
   toJSON(message: QueryTotalEscrowForDenomRequest): unknown {
@@ -838,13 +838,13 @@ export const QueryTotalEscrowForDenomResponse = {
 
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  /** DenomTrace queries a denomination trace information. */
-  DenomTrace(request: DeepPartial<QueryDenomTraceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomTraceResponse>;
   /** DenomTraces queries all denomination traces. */
   DenomTraces(
     request: DeepPartial<QueryDenomTracesRequest>,
     metadata?: grpc.Metadata,
   ): Promise<QueryDenomTracesResponse>;
+  /** DenomTrace queries a denomination trace information. */
+  DenomTrace(request: DeepPartial<QueryDenomTraceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomTraceResponse>;
   /** Params queries all parameters of the ibc-transfer module. */
   Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
   /** DenomHash queries a denomination hash information. */
@@ -866,16 +866,12 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.DenomTrace = this.DenomTrace.bind(this);
     this.DenomTraces = this.DenomTraces.bind(this);
+    this.DenomTrace = this.DenomTrace.bind(this);
     this.Params = this.Params.bind(this);
     this.DenomHash = this.DenomHash.bind(this);
     this.EscrowAddress = this.EscrowAddress.bind(this);
     this.TotalEscrowForDenom = this.TotalEscrowForDenom.bind(this);
-  }
-
-  DenomTrace(request: DeepPartial<QueryDenomTraceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomTraceResponse> {
-    return this.rpc.unary(QueryDenomTraceDesc, QueryDenomTraceRequest.fromPartial(request), metadata);
   }
 
   DenomTraces(
@@ -883,6 +879,10 @@ export class QueryClientImpl implements Query {
     metadata?: grpc.Metadata,
   ): Promise<QueryDenomTracesResponse> {
     return this.rpc.unary(QueryDenomTracesDesc, QueryDenomTracesRequest.fromPartial(request), metadata);
+  }
+
+  DenomTrace(request: DeepPartial<QueryDenomTraceRequest>, metadata?: grpc.Metadata): Promise<QueryDenomTraceResponse> {
+    return this.rpc.unary(QueryDenomTraceDesc, QueryDenomTraceRequest.fromPartial(request), metadata);
   }
 
   Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse> {
@@ -910,29 +910,6 @@ export class QueryClientImpl implements Query {
 
 export const QueryDesc = { serviceName: "ibc.applications.transfer.v1.Query" };
 
-export const QueryDenomTraceDesc: UnaryMethodDefinitionish = {
-  methodName: "DenomTrace",
-  service: QueryDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return QueryDenomTraceRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      const value = QueryDenomTraceResponse.decode(data);
-      return {
-        ...value,
-        toObject() {
-          return value;
-        },
-      };
-    },
-  } as any,
-};
-
 export const QueryDenomTracesDesc: UnaryMethodDefinitionish = {
   methodName: "DenomTraces",
   service: QueryDesc,
@@ -946,6 +923,29 @@ export const QueryDenomTracesDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = QueryDenomTracesResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryDenomTraceDesc: UnaryMethodDefinitionish = {
+  methodName: "DenomTrace",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryDenomTraceRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryDenomTraceResponse.decode(data);
       return {
         ...value,
         toObject() {
@@ -1116,29 +1116,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1146,7 +1128,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

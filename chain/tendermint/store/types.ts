@@ -56,8 +56,8 @@ export const BlockStoreState = {
 
   fromJSON(object: any): BlockStoreState {
     return {
-      base: isSet(object.base) ? String(object.base) : "0",
-      height: isSet(object.height) ? String(object.height) : "0",
+      base: isSet(object.base) ? globalThis.String(object.base) : "0",
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
     };
   },
 
@@ -86,7 +86,8 @@ export const BlockStoreState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

@@ -285,8 +285,8 @@ export const QueryBalanceRequest = {
 
   fromJSON(object: any): QueryBalanceRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
     };
   },
 
@@ -422,7 +422,7 @@ export const QueryAllBalancesRequest = {
 
   fromJSON(object: any): QueryAllBalancesRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -500,7 +500,7 @@ export const QueryAllBalancesResponse = {
 
   fromJSON(object: any): QueryAllBalancesResponse {
     return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
+      balances: globalThis.Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -578,7 +578,7 @@ export const QuerySpendableBalancesRequest = {
 
   fromJSON(object: any): QuerySpendableBalancesRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -656,7 +656,7 @@ export const QuerySpendableBalancesResponse = {
 
   fromJSON(object: any): QuerySpendableBalancesResponse {
     return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
+      balances: globalThis.Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -734,8 +734,8 @@ export const QuerySpendableBalanceByDenomRequest = {
 
   fromJSON(object: any): QuerySpendableBalanceByDenomRequest {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      denom: isSet(object.denom) ? String(object.denom) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
     };
   },
 
@@ -932,7 +932,7 @@ export const QueryTotalSupplyResponse = {
 
   fromJSON(object: any): QueryTotalSupplyResponse {
     return {
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
+      supply: globalThis.Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -999,7 +999,7 @@ export const QuerySupplyOfRequest = {
   },
 
   fromJSON(object: any): QuerySupplyOfRequest {
-    return { denom: isSet(object.denom) ? String(object.denom) : "" };
+    return { denom: isSet(object.denom) ? globalThis.String(object.denom) : "" };
   },
 
   toJSON(message: QuerySupplyOfRequest): unknown {
@@ -1297,7 +1297,9 @@ export const QueryDenomsMetadataResponse = {
 
   fromJSON(object: any): QueryDenomsMetadataResponse {
     return {
-      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromJSON(e)) : [],
+      metadatas: globalThis.Array.isArray(object?.metadatas)
+        ? object.metadatas.map((e: any) => Metadata.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1364,7 +1366,7 @@ export const QueryDenomMetadataRequest = {
   },
 
   fromJSON(object: any): QueryDenomMetadataRequest {
-    return { denom: isSet(object.denom) ? String(object.denom) : "" };
+    return { denom: isSet(object.denom) ? globalThis.String(object.denom) : "" };
   },
 
   toJSON(message: QueryDenomMetadataRequest): unknown {
@@ -1495,7 +1497,7 @@ export const QueryDenomOwnersRequest = {
 
   fromJSON(object: any): QueryDenomOwnersRequest {
     return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1573,7 +1575,7 @@ export const DenomOwner = {
 
   fromJSON(object: any): DenomOwner {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined,
     };
   },
@@ -1651,7 +1653,7 @@ export const QueryDenomOwnersResponse = {
 
   fromJSON(object: any): QueryDenomOwnersResponse {
     return {
-      denom_owners: Array.isArray(object?.denom_owners)
+      denom_owners: globalThis.Array.isArray(object?.denom_owners)
         ? object.denom_owners.map((e: any) => DenomOwner.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1731,7 +1733,7 @@ export const QuerySendEnabledRequest = {
 
   fromJSON(object: any): QuerySendEnabledRequest {
     return {
-      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : [],
+      denoms: globalThis.Array.isArray(object?.denoms) ? object.denoms.map((e: any) => globalThis.String(e)) : [],
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1809,7 +1811,7 @@ export const QuerySendEnabledResponse = {
 
   fromJSON(object: any): QuerySendEnabledResponse {
     return {
-      send_enabled: Array.isArray(object?.send_enabled)
+      send_enabled: globalThis.Array.isArray(object?.send_enabled)
         ? object.send_enabled.map((e: any) => SendEnabled.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -2354,29 +2356,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2384,7 +2368,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

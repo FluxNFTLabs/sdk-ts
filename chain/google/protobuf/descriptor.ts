@@ -1174,7 +1174,9 @@ export const FileDescriptorSet = {
   },
 
   fromJSON(object: any): FileDescriptorSet {
-    return { file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromJSON(e)) : [] };
+    return {
+      file: globalThis.Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: FileDescriptorSet): unknown {
@@ -1381,26 +1383,32 @@ export const FileDescriptorProto = {
 
   fromJSON(object: any): FileDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      package: isSet(object.package) ? String(object.package) : "",
-      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => String(e)) : [],
-      public_dependency: Array.isArray(object?.public_dependency)
-        ? object.public_dependency.map((e: any) => Number(e))
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      package: isSet(object.package) ? globalThis.String(object.package) : "",
+      dependency: globalThis.Array.isArray(object?.dependency)
+        ? object.dependency.map((e: any) => globalThis.String(e))
         : [],
-      weak_dependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => Number(e)) : [],
-      message_type: Array.isArray(object?.message_type)
+      public_dependency: globalThis.Array.isArray(object?.public_dependency)
+        ? object.public_dependency.map((e: any) => globalThis.Number(e))
+        : [],
+      weak_dependency: globalThis.Array.isArray(object?.weak_dependency)
+        ? object.weak_dependency.map((e: any) => globalThis.Number(e))
+        : [],
+      message_type: globalThis.Array.isArray(object?.message_type)
         ? object.message_type.map((e: any) => DescriptorProto.fromJSON(e))
         : [],
-      enum_type: Array.isArray(object?.enum_type)
+      enum_type: globalThis.Array.isArray(object?.enum_type)
         ? object.enum_type.map((e: any) => EnumDescriptorProto.fromJSON(e))
         : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e)) : [],
-      extension: Array.isArray(object?.extension)
+      service: globalThis.Array.isArray(object?.service)
+        ? object.service.map((e: any) => ServiceDescriptorProto.fromJSON(e))
+        : [],
+      extension: globalThis.Array.isArray(object?.extension)
         ? object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e))
         : [],
       options: isSet(object.options) ? FileOptions.fromJSON(object.options) : undefined,
       source_code_info: isSet(object.source_code_info) ? SourceCodeInfo.fromJSON(object.source_code_info) : undefined,
-      syntax: isSet(object.syntax) ? String(object.syntax) : "",
+      syntax: isSet(object.syntax) ? globalThis.String(object.syntax) : "",
     };
   },
 
@@ -1610,29 +1618,31 @@ export const DescriptorProto = {
 
   fromJSON(object: any): DescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromJSON(e)) : [],
-      extension: Array.isArray(object?.extension)
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      field: globalThis.Array.isArray(object?.field)
+        ? object.field.map((e: any) => FieldDescriptorProto.fromJSON(e))
+        : [],
+      extension: globalThis.Array.isArray(object?.extension)
         ? object.extension.map((e: any) => FieldDescriptorProto.fromJSON(e))
         : [],
-      nested_type: Array.isArray(object?.nested_type)
+      nested_type: globalThis.Array.isArray(object?.nested_type)
         ? object.nested_type.map((e: any) => DescriptorProto.fromJSON(e))
         : [],
-      enum_type: Array.isArray(object?.enum_type)
+      enum_type: globalThis.Array.isArray(object?.enum_type)
         ? object.enum_type.map((e: any) => EnumDescriptorProto.fromJSON(e))
         : [],
-      extension_range: Array.isArray(object?.extension_range)
+      extension_range: globalThis.Array.isArray(object?.extension_range)
         ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromJSON(e))
         : [],
-      oneof_decl: Array.isArray(object?.oneof_decl)
+      oneof_decl: globalThis.Array.isArray(object?.oneof_decl)
         ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromJSON(e))
         : [],
       options: isSet(object.options) ? MessageOptions.fromJSON(object.options) : undefined,
-      reserved_range: Array.isArray(object?.reserved_range)
+      reserved_range: globalThis.Array.isArray(object?.reserved_range)
         ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromJSON(e))
         : [],
-      reserved_name: Array.isArray(object?.reserved_name)
-        ? object.reserved_name.map((e: any) => String(e))
+      reserved_name: globalThis.Array.isArray(object?.reserved_name)
+        ? object.reserved_name.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -1752,8 +1762,8 @@ export const DescriptorProto_ExtensionRange = {
 
   fromJSON(object: any): DescriptorProto_ExtensionRange {
     return {
-      start: isSet(object.start) ? Number(object.start) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0,
+      start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+      end: isSet(object.end) ? globalThis.Number(object.end) : 0,
       options: isSet(object.options) ? ExtensionRangeOptions.fromJSON(object.options) : undefined,
     };
   },
@@ -1834,7 +1844,10 @@ export const DescriptorProto_ReservedRange = {
   },
 
   fromJSON(object: any): DescriptorProto_ReservedRange {
-    return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
+    return {
+      start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+      end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+    };
   },
 
   toJSON(message: DescriptorProto_ReservedRange): unknown {
@@ -1898,7 +1911,7 @@ export const ExtensionRangeOptions = {
 
   fromJSON(object: any): ExtensionRangeOptions {
     return {
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -2073,17 +2086,17 @@ export const FieldDescriptorProto = {
 
   fromJSON(object: any): FieldDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      number: isSet(object.number) ? globalThis.Number(object.number) : 0,
       label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : 1,
       type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : 1,
-      type_name: isSet(object.type_name) ? String(object.type_name) : "",
-      extendee: isSet(object.extendee) ? String(object.extendee) : "",
-      default_value: isSet(object.default_value) ? String(object.default_value) : "",
-      oneof_index: isSet(object.oneof_index) ? Number(object.oneof_index) : 0,
-      json_name: isSet(object.json_name) ? String(object.json_name) : "",
+      type_name: isSet(object.type_name) ? globalThis.String(object.type_name) : "",
+      extendee: isSet(object.extendee) ? globalThis.String(object.extendee) : "",
+      default_value: isSet(object.default_value) ? globalThis.String(object.default_value) : "",
+      oneof_index: isSet(object.oneof_index) ? globalThis.Number(object.oneof_index) : 0,
+      json_name: isSet(object.json_name) ? globalThis.String(object.json_name) : "",
       options: isSet(object.options) ? FieldOptions.fromJSON(object.options) : undefined,
-      proto3_optional: isSet(object.proto3_optional) ? Boolean(object.proto3_optional) : false,
+      proto3_optional: isSet(object.proto3_optional) ? globalThis.Boolean(object.proto3_optional) : false,
     };
   },
 
@@ -2196,7 +2209,7 @@ export const OneofDescriptorProto = {
 
   fromJSON(object: any): OneofDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       options: isSet(object.options) ? OneofOptions.fromJSON(object.options) : undefined,
     };
   },
@@ -2304,13 +2317,17 @@ export const EnumDescriptorProto = {
 
   fromJSON(object: any): EnumDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e)) : [],
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      value: globalThis.Array.isArray(object?.value)
+        ? object.value.map((e: any) => EnumValueDescriptorProto.fromJSON(e))
+        : [],
       options: isSet(object.options) ? EnumOptions.fromJSON(object.options) : undefined,
-      reserved_range: Array.isArray(object?.reserved_range)
+      reserved_range: globalThis.Array.isArray(object?.reserved_range)
         ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromJSON(e))
         : [],
-      reserved_name: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => String(e)) : [],
+      reserved_name: globalThis.Array.isArray(object?.reserved_name)
+        ? object.reserved_name.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -2399,7 +2416,10 @@ export const EnumDescriptorProto_EnumReservedRange = {
   },
 
   fromJSON(object: any): EnumDescriptorProto_EnumReservedRange {
-    return { start: isSet(object.start) ? Number(object.start) : 0, end: isSet(object.end) ? Number(object.end) : 0 };
+    return {
+      start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+      end: isSet(object.end) ? globalThis.Number(object.end) : 0,
+    };
   },
 
   toJSON(message: EnumDescriptorProto_EnumReservedRange): unknown {
@@ -2483,8 +2503,8 @@ export const EnumValueDescriptorProto = {
 
   fromJSON(object: any): EnumValueDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      number: isSet(object.number) ? globalThis.Number(object.number) : 0,
       options: isSet(object.options) ? EnumValueOptions.fromJSON(object.options) : undefined,
     };
   },
@@ -2576,8 +2596,10 @@ export const ServiceDescriptorProto = {
 
   fromJSON(object: any): ServiceDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromJSON(e)) : [],
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      method: globalThis.Array.isArray(object?.method)
+        ? object.method.map((e: any) => MethodDescriptorProto.fromJSON(e))
+        : [],
       options: isSet(object.options) ? ServiceOptions.fromJSON(object.options) : undefined,
     };
   },
@@ -2706,12 +2728,12 @@ export const MethodDescriptorProto = {
 
   fromJSON(object: any): MethodDescriptorProto {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      input_type: isSet(object.input_type) ? String(object.input_type) : "",
-      output_type: isSet(object.output_type) ? String(object.output_type) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      input_type: isSet(object.input_type) ? globalThis.String(object.input_type) : "",
+      output_type: isSet(object.output_type) ? globalThis.String(object.output_type) : "",
       options: isSet(object.options) ? MethodOptions.fromJSON(object.options) : undefined,
-      client_streaming: isSet(object.client_streaming) ? Boolean(object.client_streaming) : false,
-      server_streaming: isSet(object.server_streaming) ? Boolean(object.server_streaming) : false,
+      client_streaming: isSet(object.client_streaming) ? globalThis.Boolean(object.client_streaming) : false,
+      server_streaming: isSet(object.server_streaming) ? globalThis.Boolean(object.server_streaming) : false,
     };
   },
 
@@ -3016,29 +3038,37 @@ export const FileOptions = {
 
   fromJSON(object: any): FileOptions {
     return {
-      java_package: isSet(object.java_package) ? String(object.java_package) : "",
-      java_outer_classname: isSet(object.java_outer_classname) ? String(object.java_outer_classname) : "",
-      java_multiple_files: isSet(object.java_multiple_files) ? Boolean(object.java_multiple_files) : false,
+      java_package: isSet(object.java_package) ? globalThis.String(object.java_package) : "",
+      java_outer_classname: isSet(object.java_outer_classname) ? globalThis.String(object.java_outer_classname) : "",
+      java_multiple_files: isSet(object.java_multiple_files) ? globalThis.Boolean(object.java_multiple_files) : false,
       java_generate_equals_and_hash: isSet(object.java_generate_equals_and_hash)
-        ? Boolean(object.java_generate_equals_and_hash)
+        ? globalThis.Boolean(object.java_generate_equals_and_hash)
         : false,
-      java_string_check_utf8: isSet(object.java_string_check_utf8) ? Boolean(object.java_string_check_utf8) : false,
+      java_string_check_utf8: isSet(object.java_string_check_utf8)
+        ? globalThis.Boolean(object.java_string_check_utf8)
+        : false,
       optimize_for: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : 1,
-      go_package: isSet(object.go_package) ? String(object.go_package) : "",
-      cc_generic_services: isSet(object.cc_generic_services) ? Boolean(object.cc_generic_services) : false,
-      java_generic_services: isSet(object.java_generic_services) ? Boolean(object.java_generic_services) : false,
-      py_generic_services: isSet(object.py_generic_services) ? Boolean(object.py_generic_services) : false,
-      php_generic_services: isSet(object.php_generic_services) ? Boolean(object.php_generic_services) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      cc_enable_arenas: isSet(object.cc_enable_arenas) ? Boolean(object.cc_enable_arenas) : false,
-      objc_class_prefix: isSet(object.objc_class_prefix) ? String(object.objc_class_prefix) : "",
-      csharp_namespace: isSet(object.csharp_namespace) ? String(object.csharp_namespace) : "",
-      swift_prefix: isSet(object.swift_prefix) ? String(object.swift_prefix) : "",
-      php_class_prefix: isSet(object.php_class_prefix) ? String(object.php_class_prefix) : "",
-      php_namespace: isSet(object.php_namespace) ? String(object.php_namespace) : "",
-      php_metadata_namespace: isSet(object.php_metadata_namespace) ? String(object.php_metadata_namespace) : "",
-      ruby_package: isSet(object.ruby_package) ? String(object.ruby_package) : "",
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      go_package: isSet(object.go_package) ? globalThis.String(object.go_package) : "",
+      cc_generic_services: isSet(object.cc_generic_services) ? globalThis.Boolean(object.cc_generic_services) : false,
+      java_generic_services: isSet(object.java_generic_services)
+        ? globalThis.Boolean(object.java_generic_services)
+        : false,
+      py_generic_services: isSet(object.py_generic_services) ? globalThis.Boolean(object.py_generic_services) : false,
+      php_generic_services: isSet(object.php_generic_services)
+        ? globalThis.Boolean(object.php_generic_services)
+        : false,
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      cc_enable_arenas: isSet(object.cc_enable_arenas) ? globalThis.Boolean(object.cc_enable_arenas) : false,
+      objc_class_prefix: isSet(object.objc_class_prefix) ? globalThis.String(object.objc_class_prefix) : "",
+      csharp_namespace: isSet(object.csharp_namespace) ? globalThis.String(object.csharp_namespace) : "",
+      swift_prefix: isSet(object.swift_prefix) ? globalThis.String(object.swift_prefix) : "",
+      php_class_prefix: isSet(object.php_class_prefix) ? globalThis.String(object.php_class_prefix) : "",
+      php_namespace: isSet(object.php_namespace) ? globalThis.String(object.php_namespace) : "",
+      php_metadata_namespace: isSet(object.php_metadata_namespace)
+        ? globalThis.String(object.php_metadata_namespace)
+        : "",
+      ruby_package: isSet(object.ruby_package) ? globalThis.String(object.ruby_package) : "",
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3227,13 +3257,15 @@ export const MessageOptions = {
 
   fromJSON(object: any): MessageOptions {
     return {
-      message_set_wire_format: isSet(object.message_set_wire_format) ? Boolean(object.message_set_wire_format) : false,
-      no_standard_descriptor_accessor: isSet(object.no_standard_descriptor_accessor)
-        ? Boolean(object.no_standard_descriptor_accessor)
+      message_set_wire_format: isSet(object.message_set_wire_format)
+        ? globalThis.Boolean(object.message_set_wire_format)
         : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      map_entry: isSet(object.map_entry) ? Boolean(object.map_entry) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      no_standard_descriptor_accessor: isSet(object.no_standard_descriptor_accessor)
+        ? globalThis.Boolean(object.no_standard_descriptor_accessor)
+        : false,
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      map_entry: isSet(object.map_entry) ? globalThis.Boolean(object.map_entry) : false,
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3392,13 +3424,13 @@ export const FieldOptions = {
   fromJSON(object: any): FieldOptions {
     return {
       ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : 0,
-      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      packed: isSet(object.packed) ? globalThis.Boolean(object.packed) : false,
       jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : 0,
-      lazy: isSet(object.lazy) ? Boolean(object.lazy) : false,
-      unverified_lazy: isSet(object.unverified_lazy) ? Boolean(object.unverified_lazy) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      weak: isSet(object.weak) ? Boolean(object.weak) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      lazy: isSet(object.lazy) ? globalThis.Boolean(object.lazy) : false,
+      unverified_lazy: isSet(object.unverified_lazy) ? globalThis.Boolean(object.unverified_lazy) : false,
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      weak: isSet(object.weak) ? globalThis.Boolean(object.weak) : false,
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3489,7 +3521,7 @@ export const OneofOptions = {
 
   fromJSON(object: any): OneofOptions {
     return {
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3572,9 +3604,9 @@ export const EnumOptions = {
 
   fromJSON(object: any): EnumOptions {
     return {
-      allow_alias: isSet(object.allow_alias) ? Boolean(object.allow_alias) : false,
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      allow_alias: isSet(object.allow_alias) ? globalThis.Boolean(object.allow_alias) : false,
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3655,8 +3687,8 @@ export const EnumValueOptions = {
 
   fromJSON(object: any): EnumValueOptions {
     return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3733,8 +3765,8 @@ export const ServiceOptions = {
 
   fromJSON(object: any): ServiceOptions {
     return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3821,11 +3853,11 @@ export const MethodOptions = {
 
   fromJSON(object: any): MethodOptions {
     return {
-      deprecated: isSet(object.deprecated) ? Boolean(object.deprecated) : false,
+      deprecated: isSet(object.deprecated) ? globalThis.Boolean(object.deprecated) : false,
       idempotency_level: isSet(object.idempotency_level)
         ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level)
         : 0,
-      uninterpreted_option: Array.isArray(object?.uninterpreted_option)
+      uninterpreted_option: globalThis.Array.isArray(object?.uninterpreted_option)
         ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromJSON(e))
         : [],
     };
@@ -3964,13 +3996,15 @@ export const UninterpretedOption = {
 
   fromJSON(object: any): UninterpretedOption {
     return {
-      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e)) : [],
-      identifier_value: isSet(object.identifier_value) ? String(object.identifier_value) : "",
-      positive_int_value: isSet(object.positive_int_value) ? String(object.positive_int_value) : "0",
-      negative_int_value: isSet(object.negative_int_value) ? String(object.negative_int_value) : "0",
-      double_value: isSet(object.double_value) ? Number(object.double_value) : 0,
+      name: globalThis.Array.isArray(object?.name)
+        ? object.name.map((e: any) => UninterpretedOption_NamePart.fromJSON(e))
+        : [],
+      identifier_value: isSet(object.identifier_value) ? globalThis.String(object.identifier_value) : "",
+      positive_int_value: isSet(object.positive_int_value) ? globalThis.String(object.positive_int_value) : "0",
+      negative_int_value: isSet(object.negative_int_value) ? globalThis.String(object.negative_int_value) : "0",
+      double_value: isSet(object.double_value) ? globalThis.Number(object.double_value) : 0,
       string_value: isSet(object.string_value) ? bytesFromBase64(object.string_value) : new Uint8Array(0),
-      aggregate_value: isSet(object.aggregate_value) ? String(object.aggregate_value) : "",
+      aggregate_value: isSet(object.aggregate_value) ? globalThis.String(object.aggregate_value) : "",
     };
   },
 
@@ -4065,8 +4099,8 @@ export const UninterpretedOption_NamePart = {
 
   fromJSON(object: any): UninterpretedOption_NamePart {
     return {
-      name_part: isSet(object.name_part) ? String(object.name_part) : "",
-      is_extension: isSet(object.is_extension) ? Boolean(object.is_extension) : false,
+      name_part: isSet(object.name_part) ? globalThis.String(object.name_part) : "",
+      is_extension: isSet(object.is_extension) ? globalThis.Boolean(object.is_extension) : false,
     };
   },
 
@@ -4131,7 +4165,7 @@ export const SourceCodeInfo = {
 
   fromJSON(object: any): SourceCodeInfo {
     return {
-      location: Array.isArray(object?.location)
+      location: globalThis.Array.isArray(object?.location)
         ? object.location.map((e: any) => SourceCodeInfo_Location.fromJSON(e))
         : [],
     };
@@ -4258,12 +4292,12 @@ export const SourceCodeInfo_Location = {
 
   fromJSON(object: any): SourceCodeInfo_Location {
     return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
-      span: Array.isArray(object?.span) ? object.span.map((e: any) => Number(e)) : [],
-      leading_comments: isSet(object.leading_comments) ? String(object.leading_comments) : "",
-      trailing_comments: isSet(object.trailing_comments) ? String(object.trailing_comments) : "",
-      leading_detached_comments: Array.isArray(object?.leading_detached_comments)
-        ? object.leading_detached_comments.map((e: any) => String(e))
+      path: globalThis.Array.isArray(object?.path) ? object.path.map((e: any) => globalThis.Number(e)) : [],
+      span: globalThis.Array.isArray(object?.span) ? object.span.map((e: any) => globalThis.Number(e)) : [],
+      leading_comments: isSet(object.leading_comments) ? globalThis.String(object.leading_comments) : "",
+      trailing_comments: isSet(object.trailing_comments) ? globalThis.String(object.trailing_comments) : "",
+      leading_detached_comments: globalThis.Array.isArray(object?.leading_detached_comments)
+        ? object.leading_detached_comments.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -4341,7 +4375,7 @@ export const GeneratedCodeInfo = {
 
   fromJSON(object: any): GeneratedCodeInfo {
     return {
-      annotation: Array.isArray(object?.annotation)
+      annotation: globalThis.Array.isArray(object?.annotation)
         ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromJSON(e))
         : [],
     };
@@ -4446,10 +4480,10 @@ export const GeneratedCodeInfo_Annotation = {
 
   fromJSON(object: any): GeneratedCodeInfo_Annotation {
     return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => Number(e)) : [],
-      source_file: isSet(object.source_file) ? String(object.source_file) : "",
-      begin: isSet(object.begin) ? Number(object.begin) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0,
+      path: globalThis.Array.isArray(object?.path) ? object.path.map((e: any) => globalThis.Number(e)) : [],
+      source_file: isSet(object.source_file) ? globalThis.String(object.source_file) : "",
+      begin: isSet(object.begin) ? globalThis.Number(object.begin) : 0,
+      end: isSet(object.end) ? globalThis.Number(object.end) : 0,
     };
   },
 
@@ -4483,30 +4517,11 @@ export const GeneratedCodeInfo_Annotation = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -4516,21 +4531,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

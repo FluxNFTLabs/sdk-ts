@@ -143,12 +143,20 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      app_name: isSet(object.app_name) ? String(object.app_name) : "",
-      begin_blockers: Array.isArray(object?.begin_blockers) ? object.begin_blockers.map((e: any) => String(e)) : [],
-      end_blockers: Array.isArray(object?.end_blockers) ? object.end_blockers.map((e: any) => String(e)) : [],
-      init_genesis: Array.isArray(object?.init_genesis) ? object.init_genesis.map((e: any) => String(e)) : [],
-      export_genesis: Array.isArray(object?.export_genesis) ? object.export_genesis.map((e: any) => String(e)) : [],
-      override_store_keys: Array.isArray(object?.override_store_keys)
+      app_name: isSet(object.app_name) ? globalThis.String(object.app_name) : "",
+      begin_blockers: globalThis.Array.isArray(object?.begin_blockers)
+        ? object.begin_blockers.map((e: any) => globalThis.String(e))
+        : [],
+      end_blockers: globalThis.Array.isArray(object?.end_blockers)
+        ? object.end_blockers.map((e: any) => globalThis.String(e))
+        : [],
+      init_genesis: globalThis.Array.isArray(object?.init_genesis)
+        ? object.init_genesis.map((e: any) => globalThis.String(e))
+        : [],
+      export_genesis: globalThis.Array.isArray(object?.export_genesis)
+        ? object.export_genesis.map((e: any) => globalThis.String(e))
+        : [],
+      override_store_keys: globalThis.Array.isArray(object?.override_store_keys)
         ? object.override_store_keys.map((e: any) => StoreKeyConfig.fromJSON(e))
         : [],
     };
@@ -241,8 +249,8 @@ export const StoreKeyConfig = {
 
   fromJSON(object: any): StoreKeyConfig {
     return {
-      module_name: isSet(object.module_name) ? String(object.module_name) : "",
-      kv_store_key: isSet(object.kv_store_key) ? String(object.kv_store_key) : "",
+      module_name: isSet(object.module_name) ? globalThis.String(object.module_name) : "",
+      kv_store_key: isSet(object.kv_store_key) ? globalThis.String(object.kv_store_key) : "",
     };
   },
 
@@ -271,7 +279,8 @@ export const StoreKeyConfig = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

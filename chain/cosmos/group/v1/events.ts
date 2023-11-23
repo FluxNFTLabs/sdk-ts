@@ -103,7 +103,7 @@ export const EventCreateGroup = {
   },
 
   fromJSON(object: any): EventCreateGroup {
-    return { group_id: isSet(object.group_id) ? String(object.group_id) : "0" };
+    return { group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0" };
   },
 
   toJSON(message: EventCreateGroup): unknown {
@@ -162,7 +162,7 @@ export const EventUpdateGroup = {
   },
 
   fromJSON(object: any): EventUpdateGroup {
-    return { group_id: isSet(object.group_id) ? String(object.group_id) : "0" };
+    return { group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0" };
   },
 
   toJSON(message: EventUpdateGroup): unknown {
@@ -221,7 +221,7 @@ export const EventCreateGroupPolicy = {
   },
 
   fromJSON(object: any): EventCreateGroupPolicy {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: EventCreateGroupPolicy): unknown {
@@ -280,7 +280,7 @@ export const EventUpdateGroupPolicy = {
   },
 
   fromJSON(object: any): EventUpdateGroupPolicy {
-    return { address: isSet(object.address) ? String(object.address) : "" };
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: EventUpdateGroupPolicy): unknown {
@@ -339,7 +339,7 @@ export const EventSubmitProposal = {
   },
 
   fromJSON(object: any): EventSubmitProposal {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: EventSubmitProposal): unknown {
@@ -398,7 +398,7 @@ export const EventWithdrawProposal = {
   },
 
   fromJSON(object: any): EventWithdrawProposal {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: EventWithdrawProposal): unknown {
@@ -457,7 +457,7 @@ export const EventVote = {
   },
 
   fromJSON(object: any): EventVote {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: EventVote): unknown {
@@ -537,9 +537,9 @@ export const EventExec = {
 
   fromJSON(object: any): EventExec {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0,
-      logs: isSet(object.logs) ? String(object.logs) : "",
+      logs: isSet(object.logs) ? globalThis.String(object.logs) : "",
     };
   },
 
@@ -618,8 +618,8 @@ export const EventLeaveGroup = {
 
   fromJSON(object: any): EventLeaveGroup {
     return {
-      group_id: isSet(object.group_id) ? String(object.group_id) : "0",
-      address: isSet(object.address) ? String(object.address) : "",
+      group_id: isSet(object.group_id) ? globalThis.String(object.group_id) : "0",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
     };
   },
 
@@ -648,7 +648,8 @@ export const EventLeaveGroup = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

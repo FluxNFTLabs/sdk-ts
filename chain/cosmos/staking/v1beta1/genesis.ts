@@ -158,18 +158,22 @@ export const GenesisState = {
     return {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       last_total_power: isSet(object.last_total_power) ? bytesFromBase64(object.last_total_power) : new Uint8Array(0),
-      last_validator_powers: Array.isArray(object?.last_validator_powers)
+      last_validator_powers: globalThis.Array.isArray(object?.last_validator_powers)
         ? object.last_validator_powers.map((e: any) => LastValidatorPower.fromJSON(e))
         : [],
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
-      delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromJSON(e)) : [],
-      unbonding_delegations: Array.isArray(object?.unbonding_delegations)
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => Validator.fromJSON(e))
+        : [],
+      delegations: globalThis.Array.isArray(object?.delegations)
+        ? object.delegations.map((e: any) => Delegation.fromJSON(e))
+        : [],
+      unbonding_delegations: globalThis.Array.isArray(object?.unbonding_delegations)
         ? object.unbonding_delegations.map((e: any) => UnbondingDelegation.fromJSON(e))
         : [],
-      redelegations: Array.isArray(object?.redelegations)
+      redelegations: globalThis.Array.isArray(object?.redelegations)
         ? object.redelegations.map((e: any) => Redelegation.fromJSON(e))
         : [],
-      exported: isSet(object.exported) ? Boolean(object.exported) : false,
+      exported: isSet(object.exported) ? globalThis.Boolean(object.exported) : false,
     };
   },
 
@@ -270,8 +274,8 @@ export const LastValidatorPower = {
 
   fromJSON(object: any): LastValidatorPower {
     return {
-      address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? String(object.power) : "0",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      power: isSet(object.power) ? globalThis.String(object.power) : "0",
     };
   },
 
@@ -297,30 +301,11 @@ export const LastValidatorPower = {
   },
 };
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -330,21 +315,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

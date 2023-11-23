@@ -99,11 +99,11 @@ export const BIP44Params = {
 
   fromJSON(object: any): BIP44Params {
     return {
-      purpose: isSet(object.purpose) ? Number(object.purpose) : 0,
-      coin_type: isSet(object.coin_type) ? Number(object.coin_type) : 0,
-      account: isSet(object.account) ? Number(object.account) : 0,
-      change: isSet(object.change) ? Boolean(object.change) : false,
-      address_index: isSet(object.address_index) ? Number(object.address_index) : 0,
+      purpose: isSet(object.purpose) ? globalThis.Number(object.purpose) : 0,
+      coin_type: isSet(object.coin_type) ? globalThis.Number(object.coin_type) : 0,
+      account: isSet(object.account) ? globalThis.Number(object.account) : 0,
+      change: isSet(object.change) ? globalThis.Boolean(object.change) : false,
+      address_index: isSet(object.address_index) ? globalThis.Number(object.address_index) : 0,
     };
   },
 
@@ -144,7 +144,8 @@ export const BIP44Params = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

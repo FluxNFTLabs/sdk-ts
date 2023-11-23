@@ -7,6 +7,121 @@ import { Observable } from "rxjs";
 import { share } from "rxjs/operators";
 import { Any } from "../../../google/protobuf/any";
 
+/** WARNING: always append to bottom or you will mess up indexer logic */
+export enum Op {
+  /** SyntheticUpdate - Synthetic events */
+  SyntheticUpdate = 0,
+  /** FNFTCreate - FNFT events */
+  FNFTCreate = 100,
+  FNFTPurchaseShares = 101,
+  FNFTTransferShares = 102,
+  FNFTDepositShares = 103,
+  FNFTWithdrawShares = 104,
+  FNFTSponsor = 105,
+  FNFTUpdateHolder = 106,
+  FNFTDeleteHolder = 107,
+  FNFTUpdateRevenue = 108,
+  FNFTISO = 109,
+  FNFTDividend = 110,
+  /** BazaarCreateProduct - Bazaar events */
+  BazaarCreateProduct = 200,
+  BazaarPurchaseOffering = 201,
+  BazaarVerifyProduct = 202,
+  UNRECOGNIZED = -1,
+}
+
+export function opFromJSON(object: any): Op {
+  switch (object) {
+    case 0:
+    case "SyntheticUpdate":
+      return Op.SyntheticUpdate;
+    case 100:
+    case "FNFTCreate":
+      return Op.FNFTCreate;
+    case 101:
+    case "FNFTPurchaseShares":
+      return Op.FNFTPurchaseShares;
+    case 102:
+    case "FNFTTransferShares":
+      return Op.FNFTTransferShares;
+    case 103:
+    case "FNFTDepositShares":
+      return Op.FNFTDepositShares;
+    case 104:
+    case "FNFTWithdrawShares":
+      return Op.FNFTWithdrawShares;
+    case 105:
+    case "FNFTSponsor":
+      return Op.FNFTSponsor;
+    case 106:
+    case "FNFTUpdateHolder":
+      return Op.FNFTUpdateHolder;
+    case 107:
+    case "FNFTDeleteHolder":
+      return Op.FNFTDeleteHolder;
+    case 108:
+    case "FNFTUpdateRevenue":
+      return Op.FNFTUpdateRevenue;
+    case 109:
+    case "FNFTISO":
+      return Op.FNFTISO;
+    case 110:
+    case "FNFTDividend":
+      return Op.FNFTDividend;
+    case 200:
+    case "BazaarCreateProduct":
+      return Op.BazaarCreateProduct;
+    case 201:
+    case "BazaarPurchaseOffering":
+      return Op.BazaarPurchaseOffering;
+    case 202:
+    case "BazaarVerifyProduct":
+      return Op.BazaarVerifyProduct;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Op.UNRECOGNIZED;
+  }
+}
+
+export function opToJSON(object: Op): string {
+  switch (object) {
+    case Op.SyntheticUpdate:
+      return "SyntheticUpdate";
+    case Op.FNFTCreate:
+      return "FNFTCreate";
+    case Op.FNFTPurchaseShares:
+      return "FNFTPurchaseShares";
+    case Op.FNFTTransferShares:
+      return "FNFTTransferShares";
+    case Op.FNFTDepositShares:
+      return "FNFTDepositShares";
+    case Op.FNFTWithdrawShares:
+      return "FNFTWithdrawShares";
+    case Op.FNFTSponsor:
+      return "FNFTSponsor";
+    case Op.FNFTUpdateHolder:
+      return "FNFTUpdateHolder";
+    case Op.FNFTDeleteHolder:
+      return "FNFTDeleteHolder";
+    case Op.FNFTUpdateRevenue:
+      return "FNFTUpdateRevenue";
+    case Op.FNFTISO:
+      return "FNFTISO";
+    case Op.FNFTDividend:
+      return "FNFTDividend";
+    case Op.BazaarCreateProduct:
+      return "BazaarCreateProduct";
+    case Op.BazaarPurchaseOffering:
+      return "BazaarPurchaseOffering";
+    case Op.BazaarVerifyProduct:
+      return "BazaarVerifyProduct";
+    case Op.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface EventsRequest {
   height: string;
   modules: string[];
@@ -17,13 +132,26 @@ export interface EventsResponse {
   height: string;
   time: string;
   modules: string[];
-  events: Events[];
+  events: Event[];
   tm_queries: string[];
   tm_data: string[];
 }
 
-export interface Events {
-  raw_events: Any[];
+export interface Event {
+  event_ops: EventOp[];
+}
+
+export interface EventOp {
+  op: Op;
+  module: string;
+  data: Any | undefined;
+}
+
+export interface SyncStatus {
+  last_block: string;
+  last_block_time: string;
+  updated_at: string;
+  current_version: string;
 }
 
 function createBaseEventsRequest(): EventsRequest {
@@ -85,9 +213,11 @@ export const EventsRequest = {
 
   fromJSON(object: any): EventsRequest {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
-      tm_queries: Array.isArray(object?.tm_queries) ? object.tm_queries.map((e: any) => String(e)) : [],
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      modules: globalThis.Array.isArray(object?.modules) ? object.modules.map((e: any) => globalThis.String(e)) : [],
+      tm_queries: globalThis.Array.isArray(object?.tm_queries)
+        ? object.tm_queries.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -135,7 +265,7 @@ export const EventsResponse = {
       writer.uint32(26).string(v!);
     }
     for (const v of message.events) {
-      Events.encode(v!, writer.uint32(34).fork()).ldelim();
+      Event.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     for (const v of message.tm_queries) {
       writer.uint32(42).string(v!);
@@ -179,7 +309,7 @@ export const EventsResponse = {
             break;
           }
 
-          message.events.push(Events.decode(reader, reader.uint32()));
+          message.events.push(Event.decode(reader, reader.uint32()));
           continue;
         case 5:
           if (tag !== 42) {
@@ -206,12 +336,14 @@ export const EventsResponse = {
 
   fromJSON(object: any): EventsResponse {
     return {
-      height: isSet(object.height) ? String(object.height) : "0",
-      time: isSet(object.time) ? String(object.time) : "0",
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => String(e)) : [],
-      events: Array.isArray(object?.events) ? object.events.map((e: any) => Events.fromJSON(e)) : [],
-      tm_queries: Array.isArray(object?.tm_queries) ? object.tm_queries.map((e: any) => String(e)) : [],
-      tm_data: Array.isArray(object?.tm_data) ? object.tm_data.map((e: any) => String(e)) : [],
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      time: isSet(object.time) ? globalThis.String(object.time) : "0",
+      modules: globalThis.Array.isArray(object?.modules) ? object.modules.map((e: any) => globalThis.String(e)) : [],
+      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromJSON(e)) : [],
+      tm_queries: globalThis.Array.isArray(object?.tm_queries)
+        ? object.tm_queries.map((e: any) => globalThis.String(e))
+        : [],
+      tm_data: globalThis.Array.isArray(object?.tm_data) ? object.tm_data.map((e: any) => globalThis.String(e)) : [],
     };
   },
 
@@ -227,7 +359,7 @@ export const EventsResponse = {
       obj.modules = message.modules;
     }
     if (message.events?.length) {
-      obj.events = message.events.map((e) => Events.toJSON(e));
+      obj.events = message.events.map((e) => Event.toJSON(e));
     }
     if (message.tm_queries?.length) {
       obj.tm_queries = message.tm_queries;
@@ -246,31 +378,31 @@ export const EventsResponse = {
     message.height = object.height ?? "0";
     message.time = object.time ?? "0";
     message.modules = object.modules?.map((e) => e) || [];
-    message.events = object.events?.map((e) => Events.fromPartial(e)) || [];
+    message.events = object.events?.map((e) => Event.fromPartial(e)) || [];
     message.tm_queries = object.tm_queries?.map((e) => e) || [];
     message.tm_data = object.tm_data?.map((e) => e) || [];
     return message;
   },
 };
 
-function createBaseEvents(): Events {
-  return { raw_events: [] };
+function createBaseEvent(): Event {
+  return { event_ops: [] };
 }
 
-export const Events = {
-  $type: "flux.stream.v1beta1.Events" as const,
+export const Event = {
+  $type: "flux.stream.v1beta1.Event" as const,
 
-  encode(message: Events, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.raw_events) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+  encode(message: Event, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.event_ops) {
+      EventOp.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Events {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Event {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEvents();
+    const message = createBaseEvent();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -279,7 +411,7 @@ export const Events = {
             break;
           }
 
-          message.raw_events.push(Any.decode(reader, reader.uint32()));
+          message.event_ops.push(EventOp.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -290,24 +422,225 @@ export const Events = {
     return message;
   },
 
-  fromJSON(object: any): Events {
-    return { raw_events: Array.isArray(object?.raw_events) ? object.raw_events.map((e: any) => Any.fromJSON(e)) : [] };
+  fromJSON(object: any): Event {
+    return {
+      event_ops: globalThis.Array.isArray(object?.event_ops)
+        ? object.event_ops.map((e: any) => EventOp.fromJSON(e))
+        : [],
+    };
   },
 
-  toJSON(message: Events): unknown {
+  toJSON(message: Event): unknown {
     const obj: any = {};
-    if (message.raw_events?.length) {
-      obj.raw_events = message.raw_events.map((e) => Any.toJSON(e));
+    if (message.event_ops?.length) {
+      obj.event_ops = message.event_ops.map((e) => EventOp.toJSON(e));
     }
     return obj;
   },
 
-  create(base?: DeepPartial<Events>): Events {
-    return Events.fromPartial(base ?? {});
+  create(base?: DeepPartial<Event>): Event {
+    return Event.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<Events>): Events {
-    const message = createBaseEvents();
-    message.raw_events = object.raw_events?.map((e) => Any.fromPartial(e)) || [];
+  fromPartial(object: DeepPartial<Event>): Event {
+    const message = createBaseEvent();
+    message.event_ops = object.event_ops?.map((e) => EventOp.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseEventOp(): EventOp {
+  return { op: 0, module: "", data: undefined };
+}
+
+export const EventOp = {
+  $type: "flux.stream.v1beta1.EventOp" as const,
+
+  encode(message: EventOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.op !== 0) {
+      writer.uint32(8).int32(message.op);
+    }
+    if (message.module !== "") {
+      writer.uint32(18).string(message.module);
+    }
+    if (message.data !== undefined) {
+      Any.encode(message.data, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventOp {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventOp();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.op = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.module = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.data = Any.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventOp {
+    return {
+      op: isSet(object.op) ? opFromJSON(object.op) : 0,
+      module: isSet(object.module) ? globalThis.String(object.module) : "",
+      data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
+    };
+  },
+
+  toJSON(message: EventOp): unknown {
+    const obj: any = {};
+    if (message.op !== 0) {
+      obj.op = opToJSON(message.op);
+    }
+    if (message.module !== "") {
+      obj.module = message.module;
+    }
+    if (message.data !== undefined) {
+      obj.data = Any.toJSON(message.data);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<EventOp>): EventOp {
+    return EventOp.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<EventOp>): EventOp {
+    const message = createBaseEventOp();
+    message.op = object.op ?? 0;
+    message.module = object.module ?? "";
+    message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
+    return message;
+  },
+};
+
+function createBaseSyncStatus(): SyncStatus {
+  return { last_block: "0", last_block_time: "0", updated_at: "0", current_version: "" };
+}
+
+export const SyncStatus = {
+  $type: "flux.stream.v1beta1.SyncStatus" as const,
+
+  encode(message: SyncStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.last_block !== "0") {
+      writer.uint32(8).uint64(message.last_block);
+    }
+    if (message.last_block_time !== "0") {
+      writer.uint32(16).int64(message.last_block_time);
+    }
+    if (message.updated_at !== "0") {
+      writer.uint32(24).int64(message.updated_at);
+    }
+    if (message.current_version !== "") {
+      writer.uint32(34).string(message.current_version);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SyncStatus {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSyncStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.last_block = longToString(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.last_block_time = longToString(reader.int64() as Long);
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.updated_at = longToString(reader.int64() as Long);
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.current_version = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SyncStatus {
+    return {
+      last_block: isSet(object.last_block) ? globalThis.String(object.last_block) : "0",
+      last_block_time: isSet(object.last_block_time) ? globalThis.String(object.last_block_time) : "0",
+      updated_at: isSet(object.updated_at) ? globalThis.String(object.updated_at) : "0",
+      current_version: isSet(object.current_version) ? globalThis.String(object.current_version) : "",
+    };
+  },
+
+  toJSON(message: SyncStatus): unknown {
+    const obj: any = {};
+    if (message.last_block !== "0") {
+      obj.last_block = message.last_block;
+    }
+    if (message.last_block_time !== "0") {
+      obj.last_block_time = message.last_block_time;
+    }
+    if (message.updated_at !== "0") {
+      obj.updated_at = message.updated_at;
+    }
+    if (message.current_version !== "") {
+      obj.current_version = message.current_version;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<SyncStatus>): SyncStatus {
+    return SyncStatus.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<SyncStatus>): SyncStatus {
+    const message = createBaseSyncStatus();
+    message.last_block = object.last_block ?? "0";
+    message.last_block_time = object.last_block_time ?? "0";
+    message.updated_at = object.updated_at ?? "0";
+    message.current_version = object.current_version ?? "";
     return message;
   },
 };
@@ -468,7 +801,7 @@ export class GrpcWebImpl {
       ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
       : metadata ?? this.options.metadata;
     return new Observable((observer) => {
-      const upStream = (() => {
+      const upStream = () => {
         const client = grpc.invoke(methodDesc, {
           host: this.host,
           request,
@@ -492,35 +825,17 @@ export class GrpcWebImpl {
         observer.add(() => {
           return client.close();
         });
-      });
+      };
       upStream();
     }).pipe(share());
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -537,7 +852,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

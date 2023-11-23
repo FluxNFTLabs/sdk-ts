@@ -82,9 +82,9 @@ export const EventGrant = {
 
   fromJSON(object: any): EventGrant {
     return {
-      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? globalThis.String(object.msg_type_url) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
     };
   },
 
@@ -173,9 +173,9 @@ export const EventRevoke = {
 
   fromJSON(object: any): EventRevoke {
     return {
-      msg_type_url: isSet(object.msg_type_url) ? String(object.msg_type_url) : "",
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msg_type_url: isSet(object.msg_type_url) ? globalThis.String(object.msg_type_url) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
     };
   },
 
@@ -208,7 +208,8 @@ export const EventRevoke = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

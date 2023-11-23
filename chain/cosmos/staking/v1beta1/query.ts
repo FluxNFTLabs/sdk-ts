@@ -315,7 +315,7 @@ export const QueryValidatorsRequest = {
 
   fromJSON(object: any): QueryValidatorsRequest {
     return {
-      status: isSet(object.status) ? String(object.status) : "",
+      status: isSet(object.status) ? globalThis.String(object.status) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -393,7 +393,9 @@ export const QueryValidatorsResponse = {
 
   fromJSON(object: any): QueryValidatorsResponse {
     return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => Validator.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -460,7 +462,7 @@ export const QueryValidatorRequest = {
   },
 
   fromJSON(object: any): QueryValidatorRequest {
-    return { validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "" };
+    return { validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "" };
   },
 
   toJSON(message: QueryValidatorRequest): unknown {
@@ -591,7 +593,7 @@ export const QueryValidatorDelegationsRequest = {
 
   fromJSON(object: any): QueryValidatorDelegationsRequest {
     return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -669,7 +671,7 @@ export const QueryValidatorDelegationsResponse = {
 
   fromJSON(object: any): QueryValidatorDelegationsResponse {
     return {
-      delegation_responses: Array.isArray(object?.delegation_responses)
+      delegation_responses: globalThis.Array.isArray(object?.delegation_responses)
         ? object.delegation_responses.map((e: any) => DelegationResponse.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -749,7 +751,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
 
   fromJSON(object: any): QueryValidatorUnbondingDelegationsRequest {
     return {
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -829,7 +831,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
 
   fromJSON(object: any): QueryValidatorUnbondingDelegationsResponse {
     return {
-      unbonding_responses: Array.isArray(object?.unbonding_responses)
+      unbonding_responses: globalThis.Array.isArray(object?.unbonding_responses)
         ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -911,8 +913,8 @@ export const QueryDelegationRequest = {
 
   fromJSON(object: any): QueryDelegationRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "",
     };
   },
 
@@ -1052,8 +1054,8 @@ export const QueryUnbondingDelegationRequest = {
 
   fromJSON(object: any): QueryUnbondingDelegationRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "",
     };
   },
 
@@ -1189,7 +1191,7 @@ export const QueryDelegatorDelegationsRequest = {
 
   fromJSON(object: any): QueryDelegatorDelegationsRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1267,7 +1269,7 @@ export const QueryDelegatorDelegationsResponse = {
 
   fromJSON(object: any): QueryDelegatorDelegationsResponse {
     return {
-      delegation_responses: Array.isArray(object?.delegation_responses)
+      delegation_responses: globalThis.Array.isArray(object?.delegation_responses)
         ? object.delegation_responses.map((e: any) => DelegationResponse.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1347,7 +1349,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
 
   fromJSON(object: any): QueryDelegatorUnbondingDelegationsRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1427,7 +1429,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
 
   fromJSON(object: any): QueryDelegatorUnbondingDelegationsResponse {
     return {
-      unbonding_responses: Array.isArray(object?.unbonding_responses)
+      unbonding_responses: globalThis.Array.isArray(object?.unbonding_responses)
         ? object.unbonding_responses.map((e: any) => UnbondingDelegation.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1529,9 +1531,9 @@ export const QueryRedelegationsRequest = {
 
   fromJSON(object: any): QueryRedelegationsRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      src_validator_addr: isSet(object.src_validator_addr) ? String(object.src_validator_addr) : "",
-      dst_validator_addr: isSet(object.dst_validator_addr) ? String(object.dst_validator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
+      src_validator_addr: isSet(object.src_validator_addr) ? globalThis.String(object.src_validator_addr) : "",
+      dst_validator_addr: isSet(object.dst_validator_addr) ? globalThis.String(object.dst_validator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1617,7 +1619,7 @@ export const QueryRedelegationsResponse = {
 
   fromJSON(object: any): QueryRedelegationsResponse {
     return {
-      redelegation_responses: Array.isArray(object?.redelegation_responses)
+      redelegation_responses: globalThis.Array.isArray(object?.redelegation_responses)
         ? object.redelegation_responses.map((e: any) => RedelegationResponse.fromJSON(e))
         : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
@@ -1698,7 +1700,7 @@ export const QueryDelegatorValidatorsRequest = {
 
   fromJSON(object: any): QueryDelegatorValidatorsRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1776,7 +1778,9 @@ export const QueryDelegatorValidatorsResponse = {
 
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
     return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
+      validators: globalThis.Array.isArray(object?.validators)
+        ? object.validators.map((e: any) => Validator.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1854,8 +1858,8 @@ export const QueryDelegatorValidatorRequest = {
 
   fromJSON(object: any): QueryDelegatorValidatorRequest {
     return {
-      delegator_addr: isSet(object.delegator_addr) ? String(object.delegator_addr) : "",
-      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : "",
+      delegator_addr: isSet(object.delegator_addr) ? globalThis.String(object.delegator_addr) : "",
+      validator_addr: isSet(object.validator_addr) ? globalThis.String(object.validator_addr) : "",
     };
   },
 
@@ -1980,7 +1984,7 @@ export const QueryHistoricalInfoRequest = {
   },
 
   fromJSON(object: any): QueryHistoricalInfoRequest {
-    return { height: isSet(object.height) ? String(object.height) : "0" };
+    return { height: isSet(object.height) ? globalThis.String(object.height) : "0" };
   },
 
   toJSON(message: QueryHistoricalInfoRequest): unknown {
@@ -2887,29 +2891,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -2926,7 +2912,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

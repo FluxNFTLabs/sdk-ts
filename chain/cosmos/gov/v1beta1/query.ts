@@ -184,7 +184,7 @@ export const QueryProposalRequest = {
   },
 
   fromJSON(object: any): QueryProposalRequest {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
@@ -336,8 +336,8 @@ export const QueryProposalsRequest = {
   fromJSON(object: any): QueryProposalsRequest {
     return {
       proposal_status: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : 0,
-      voter: isSet(object.voter) ? String(object.voter) : "",
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
+      depositor: isSet(object.depositor) ? globalThis.String(object.depositor) : "",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -423,7 +423,9 @@ export const QueryProposalsResponse = {
 
   fromJSON(object: any): QueryProposalsResponse {
     return {
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      proposals: globalThis.Array.isArray(object?.proposals)
+        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
+        : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -501,8 +503,8 @@ export const QueryVoteRequest = {
 
   fromJSON(object: any): QueryVoteRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      voter: isSet(object.voter) ? String(object.voter) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      voter: isSet(object.voter) ? globalThis.String(object.voter) : "",
     };
   },
 
@@ -636,7 +638,7 @@ export const QueryVotesRequest = {
 
   fromJSON(object: any): QueryVotesRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -714,7 +716,7 @@ export const QueryVotesResponse = {
 
   fromJSON(object: any): QueryVotesResponse {
     return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      votes: globalThis.Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -781,7 +783,7 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(object: any): QueryParamsRequest {
-    return { params_type: isSet(object.params_type) ? String(object.params_type) : "" };
+    return { params_type: isSet(object.params_type) ? globalThis.String(object.params_type) : "" };
   },
 
   toJSON(message: QueryParamsRequest): unknown {
@@ -948,8 +950,8 @@ export const QueryDepositRequest = {
 
   fromJSON(object: any): QueryDepositRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
-      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      depositor: isSet(object.depositor) ? globalThis.String(object.depositor) : "",
     };
   },
 
@@ -1085,7 +1087,7 @@ export const QueryDepositsRequest = {
 
   fromJSON(object: any): QueryDepositsRequest {
     return {
-      proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0",
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1163,7 +1165,7 @@ export const QueryDepositsResponse = {
 
   fromJSON(object: any): QueryDepositsResponse {
     return {
-      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
+      deposits: globalThis.Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -1230,7 +1232,7 @@ export const QueryTallyResultRequest = {
   },
 
   fromJSON(object: any): QueryTallyResultRequest {
-    return { proposal_id: isSet(object.proposal_id) ? String(object.proposal_id) : "0" };
+    return { proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0" };
   },
 
   toJSON(message: QueryTallyResultRequest): unknown {
@@ -1640,29 +1642,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -1679,7 +1663,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

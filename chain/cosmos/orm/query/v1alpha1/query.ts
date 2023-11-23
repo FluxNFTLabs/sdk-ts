@@ -189,9 +189,9 @@ export const GetRequest = {
 
   fromJSON(object: any): GetRequest {
     return {
-      message_name: isSet(object.message_name) ? String(object.message_name) : "",
-      index: isSet(object.index) ? String(object.index) : "",
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => IndexValue.fromJSON(e)) : [],
+      message_name: isSet(object.message_name) ? globalThis.String(object.message_name) : "",
+      index: isSet(object.index) ? globalThis.String(object.index) : "",
+      values: globalThis.Array.isArray(object?.values) ? object.values.map((e: any) => IndexValue.fromJSON(e)) : [],
     };
   },
 
@@ -361,8 +361,8 @@ export const ListRequest = {
 
   fromJSON(object: any): ListRequest {
     return {
-      message_name: isSet(object.message_name) ? String(object.message_name) : "",
-      index: isSet(object.index) ? String(object.index) : "",
+      message_name: isSet(object.message_name) ? globalThis.String(object.message_name) : "",
+      index: isSet(object.index) ? globalThis.String(object.index) : "",
       prefix: isSet(object.prefix) ? ListRequest_Prefix.fromJSON(object.prefix) : undefined,
       range: isSet(object.range) ? ListRequest_Range.fromJSON(object.range) : undefined,
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
@@ -447,7 +447,9 @@ export const ListRequest_Prefix = {
   },
 
   fromJSON(object: any): ListRequest_Prefix {
-    return { values: Array.isArray(object?.values) ? object.values.map((e: any) => IndexValue.fromJSON(e)) : [] };
+    return {
+      values: globalThis.Array.isArray(object?.values) ? object.values.map((e: any) => IndexValue.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: ListRequest_Prefix): unknown {
@@ -517,8 +519,8 @@ export const ListRequest_Range = {
 
   fromJSON(object: any): ListRequest_Range {
     return {
-      start: Array.isArray(object?.start) ? object.start.map((e: any) => IndexValue.fromJSON(e)) : [],
-      end: Array.isArray(object?.end) ? object.end.map((e: any) => IndexValue.fromJSON(e)) : [],
+      start: globalThis.Array.isArray(object?.start) ? object.start.map((e: any) => IndexValue.fromJSON(e)) : [],
+      end: globalThis.Array.isArray(object?.end) ? object.end.map((e: any) => IndexValue.fromJSON(e)) : [],
     };
   },
 
@@ -593,7 +595,7 @@ export const ListResponse = {
 
   fromJSON(object: any): ListResponse {
     return {
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => Any.fromJSON(e)) : [],
+      results: globalThis.Array.isArray(object?.results) ? object.results.map((e: any) => Any.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
@@ -740,12 +742,12 @@ export const IndexValue = {
 
   fromJSON(object: any): IndexValue {
     return {
-      uint: isSet(object.uint) ? String(object.uint) : undefined,
-      int: isSet(object.int) ? String(object.int) : undefined,
-      str: isSet(object.str) ? String(object.str) : undefined,
+      uint: isSet(object.uint) ? globalThis.String(object.uint) : undefined,
+      int: isSet(object.int) ? globalThis.String(object.int) : undefined,
+      str: isSet(object.str) ? globalThis.String(object.str) : undefined,
       bytes: isSet(object.bytes) ? bytesFromBase64(object.bytes) : undefined,
-      enum: isSet(object.enum) ? String(object.enum) : undefined,
-      bool: isSet(object.bool) ? Boolean(object.bool) : undefined,
+      enum: isSet(object.enum) ? globalThis.String(object.enum) : undefined,
+      bool: isSet(object.bool) ? globalThis.Boolean(object.bool) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
     };
@@ -941,30 +943,11 @@ export class GrpcWebImpl {
   }
 }
 
-declare const self: any | undefined;
-declare const window: any | undefined;
-declare const global: any | undefined;
-const tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
-    return globalThis;
-  }
-  if (typeof self !== "undefined") {
-    return self;
-  }
-  if (typeof window !== "undefined") {
-    return window;
-  }
-  if (typeof global !== "undefined") {
-    return global;
-  }
-  throw "Unable to locate global object";
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -974,21 +957,22 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(""));
   }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -999,16 +983,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
@@ -1027,7 +1011,7 @@ function isSet(value: any): boolean {
   return value !== null && value !== undefined;
 }
 
-export class GrpcWebError extends tsProtoGlobalThis.Error {
+export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
     super(message);
   }

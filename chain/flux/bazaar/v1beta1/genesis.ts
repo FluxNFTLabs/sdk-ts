@@ -6,10 +6,11 @@ import { ClassCommission, Product } from "./product";
 export interface GenesisState {
   products: Product[];
   commissions: ClassCommission[];
+  verifiers: string[];
 }
 
 function createBaseGenesisState(): GenesisState {
-  return { products: [], commissions: [] };
+  return { products: [], commissions: [], verifiers: [] };
 }
 
 export const GenesisState = {
@@ -21,6 +22,9 @@ export const GenesisState = {
     }
     for (const v of message.commissions) {
       ClassCommission.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.verifiers) {
+      writer.uint32(26).string(v!);
     }
     return writer;
   },
@@ -46,6 +50,13 @@ export const GenesisState = {
 
           message.commissions.push(ClassCommission.decode(reader, reader.uint32()));
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.verifiers.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -57,9 +68,12 @@ export const GenesisState = {
 
   fromJSON(object: any): GenesisState {
     return {
-      products: Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
-      commissions: Array.isArray(object?.commissions)
+      products: globalThis.Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
+      commissions: globalThis.Array.isArray(object?.commissions)
         ? object.commissions.map((e: any) => ClassCommission.fromJSON(e))
+        : [],
+      verifiers: globalThis.Array.isArray(object?.verifiers)
+        ? object.verifiers.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -72,6 +86,9 @@ export const GenesisState = {
     if (message.commissions?.length) {
       obj.commissions = message.commissions.map((e) => ClassCommission.toJSON(e));
     }
+    if (message.verifiers?.length) {
+      obj.verifiers = message.verifiers;
+    }
     return obj;
   },
 
@@ -82,6 +99,7 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.products = object.products?.map((e) => Product.fromPartial(e)) || [];
     message.commissions = object.commissions?.map((e) => ClassCommission.fromPartial(e)) || [];
+    message.verifiers = object.verifiers?.map((e) => e) || [];
     return message;
   },
 };
@@ -89,6 +107,7 @@ export const GenesisState = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

@@ -122,7 +122,9 @@ export const BasicAllowance = {
 
   fromJSON(object: any): BasicAllowance {
     return {
-      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromJSON(e)) : [],
+      spend_limit: globalThis.Array.isArray(object?.spend_limit)
+        ? object.spend_limit.map((e: any) => Coin.fromJSON(e))
+        : [],
       expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined,
     };
   },
@@ -230,10 +232,10 @@ export const PeriodicAllowance = {
     return {
       basic: isSet(object.basic) ? BasicAllowance.fromJSON(object.basic) : undefined,
       period: isSet(object.period) ? Duration.fromJSON(object.period) : undefined,
-      period_spend_limit: Array.isArray(object?.period_spend_limit)
+      period_spend_limit: globalThis.Array.isArray(object?.period_spend_limit)
         ? object.period_spend_limit.map((e: any) => Coin.fromJSON(e))
         : [],
-      period_can_spend: Array.isArray(object?.period_can_spend)
+      period_can_spend: globalThis.Array.isArray(object?.period_can_spend)
         ? object.period_can_spend.map((e: any) => Coin.fromJSON(e))
         : [],
       period_reset: isSet(object.period_reset) ? fromJsonTimestamp(object.period_reset) : undefined,
@@ -328,8 +330,8 @@ export const AllowedMsgAllowance = {
   fromJSON(object: any): AllowedMsgAllowance {
     return {
       allowance: isSet(object.allowance) ? Any.fromJSON(object.allowance) : undefined,
-      allowed_messages: Array.isArray(object?.allowed_messages)
-        ? object.allowed_messages.map((e: any) => String(e))
+      allowed_messages: globalThis.Array.isArray(object?.allowed_messages)
+        ? object.allowed_messages.map((e: any) => globalThis.String(e))
         : [],
     };
   },
@@ -417,8 +419,8 @@ export const Grant = {
 
   fromJSON(object: any): Grant {
     return {
-      granter: isSet(object.granter) ? String(object.granter) : "",
-      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      granter: isSet(object.granter) ? globalThis.String(object.granter) : "",
+      grantee: isSet(object.grantee) ? globalThis.String(object.grantee) : "",
       allowance: isSet(object.allowance) ? Any.fromJSON(object.allowance) : undefined,
     };
   },
@@ -454,7 +456,8 @@ export const Grant = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -465,16 +468,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

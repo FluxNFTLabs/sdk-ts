@@ -112,12 +112,14 @@ export const Metadata = {
 
   fromJSON(object: any): Metadata {
     return {
-      version: isSet(object.version) ? String(object.version) : "",
-      controller_connection_id: isSet(object.controller_connection_id) ? String(object.controller_connection_id) : "",
-      host_connection_id: isSet(object.host_connection_id) ? String(object.host_connection_id) : "",
-      address: isSet(object.address) ? String(object.address) : "",
-      encoding: isSet(object.encoding) ? String(object.encoding) : "",
-      tx_type: isSet(object.tx_type) ? String(object.tx_type) : "",
+      version: isSet(object.version) ? globalThis.String(object.version) : "",
+      controller_connection_id: isSet(object.controller_connection_id)
+        ? globalThis.String(object.controller_connection_id)
+        : "",
+      host_connection_id: isSet(object.host_connection_id) ? globalThis.String(object.host_connection_id) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      encoding: isSet(object.encoding) ? globalThis.String(object.encoding) : "",
+      tx_type: isSet(object.tx_type) ? globalThis.String(object.tx_type) : "",
     };
   },
 
@@ -162,7 +164,8 @@ export const Metadata = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

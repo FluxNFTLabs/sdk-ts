@@ -64,8 +64,8 @@ export const Config = {
 
   fromJSON(object: any): Config {
     return {
-      skip_ante_handler: isSet(object.skip_ante_handler) ? Boolean(object.skip_ante_handler) : false,
-      skip_post_handler: isSet(object.skip_post_handler) ? Boolean(object.skip_post_handler) : false,
+      skip_ante_handler: isSet(object.skip_ante_handler) ? globalThis.Boolean(object.skip_ante_handler) : false,
+      skip_post_handler: isSet(object.skip_post_handler) ? globalThis.Boolean(object.skip_post_handler) : false,
     };
   },
 
@@ -94,7 +94,8 @@ export const Config = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

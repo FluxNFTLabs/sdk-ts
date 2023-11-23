@@ -68,8 +68,12 @@ export const SendAuthorization = {
 
   fromJSON(object: any): SendAuthorization {
     return {
-      spend_limit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromJSON(e)) : [],
-      allow_list: Array.isArray(object?.allow_list) ? object.allow_list.map((e: any) => String(e)) : [],
+      spend_limit: globalThis.Array.isArray(object?.spend_limit)
+        ? object.spend_limit.map((e: any) => Coin.fromJSON(e))
+        : [],
+      allow_list: globalThis.Array.isArray(object?.allow_list)
+        ? object.allow_list.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -98,6 +102,7 @@ export const SendAuthorization = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;

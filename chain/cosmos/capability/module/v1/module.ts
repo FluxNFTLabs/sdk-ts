@@ -48,7 +48,7 @@ export const Module = {
   },
 
   fromJSON(object: any): Module {
-    return { seal_keeper: isSet(object.seal_keeper) ? Boolean(object.seal_keeper) : false };
+    return { seal_keeper: isSet(object.seal_keeper) ? globalThis.Boolean(object.seal_keeper) : false };
   },
 
   toJSON(message: Module): unknown {
@@ -72,7 +72,8 @@ export const Module = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

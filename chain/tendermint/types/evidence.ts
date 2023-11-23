@@ -199,8 +199,8 @@ export const DuplicateVoteEvidence = {
     return {
       vote_a: isSet(object.vote_a) ? Vote.fromJSON(object.vote_a) : undefined,
       vote_b: isSet(object.vote_b) ? Vote.fromJSON(object.vote_b) : undefined,
-      total_voting_power: isSet(object.total_voting_power) ? String(object.total_voting_power) : "0",
-      validator_power: isSet(object.validator_power) ? String(object.validator_power) : "0",
+      total_voting_power: isSet(object.total_voting_power) ? globalThis.String(object.total_voting_power) : "0",
+      validator_power: isSet(object.validator_power) ? globalThis.String(object.validator_power) : "0",
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
     };
   },
@@ -329,11 +329,11 @@ export const LightClientAttackEvidence = {
   fromJSON(object: any): LightClientAttackEvidence {
     return {
       conflicting_block: isSet(object.conflicting_block) ? LightBlock.fromJSON(object.conflicting_block) : undefined,
-      common_height: isSet(object.common_height) ? String(object.common_height) : "0",
-      byzantine_validators: Array.isArray(object?.byzantine_validators)
+      common_height: isSet(object.common_height) ? globalThis.String(object.common_height) : "0",
+      byzantine_validators: globalThis.Array.isArray(object?.byzantine_validators)
         ? object.byzantine_validators.map((e: any) => Validator.fromJSON(e))
         : [],
-      total_voting_power: isSet(object.total_voting_power) ? String(object.total_voting_power) : "0",
+      total_voting_power: isSet(object.total_voting_power) ? globalThis.String(object.total_voting_power) : "0",
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
     };
   },
@@ -412,7 +412,9 @@ export const EvidenceList = {
   },
 
   fromJSON(object: any): EvidenceList {
-    return { evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromJSON(e)) : [] };
+    return {
+      evidence: globalThis.Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromJSON(e)) : [],
+    };
   },
 
   toJSON(message: EvidenceList): unknown {
@@ -436,7 +438,8 @@ export const EvidenceList = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
@@ -447,16 +450,16 @@ function toTimestamp(date: Date): Timestamp {
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = (Number(t.seconds) || 0) * 1_000;
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
   millis += (t.nanos || 0) / 1_000_000;
-  return new Date(millis);
+  return new globalThis.Date(millis);
 }
 
 function fromJsonTimestamp(o: any): Date {
-  if (o instanceof Date) {
+  if (o instanceof globalThis.Date) {
     return o;
   } else if (typeof o === "string") {
-    return new Date(o);
+    return new globalThis.Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }

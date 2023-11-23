@@ -62,8 +62,10 @@ export const Module = {
 
   fromJSON(object: any): Module {
     return {
-      hooks_order: Array.isArray(object?.hooks_order) ? object.hooks_order.map((e: any) => String(e)) : [],
-      authority: isSet(object.authority) ? String(object.authority) : "",
+      hooks_order: globalThis.Array.isArray(object?.hooks_order)
+        ? object.hooks_order.map((e: any) => globalThis.String(e))
+        : [],
+      authority: isSet(object.authority) ? globalThis.String(object.authority) : "",
     };
   },
 
@@ -92,7 +94,8 @@ export const Module = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

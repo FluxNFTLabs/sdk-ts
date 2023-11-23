@@ -258,9 +258,9 @@ export const BlockParams = {
 
   fromJSON(object: any): BlockParams {
     return {
-      max_bytes: isSet(object.max_bytes) ? String(object.max_bytes) : "0",
-      max_gas: isSet(object.max_gas) ? String(object.max_gas) : "0",
-      time_iota_ms: isSet(object.time_iota_ms) ? String(object.time_iota_ms) : "0",
+      max_bytes: isSet(object.max_bytes) ? globalThis.String(object.max_bytes) : "0",
+      max_gas: isSet(object.max_gas) ? globalThis.String(object.max_gas) : "0",
+      time_iota_ms: isSet(object.time_iota_ms) ? globalThis.String(object.time_iota_ms) : "0",
     };
   },
 
@@ -349,9 +349,9 @@ export const EvidenceParams = {
 
   fromJSON(object: any): EvidenceParams {
     return {
-      max_age_num_blocks: isSet(object.max_age_num_blocks) ? String(object.max_age_num_blocks) : "0",
+      max_age_num_blocks: isSet(object.max_age_num_blocks) ? globalThis.String(object.max_age_num_blocks) : "0",
       max_age_duration: isSet(object.max_age_duration) ? Duration.fromJSON(object.max_age_duration) : undefined,
-      max_bytes: isSet(object.max_bytes) ? String(object.max_bytes) : "0",
+      max_bytes: isSet(object.max_bytes) ? globalThis.String(object.max_bytes) : "0",
     };
   },
 
@@ -422,7 +422,9 @@ export const ValidatorParams = {
 
   fromJSON(object: any): ValidatorParams {
     return {
-      pub_key_types: Array.isArray(object?.pub_key_types) ? object.pub_key_types.map((e: any) => String(e)) : [],
+      pub_key_types: globalThis.Array.isArray(object?.pub_key_types)
+        ? object.pub_key_types.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -482,7 +484,7 @@ export const VersionParams = {
   },
 
   fromJSON(object: any): VersionParams {
-    return { app_version: isSet(object.app_version) ? String(object.app_version) : "0" };
+    return { app_version: isSet(object.app_version) ? globalThis.String(object.app_version) : "0" };
   },
 
   toJSON(message: VersionParams): unknown {
@@ -552,8 +554,8 @@ export const HashedParams = {
 
   fromJSON(object: any): HashedParams {
     return {
-      block_max_bytes: isSet(object.block_max_bytes) ? String(object.block_max_bytes) : "0",
-      block_max_gas: isSet(object.block_max_gas) ? String(object.block_max_gas) : "0",
+      block_max_bytes: isSet(object.block_max_bytes) ? globalThis.String(object.block_max_bytes) : "0",
+      block_max_gas: isSet(object.block_max_gas) ? globalThis.String(object.block_max_gas) : "0",
     };
   },
 
@@ -582,7 +584,8 @@ export const HashedParams = {
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
 type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 

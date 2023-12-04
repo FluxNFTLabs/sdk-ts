@@ -33,7 +33,9 @@ export interface NFT {
   /** available shares to purchase within iso period */
   available_shares: string;
   /** iso price per share */
-  initial_price: string;
+  initial_price:
+    | Coin
+    | undefined;
   /** timestamp when iso period is over */
   ISO_timestamp: string;
   ISO_success_percent: string;
@@ -212,7 +214,7 @@ function createBaseNFT(): NFT {
     url: "",
     supply: "",
     available_shares: "",
-    initial_price: "",
+    initial_price: undefined,
     ISO_timestamp: "0",
     ISO_success_percent: "0",
     accepted_payment_denom: "",
@@ -245,8 +247,8 @@ export const NFT = {
     if (message.available_shares !== "") {
       writer.uint32(42).string(message.available_shares);
     }
-    if (message.initial_price !== "") {
-      writer.uint32(50).string(message.initial_price);
+    if (message.initial_price !== undefined) {
+      Coin.encode(message.initial_price, writer.uint32(50).fork()).ldelim();
     }
     if (message.ISO_timestamp !== "0") {
       writer.uint32(56).uint64(message.ISO_timestamp);
@@ -328,7 +330,7 @@ export const NFT = {
             break;
           }
 
-          message.initial_price = reader.string();
+          message.initial_price = Coin.decode(reader, reader.uint32());
           continue;
         case 7:
           if (tag !== 56) {
@@ -416,7 +418,7 @@ export const NFT = {
       url: isSet(object.url) ? globalThis.String(object.url) : "",
       supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
       available_shares: isSet(object.available_shares) ? globalThis.String(object.available_shares) : "",
-      initial_price: isSet(object.initial_price) ? globalThis.String(object.initial_price) : "",
+      initial_price: isSet(object.initial_price) ? Coin.fromJSON(object.initial_price) : undefined,
       ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
       ISO_success_percent: isSet(object.ISO_success_percent) ? globalThis.String(object.ISO_success_percent) : "0",
       accepted_payment_denom: isSet(object.accepted_payment_denom)
@@ -453,8 +455,8 @@ export const NFT = {
     if (message.available_shares !== "") {
       obj.available_shares = message.available_shares;
     }
-    if (message.initial_price !== "") {
-      obj.initial_price = message.initial_price;
+    if (message.initial_price !== undefined) {
+      obj.initial_price = Coin.toJSON(message.initial_price);
     }
     if (message.ISO_timestamp !== "0") {
       obj.ISO_timestamp = message.ISO_timestamp;
@@ -499,7 +501,9 @@ export const NFT = {
     message.url = object.url ?? "";
     message.supply = object.supply ?? "";
     message.available_shares = object.available_shares ?? "";
-    message.initial_price = object.initial_price ?? "";
+    message.initial_price = (object.initial_price !== undefined && object.initial_price !== null)
+      ? Coin.fromPartial(object.initial_price)
+      : undefined;
     message.ISO_timestamp = object.ISO_timestamp ?? "0";
     message.ISO_success_percent = object.ISO_success_percent ?? "0";
     message.accepted_payment_denom = object.accepted_payment_denom ?? "";

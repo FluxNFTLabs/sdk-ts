@@ -2,6 +2,7 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 export interface MsgRefereeSend {
   sender: string;
@@ -10,14 +11,14 @@ export interface MsgRefereeSend {
   game_id: string;
   from: string;
   to: string;
-  coin: string;
+  coin: Coin | undefined;
 }
 
 export interface MsgRefereeSendResponse {
 }
 
 function createBaseMsgRefereeSend(): MsgRefereeSend {
-  return { sender: "", class_id: "", id: "", game_id: "", from: "", to: "", coin: "" };
+  return { sender: "", class_id: "", id: "", game_id: "", from: "", to: "", coin: undefined };
 }
 
 export const MsgRefereeSend = {
@@ -42,8 +43,8 @@ export const MsgRefereeSend = {
     if (message.to !== "") {
       writer.uint32(50).string(message.to);
     }
-    if (message.coin !== "") {
-      writer.uint32(58).string(message.coin);
+    if (message.coin !== undefined) {
+      Coin.encode(message.coin, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -102,7 +103,7 @@ export const MsgRefereeSend = {
             break;
           }
 
-          message.coin = reader.string();
+          message.coin = Coin.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -121,7 +122,7 @@ export const MsgRefereeSend = {
       game_id: isSet(object.game_id) ? globalThis.String(object.game_id) : "",
       from: isSet(object.from) ? globalThis.String(object.from) : "",
       to: isSet(object.to) ? globalThis.String(object.to) : "",
-      coin: isSet(object.coin) ? globalThis.String(object.coin) : "",
+      coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined,
     };
   },
 
@@ -145,8 +146,8 @@ export const MsgRefereeSend = {
     if (message.to !== "") {
       obj.to = message.to;
     }
-    if (message.coin !== "") {
-      obj.coin = message.coin;
+    if (message.coin !== undefined) {
+      obj.coin = Coin.toJSON(message.coin);
     }
     return obj;
   },
@@ -162,7 +163,7 @@ export const MsgRefereeSend = {
     message.game_id = object.game_id ?? "";
     message.from = object.from ?? "";
     message.to = object.to ?? "";
-    message.coin = object.coin ?? "";
+    message.coin = (object.coin !== undefined && object.coin !== null) ? Coin.fromPartial(object.coin) : undefined;
     return message;
   },
 };

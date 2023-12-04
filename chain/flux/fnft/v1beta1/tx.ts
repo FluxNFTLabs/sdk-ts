@@ -3,6 +3,7 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 /** MsgCreate represents a message to create a nft from one account. */
 export interface MsgCreate {
@@ -13,7 +14,9 @@ export interface MsgCreate {
   /** shares defines the number of shares this nft holds */
   supply: string;
   /** initial_price defines initial price of a share */
-  initial_price: string;
+  initial_price:
+    | Coin
+    | undefined;
   /** iso_timestamp defines when iso period is over */
   ISO_timestamp: string;
   ISO_success_percent: string;
@@ -102,7 +105,9 @@ export interface MsgSponsor {
   /** id defines the unique identification of nft */
   id: string;
   /** coin defines the value of this sponsorship */
-  coin: string;
+  coin:
+    | Coin
+    | undefined;
   /** description defines nft sponsorship description */
   description: string;
 }
@@ -116,7 +121,7 @@ function createBaseMsgCreate(): MsgCreate {
     sender: "",
     class_id: "",
     supply: "",
-    initial_price: "",
+    initial_price: undefined,
     ISO_timestamp: "0",
     ISO_success_percent: "0",
     accepted_payment_denom: "",
@@ -137,8 +142,8 @@ export const MsgCreate = {
     if (message.supply !== "") {
       writer.uint32(26).string(message.supply);
     }
-    if (message.initial_price !== "") {
-      writer.uint32(34).string(message.initial_price);
+    if (message.initial_price !== undefined) {
+      Coin.encode(message.initial_price, writer.uint32(34).fork()).ldelim();
     }
     if (message.ISO_timestamp !== "0") {
       writer.uint32(40).uint64(message.ISO_timestamp);
@@ -188,7 +193,7 @@ export const MsgCreate = {
             break;
           }
 
-          message.initial_price = reader.string();
+          message.initial_price = Coin.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 40) {
@@ -232,7 +237,7 @@ export const MsgCreate = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
-      initial_price: isSet(object.initial_price) ? globalThis.String(object.initial_price) : "",
+      initial_price: isSet(object.initial_price) ? Coin.fromJSON(object.initial_price) : undefined,
       ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
       ISO_success_percent: isSet(object.ISO_success_percent) ? globalThis.String(object.ISO_success_percent) : "0",
       accepted_payment_denom: isSet(object.accepted_payment_denom)
@@ -253,8 +258,8 @@ export const MsgCreate = {
     if (message.supply !== "") {
       obj.supply = message.supply;
     }
-    if (message.initial_price !== "") {
-      obj.initial_price = message.initial_price;
+    if (message.initial_price !== undefined) {
+      obj.initial_price = Coin.toJSON(message.initial_price);
     }
     if (message.ISO_timestamp !== "0") {
       obj.ISO_timestamp = message.ISO_timestamp;
@@ -279,7 +284,9 @@ export const MsgCreate = {
     message.sender = object.sender ?? "";
     message.class_id = object.class_id ?? "";
     message.supply = object.supply ?? "";
-    message.initial_price = object.initial_price ?? "";
+    message.initial_price = (object.initial_price !== undefined && object.initial_price !== null)
+      ? Coin.fromPartial(object.initial_price)
+      : undefined;
     message.ISO_timestamp = object.ISO_timestamp ?? "0";
     message.ISO_success_percent = object.ISO_success_percent ?? "0";
     message.accepted_payment_denom = object.accepted_payment_denom ?? "";
@@ -953,7 +960,7 @@ export const MsgWithdrawSharesResponse = {
 };
 
 function createBaseMsgSponsor(): MsgSponsor {
-  return { sender: "", class_id: "", id: "", coin: "", description: "" };
+  return { sender: "", class_id: "", id: "", coin: undefined, description: "" };
 }
 
 export const MsgSponsor = {
@@ -969,8 +976,8 @@ export const MsgSponsor = {
     if (message.id !== "") {
       writer.uint32(26).string(message.id);
     }
-    if (message.coin !== "") {
-      writer.uint32(34).string(message.coin);
+    if (message.coin !== undefined) {
+      Coin.encode(message.coin, writer.uint32(34).fork()).ldelim();
     }
     if (message.description !== "") {
       writer.uint32(42).string(message.description);
@@ -1011,7 +1018,7 @@ export const MsgSponsor = {
             break;
           }
 
-          message.coin = reader.string();
+          message.coin = Coin.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
@@ -1034,7 +1041,7 @@ export const MsgSponsor = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       id: isSet(object.id) ? globalThis.String(object.id) : "",
-      coin: isSet(object.coin) ? globalThis.String(object.coin) : "",
+      coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
@@ -1050,8 +1057,8 @@ export const MsgSponsor = {
     if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.coin !== "") {
-      obj.coin = message.coin;
+    if (message.coin !== undefined) {
+      obj.coin = Coin.toJSON(message.coin);
     }
     if (message.description !== "") {
       obj.description = message.description;
@@ -1067,7 +1074,7 @@ export const MsgSponsor = {
     message.sender = object.sender ?? "";
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
-    message.coin = object.coin ?? "";
+    message.coin = (object.coin !== undefined && object.coin !== null) ? Coin.fromPartial(object.coin) : undefined;
     message.description = object.description ?? "";
     return message;
   },

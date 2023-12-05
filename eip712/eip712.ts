@@ -116,4 +116,3 @@ export const extractEIP712Types = (tx: any): any => {
 
   return deepSortObject(rootTypes)
 }
-

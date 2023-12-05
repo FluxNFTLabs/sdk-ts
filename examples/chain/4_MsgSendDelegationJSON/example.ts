@@ -17,7 +17,7 @@ import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
 import * as codectypemap from '../../../chain/codec_type_map.json'
 
-import {deepSortObject, extractEIP712Types} from './eip712';
+import {deepSortObject, extractEIP712Types} from '../../../eip712/eip712';
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);

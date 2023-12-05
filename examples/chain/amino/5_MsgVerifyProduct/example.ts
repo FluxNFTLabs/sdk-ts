@@ -7,7 +7,7 @@ import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport'
 
 import * as anytypes from '../../../../chain/google/protobuf/any'
 import * as chaintypes from '../../../../chain/flux/types/v1beta1/tx_ext'
-import * as banktypes from '../../../../chain/cosmos/bank/v1beta1/tx'
+import * as bazaartypes from "../../../../chain/flux/bazaar/v1beta1/tx";
 import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
 import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
@@ -24,7 +24,6 @@ function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   return Buffer.concat([yParityByte, xCoord])
 }
 
-
 const main = async () => {
   // init clients
   const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
@@ -33,8 +32,8 @@ const main = async () => {
   const txClient = new txservice.ServiceClientImpl(cc)
   const authClient = new authservice.QueryClientImpl(cc)
 
-  // init accounts
-  const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')))
+  // init signer1
+  const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from("c25e5cccd433d2c97971eaa6cfe92ea05771dc05b984c62464ab580f16a905e1", 'hex')))
   const senderPrivKey: secp256k1.PrivKey = {key: wallet.getPrivateKey()}
   const senderPubkey: secp256k1.PubKey = {key: compressPublicKey(Buffer.from(wallet.getPublicKey()))}
   const senderPubkeyAny: anytypes.Any = {
@@ -50,18 +49,19 @@ const main = async () => {
   const senderAccSeq = senderInfo.info!.sequence!
 
   // init msg
-  const msg: banktypes.MsgSend = {
-    from_address: senderAddr,
-    to_address: receiverAddr,
-    amount: [{  amount: '77', denom: 'lux'}],
+  const msg: bazaartypes.MsgVerifyProduct = {
+    sender: senderAddr,
+    class_id: 'series',
+    id: '0',
+    product_id: '0',
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + banktypes.MsgSend.$type,
-    value: banktypes.MsgSend.encode(msg).finish(),
+    type_url: '/' + bazaartypes.MsgVerifyProduct.$type,
+    value: bazaartypes.MsgVerifyProduct.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + banktypes.MsgSend.$type],
-    value: banktypes.MsgSend.toJSON(msg)
+    type: codectypemap['/' + bazaartypes.MsgVerifyProduct.$type],
+    value: bazaartypes.MsgVerifyProduct.toJSON(msg)
   }
 
   // prep tx data

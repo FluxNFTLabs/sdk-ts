@@ -5,17 +5,17 @@ import { createAddress } from '@tendermint/sig';
 
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
-import * as anytypes from '../../../chain/google/protobuf/any'
-import * as chaintypes from '../../../chain/flux/types/v1beta1/tx_ext'
-import * as fnfttypes from '../../../chain/flux/fnft/v1beta1/tx'
-import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
-import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
-import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../chain/cosmos/crypto/secp256k1/keys'
-import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
-import * as codectypemap from '../../../chain/codec_type_map.json'
+import * as anytypes from '../../../../chain/google/protobuf/any'
+import * as chaintypes from '../../../../chain/flux/types/v1beta1/tx_ext'
+import * as fnfttypes from '../../../../chain/flux/fnft/v1beta1/tx'
+import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
+import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
+import * as secp256k1 from '../../../../chain/cosmos/crypto/secp256k1/keys'
+import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
+import * as codectypemap from '../../../../chain/codec_type_map.json'
 
-import {getEIP712SignBytes} from '../../../eip712/eip712';
+import {getEIP712SignBytes} from '../../../../eip712/eip712';
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);

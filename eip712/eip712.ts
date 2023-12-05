@@ -1,8 +1,49 @@
+import * as txtypes from "../chain/cosmos/tx/v1beta1/tx";
+
 interface Eip712Types {
   [key: string]: any
 }
 
-export const deepSortObject = (obj: any): any => {
+export const getEIP712SignBytes = (signDoc: txtypes.SignDoc, msgsJSON: any[], feePayerAddr: string): any => {
+  const txBody = txtypes.TxBody.decode(signDoc.body_bytes)
+  const authInfo = txtypes.AuthInfo.decode(signDoc.auth_info_bytes)
+
+  // set domain
+  const domain = {
+    name:              'Flux Web3',
+    version:           '1.0.0',
+    chainId:           '0x1',
+    verifyingContract: 'cosmos',
+    salt:              '0',
+  }
+
+  // set tx
+  let tx = {
+    account_number: signDoc.account_number,
+    chain_id: signDoc.chain_id,
+    fee: {
+      amount: authInfo.fee!.amount,
+      feePayer: feePayerAddr,
+      gas: authInfo.fee!.gas_limit,
+    },
+    memo: txBody.memo,
+    msgs: msgsJSON,
+    sequence: authInfo.signer_infos[0].sequence,
+    timeout_height: txBody.timeout_height,
+  }
+
+  const txTypes = extractEIP712Types(tx)
+  tx = deepSortObject(tx)
+
+  return {
+    types:       txTypes,
+    primaryType: 'Tx',
+    domain:      domain,
+    message:     tx,
+  }
+}
+
+function deepSortObject (obj: any): any {
   if (typeof obj !== 'object' || obj === null) {
     return obj; // Base case: return non-object values as-is
   }
@@ -57,7 +98,7 @@ function walkNestedJSON(rootTypes: Eip712Types, jsonObj: any, parentKey: string 
   }
 }
 
-export const extractEIP712Types = (tx: any): any => {
+function extractEIP712Types(tx: any): any {
   let rootTypes: Eip712Types = {
     'EIP712Domain': [
       {

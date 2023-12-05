@@ -17,60 +17,13 @@ import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
 import * as codectypemap from '../../../chain/codec_type_map.json'
 
-import {deepSortObject, extractEIP712Types} from '../../../eip712/eip712';
+import {getEIP712SignBytes} from '../../../eip712/eip712';
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);
   const yCoord = uncompressedPublicKey.slice(32,64);
   const yParityByte = yCoord[31] % 2 == 0 ? Buffer.from([2]) : Buffer.from([3])
   return Buffer.concat([yParityByte, xCoord])
-}
-
-function getEIP712SignBytes(signDoc: txtypes.SignDoc, feePayerAddr: string): any {
-  const txBody = txtypes.TxBody.decode(signDoc.body_bytes)
-  const authInfo = txtypes.AuthInfo.decode(signDoc.auth_info_bytes)
-
-  // set domain
-  const domain = {
-    name:              'Flux Web3',
-    version:           '1.0.0',
-    chainId:           '0x1',
-    verifyingContract: 'cosmos',
-    salt:              '0',
-  }
-
-  // set tx
-  const jsonMsgs = []
-  for (let msg of txBody.messages) {
-    const jsonMsg = {
-      type: codectypemap['/' + banktypes.MsgSend.$type],
-      value: banktypes.MsgSend.toJSON(banktypes.MsgSend.decode(msg.value))
-    }
-    jsonMsgs.push(jsonMsg)
-  }
-  let tx = {
-    account_number: signDoc.account_number,
-    chain_id: signDoc.chain_id,
-    fee: {
-      amount: authInfo.fee!.amount,
-      feePayer: feePayerAddr,
-      gas: authInfo.fee!.gas_limit,
-    },
-    memo: txBody.memo,
-    msgs: jsonMsgs,
-    sequence: authInfo.signer_infos[0].sequence,
-    timeout_height: txBody.timeout_height,
-  }
-
-  const txTypes = extractEIP712Types(tx)
-  tx = deepSortObject(tx)
-
-  return {
-    types:       txTypes,
-    primaryType: 'Tx',
-    domain:      domain,
-    message:     tx,
-  }
 }
 
 const main = async () => {
@@ -121,6 +74,10 @@ const main = async () => {
     type_url: '/' + banktypes.MsgSend.$type,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
+  const msgJSON = {
+    type: codectypemap['/' + banktypes.MsgSend.$type],
+    value: banktypes.MsgSend.toJSON(msg)
+  }
 
   // prep tx data
   const txBody: txtypes.TxBody = {
@@ -162,7 +119,7 @@ const main = async () => {
     account_number: senderAccNum,
   }
 
-  let eip712SignDoc = getEIP712SignBytes(signDoc, feePayerAddr)
+  let eip712SignDoc = getEIP712SignBytes(signDoc, [msgJSON], feePayerAddr)
   const msgHash = Buffer.from(getMessage(eip712SignDoc, true, {verifyDomain: false}))
 
   const encoder = new TextEncoder();

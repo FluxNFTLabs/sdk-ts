@@ -5,14 +5,14 @@ import { createAddress } from '@tendermint/sig';
 import * as bech32 from 'bech32'
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
-import * as anytypes from '../../../chain/google/protobuf/any'
-import * as banktypes from '../../../chain/cosmos/bank/v1beta1/tx'
-import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
-import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
-import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../chain/cosmos/crypto/secp256k1/keys'
-import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
-import * as web3gwtypes from '../../../chain/flux/indexer/web3gw/query'
+import * as anytypes from '../../../../chain/google/protobuf/any'
+import * as banktypes from '../../../../chain/cosmos/bank/v1beta1/tx'
+import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
+import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
+import * as secp256k1 from '../../../../chain/cosmos/crypto/secp256k1/keys'
+import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
+import * as web3gwtypes from '../../../../chain/flux/indexer/web3gw/query'
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);

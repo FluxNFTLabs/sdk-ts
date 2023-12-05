@@ -4,14 +4,13 @@ import { sha256 } from "ethereum-cryptography/sha256.js";
 import { createAddress } from '@tendermint/sig';
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
-import * as bazaartypes from '../../../chain/flux/bazaar/v1beta1/tx'
-import * as txtypes from '../../../chain/cosmos/tx/v1beta1/tx'
-import * as txservice from '../../../chain/cosmos/tx/v1beta1/service'
-import * as authservice from '../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../chain/cosmos/crypto/secp256k1/keys'
-import * as signingtypes from '../../../chain/cosmos/tx/signing/v1beta1/signing'
-import * as anytypes from '../../../chain/google/protobuf/any'
-import {Offering} from "../../../chain/flux/bazaar/v1beta1/product";
+import * as bazaartypes from '../../../../chain/flux/bazaar/v1beta1/tx'
+import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
+import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
+import * as secp256k1 from '../../../../chain/cosmos/crypto/secp256k1/keys'
+import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
+import * as anytypes from '../../../../chain/google/protobuf/any'
 
 function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
   const xCoord = uncompressedPublicKey.slice(0,32);

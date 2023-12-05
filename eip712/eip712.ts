@@ -4,6 +4,12 @@ interface Eip712Types {
   [key: string]: any
 }
 
+const isPrimitive : { [key: string]: boolean} = {
+  "string": true,
+  "number": true,
+  "boolean": true,
+};
+
 export const getEIP712SignBytes = (signDoc: txtypes.SignDoc, msgsJSON: any[], feePayerAddr: string): any => {
   const txBody = txtypes.TxBody.decode(signDoc.body_bytes)
   const authInfo = txtypes.AuthInfo.decode(signDoc.auth_info_bytes)
@@ -68,6 +74,15 @@ function walkNestedJSON(rootTypes: Eip712Types, jsonObj: any, parentKey: string 
     const value = jsonObj[key]
     // handle array field
     if (Array.isArray(value)) {
+      // exclude primitive types
+      if (isPrimitive[typeof value[0]]) {
+        rootTypes[parentKey].push({
+          name: key,
+          type: typeof value[0] + '[]',
+        })
+        continue
+      }
+
       const childKey = 'Type' + key.charAt(0).toUpperCase() + key.slice(1)
       rootTypes[childKey] = []
       rootTypes[parentKey].push({

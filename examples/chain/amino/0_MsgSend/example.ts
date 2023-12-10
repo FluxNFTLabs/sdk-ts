@@ -2,6 +2,7 @@ import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712';
 import { createAddress } from '@tendermint/sig';
+import { bech32 } from 'bech32'
 
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
@@ -11,19 +12,12 @@ import * as banktypes from '../../../../chain/cosmos/bank/v1beta1/tx'
 import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
 import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
 import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
-import * as secp256k1 from '../../../../chain/cosmos/crypto/secp256k1/keys'
+import * as ethsecp256k1 from '../../../../chain/cosmos/crypto/ethsecp256k1/keys'
 import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as codectypemap from '../../../../chain/codec_type_map.json'
+import * as ethcrypto from 'eth-crypto';
 
 import {getEIP712SignBytes} from '../../../../eip712/eip712';
-
-function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
-  const xCoord = uncompressedPublicKey.slice(0,32);
-  const yCoord = uncompressedPublicKey.slice(32,64);
-  const yParityByte = yCoord[31] % 2 == 0 ? Buffer.from([2]) : Buffer.from([3])
-  return Buffer.concat([yParityByte, xCoord])
-}
-
 
 const main = async () => {
   // init clients
@@ -35,13 +29,15 @@ const main = async () => {
 
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')))
-  const senderPrivKey: secp256k1.PrivKey = {key: wallet.getPrivateKey()}
-  const senderPubkey: secp256k1.PubKey = {key: compressPublicKey(Buffer.from(wallet.getPublicKey()))}
+  const senderPrivKey: ethsecp256k1.PrivKey = {key: wallet.getPrivateKey()}
+  const xPubkey = ethcrypto.publicKey.compress(Buffer.from(wallet.getPublicKey()).toString('hex'))
+
+  const senderPubkey: ethsecp256k1.PubKey = {key: Buffer.from(xPubkey, 'hex')}
   const senderPubkeyAny: anytypes.Any = {
-    type_url: '/' + secp256k1.PubKey.$type,
-    value: secp256k1.PubKey.encode(senderPubkey).finish()
+    type_url: '/' + ethsecp256k1.PubKey.$type,
+    value: ethsecp256k1.PubKey.encode(senderPubkey).finish()
   }
-  const senderAddr = createAddress(senderPubkey.key, 'lux')
+  const senderAddr = bech32.encode('lux', bech32.toWords(wallet.getAddress()))
   const receiverAddr = 'lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx'
 
   // fetch account num, seq

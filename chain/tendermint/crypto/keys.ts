@@ -1,7 +1,7 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
 
-/** PublicKey defines the keys available for use with Tendermint Validators */
+/** PublicKey defines the keys available for use with Validators */
 export interface PublicKey {
   ed25519?: Uint8Array | undefined;
   secp256k1?: Uint8Array | undefined;

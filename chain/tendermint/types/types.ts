@@ -4,53 +4,7 @@ import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { Proof } from "../crypto/proof";
 import { Consensus } from "../version/types";
-import { ValidatorSet } from "./validator";
-
-/** BlockIdFlag indicates which BlcokID the signature is for */
-export enum BlockIDFlag {
-  BLOCK_ID_FLAG_UNKNOWN = 0,
-  BLOCK_ID_FLAG_ABSENT = 1,
-  BLOCK_ID_FLAG_COMMIT = 2,
-  BLOCK_ID_FLAG_NIL = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function blockIDFlagFromJSON(object: any): BlockIDFlag {
-  switch (object) {
-    case 0:
-    case "BLOCK_ID_FLAG_UNKNOWN":
-      return BlockIDFlag.BLOCK_ID_FLAG_UNKNOWN;
-    case 1:
-    case "BLOCK_ID_FLAG_ABSENT":
-      return BlockIDFlag.BLOCK_ID_FLAG_ABSENT;
-    case 2:
-    case "BLOCK_ID_FLAG_COMMIT":
-      return BlockIDFlag.BLOCK_ID_FLAG_COMMIT;
-    case 3:
-    case "BLOCK_ID_FLAG_NIL":
-      return BlockIDFlag.BLOCK_ID_FLAG_NIL;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return BlockIDFlag.UNRECOGNIZED;
-  }
-}
-
-export function blockIDFlagToJSON(object: BlockIDFlag): string {
-  switch (object) {
-    case BlockIDFlag.BLOCK_ID_FLAG_UNKNOWN:
-      return "BLOCK_ID_FLAG_UNKNOWN";
-    case BlockIDFlag.BLOCK_ID_FLAG_ABSENT:
-      return "BLOCK_ID_FLAG_ABSENT";
-    case BlockIDFlag.BLOCK_ID_FLAG_COMMIT:
-      return "BLOCK_ID_FLAG_COMMIT";
-    case BlockIDFlag.BLOCK_ID_FLAG_NIL:
-      return "BLOCK_ID_FLAG_NIL";
-    case BlockIDFlag.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
+import { BlockIDFlag, blockIDFlagFromJSON, blockIDFlagToJSON, ValidatorSet } from "./validator";
 
 /** SignedMsgType is a type of signed message in the consensus. */
 export enum SignedMsgType {
@@ -118,7 +72,7 @@ export interface BlockID {
   part_set_header: PartSetHeader | undefined;
 }
 
-/** Header defines the structure of a Tendermint block header. */
+/** Header defines the structure of a block header. */
 export interface Header {
   /** basic block info */
   version: Consensus | undefined;
@@ -162,7 +116,7 @@ export interface Data {
 }
 
 /**
- * Vote represents a prevote, precommit, or commit vote from validators for
+ * Vote represents a prevote or precommit vote from validators for
  * consensus.
  */
 export interface Vote {
@@ -174,7 +128,22 @@ export interface Vote {
   timestamp: Date | undefined;
   validator_address: Uint8Array;
   validator_index: number;
+  /**
+   * Vote signature by the validator if they participated in consensus for the
+   * associated block.
+   */
   signature: Uint8Array;
+  /**
+   * Vote extension provided by the application. Only valid for precommit
+   * messages.
+   */
+  extension: Uint8Array;
+  /**
+   * Vote extension signature by the validator if they participated in
+   * consensus for the associated block.
+   * Only valid for precommit messages.
+   */
+  extension_signature: Uint8Array;
 }
 
 /** Commit contains the evidence that a block was committed by a set of validators. */
@@ -191,6 +160,29 @@ export interface CommitSig {
   validator_address: Uint8Array;
   timestamp: Date | undefined;
   signature: Uint8Array;
+}
+
+export interface ExtendedCommit {
+  height: string;
+  round: number;
+  block_id: BlockID | undefined;
+  extended_signatures: ExtendedCommitSig[];
+}
+
+/**
+ * ExtendedCommitSig retains all the same fields as CommitSig but adds vote
+ * extension-related fields. We use two signatures to ensure backwards compatibility.
+ * That is the digest of the original signature is still the same in prior versions
+ */
+export interface ExtendedCommitSig {
+  block_id_flag: BlockIDFlag;
+  validator_address: Uint8Array;
+  timestamp: Date | undefined;
+  signature: Uint8Array;
+  /** Vote extension data */
+  extension: Uint8Array;
+  /** Vote extension signature */
+  extension_signature: Uint8Array;
 }
 
 export interface Proposal {
@@ -820,6 +812,8 @@ function createBaseVote(): Vote {
     validator_address: new Uint8Array(0),
     validator_index: 0,
     signature: new Uint8Array(0),
+    extension: new Uint8Array(0),
+    extension_signature: new Uint8Array(0),
   };
 }
 
@@ -850,6 +844,12 @@ export const Vote = {
     }
     if (message.signature.length !== 0) {
       writer.uint32(66).bytes(message.signature);
+    }
+    if (message.extension.length !== 0) {
+      writer.uint32(74).bytes(message.extension);
+    }
+    if (message.extension_signature.length !== 0) {
+      writer.uint32(82).bytes(message.extension_signature);
     }
     return writer;
   },
@@ -917,6 +917,20 @@ export const Vote = {
 
           message.signature = reader.bytes();
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.extension = reader.bytes();
+          continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.extension_signature = reader.bytes();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -938,6 +952,10 @@ export const Vote = {
         : new Uint8Array(0),
       validator_index: isSet(object.validator_index) ? globalThis.Number(object.validator_index) : 0,
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
+      extension: isSet(object.extension) ? bytesFromBase64(object.extension) : new Uint8Array(0),
+      extension_signature: isSet(object.extension_signature)
+        ? bytesFromBase64(object.extension_signature)
+        : new Uint8Array(0),
     };
   },
 
@@ -967,6 +985,12 @@ export const Vote = {
     if (message.signature.length !== 0) {
       obj.signature = base64FromBytes(message.signature);
     }
+    if (message.extension.length !== 0) {
+      obj.extension = base64FromBytes(message.extension);
+    }
+    if (message.extension_signature.length !== 0) {
+      obj.extension_signature = base64FromBytes(message.extension_signature);
+    }
     return obj;
   },
 
@@ -985,6 +1009,8 @@ export const Vote = {
     message.validator_address = object.validator_address ?? new Uint8Array(0);
     message.validator_index = object.validator_index ?? 0;
     message.signature = object.signature ?? new Uint8Array(0);
+    message.extension = object.extension ?? new Uint8Array(0);
+    message.extension_signature = object.extension_signature ?? new Uint8Array(0);
     return message;
   },
 };
@@ -1203,6 +1229,263 @@ export const CommitSig = {
     message.validator_address = object.validator_address ?? new Uint8Array(0);
     message.timestamp = object.timestamp ?? undefined;
     message.signature = object.signature ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseExtendedCommit(): ExtendedCommit {
+  return { height: "0", round: 0, block_id: undefined, extended_signatures: [] };
+}
+
+export const ExtendedCommit = {
+  $type: "tendermint.types.ExtendedCommit" as const,
+
+  encode(message: ExtendedCommit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.height !== "0") {
+      writer.uint32(8).int64(message.height);
+    }
+    if (message.round !== 0) {
+      writer.uint32(16).int32(message.round);
+    }
+    if (message.block_id !== undefined) {
+      BlockID.encode(message.block_id, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.extended_signatures) {
+      ExtendedCommitSig.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExtendedCommit {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExtendedCommit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.height = longToString(reader.int64() as Long);
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.round = reader.int32();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.block_id = BlockID.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.extended_signatures.push(ExtendedCommitSig.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ExtendedCommit {
+    return {
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      round: isSet(object.round) ? globalThis.Number(object.round) : 0,
+      block_id: isSet(object.block_id) ? BlockID.fromJSON(object.block_id) : undefined,
+      extended_signatures: globalThis.Array.isArray(object?.extended_signatures)
+        ? object.extended_signatures.map((e: any) => ExtendedCommitSig.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ExtendedCommit): unknown {
+    const obj: any = {};
+    if (message.height !== "0") {
+      obj.height = message.height;
+    }
+    if (message.round !== 0) {
+      obj.round = Math.round(message.round);
+    }
+    if (message.block_id !== undefined) {
+      obj.block_id = BlockID.toJSON(message.block_id);
+    }
+    if (message.extended_signatures?.length) {
+      obj.extended_signatures = message.extended_signatures.map((e) => ExtendedCommitSig.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<ExtendedCommit>): ExtendedCommit {
+    return ExtendedCommit.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<ExtendedCommit>): ExtendedCommit {
+    const message = createBaseExtendedCommit();
+    message.height = object.height ?? "0";
+    message.round = object.round ?? 0;
+    message.block_id = (object.block_id !== undefined && object.block_id !== null)
+      ? BlockID.fromPartial(object.block_id)
+      : undefined;
+    message.extended_signatures = object.extended_signatures?.map((e) => ExtendedCommitSig.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseExtendedCommitSig(): ExtendedCommitSig {
+  return {
+    block_id_flag: 0,
+    validator_address: new Uint8Array(0),
+    timestamp: undefined,
+    signature: new Uint8Array(0),
+    extension: new Uint8Array(0),
+    extension_signature: new Uint8Array(0),
+  };
+}
+
+export const ExtendedCommitSig = {
+  $type: "tendermint.types.ExtendedCommitSig" as const,
+
+  encode(message: ExtendedCommitSig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.block_id_flag !== 0) {
+      writer.uint32(8).int32(message.block_id_flag);
+    }
+    if (message.validator_address.length !== 0) {
+      writer.uint32(18).bytes(message.validator_address);
+    }
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(26).fork()).ldelim();
+    }
+    if (message.signature.length !== 0) {
+      writer.uint32(34).bytes(message.signature);
+    }
+    if (message.extension.length !== 0) {
+      writer.uint32(42).bytes(message.extension);
+    }
+    if (message.extension_signature.length !== 0) {
+      writer.uint32(50).bytes(message.extension_signature);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ExtendedCommitSig {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExtendedCommitSig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.block_id_flag = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.validator_address = reader.bytes();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.signature = reader.bytes();
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.extension = reader.bytes();
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.extension_signature = reader.bytes();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ExtendedCommitSig {
+    return {
+      block_id_flag: isSet(object.block_id_flag) ? blockIDFlagFromJSON(object.block_id_flag) : 0,
+      validator_address: isSet(object.validator_address)
+        ? bytesFromBase64(object.validator_address)
+        : new Uint8Array(0),
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
+      extension: isSet(object.extension) ? bytesFromBase64(object.extension) : new Uint8Array(0),
+      extension_signature: isSet(object.extension_signature)
+        ? bytesFromBase64(object.extension_signature)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: ExtendedCommitSig): unknown {
+    const obj: any = {};
+    if (message.block_id_flag !== 0) {
+      obj.block_id_flag = blockIDFlagToJSON(message.block_id_flag);
+    }
+    if (message.validator_address.length !== 0) {
+      obj.validator_address = base64FromBytes(message.validator_address);
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.signature.length !== 0) {
+      obj.signature = base64FromBytes(message.signature);
+    }
+    if (message.extension.length !== 0) {
+      obj.extension = base64FromBytes(message.extension);
+    }
+    if (message.extension_signature.length !== 0) {
+      obj.extension_signature = base64FromBytes(message.extension_signature);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<ExtendedCommitSig>): ExtendedCommitSig {
+    return ExtendedCommitSig.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<ExtendedCommitSig>): ExtendedCommitSig {
+    const message = createBaseExtendedCommitSig();
+    message.block_id_flag = object.block_id_flag ?? 0;
+    message.validator_address = object.validator_address ?? new Uint8Array(0);
+    message.timestamp = object.timestamp ?? undefined;
+    message.signature = object.signature ?? new Uint8Array(0);
+    message.extension = object.extension ?? new Uint8Array(0);
+    message.extension_signature = object.extension_signature ?? new Uint8Array(0);
     return message;
   },
 };

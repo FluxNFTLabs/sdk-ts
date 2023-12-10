@@ -34,6 +34,24 @@ export interface Module {
    * to be used in keeper construction.
    */
   override_store_keys: StoreKeyConfig[];
+  /**
+   * order_migrations defines the order in which module migrations are performed.
+   * If this is left empty, it uses the default migration order.
+   * https://pkg.go.dev/github.com/cosmos/cosmos-sdk@v0.47.0-alpha2/types/module#DefaultMigrationsOrder
+   */
+  order_migrations: string[];
+  /**
+   * precommiters specifies the module names of the precommiters
+   * to call in the order in which they should be called. If this is left empty
+   * no precommit function will be registered.
+   */
+  precommiters: string[];
+  /**
+   * prepare_check_staters specifies the module names of the prepare_check_staters
+   * to call in the order in which they should be called. If this is left empty
+   * no preparecheckstate function will be registered.
+   */
+  prepare_check_staters: string[];
 }
 
 /**
@@ -55,6 +73,9 @@ function createBaseModule(): Module {
     init_genesis: [],
     export_genesis: [],
     override_store_keys: [],
+    order_migrations: [],
+    precommiters: [],
+    prepare_check_staters: [],
   };
 }
 
@@ -79,6 +100,15 @@ export const Module = {
     }
     for (const v of message.override_store_keys) {
       StoreKeyConfig.encode(v!, writer.uint32(50).fork()).ldelim();
+    }
+    for (const v of message.order_migrations) {
+      writer.uint32(58).string(v!);
+    }
+    for (const v of message.precommiters) {
+      writer.uint32(66).string(v!);
+    }
+    for (const v of message.prepare_check_staters) {
+      writer.uint32(74).string(v!);
     }
     return writer;
   },
@@ -132,6 +162,27 @@ export const Module = {
 
           message.override_store_keys.push(StoreKeyConfig.decode(reader, reader.uint32()));
           continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.order_migrations.push(reader.string());
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.precommiters.push(reader.string());
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.prepare_check_staters.push(reader.string());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -159,6 +210,15 @@ export const Module = {
       override_store_keys: globalThis.Array.isArray(object?.override_store_keys)
         ? object.override_store_keys.map((e: any) => StoreKeyConfig.fromJSON(e))
         : [],
+      order_migrations: globalThis.Array.isArray(object?.order_migrations)
+        ? object.order_migrations.map((e: any) => globalThis.String(e))
+        : [],
+      precommiters: globalThis.Array.isArray(object?.precommiters)
+        ? object.precommiters.map((e: any) => globalThis.String(e))
+        : [],
+      prepare_check_staters: globalThis.Array.isArray(object?.prepare_check_staters)
+        ? object.prepare_check_staters.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -182,6 +242,15 @@ export const Module = {
     if (message.override_store_keys?.length) {
       obj.override_store_keys = message.override_store_keys.map((e) => StoreKeyConfig.toJSON(e));
     }
+    if (message.order_migrations?.length) {
+      obj.order_migrations = message.order_migrations;
+    }
+    if (message.precommiters?.length) {
+      obj.precommiters = message.precommiters;
+    }
+    if (message.prepare_check_staters?.length) {
+      obj.prepare_check_staters = message.prepare_check_staters;
+    }
     return obj;
   },
 
@@ -196,6 +265,9 @@ export const Module = {
     message.init_genesis = object.init_genesis?.map((e) => e) || [];
     message.export_genesis = object.export_genesis?.map((e) => e) || [];
     message.override_store_keys = object.override_store_keys?.map((e) => StoreKeyConfig.fromPartial(e)) || [];
+    message.order_migrations = object.order_migrations?.map((e) => e) || [];
+    message.precommiters = object.precommiters?.map((e) => e) || [];
+    message.prepare_check_staters = object.prepare_check_staters?.map((e) => e) || [];
     return message;
   },
 };

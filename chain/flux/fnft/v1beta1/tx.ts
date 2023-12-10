@@ -9,7 +9,10 @@ import { Coin } from "../../../cosmos/base/v1beta1/coin";
 export interface MsgCreate {
   /** sender is the address of the owner of nft */
   sender: string;
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** shares defines the number of shares this nft holds */
   supply: string;
@@ -34,7 +37,10 @@ export interface MsgCreateResponse {
 export interface MsgPurchaseShares {
   /** sender is the address of sender */
   sender: string;
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** id defines the monotonic increasing id of the nft in nft class */
   id: string;
@@ -46,9 +52,15 @@ export interface MsgPurchaseShares {
 export interface MsgPurchaseSharesResponse {
 }
 
-/** MsgTransferShares represents a message to transfer nft shares from one account to another account. */
+/**
+ * MsgTransferShares represents a message to transfer nft shares from one
+ * account to another account.
+ */
 export interface MsgTransferShares {
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** id defines the unique identification of nft */
   id: string;
@@ -64,9 +76,15 @@ export interface MsgTransferShares {
 export interface MsgTransferSharesResponse {
 }
 
-/** MsgDepositShares represents a message to deposit nft shares from bank to fnft. */
+/**
+ * MsgDepositShares represents a message to deposit nft shares from bank to
+ * fnft.
+ */
 export interface MsgDepositShares {
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** id defines the unique identification of nft */
   id: string;
@@ -80,9 +98,15 @@ export interface MsgDepositShares {
 export interface MsgDepositSharesResponse {
 }
 
-/** MsgWithdrawShares represents a message to withdraw nft shares from fnft to bank. */
+/**
+ * MsgWithdrawShares represents a message to withdraw nft shares from fnft to
+ * bank.
+ */
 export interface MsgWithdrawShares {
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** id defines the unique identification of nft */
   id: string;
@@ -100,7 +124,10 @@ export interface MsgWithdrawSharesResponse {
 export interface MsgSponsor {
   /** sender is the address of sender */
   sender: string;
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  /**
+   * class_id defines the unique identifier of the nft classification, similar
+   * to the contract address of ERC721
+   */
   class_id: string;
   /** id defines the unique identification of nft */
   id: string;
@@ -1131,11 +1158,20 @@ export interface Msg {
   Create(request: DeepPartial<MsgCreate>, metadata?: grpc.Metadata): Promise<MsgCreateResponse>;
   /** PurchaseShares defines a method to purchase shares from a nft. */
   PurchaseShares(request: DeepPartial<MsgPurchaseShares>, metadata?: grpc.Metadata): Promise<MsgPurchaseSharesResponse>;
-  /** TransferShares defines a method to TransferShares a nft shares one account to another. */
+  /**
+   * TransferShares defines a method to TransferShares a nft shares one account
+   * to another.
+   */
   TransferShares(request: DeepPartial<MsgTransferShares>, metadata?: grpc.Metadata): Promise<MsgTransferSharesResponse>;
-  /** TransferShares defines a method to TransferShares a nft shares one account to another. */
+  /**
+   * TransferShares defines a method to TransferShares a nft shares one account
+   * to another.
+   */
   DepositShares(request: DeepPartial<MsgDepositShares>, metadata?: grpc.Metadata): Promise<MsgDepositSharesResponse>;
-  /** TransferShares defines a method to TransferShares a nft shares one account to another. */
+  /**
+   * TransferShares defines a method to TransferShares a nft shares one account
+   * to another.
+   */
   WithdrawShares(request: DeepPartial<MsgWithdrawShares>, metadata?: grpc.Metadata): Promise<MsgWithdrawSharesResponse>;
   /** Sponsor defines a method to sponsor a nft project */
   Sponsor(request: DeepPartial<MsgSponsor>, metadata?: grpc.Metadata): Promise<MsgSponsorResponse>;

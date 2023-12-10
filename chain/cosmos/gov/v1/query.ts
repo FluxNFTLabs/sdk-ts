@@ -20,6 +20,15 @@ import {
 
 /** Since: cosmos-sdk 0.46 */
 
+/** QueryConstitutionRequest is the request type for the Query/Constitution RPC method */
+export interface QueryConstitutionRequest {
+}
+
+/** QueryConstitutionResponse is the response type for the Query/Constitution RPC method */
+export interface QueryConstitutionResponse {
+  constitution: string;
+}
+
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
   /** proposal_id defines the unique id of the proposal. */
@@ -172,6 +181,110 @@ export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
   tally: TallyResult | undefined;
 }
+
+function createBaseQueryConstitutionRequest(): QueryConstitutionRequest {
+  return {};
+}
+
+export const QueryConstitutionRequest = {
+  $type: "cosmos.gov.v1.QueryConstitutionRequest" as const,
+
+  encode(_: QueryConstitutionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConstitutionRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryConstitutionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryConstitutionRequest {
+    return {};
+  },
+
+  toJSON(_: QueryConstitutionRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryConstitutionRequest>): QueryConstitutionRequest {
+    return QueryConstitutionRequest.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<QueryConstitutionRequest>): QueryConstitutionRequest {
+    const message = createBaseQueryConstitutionRequest();
+    return message;
+  },
+};
+
+function createBaseQueryConstitutionResponse(): QueryConstitutionResponse {
+  return { constitution: "" };
+}
+
+export const QueryConstitutionResponse = {
+  $type: "cosmos.gov.v1.QueryConstitutionResponse" as const,
+
+  encode(message: QueryConstitutionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.constitution !== "") {
+      writer.uint32(10).string(message.constitution);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryConstitutionResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryConstitutionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.constitution = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryConstitutionResponse {
+    return { constitution: isSet(object.constitution) ? globalThis.String(object.constitution) : "" };
+  },
+
+  toJSON(message: QueryConstitutionResponse): unknown {
+    const obj: any = {};
+    if (message.constitution !== "") {
+      obj.constitution = message.constitution;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryConstitutionResponse>): QueryConstitutionResponse {
+    return QueryConstitutionResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryConstitutionResponse>): QueryConstitutionResponse {
+    const message = createBaseQueryConstitutionResponse();
+    message.constitution = object.constitution ?? "";
+    return message;
+  },
+};
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return { proposal_id: "0" };
@@ -1360,6 +1473,11 @@ export const QueryTallyResultResponse = {
 
 /** Query defines the gRPC querier service for gov module */
 export interface Query {
+  /** Constitution queries the chain's constitution. */
+  Constitution(
+    request: DeepPartial<QueryConstitutionRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryConstitutionResponse>;
   /** Proposal queries proposal details based on ProposalID. */
   Proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse>;
   /** Proposals queries all proposals based on given status. */
@@ -1370,7 +1488,7 @@ export interface Query {
   Votes(request: DeepPartial<QueryVotesRequest>, metadata?: grpc.Metadata): Promise<QueryVotesResponse>;
   /** Params queries all parameters of the gov module. */
   Params(request: DeepPartial<QueryParamsRequest>, metadata?: grpc.Metadata): Promise<QueryParamsResponse>;
-  /** Deposit queries single deposit information based proposalID, depositAddr. */
+  /** Deposit queries single deposit information based on proposalID, depositAddr. */
   Deposit(request: DeepPartial<QueryDepositRequest>, metadata?: grpc.Metadata): Promise<QueryDepositResponse>;
   /** Deposits queries all deposits of a single proposal. */
   Deposits(request: DeepPartial<QueryDepositsRequest>, metadata?: grpc.Metadata): Promise<QueryDepositsResponse>;
@@ -1386,6 +1504,7 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.Constitution = this.Constitution.bind(this);
     this.Proposal = this.Proposal.bind(this);
     this.Proposals = this.Proposals.bind(this);
     this.Vote = this.Vote.bind(this);
@@ -1394,6 +1513,13 @@ export class QueryClientImpl implements Query {
     this.Deposit = this.Deposit.bind(this);
     this.Deposits = this.Deposits.bind(this);
     this.TallyResult = this.TallyResult.bind(this);
+  }
+
+  Constitution(
+    request: DeepPartial<QueryConstitutionRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryConstitutionResponse> {
+    return this.rpc.unary(QueryConstitutionDesc, QueryConstitutionRequest.fromPartial(request), metadata);
   }
 
   Proposal(request: DeepPartial<QueryProposalRequest>, metadata?: grpc.Metadata): Promise<QueryProposalResponse> {
@@ -1433,6 +1559,29 @@ export class QueryClientImpl implements Query {
 }
 
 export const QueryDesc = { serviceName: "cosmos.gov.v1.Query" };
+
+export const QueryConstitutionDesc: UnaryMethodDefinitionish = {
+  methodName: "Constitution",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryConstitutionRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryConstitutionResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
 
 export const QueryProposalDesc: UnaryMethodDefinitionish = {
   methodName: "Proposal",

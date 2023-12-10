@@ -12,6 +12,7 @@ export interface ConsensusParams {
   evidence: EvidenceParams | undefined;
   validator: ValidatorParams | undefined;
   version: VersionParams | undefined;
+  abci: ABCIParams | undefined;
 }
 
 /** BlockParams contains limits on the block size. */
@@ -26,13 +27,6 @@ export interface BlockParams {
    * Note: must be greater or equal to -1
    */
   max_gas: string;
-  /**
-   * Minimum time increment between consecutive blocks (in milliseconds) If the
-   * block header timestamp is ahead of the system clock, decrease this value.
-   *
-   * Not exposed to the application.
-   */
-  time_iota_ms: string;
 }
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
@@ -72,7 +66,7 @@ export interface ValidatorParams {
 
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
-  app_version: string;
+  app: string;
 }
 
 /**
@@ -85,8 +79,24 @@ export interface HashedParams {
   block_max_gas: string;
 }
 
+/** ABCIParams configure functionality specific to the Application Blockchain Interface. */
+export interface ABCIParams {
+  /**
+   * vote_extensions_enable_height configures the first height during which
+   * vote extensions will be enabled. During this specified height, and for all
+   * subsequent heights, precommit messages that do not contain valid extension data
+   * will be considered invalid. Prior to this height, vote extensions will not
+   * be used or accepted by validators on the network.
+   *
+   * Once enabled, vote extensions will be created by the application in ExtendVote,
+   * passed to the application for validation in VerifyVoteExtension and given
+   * to the application to use when proposing a block during PrepareProposal.
+   */
+  vote_extensions_enable_height: string;
+}
+
 function createBaseConsensusParams(): ConsensusParams {
-  return { block: undefined, evidence: undefined, validator: undefined, version: undefined };
+  return { block: undefined, evidence: undefined, validator: undefined, version: undefined, abci: undefined };
 }
 
 export const ConsensusParams = {
@@ -104,6 +114,9 @@ export const ConsensusParams = {
     }
     if (message.version !== undefined) {
       VersionParams.encode(message.version, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.abci !== undefined) {
+      ABCIParams.encode(message.abci, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -143,6 +156,13 @@ export const ConsensusParams = {
 
           message.version = VersionParams.decode(reader, reader.uint32());
           continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.abci = ABCIParams.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -158,6 +178,7 @@ export const ConsensusParams = {
       evidence: isSet(object.evidence) ? EvidenceParams.fromJSON(object.evidence) : undefined,
       validator: isSet(object.validator) ? ValidatorParams.fromJSON(object.validator) : undefined,
       version: isSet(object.version) ? VersionParams.fromJSON(object.version) : undefined,
+      abci: isSet(object.abci) ? ABCIParams.fromJSON(object.abci) : undefined,
     };
   },
 
@@ -174,6 +195,9 @@ export const ConsensusParams = {
     }
     if (message.version !== undefined) {
       obj.version = VersionParams.toJSON(message.version);
+    }
+    if (message.abci !== undefined) {
+      obj.abci = ABCIParams.toJSON(message.abci);
     }
     return obj;
   },
@@ -195,12 +219,15 @@ export const ConsensusParams = {
     message.version = (object.version !== undefined && object.version !== null)
       ? VersionParams.fromPartial(object.version)
       : undefined;
+    message.abci = (object.abci !== undefined && object.abci !== null)
+      ? ABCIParams.fromPartial(object.abci)
+      : undefined;
     return message;
   },
 };
 
 function createBaseBlockParams(): BlockParams {
-  return { max_bytes: "0", max_gas: "0", time_iota_ms: "0" };
+  return { max_bytes: "0", max_gas: "0" };
 }
 
 export const BlockParams = {
@@ -212,9 +239,6 @@ export const BlockParams = {
     }
     if (message.max_gas !== "0") {
       writer.uint32(16).int64(message.max_gas);
-    }
-    if (message.time_iota_ms !== "0") {
-      writer.uint32(24).int64(message.time_iota_ms);
     }
     return writer;
   },
@@ -240,13 +264,6 @@ export const BlockParams = {
 
           message.max_gas = longToString(reader.int64() as Long);
           continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.time_iota_ms = longToString(reader.int64() as Long);
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -260,7 +277,6 @@ export const BlockParams = {
     return {
       max_bytes: isSet(object.max_bytes) ? globalThis.String(object.max_bytes) : "0",
       max_gas: isSet(object.max_gas) ? globalThis.String(object.max_gas) : "0",
-      time_iota_ms: isSet(object.time_iota_ms) ? globalThis.String(object.time_iota_ms) : "0",
     };
   },
 
@@ -272,9 +288,6 @@ export const BlockParams = {
     if (message.max_gas !== "0") {
       obj.max_gas = message.max_gas;
     }
-    if (message.time_iota_ms !== "0") {
-      obj.time_iota_ms = message.time_iota_ms;
-    }
     return obj;
   },
 
@@ -285,7 +298,6 @@ export const BlockParams = {
     const message = createBaseBlockParams();
     message.max_bytes = object.max_bytes ?? "0";
     message.max_gas = object.max_gas ?? "0";
-    message.time_iota_ms = object.time_iota_ms ?? "0";
     return message;
   },
 };
@@ -447,15 +459,15 @@ export const ValidatorParams = {
 };
 
 function createBaseVersionParams(): VersionParams {
-  return { app_version: "0" };
+  return { app: "0" };
 }
 
 export const VersionParams = {
   $type: "tendermint.types.VersionParams" as const,
 
   encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.app_version !== "0") {
-      writer.uint32(8).uint64(message.app_version);
+    if (message.app !== "0") {
+      writer.uint32(8).uint64(message.app);
     }
     return writer;
   },
@@ -472,7 +484,7 @@ export const VersionParams = {
             break;
           }
 
-          message.app_version = longToString(reader.uint64() as Long);
+          message.app = longToString(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -484,13 +496,13 @@ export const VersionParams = {
   },
 
   fromJSON(object: any): VersionParams {
-    return { app_version: isSet(object.app_version) ? globalThis.String(object.app_version) : "0" };
+    return { app: isSet(object.app) ? globalThis.String(object.app) : "0" };
   },
 
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
-    if (message.app_version !== "0") {
-      obj.app_version = message.app_version;
+    if (message.app !== "0") {
+      obj.app = message.app;
     }
     return obj;
   },
@@ -500,7 +512,7 @@ export const VersionParams = {
   },
   fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = createBaseVersionParams();
-    message.app_version = object.app_version ?? "0";
+    message.app = object.app ?? "0";
     return message;
   },
 };
@@ -577,6 +589,69 @@ export const HashedParams = {
     const message = createBaseHashedParams();
     message.block_max_bytes = object.block_max_bytes ?? "0";
     message.block_max_gas = object.block_max_gas ?? "0";
+    return message;
+  },
+};
+
+function createBaseABCIParams(): ABCIParams {
+  return { vote_extensions_enable_height: "0" };
+}
+
+export const ABCIParams = {
+  $type: "tendermint.types.ABCIParams" as const,
+
+  encode(message: ABCIParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.vote_extensions_enable_height !== "0") {
+      writer.uint32(8).int64(message.vote_extensions_enable_height);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ABCIParams {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseABCIParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.vote_extensions_enable_height = longToString(reader.int64() as Long);
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ABCIParams {
+    return {
+      vote_extensions_enable_height: isSet(object.vote_extensions_enable_height)
+        ? globalThis.String(object.vote_extensions_enable_height)
+        : "0",
+    };
+  },
+
+  toJSON(message: ABCIParams): unknown {
+    const obj: any = {};
+    if (message.vote_extensions_enable_height !== "0") {
+      obj.vote_extensions_enable_height = message.vote_extensions_enable_height;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<ABCIParams>): ABCIParams {
+    return ABCIParams.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<ABCIParams>): ABCIParams {
+    const message = createBaseABCIParams();
+    message.vote_extensions_enable_height = object.vote_extensions_enable_height ?? "0";
     return message;
   },
 };

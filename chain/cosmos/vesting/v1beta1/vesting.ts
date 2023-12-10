@@ -13,6 +13,7 @@ export interface BaseVestingAccount {
   original_vesting: Coin[];
   delegated_free: Coin[];
   delegated_vesting: Coin[];
+  /** Vesting end time, as unix timestamp (in seconds). */
   end_time: string;
 }
 
@@ -21,7 +22,10 @@ export interface BaseVestingAccount {
  * continuously vests by unlocking coins linearly with respect to time.
  */
 export interface ContinuousVestingAccount {
-  base_vesting_account: BaseVestingAccount | undefined;
+  base_vesting_account:
+    | BaseVestingAccount
+    | undefined;
+  /** Vesting start time, as unix timestamp (in seconds). */
   start_time: string;
 }
 
@@ -36,6 +40,7 @@ export interface DelayedVestingAccount {
 
 /** Period defines a length of time and amount of coins that will vest. */
 export interface Period {
+  /** Period duration in seconds. */
   length: string;
   amount: Coin[];
 }

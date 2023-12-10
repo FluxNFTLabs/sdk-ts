@@ -6,7 +6,10 @@ import { Any } from "../../../google/protobuf/any";
 
 /** Class defines the class of the nft type. */
 export interface Class {
-  /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
+  /**
+   * id defines the unique identifier of the NFT classification, similar to the
+   * contract address of ERC721
+   */
   id: string;
   /** name defines the human-readable name of the NFT classification. Optional */
   name: string;
@@ -14,7 +17,10 @@ export interface Class {
   symbol: string;
   /** description is a brief description of nft classification. Optional */
   description: string;
-  /** url for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
+  /**
+   * url for the class metadata stored off chain. It can define schema for Class
+   * and NFT `Data` attributes. Optional
+   */
   url: string;
   /** data is the app specific metadata of the NFT class. Optional */
   data: Any | undefined;

@@ -14,6 +14,7 @@ export interface MsgCreateVestingAccount {
   from_address: string;
   to_address: string;
   amount: Coin[];
+  /** end of vesting as unix time (in seconds). */
   end_time: string;
   delayed: boolean;
 }
@@ -51,6 +52,7 @@ export interface MsgCreatePermanentLockedAccountResponse {
 export interface MsgCreatePeriodicVestingAccount {
   from_address: string;
   to_address: string;
+  /** start of vesting as unix time (in seconds). */
   start_time: string;
   vesting_periods: Period[];
 }

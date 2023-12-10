@@ -3,11 +3,11 @@ import _m0 from "protobufjs/minimal";
 
 /** ModuleOptions describes the CLI options for a Cosmos SDK module. */
 export interface ModuleOptions {
-  /** tx describes the tx command for the module. */
+  /** tx describes the tx commands for the module. */
   tx:
     | ServiceCommandDescriptor
     | undefined;
-  /** query describes the tx command for the module. */
+  /** query describes the queries commands for the module. */
   query: ServiceCommandDescriptor | undefined;
 }
 
@@ -110,8 +110,6 @@ export interface FlagOptions {
   usage: string;
   /** default_value is the default value as text. */
   default_value: string;
-  /** default value is the default value as text if the flag is used without any value. */
-  no_opt_default_value: string;
   /** deprecated is the usage text to show if this flag is deprecated. */
   deprecated: string;
   /** shorthand_deprecated is the usage text to show if the shorthand of this flag is deprecated. */
@@ -761,7 +759,6 @@ function createBaseFlagOptions(): FlagOptions {
     shorthand: "",
     usage: "",
     default_value: "",
-    no_opt_default_value: "",
     deprecated: "",
     shorthand_deprecated: "",
     hidden: false,
@@ -783,9 +780,6 @@ export const FlagOptions = {
     }
     if (message.default_value !== "") {
       writer.uint32(34).string(message.default_value);
-    }
-    if (message.no_opt_default_value !== "") {
-      writer.uint32(42).string(message.no_opt_default_value);
     }
     if (message.deprecated !== "") {
       writer.uint32(50).string(message.deprecated);
@@ -834,13 +828,6 @@ export const FlagOptions = {
 
           message.default_value = reader.string();
           continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.no_opt_default_value = reader.string();
-          continue;
         case 6:
           if (tag !== 50) {
             break;
@@ -877,7 +864,6 @@ export const FlagOptions = {
       shorthand: isSet(object.shorthand) ? globalThis.String(object.shorthand) : "",
       usage: isSet(object.usage) ? globalThis.String(object.usage) : "",
       default_value: isSet(object.default_value) ? globalThis.String(object.default_value) : "",
-      no_opt_default_value: isSet(object.no_opt_default_value) ? globalThis.String(object.no_opt_default_value) : "",
       deprecated: isSet(object.deprecated) ? globalThis.String(object.deprecated) : "",
       shorthand_deprecated: isSet(object.shorthand_deprecated) ? globalThis.String(object.shorthand_deprecated) : "",
       hidden: isSet(object.hidden) ? globalThis.Boolean(object.hidden) : false,
@@ -897,9 +883,6 @@ export const FlagOptions = {
     }
     if (message.default_value !== "") {
       obj.default_value = message.default_value;
-    }
-    if (message.no_opt_default_value !== "") {
-      obj.no_opt_default_value = message.no_opt_default_value;
     }
     if (message.deprecated !== "") {
       obj.deprecated = message.deprecated;
@@ -922,7 +905,6 @@ export const FlagOptions = {
     message.shorthand = object.shorthand ?? "";
     message.usage = object.usage ?? "";
     message.default_value = object.default_value ?? "";
-    message.no_opt_default_value = object.no_opt_default_value ?? "";
     message.deprecated = object.deprecated ?? "";
     message.shorthand_deprecated = object.shorthand_deprecated ?? "";
     message.hidden = object.hidden ?? false;

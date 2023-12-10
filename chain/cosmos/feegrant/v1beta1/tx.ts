@@ -35,6 +35,24 @@ export interface MsgRevokeAllowance {
 export interface MsgRevokeAllowanceResponse {
 }
 
+/**
+ * MsgPruneAllowances prunes expired fee allowances.
+ *
+ * Since cosmos-sdk 0.50
+ */
+export interface MsgPruneAllowances {
+  /** pruner is the address of the user pruning expired allowances. */
+  pruner: string;
+}
+
+/**
+ * MsgPruneAllowancesResponse defines the Msg/PruneAllowancesResponse response type.
+ *
+ * Since cosmos-sdk 0.50
+ */
+export interface MsgPruneAllowancesResponse {
+}
+
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {
   return { granter: "", grantee: "", allowance: undefined };
 }
@@ -294,6 +312,110 @@ export const MsgRevokeAllowanceResponse = {
   },
 };
 
+function createBaseMsgPruneAllowances(): MsgPruneAllowances {
+  return { pruner: "" };
+}
+
+export const MsgPruneAllowances = {
+  $type: "cosmos.feegrant.v1beta1.MsgPruneAllowances" as const,
+
+  encode(message: MsgPruneAllowances, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.pruner !== "") {
+      writer.uint32(10).string(message.pruner);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPruneAllowances {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgPruneAllowances();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.pruner = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgPruneAllowances {
+    return { pruner: isSet(object.pruner) ? globalThis.String(object.pruner) : "" };
+  },
+
+  toJSON(message: MsgPruneAllowances): unknown {
+    const obj: any = {};
+    if (message.pruner !== "") {
+      obj.pruner = message.pruner;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgPruneAllowances>): MsgPruneAllowances {
+    return MsgPruneAllowances.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgPruneAllowances>): MsgPruneAllowances {
+    const message = createBaseMsgPruneAllowances();
+    message.pruner = object.pruner ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgPruneAllowancesResponse(): MsgPruneAllowancesResponse {
+  return {};
+}
+
+export const MsgPruneAllowancesResponse = {
+  $type: "cosmos.feegrant.v1beta1.MsgPruneAllowancesResponse" as const,
+
+  encode(_: MsgPruneAllowancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPruneAllowancesResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgPruneAllowancesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgPruneAllowancesResponse {
+    return {};
+  },
+
+  toJSON(_: MsgPruneAllowancesResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgPruneAllowancesResponse>): MsgPruneAllowancesResponse {
+    return MsgPruneAllowancesResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgPruneAllowancesResponse>): MsgPruneAllowancesResponse {
+    const message = createBaseMsgPruneAllowancesResponse();
+    return message;
+  },
+};
+
 /** Msg defines the feegrant msg service. */
 export interface Msg {
   /**
@@ -309,6 +431,15 @@ export interface Msg {
     request: DeepPartial<MsgRevokeAllowance>,
     metadata?: grpc.Metadata,
   ): Promise<MsgRevokeAllowanceResponse>;
+  /**
+   * PruneAllowances prunes expired fee allowances, currently up to 75 at a time.
+   *
+   * Since cosmos-sdk 0.50
+   */
+  PruneAllowances(
+    request: DeepPartial<MsgPruneAllowances>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgPruneAllowancesResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -318,6 +449,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.GrantAllowance = this.GrantAllowance.bind(this);
     this.RevokeAllowance = this.RevokeAllowance.bind(this);
+    this.PruneAllowances = this.PruneAllowances.bind(this);
   }
 
   GrantAllowance(
@@ -332,6 +464,13 @@ export class MsgClientImpl implements Msg {
     metadata?: grpc.Metadata,
   ): Promise<MsgRevokeAllowanceResponse> {
     return this.rpc.unary(MsgRevokeAllowanceDesc, MsgRevokeAllowance.fromPartial(request), metadata);
+  }
+
+  PruneAllowances(
+    request: DeepPartial<MsgPruneAllowances>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgPruneAllowancesResponse> {
+    return this.rpc.unary(MsgPruneAllowancesDesc, MsgPruneAllowances.fromPartial(request), metadata);
   }
 }
 
@@ -373,6 +512,29 @@ export const MsgRevokeAllowanceDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = MsgRevokeAllowanceResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const MsgPruneAllowancesDesc: UnaryMethodDefinitionish = {
+  methodName: "PruneAllowances",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgPruneAllowances.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgPruneAllowancesResponse.decode(data);
       return {
         ...value,
         toObject() {

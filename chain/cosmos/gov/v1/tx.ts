@@ -4,6 +4,7 @@ import { BrowserHeaders } from "browser-headers";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Coin } from "../../base/v1beta1/coin";
 import { Params, VoteOption, voteOptionFromJSON, voteOptionToJSON, WeightedVoteOption } from "./gov";
 
@@ -34,6 +35,12 @@ export interface MsgSubmitProposal {
    * Since: cosmos-sdk 0.47
    */
   summary: string;
+  /**
+   * expedited defines if the proposal is expedited or not
+   *
+   * Since: cosmos-sdk 0.50
+   */
+  expedited: boolean;
 }
 
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
@@ -130,8 +137,37 @@ export interface MsgUpdateParams {
 export interface MsgUpdateParamsResponse {
 }
 
+/**
+ * MsgCancelProposal is the Msg/CancelProposal request type.
+ *
+ * Since: cosmos-sdk 0.50
+ */
+export interface MsgCancelProposal {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: string;
+  /** proposer is the account address of the proposer. */
+  proposer: string;
+}
+
+/**
+ * MsgCancelProposalResponse defines the response structure for executing a
+ * MsgCancelProposal message.
+ *
+ * Since: cosmos-sdk 0.50
+ */
+export interface MsgCancelProposalResponse {
+  /** proposal_id defines the unique id of the proposal. */
+  proposal_id: string;
+  /** canceled_time is the time when proposal is canceled. */
+  canceled_time:
+    | Date
+    | undefined;
+  /** canceled_height defines the block height at which the proposal is canceled. */
+  canceled_height: string;
+}
+
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
-  return { messages: [], initial_deposit: [], proposer: "", metadata: "", title: "", summary: "" };
+  return { messages: [], initial_deposit: [], proposer: "", metadata: "", title: "", summary: "", expedited: false };
 }
 
 export const MsgSubmitProposal = {
@@ -155,6 +191,9 @@ export const MsgSubmitProposal = {
     }
     if (message.summary !== "") {
       writer.uint32(50).string(message.summary);
+    }
+    if (message.expedited === true) {
+      writer.uint32(56).bool(message.expedited);
     }
     return writer;
   },
@@ -208,6 +247,13 @@ export const MsgSubmitProposal = {
 
           message.summary = reader.string();
           continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.expedited = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -227,6 +273,7 @@ export const MsgSubmitProposal = {
       metadata: isSet(object.metadata) ? globalThis.String(object.metadata) : "",
       title: isSet(object.title) ? globalThis.String(object.title) : "",
       summary: isSet(object.summary) ? globalThis.String(object.summary) : "",
+      expedited: isSet(object.expedited) ? globalThis.Boolean(object.expedited) : false,
     };
   },
 
@@ -250,6 +297,9 @@ export const MsgSubmitProposal = {
     if (message.summary !== "") {
       obj.summary = message.summary;
     }
+    if (message.expedited === true) {
+      obj.expedited = message.expedited;
+    }
     return obj;
   },
 
@@ -264,6 +314,7 @@ export const MsgSubmitProposal = {
     message.metadata = object.metadata ?? "";
     message.title = object.title ?? "";
     message.summary = object.summary ?? "";
+    message.expedited = object.expedited ?? false;
     return message;
   },
 };
@@ -1013,6 +1064,173 @@ export const MsgUpdateParamsResponse = {
   },
 };
 
+function createBaseMsgCancelProposal(): MsgCancelProposal {
+  return { proposal_id: "0", proposer: "" };
+}
+
+export const MsgCancelProposal = {
+  $type: "cosmos.gov.v1.MsgCancelProposal" as const,
+
+  encode(message: MsgCancelProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
+    }
+    if (message.proposer !== "") {
+      writer.uint32(18).string(message.proposer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelProposal {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelProposal();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.proposal_id = longToString(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.proposer = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCancelProposal {
+    return {
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      proposer: isSet(object.proposer) ? globalThis.String(object.proposer) : "",
+    };
+  },
+
+  toJSON(message: MsgCancelProposal): unknown {
+    const obj: any = {};
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
+    }
+    if (message.proposer !== "") {
+      obj.proposer = message.proposer;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgCancelProposal>): MsgCancelProposal {
+    return MsgCancelProposal.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgCancelProposal>): MsgCancelProposal {
+    const message = createBaseMsgCancelProposal();
+    message.proposal_id = object.proposal_id ?? "0";
+    message.proposer = object.proposer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgCancelProposalResponse(): MsgCancelProposalResponse {
+  return { proposal_id: "0", canceled_time: undefined, canceled_height: "0" };
+}
+
+export const MsgCancelProposalResponse = {
+  $type: "cosmos.gov.v1.MsgCancelProposalResponse" as const,
+
+  encode(message: MsgCancelProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.proposal_id !== "0") {
+      writer.uint32(8).uint64(message.proposal_id);
+    }
+    if (message.canceled_time !== undefined) {
+      Timestamp.encode(toTimestamp(message.canceled_time), writer.uint32(18).fork()).ldelim();
+    }
+    if (message.canceled_height !== "0") {
+      writer.uint32(24).uint64(message.canceled_height);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelProposalResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelProposalResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.proposal_id = longToString(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.canceled_time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.canceled_height = longToString(reader.uint64() as Long);
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCancelProposalResponse {
+    return {
+      proposal_id: isSet(object.proposal_id) ? globalThis.String(object.proposal_id) : "0",
+      canceled_time: isSet(object.canceled_time) ? fromJsonTimestamp(object.canceled_time) : undefined,
+      canceled_height: isSet(object.canceled_height) ? globalThis.String(object.canceled_height) : "0",
+    };
+  },
+
+  toJSON(message: MsgCancelProposalResponse): unknown {
+    const obj: any = {};
+    if (message.proposal_id !== "0") {
+      obj.proposal_id = message.proposal_id;
+    }
+    if (message.canceled_time !== undefined) {
+      obj.canceled_time = message.canceled_time.toISOString();
+    }
+    if (message.canceled_height !== "0") {
+      obj.canceled_height = message.canceled_height;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgCancelProposalResponse>): MsgCancelProposalResponse {
+    return MsgCancelProposalResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgCancelProposalResponse>): MsgCancelProposalResponse {
+    const message = createBaseMsgCancelProposalResponse();
+    message.proposal_id = object.proposal_id ?? "0";
+    message.canceled_time = object.canceled_time ?? undefined;
+    message.canceled_height = object.canceled_height ?? "0";
+    return message;
+  },
+};
+
 /** Msg defines the gov Msg service. */
 export interface Msg {
   /** SubmitProposal defines a method to create new proposal given the messages. */
@@ -1038,6 +1256,12 @@ export interface Msg {
    * Since: cosmos-sdk 0.47
    */
   UpdateParams(request: DeepPartial<MsgUpdateParams>, metadata?: grpc.Metadata): Promise<MsgUpdateParamsResponse>;
+  /**
+   * CancelProposal defines a method to cancel governance proposal
+   *
+   * Since: cosmos-sdk 0.50
+   */
+  CancelProposal(request: DeepPartial<MsgCancelProposal>, metadata?: grpc.Metadata): Promise<MsgCancelProposalResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1051,6 +1275,7 @@ export class MsgClientImpl implements Msg {
     this.VoteWeighted = this.VoteWeighted.bind(this);
     this.Deposit = this.Deposit.bind(this);
     this.UpdateParams = this.UpdateParams.bind(this);
+    this.CancelProposal = this.CancelProposal.bind(this);
   }
 
   SubmitProposal(
@@ -1081,6 +1306,13 @@ export class MsgClientImpl implements Msg {
 
   UpdateParams(request: DeepPartial<MsgUpdateParams>, metadata?: grpc.Metadata): Promise<MsgUpdateParamsResponse> {
     return this.rpc.unary(MsgUpdateParamsDesc, MsgUpdateParams.fromPartial(request), metadata);
+  }
+
+  CancelProposal(
+    request: DeepPartial<MsgCancelProposal>,
+    metadata?: grpc.Metadata,
+  ): Promise<MsgCancelProposalResponse> {
+    return this.rpc.unary(MsgCancelProposalDesc, MsgCancelProposal.fromPartial(request), metadata);
   }
 }
 
@@ -1224,6 +1456,29 @@ export const MsgUpdateParamsDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
+export const MsgCancelProposalDesc: UnaryMethodDefinitionish = {
+  methodName: "CancelProposal",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgCancelProposal.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgCancelProposalResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
 interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
@@ -1299,6 +1554,28 @@ type DeepPartial<T> = T extends Builtin ? T
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000).toString();
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (globalThis.Number(t.seconds) || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
 
 function longToString(long: Long) {
   return long.toString();

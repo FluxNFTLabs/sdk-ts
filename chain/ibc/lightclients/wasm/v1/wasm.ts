@@ -27,6 +27,18 @@ export interface ClientMessage {
   data: Uint8Array;
 }
 
+/**
+ * Checksums defines a list of all checksums that are stored
+ *
+ * Deprecated: This message is deprecated in favor of storing the checksums
+ * using a Collections.KeySet.
+ *
+ * @deprecated
+ */
+export interface Checksums {
+  checksums: Uint8Array[];
+}
+
 function createBaseClientState(): ClientState {
   return { data: new Uint8Array(0), checksum: new Uint8Array(0), latest_height: undefined };
 }
@@ -234,6 +246,69 @@ export const ClientMessage = {
   fromPartial(object: DeepPartial<ClientMessage>): ClientMessage {
     const message = createBaseClientMessage();
     message.data = object.data ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseChecksums(): Checksums {
+  return { checksums: [] };
+}
+
+export const Checksums = {
+  $type: "ibc.lightclients.wasm.v1.Checksums" as const,
+
+  encode(message: Checksums, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.checksums) {
+      writer.uint32(10).bytes(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Checksums {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChecksums();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.checksums.push(reader.bytes());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Checksums {
+    return {
+      checksums: globalThis.Array.isArray(object?.checksums)
+        ? object.checksums.map((e: any) => bytesFromBase64(e))
+        : [],
+    };
+  },
+
+  toJSON(message: Checksums): unknown {
+    const obj: any = {};
+    if (message.checksums?.length) {
+      obj.checksums = message.checksums.map((e) => base64FromBytes(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<Checksums>): Checksums {
+    return Checksums.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<Checksums>): Checksums {
+    const message = createBaseChecksums();
+    message.checksums = object.checksums?.map((e) => e) || [];
     return message;
   },
 };

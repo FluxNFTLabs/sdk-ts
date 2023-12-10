@@ -1530,7 +1530,7 @@ export interface Query {
     metadata?: grpc.Metadata,
   ): Promise<QueryDelegationRewardsResponse>;
   /**
-   * DelegationTotalRewards queries the total rewards accrued by a each
+   * DelegationTotalRewards queries the total rewards accrued by each
    * validator.
    */
   DelegationTotalRewards(

@@ -47,7 +47,18 @@ export interface GenesisState {
    *
    * Since: cosmos-sdk 0.47
    */
-  params: Params | undefined;
+  params:
+    | Params
+    | undefined;
+  /**
+   * The constitution allows builders to lay a foundation and define purpose.
+   * This is an immutable string set in genesis.
+   * There are no amendments, to go outside of scope, just fork.
+   * constitution is an immutable string in genesis for a chain builder to lay out their vision, ideas and ideals.
+   *
+   * Since: cosmos-sdk 0.50
+   */
+  constitution: string;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -60,6 +71,7 @@ function createBaseGenesisState(): GenesisState {
     voting_params: undefined,
     tally_params: undefined,
     params: undefined,
+    constitution: "",
   };
 }
 
@@ -90,6 +102,9 @@ export const GenesisState = {
     }
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.constitution !== "") {
+      writer.uint32(74).string(message.constitution);
     }
     return writer;
   },
@@ -157,6 +172,13 @@ export const GenesisState = {
 
           message.params = Params.decode(reader, reader.uint32());
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.constitution = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -178,6 +200,7 @@ export const GenesisState = {
       voting_params: isSet(object.voting_params) ? VotingParams.fromJSON(object.voting_params) : undefined,
       tally_params: isSet(object.tally_params) ? TallyParams.fromJSON(object.tally_params) : undefined,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      constitution: isSet(object.constitution) ? globalThis.String(object.constitution) : "",
     };
   },
 
@@ -207,6 +230,9 @@ export const GenesisState = {
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
+    if (message.constitution !== "") {
+      obj.constitution = message.constitution;
+    }
     return obj;
   },
 
@@ -231,6 +257,7 @@ export const GenesisState = {
     message.params = (object.params !== undefined && object.params !== null)
       ? Params.fromPartial(object.params)
       : undefined;
+    message.constitution = object.constitution ?? "";
     return message;
   },
 };

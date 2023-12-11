@@ -1,7 +1,6 @@
 import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712';
-import { createAddress } from '@tendermint/sig';
 
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
@@ -16,13 +15,9 @@ import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signi
 import * as codectypemap from '../../../../chain/codec_type_map.json'
 
 import {getEIP712SignBytes} from '../../../../eip712/eip712';
-
-function compressPublicKey(uncompressedPublicKey: Buffer): Buffer {
-  const xCoord = uncompressedPublicKey.slice(0,32);
-  const yCoord = uncompressedPublicKey.slice(32,64);
-  const yParityByte = yCoord[31] % 2 == 0 ? Buffer.from([2]) : Buffer.from([3])
-  return Buffer.concat([yParityByte, xCoord])
-}
+import * as ethcrypto from "eth-crypto";
+import * as ethsecp256k1 from "../../../../chain/cosmos/crypto/ethsecp256k1/keys";
+import {bech32} from "bech32";
 
 const main = async () => {
   // init clients
@@ -35,13 +30,13 @@ const main = async () => {
   // init user3
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from("39a4c898dda351d54875d5ebb3e1c451189116faa556c3c04adc860dd1000608", 'hex')))
   const senderPrivKey: secp256k1.PrivKey = {key: wallet.getPrivateKey()}
-  const senderPubkey: secp256k1.PubKey = {key: compressPublicKey(Buffer.from(wallet.getPublicKey()))}
+  const senderXPubkey = ethcrypto.publicKey.compress(Buffer.from(wallet.getPublicKey()).toString('hex'))
+  const senderPubkey: ethsecp256k1.PubKey = {key: Buffer.from(senderXPubkey, 'hex')}
   const senderPubkeyAny: anytypes.Any = {
-    type_url: '/' + secp256k1.PubKey.$type,
-    value: secp256k1.PubKey.encode(senderPubkey).finish()
+    type_url: '/' + ethsecp256k1.PubKey.$type,
+    value: ethsecp256k1.PubKey.encode(senderPubkey).finish()
   }
-  const senderAddr = createAddress(senderPubkey.key, 'lux')
-  const receiverAddr = 'lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx'
+  const senderAddr = bech32.encode('lux', bech32.toWords(wallet.getAddress()))
 
   // fetch account num, seq
   const senderInfo = await authClient.AccountInfo({address: senderAddr})

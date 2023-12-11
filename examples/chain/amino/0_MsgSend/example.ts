@@ -1,7 +1,6 @@
 import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712';
-import { createAddress } from '@tendermint/sig';
 import { bech32 } from 'bech32'
 
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
@@ -30,9 +29,8 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')))
   const senderPrivKey: ethsecp256k1.PrivKey = {key: wallet.getPrivateKey()}
-  const xPubkey = ethcrypto.publicKey.compress(Buffer.from(wallet.getPublicKey()).toString('hex'))
-
-  const senderPubkey: ethsecp256k1.PubKey = {key: Buffer.from(xPubkey, 'hex')}
+  const senderXPubkey = ethcrypto.publicKey.compress(Buffer.from(wallet.getPublicKey()).toString('hex'))
+  const senderPubkey: ethsecp256k1.PubKey = {key: Buffer.from(senderXPubkey, 'hex')}
   const senderPubkeyAny: anytypes.Any = {
     type_url: '/' + ethsecp256k1.PubKey.$type,
     value: ethsecp256k1.PubKey.encode(senderPubkey).finish()

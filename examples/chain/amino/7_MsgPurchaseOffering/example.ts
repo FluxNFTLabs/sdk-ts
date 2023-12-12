@@ -53,11 +53,11 @@ const main = async () => {
     offering_quantity: ['2', '3'],
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + bazaartypes.MsgPurchaseOffering.$type,
+    type_url: `/${bazaartypes.MsgPurchaseOffering.$type}`,
     value: bazaartypes.MsgPurchaseOffering.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + bazaartypes.MsgPurchaseOffering.$type],
+    type: codectypemap[`/${bazaartypes.MsgPurchaseOffering.$type}`],
     value: bazaartypes.MsgPurchaseOffering.toJSON(msg)
   }
 

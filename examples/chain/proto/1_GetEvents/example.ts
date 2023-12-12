@@ -11,7 +11,7 @@ const main = async () => {
   const req: streamtypes.EventsRequest = {
     height: "1",
     modules: ["fnft"],
-    tmQueries: ["block", "block_results"]
+    tm_queries: ["block", "block_results"]
   };
 
   try {

@@ -26,5 +26,8 @@
     "grpc-tools": "^1.12.4",
     "grpc-web": "^1.4.2",
     "protoc-gen-grpc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/create-hash": "^1.2.6"
   }
 }

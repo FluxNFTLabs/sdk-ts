@@ -57,11 +57,11 @@ const main = async () => {
     tags: ['culture', 'vietnam', 'travel', 'art', 'vietmyusa'],
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + bazaartypes.MsgCreateProduct.$type,
+    type_url: `/${bazaartypes.MsgCreateProduct.$type}`,
     value: bazaartypes.MsgCreateProduct.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + bazaartypes.MsgCreateProduct.$type],
+    type: codectypemap[`/${bazaartypes.MsgCreateProduct.$type}`],
     value: bazaartypes.MsgCreateProduct.toJSON(msg)
   }
 

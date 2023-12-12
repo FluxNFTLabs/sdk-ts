@@ -55,11 +55,11 @@ const main = async () => {
     dividend_interval: '100',
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + fnfttypes.MsgCreate.$type,
+    type_url: `/${fnfttypes.MsgCreate.$type}`,
     value: fnfttypes.MsgCreate.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + fnfttypes.MsgCreate.$type],
+    type: codectypemap[`/${fnfttypes.MsgCreate.$type}`],
     value: fnfttypes.MsgCreate.toJSON(msg)
   }
 

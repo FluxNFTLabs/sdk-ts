@@ -53,7 +53,7 @@ const main = async () => {
   }
 
   const msgAny: anytypes.Any = {
-    type_url: '/' + fnfttypes.MsgPurchaseShares.$type,
+    type_url: `/${fnfttypes.MsgPurchaseShares.$type}`,
     value: fnfttypes.MsgPurchaseShares.encode(msg).finish(),
   }
 

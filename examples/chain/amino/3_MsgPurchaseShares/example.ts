@@ -48,7 +48,7 @@ const main = async () => {
     sender: senderAddr,
     class_id: 'series',
     id: '0',
-    shares: '80000',
+    shares: '40000',
   }
   const msgAny: anytypes.Any = {
     type_url: '/' + fnfttypes.MsgPurchaseShares.$type,

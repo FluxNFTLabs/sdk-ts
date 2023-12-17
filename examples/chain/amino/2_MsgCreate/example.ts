@@ -49,6 +49,7 @@ const main = async () => {
     class_id: 'series',
     supply: '100000',
     initial_price: { denom: 'usdt', amount: '100000' }, // 0.1 USDT
+    owner_equity_percent: "40",
     ISO_timestamp: '' + Math.round(Date.now() / 1000 + 20),
     ISO_success_percent: '75',
     accepted_payment_denom: 'usdt',

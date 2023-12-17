@@ -65,7 +65,7 @@ export interface QueryConsensusStateRequest {
   /** consensus state revision height */
   revision_height: string;
   /**
-   * latest_height overrrides the height field and queries the latest stored
+   * latest_height overrides the height field and queries the latest stored
    * ConsensusState
    */
   latest_height: boolean;

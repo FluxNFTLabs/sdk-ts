@@ -16,6 +16,8 @@ export interface MsgCreate {
   class_id: string;
   /** shares defines the number of shares this nft holds */
   supply: string;
+  /** owner equity is the percentage of shares owner will receive via vesting */
+  owner_equity_percent: string;
   /** initial_price defines initial price of a share */
   initial_price:
     | Coin
@@ -148,6 +150,7 @@ function createBaseMsgCreate(): MsgCreate {
     sender: "",
     class_id: "",
     supply: "",
+    owner_equity_percent: "",
     initial_price: undefined,
     ISO_timestamp: "0",
     ISO_success_percent: "0",
@@ -169,20 +172,23 @@ export const MsgCreate = {
     if (message.supply !== "") {
       writer.uint32(26).string(message.supply);
     }
+    if (message.owner_equity_percent !== "") {
+      writer.uint32(34).string(message.owner_equity_percent);
+    }
     if (message.initial_price !== undefined) {
-      Coin.encode(message.initial_price, writer.uint32(34).fork()).ldelim();
+      Coin.encode(message.initial_price, writer.uint32(42).fork()).ldelim();
     }
     if (message.ISO_timestamp !== "0") {
-      writer.uint32(40).uint64(message.ISO_timestamp);
+      writer.uint32(48).uint64(message.ISO_timestamp);
     }
     if (message.ISO_success_percent !== "0") {
-      writer.uint32(48).uint64(message.ISO_success_percent);
+      writer.uint32(56).uint64(message.ISO_success_percent);
     }
     if (message.accepted_payment_denom !== "") {
-      writer.uint32(58).string(message.accepted_payment_denom);
+      writer.uint32(66).string(message.accepted_payment_denom);
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(64).uint64(message.dividend_interval);
+      writer.uint32(72).uint64(message.dividend_interval);
     }
     return writer;
   },
@@ -220,31 +226,38 @@ export const MsgCreate = {
             break;
           }
 
-          message.initial_price = Coin.decode(reader, reader.uint32());
+          message.owner_equity_percent = reader.string();
           continue;
         case 5:
-          if (tag !== 40) {
+          if (tag !== 42) {
             break;
           }
 
-          message.ISO_timestamp = longToString(reader.uint64() as Long);
+          message.initial_price = Coin.decode(reader, reader.uint32());
           continue;
         case 6:
           if (tag !== 48) {
             break;
           }
 
-          message.ISO_success_percent = longToString(reader.uint64() as Long);
+          message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 7:
-          if (tag !== 58) {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.ISO_success_percent = longToString(reader.uint64() as Long);
+          continue;
+        case 8:
+          if (tag !== 66) {
             break;
           }
 
           message.accepted_payment_denom = reader.string();
           continue;
-        case 8:
-          if (tag !== 64) {
+        case 9:
+          if (tag !== 72) {
             break;
           }
 
@@ -264,6 +277,7 @@ export const MsgCreate = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
+      owner_equity_percent: isSet(object.owner_equity_percent) ? globalThis.String(object.owner_equity_percent) : "",
       initial_price: isSet(object.initial_price) ? Coin.fromJSON(object.initial_price) : undefined,
       ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
       ISO_success_percent: isSet(object.ISO_success_percent) ? globalThis.String(object.ISO_success_percent) : "0",
@@ -284,6 +298,9 @@ export const MsgCreate = {
     }
     if (message.supply !== "") {
       obj.supply = message.supply;
+    }
+    if (message.owner_equity_percent !== "") {
+      obj.owner_equity_percent = message.owner_equity_percent;
     }
     if (message.initial_price !== undefined) {
       obj.initial_price = Coin.toJSON(message.initial_price);
@@ -311,6 +328,7 @@ export const MsgCreate = {
     message.sender = object.sender ?? "";
     message.class_id = object.class_id ?? "";
     message.supply = object.supply ?? "";
+    message.owner_equity_percent = object.owner_equity_percent ?? "";
     message.initial_price = (object.initial_price !== undefined && object.initial_price !== null)
       ? Coin.fromPartial(object.initial_price)
       : undefined;

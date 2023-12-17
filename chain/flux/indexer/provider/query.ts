@@ -393,7 +393,7 @@ export const ProviderEventsResponse = {
   },
 };
 
-export interface Provider {
+export interface API {
   GetBlock(request: DeepPartial<ProviderBlockRequest>, metadata?: grpc.Metadata): Promise<ProviderBlockResponse>;
   StreamBlock(request: DeepPartial<ProviderBlockRequest>, metadata?: grpc.Metadata): Observable<ProviderBlockResponse>;
   GetEvents(request: DeepPartial<ProviderEventsRequest>, metadata?: grpc.Metadata): Promise<ProviderEventsResponse>;
@@ -403,7 +403,7 @@ export interface Provider {
   ): Observable<ProviderEventsResponse>;
 }
 
-export class ProviderClientImpl implements Provider {
+export class APIClientImpl implements API {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
@@ -415,30 +415,30 @@ export class ProviderClientImpl implements Provider {
   }
 
   GetBlock(request: DeepPartial<ProviderBlockRequest>, metadata?: grpc.Metadata): Promise<ProviderBlockResponse> {
-    return this.rpc.unary(ProviderGetBlockDesc, ProviderBlockRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APIGetBlockDesc, ProviderBlockRequest.fromPartial(request), metadata);
   }
 
   StreamBlock(request: DeepPartial<ProviderBlockRequest>, metadata?: grpc.Metadata): Observable<ProviderBlockResponse> {
-    return this.rpc.invoke(ProviderStreamBlockDesc, ProviderBlockRequest.fromPartial(request), metadata);
+    return this.rpc.invoke(APIStreamBlockDesc, ProviderBlockRequest.fromPartial(request), metadata);
   }
 
   GetEvents(request: DeepPartial<ProviderEventsRequest>, metadata?: grpc.Metadata): Promise<ProviderEventsResponse> {
-    return this.rpc.unary(ProviderGetEventsDesc, ProviderEventsRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APIGetEventsDesc, ProviderEventsRequest.fromPartial(request), metadata);
   }
 
   StreamEvents(
     request: DeepPartial<ProviderEventsRequest>,
     metadata?: grpc.Metadata,
   ): Observable<ProviderEventsResponse> {
-    return this.rpc.invoke(ProviderStreamEventsDesc, ProviderEventsRequest.fromPartial(request), metadata);
+    return this.rpc.invoke(APIStreamEventsDesc, ProviderEventsRequest.fromPartial(request), metadata);
   }
 }
 
-export const ProviderDesc = { serviceName: "flux.indexer.provider.Provider" };
+export const APIDesc = { serviceName: "flux.indexer.provider.API" };
 
-export const ProviderGetBlockDesc: UnaryMethodDefinitionish = {
+export const APIGetBlockDesc: UnaryMethodDefinitionish = {
   methodName: "GetBlock",
-  service: ProviderDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -459,9 +459,9 @@ export const ProviderGetBlockDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const ProviderStreamBlockDesc: UnaryMethodDefinitionish = {
+export const APIStreamBlockDesc: UnaryMethodDefinitionish = {
   methodName: "StreamBlock",
-  service: ProviderDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: true,
   requestType: {
@@ -482,9 +482,9 @@ export const ProviderStreamBlockDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const ProviderGetEventsDesc: UnaryMethodDefinitionish = {
+export const APIGetEventsDesc: UnaryMethodDefinitionish = {
   methodName: "GetEvents",
-  service: ProviderDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -505,9 +505,9 @@ export const ProviderGetEventsDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const ProviderStreamEventsDesc: UnaryMethodDefinitionish = {
+export const APIStreamEventsDesc: UnaryMethodDefinitionish = {
   methodName: "StreamEvents",
-  service: ProviderDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: true,
   requestType: {

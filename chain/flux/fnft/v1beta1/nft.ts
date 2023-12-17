@@ -36,6 +36,8 @@ export interface NFT {
   url: string;
   /** supply is shares supply for this nft */
   supply: string;
+  /** owner equity is the percentage of shares owner will receive via vesting */
+  owner_equity_percent: string;
   /** available shares to purchase within iso period */
   available_shares: string;
   /** iso price per share */
@@ -219,6 +221,7 @@ function createBaseNFT(): NFT {
     id: "",
     url: "",
     supply: "",
+    owner_equity_percent: "",
     available_shares: "",
     initial_price: undefined,
     ISO_timestamp: "0",
@@ -250,41 +253,44 @@ export const NFT = {
     if (message.supply !== "") {
       writer.uint32(34).string(message.supply);
     }
+    if (message.owner_equity_percent !== "") {
+      writer.uint32(42).string(message.owner_equity_percent);
+    }
     if (message.available_shares !== "") {
-      writer.uint32(42).string(message.available_shares);
+      writer.uint32(50).string(message.available_shares);
     }
     if (message.initial_price !== undefined) {
-      Coin.encode(message.initial_price, writer.uint32(50).fork()).ldelim();
+      Coin.encode(message.initial_price, writer.uint32(58).fork()).ldelim();
     }
     if (message.ISO_timestamp !== "0") {
-      writer.uint32(56).uint64(message.ISO_timestamp);
+      writer.uint32(64).uint64(message.ISO_timestamp);
     }
     if (message.ISO_success_percent !== "0") {
-      writer.uint32(64).uint64(message.ISO_success_percent);
+      writer.uint32(72).uint64(message.ISO_success_percent);
     }
     if (message.accepted_payment_denom !== "") {
-      writer.uint32(74).string(message.accepted_payment_denom);
+      writer.uint32(82).string(message.accepted_payment_denom);
     }
     for (const v of message.sponsorships) {
-      Sponsorship.encode(v!, writer.uint32(82).fork()).ldelim();
+      Sponsorship.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     if (message.revenue !== undefined) {
-      Coin.encode(message.revenue, writer.uint32(90).fork()).ldelim();
+      Coin.encode(message.revenue, writer.uint32(98).fork()).ldelim();
     }
     if (message.dividend_interval !== "0") {
-      writer.uint32(96).uint64(message.dividend_interval);
+      writer.uint32(104).uint64(message.dividend_interval);
     }
     if (message.last_dividend_timestamp !== "0") {
-      writer.uint32(104).uint64(message.last_dividend_timestamp);
+      writer.uint32(112).uint64(message.last_dividend_timestamp);
     }
     if (message.owner !== "") {
-      writer.uint32(114).string(message.owner);
+      writer.uint32(122).string(message.owner);
     }
     if (message.active === true) {
-      writer.uint32(120).bool(message.active);
+      writer.uint32(128).bool(message.active);
     }
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(130).fork()).ldelim();
+      Any.encode(message.data, writer.uint32(138).fork()).ldelim();
     }
     return writer;
   },
@@ -329,80 +335,87 @@ export const NFT = {
             break;
           }
 
-          message.available_shares = reader.string();
+          message.owner_equity_percent = reader.string();
           continue;
         case 6:
           if (tag !== 50) {
             break;
           }
 
-          message.initial_price = Coin.decode(reader, reader.uint32());
+          message.available_shares = reader.string();
           continue;
         case 7:
-          if (tag !== 56) {
+          if (tag !== 58) {
             break;
           }
 
-          message.ISO_timestamp = longToString(reader.uint64() as Long);
+          message.initial_price = Coin.decode(reader, reader.uint32());
           continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.ISO_success_percent = longToString(reader.uint64() as Long);
+          message.ISO_timestamp = longToString(reader.uint64() as Long);
           continue;
         case 9:
-          if (tag !== 74) {
+          if (tag !== 72) {
             break;
           }
 
-          message.accepted_payment_denom = reader.string();
+          message.ISO_success_percent = longToString(reader.uint64() as Long);
           continue;
         case 10:
           if (tag !== 82) {
             break;
           }
 
-          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
+          message.accepted_payment_denom = reader.string();
           continue;
         case 11:
           if (tag !== 90) {
             break;
           }
 
-          message.revenue = Coin.decode(reader, reader.uint32());
+          message.sponsorships.push(Sponsorship.decode(reader, reader.uint32()));
           continue;
         case 12:
-          if (tag !== 96) {
+          if (tag !== 98) {
             break;
           }
 
-          message.dividend_interval = longToString(reader.uint64() as Long);
+          message.revenue = Coin.decode(reader, reader.uint32());
           continue;
         case 13:
           if (tag !== 104) {
             break;
           }
 
-          message.last_dividend_timestamp = longToString(reader.uint64() as Long);
+          message.dividend_interval = longToString(reader.uint64() as Long);
           continue;
         case 14:
-          if (tag !== 114) {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.last_dividend_timestamp = longToString(reader.uint64() as Long);
+          continue;
+        case 15:
+          if (tag !== 122) {
             break;
           }
 
           message.owner = reader.string();
           continue;
-        case 15:
-          if (tag !== 120) {
+        case 16:
+          if (tag !== 128) {
             break;
           }
 
           message.active = reader.bool();
           continue;
-        case 16:
-          if (tag !== 130) {
+        case 17:
+          if (tag !== 138) {
             break;
           }
 
@@ -423,6 +436,7 @@ export const NFT = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       url: isSet(object.url) ? globalThis.String(object.url) : "",
       supply: isSet(object.supply) ? globalThis.String(object.supply) : "",
+      owner_equity_percent: isSet(object.owner_equity_percent) ? globalThis.String(object.owner_equity_percent) : "",
       available_shares: isSet(object.available_shares) ? globalThis.String(object.available_shares) : "",
       initial_price: isSet(object.initial_price) ? Coin.fromJSON(object.initial_price) : undefined,
       ISO_timestamp: isSet(object.ISO_timestamp) ? globalThis.String(object.ISO_timestamp) : "0",
@@ -457,6 +471,9 @@ export const NFT = {
     }
     if (message.supply !== "") {
       obj.supply = message.supply;
+    }
+    if (message.owner_equity_percent !== "") {
+      obj.owner_equity_percent = message.owner_equity_percent;
     }
     if (message.available_shares !== "") {
       obj.available_shares = message.available_shares;
@@ -506,6 +523,7 @@ export const NFT = {
     message.id = object.id ?? "";
     message.url = object.url ?? "";
     message.supply = object.supply ?? "";
+    message.owner_equity_percent = object.owner_equity_percent ?? "";
     message.available_shares = object.available_shares ?? "";
     message.initial_price = (object.initial_price !== undefined && object.initial_price !== null)
       ? Coin.fromPartial(object.initial_price)

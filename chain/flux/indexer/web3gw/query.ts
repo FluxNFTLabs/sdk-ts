@@ -453,13 +453,13 @@ export const SignJSONResponse = {
   },
 };
 
-export interface Web3GW {
+export interface API {
   GetMetaData(request: DeepPartial<GetMetaDataRequest>, metadata?: grpc.Metadata): Promise<GetMetaDataResponse>;
   SignProto(request: DeepPartial<SignProtoRequest>, metadata?: grpc.Metadata): Promise<SignProtoResponse>;
   SignJSON(request: DeepPartial<SignJSONRequest>, metadata?: grpc.Metadata): Promise<SignJSONResponse>;
 }
 
-export class Web3GWClientImpl implements Web3GW {
+export class APIClientImpl implements API {
   private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
@@ -470,23 +470,23 @@ export class Web3GWClientImpl implements Web3GW {
   }
 
   GetMetaData(request: DeepPartial<GetMetaDataRequest>, metadata?: grpc.Metadata): Promise<GetMetaDataResponse> {
-    return this.rpc.unary(Web3GWGetMetaDataDesc, GetMetaDataRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APIGetMetaDataDesc, GetMetaDataRequest.fromPartial(request), metadata);
   }
 
   SignProto(request: DeepPartial<SignProtoRequest>, metadata?: grpc.Metadata): Promise<SignProtoResponse> {
-    return this.rpc.unary(Web3GWSignProtoDesc, SignProtoRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APISignProtoDesc, SignProtoRequest.fromPartial(request), metadata);
   }
 
   SignJSON(request: DeepPartial<SignJSONRequest>, metadata?: grpc.Metadata): Promise<SignJSONResponse> {
-    return this.rpc.unary(Web3GWSignJSONDesc, SignJSONRequest.fromPartial(request), metadata);
+    return this.rpc.unary(APISignJSONDesc, SignJSONRequest.fromPartial(request), metadata);
   }
 }
 
-export const Web3GWDesc = { serviceName: "flux.indexer.web3gw.Web3GW" };
+export const APIDesc = { serviceName: "flux.indexer.web3gw.API" };
 
-export const Web3GWGetMetaDataDesc: UnaryMethodDefinitionish = {
+export const APIGetMetaDataDesc: UnaryMethodDefinitionish = {
   methodName: "GetMetaData",
-  service: Web3GWDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -507,9 +507,9 @@ export const Web3GWGetMetaDataDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const Web3GWSignProtoDesc: UnaryMethodDefinitionish = {
+export const APISignProtoDesc: UnaryMethodDefinitionish = {
   methodName: "SignProto",
-  service: Web3GWDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
@@ -530,9 +530,9 @@ export const Web3GWSignProtoDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
-export const Web3GWSignJSONDesc: UnaryMethodDefinitionish = {
+export const APISignJSONDesc: UnaryMethodDefinitionish = {
   methodName: "SignJSON",
-  service: Web3GWDesc,
+  service: APIDesc,
   requestStream: false,
   responseStream: false,
   requestType: {

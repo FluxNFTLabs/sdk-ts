@@ -51,11 +51,11 @@ const main = async () => {
     shares: '40000',
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + fnfttypes.MsgPurchaseShares.$type,
+    type_url: `/${fnfttypes.MsgPurchaseShares.$type}`,
     value: fnfttypes.MsgPurchaseShares.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + fnfttypes.MsgPurchaseShares.$type],
+    type: codectypemap[`/${fnfttypes.MsgPurchaseShares.$type}`],
     value: fnfttypes.MsgPurchaseShares.toJSON(msg)
   }
 

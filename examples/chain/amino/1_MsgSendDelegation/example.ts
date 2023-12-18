@@ -64,11 +64,11 @@ const main = async () => {
     amount: [{  amount: '77', denom: 'lux'}],
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + banktypes.MsgSend.$type,
+    type_url: `/${banktypes.MsgSend.$type}`,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + banktypes.MsgSend.$type],
+    type: codectypemap[`/${banktypes.MsgSend.$type}`],
     value: banktypes.MsgSend.toJSON(msg)
   }
 

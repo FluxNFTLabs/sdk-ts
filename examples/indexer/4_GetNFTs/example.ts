@@ -1,4 +1,4 @@
-import * as fnfttypes from '../../../../chain/flux/indexer/fnft/query';
+import * as fnfttypes from '../../../chain/flux/indexer/fnft/query';
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
 const main = async () => {
@@ -6,10 +6,10 @@ const main = async () => {
   const cc = new fnfttypes.GrpcWebImpl(host, {
     transport: NodeHttpTransport(),
   })
-  const client = new fnfttypes.FNFTClientImpl(cc)
+  const client = new fnfttypes.APIClientImpl(cc)
 
   const req: fnfttypes.GetNFTsRequest = {
-    classId: "series",
+    class_id: "series",
     id: "",
     owner: "",
   };

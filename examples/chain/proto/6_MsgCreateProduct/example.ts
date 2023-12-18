@@ -60,7 +60,7 @@ const main = async () => {
   }
 
   const msgAny: anytypes.Any = {
-    type_url: '/' + bazaartypes.MsgCreateProduct.$type,
+    type_url: `/${bazaartypes.MsgCreateProduct.$type}`,
     value: bazaartypes.MsgCreateProduct.encode(msg).finish(),
   }
 

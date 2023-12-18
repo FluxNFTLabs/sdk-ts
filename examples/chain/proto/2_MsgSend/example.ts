@@ -52,7 +52,7 @@ const main = async () => {
   }
 
   const msgAny: anytypes.Any = {
-    type_url: '/' + banktypes.MsgSend.$type,
+    type_url: `/${banktypes.MsgSend.$type}`,
     value: banktypes.MsgSend.encode(msg).finish(),
   }
 

@@ -1,4 +1,4 @@
-import * as providertypes from '../../../../chain/flux/indexer/provider/query';
+import * as providertypes from '../../../chain/flux/indexer/provider/query';
 import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 
 const main = async () => {

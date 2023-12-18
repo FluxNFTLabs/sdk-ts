@@ -51,11 +51,11 @@ const main = async () => {
     product_id: '0',
   }
   const msgAny: anytypes.Any = {
-    type_url: '/' + bazaartypes.MsgVerifyProduct.$type,
+    type_url: `/${bazaartypes.MsgVerifyProduct.$type}`,
     value: bazaartypes.MsgVerifyProduct.encode(msg).finish(),
   }
   const msgJSON = {
-    type: codectypemap['/' + bazaartypes.MsgVerifyProduct.$type],
+    type: codectypemap[`/${bazaartypes.MsgVerifyProduct.$type}`],
     value: bazaartypes.MsgVerifyProduct.toJSON(msg)
   }
 

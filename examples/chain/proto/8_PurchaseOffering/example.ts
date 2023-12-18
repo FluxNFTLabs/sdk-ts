@@ -55,7 +55,7 @@ const main = async () => {
   }
 
   const msgAny: anytypes.Any = {
-    type_url: '/' + bazaartypes.MsgPurchaseOffering.$type,
+    type_url: `/${bazaartypes.MsgPurchaseOffering.$type}`,
     value: bazaartypes.MsgPurchaseOffering.encode(msg).finish(),
   }
 

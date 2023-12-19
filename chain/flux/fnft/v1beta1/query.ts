@@ -4,7 +4,7 @@ import { BrowserHeaders } from "browser-headers";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Class, NFT } from "./nft";
+import { Class, Holder, NFT } from "./nft";
 
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
@@ -44,6 +44,29 @@ export interface QuerySupplyRequest {
 export interface QuerySupplyResponse {
   /** amount is the number of all NFTs from the given class */
   amount: string;
+}
+
+/** QueryHolderRequest is the request type for the Query/Holder RPC method */
+export interface QueryHolderRequest {
+  class_id: string;
+  id: string;
+  address: string;
+}
+
+/** QueryHolderRequest is the response type for the Query/Holder RPC method */
+export interface QueryHolderResponse {
+  holder: Holder | undefined;
+}
+
+/** QueryHoldersRequest is the request type for the Query/Holders RPC method */
+export interface QueryHoldersRequest {
+  class_id: string;
+  id: string;
+}
+
+/** QueryHoldersRequest is the response type for the Query/Holders RPC method */
+export interface QueryHoldersResponse {
+  holders: Holder[];
 }
 
 /** QueryNFTstRequest is the request type for the Query/NFTs RPC method */
@@ -488,6 +511,295 @@ export const QuerySupplyResponse = {
   fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
     message.amount = object.amount ?? "0";
+    return message;
+  },
+};
+
+function createBaseQueryHolderRequest(): QueryHolderRequest {
+  return { class_id: "", id: "", address: "" };
+}
+
+export const QueryHolderRequest = {
+  $type: "flux.fnft.v1beta1.QueryHolderRequest" as const,
+
+  encode(message: QueryHolderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    if (message.address !== "") {
+      writer.uint32(26).string(message.address);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHolderRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryHolderRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.class_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.address = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHolderRequest {
+    return {
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+    };
+  },
+
+  toJSON(message: QueryHolderRequest): unknown {
+    const obj: any = {};
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    if (message.address !== "") {
+      obj.address = message.address;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryHolderRequest>): QueryHolderRequest {
+    return QueryHolderRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryHolderRequest>): QueryHolderRequest {
+    const message = createBaseQueryHolderRequest();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    message.address = object.address ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryHolderResponse(): QueryHolderResponse {
+  return { holder: undefined };
+}
+
+export const QueryHolderResponse = {
+  $type: "flux.fnft.v1beta1.QueryHolderResponse" as const,
+
+  encode(message: QueryHolderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.holder !== undefined) {
+      Holder.encode(message.holder, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHolderResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryHolderResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.holder = Holder.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHolderResponse {
+    return { holder: isSet(object.holder) ? Holder.fromJSON(object.holder) : undefined };
+  },
+
+  toJSON(message: QueryHolderResponse): unknown {
+    const obj: any = {};
+    if (message.holder !== undefined) {
+      obj.holder = Holder.toJSON(message.holder);
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryHolderResponse>): QueryHolderResponse {
+    return QueryHolderResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryHolderResponse>): QueryHolderResponse {
+    const message = createBaseQueryHolderResponse();
+    message.holder = (object.holder !== undefined && object.holder !== null)
+      ? Holder.fromPartial(object.holder)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryHoldersRequest(): QueryHoldersRequest {
+  return { class_id: "", id: "" };
+}
+
+export const QueryHoldersRequest = {
+  $type: "flux.fnft.v1beta1.QueryHoldersRequest" as const,
+
+  encode(message: QueryHoldersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHoldersRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryHoldersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.class_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHoldersRequest {
+    return {
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+    };
+  },
+
+  toJSON(message: QueryHoldersRequest): unknown {
+    const obj: any = {};
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryHoldersRequest>): QueryHoldersRequest {
+    return QueryHoldersRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryHoldersRequest>): QueryHoldersRequest {
+    const message = createBaseQueryHoldersRequest();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryHoldersResponse(): QueryHoldersResponse {
+  return { holders: [] };
+}
+
+export const QueryHoldersResponse = {
+  $type: "flux.fnft.v1beta1.QueryHoldersResponse" as const,
+
+  encode(message: QueryHoldersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.holders) {
+      Holder.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryHoldersResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryHoldersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.holders.push(Holder.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryHoldersResponse {
+    return {
+      holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: QueryHoldersResponse): unknown {
+    const obj: any = {};
+    if (message.holders?.length) {
+      obj.holders = message.holders.map((e) => Holder.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryHoldersResponse>): QueryHoldersResponse {
+    return QueryHoldersResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryHoldersResponse>): QueryHoldersResponse {
+    const message = createBaseQueryHoldersResponse();
+    message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1073,6 +1385,16 @@ export interface Query {
    */
   Supply(request: DeepPartial<QuerySupplyRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyResponse>;
   /**
+   * Holders queries single share holders from the given class, class id, address
+   * of ERC721.
+   */
+  Holder(request: DeepPartial<QueryHolderRequest>, metadata?: grpc.Metadata): Promise<QueryHolderResponse>;
+  /**
+   * Holders queries all share holders from the given class, class id
+   * of ERC721.
+   */
+  Holders(request: DeepPartial<QueryHoldersRequest>, metadata?: grpc.Metadata): Promise<QueryHoldersResponse>;
+  /**
    * NFTs queries all NFTs of a given class or owner,choose at least one of the
    * two, similar to tokenByIndex in ERC721Enumerable
    */
@@ -1093,6 +1415,8 @@ export class QueryClientImpl implements Query {
     this.Balance = this.Balance.bind(this);
     this.Owner = this.Owner.bind(this);
     this.Supply = this.Supply.bind(this);
+    this.Holder = this.Holder.bind(this);
+    this.Holders = this.Holders.bind(this);
     this.NFTs = this.NFTs.bind(this);
     this.NFT = this.NFT.bind(this);
     this.Class = this.Class.bind(this);
@@ -1109,6 +1433,14 @@ export class QueryClientImpl implements Query {
 
   Supply(request: DeepPartial<QuerySupplyRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyResponse> {
     return this.rpc.unary(QuerySupplyDesc, QuerySupplyRequest.fromPartial(request), metadata);
+  }
+
+  Holder(request: DeepPartial<QueryHolderRequest>, metadata?: grpc.Metadata): Promise<QueryHolderResponse> {
+    return this.rpc.unary(QueryHolderDesc, QueryHolderRequest.fromPartial(request), metadata);
+  }
+
+  Holders(request: DeepPartial<QueryHoldersRequest>, metadata?: grpc.Metadata): Promise<QueryHoldersResponse> {
+    return this.rpc.unary(QueryHoldersDesc, QueryHoldersRequest.fromPartial(request), metadata);
   }
 
   NFTs(request: DeepPartial<QueryNFTsRequest>, metadata?: grpc.Metadata): Promise<QueryNFTsResponse> {
@@ -1189,6 +1521,52 @@ export const QuerySupplyDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = QuerySupplyResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryHolderDesc: UnaryMethodDefinitionish = {
+  methodName: "Holder",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryHolderRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryHolderResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryHoldersDesc: UnaryMethodDefinitionish = {
+  methodName: "Holders",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryHoldersRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryHoldersResponse.decode(data);
       return {
         ...value,
         toObject() {

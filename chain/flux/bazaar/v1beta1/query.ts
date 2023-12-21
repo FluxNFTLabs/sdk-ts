@@ -2,24 +2,172 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
+import { Product } from "./product";
 
-export interface QueryProductRequest {
+export interface QueryNFTProductsRequest {
+  class_id: string;
+  id: string;
+}
+
+export interface QueryNFTProductsResponse {
+  products: Product[];
+}
+
+export interface QueryNFTProductRequest {
   class_id: string;
   id: string;
   product_id: string;
 }
 
-export interface QueryProductResponse {
+export interface QueryNFTProductResponse {
+  product: Product | undefined;
 }
 
-function createBaseQueryProductRequest(): QueryProductRequest {
+function createBaseQueryNFTProductsRequest(): QueryNFTProductsRequest {
+  return { class_id: "", id: "" };
+}
+
+export const QueryNFTProductsRequest = {
+  $type: "flux.bazaar.v1beta1.QueryNFTProductsRequest" as const,
+
+  encode(message: QueryNFTProductsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.class_id !== "") {
+      writer.uint32(10).string(message.class_id);
+    }
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTProductsRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryNFTProductsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.class_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.id = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryNFTProductsRequest {
+    return {
+      class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
+      id: isSet(object.id) ? globalThis.String(object.id) : "",
+    };
+  },
+
+  toJSON(message: QueryNFTProductsRequest): unknown {
+    const obj: any = {};
+    if (message.class_id !== "") {
+      obj.class_id = message.class_id;
+    }
+    if (message.id !== "") {
+      obj.id = message.id;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryNFTProductsRequest>): QueryNFTProductsRequest {
+    return QueryNFTProductsRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryNFTProductsRequest>): QueryNFTProductsRequest {
+    const message = createBaseQueryNFTProductsRequest();
+    message.class_id = object.class_id ?? "";
+    message.id = object.id ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryNFTProductsResponse(): QueryNFTProductsResponse {
+  return { products: [] };
+}
+
+export const QueryNFTProductsResponse = {
+  $type: "flux.bazaar.v1beta1.QueryNFTProductsResponse" as const,
+
+  encode(message: QueryNFTProductsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.products) {
+      Product.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTProductsResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryNFTProductsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.products.push(Product.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryNFTProductsResponse {
+    return {
+      products: globalThis.Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: QueryNFTProductsResponse): unknown {
+    const obj: any = {};
+    if (message.products?.length) {
+      obj.products = message.products.map((e) => Product.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryNFTProductsResponse>): QueryNFTProductsResponse {
+    return QueryNFTProductsResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryNFTProductsResponse>): QueryNFTProductsResponse {
+    const message = createBaseQueryNFTProductsResponse();
+    message.products = object.products?.map((e) => Product.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseQueryNFTProductRequest(): QueryNFTProductRequest {
   return { class_id: "", id: "", product_id: "" };
 }
 
-export const QueryProductRequest = {
-  $type: "flux.bazaar.v1beta1.QueryProductRequest" as const,
+export const QueryNFTProductRequest = {
+  $type: "flux.bazaar.v1beta1.QueryNFTProductRequest" as const,
 
-  encode(message: QueryProductRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTProductRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.class_id !== "") {
       writer.uint32(10).string(message.class_id);
     }
@@ -32,10 +180,10 @@ export const QueryProductRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProductRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTProductRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryProductRequest();
+    const message = createBaseQueryNFTProductRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -69,7 +217,7 @@ export const QueryProductRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryProductRequest {
+  fromJSON(object: any): QueryNFTProductRequest {
     return {
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       id: isSet(object.id) ? globalThis.String(object.id) : "",
@@ -77,7 +225,7 @@ export const QueryProductRequest = {
     };
   },
 
-  toJSON(message: QueryProductRequest): unknown {
+  toJSON(message: QueryNFTProductRequest): unknown {
     const obj: any = {};
     if (message.class_id !== "") {
       obj.class_id = message.class_id;
@@ -91,11 +239,11 @@ export const QueryProductRequest = {
     return obj;
   },
 
-  create(base?: DeepPartial<QueryProductRequest>): QueryProductRequest {
-    return QueryProductRequest.fromPartial(base ?? {});
+  create(base?: DeepPartial<QueryNFTProductRequest>): QueryNFTProductRequest {
+    return QueryNFTProductRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<QueryProductRequest>): QueryProductRequest {
-    const message = createBaseQueryProductRequest();
+  fromPartial(object: DeepPartial<QueryNFTProductRequest>): QueryNFTProductRequest {
+    const message = createBaseQueryNFTProductRequest();
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.product_id = object.product_id ?? "";
@@ -103,24 +251,34 @@ export const QueryProductRequest = {
   },
 };
 
-function createBaseQueryProductResponse(): QueryProductResponse {
-  return {};
+function createBaseQueryNFTProductResponse(): QueryNFTProductResponse {
+  return { product: undefined };
 }
 
-export const QueryProductResponse = {
-  $type: "flux.bazaar.v1beta1.QueryProductResponse" as const,
+export const QueryNFTProductResponse = {
+  $type: "flux.bazaar.v1beta1.QueryNFTProductResponse" as const,
 
-  encode(_: QueryProductResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: QueryNFTProductResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.product !== undefined) {
+      Product.encode(message.product, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProductResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryNFTProductResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryProductResponse();
+    const message = createBaseQueryNFTProductResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.product = Product.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -130,27 +288,37 @@ export const QueryProductResponse = {
     return message;
   },
 
-  fromJSON(_: any): QueryProductResponse {
-    return {};
+  fromJSON(object: any): QueryNFTProductResponse {
+    return { product: isSet(object.product) ? Product.fromJSON(object.product) : undefined };
   },
 
-  toJSON(_: QueryProductResponse): unknown {
+  toJSON(message: QueryNFTProductResponse): unknown {
     const obj: any = {};
+    if (message.product !== undefined) {
+      obj.product = Product.toJSON(message.product);
+    }
     return obj;
   },
 
-  create(base?: DeepPartial<QueryProductResponse>): QueryProductResponse {
-    return QueryProductResponse.fromPartial(base ?? {});
+  create(base?: DeepPartial<QueryNFTProductResponse>): QueryNFTProductResponse {
+    return QueryNFTProductResponse.fromPartial(base ?? {});
   },
-  fromPartial(_: DeepPartial<QueryProductResponse>): QueryProductResponse {
-    const message = createBaseQueryProductResponse();
+  fromPartial(object: DeepPartial<QueryNFTProductResponse>): QueryNFTProductResponse {
+    const message = createBaseQueryNFTProductResponse();
+    message.product = (object.product !== undefined && object.product !== null)
+      ? Product.fromPartial(object.product)
+      : undefined;
     return message;
   },
 };
 
 /** Query defines the gRPC querier service. */
 export interface Query {
-  Product(request: DeepPartial<QueryProductRequest>, metadata?: grpc.Metadata): Promise<QueryProductResponse>;
+  NFTProducts(
+    request: DeepPartial<QueryNFTProductsRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryNFTProductsResponse>;
+  NFTProduct(request: DeepPartial<QueryNFTProductRequest>, metadata?: grpc.Metadata): Promise<QueryNFTProductResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -158,29 +326,60 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.Product = this.Product.bind(this);
+    this.NFTProducts = this.NFTProducts.bind(this);
+    this.NFTProduct = this.NFTProduct.bind(this);
   }
 
-  Product(request: DeepPartial<QueryProductRequest>, metadata?: grpc.Metadata): Promise<QueryProductResponse> {
-    return this.rpc.unary(QueryProductDesc, QueryProductRequest.fromPartial(request), metadata);
+  NFTProducts(
+    request: DeepPartial<QueryNFTProductsRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryNFTProductsResponse> {
+    return this.rpc.unary(QueryNFTProductsDesc, QueryNFTProductsRequest.fromPartial(request), metadata);
+  }
+
+  NFTProduct(request: DeepPartial<QueryNFTProductRequest>, metadata?: grpc.Metadata): Promise<QueryNFTProductResponse> {
+    return this.rpc.unary(QueryNFTProductDesc, QueryNFTProductRequest.fromPartial(request), metadata);
   }
 }
 
 export const QueryDesc = { serviceName: "flux.bazaar.v1beta1.Query" };
 
-export const QueryProductDesc: UnaryMethodDefinitionish = {
-  methodName: "Product",
+export const QueryNFTProductsDesc: UnaryMethodDefinitionish = {
+  methodName: "NFTProducts",
   service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return QueryProductRequest.encode(this).finish();
+      return QueryNFTProductsRequest.encode(this).finish();
     },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = QueryProductResponse.decode(data);
+      const value = QueryNFTProductsResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryNFTProductDesc: UnaryMethodDefinitionish = {
+  methodName: "NFTProduct",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryNFTProductRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryNFTProductResponse.decode(data);
       return {
         ...value,
         toObject() {

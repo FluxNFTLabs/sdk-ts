@@ -32,6 +32,13 @@ export interface SignJSONResponse {
   signature: Uint8Array;
 }
 
+export interface FaucetSendRequest {
+  address: string;
+}
+
+export interface FaucetSendResponse {
+}
+
 function createBaseGetMetaDataRequest(): GetMetaDataRequest {
   return {};
 }
@@ -453,10 +460,115 @@ export const SignJSONResponse = {
   },
 };
 
+function createBaseFaucetSendRequest(): FaucetSendRequest {
+  return { address: "" };
+}
+
+export const FaucetSendRequest = {
+  $type: "flux.indexer.web3gw.FaucetSendRequest" as const,
+
+  encode(message: FaucetSendRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
+      writer.uint32(10).string(message.address);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FaucetSendRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFaucetSendRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.address = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FaucetSendRequest {
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
+  },
+
+  toJSON(message: FaucetSendRequest): unknown {
+    const obj: any = {};
+    if (message.address !== "") {
+      obj.address = message.address;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<FaucetSendRequest>): FaucetSendRequest {
+    return FaucetSendRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<FaucetSendRequest>): FaucetSendRequest {
+    const message = createBaseFaucetSendRequest();
+    message.address = object.address ?? "";
+    return message;
+  },
+};
+
+function createBaseFaucetSendResponse(): FaucetSendResponse {
+  return {};
+}
+
+export const FaucetSendResponse = {
+  $type: "flux.indexer.web3gw.FaucetSendResponse" as const,
+
+  encode(_: FaucetSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FaucetSendResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFaucetSendResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): FaucetSendResponse {
+    return {};
+  },
+
+  toJSON(_: FaucetSendResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<FaucetSendResponse>): FaucetSendResponse {
+    return FaucetSendResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<FaucetSendResponse>): FaucetSendResponse {
+    const message = createBaseFaucetSendResponse();
+    return message;
+  },
+};
+
 export interface API {
   GetMetaData(request: DeepPartial<GetMetaDataRequest>, metadata?: grpc.Metadata): Promise<GetMetaDataResponse>;
   SignProto(request: DeepPartial<SignProtoRequest>, metadata?: grpc.Metadata): Promise<SignProtoResponse>;
   SignJSON(request: DeepPartial<SignJSONRequest>, metadata?: grpc.Metadata): Promise<SignJSONResponse>;
+  FaucetSend(request: DeepPartial<FaucetSendRequest>, metadata?: grpc.Metadata): Promise<FaucetSendResponse>;
 }
 
 export class APIClientImpl implements API {
@@ -467,6 +579,7 @@ export class APIClientImpl implements API {
     this.GetMetaData = this.GetMetaData.bind(this);
     this.SignProto = this.SignProto.bind(this);
     this.SignJSON = this.SignJSON.bind(this);
+    this.FaucetSend = this.FaucetSend.bind(this);
   }
 
   GetMetaData(request: DeepPartial<GetMetaDataRequest>, metadata?: grpc.Metadata): Promise<GetMetaDataResponse> {
@@ -479,6 +592,10 @@ export class APIClientImpl implements API {
 
   SignJSON(request: DeepPartial<SignJSONRequest>, metadata?: grpc.Metadata): Promise<SignJSONResponse> {
     return this.rpc.unary(APISignJSONDesc, SignJSONRequest.fromPartial(request), metadata);
+  }
+
+  FaucetSend(request: DeepPartial<FaucetSendRequest>, metadata?: grpc.Metadata): Promise<FaucetSendResponse> {
+    return this.rpc.unary(APIFaucetSendDesc, FaucetSendRequest.fromPartial(request), metadata);
   }
 }
 
@@ -543,6 +660,29 @@ export const APISignJSONDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = SignJSONResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const APIFaucetSendDesc: UnaryMethodDefinitionish = {
+  methodName: "FaucetSend",
+  service: APIDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return FaucetSendRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = FaucetSendResponse.decode(data);
       return {
         ...value,
         toObject() {

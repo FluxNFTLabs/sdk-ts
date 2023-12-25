@@ -4,6 +4,45 @@ import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Any } from "../../../google/protobuf/any";
 
+export enum NFTStatus {
+  ISO = 0,
+  Failed = 1,
+  Active = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function nFTStatusFromJSON(object: any): NFTStatus {
+  switch (object) {
+    case 0:
+    case "ISO":
+      return NFTStatus.ISO;
+    case 1:
+    case "Failed":
+      return NFTStatus.Failed;
+    case 2:
+    case "Active":
+      return NFTStatus.Active;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NFTStatus.UNRECOGNIZED;
+  }
+}
+
+export function nFTStatusToJSON(object: NFTStatus): string {
+  switch (object) {
+    case NFTStatus.ISO:
+      return "ISO";
+    case NFTStatus.Failed:
+      return "Failed";
+    case NFTStatus.Active:
+      return "Active";
+    case NFTStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 /** Class defines the class of the nft type. */
 export interface Class {
   /**
@@ -62,7 +101,7 @@ export interface NFT {
   /** nft owner */
   owner: string;
   /** indicate if nft passes iso or not */
-  active: boolean;
+  status: NFTStatus;
   /** data is an app specific data of the NFT. Optional */
   data: Any | undefined;
 }
@@ -232,7 +271,7 @@ function createBaseNFT(): NFT {
     dividend_interval: "0",
     last_dividend_timestamp: "0",
     owner: "",
-    active: false,
+    status: 0,
     data: undefined,
   };
 }
@@ -286,8 +325,8 @@ export const NFT = {
     if (message.owner !== "") {
       writer.uint32(122).string(message.owner);
     }
-    if (message.active === true) {
-      writer.uint32(128).bool(message.active);
+    if (message.status !== 0) {
+      writer.uint32(128).int32(message.status);
     }
     if (message.data !== undefined) {
       Any.encode(message.data, writer.uint32(138).fork()).ldelim();
@@ -412,7 +451,7 @@ export const NFT = {
             break;
           }
 
-          message.active = reader.bool();
+          message.status = reader.int32() as any;
           continue;
         case 17:
           if (tag !== 138) {
@@ -453,7 +492,7 @@ export const NFT = {
         ? globalThis.String(object.last_dividend_timestamp)
         : "0",
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
-      active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
+      status: isSet(object.status) ? nFTStatusFromJSON(object.status) : 0,
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -505,8 +544,8 @@ export const NFT = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.active === true) {
-      obj.active = message.active;
+    if (message.status !== 0) {
+      obj.status = nFTStatusToJSON(message.status);
     }
     if (message.data !== undefined) {
       obj.data = Any.toJSON(message.data);
@@ -538,7 +577,7 @@ export const NFT = {
     message.dividend_interval = object.dividend_interval ?? "0";
     message.last_dividend_timestamp = object.last_dividend_timestamp ?? "0";
     message.owner = object.owner ?? "";
-    message.active = object.active ?? false;
+    message.status = object.status ?? 0;
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },

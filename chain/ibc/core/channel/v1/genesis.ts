@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { IdentifiedChannel, PacketState } from "./channel";
+import { IdentifiedChannel, PacketState, Params } from "./channel";
 
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisState {
@@ -14,6 +14,7 @@ export interface GenesisState {
   ack_sequences: PacketSequence[];
   /** the sequence for the next generated channel identifier */
   next_channel_sequence: string;
+  params: Params | undefined;
 }
 
 /**
@@ -36,6 +37,7 @@ function createBaseGenesisState(): GenesisState {
     recv_sequences: [],
     ack_sequences: [],
     next_channel_sequence: "0",
+    params: undefined,
   };
 }
 
@@ -66,6 +68,9 @@ export const GenesisState = {
     }
     if (message.next_channel_sequence !== "0") {
       writer.uint32(64).uint64(message.next_channel_sequence);
+    }
+    if (message.params !== undefined) {
+      Params.encode(message.params, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -133,6 +138,13 @@ export const GenesisState = {
 
           message.next_channel_sequence = longToString(reader.uint64() as Long);
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.params = Params.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -168,6 +180,7 @@ export const GenesisState = {
       next_channel_sequence: isSet(object.next_channel_sequence)
         ? globalThis.String(object.next_channel_sequence)
         : "0",
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
 
@@ -197,6 +210,9 @@ export const GenesisState = {
     if (message.next_channel_sequence !== "0") {
       obj.next_channel_sequence = message.next_channel_sequence;
     }
+    if (message.params !== undefined) {
+      obj.params = Params.toJSON(message.params);
+    }
     return obj;
   },
 
@@ -213,6 +229,9 @@ export const GenesisState = {
     message.recv_sequences = object.recv_sequences?.map((e) => PacketSequence.fromPartial(e)) || [];
     message.ack_sequences = object.ack_sequences?.map((e) => PacketSequence.fromPartial(e)) || [];
     message.next_channel_sequence = object.next_channel_sequence ?? "0";
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };

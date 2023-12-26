@@ -23,6 +23,13 @@ export interface QueryNFTProductResponse {
   product: Product | undefined;
 }
 
+export interface QueryVerifiersRequest {
+}
+
+export interface QueryVerifiersResponse {
+  verifiers: string[];
+}
+
 function createBaseQueryNFTProductsRequest(): QueryNFTProductsRequest {
   return { class_id: "", id: "" };
 }
@@ -312,6 +319,114 @@ export const QueryNFTProductResponse = {
   },
 };
 
+function createBaseQueryVerifiersRequest(): QueryVerifiersRequest {
+  return {};
+}
+
+export const QueryVerifiersRequest = {
+  $type: "flux.bazaar.v1beta1.QueryVerifiersRequest" as const,
+
+  encode(_: QueryVerifiersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVerifiersRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryVerifiersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryVerifiersRequest {
+    return {};
+  },
+
+  toJSON(_: QueryVerifiersRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryVerifiersRequest>): QueryVerifiersRequest {
+    return QueryVerifiersRequest.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<QueryVerifiersRequest>): QueryVerifiersRequest {
+    const message = createBaseQueryVerifiersRequest();
+    return message;
+  },
+};
+
+function createBaseQueryVerifiersResponse(): QueryVerifiersResponse {
+  return { verifiers: [] };
+}
+
+export const QueryVerifiersResponse = {
+  $type: "flux.bazaar.v1beta1.QueryVerifiersResponse" as const,
+
+  encode(message: QueryVerifiersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.verifiers) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVerifiersResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryVerifiersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.verifiers.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryVerifiersResponse {
+    return {
+      verifiers: globalThis.Array.isArray(object?.verifiers)
+        ? object.verifiers.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: QueryVerifiersResponse): unknown {
+    const obj: any = {};
+    if (message.verifiers?.length) {
+      obj.verifiers = message.verifiers;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryVerifiersResponse>): QueryVerifiersResponse {
+    return QueryVerifiersResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryVerifiersResponse>): QueryVerifiersResponse {
+    const message = createBaseQueryVerifiersResponse();
+    message.verifiers = object.verifiers?.map((e) => e) || [];
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   NFTProducts(
@@ -319,6 +434,7 @@ export interface Query {
     metadata?: grpc.Metadata,
   ): Promise<QueryNFTProductsResponse>;
   NFTProduct(request: DeepPartial<QueryNFTProductRequest>, metadata?: grpc.Metadata): Promise<QueryNFTProductResponse>;
+  Verifiers(request: DeepPartial<QueryVerifiersRequest>, metadata?: grpc.Metadata): Promise<QueryVerifiersResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -328,6 +444,7 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
     this.NFTProducts = this.NFTProducts.bind(this);
     this.NFTProduct = this.NFTProduct.bind(this);
+    this.Verifiers = this.Verifiers.bind(this);
   }
 
   NFTProducts(
@@ -339,6 +456,10 @@ export class QueryClientImpl implements Query {
 
   NFTProduct(request: DeepPartial<QueryNFTProductRequest>, metadata?: grpc.Metadata): Promise<QueryNFTProductResponse> {
     return this.rpc.unary(QueryNFTProductDesc, QueryNFTProductRequest.fromPartial(request), metadata);
+  }
+
+  Verifiers(request: DeepPartial<QueryVerifiersRequest>, metadata?: grpc.Metadata): Promise<QueryVerifiersResponse> {
+    return this.rpc.unary(QueryVerifiersDesc, QueryVerifiersRequest.fromPartial(request), metadata);
   }
 }
 
@@ -380,6 +501,29 @@ export const QueryNFTProductDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = QueryNFTProductResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryVerifiersDesc: UnaryMethodDefinitionish = {
+  methodName: "Verifiers",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryVerifiersRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryVerifiersResponse.decode(data);
       return {
         ...value,
         toObject() {

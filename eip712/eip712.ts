@@ -166,7 +166,11 @@ function extractEIP712Types(tx: any): any {
 
   // cleanup
   delete rootTypes['MsgsPlaceHolder']
-  delete rootTypes['Type0']
+
+  // TODO: delete this part to start debug & support multiple different types of msgs
+  for (let i=0; i<tx['msgs'].length; i++) {
+    delete rootTypes[`Type${i}`]
+  }
   rootTypes['MsgValue'] = rootTypes['TypeValue']
   delete rootTypes['TypeValue']
 

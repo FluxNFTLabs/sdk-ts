@@ -10,12 +10,6 @@ export interface Product {
   id: string;
   /** product id */
   product_id: string;
-  /** title */
-  title: string;
-  /** description */
-  description: string;
-  /** content url */
-  content_url: string;
   /** product offerings including gift, items, etc */
   offerings: Offering[];
   /** product revenue */
@@ -41,18 +35,7 @@ export interface ClassCommission {
 }
 
 function createBaseProduct(): Product {
-  return {
-    class_id: "",
-    id: "",
-    product_id: "",
-    title: "",
-    description: "",
-    content_url: "",
-    offerings: [],
-    revenue: undefined,
-    tags: [],
-    verified: false,
-  };
+  return { class_id: "", id: "", product_id: "", offerings: [], revenue: undefined, tags: [], verified: false };
 }
 
 export const Product = {
@@ -67,15 +50,6 @@ export const Product = {
     }
     if (message.product_id !== "") {
       writer.uint32(26).string(message.product_id);
-    }
-    if (message.title !== "") {
-      writer.uint32(34).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(42).string(message.description);
-    }
-    if (message.content_url !== "") {
-      writer.uint32(50).string(message.content_url);
     }
     for (const v of message.offerings) {
       Offering.encode(v!, writer.uint32(58).fork()).ldelim();
@@ -120,27 +94,6 @@ export const Product = {
 
           message.product_id = reader.string();
           continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.title = reader.string();
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.content_url = reader.string();
-          continue;
         case 7:
           if (tag !== 58) {
             break;
@@ -183,9 +136,6 @@ export const Product = {
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       product_id: isSet(object.product_id) ? globalThis.String(object.product_id) : "",
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
-      content_url: isSet(object.content_url) ? globalThis.String(object.content_url) : "",
       offerings: globalThis.Array.isArray(object?.offerings)
         ? object.offerings.map((e: any) => Offering.fromJSON(e))
         : [],
@@ -205,15 +155,6 @@ export const Product = {
     }
     if (message.product_id !== "") {
       obj.product_id = message.product_id;
-    }
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
-    if (message.content_url !== "") {
-      obj.content_url = message.content_url;
     }
     if (message.offerings?.length) {
       obj.offerings = message.offerings.map((e) => Offering.toJSON(e));
@@ -238,9 +179,6 @@ export const Product = {
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.product_id = object.product_id ?? "";
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
-    message.content_url = object.content_url ?? "";
     message.offerings = object.offerings?.map((e) => Offering.fromPartial(e)) || [];
     message.revenue = (object.revenue !== undefined && object.revenue !== null)
       ? Coin.fromPartial(object.revenue)

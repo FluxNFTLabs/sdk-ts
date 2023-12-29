@@ -9,8 +9,6 @@ export interface MsgCreateProduct {
   sender: string;
   class_id: string;
   id: string;
-  title: string;
-  description: string;
   offerings: Offering[];
   tags: string[];
 }
@@ -41,7 +39,7 @@ export interface MsgVerifyProductResponse {
 }
 
 function createBaseMsgCreateProduct(): MsgCreateProduct {
-  return { sender: "", class_id: "", id: "", title: "", description: "", offerings: [], tags: [] };
+  return { sender: "", class_id: "", id: "", offerings: [], tags: [] };
 }
 
 export const MsgCreateProduct = {
@@ -57,17 +55,11 @@ export const MsgCreateProduct = {
     if (message.id !== "") {
       writer.uint32(26).string(message.id);
     }
-    if (message.title !== "") {
-      writer.uint32(34).string(message.title);
-    }
-    if (message.description !== "") {
-      writer.uint32(42).string(message.description);
-    }
     for (const v of message.offerings) {
-      Offering.encode(v!, writer.uint32(50).fork()).ldelim();
+      Offering.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     for (const v of message.tags) {
-      writer.uint32(58).string(v!);
+      writer.uint32(42).string(v!);
     }
     return writer;
   },
@@ -105,24 +97,10 @@ export const MsgCreateProduct = {
             break;
           }
 
-          message.title = reader.string();
+          message.offerings.push(Offering.decode(reader, reader.uint32()));
           continue;
         case 5:
           if (tag !== 42) {
-            break;
-          }
-
-          message.description = reader.string();
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.offerings.push(Offering.decode(reader, reader.uint32()));
-          continue;
-        case 7:
-          if (tag !== 58) {
             break;
           }
 
@@ -142,8 +120,6 @@ export const MsgCreateProduct = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       id: isSet(object.id) ? globalThis.String(object.id) : "",
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
       offerings: globalThis.Array.isArray(object?.offerings)
         ? object.offerings.map((e: any) => Offering.fromJSON(e))
         : [],
@@ -162,12 +138,6 @@ export const MsgCreateProduct = {
     if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.title !== "") {
-      obj.title = message.title;
-    }
-    if (message.description !== "") {
-      obj.description = message.description;
-    }
     if (message.offerings?.length) {
       obj.offerings = message.offerings.map((e) => Offering.toJSON(e));
     }
@@ -185,8 +155,6 @@ export const MsgCreateProduct = {
     message.sender = object.sender ?? "";
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
-    message.title = object.title ?? "";
-    message.description = object.description ?? "";
     message.offerings = object.offerings?.map((e) => Offering.fromPartial(e)) || [];
     message.tags = object.tags?.map((e) => e) || [];
     return message;

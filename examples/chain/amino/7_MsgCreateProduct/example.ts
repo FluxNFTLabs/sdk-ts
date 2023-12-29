@@ -48,8 +48,6 @@ const main = async () => {
     sender: senderAddr,
     class_id: 'series',
     id: '0',
-    title: "Dong Thap Landscape",
-    description: 'foo bar',
     offerings: [
       { url: "", price: { denom: 'usdt', amount: '5000000' }, purchase_count: "0" },
       { url: "", price: { denom: 'usdt', amount: '7000000' }, purchase_count: "0" },

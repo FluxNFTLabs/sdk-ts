@@ -20,6 +20,8 @@ export interface Product {
   tags: string[];
   /** verified */
   verified: boolean;
+  /** owner */
+  owner: string;
 }
 
 export interface Offering {
@@ -35,7 +37,16 @@ export interface ClassCommission {
 }
 
 function createBaseProduct(): Product {
-  return { class_id: "", id: "", product_id: "", offerings: [], revenue: undefined, tags: [], verified: false };
+  return {
+    class_id: "",
+    id: "",
+    product_id: "",
+    offerings: [],
+    revenue: undefined,
+    tags: [],
+    verified: false,
+    owner: "",
+  };
 }
 
 export const Product = {
@@ -62,6 +73,9 @@ export const Product = {
     }
     if (message.verified === true) {
       writer.uint32(80).bool(message.verified);
+    }
+    if (message.owner !== "") {
+      writer.uint32(90).string(message.owner);
     }
     return writer;
   },
@@ -122,6 +136,13 @@ export const Product = {
 
           message.verified = reader.bool();
           continue;
+        case 11:
+          if (tag !== 90) {
+            break;
+          }
+
+          message.owner = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -142,6 +163,7 @@ export const Product = {
       revenue: isSet(object.revenue) ? Coin.fromJSON(object.revenue) : undefined,
       tags: globalThis.Array.isArray(object?.tags) ? object.tags.map((e: any) => globalThis.String(e)) : [],
       verified: isSet(object.verified) ? globalThis.Boolean(object.verified) : false,
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
     };
   },
 
@@ -168,6 +190,9 @@ export const Product = {
     if (message.verified === true) {
       obj.verified = message.verified;
     }
+    if (message.owner !== "") {
+      obj.owner = message.owner;
+    }
     return obj;
   },
 
@@ -185,6 +210,7 @@ export const Product = {
       : undefined;
     message.tags = object.tags?.map((e) => e) || [];
     message.verified = object.verified ?? false;
+    message.owner = object.owner ?? "";
     return message;
   },
 };

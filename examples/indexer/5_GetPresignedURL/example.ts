@@ -38,12 +38,14 @@ const main = async () => {
     const nonce = Buffer.from(accountInfo.nonce)
     const reqBz = media.PresignedURLRequest.encode(req).finish()
     const reqHash = keccak256(Buffer.concat([reqBz, nonce]))
+
     const sigParts = ethutil.ecsign(reqHash, Buffer.from(senderPrivKey.key))
-    const reqSig = ethutil.toRpcSig(BigInt(0), sigParts.r, sigParts.s)
+    const v = Number(sigParts.v)%27
+    const reqSig = ethutil.toRpcSig(BigInt(v), sigParts.r, sigParts.s)
 
     const md = new grpc.Metadata();
-    md.set('sender', [senderAddr]);
-    md.set('signature', [reqSig.substring(2)])
+    md.set('sender', senderAddr);
+    md.set('signature', reqSig.substring(2))
 
     const res = await mediaClient.PresignedURL(req, md)
     console.log(res)

@@ -32,14 +32,18 @@ const main = async () => {
 
     // prepare header & ctx
     const req: media.PresignedURLRequest = {
-        op:  media.S3Operation.Put,
-        key: "series/0/cac.txt",
+        path: "series/0",
+        objs: [
+            {key: "thumbnail.jpg", op: media.S3Operation.Put},
+            {key: "pitch.pdf", op: media.S3Operation.Put}
+        ]
     }
 
-    const ethereumPrefix = Buffer.from("\x19Ethereum Signed Message:\n")
     const nonce = Buffer.from(accountInfo.nonce)
     const reqBz = media.PresignedURLRequest.encode(req).finish()
-    const reqHash = keccak256(Buffer.concat([ethereumPrefix, reqBz, nonce]))
+    const msg = Buffer.concat([reqBz, nonce])
+    const prefix = Buffer.from(`\x19Ethereum Signed Message:\n${msg.length}`)
+    const reqHash = keccak256(Buffer.concat([prefix, msg]))
     const sigParts = ethutil.ecsign(reqHash, Buffer.from(senderPrivKey.key))
     const v = Number(sigParts.v)%27
     const reqSig = ethutil.toRpcSig(BigInt(v), sigParts.r, sigParts.s)

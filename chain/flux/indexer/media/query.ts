@@ -36,44 +36,30 @@ export function s3OperationToJSON(object: S3Operation): string {
   }
 }
 
-export interface PresignedURLRequest {
+export interface S3Obj {
   op: S3Operation;
   key: string;
 }
 
+export interface PresignedURLRequest {
+  path: string;
+  objs: S3Obj[];
+}
+
 export interface PresignedURLResponse {
-  url: string;
-}
-
-export interface GetMedataRequest {
-  owner: string;
   path: string;
-  key: string;
+  keys: string[];
+  urls: string[];
 }
 
-export interface GetMetadataResponse {
-  owner: string;
-  path: string;
-  key: string;
-}
-
-export interface SetMetadataRequest {
-  owner: string;
-  path: string;
-  key: string;
-}
-
-export interface SetMetadataResponse {
-}
-
-function createBasePresignedURLRequest(): PresignedURLRequest {
+function createBaseS3Obj(): S3Obj {
   return { op: 0, key: "" };
 }
 
-export const PresignedURLRequest = {
-  $type: "flux.indexer.media.PresignedURLRequest" as const,
+export const S3Obj = {
+  $type: "flux.indexer.media.S3Obj" as const,
 
-  encode(message: PresignedURLRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: S3Obj, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.op !== 0) {
       writer.uint32(8).int32(message.op);
     }
@@ -83,10 +69,10 @@ export const PresignedURLRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PresignedURLRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): S3Obj {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBasePresignedURLRequest();
+    const message = createBaseS3Obj();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -113,14 +99,14 @@ export const PresignedURLRequest = {
     return message;
   },
 
-  fromJSON(object: any): PresignedURLRequest {
+  fromJSON(object: any): S3Obj {
     return {
       op: isSet(object.op) ? s3OperationFromJSON(object.op) : 0,
       key: isSet(object.key) ? globalThis.String(object.key) : "",
     };
   },
 
-  toJSON(message: PresignedURLRequest): unknown {
+  toJSON(message: S3Obj): unknown {
     const obj: any = {};
     if (message.op !== 0) {
       obj.op = s3OperationToJSON(message.op);
@@ -131,27 +117,109 @@ export const PresignedURLRequest = {
     return obj;
   },
 
-  create(base?: DeepPartial<PresignedURLRequest>): PresignedURLRequest {
-    return PresignedURLRequest.fromPartial(base ?? {});
+  create(base?: DeepPartial<S3Obj>): S3Obj {
+    return S3Obj.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<PresignedURLRequest>): PresignedURLRequest {
-    const message = createBasePresignedURLRequest();
+  fromPartial(object: DeepPartial<S3Obj>): S3Obj {
+    const message = createBaseS3Obj();
     message.op = object.op ?? 0;
     message.key = object.key ?? "";
     return message;
   },
 };
 
+function createBasePresignedURLRequest(): PresignedURLRequest {
+  return { path: "", objs: [] };
+}
+
+export const PresignedURLRequest = {
+  $type: "flux.indexer.media.PresignedURLRequest" as const,
+
+  encode(message: PresignedURLRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.path !== "") {
+      writer.uint32(10).string(message.path);
+    }
+    for (const v of message.objs) {
+      S3Obj.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PresignedURLRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePresignedURLRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.path = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.objs.push(S3Obj.decode(reader, reader.uint32()));
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PresignedURLRequest {
+    return {
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      objs: globalThis.Array.isArray(object?.objs) ? object.objs.map((e: any) => S3Obj.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: PresignedURLRequest): unknown {
+    const obj: any = {};
+    if (message.path !== "") {
+      obj.path = message.path;
+    }
+    if (message.objs?.length) {
+      obj.objs = message.objs.map((e) => S3Obj.toJSON(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<PresignedURLRequest>): PresignedURLRequest {
+    return PresignedURLRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<PresignedURLRequest>): PresignedURLRequest {
+    const message = createBasePresignedURLRequest();
+    message.path = object.path ?? "";
+    message.objs = object.objs?.map((e) => S3Obj.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 function createBasePresignedURLResponse(): PresignedURLResponse {
-  return { url: "" };
+  return { path: "", keys: [], urls: [] };
 }
 
 export const PresignedURLResponse = {
   $type: "flux.indexer.media.PresignedURLResponse" as const,
 
   encode(message: PresignedURLResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.url !== "") {
-      writer.uint32(10).string(message.url);
+    if (message.path !== "") {
+      writer.uint32(10).string(message.path);
+    }
+    for (const v of message.keys) {
+      writer.uint32(18).string(v!);
+    }
+    for (const v of message.urls) {
+      writer.uint32(26).string(v!);
     }
     return writer;
   },
@@ -168,7 +236,21 @@ export const PresignedURLResponse = {
             break;
           }
 
-          message.url = reader.string();
+          message.path = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.keys.push(reader.string());
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.urls.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -180,13 +262,23 @@ export const PresignedURLResponse = {
   },
 
   fromJSON(object: any): PresignedURLResponse {
-    return { url: isSet(object.url) ? globalThis.String(object.url) : "" };
+    return {
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      keys: globalThis.Array.isArray(object?.keys) ? object.keys.map((e: any) => globalThis.String(e)) : [],
+      urls: globalThis.Array.isArray(object?.urls) ? object.urls.map((e: any) => globalThis.String(e)) : [],
+    };
   },
 
   toJSON(message: PresignedURLResponse): unknown {
     const obj: any = {};
-    if (message.url !== "") {
-      obj.url = message.url;
+    if (message.path !== "") {
+      obj.path = message.path;
+    }
+    if (message.keys?.length) {
+      obj.keys = message.keys;
+    }
+    if (message.urls?.length) {
+      obj.urls = message.urls;
     }
     return obj;
   },
@@ -196,333 +288,15 @@ export const PresignedURLResponse = {
   },
   fromPartial(object: DeepPartial<PresignedURLResponse>): PresignedURLResponse {
     const message = createBasePresignedURLResponse();
-    message.url = object.url ?? "";
-    return message;
-  },
-};
-
-function createBaseGetMedataRequest(): GetMedataRequest {
-  return { owner: "", path: "", key: "" };
-}
-
-export const GetMedataRequest = {
-  $type: "flux.indexer.media.GetMedataRequest" as const,
-
-  encode(message: GetMedataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.owner !== "") {
-      writer.uint32(10).string(message.owner);
-    }
-    if (message.path !== "") {
-      writer.uint32(18).string(message.path);
-    }
-    if (message.key !== "") {
-      writer.uint32(26).string(message.key);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetMedataRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetMedataRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.owner = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.path = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): GetMedataRequest {
-    return {
-      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
-      path: isSet(object.path) ? globalThis.String(object.path) : "",
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-    };
-  },
-
-  toJSON(message: GetMedataRequest): unknown {
-    const obj: any = {};
-    if (message.owner !== "") {
-      obj.owner = message.owner;
-    }
-    if (message.path !== "") {
-      obj.path = message.path;
-    }
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    return obj;
-  },
-
-  create(base?: DeepPartial<GetMedataRequest>): GetMedataRequest {
-    return GetMedataRequest.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<GetMedataRequest>): GetMedataRequest {
-    const message = createBaseGetMedataRequest();
-    message.owner = object.owner ?? "";
     message.path = object.path ?? "";
-    message.key = object.key ?? "";
-    return message;
-  },
-};
-
-function createBaseGetMetadataResponse(): GetMetadataResponse {
-  return { owner: "", path: "", key: "" };
-}
-
-export const GetMetadataResponse = {
-  $type: "flux.indexer.media.GetMetadataResponse" as const,
-
-  encode(message: GetMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.owner !== "") {
-      writer.uint32(10).string(message.owner);
-    }
-    if (message.path !== "") {
-      writer.uint32(18).string(message.path);
-    }
-    if (message.key !== "") {
-      writer.uint32(26).string(message.key);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetMetadataResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.owner = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.path = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): GetMetadataResponse {
-    return {
-      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
-      path: isSet(object.path) ? globalThis.String(object.path) : "",
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-    };
-  },
-
-  toJSON(message: GetMetadataResponse): unknown {
-    const obj: any = {};
-    if (message.owner !== "") {
-      obj.owner = message.owner;
-    }
-    if (message.path !== "") {
-      obj.path = message.path;
-    }
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    return obj;
-  },
-
-  create(base?: DeepPartial<GetMetadataResponse>): GetMetadataResponse {
-    return GetMetadataResponse.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<GetMetadataResponse>): GetMetadataResponse {
-    const message = createBaseGetMetadataResponse();
-    message.owner = object.owner ?? "";
-    message.path = object.path ?? "";
-    message.key = object.key ?? "";
-    return message;
-  },
-};
-
-function createBaseSetMetadataRequest(): SetMetadataRequest {
-  return { owner: "", path: "", key: "" };
-}
-
-export const SetMetadataRequest = {
-  $type: "flux.indexer.media.SetMetadataRequest" as const,
-
-  encode(message: SetMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.owner !== "") {
-      writer.uint32(10).string(message.owner);
-    }
-    if (message.path !== "") {
-      writer.uint32(18).string(message.path);
-    }
-    if (message.key !== "") {
-      writer.uint32(26).string(message.key);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetMetadataRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSetMetadataRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.owner = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.path = reader.string();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): SetMetadataRequest {
-    return {
-      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
-      path: isSet(object.path) ? globalThis.String(object.path) : "",
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-    };
-  },
-
-  toJSON(message: SetMetadataRequest): unknown {
-    const obj: any = {};
-    if (message.owner !== "") {
-      obj.owner = message.owner;
-    }
-    if (message.path !== "") {
-      obj.path = message.path;
-    }
-    if (message.key !== "") {
-      obj.key = message.key;
-    }
-    return obj;
-  },
-
-  create(base?: DeepPartial<SetMetadataRequest>): SetMetadataRequest {
-    return SetMetadataRequest.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<SetMetadataRequest>): SetMetadataRequest {
-    const message = createBaseSetMetadataRequest();
-    message.owner = object.owner ?? "";
-    message.path = object.path ?? "";
-    message.key = object.key ?? "";
-    return message;
-  },
-};
-
-function createBaseSetMetadataResponse(): SetMetadataResponse {
-  return {};
-}
-
-export const SetMetadataResponse = {
-  $type: "flux.indexer.media.SetMetadataResponse" as const,
-
-  encode(_: SetMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): SetMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSetMetadataResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(_: any): SetMetadataResponse {
-    return {};
-  },
-
-  toJSON(_: SetMetadataResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create(base?: DeepPartial<SetMetadataResponse>): SetMetadataResponse {
-    return SetMetadataResponse.fromPartial(base ?? {});
-  },
-  fromPartial(_: DeepPartial<SetMetadataResponse>): SetMetadataResponse {
-    const message = createBaseSetMetadataResponse();
+    message.keys = object.keys?.map((e) => e) || [];
+    message.urls = object.urls?.map((e) => e) || [];
     return message;
   },
 };
 
 export interface API {
   PresignedURL(request: DeepPartial<PresignedURLRequest>, metadata?: grpc.Metadata): Promise<PresignedURLResponse>;
-  GetMetaData(request: DeepPartial<GetMedataRequest>, metadata?: grpc.Metadata): Promise<GetMetadataResponse>;
-  SetMetaData(request: DeepPartial<SetMetadataRequest>, metadata?: grpc.Metadata): Promise<SetMetadataResponse>;
 }
 
 export class APIClientImpl implements API {
@@ -531,20 +305,10 @@ export class APIClientImpl implements API {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.PresignedURL = this.PresignedURL.bind(this);
-    this.GetMetaData = this.GetMetaData.bind(this);
-    this.SetMetaData = this.SetMetaData.bind(this);
   }
 
   PresignedURL(request: DeepPartial<PresignedURLRequest>, metadata?: grpc.Metadata): Promise<PresignedURLResponse> {
     return this.rpc.unary(APIPresignedURLDesc, PresignedURLRequest.fromPartial(request), metadata);
-  }
-
-  GetMetaData(request: DeepPartial<GetMedataRequest>, metadata?: grpc.Metadata): Promise<GetMetadataResponse> {
-    return this.rpc.unary(APIGetMetaDataDesc, GetMedataRequest.fromPartial(request), metadata);
-  }
-
-  SetMetaData(request: DeepPartial<SetMetadataRequest>, metadata?: grpc.Metadata): Promise<SetMetadataResponse> {
-    return this.rpc.unary(APISetMetaDataDesc, SetMetadataRequest.fromPartial(request), metadata);
   }
 }
 
@@ -563,52 +327,6 @@ export const APIPresignedURLDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = PresignedURLResponse.decode(data);
-      return {
-        ...value,
-        toObject() {
-          return value;
-        },
-      };
-    },
-  } as any,
-};
-
-export const APIGetMetaDataDesc: UnaryMethodDefinitionish = {
-  methodName: "GetMetaData",
-  service: APIDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return GetMedataRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      const value = GetMetadataResponse.decode(data);
-      return {
-        ...value,
-        toObject() {
-          return value;
-        },
-      };
-    },
-  } as any,
-};
-
-export const APISetMetaDataDesc: UnaryMethodDefinitionish = {
-  methodName: "SetMetaData",
-  service: APIDesc,
-  requestStream: false,
-  responseStream: false,
-  requestType: {
-    serializeBinary() {
-      return SetMetadataRequest.encode(this).finish();
-    },
-  } as any,
-  responseType: {
-    deserializeBinary(data: Uint8Array) {
-      const value = SetMetadataResponse.decode(data);
       return {
         ...value,
         toObject() {

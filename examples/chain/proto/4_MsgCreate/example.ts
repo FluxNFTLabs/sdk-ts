@@ -54,6 +54,7 @@ const main = async () => {
     ISO_success_percent: '75',
     accepted_payment_denom: 'usdt',
     dividend_interval: '100',
+    owner_equity_percent: '40',
   }
 
   const msgAny: anytypes.Any = {

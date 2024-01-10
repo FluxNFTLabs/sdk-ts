@@ -29,7 +29,7 @@ const main = async () => {
   const web3gwCC = new web3gwtypes.GrpcWebImpl('http://localhost:4445', {
     transport: NodeHttpTransport(),
   })
-  const web3gwClient = new web3gwtypes.Web3GWClientImpl(web3gwCC)
+  const web3gwClient = new web3gwtypes.APIClientImpl(web3gwCC)
 
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(Uint8Array.from(Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')))

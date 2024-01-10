@@ -6,15 +6,15 @@ const main = async () => {
   const cc = new providertypes.GrpcWebImpl(host, {
     transport: NodeHttpTransport(),
   })
-  const client = new providertypes.ProviderClientImpl(cc)
+  const client = new providertypes.APIClientImpl(cc)
 
   const req: providertypes.ProviderBlockRequest = {
     height: "1",
   };
 
   try {
-    const obs = await client.StreamBlock(req)
-    obs.subscribe(res => {
+    const obs =  client.StreamBlock(req)
+    obs.subscribe((res:any) => {
       console.log(res)
     })
   } catch(err) {

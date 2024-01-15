@@ -6,7 +6,7 @@ export class ChainGrpcBankQuery extends BaseGrpc {
     super(endpoint)
     this.client = new bankQuery.QueryClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async getAllBalances(address: string) {
+  async getAllBalances(address: string): Promise<bankQuery.QueryAllBalancesResponse> {
     try {
       const request = bankQuery.QueryAllBalancesRequest.create({
         address: address,
@@ -14,7 +14,7 @@ export class ChainGrpcBankQuery extends BaseGrpc {
         resolve_denom: true
       })
       let response = await this.retry(() => this.client.AllBalances(request))
-      return response
+      return response as bankQuery.QueryAllBalancesResponse
     } catch (e) {
       throw e
     }

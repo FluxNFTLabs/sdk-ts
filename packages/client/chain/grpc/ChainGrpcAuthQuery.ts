@@ -6,11 +6,11 @@ export class ChainGrpcAuthQuery extends BaseGrpc {
     super(endpoint)
     this.client = new authQuery.QueryClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async getAccount(address: string) {
+  async getAccount(address: string): Promise<authQuery.QueryAccountInfoResponse> {
     try {
       let request = authQuery.QueryAccountRequest.create({ address })
       let response = await this.retry(() => this.client.AccountInfo(request))
-      return response
+      return response as authQuery.QueryAccountInfoResponse
     } catch (e) {
       console.log(e)
       throw e

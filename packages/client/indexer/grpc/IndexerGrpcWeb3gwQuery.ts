@@ -6,7 +6,7 @@ export class IndexerGrpcWeb3gwQuery extends BaseGrpc {
     super(endpoint)
     this.client = new web3gwQuery.APIClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async faucetSend(address: string) {
+  async faucetSend(address: string): Promise<web3gwQuery.FaucetSendResponse> {
     try {
       let request = web3gwQuery.FaucetSendRequest.create({ address })
       let response = await this.retry(() => this.client.FaucetSend(request))

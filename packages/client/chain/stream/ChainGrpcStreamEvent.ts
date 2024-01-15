@@ -4,7 +4,7 @@ export class ChainGrpcStreamEvent {
   constructor(endpoint: string) {
     this.client = new streamService.QueryClientImpl(new streamService.GrpcWebImpl(endpoint, {}))
   }
-  async getStreamEvent({
+  getStreamEvent({
     request,
     callback,
     onEndCallback,

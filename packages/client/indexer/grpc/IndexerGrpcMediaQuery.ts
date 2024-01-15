@@ -7,11 +7,14 @@ export class IndexerGrpcMediaQuery extends BaseGrpc {
     super(endpoint)
     this.client = new mediaQuery.APIClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async getPresignedURL(req: mediaQuery.PresignedURLRequest, metadata: grpc.Metadata) {
+  async getPresignedURL(
+    req: mediaQuery.PresignedURLRequest,
+    metadata: grpc.Metadata
+  ): Promise<mediaQuery.PresignedURLResponse> {
     try {
       let request = mediaQuery.PresignedURLRequest.create(req)
       let response = await this.retry(() => this.client.PresignedURL(request, metadata))
-      return response
+      return response as mediaQuery.PresignedURLResponse
     } catch (e) {
       throw e
     }

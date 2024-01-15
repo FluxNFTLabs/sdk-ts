@@ -6,11 +6,11 @@ export class IndexerGrpcAccountQuery extends BaseGrpc {
     super(endpoint)
     this.client = new accountQuery.APIClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async getAccount(address: string) {
+  async getAccount(address: string): Promise<accountQuery.Account> {
     try {
       let request = accountQuery.GetAccountRequest.create({ address })
       let response = await this.retry(() => this.client.GetAccount(request))
-      return response
+      return response as accountQuery.Account
     } catch (e) {
       throw e
     }

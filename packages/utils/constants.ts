@@ -1,0 +1,1 @@
+export const DEFAULT_BLOCK_TIMEOUT_HEIGHT = 30

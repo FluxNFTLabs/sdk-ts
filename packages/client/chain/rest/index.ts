@@ -1,0 +1,1 @@
+export { ChainRestTendermintApi } from './ChainRestTendermintApi'

@@ -1,27 +1,31 @@
 /* eslint-disable */
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
+import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Observable } from "rxjs";
+import { share } from "rxjs/operators";
 import { Product } from "../../bazaar/v1beta1/product";
 
-export interface GetProductsRequest {
+export interface ProductsRequest {
   class_id: string;
   id: string;
   product_id: string;
 }
 
-export interface GetProductsResponse {
+export interface ProductsResponse {
+  height: string;
   products: Product[];
 }
 
-function createBaseGetProductsRequest(): GetProductsRequest {
+function createBaseProductsRequest(): ProductsRequest {
   return { class_id: "", id: "", product_id: "" };
 }
 
-export const GetProductsRequest = {
-  $type: "flux.indexer.bazaar.GetProductsRequest" as const,
+export const ProductsRequest = {
+  $type: "flux.indexer.bazaar.ProductsRequest" as const,
 
-  encode(message: GetProductsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ProductsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.class_id !== "") {
       writer.uint32(10).string(message.class_id);
     }
@@ -34,10 +38,10 @@ export const GetProductsRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetProductsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProductsRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetProductsRequest();
+    const message = createBaseProductsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -71,7 +75,7 @@ export const GetProductsRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetProductsRequest {
+  fromJSON(object: any): ProductsRequest {
     return {
       class_id: isSet(object.class_id) ? globalThis.String(object.class_id) : "",
       id: isSet(object.id) ? globalThis.String(object.id) : "",
@@ -79,7 +83,7 @@ export const GetProductsRequest = {
     };
   },
 
-  toJSON(message: GetProductsRequest): unknown {
+  toJSON(message: ProductsRequest): unknown {
     const obj: any = {};
     if (message.class_id !== "") {
       obj.class_id = message.class_id;
@@ -93,11 +97,11 @@ export const GetProductsRequest = {
     return obj;
   },
 
-  create(base?: DeepPartial<GetProductsRequest>): GetProductsRequest {
-    return GetProductsRequest.fromPartial(base ?? {});
+  create(base?: DeepPartial<ProductsRequest>): ProductsRequest {
+    return ProductsRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<GetProductsRequest>): GetProductsRequest {
-    const message = createBaseGetProductsRequest();
+  fromPartial(object: DeepPartial<ProductsRequest>): ProductsRequest {
+    const message = createBaseProductsRequest();
     message.class_id = object.class_id ?? "";
     message.id = object.id ?? "";
     message.product_id = object.product_id ?? "";
@@ -105,29 +109,39 @@ export const GetProductsRequest = {
   },
 };
 
-function createBaseGetProductsResponse(): GetProductsResponse {
-  return { products: [] };
+function createBaseProductsResponse(): ProductsResponse {
+  return { height: "0", products: [] };
 }
 
-export const GetProductsResponse = {
-  $type: "flux.indexer.bazaar.GetProductsResponse" as const,
+export const ProductsResponse = {
+  $type: "flux.indexer.bazaar.ProductsResponse" as const,
 
-  encode(message: GetProductsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ProductsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.height !== "0") {
+      writer.uint32(8).uint64(message.height);
+    }
     for (const v of message.products) {
-      Product.encode(v!, writer.uint32(10).fork()).ldelim();
+      Product.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetProductsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProductsResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetProductsResponse();
+    const message = createBaseProductsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 10) {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.height = longToString(reader.uint64() as Long);
+          continue;
+        case 2:
+          if (tag !== 18) {
             break;
           }
 
@@ -142,32 +156,38 @@ export const GetProductsResponse = {
     return message;
   },
 
-  fromJSON(object: any): GetProductsResponse {
+  fromJSON(object: any): ProductsResponse {
     return {
+      height: isSet(object.height) ? globalThis.String(object.height) : "0",
       products: globalThis.Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
     };
   },
 
-  toJSON(message: GetProductsResponse): unknown {
+  toJSON(message: ProductsResponse): unknown {
     const obj: any = {};
+    if (message.height !== "0") {
+      obj.height = message.height;
+    }
     if (message.products?.length) {
       obj.products = message.products.map((e) => Product.toJSON(e));
     }
     return obj;
   },
 
-  create(base?: DeepPartial<GetProductsResponse>): GetProductsResponse {
-    return GetProductsResponse.fromPartial(base ?? {});
+  create(base?: DeepPartial<ProductsResponse>): ProductsResponse {
+    return ProductsResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<GetProductsResponse>): GetProductsResponse {
-    const message = createBaseGetProductsResponse();
+  fromPartial(object: DeepPartial<ProductsResponse>): ProductsResponse {
+    const message = createBaseProductsResponse();
+    message.height = object.height ?? "0";
     message.products = object.products?.map((e) => Product.fromPartial(e)) || [];
     return message;
   },
 };
 
 export interface API {
-  GetProducts(request: DeepPartial<GetProductsRequest>, metadata?: grpc.Metadata): Promise<GetProductsResponse>;
+  GetProducts(request: DeepPartial<ProductsRequest>, metadata?: grpc.Metadata): Promise<ProductsResponse>;
+  StreamProducts(request: DeepPartial<ProductsRequest>, metadata?: grpc.Metadata): Observable<ProductsResponse>;
 }
 
 export class APIClientImpl implements API {
@@ -176,10 +196,15 @@ export class APIClientImpl implements API {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.GetProducts = this.GetProducts.bind(this);
+    this.StreamProducts = this.StreamProducts.bind(this);
   }
 
-  GetProducts(request: DeepPartial<GetProductsRequest>, metadata?: grpc.Metadata): Promise<GetProductsResponse> {
-    return this.rpc.unary(APIGetProductsDesc, GetProductsRequest.fromPartial(request), metadata);
+  GetProducts(request: DeepPartial<ProductsRequest>, metadata?: grpc.Metadata): Promise<ProductsResponse> {
+    return this.rpc.unary(APIGetProductsDesc, ProductsRequest.fromPartial(request), metadata);
+  }
+
+  StreamProducts(request: DeepPartial<ProductsRequest>, metadata?: grpc.Metadata): Observable<ProductsResponse> {
+    return this.rpc.invoke(APIStreamProductsDesc, ProductsRequest.fromPartial(request), metadata);
   }
 }
 
@@ -192,12 +217,35 @@ export const APIGetProductsDesc: UnaryMethodDefinitionish = {
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return GetProductsRequest.encode(this).finish();
+      return ProductsRequest.encode(this).finish();
     },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = GetProductsResponse.decode(data);
+      const value = ProductsResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const APIStreamProductsDesc: UnaryMethodDefinitionish = {
+  methodName: "StreamProducts",
+  service: APIDesc,
+  requestStream: false,
+  responseStream: true,
+  requestType: {
+    serializeBinary() {
+      return ProductsRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = ProductsResponse.decode(data);
       return {
         ...value,
         toObject() {
@@ -221,13 +269,18 @@ interface Rpc {
     request: any,
     metadata: grpc.Metadata | undefined,
   ): Promise<any>;
+  invoke<T extends UnaryMethodDefinitionish>(
+    methodDesc: T,
+    request: any,
+    metadata: grpc.Metadata | undefined,
+  ): Observable<any>;
 }
 
 export class GrpcWebImpl {
   private host: string;
   private options: {
     transport?: grpc.TransportFactory;
-
+    streamingTransport?: grpc.TransportFactory;
     debug?: boolean;
     metadata?: grpc.Metadata;
     upStreamRetryCodes?: number[];
@@ -237,7 +290,7 @@ export class GrpcWebImpl {
     host: string,
     options: {
       transport?: grpc.TransportFactory;
-
+      streamingTransport?: grpc.TransportFactory;
       debug?: boolean;
       metadata?: grpc.Metadata;
       upStreamRetryCodes?: number[];
@@ -274,6 +327,46 @@ export class GrpcWebImpl {
       });
     });
   }
+
+  invoke<T extends UnaryMethodDefinitionish>(
+    methodDesc: T,
+    _request: any,
+    metadata: grpc.Metadata | undefined,
+  ): Observable<any> {
+    const upStreamCodes = this.options.upStreamRetryCodes ?? [];
+    const DEFAULT_TIMEOUT_TIME: number = 3_000;
+    const request = { ..._request, ...methodDesc.requestType };
+    const transport = this.options.streamingTransport ?? this.options.transport;
+    const maybeCombinedMetadata = metadata && this.options.metadata
+      ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
+      : metadata ?? this.options.metadata;
+    return new Observable((observer) => {
+      const upStream = () => {
+        const client = grpc.invoke(methodDesc, {
+          host: this.host,
+          request,
+          ...(transport !== undefined ? { transport } : {}),
+          metadata: maybeCombinedMetadata ?? {},
+          debug: this.options.debug ?? false,
+          onMessage: (next) => observer.next(next),
+          onEnd: (code: grpc.Code, message: string, trailers: grpc.Metadata) => {
+            if (code === 0) {
+              observer.complete();
+            } else if (upStreamCodes.includes(code)) {
+              setTimeout(upStream, DEFAULT_TIMEOUT_TIME);
+            } else {
+              const err = new Error(message) as any;
+              err.code = code;
+              err.metadata = trailers;
+              observer.error(err);
+            }
+          },
+        });
+        observer.add(() => client.close());
+      };
+      upStream();
+    }).pipe(share());
+  }
 }
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
@@ -283,6 +376,15 @@ type DeepPartial<T> = T extends Builtin ? T
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function longToString(long: Long) {
+  return long.toString();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

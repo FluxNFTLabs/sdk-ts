@@ -9,16 +9,20 @@ export class ChainGrpcFnftQuery extends BaseGrpc {
     this.client = new fnftQuery.QueryClientImpl(this.getGrpcWebImpl(endpoint))
   }
 
-  async getHolder(
-    classId: string,
-    projectId: string,
+  async getHolder({
+    class_id,
+    id,
+    address
+  }: {
+    class_id: string
+    id: string
     address: string
-  ): Promise<fnftQuery.QueryHolderResponse> {
+  }): Promise<fnftQuery.QueryHolderResponse> {
     try {
       const request = fnftQuery.QueryHolderRequest.create({
-        class_id: classId,
-        id: projectId,
-        address: address
+        class_id,
+        id,
+        address
       })
       const response = await this.retry(() => this.client.Holder(request))
       return response as fnftQuery.QueryHolderResponse
@@ -28,11 +32,17 @@ export class ChainGrpcFnftQuery extends BaseGrpc {
     }
   }
 
-  async getHolders(classId: string, projectId: string): Promise<fnftQuery.QueryHoldersResponse> {
+  async getHolders({
+    class_id,
+    id
+  }: {
+    class_id: string
+    id: string
+  }): Promise<fnftQuery.QueryHoldersResponse> {
     try {
       const request = fnftQuery.QueryHoldersRequest.create({
-        class_id: classId,
-        id: projectId
+        class_id,
+        id
       })
       const response = await this.retry(() => this.client.Holders(request))
       return response as fnftQuery.QueryHoldersResponse
@@ -42,11 +52,17 @@ export class ChainGrpcFnftQuery extends BaseGrpc {
     }
   }
 
-  async getNFTs(classId: string, owner: string): Promise<fnftQuery.QueryNFTsResponse> {
+  async getNFTs({
+    class_id,
+    owner
+  }: {
+    class_id: string
+    owner: string
+  }): Promise<fnftQuery.QueryNFTsResponse> {
     try {
       const request = fnftQuery.QueryNFTsRequest.create({
-        class_id: classId,
-        owner: owner
+        class_id,
+        owner
       })
       const response = await this.retry(() => this.client.NFTs(request))
       return response as fnftQuery.QueryNFTsResponse
@@ -56,11 +72,17 @@ export class ChainGrpcFnftQuery extends BaseGrpc {
     }
   }
 
-  async getNFT(classId: string, projectId: string): Promise<fnftQuery.QueryNFTResponse> {
+  async getNFT({
+    class_id,
+    id
+  }: {
+    class_id: string
+    id: string
+  }): Promise<fnftQuery.QueryNFTResponse> {
     try {
       const request = fnftQuery.QueryNFTRequest.create({
-        class_id: classId,
-        id: projectId
+        class_id,
+        id
       })
       const response = await this.retry(() => this.client.NFT(request))
       return response as fnftQuery.QueryNFTResponse

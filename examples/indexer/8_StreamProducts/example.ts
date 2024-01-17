@@ -1,25 +1,23 @@
-import * as bazaartypes from '../../../chain/flux/indexer/bazaar/query';
-import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
-
+import * as bazaartypes from '../../../chain/flux/indexer/bazaar/query'
+import { IndexerStreamBazaar } from '../../../packages'
 const main = async () => {
-  const host = 'http://localhost:4451';
-  const cc = new bazaartypes.GrpcWebImpl(host, {
-    transport: NodeHttpTransport(),
-  })
-  const client = new bazaartypes.APIClientImpl(cc)
+  const host = 'http://localhost:4451'
+  const client = new IndexerStreamBazaar(host)
 
   const req: bazaartypes.ProductsRequest = {
-    class_id: "series",
-    id: "",
-    product_id: "",
-  };
+    class_id: 'series',
+    id: '',
+    product_id: ''
+  }
 
   try {
-    const obs =  client.StreamProducts(req)
-    obs.subscribe((res:any) => {
-      console.log(res)
+    client.getStreamProducts({
+      request: req,
+      callback: (res: any) => {
+        console.log(res)
+      }
     })
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }

@@ -9,14 +9,17 @@ export class ChainGrpcBazaarQuery extends BaseGrpc {
     this.client = new bazaarQuery.QueryClientImpl(this.getGrpcWebImpl(endpoint))
   }
 
-  async getNFTProducts(
-    classId: string,
-    projectId: string
-  ): Promise<bazaarQuery.QueryNFTProductsResponse> {
+  async getNFTProducts({
+    class_id,
+    id
+  }: {
+    class_id: string
+    id: string
+  }): Promise<bazaarQuery.QueryNFTProductsResponse> {
     try {
       const request = bazaarQuery.QueryNFTProductsRequest.create({
-        class_id: classId,
-        id: projectId
+        class_id,
+        id
       })
       const response = await this.retry(() => this.client.NFTProducts(request))
       return response as bazaarQuery.QueryNFTProductsResponse
@@ -25,16 +28,20 @@ export class ChainGrpcBazaarQuery extends BaseGrpc {
     }
   }
 
-  async getNFTProduct(
-    classId: string,
-    projectId: string,
-    productId: string
-  ): Promise<bazaarQuery.QueryNFTProductResponse> {
+  async getNFTProduct({
+    class_id,
+    id,
+    product_id
+  }: {
+    class_id: string
+    id: string
+    product_id: string
+  }): Promise<bazaarQuery.QueryNFTProductResponse> {
     try {
       const request = bazaarQuery.QueryNFTProductRequest.create({
-        class_id: classId,
-        id: projectId,
-        product_id: productId
+        class_id,
+        id,
+        product_id
       })
       const response = await this.retry(() => this.client.NFTProduct(request))
       return response as bazaarQuery.QueryNFTProductResponse

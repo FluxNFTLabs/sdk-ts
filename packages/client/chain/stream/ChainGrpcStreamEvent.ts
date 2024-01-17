@@ -1,4 +1,5 @@
 import * as streamService from '../../../../chain/flux/stream/v1beta1/query'
+import { Subscription } from 'rxjs'
 export class ChainGrpcStreamEvent {
   protected client: streamService.QueryClientImpl
   constructor(endpoint: string) {
@@ -14,7 +15,7 @@ export class ChainGrpcStreamEvent {
     callback: Function
     onEndCallback?: Function
     onStatusCallback?: Function
-  }) {
+  }): Subscription {
     try {
       const subscription = this.client.StreamEvents(request).subscribe({
         next: (response: any) => {

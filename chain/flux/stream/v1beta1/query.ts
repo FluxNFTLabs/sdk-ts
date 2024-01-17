@@ -11,19 +11,23 @@ import { Any } from "../../../google/protobuf/any";
 export enum Op {
   /** SyntheticUpdate - Synthetic events */
   SyntheticUpdate = 0,
-  /** FNFTCreate - FNFT events */
+  /**
+   * FNFTCreate - FNFT
+   * nft events
+   */
   FNFTCreate = 100,
   FNFTPurchaseShares = 101,
-  FNFTTransferShares = 102,
-  FNFTDepositShares = 103,
-  FNFTWithdrawShares = 104,
-  FNFTSponsor = 105,
+  FNFTSponsor = 102,
+  FNFTUpdateRevenue = 103,
+  FNFTISO = 104,
+  FNFTDividend = 105,
+  /** FNFTUpdateHolder - holder events */
   FNFTUpdateHolder = 106,
   FNFTDeleteHolder = 107,
-  FNFTUpdateRevenue = 108,
-  FNFTISO = 109,
-  FNFTDividend = 110,
-  /** BazaarCreateProduct - Bazaar events */
+  /**
+   * BazaarCreateProduct - BAZAAR
+   * product events
+   */
   BazaarCreateProduct = 200,
   BazaarPurchaseOffering = 201,
   BazaarVerifyProduct = 202,
@@ -42,32 +46,23 @@ export function opFromJSON(object: any): Op {
     case "FNFTPurchaseShares":
       return Op.FNFTPurchaseShares;
     case 102:
-    case "FNFTTransferShares":
-      return Op.FNFTTransferShares;
-    case 103:
-    case "FNFTDepositShares":
-      return Op.FNFTDepositShares;
-    case 104:
-    case "FNFTWithdrawShares":
-      return Op.FNFTWithdrawShares;
-    case 105:
     case "FNFTSponsor":
       return Op.FNFTSponsor;
+    case 103:
+    case "FNFTUpdateRevenue":
+      return Op.FNFTUpdateRevenue;
+    case 104:
+    case "FNFTISO":
+      return Op.FNFTISO;
+    case 105:
+    case "FNFTDividend":
+      return Op.FNFTDividend;
     case 106:
     case "FNFTUpdateHolder":
       return Op.FNFTUpdateHolder;
     case 107:
     case "FNFTDeleteHolder":
       return Op.FNFTDeleteHolder;
-    case 108:
-    case "FNFTUpdateRevenue":
-      return Op.FNFTUpdateRevenue;
-    case 109:
-    case "FNFTISO":
-      return Op.FNFTISO;
-    case 110:
-    case "FNFTDividend":
-      return Op.FNFTDividend;
     case 200:
     case "BazaarCreateProduct":
       return Op.BazaarCreateProduct;
@@ -92,24 +87,18 @@ export function opToJSON(object: Op): string {
       return "FNFTCreate";
     case Op.FNFTPurchaseShares:
       return "FNFTPurchaseShares";
-    case Op.FNFTTransferShares:
-      return "FNFTTransferShares";
-    case Op.FNFTDepositShares:
-      return "FNFTDepositShares";
-    case Op.FNFTWithdrawShares:
-      return "FNFTWithdrawShares";
     case Op.FNFTSponsor:
       return "FNFTSponsor";
-    case Op.FNFTUpdateHolder:
-      return "FNFTUpdateHolder";
-    case Op.FNFTDeleteHolder:
-      return "FNFTDeleteHolder";
     case Op.FNFTUpdateRevenue:
       return "FNFTUpdateRevenue";
     case Op.FNFTISO:
       return "FNFTISO";
     case Op.FNFTDividend:
       return "FNFTDividend";
+    case Op.FNFTUpdateHolder:
+      return "FNFTUpdateHolder";
+    case Op.FNFTDeleteHolder:
+      return "FNFTDeleteHolder";
     case Op.BazaarCreateProduct:
       return "BazaarCreateProduct";
     case Op.BazaarPurchaseOffering:

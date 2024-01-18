@@ -90,7 +90,7 @@ export class IndexerGrpcFnftQuery extends BaseIndexerGrpc {
       })
       const response: fnftQuery.NFTsResponse = await this.retry(() => this.client.GetNFTs(request))
       return {
-        nft: response.nft[0] ?? null
+        nft: response.nfts[0] ?? null
       }
     } catch (e) {
       console.error(e)

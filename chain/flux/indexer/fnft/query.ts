@@ -24,7 +24,7 @@ export interface NFTsRequest {
 
 export interface NFTsResponse {
   height: string;
-  nft: NFT[];
+  nfts: NFT[];
 }
 
 export interface HoldersRequest {
@@ -266,7 +266,7 @@ export const NFTsRequest = {
 };
 
 function createBaseNFTsResponse(): NFTsResponse {
-  return { height: "0", nft: [] };
+  return { height: "0", nfts: [] };
 }
 
 export const NFTsResponse = {
@@ -276,7 +276,7 @@ export const NFTsResponse = {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
     }
-    for (const v of message.nft) {
+    for (const v of message.nfts) {
       NFT.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
@@ -301,7 +301,7 @@ export const NFTsResponse = {
             break;
           }
 
-          message.nft.push(NFT.decode(reader, reader.uint32()));
+          message.nfts.push(NFT.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -315,7 +315,7 @@ export const NFTsResponse = {
   fromJSON(object: any): NFTsResponse {
     return {
       height: isSet(object.height) ? globalThis.String(object.height) : "0",
-      nft: globalThis.Array.isArray(object?.nft) ? object.nft.map((e: any) => NFT.fromJSON(e)) : [],
+      nfts: globalThis.Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
     };
   },
 
@@ -324,8 +324,8 @@ export const NFTsResponse = {
     if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.nft?.length) {
-      obj.nft = message.nft.map((e) => NFT.toJSON(e));
+    if (message.nfts?.length) {
+      obj.nfts = message.nfts.map((e) => NFT.toJSON(e));
     }
     return obj;
   },
@@ -336,7 +336,7 @@ export const NFTsResponse = {
   fromPartial(object: DeepPartial<NFTsResponse>): NFTsResponse {
     const message = createBaseNFTsResponse();
     message.height = object.height ?? "0";
-    message.nft = object.nft?.map((e) => NFT.fromPartial(e)) || [];
+    message.nfts = object.nfts?.map((e) => NFT.fromPartial(e)) || [];
     return message;
   },
 };

@@ -3,6 +3,7 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import Long from "long";
 import _m0 from "protobufjs/minimal";
+import { Order, orderFromJSON, orderToJSON } from "../../../../core/channel/v1/channel";
 import { InterchainAccountPacketData } from "../../v1/packet";
 import { Params } from "./controller";
 
@@ -11,6 +12,7 @@ export interface MsgRegisterInterchainAccount {
   owner: string;
   connection_id: string;
   version: string;
+  order: Order;
 }
 
 /** MsgRegisterInterchainAccountResponse defines the response for Msg/RegisterAccount */
@@ -55,7 +57,7 @@ export interface MsgUpdateParamsResponse {
 }
 
 function createBaseMsgRegisterInterchainAccount(): MsgRegisterInterchainAccount {
-  return { owner: "", connection_id: "", version: "" };
+  return { owner: "", connection_id: "", version: "", order: 0 };
 }
 
 export const MsgRegisterInterchainAccount = {
@@ -70,6 +72,9 @@ export const MsgRegisterInterchainAccount = {
     }
     if (message.version !== "") {
       writer.uint32(26).string(message.version);
+    }
+    if (message.order !== 0) {
+      writer.uint32(32).int32(message.order);
     }
     return writer;
   },
@@ -102,6 +107,13 @@ export const MsgRegisterInterchainAccount = {
 
           message.version = reader.string();
           continue;
+        case 4:
+          if (tag !== 32) {
+            break;
+          }
+
+          message.order = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -116,6 +128,7 @@ export const MsgRegisterInterchainAccount = {
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       connection_id: isSet(object.connection_id) ? globalThis.String(object.connection_id) : "",
       version: isSet(object.version) ? globalThis.String(object.version) : "",
+      order: isSet(object.order) ? orderFromJSON(object.order) : 0,
     };
   },
 
@@ -130,6 +143,9 @@ export const MsgRegisterInterchainAccount = {
     if (message.version !== "") {
       obj.version = message.version;
     }
+    if (message.order !== 0) {
+      obj.order = orderToJSON(message.order);
+    }
     return obj;
   },
 
@@ -141,6 +157,7 @@ export const MsgRegisterInterchainAccount = {
     message.owner = object.owner ?? "";
     message.connection_id = object.connection_id ?? "";
     message.version = object.version ?? "";
+    message.order = object.order ?? 0;
     return message;
   },
 };

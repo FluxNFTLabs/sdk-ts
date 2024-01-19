@@ -11,19 +11,16 @@ import { Any } from "../../../google/protobuf/any";
 export enum Op {
   /** SyntheticUpdate - Synthetic events */
   SyntheticUpdate = 0,
-  /**
-   * FNFTCreate - FNFT
-   * nft events
-   */
-  FNFTCreate = 100,
-  FNFTPurchaseShares = 101,
-  FNFTSponsor = 102,
-  FNFTUpdateRevenue = 103,
-  FNFTISO = 104,
-  FNFTDividend = 105,
-  /** FNFTUpdateHolder - holder events */
-  FNFTUpdateHolder = 106,
-  FNFTDeleteHolder = 107,
+  /** FNFTUpdateClass - FNFT */
+  FNFTUpdateClass = 100,
+  FNFTCreate = 101,
+  FNFTPurchaseShares = 102,
+  FNFTSponsor = 103,
+  FNFTUpdateRevenue = 104,
+  FNFTISO = 105,
+  FNFTDividend = 106,
+  FNFTUpdateHolder = 107,
+  FNFTDeleteHolder = 108,
   /**
    * BazaarCreateProduct - BAZAAR
    * product events
@@ -40,27 +37,30 @@ export function opFromJSON(object: any): Op {
     case "SyntheticUpdate":
       return Op.SyntheticUpdate;
     case 100:
+    case "FNFTUpdateClass":
+      return Op.FNFTUpdateClass;
+    case 101:
     case "FNFTCreate":
       return Op.FNFTCreate;
-    case 101:
+    case 102:
     case "FNFTPurchaseShares":
       return Op.FNFTPurchaseShares;
-    case 102:
+    case 103:
     case "FNFTSponsor":
       return Op.FNFTSponsor;
-    case 103:
+    case 104:
     case "FNFTUpdateRevenue":
       return Op.FNFTUpdateRevenue;
-    case 104:
+    case 105:
     case "FNFTISO":
       return Op.FNFTISO;
-    case 105:
+    case 106:
     case "FNFTDividend":
       return Op.FNFTDividend;
-    case 106:
+    case 107:
     case "FNFTUpdateHolder":
       return Op.FNFTUpdateHolder;
-    case 107:
+    case 108:
     case "FNFTDeleteHolder":
       return Op.FNFTDeleteHolder;
     case 200:
@@ -83,6 +83,8 @@ export function opToJSON(object: Op): string {
   switch (object) {
     case Op.SyntheticUpdate:
       return "SyntheticUpdate";
+    case Op.FNFTUpdateClass:
+      return "FNFTUpdateClass";
     case Op.FNFTCreate:
       return "FNFTCreate";
     case Op.FNFTPurchaseShares:

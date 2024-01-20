@@ -38,15 +38,18 @@ export class IndexerGrpcFnftQuery extends BaseIndexerGrpc {
 
   async getHolders({
     class_id,
-    id
+    id,
+    address
   }: {
-    class_id: string
-    id: string
+    class_id?: string
+    id?: string
+    address?: string
   }): Promise<fnftQuery.HoldersResponse> {
     try {
       const request = fnftQuery.HoldersRequest.create({
-        class_id,
-        id
+        class_id: class_id ?? '',
+        id: id ?? '',
+        address: address ?? ''
       })
       const response = await this.retry(() => this.client.GetHolders(request))
       return response as fnftQuery.HoldersResponse
@@ -62,14 +65,14 @@ export class IndexerGrpcFnftQuery extends BaseIndexerGrpc {
     owner,
     status
   }: {
-    class_id: string
+    class_id?: string
     id?: string
     owner?: string
     status?: string
   }): Promise<fnftQuery.NFTsResponse> {
     try {
       const request = fnftQuery.NFTsRequest.create({
-        class_id: class_id,
+        class_id: class_id ?? '',
         owner: owner ?? '',
         id: id ?? '',
         status: status ?? ''

@@ -100,6 +100,7 @@ export interface NFT {
   last_dividend_timestamp: string;
   /** nft owner */
   owner: string;
+  holder_count: string;
   /** indicate if nft passes iso or not */
   status: NFTStatus;
   /** data is an app specific data of the NFT. Optional */
@@ -271,6 +272,7 @@ function createBaseNFT(): NFT {
     dividend_interval: "0",
     last_dividend_timestamp: "0",
     owner: "",
+    holder_count: "0",
     status: 0,
     data: undefined,
   };
@@ -325,11 +327,14 @@ export const NFT = {
     if (message.owner !== "") {
       writer.uint32(122).string(message.owner);
     }
+    if (message.holder_count !== "0") {
+      writer.uint32(128).uint64(message.holder_count);
+    }
     if (message.status !== 0) {
-      writer.uint32(128).int32(message.status);
+      writer.uint32(136).int32(message.status);
     }
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(138).fork()).ldelim();
+      Any.encode(message.data, writer.uint32(146).fork()).ldelim();
     }
     return writer;
   },
@@ -451,10 +456,17 @@ export const NFT = {
             break;
           }
 
-          message.status = reader.int32() as any;
+          message.holder_count = longToString(reader.uint64() as Long);
           continue;
         case 17:
-          if (tag !== 138) {
+          if (tag !== 136) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        case 18:
+          if (tag !== 146) {
             break;
           }
 
@@ -492,6 +504,7 @@ export const NFT = {
         ? globalThis.String(object.last_dividend_timestamp)
         : "0",
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      holder_count: isSet(object.holder_count) ? globalThis.String(object.holder_count) : "0",
       status: isSet(object.status) ? nFTStatusFromJSON(object.status) : 0,
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
@@ -544,6 +557,9 @@ export const NFT = {
     if (message.owner !== "") {
       obj.owner = message.owner;
     }
+    if (message.holder_count !== "0") {
+      obj.holder_count = message.holder_count;
+    }
     if (message.status !== 0) {
       obj.status = nFTStatusToJSON(message.status);
     }
@@ -577,6 +593,7 @@ export const NFT = {
     message.dividend_interval = object.dividend_interval ?? "0";
     message.last_dividend_timestamp = object.last_dividend_timestamp ?? "0";
     message.owner = object.owner ?? "";
+    message.holder_count = object.holder_count ?? "0";
     message.status = object.status ?? 0;
     message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;

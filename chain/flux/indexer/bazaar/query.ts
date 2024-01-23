@@ -15,6 +15,7 @@ export interface ProductsRequest {
 
 export interface ProductsResponse {
   height: string;
+  deleted: string;
   products: Product[];
 }
 
@@ -110,7 +111,7 @@ export const ProductsRequest = {
 };
 
 function createBaseProductsResponse(): ProductsResponse {
-  return { height: "0", products: [] };
+  return { height: "0", deleted: "0", products: [] };
 }
 
 export const ProductsResponse = {
@@ -120,8 +121,11 @@ export const ProductsResponse = {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
     }
+    if (message.deleted !== "0") {
+      writer.uint32(16).uint64(message.deleted);
+    }
     for (const v of message.products) {
-      Product.encode(v!, writer.uint32(18).fork()).ldelim();
+      Product.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -141,7 +145,14 @@ export const ProductsResponse = {
           message.height = longToString(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.deleted = longToString(reader.uint64() as Long);
+          continue;
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -159,6 +170,7 @@ export const ProductsResponse = {
   fromJSON(object: any): ProductsResponse {
     return {
       height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      deleted: isSet(object.deleted) ? globalThis.String(object.deleted) : "0",
       products: globalThis.Array.isArray(object?.products) ? object.products.map((e: any) => Product.fromJSON(e)) : [],
     };
   },
@@ -167,6 +179,9 @@ export const ProductsResponse = {
     const obj: any = {};
     if (message.height !== "0") {
       obj.height = message.height;
+    }
+    if (message.deleted !== "0") {
+      obj.deleted = message.deleted;
     }
     if (message.products?.length) {
       obj.products = message.products.map((e) => Product.toJSON(e));
@@ -180,6 +195,7 @@ export const ProductsResponse = {
   fromPartial(object: DeepPartial<ProductsResponse>): ProductsResponse {
     const message = createBaseProductsResponse();
     message.height = object.height ?? "0";
+    message.deleted = object.deleted ?? "0";
     message.products = object.products?.map((e) => Product.fromPartial(e)) || [];
     return message;
   },

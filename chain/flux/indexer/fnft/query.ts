@@ -12,6 +12,7 @@ export interface ClassesRequest {
 
 export interface ClassesResponse {
   height: string;
+  deleted: string;
   classes: Class[];
 }
 
@@ -24,6 +25,7 @@ export interface NFTsRequest {
 
 export interface NFTsResponse {
   height: string;
+  deleted: string;
   nfts: NFT[];
 }
 
@@ -35,6 +37,7 @@ export interface HoldersRequest {
 
 export interface HoldersResponse {
   height: string;
+  deleted: string;
   holders: Holder[];
 }
 
@@ -84,7 +87,7 @@ export const ClassesRequest = {
 };
 
 function createBaseClassesResponse(): ClassesResponse {
-  return { height: "0", classes: [] };
+  return { height: "0", deleted: "0", classes: [] };
 }
 
 export const ClassesResponse = {
@@ -94,8 +97,11 @@ export const ClassesResponse = {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
     }
+    if (message.deleted !== "0") {
+      writer.uint32(16).uint64(message.deleted);
+    }
     for (const v of message.classes) {
-      Class.encode(v!, writer.uint32(18).fork()).ldelim();
+      Class.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -115,7 +121,14 @@ export const ClassesResponse = {
           message.height = longToString(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.deleted = longToString(reader.uint64() as Long);
+          continue;
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -133,6 +146,7 @@ export const ClassesResponse = {
   fromJSON(object: any): ClassesResponse {
     return {
       height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      deleted: isSet(object.deleted) ? globalThis.String(object.deleted) : "0",
       classes: globalThis.Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
     };
   },
@@ -141,6 +155,9 @@ export const ClassesResponse = {
     const obj: any = {};
     if (message.height !== "0") {
       obj.height = message.height;
+    }
+    if (message.deleted !== "0") {
+      obj.deleted = message.deleted;
     }
     if (message.classes?.length) {
       obj.classes = message.classes.map((e) => Class.toJSON(e));
@@ -154,6 +171,7 @@ export const ClassesResponse = {
   fromPartial(object: DeepPartial<ClassesResponse>): ClassesResponse {
     const message = createBaseClassesResponse();
     message.height = object.height ?? "0";
+    message.deleted = object.deleted ?? "0";
     message.classes = object.classes?.map((e) => Class.fromPartial(e)) || [];
     return message;
   },
@@ -266,7 +284,7 @@ export const NFTsRequest = {
 };
 
 function createBaseNFTsResponse(): NFTsResponse {
-  return { height: "0", nfts: [] };
+  return { height: "0", deleted: "0", nfts: [] };
 }
 
 export const NFTsResponse = {
@@ -276,8 +294,11 @@ export const NFTsResponse = {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
     }
+    if (message.deleted !== "0") {
+      writer.uint32(16).uint64(message.deleted);
+    }
     for (const v of message.nfts) {
-      NFT.encode(v!, writer.uint32(18).fork()).ldelim();
+      NFT.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -297,7 +318,14 @@ export const NFTsResponse = {
           message.height = longToString(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.deleted = longToString(reader.uint64() as Long);
+          continue;
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -315,6 +343,7 @@ export const NFTsResponse = {
   fromJSON(object: any): NFTsResponse {
     return {
       height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      deleted: isSet(object.deleted) ? globalThis.String(object.deleted) : "0",
       nfts: globalThis.Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : [],
     };
   },
@@ -323,6 +352,9 @@ export const NFTsResponse = {
     const obj: any = {};
     if (message.height !== "0") {
       obj.height = message.height;
+    }
+    if (message.deleted !== "0") {
+      obj.deleted = message.deleted;
     }
     if (message.nfts?.length) {
       obj.nfts = message.nfts.map((e) => NFT.toJSON(e));
@@ -336,6 +368,7 @@ export const NFTsResponse = {
   fromPartial(object: DeepPartial<NFTsResponse>): NFTsResponse {
     const message = createBaseNFTsResponse();
     message.height = object.height ?? "0";
+    message.deleted = object.deleted ?? "0";
     message.nfts = object.nfts?.map((e) => NFT.fromPartial(e)) || [];
     return message;
   },
@@ -433,7 +466,7 @@ export const HoldersRequest = {
 };
 
 function createBaseHoldersResponse(): HoldersResponse {
-  return { height: "0", holders: [] };
+  return { height: "0", deleted: "0", holders: [] };
 }
 
 export const HoldersResponse = {
@@ -443,8 +476,11 @@ export const HoldersResponse = {
     if (message.height !== "0") {
       writer.uint32(8).uint64(message.height);
     }
+    if (message.deleted !== "0") {
+      writer.uint32(16).uint64(message.deleted);
+    }
     for (const v of message.holders) {
-      Holder.encode(v!, writer.uint32(18).fork()).ldelim();
+      Holder.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -464,7 +500,14 @@ export const HoldersResponse = {
           message.height = longToString(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag !== 18) {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.deleted = longToString(reader.uint64() as Long);
+          continue;
+        case 3:
+          if (tag !== 26) {
             break;
           }
 
@@ -482,6 +525,7 @@ export const HoldersResponse = {
   fromJSON(object: any): HoldersResponse {
     return {
       height: isSet(object.height) ? globalThis.String(object.height) : "0",
+      deleted: isSet(object.deleted) ? globalThis.String(object.deleted) : "0",
       holders: globalThis.Array.isArray(object?.holders) ? object.holders.map((e: any) => Holder.fromJSON(e)) : [],
     };
   },
@@ -490,6 +534,9 @@ export const HoldersResponse = {
     const obj: any = {};
     if (message.height !== "0") {
       obj.height = message.height;
+    }
+    if (message.deleted !== "0") {
+      obj.deleted = message.deleted;
     }
     if (message.holders?.length) {
       obj.holders = message.holders.map((e) => Holder.toJSON(e));
@@ -503,6 +550,7 @@ export const HoldersResponse = {
   fromPartial(object: DeepPartial<HoldersResponse>): HoldersResponse {
     const message = createBaseHoldersResponse();
     message.height = object.height ?? "0";
+    message.deleted = object.deleted ?? "0";
     message.holders = object.holders?.map((e) => Holder.fromPartial(e)) || [];
     return message;
   },

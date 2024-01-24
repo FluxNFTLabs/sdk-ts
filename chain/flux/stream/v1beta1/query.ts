@@ -20,8 +20,9 @@ export enum Op {
   FNFTISO = 105,
   FNFTDividend = 106,
   FNFTUpdateHolderCount = 107,
-  FNFTUpdateHolder = 108,
-  FNFTDeleteHolder = 109,
+  FNFTUpdateProductCount = 108,
+  FNFTUpdateHolder = 109,
+  FNFTDeleteHolder = 110,
   /**
    * BazaarCreateProduct - BAZAAR
    * product events
@@ -62,9 +63,12 @@ export function opFromJSON(object: any): Op {
     case "FNFTUpdateHolderCount":
       return Op.FNFTUpdateHolderCount;
     case 108:
+    case "FNFTUpdateProductCount":
+      return Op.FNFTUpdateProductCount;
+    case 109:
     case "FNFTUpdateHolder":
       return Op.FNFTUpdateHolder;
-    case 109:
+    case 110:
     case "FNFTDeleteHolder":
       return Op.FNFTDeleteHolder;
     case 200:
@@ -103,6 +107,8 @@ export function opToJSON(object: Op): string {
       return "FNFTDividend";
     case Op.FNFTUpdateHolderCount:
       return "FNFTUpdateHolderCount";
+    case Op.FNFTUpdateProductCount:
+      return "FNFTUpdateProductCount";
     case Op.FNFTUpdateHolder:
       return "FNFTUpdateHolder";
     case Op.FNFTDeleteHolder:

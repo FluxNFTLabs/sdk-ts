@@ -6,7 +6,9 @@ export class IndexerStreamFnft extends BaseIndexerStream {
   protected client: streamService.APIClientImpl
   constructor(endpoint: string) {
     super(endpoint)
-    this.client = new streamService.APIClientImpl(this.getGrpcWebImpl(endpoint))
+    this.client = new streamService.APIClientImpl(
+      new streamService.GrpcWebImpl(endpoint, { transport: getGrpcTransport() })
+    )
   }
   getStreamNFTs({
     request,

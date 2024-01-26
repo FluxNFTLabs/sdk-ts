@@ -3,7 +3,7 @@ import { bech32 } from 'bech32'
 import { ChainGrpcBankQuery } from '../../../../packages'
 const main = async () => {
   // init clients
-  const txClient = new ChainGrpcBankQuery('http://localhost:10337')
+  const bankClient = new ChainGrpcBankQuery('http://localhost:10337')
 
   // init user2
   const wallet = ethwallet.Wallet.fromPrivateKey(
@@ -13,7 +13,7 @@ const main = async () => {
   )
   const senderAddr = bech32.encode('lux', bech32.toWords(wallet.getAddress()))
   try {
-    const res = await txClient.getAllBalances(senderAddr)
+    const res = await bankClient.getAllBalances(senderAddr)
     console.log(JSON.stringify(res.balances, null, 2))
   } catch (err) {
     console.log(err)

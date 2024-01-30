@@ -23,7 +23,7 @@ export default class KeplrWallet {
       rest: 'https://lcd.localhost',
       chainId: ChainId.Testnet,
       chainName: 'Flux',
-      stakeCurrency: { coinDenom: 'LUX', coinMinimalDenom: 'ulux', coinDecimals: 18 },
+      stakeCurrency: { coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 },
       bech32Config: {
         bech32PrefixAccAddr: 'lux',
         bech32PrefixAccPub: 'luxpub',
@@ -33,9 +33,9 @@ export default class KeplrWallet {
         bech32PrefixConsPub: 'luxvalconspub'
       },
       bip44: { coinType: 60 },
-      currencies: [{ coinDenom: 'LUX', coinMinimalDenom: 'ulux', coinDecimals: 18 }],
-      feeCurrencies: [{ coinDenom: 'LUX', coinMinimalDenom: 'ulux', coinDecimals: 18 }],
-      gasPriceStep: { low: 0.05, average: 0.125, high: 0.2 }
+      currencies: [{ coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 }],
+      feeCurrencies: [{ coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 }],
+      gasPriceStep: { low: 10000000000, average: 10000000000, high: 10000000000 }
     })
   }
   async getAddresses(): Promise<string[]> {
@@ -78,7 +78,6 @@ export default class KeplrWallet {
   public async getKeplrWallet() {
     const { chainId } = this
     const keplr = await this.getKeplr()
-    console.log('getKeplrWallet')
     try {
       await keplr.enable(chainId)
       return keplr as Keplr
@@ -107,11 +106,8 @@ export default class KeplrWallet {
 
   async signTransactionCosmos(signDoc: any, address: string) {
     const keplr = await this.getKeplr()
-    console.log('this.chainId', this.chainId)
     const offlineSigner = keplr.getOfflineSigner(this.chainId)
-    console.log('offlineSigner', offlineSigner)
     const directSignResponse = await offlineSigner.signDirect(address, signDoc)
-    console.log(2)
     return directSignResponse
   }
 
@@ -134,6 +130,15 @@ export default class KeplrWallet {
         signDoc
       })
       return keplr.experimentalSignEIP712CosmosTx_v0(chainId, key.bech32Address, eip712, signDoc)
+    } catch (e: unknown) {
+      console.log(e)
+      throw e
+    }
+  }
+  async sendTx(tx: any, mode: any) {
+    const keplr = await this.getKeplrWallet()
+    try {
+      return keplr.sendTx(this.chainId, tx, mode)
     } catch (e: unknown) {
       console.log(e)
       throw e

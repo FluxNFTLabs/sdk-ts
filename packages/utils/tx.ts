@@ -3,7 +3,6 @@ import * as CosmosTxV1Beta1Tx from '../../chain/cosmos/tx/v1beta1/tx'
 import * as CosmosBaseV1Beta1Coin from '../../chain/cosmos/base/v1beta1/coin'
 import * as GoogleProtobufAny from '../../chain/google/protobuf/any'
 import * as CosmosTxSigningV1Beta1Signing from '../../chain/cosmos/tx/signing/v1beta1/signing'
-import * as CosmosCryptoSecp256k1Keys from '../../chain/cosmos/crypto/secp256k1/keys'
 import * as EthCryptoSecp256k1Keys from '../../chain/cosmos/crypto/ethsecp256k1/keys'
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import { EthereumChainId, DEFAULT_STD_FEE } from '../utils'
@@ -16,34 +15,16 @@ export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
     value: EthCryptoSecp256k1Keys.PubKey.encode({ key: Buffer.from(key, 'hex') }).finish()
   }
 }
-export const getPublicKey = ({
-  chainId,
-  key
-}: {
-  chainId: string
-  key: string | GoogleProtobufAny.Any
-}) => {
+export const getPublicKey = ({ key }: { key: string | GoogleProtobufAny.Any }) => {
   if (typeof key !== 'string') {
     return key
   }
-
   let proto
   let path
   let baseProto
-
-  if (chainId.startsWith('injective')) {
-    proto = CosmosCryptoSecp256k1Keys.PubKey.create()
-    baseProto = CosmosCryptoSecp256k1Keys.PubKey
-    path = '/injective.crypto.v1beta1.ethsecp256k1.PubKey'
-  } else if (chainId.startsWith('evmos')) {
-    proto = CosmosCryptoSecp256k1Keys.PubKey.create()
-    baseProto = CosmosCryptoSecp256k1Keys.PubKey
-    path = '/ethermint.crypto.v1.ethsecp256k1.PubKey'
-  } else {
-    proto = CosmosCryptoSecp256k1Keys.PubKey.create()
-    baseProto = CosmosCryptoSecp256k1Keys.PubKey
-    path = '/cosmos.crypto.secp256k1.PubKey'
-  }
+  proto = EthCryptoSecp256k1Keys.PubKey.create()
+  baseProto = EthCryptoSecp256k1Keys.PubKey
+  path = '/' + EthCryptoSecp256k1Keys.PubKey.$type
 
   proto.key = Buffer.from(key, 'base64')
 
@@ -92,7 +73,6 @@ export const createFee = ({
   const feeAmount = CosmosBaseV1Beta1Coin.Coin.create()
   feeAmount.amount = fee.amount
   feeAmount.denom = fee.denom
-
   const feeProto = CosmosTxV1Beta1Tx.Fee.create()
   feeProto.gas_limit = gasLimit.toString()
   feeProto.amount = [feeAmount]
@@ -138,8 +118,7 @@ export const createSignerInfo = ({
   sequence: string
   mode: CosmosTxSigningV1Beta1Signing.SignMode
 }) => {
-  const pubKey = getPublicKey({ chainId, key: publicKey })
-
+  const pubKey = getPublicKey({ key: publicKey })
   const single = CosmosTxV1Beta1Tx.ModeInfo_Single.create()
   single.mode = mode
 

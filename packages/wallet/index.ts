@@ -77,4 +77,10 @@ export default class WalletStrategy {
     }
     return this.provider.signTransactionCosmos(signDoc, address)
   }
+  async sendTx(tx: any, mode: any) {
+    if (this.wallet === Wallet.Metamask) {
+      throw new Error('This wallet does not support sendTx')
+    }
+    return this.provider.sendTx(tx, mode)
+  }
 }

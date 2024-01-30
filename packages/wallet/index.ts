@@ -48,7 +48,6 @@ export default class WalletStrategy {
     return this.provider.getPubKey()
   }
   async getPubkeyFromSignature(message: string, signature: string): Promise<string> {
-    console.log('this.wallet ', this.wallet)
     if (this.wallet === Wallet.Metamask) {
       return this.provider.getPubkeyFromSignature(message, signature)
     }

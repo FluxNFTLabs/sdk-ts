@@ -15,10 +15,13 @@ export default class KeplrWallet {
   }
 
   async suggestChain() {
-    let res = await window.keplr.experimentalSuggestChain({
+    if (!window || !window.keplr) {
+      throw new Error('Please install the Keplr wallet extension')
+    }
+    await window.keplr.experimentalSuggestChain({
       rpc: 'https://tm.localhost',
       rest: 'https://lcd.localhost',
-      chainId: 'flux-1',
+      chainId: ChainId.Testnet,
       chainName: 'Flux',
       stakeCurrency: { coinDenom: 'LUX', coinMinimalDenom: 'ulux', coinDecimals: 18 },
       bech32Config: {
@@ -34,8 +37,6 @@ export default class KeplrWallet {
       feeCurrencies: [{ coinDenom: 'LUX', coinMinimalDenom: 'ulux', coinDecimals: 18 }],
       gasPriceStep: { low: 0.05, average: 0.125, high: 0.2 }
     })
-
-    console.log(res)
   }
   async getAddresses(): Promise<string[]> {
     try {

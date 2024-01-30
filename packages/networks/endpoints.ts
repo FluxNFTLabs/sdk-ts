@@ -2,9 +2,9 @@ import { NetworkEndpoints, Network } from './types'
 export const localhostEndpoints: NetworkEndpoints = {
   name: 'Localhost',
   id: Network.Localhost,
-  lcd: 'http://lcd.localhost',
-  tm: 'http://tm.localhost',
-  api: 'http://api.localhost'
+  lcd: 'https://lcd.localhost',
+  tm: 'https://tm.localhost',
+  api: 'https://api.localhost'
 }
 export const devnetEndpoints: NetworkEndpoints = {
   name: 'Devnet',

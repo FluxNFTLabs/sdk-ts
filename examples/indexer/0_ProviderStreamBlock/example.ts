@@ -1,23 +1,21 @@
-import * as providertypes from '../../../chain/flux/indexer/provider/query';
-import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
-
+import * as providertypes from '../../../chain/flux/indexer/provider/query'
+import { IndexerStreamProvider } from '../../../packages'
 const main = async () => {
-  const host = 'http://localhost:4445';
-  const cc = new providertypes.GrpcWebImpl(host, {
-    transport: NodeHttpTransport(),
-  })
-  const client = new providertypes.APIClientImpl(cc)
+  const host = 'http://localhost:4445'
+  const client = new IndexerStreamProvider(host)
 
   const req: providertypes.ProviderBlockRequest = {
-    height: "1",
-  };
+    height: '1'
+  }
 
   try {
-    const obs =  client.StreamBlock(req)
-    obs.subscribe((res:any) => {
-      console.log(res)
+    client.getStreamBlock({
+      request: req,
+      callback: (res: any) => {
+        console.log(res.height)
+      }
     })
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }

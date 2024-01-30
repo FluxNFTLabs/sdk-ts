@@ -1,21 +1,12 @@
-import * as providertypes from '../../../chain/flux/indexer/provider/query';
-import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
-
+import { IndexerGrpcProviderQuery } from '../../../packages'
 const main = async () => {
-  const host = 'http://localhost:4445';
-  const cc = new providertypes.GrpcWebImpl(host, {
-    transport: NodeHttpTransport(),
-  })
-  const client = new providertypes.APIClientImpl(cc)
-
-  const req: providertypes.ProviderBlockRequest = {
-    height: "1",
-  };
-
+  const host = 'http://localhost:4445'
+  const client = new IndexerGrpcProviderQuery(host)
+  const height = '19173'
   try {
-    const res = await client.GetBlock(req)
+    const res = await client.getBlock(height)
     console.log(res)
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
 }

@@ -19,4 +19,16 @@ export class ChainGrpcBankQuery extends BaseGrpc {
       throw e
     }
   }
+  async getBalance(address: string, denom: string): Promise<bankQuery.QueryBalanceResponse> {
+    try {
+      const request = bankQuery.QueryBalanceRequest.create({
+        address: address,
+        denom: denom
+      })
+      let response = await this.retry(() => this.client.Balance(request))
+      return response as bankQuery.QueryBalanceResponse
+    } catch (e) {
+      throw e
+    }
+  }
 }

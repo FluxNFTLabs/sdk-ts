@@ -14,7 +14,7 @@ export const getFluxAddress = (ethAddress: string): string => {
 }
 
 /**
- * Get ethereum address from injective bech32 address
+ * Get ethereum address from flux bech32 address
  *
  * @param luxAddress string
  * @returns string

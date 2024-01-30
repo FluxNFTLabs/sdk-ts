@@ -68,8 +68,8 @@ export default class WalletStrategy {
   }
   async signEIP712CosmosTx(eip712: any, signDoc: string) {
     if (this.wallet === Wallet.Metamask) {
-      return this.provider.signEIP712CosmosTx(eip712, signDoc)
+      throw new Error('This wallet does not support signEIP712CosmosTx')
     }
-    throw new Error('This wallet does not support signEIP712CosmosTx')
+    return this.provider.signEIP712CosmosTx({ eip712, signDoc })
   }
 }

@@ -77,7 +77,7 @@ export default class KeplrWallet {
   public async getKeplrWallet() {
     const { chainId } = this
     const keplr = await this.getKeplr()
-
+    console.log('getKeplrWallet')
     try {
       await keplr.enable(chainId)
       return keplr as Keplr
@@ -104,6 +104,16 @@ export default class KeplrWallet {
     }
   }
 
+  async signTransactionCosmos(signDoc: any, address: string) {
+    const keplr = await this.getKeplr()
+    console.log('this.chainId', this.chainId)
+    const offlineSigner = keplr.getOfflineSigner(this.chainId)
+    console.log('offlineSigner', offlineSigner)
+    const directSignResponse = await offlineSigner.signDirect(address, signDoc)
+    console.log(2)
+    return directSignResponse
+  }
+
   public async signEIP712CosmosTx({
     eip712,
     signDoc
@@ -116,8 +126,15 @@ export default class KeplrWallet {
     const key = await this.getKey()
 
     try {
+      console.log({
+        chainId,
+        key: key.bech32Address,
+        eip712,
+        signDoc
+      })
       return keplr.experimentalSignEIP712CosmosTx_v0(chainId, key.bech32Address, eip712, signDoc)
     } catch (e: unknown) {
+      console.log(e)
       throw e
     }
   }

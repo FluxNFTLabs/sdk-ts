@@ -6,8 +6,10 @@ import * as CosmosTxSigningV1Beta1Signing from '../../chain/cosmos/tx/signing/v1
 import * as CosmosCryptoSecp256k1Keys from '../../chain/cosmos/crypto/secp256k1/keys'
 import * as EthCryptoSecp256k1Keys from '../../chain/cosmos/crypto/ethsecp256k1/keys'
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
-import { EthereumChainId } from '../utils'
+import { EthereumChainId, DEFAULT_STD_FEE } from '../utils'
 import * as FluxTypesV1TxExt from '../../chain/flux/types/v1beta1/tx_ext'
+import { DirectSignResponse } from '@cosmjs/proto-signing'
+import keccak256 from 'keccak256'
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
     type_url: '/' + EthCryptoSecp256k1Keys.PubKey.$type,
@@ -67,7 +69,6 @@ export const createBody = ({
       type: messageWrapper.$type
     })
   )
-  console.log('txBody', txBody, message)
   txBody.memo = memo
 
   if (timeoutHeight) {
@@ -260,4 +261,144 @@ export const createWeb3Extension = ({
     value: FluxTypesV1TxExt.ExtensionOptionsWeb3Tx.encode(web3Extension).finish()
   }
   return extOptsAny
+}
+
+interface CreateTransactionArgs {
+  message: any
+  sequence: string
+  chainId: string
+  timeoutHeight?: number
+  memo?: string
+  fee?: any
+  signMode?: CosmosTxSigningV1Beta1Signing.SignMode
+  pubKey: string | any
+  accountNumber: string
+  messageWrapper: any
+}
+interface CreateTransactionResult {
+  txRaw: CosmosTxV1Beta1Tx.TxRaw
+  signDoc: CosmosTxV1Beta1Tx.SignDoc
+  signers: any
+  signer: Object
+  signBytes: Uint8Array
+  signHashedBytes: Uint8Array
+  bodyBytes: Uint8Array
+  authInfoBytes: Uint8Array
+  authInfo: CosmosTxV1Beta1Tx.AuthInfo
+  txBody: CosmosTxV1Beta1Tx.TxBody
+}
+export const createTransaction = (args: CreateTransactionArgs): CreateTransactionResult => {
+  return createTransactionWithSigners({
+    ...args,
+    signers: {
+      pubKey: args.pubKey,
+      accountNumber: args.accountNumber,
+      sequence: args.sequence
+    }
+  })
+}
+
+interface CreateTransactionWithSignersArgs {
+  signers: any
+  chainId: string
+  message: any
+  timeoutHeight?: number
+  memo?: string
+  fee?: any
+  signMode?: CosmosTxSigningV1Beta1Signing.SignMode
+  messageWrapper: any
+}
+
+export const createTransactionWithSigners = ({
+  signers,
+  chainId,
+  message,
+  timeoutHeight,
+  memo = '',
+  fee = DEFAULT_STD_FEE,
+  signMode = CosmosTxSigningV1Beta1Signing.SignMode.SIGN_MODE_DIRECT,
+  messageWrapper
+}: CreateTransactionWithSignersArgs): CreateTransactionResult => {
+  const actualSigners = Array.isArray(signers) ? signers : [signers]
+  const [signer] = actualSigners
+
+  const body = createBody({ message, memo, timeoutHeight, messageWrapper })
+  const feeMessage = createFee({
+    fee: fee.amount[0],
+    payer: fee.payer,
+    granter: fee.granter,
+    gasLimit: parseInt(fee.gas, 10)
+  })
+
+  const signInfo = createSigners({
+    chainId,
+    mode: signMode,
+    signers: actualSigners
+  })
+
+  const authInfo = createAuthInfo({
+    signerInfo: signInfo,
+    fee: feeMessage
+  })
+
+  const bodyBytes = CosmosTxV1Beta1Tx.TxBody.encode(body).finish()
+  const authInfoBytes = CosmosTxV1Beta1Tx.AuthInfo.encode(authInfo).finish()
+
+  const signDoc = createSignDoc({
+    chainId,
+    bodyBytes: bodyBytes,
+    authInfoBytes: authInfoBytes,
+    accountNumber: signer.accountNumber
+  })
+
+  const signDocBytes = CosmosTxV1Beta1Tx.SignDoc.encode(signDoc).finish()
+
+  const toSignBytes = Buffer.from(signDocBytes)
+  const toSignHash = keccak256(Buffer.from(signDocBytes))
+
+  const txRaw = CosmosTxV1Beta1Tx.TxRaw.create()
+  txRaw.auth_info_bytes = authInfoBytes
+  txRaw.body_bytes = bodyBytes
+
+  return {
+    txRaw,
+    signDoc,
+    signers,
+    signer,
+    signBytes: toSignBytes,
+    signHashedBytes: toSignHash,
+    bodyBytes: bodyBytes,
+    authInfoBytes: authInfoBytes,
+    authInfo,
+    txBody: body
+  }
+}
+
+/**
+ * Used when we get a DirectSignResponse from
+ * Cosmos native wallets like Keplr, Leap, etc after
+ * the TxRaw has been signed.
+ *
+ * The reason why we need to create a new TxRaw and
+ * not use the one that we passed to signing is that the users
+ * can change the gas fees and that will alter the original
+ * TxRaw which will cause signature miss match if we broadcast
+ * that transaction on chain
+ * @returns TxRaw
+ */
+export const createTxRawFromSigResponse = (
+  response: CosmosTxV1Beta1Tx.TxRaw | DirectSignResponse
+) => {
+  if ((response as DirectSignResponse).signed === undefined) {
+    return response as CosmosTxV1Beta1Tx.TxRaw
+  }
+
+  const directSignResponse = response as DirectSignResponse
+
+  const txRaw = CosmosTxV1Beta1Tx.TxRaw.create()
+  txRaw.auth_info_bytes = directSignResponse.signed.authInfoBytes
+  txRaw.body_bytes = directSignResponse.signed.bodyBytes
+  txRaw.signatures = [Buffer.from(directSignResponse.signature.signature, 'base64')]
+
+  return txRaw
 }

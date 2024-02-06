@@ -83,4 +83,10 @@ export default class WalletStrategy {
     }
     return this.provider.sendTx(tx, mode)
   }
+  async getSignaturePersonal(senderAddress: string, message: any) {
+    if (this.wallet === Wallet.Keplr) {
+      throw new Error('This wallet does not support getSignaturePersonal')
+    }
+    return this.provider.signPersonal(senderAddress, message)
+  }
 }

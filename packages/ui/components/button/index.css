@@ -1,0 +1,34 @@
+.btn {
+  @apply tw-px-6 tw-py-3 tw-rounded-2xl tw-font-bold tw-text-[16px] tw-relative tw-bg-transparent tw-text-blueGray-50;
+}
+.btn:disabled {
+  @apply tw-opacity-[0.2] tw-cursor-not-allowed;
+}
+
+.btn:not(:disabled):hover::before {
+  @apply tw-bg-blueGray-light-100 tw-absolute tw-top-0 tw-left-0 tw-rounded-2xl tw-w-full tw-h-full;
+  content: '';
+}
+.btn:not(:disabled):active::before {
+  @apply tw-bg-blueGray-light-200 tw-absolute tw-top-0 tw-left-0 tw-rounded-2xl tw-w-full tw-h-full;
+  content: '';
+}
+
+.btn.small {
+  @apply tw-px-5 tw-py-[10px] tw-text-[14px];
+}
+.btn.large {
+  @apply tw-px-8 tw-py-[14px] tw-text-[18px];
+}
+
+.btn.primary {
+  @apply tw-bg-gradient-to-r tw-from-orange-400 tw-to-pink-500 tw-text-blueGray-900;
+}
+
+.btn.secondary {
+  @apply tw-bg-blueGray-light-100 tw-text-blueGray-50;
+}
+
+.btn.tertiary {
+  @apply tw-bg-transparent tw-text-blueGray-50;
+}

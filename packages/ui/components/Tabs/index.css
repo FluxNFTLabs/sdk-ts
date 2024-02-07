@@ -1,0 +1,17 @@
+.tabs {
+  @apply tw-flex tw-items-center tw-relative tw-h-[fit-content];
+}
+.tabs.vertical {
+  @apply tw-flex-col tw-items-start;
+}
+.tabs .tabs_item {
+  @apply tw-p-4 tw-text-[16px] tw-font-bold tw-text-blueGray-400 tw-cursor-pointer tw-border-b tw-border-blueGray-light-200;
+}
+.tabs .tabs_item.active,
+.tabs .tabs_item:hover {
+  @apply tw-text-blueGray-50;
+}
+
+.tabs .active-border {
+  @apply tw-bg-blueGray-50 tw-absolute tw-bottom-0 tw-h-[2px];
+}

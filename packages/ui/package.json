@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxt/kit": "3.5.3",
     "@vueuse/core": "^10.7.2",
-    "floating-vue": "^5.2.2"
+    "floating-vue": "^5.2.2",
+    "pinia": "^2.1.7"
   }
 }

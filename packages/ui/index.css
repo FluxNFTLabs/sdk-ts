@@ -2,4 +2,5 @@
 @import 'components/TextField/index.css';
 @import 'components/Tooltip/index.css';
 @import 'components/Chip/index.css';
+@import 'components/Snackbar/index.css';
 @import 'floating-vue/dist/style.css';

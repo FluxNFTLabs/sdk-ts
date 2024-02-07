@@ -1,0 +1,19 @@
+.snackbar {
+  @apply tw-fixed tw-flex tw-items-center tw-justify-center tw-rounded-[16px] tw-pl-6 tw-pr-4 tw-py-2 tw-text-[16px] tw-font-bold;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snackbar.info {
+  @apply tw-bg-blueGray-50 tw-text-blueGray-900;
+}
+.snackbar.success {
+  @apply tw-bg-green-400 tw-text-blueGray-900;
+}
+.snackbar.error {
+  @apply tw-bg-rose-400 tw-text-blueGray-900;
+}
+.snackbar.warning {
+  @apply tw-bg-orange-400 tw-text-blueGray-900;
+}

@@ -37,7 +37,7 @@ watchEffect(() => {
 <template>
   <transition>
     <div class="snackbar" :class="color" v-if="modelValue">
-      <div>
+      <div class="snackbar_content">
         <slot />
       </div>
       <div>

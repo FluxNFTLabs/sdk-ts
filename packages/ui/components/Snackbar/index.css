@@ -1,5 +1,5 @@
 .snackbar {
-  @apply tw-fixed tw-flex tw-items-center tw-justify-center tw-rounded-[16px] tw-pl-6 tw-pr-4 tw-py-2 tw-text-[16px] tw-font-bold;
+  @apply tw-w-[90%] sm:tw-w-[fit-content] sm:tw-min-w-[300px] sm:tw-max-w-[500px] tw-fixed tw-flex tw-items-center tw-justify-center tw-rounded-[16px] tw-pl-6 tw-pr-4 tw-py-2 tw-text-[16px] tw-font-bold;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -16,4 +16,7 @@
 }
 .snackbar.warning {
   @apply tw-bg-orange-400 tw-text-blueGray-900;
+}
+.snackbar.snackbar_content {
+  @apply tw-flex-1;
 }

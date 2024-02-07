@@ -55,7 +55,7 @@ const closeDebounce = useDebounceFn(() => {
     :popperTriggers="triggers"
     :triggers="triggers"
     :distance="8"
-    :shown="true"
+    :shown="isOpen"
     @update:shown="onUpdate"
     @apply-hide="onHide"
     popperClass="base-tooltip"

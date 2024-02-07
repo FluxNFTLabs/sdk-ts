@@ -1,2 +1,4 @@
 @import 'components/button/index.css';
 @import 'components/TextField/index.css';
+@import 'components/Tooltip/index.css';
+@import 'floating-vue/dist/style.css';

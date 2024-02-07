@@ -32,3 +32,21 @@
 .btn.tertiary {
   @apply tw-bg-transparent tw-text-blueGray-50;
 }
+.btn.icon {
+  @apply tw-min-w-12 tw-min-h-12 tw-px-3 tw-py-3 !tw-rounded-full;
+}
+.btn.icon.small {
+  @apply tw-min-w-10 tw-min-h-10 tw-px-[6px] tw-py-[6px] !tw-rounded-full;
+}
+.btn.icon.large {
+  @apply tw-min-w-14 tw-min-h-14 tw-px-3 tw-py-3 !tw-rounded-full;
+}
+
+.btn.icon:not(:disabled):hover::before {
+  @apply tw-rounded-full;
+  content: '';
+}
+.btn.icon:not(:disabled):active::before {
+  @apply tw-rounded-full;
+  content: '';
+}

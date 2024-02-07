@@ -41,7 +41,7 @@ watchEffect(() => {
         <slot />
       </div>
       <div>
-        <BaseButton class="small" @click="hide">
+        <BaseButton size="small" icon @click="hide">
           <span class="tw-text-blueGray-900">
             <IconsClose />
           </span>

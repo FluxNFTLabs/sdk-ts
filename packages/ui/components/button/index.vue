@@ -1,5 +1,26 @@
+<script lang="ts" setup>
+import { defineProps } from 'vue'
+type Color = 'primary' | 'secondary' | 'tertiary'
+type Size = 'small' | 'medium' | 'large'
+
+defineProps({
+  size: {
+    type: String as () => Size,
+    default: 'medium'
+  },
+  color: {
+    type: String as () => Color,
+    default: 'tertiary'
+  },
+  icon: {
+    type: Boolean,
+    default: false
+  }
+})
+</script>
+
 <template>
-  <button class="btn">
+  <button class="btn" :class="[size, color, icon ? 'icon' : ''].join(' ')">
     <slot />
   </button>
 </template>

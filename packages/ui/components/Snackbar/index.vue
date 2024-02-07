@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { useSnackbarStore } from '../../store/snackbar'
 import Toast from './Toast.vue'
 const snackbarStore = useSnackbarStore()
@@ -16,19 +16,8 @@ const isShow = computed({
     snackbarStore.hide()
   }
 })
-const show = () => {
-  snackbarStore.show({
-    message: 'Hello',
-    timeout: 5000,
-    color: 'info'
-  })
-}
-watchEffect(() => {
-  console.log('isShow', isShow.value)
-})
 </script>
 <template>
-  <BaseButton @click="show">asds</BaseButton>
   <Toast v-model="isShow" :timeout="timeout" :color="color" :createAt="createAt">
     {{ message }}
   </Toast>

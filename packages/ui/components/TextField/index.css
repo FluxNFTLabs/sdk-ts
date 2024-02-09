@@ -31,5 +31,5 @@
 }
 
 .base-text-field .input:disabled {
-  @apply !tw-border-blueGray-light-200;
+  @apply !tw-border-blueGray-dark-200 dark:!tw-border-blueGray-light-200;
 }

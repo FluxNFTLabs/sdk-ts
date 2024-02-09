@@ -5,13 +5,13 @@
   @apply tw-flex-col tw-items-start;
 }
 .tabs .tabs_item {
-  @apply tw-p-4 tw-text-[16px] tw-font-bold tw-text-blueGray-400 tw-cursor-pointer tw-border-b tw-border-blueGray-light-200;
+  @apply tw-p-4 tw-text-[16px] tw-font-bold tw-text-blueGray-500 dark:tw-text-blueGray-400 tw-cursor-pointer tw-border-b tw-border-blueGray-dark-200 dark:tw-border-blueGray-light-200;
 }
 .tabs .tabs_item.active,
 .tabs .tabs_item:hover {
-  @apply tw-text-blueGray-50;
+  @apply tw-text-blueGray-900 dark:tw-text-blueGray-50;
 }
 
 .tabs .active-border {
-  @apply tw-bg-blueGray-50 tw-absolute tw-bottom-0 tw-h-[2px];
+  @apply tw-bg-blueGray-800 dark:tw-bg-blueGray-50 tw-absolute tw-bottom-0 tw-h-[2px];
 }

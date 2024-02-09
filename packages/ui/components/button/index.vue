@@ -10,7 +10,7 @@ defineProps({
   },
   color: {
     type: String as () => Color,
-    default: 'tertiary'
+    default: 'default'
   },
   icon: {
     type: Boolean,

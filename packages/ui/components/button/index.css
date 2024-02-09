@@ -20,18 +20,27 @@
 .btn.large {
   @apply tw-px-8 tw-py-[14px] tw-text-[18px];
 }
-
+/* Primary */
 .btn.primary {
   @apply tw-bg-gradient-to-r tw-from-orange-400 tw-to-pink-500 tw-text-blueGray-900;
 }
-
+/* Secondary */
 .btn.secondary {
   @apply tw-bg-blueGray-light-100 tw-text-blueGray-50;
 }
-
+/* Tertiary */
 .btn.tertiary {
-  @apply tw-bg-transparent tw-text-blueGray-50;
+  @apply tw-bg-blueGray-50 tw-text-blueGray-900;
 }
+.btn.tertiary:not(:disabled):hover::before {
+  @apply tw-bg-blueGray-dark-100;
+  content: '';
+}
+.btn.tertiary:not(:disabled):active::before {
+  @apply tw-bg-blueGray-dark-200;
+  content: '';
+}
+/* Icon */
 .btn.icon {
   @apply tw-min-w-12 tw-min-h-12 tw-px-3 tw-py-3 !tw-rounded-full;
 }

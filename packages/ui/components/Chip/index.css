@@ -1,5 +1,5 @@
 .chip {
-  @apply tw-text-[16px] tw-font-[400] dark:tw-bg-blueGray-light-100 tw-bg-blueGray-50 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2;
+  @apply tw-text-[16px] tw-font-[400] dark:tw-bg-blueGray-light-100 tw-bg-blueGray-500 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-px-4 tw-py-2;
   box-shadow: 0px 8px 32px -4px rgba(0, 0, 0, 0.1), 0px 4px 16px -2px rgba(0, 0, 0, 0.06),
     0px 0px 8px 0px rgba(0, 0, 0, 0.04);
 }

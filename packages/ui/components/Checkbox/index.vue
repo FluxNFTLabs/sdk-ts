@@ -1,4 +1,3 @@
-import internal from 'stream';
 <script lang="ts" setup>
 import { defineProps, defineEmits } from 'vue'
 const emit = defineEmits(['update:modelValue'])

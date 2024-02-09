@@ -1,4 +1,6 @@
 <script setup>
+import { defineProps } from 'vue'
+import IconsClose from '../Icons/Close.vue'
 defineProps({
   isOpen: {
     type: Boolean,

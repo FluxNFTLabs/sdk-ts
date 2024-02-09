@@ -6,4 +6,5 @@
 @import 'components/Tabs/index.css';
 @import 'components/Modal/index.css';
 @import 'components/Checkbox/index.css';
+@import 'components/Select/index.css';
 @import 'floating-vue/dist/style.css';

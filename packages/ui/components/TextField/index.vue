@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { defineProps, useAttrs, defineOptions } from 'vue'
+defineOptions({
+  inheritAttrs: false
+})
 defineProps({
   label: {
     type: String,
@@ -7,12 +11,22 @@ defineProps({
   errorMessage: {
     type: String,
     default: ''
+  },
+  containerClass: {
+    type: String,
+    default: ''
+  },
+  labelClass: {
+    type: String,
+    default: ''
   }
 })
+const $attrs = useAttrs()
+console.log($attrs)
 </script>
 <template>
-  <div class="base-text-field" :class="errorMessage ? 'invalid' : ''">
-    <p class="label">
+  <div class="base-text-field" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
+    <p class="label" :class="labelClass">
       {{ label }}
     </p>
     <input class="input" type="text" v-bind="$attrs" />

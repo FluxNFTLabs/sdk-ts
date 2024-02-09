@@ -1,5 +1,5 @@
 .btn {
-  @apply tw-px-6 tw-py-3 tw-rounded-2xl tw-font-bold tw-text-[16px] tw-relative tw-bg-transparent tw-text-blueGray-50;
+  @apply tw-px-6 tw-py-3 tw-rounded-2xl tw-font-bold tw-text-[16px] tw-relative tw-bg-transparent tw-text-blueGray-50 tw-flex tw-items-center tw-justify-center;
 }
 .btn:disabled {
   @apply tw-opacity-[0.2] tw-cursor-not-allowed;

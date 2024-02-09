@@ -1,0 +1,23 @@
+.modal {
+  @apply tw-absolute tw-z-[1300] tw-top-0 tw-left-0 tw-w-screen tw-h-screen tw-flex tw-items-center tw-justify-center;
+}
+
+.modal__header {
+  @apply tw-p-[16px_32px] tw-pb-1  tw-flex tw-items-center;
+}
+
+.modal__body {
+  @apply tw-p-[16px_32px] tw-pt-1 tw-flex tw-flex-col tw-overflow-auto;
+}
+
+.modal-backdrop {
+  @apply tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-[1300] tw-bg-[rgba(15,23,42,0.2)] tw-backdrop-blur-[16px];
+}
+
+.modal__button-close {
+  @apply tw-w-10 tw-h-10 tw-mr-[-13px] tw-ml-3;
+}
+
+.modal__content {
+  @apply tw-rounded-xl tw-shadow-lg tw-relative tw-z-[1300] tw-flex tw-flex-col tw-max-h-[100%] tw-bg-blueGray-800;
+}

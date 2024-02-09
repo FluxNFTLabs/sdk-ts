@@ -4,4 +4,5 @@
 @import 'components/Chip/index.css';
 @import 'components/Snackbar/index.css';
 @import 'components/Tabs/index.css';
+@import 'components/Modal/index.css';
 @import 'floating-vue/dist/style.css';

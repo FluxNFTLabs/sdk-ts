@@ -22,7 +22,6 @@ defineProps({
   }
 })
 const $attrs = useAttrs()
-console.log($attrs)
 </script>
 <template>
   <div class="base-text-field" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">

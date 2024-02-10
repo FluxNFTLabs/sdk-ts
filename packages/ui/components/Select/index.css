@@ -6,7 +6,7 @@
   outline: none;
   transition: border-color 0.3s ease;
 }
-.base-select .select[disabled] {
+.base-select .select[disabled='true'] {
   @apply tw-cursor-default !tw-border-blueGray-dark-200 dark:!tw-border-blueGray-light-200;
 }
 
@@ -27,6 +27,9 @@
 .base-select__popover .v-popper__wrapper .v-popper__inner {
   @apply tw-rounded-lg dark:tw-bg-blueGray-dark-500 tw-p-2  dark:tw-text-blueGray-50;
   border: none !important;
+}
+.base-select__popover .content-popover__item.multiple {
+  @apply tw-w-full;
 }
 .base-select__popover .content-popover__item {
   @apply tw-rounded-lg tw-px-4 tw-py-2;

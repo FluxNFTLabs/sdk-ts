@@ -1,5 +1,5 @@
 .checkbox {
-  @apply tw-cursor-pointer tw-flex tw-items-center tw-justify-center tw-gap-2;
+  @apply tw-cursor-pointer tw-flex tw-items-center tw-justify-start tw-gap-2;
 }
 .checkbox:hover .checkbox__box {
   @apply tw-border-blueGray-900 dark:tw-border-blueGray-50;

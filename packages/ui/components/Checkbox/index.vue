@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref, watch } from 'vue'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  modelValue: String
+  modelValue: String,
+  onChange: Function,
+  checked: Boolean
 })
-const internalValue = ref(props.modelValue)
+const internalValue = ref(props.modelValue || props.checked)
 watch(
   () => props.modelValue,
   (value) => {
@@ -13,9 +15,9 @@ watch(
   }
 )
 const checkBoxChange = (value) => {
-  console.log('checkBoxChange', value)
   internalValue.value = value
   emit('update:modelValue', value)
+  props.onChange && props.onChange(value)
 }
 </script>
 

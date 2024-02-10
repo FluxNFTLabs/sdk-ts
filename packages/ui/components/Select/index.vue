@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue'
+import { defineProps, defineEmits, ref, useAttrs, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Dropdown } from 'floating-vue'
 import IconsAngleDown from '../Icons/AngleDown.vue'
+import BaseChip from '../Chip/index.vue'
+import CheckBox from '../Checkbox/index.vue'
+interface Option {
+  value: string
+  title: string
+}
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  modelValue: String,
+  modelValue: String || Array,
   label: {
     type: String,
     required: true
@@ -30,58 +36,125 @@ const props = defineProps({
     default: false
   },
   options: {
-    type: Array,
+    type: Array as () => Option[],
     default: () => []
   }
 })
+const $attrs = useAttrs()
 const selectRef = ref(null)
-const popoverWidth = ref('')
+const popoverWidth = ref('0px')
+const dropdownAttrs = computed(() => ({
+  ...$attrs,
+  disabled: props.disabled
+}))
+
+let resizeObserver = null
 onMounted(() => {
   if (selectRef.value) {
-    popoverWidth.value = `${selectRef.value.offsetWidth}px`
+    resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width } = entry.contentRect
+        popoverWidth.value = `${width}px`
+      }
+    })
+    resizeObserver.observe(selectRef.value)
   }
 })
-const isDropdownOpen = ref(false)
-const internalValue = ref(props.modelValue)
+
+onBeforeUnmount(() => {
+  if (resizeObserver && selectRef.value) {
+    resizeObserver.unobserve(selectRef.value)
+  }
+})
+
+const internalValue = ref<Option | Option[]>(
+  props.multiple
+    ? Array.isArray(props.modelValue)
+      ? props.options.filter((option) => props.modelValue.includes(option.value))
+      : []
+    : props.options.find((option) => option.value === props.modelValue)
+)
 const handleSelect = (option: any) => {
+  if (props.multiple && Array.isArray(internalValue.value)) {
+    if (internalValue.value.some((item) => item.value === option.value)) {
+      internalValue.value = internalValue.value.filter((item) => item.value !== option.value)
+    } else {
+      internalValue.value = [...internalValue.value, option]
+    }
+    console.log(internalValue.value)
+    return emit(
+      'update:modelValue',
+      internalValue.value.map((item) => item.value)
+    )
+  }
   internalValue.value = option
-  emit('update:modelValue', option.id)
-  isDropdownOpen.value = false
+  emit('update:modelValue', option.value)
+}
+
+const isActive = (value: string) => {
+  return Array.isArray(internalValue.value)
+    ? Boolean(internalValue.value?.find((item) => item.value === value))
+    : internalValue.value?.value === value
 }
 </script>
 <template>
-  <div class="base-select" :class="[containerClass].join(' ')">
+  <div class="base-select" :class="[containerClass].join(' ')" ref="selectRef">
     <p class="label" :class="labelClass">
       {{ label }}
     </p>
     <Dropdown
-      v-model="isDropdownOpen"
       :disabled="disabled"
-      :popperHideTriggers="(triggers) => [...triggers, 'click']"
-      :popperClass="`base-select__popover tw-w-[${popoverWidth}]`"
+      :popperHideTriggers="(triggers) => (multiple ? triggers : [...triggers, 'click'])"
+      :popperClass="`base-select__popover`"
     >
-      <div
-        class="select"
-        ref="selectRef"
-        v-bind="disabled ? { ...$attrs, disabled: true } : $attrs"
-      >
+      <div class="select" v-bind="dropdownAttrs">
         <div class="tw-flex-1">
-          <p class="tw-flex tw-items-center" v-if="!internalValue">{{ placeholder }}</p>
-          <p class="tw-flex tw-items-center" v-else>{{ internalValue?.text }}</p>
+          <p
+            class="tw-flex tw-items-center"
+            v-if="!internalValue || (Array.isArray(internalValue) && internalValue.length === 0)"
+          >
+            {{ placeholder }}
+          </p>
+          <p class="tw-flex tw-items-center" v-else-if="!Array.isArray(internalValue)">
+            {{ internalValue?.title }}
+          </p>
+          <div v-else-if="Array.isArray(internalValue)" class="tw-flex tw-flex-wrap tw-gap-2">
+            <BaseChip
+              v-for="item in internalValue"
+              :key="item.value"
+              :onDelete="() => handleSelect(item)"
+              >{{ item.title }}</BaseChip
+            >
+          </div>
         </div>
         <IconsAngleDown />
       </div>
       <template #popper>
-        <div :style="{ width: popoverWidth }" class="content-popover">
+        <div
+          :style="{ minWidth: popoverWidth }"
+          class="content-popover"
+          :class="multiple ? 'tw-flex tw-flex-col tw-items-start' : ''"
+        >
           <div
-            v-for="(option, index) in options"
+            v-if="!multiple"
+            v-for="option in options"
             @click="handleSelect(option)"
-            :key="options.id"
+            :key="option.value"
             class="content-popover__item"
-            :class="option.id === internalValue?.id ? 'content-popover__item--selected' : ''"
+            :class="isActive(option.value) ? 'content-popover__item--selected' : ''"
           >
-            {{ option.text }}
+            {{ option.title }}
           </div>
+          <CheckBox
+            v-if="multiple"
+            v-for="option in options"
+            :key="option.value"
+            :onChange="() => handleSelect(option)"
+            :checked="isActive(option.value)"
+            class="content-popover__item multiple"
+          >
+            {{ option.title }}
+          </CheckBox>
         </div>
       </template>
     </Dropdown>

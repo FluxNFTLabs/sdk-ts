@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, watch, onMounted } from 'vue'
+import { defineProps, watch, onMounted, ref } from 'vue'
 type TabType = 'horizontal' | 'vertical'
 const props = defineProps({
   modelValue: Number,
@@ -17,7 +17,7 @@ const position = ref('0px')
 const width = ref('0px')
 const top = ref('0px')
 const indexActive = ref(0)
-const ids = ref([])
+const ids = ref<Array<string>>([])
 const onActive = (index: number) => {
   if (index === indexActive.value) return
   indexActive.value = index
@@ -31,7 +31,7 @@ const onActive = (index: number) => {
   }
   emit('update:modelValue', index)
 }
-const initId = (index: Number) => {
+const initId = (index: number) => {
   if (ids.value[index]) {
     return ids.value[index]
   }
@@ -43,9 +43,10 @@ onMounted(() => {
   let index = props.modelValue || 0
   onActive(index)
 })
-watch(props.modelValue, (value) => {
-  if (value !== indexActive.value) {
-    onActive(value)
+watch(props, (_props) => {
+  console.log(props)
+  if (_props.modelValue !== indexActive.value) {
+    onActive(_props.modelValue)
   }
 })
 </script>
@@ -53,7 +54,7 @@ watch(props.modelValue, (value) => {
   <div class="tabs" :class="type">
     <div
       v-for="(tab, index) in items"
-      :key="tab"
+      :key="(tab as string)"
       class="tabs_item"
       :class="indexActive === index ? 'active' : ''"
       @click="onActive(index)"

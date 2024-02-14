@@ -9,6 +9,8 @@ import BaseTabs from './components/Tabs/index.vue'
 import BaseModal from './components/Modal/index.vue'
 import BaseCheckbox from './components/Checkbox/index.vue'
 import BaseSelect from './components/Select/index.vue'
+import BaseWindow from './components/Window/index.vue'
+import BaseWindowItem from './components/Window/Item.vue'
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseButton', BaseButton)
   nuxtApp.vueApp.component('BaseTextField', BaseTextField)
@@ -19,4 +21,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseModal', BaseModal)
   nuxtApp.vueApp.component('BaseCheckbox', BaseCheckbox)
   nuxtApp.vueApp.component('BaseSelect', BaseSelect)
+  nuxtApp.vueApp.component('BaseWindow', BaseWindow)
+  nuxtApp.vueApp.component('BaseWindowItem', BaseWindowItem)
 })

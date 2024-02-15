@@ -1,10 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import type {
-  Keplr,
-  StdSignDoc,
-  AminoSignResponse,
-  Window as KeplrWindow
-} from '@keplr-wallet/types'
+import type { Keplr, StdSignDoc, AminoSignResponse } from '@keplr-wallet/types'
+import { EthSignType } from '@keplr-wallet/types'
 import { ChainId } from '../../utils'
 
 export default class KeplrWallet {
@@ -123,12 +119,6 @@ export default class KeplrWallet {
     const key = await this.getKey()
 
     try {
-      console.log({
-        chainId,
-        key: key.bech32Address,
-        eip712,
-        signDoc
-      })
       return keplr.experimentalSignEIP712CosmosTx_v0(chainId, key.bech32Address, eip712, signDoc)
     } catch (e: unknown) {
       console.log(e)
@@ -139,6 +129,15 @@ export default class KeplrWallet {
     const keplr = await this.getKeplrWallet()
     try {
       return keplr.sendTx(this.chainId, tx, mode)
+    } catch (e: unknown) {
+      console.log(e)
+      throw e
+    }
+  }
+  async signEthereum(address: string, message: string) {
+    const keplr = await this.getKeplrWallet()
+    try {
+      return keplr.signEthereum(this.chainId, address, message, EthSignType.MESSAGE)
     } catch (e: unknown) {
       console.log(e)
       throw e

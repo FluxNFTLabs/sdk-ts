@@ -143,4 +143,15 @@ export default class KeplrWallet {
       throw e
     }
   }
+  async signArbitrary(address: string, message: string) {
+    const keplr = await this.getKeplrWallet()
+    try {
+      const signature = await keplr.signArbitrary(this.chainId, address, message)
+      console.log(signature)
+      return signature.signature
+    } catch (e: unknown) {
+      console.log(e)
+      throw e
+    }
+  }
 }

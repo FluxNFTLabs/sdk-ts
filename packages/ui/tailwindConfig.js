@@ -195,6 +195,13 @@ export const screens = {
   xl: '1440px',
   '2xl': '1920px'
 }
+export const zIndex = {
+  1100: 1100,
+  drawer: 1200,
+  modal: 1300,
+  snackbar: 1400,
+  tooltip: 1500
+}
 
 export const gradient1 = `linear-gradient(90deg, ${lime[300]}, ${orange[400]})`
 export const gradient2 = `linear-gradient(90deg, ${orange[400]}, ${pink[400]})`

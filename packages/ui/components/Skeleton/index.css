@@ -1,0 +1,31 @@
+.skeleton-loader {
+  @apply tw-bg-blueGray-600 tw-overflow-hidden tw-rounded-md;
+}
+
+.skeleton-loader--text {
+  @apply tw-h-[16px] tw-w-full;
+}
+
+.skeleton-loader--avatar {
+  @apply tw-rounded-full tw-h-[50px] tw-w-[50px];
+}
+
+.skeleton-loader--image {
+  @apply tw-w-[300px] tw-h-[150px];
+}
+
+.skeleton-loader::before {
+  content: '';
+  display: block;
+  @apply tw-w-full tw-h-full tw-bg-gradient-to-r tw-from-blueGray-dark-50 tw-via-blueGray-light-400 tw-to-blueGray-dark-50;
+  animation: loadingShine 1.5s infinite;
+}
+
+@keyframes loadingShine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

@@ -8,4 +8,5 @@
 @import 'components/Checkbox/index.css';
 @import 'components/Select/index.css';
 @import 'components/Skeleton/index.css';
+@import 'components/Dropdown/index.css';
 @import 'floating-vue/dist/style.css';

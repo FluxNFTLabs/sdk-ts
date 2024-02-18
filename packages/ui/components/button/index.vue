@@ -12,6 +12,11 @@ defineProps({
     type: String as () => Color,
     default: 'default'
   },
+  variant: {
+    type: String as () => Color,
+    default: 'default',
+    validator: (value: string) => ['default', 'secondary', 'primary', 'tertiary'].includes(value)
+  },
   icon: {
     type: String,
     default: false
@@ -20,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-  <button class="btn" :class="[size, color, icon ? 'icon' : ''].join(' ')">
+  <button class="btn" :class="[size, variant, color, icon ? 'icon' : ''].join(' ')">
     <BaseIcons v-if="icon" :name="icon" />
     <slot />
   </button>

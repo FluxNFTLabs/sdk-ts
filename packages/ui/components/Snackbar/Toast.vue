@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { defineProps, defineEmits, ref, watchEffect } from 'vue'
+import BaseIcons from '../Icons/index.vue'
 const props = defineProps({
   modelValue: Boolean,
   timeout: {
@@ -43,7 +44,7 @@ watchEffect(() => {
       <div>
         <BaseButton size="small" icon @click="hide">
           <span class="tw-text-blueGray-900">
-            <IconsClose />
+            <BaseIcons name="close" />
           </span>
         </BaseButton>
       </div>

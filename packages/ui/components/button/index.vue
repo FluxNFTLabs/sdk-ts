@@ -13,7 +13,7 @@ defineProps({
     default: 'default'
   },
   icon: {
-    type: Boolean,
+    type: String,
     default: false
   }
 })
@@ -21,6 +21,7 @@ defineProps({
 
 <template>
   <button class="btn" :class="[size, color, icon ? 'icon' : ''].join(' ')">
+    <BaseIcons v-if="icon" :name="icon" />
     <slot />
   </button>
 </template>

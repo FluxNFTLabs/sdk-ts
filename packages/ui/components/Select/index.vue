@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, useAttrs, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Dropdown } from 'floating-vue'
-import IconsAngleDown from '../Icons/AngleDown.vue'
 import BaseChip from '../Chip/index.vue'
 import CheckBox from '../Checkbox/index.vue'
+import BaseIcons from '../Icons/index.vue'
 interface Option {
   value: string
   title: string
@@ -48,7 +48,7 @@ const dropdownAttrs = computed(() => ({
   disabled: props.disabled
 }))
 
-let resizeObserver = null
+let resizeObserver: ResizeObserver | null = null
 onMounted(() => {
   if (selectRef.value) {
     resizeObserver = new ResizeObserver((entries) => {
@@ -67,12 +67,12 @@ onBeforeUnmount(() => {
   }
 })
 
-const internalValue = ref<Option | Option[]>(
+const internalValue = ref<Option | Option[] | null>(
   props.multiple
     ? Array.isArray(props.modelValue)
-      ? props.options.filter((option) => props.modelValue.includes(option.value))
+      ? props.options.filter((option) => props.modelValue?.includes(option.value))
       : []
-    : props.options.find((option) => option.value === props.modelValue)
+    : props.options.find((option) => option.value === props.modelValue) || null
 )
 const handleSelect = (option: any) => {
   if (props.multiple && Array.isArray(internalValue.value)) {
@@ -127,7 +127,7 @@ const isActive = (value: string) => {
             >
           </div>
         </div>
-        <IconsAngleDown />
+        <BaseIcons name="angleDown" />
       </div>
       <template #popper>
         <div

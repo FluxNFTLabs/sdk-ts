@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
-import IconsClose from '../Icons/Close.vue'
+import BaseButton from '../Button/index.vue'
 defineProps({
   isOpen: {
     type: Boolean,
@@ -38,9 +38,7 @@ defineProps({
             <div class="tw-flex-1">
               <slot name="header" />
             </div>
-            <BaseButton icon size="small" class="modal__button-close" @click="onClose">
-              <IconsClose />
-            </BaseButton>
+            <BaseButton icon="close" size="small" class="modal__button-close" @click="onClose" />
           </div>
           <div :class="bodyClass" class="modal__body">
             <slot />

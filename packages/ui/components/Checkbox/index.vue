@@ -2,7 +2,7 @@
 import { defineProps, defineEmits, ref, watch } from 'vue'
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  modelValue: String,
+  modelValue: Boolean,
   onChange: Function,
   checked: Boolean
 })
@@ -14,7 +14,7 @@ watch(
     internalValue.value = value
   }
 )
-const checkBoxChange = (value) => {
+const checkBoxChange = (value: boolean) => {
   internalValue.value = value
   emit('update:modelValue', value)
   props.onChange && props.onChange(value)

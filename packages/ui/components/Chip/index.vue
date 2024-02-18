@@ -7,7 +7,7 @@ defineProps(['onDelete'])
   <div class="chip">
     <slot />
     <button v-if="onDelete" @click.stop="onDelete">
-      <IconsClose width="24" height="24" />
+      <BaseIcons name="close" width="24" height="24" />
     </button>
   </div>
 </template>

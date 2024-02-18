@@ -12,6 +12,8 @@ import BaseSelect from './components/Select/index.vue'
 import BaseWindow from './components/Window/index.vue'
 import BaseWindowItem from './components/Window/Item.vue'
 import BaseSkeleton from './components/Skeleton/index.vue'
+import BaseIcons from './components/Icons/index.vue'
+
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseButton', BaseButton)
   nuxtApp.vueApp.component('BaseTextField', BaseTextField)
@@ -25,4 +27,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseWindow', BaseWindow)
   nuxtApp.vueApp.component('BaseWindowItem', BaseWindowItem)
   nuxtApp.vueApp.component('BaseSkeleton', BaseSkeleton)
+  nuxtApp.vueApp.component('BaseIcons', BaseIcons)
 })

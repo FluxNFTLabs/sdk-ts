@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -28,7 +28,7 @@ provide('oldIndex', oldIndex)
 </script>
 
 <template>
-  <div class="tw-flex tw-overflow-hidden tw-relative tw-w-full">
+  <div class="tw-flex tw-relative tw-w-full tw-bg-inherit">
     <slot :active-index="currentIndex"></slot>
   </div>
 </template>

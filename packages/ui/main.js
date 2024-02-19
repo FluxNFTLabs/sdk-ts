@@ -14,6 +14,7 @@ import BaseWindowItem from './components/Window/Item.vue'
 import BaseSkeleton from './components/Skeleton/index.vue'
 import BaseIcons from './components/Icons/index.vue'
 import BaseDropdown from './components/Dropdown/index.vue'
+import BaseProgressLinear from './components/ProgressLinear.vue'
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseButton', BaseButton)
   nuxtApp.vueApp.component('BaseTextField', BaseTextField)
@@ -29,4 +30,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseSkeleton', BaseSkeleton)
   nuxtApp.vueApp.component('BaseIcons', BaseIcons)
   nuxtApp.vueApp.component('BaseDropdown', BaseDropdown)
+  nuxtApp.vueApp.component('BaseProgressLinear', BaseProgressLinear)
 })

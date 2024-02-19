@@ -1,14 +1,22 @@
 <template>
-  <svg
-    width="24"
-    height="24"
-    focusable="false"
-    aria-hidden="true"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
-      d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"
-    ></path>
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M2.25 6C2.25 5.58579 2.58579 5.25 3 5.25H21C21.4142 5.25 21.75 5.58579 21.75 6C21.75 6.41421 21.4142 6.75 21 6.75H3C2.58579 6.75 2.25 6.41421 2.25 6Z"
+      fill="currentColor"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M6.25 12C6.25 11.5858 6.58579 11.25 7 11.25L17 11.25C17.4142 11.25 17.75 11.5858 17.75 12C17.75 12.4142 17.4142 12.75 17 12.75L7 12.75C6.58579 12.75 6.25 12.4142 6.25 12Z"
+      fill="currentColor"
+    />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M10.25 18C10.25 17.5858 10.5858 17.25 11 17.25L13 17.25C13.4142 17.25 13.75 17.5858 13.75 18C13.75 18.4142 13.4142 18.75 13 18.75L11 18.75C10.5858 18.75 10.25 18.4142 10.25 18Z"
+      fill="currentColor"
+    />
   </svg>
 </template>

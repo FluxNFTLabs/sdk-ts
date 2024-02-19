@@ -1,4 +1,4 @@
-@import 'components/button/index.css';
+@import 'components/Button/index.css';
 @import 'components/TextField/index.css';
 @import 'components/Tooltip/index.css';
 @import 'components/Chip/index.css';
@@ -9,4 +9,5 @@
 @import 'components/Select/index.css';
 @import 'components/Skeleton/index.css';
 @import 'components/Dropdown/index.css';
+@import 'components/Icons/index.css';
 @import 'floating-vue/dist/style.css';

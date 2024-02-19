@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, watch, onMounted, ref } from 'vue'
+import { defineProps, watch, onMounted, ref, onBeforeUnmount } from 'vue'
 type TabType = 'horizontal' | 'vertical'
 const props = defineProps({
   modelValue: Number,
@@ -19,7 +19,7 @@ const top = ref('0px')
 const indexActive = ref(0)
 const ids = ref<Array<string>>([])
 const onActive = (index: number) => {
-  if (index === indexActive.value) return
+  // if (index === indexActive.value) return
   indexActive.value = index
   const element = document.getElementById(ids.value[index])
   if (!element) return
@@ -39,13 +39,37 @@ const initId = (index: number) => {
   ids.value[index] = id
   return id
 }
+let resizeObserver: ResizeObserver | null = null
 onMounted(() => {
   let index = props.modelValue || 0
-  onActive(index)
+  resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      const { width } = entry.contentRect
+      if (width > 0 && entry.target.id === ids.value[index]) {
+        onActive(index)
+      }
+    }
+  })
+  ids.value.forEach((id, index) => {
+    const element = document.getElementById(id)
+    if (element) {
+      resizeObserver?.observe(element)
+    }
+  })
+
+  setTimeout(() => {
+    onActive(index)
+  }, 200)
 })
+
+onBeforeUnmount(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+})
+
 watch(props, (_props) => {
-  console.log(props)
-  if (_props.modelValue !== indexActive.value) {
+  if (_props.modelValue && _props.modelValue !== indexActive.value) {
     onActive(_props.modelValue)
   }
 })

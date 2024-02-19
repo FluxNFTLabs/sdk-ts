@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import { Dropdown } from 'floating-vue'
-
 const emit = defineEmits<{
   'isOpen:change': [show: boolean]
   'update:isOpen': [show: boolean]

@@ -24,7 +24,7 @@ const props = defineProps({
     :leave-to-class="'slide-leave-to-' + leaveTo"
     appear
   >
-    <div v-if="isOpen" class="slider-container tw-bg-blueGray-900 dark:tw-bg-blueGray-900">
+    <div v-show="isOpen" class="slider-container tw-bg-inherit">
       <div class="slider-content">
         <slot />
       </div>
@@ -34,15 +34,15 @@ const props = defineProps({
 
 <style scoped>
 .slider-container {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: fit-content;
 }
 .slider-content {
   width: 100%;
-  height: 100%;
+  height: fit-content;
 }
 .slide-enter-active,
 .slide-leave-active {
@@ -53,17 +53,21 @@ const props = defineProps({
 .slide-enter-from-left {
   transform: translateX(-15%);
   opacity: 0;
+  position: absolute;
 }
 .slide-leave-to-left {
   transform: translateX(-15%);
   opacity: 0;
+  position: absolute;
 }
 .slide-enter-from-right {
   transform: translateX(15%);
   opacity: 0;
+  position: absolute;
 }
 .slide-leave-to-right {
   transform: translateX(15%);
   opacity: 0;
+  position: absolute;
 }
 </style>

@@ -13,13 +13,19 @@
   @apply tw-bg-blueGray-light-200 tw-absolute tw-top-0 tw-left-0 tw-rounded-2xl tw-w-full tw-h-full;
   content: '';
 }
-
-.btn.small {
+.btn.xs:not(.icon),
+.btn.x-small:not(.icon) {
+  @apply tw-px-3 tw-py-2 tw-text-[12px];
+}
+.btn.sm:not(.icon),
+.btn.small:not(.icon) {
   @apply tw-px-5 tw-py-[10px] tw-text-[14px];
 }
-.btn.large {
+.btn.lg:not(.icon),
+.btn.large:not(.icon) {
   @apply tw-px-8 tw-py-[14px] tw-text-[18px];
 }
+
 /* Primary */
 .btn.primary {
   @apply tw-bg-gradient-to-r tw-from-orange-400 tw-to-pink-500 tw-text-blueGray-900;
@@ -41,13 +47,20 @@
   content: '';
 }
 /* Icon */
-.btn.icon {
+.btn.icon.medium,
+.btn.icon.md {
   @apply tw-min-w-12 tw-min-h-12 tw-px-3 tw-py-3 !tw-rounded-full;
 }
-.btn.icon.small {
+.btn.icon.x-small,
+.btn.icon.xs {
+  @apply tw-min-w-8 tw-min-h-8 tw-px-[6px] tw-py-[6px] !tw-rounded-full;
+}
+.btn.icon.small,
+.btn.icon.sm {
   @apply tw-min-w-10 tw-min-h-10 tw-px-[6px] tw-py-[6px] !tw-rounded-full;
 }
-.btn.icon.large {
+.btn.icon.large,
+.btn.icon.lg {
   @apply tw-min-w-14 tw-min-h-14 tw-px-3 tw-py-3 !tw-rounded-full;
 }
 

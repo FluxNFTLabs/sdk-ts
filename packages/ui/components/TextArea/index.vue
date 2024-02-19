@@ -22,10 +22,10 @@ const props = defineProps({
     default: ''
   }
 })
-const $attrs = useAttrs()
-const internalValue = ref(props.modalValue || $attrs.value)
+const internalValue = ref(props.modalValue)
 const emit = defineEmits(['update:modelValue'])
 
+const $attrs = useAttrs()
 //watch internalValue and emit update:modelValue
 watch(internalValue, (value) => {
   emit('update:modelValue', value)
@@ -41,11 +41,11 @@ watch(
 )
 </script>
 <template>
-  <div class="base-text-field" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
+  <div class="base-text-area" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
     <p class="label" :class="labelClass">
       {{ label }}
     </p>
-    <input class="input" type="text" v-bind="$attrs" v-model="internalValue" />
+    <textarea class="input" type="text" v-bind="$attrs" v-model="internalValue" />
     <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>
 </template>

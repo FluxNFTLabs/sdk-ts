@@ -14,7 +14,10 @@ import BaseWindowItem from './components/Window/Item.vue'
 import BaseSkeleton from './components/Skeleton/index.vue'
 import BaseIcons from './components/Icons/index.vue'
 import BaseDropdown from './components/Dropdown/index.vue'
+import BaseTextArea from './components/TextArea/index.vue'
+import BaseDatePicker from './components/DatePicker/index.vue'
 import BaseProgressLinear from './components/ProgressLinear.vue'
+import BaseProgressCircular from './components/ProgressCircular.vue'
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseButton', BaseButton)
   nuxtApp.vueApp.component('BaseTextField', BaseTextField)
@@ -30,5 +33,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseSkeleton', BaseSkeleton)
   nuxtApp.vueApp.component('BaseIcons', BaseIcons)
   nuxtApp.vueApp.component('BaseDropdown', BaseDropdown)
+  nuxtApp.vueApp.component('BaseTextArea', BaseTextArea)
+  nuxtApp.vueApp.component('BaseDatePicker', BaseDatePicker)
   nuxtApp.vueApp.component('BaseProgressLinear', BaseProgressLinear)
+  nuxtApp.vueApp.component('BaseProgressCircular', BaseProgressCircular)
 })

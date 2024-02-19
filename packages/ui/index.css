@@ -10,4 +10,6 @@
 @import 'components/Skeleton/index.css';
 @import 'components/Dropdown/index.css';
 @import 'components/Icons/index.css';
+@import 'components/TextArea/index.css';
 @import 'floating-vue/dist/style.css';
+@import '@vuepic/vue-datepicker/dist/main.css';

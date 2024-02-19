@@ -64,7 +64,7 @@ const datePickerAttrs = computed(() => {
   >
     <template #trigger>
       <BaseTextField
-        containerClass="tw-w-full"
+        containerClass="w-full"
         :class="buttonClass"
         :value="internalValue ? dayjs(internalDateTime).format(format) : format"
         v-bind="props"

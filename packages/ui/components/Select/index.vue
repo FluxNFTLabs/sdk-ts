@@ -108,17 +108,17 @@ const isActive = (value: string) => {
       :popperClass="`base-select__popover`"
     >
       <div class="select" v-bind="dropdownAttrs">
-        <div class="tw-flex-1">
+        <div class="flex-1">
           <p
-            class="tw-flex tw-items-center"
+            class="flex items-center"
             v-if="!internalValue || (Array.isArray(internalValue) && internalValue.length === 0)"
           >
             {{ placeholder }}
           </p>
-          <p class="tw-flex tw-items-center" v-else-if="!Array.isArray(internalValue)">
+          <p class="flex items-center" v-else-if="!Array.isArray(internalValue)">
             {{ internalValue?.title }}
           </p>
-          <div v-else-if="Array.isArray(internalValue)" class="tw-flex tw-flex-wrap tw-gap-2">
+          <div v-else-if="Array.isArray(internalValue)" class="flex flex-wrap gap-2">
             <BaseChip
               v-for="item in internalValue"
               :key="item.value"
@@ -133,7 +133,7 @@ const isActive = (value: string) => {
         <div
           :style="{ minWidth: popoverWidth }"
           class="content-popover"
-          :class="multiple ? 'tw-flex tw-flex-col tw-items-start' : ''"
+          :class="multiple ? 'flex flex-col items-start' : ''"
         >
           <div
             v-if="!multiple"

@@ -35,7 +35,7 @@ defineProps({
       <div class="modal" v-if="isOpen" :class="class" @click="onClose">
         <div class="modal__content" :class="contentClass" @click.stop>
           <div :class="headerClass" class="modal__header">
-            <div class="tw-flex-1">
+            <div class="flex-1">
               <slot name="header" />
             </div>
             <BaseButton icon="close" size="small" class="modal__button-close" @click="onClose" />

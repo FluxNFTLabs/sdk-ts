@@ -43,7 +43,7 @@ watchEffect(() => {
       </div>
       <div>
         <BaseButton size="small" icon @click="hide">
-          <span class="tw-text-blueGray-900">
+          <span class="text-blueGray-900">
             <BaseIcons name="close" />
           </span>
         </BaseButton>

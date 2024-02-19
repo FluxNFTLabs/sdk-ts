@@ -1,5 +1,5 @@
 .snackbar {
-  @apply tw-w-[90%] sm:tw-w-[fit-content] sm:tw-min-w-[300px] sm:tw-max-w-[500px] tw-fixed tw-flex tw-items-center tw-justify-center tw-rounded-[16px] tw-pl-6 tw-pr-4 tw-py-2 tw-text-[16px] tw-font-bold;
+  @apply w-[90%] sm:w-[fit-content] sm:min-w-[300px] sm:max-w-[500px] fixed flex items-center justify-center rounded-[16px] pl-6 pr-4 py-2 text-[16px] font-bold;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -7,17 +7,17 @@
 }
 
 .snackbar.info {
-  @apply tw-bg-blueGray-50 tw-text-blueGray-900;
+  @apply bg-blueGray-50 text-blueGray-900;
 }
 .snackbar.success {
-  @apply tw-bg-green-400 tw-text-blueGray-900;
+  @apply bg-green-400 text-blueGray-900;
 }
 .snackbar.error {
-  @apply tw-bg-rose-400 tw-text-blueGray-900;
+  @apply bg-rose-400 text-blueGray-900;
 }
 .snackbar.warning {
-  @apply tw-bg-orange-400 tw-text-blueGray-900;
+  @apply bg-orange-400 text-blueGray-900;
 }
 .snackbar .snackbar_content {
-  @apply tw-flex-1;
+  @apply flex-1;
 }

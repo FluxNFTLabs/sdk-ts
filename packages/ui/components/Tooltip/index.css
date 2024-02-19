@@ -1,19 +1,19 @@
 .base-tooltip[data-popper-placement='bottom'] {
-  @apply tw-mt-[-8px];
+  @apply mt-[-8px];
 }
 .base-tooltip[data-popper-placement='top'] {
-  @apply tw-mt-[8px];
+  @apply mt-[8px];
 }
 .base-tooltip[data-popper-placement='right'] {
-  @apply tw-ml-[-8px];
+  @apply ml-[-8px];
 }
 .base-tooltip[data-popper-placement='left'] {
-  @apply tw-mr-[-8px];
+  @apply mr-[-8px];
 }
 .base-tooltip .v-popper__arrow-container {
   display: none;
 }
 
 .base-tooltip .v-popper__inner {
-  @apply tw-text-[16px] tw-font-[400] !tw-p-2 !tw-bg-blueGray-50 !tw-rounded-[16px];
+  @apply text-[16px] font-[400] !p-2 !bg-blueGray-50 !rounded-[16px];
 }

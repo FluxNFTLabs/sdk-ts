@@ -1,15 +1,15 @@
 .base-icon.xs {
-  @apply tw-h-4 tw-w-4 tw-min-w-4;
+  @apply h-4 w-4 min-w-4;
 }
 .base-icon.sm {
-  @apply tw-h-5 tw-w-5 tw-min-w-5;
+  @apply h-5 w-5 min-w-5;
 }
 .base-icon.md {
-  @apply tw-h-6 tw-w-6 tw-min-w-6;
+  @apply h-6 w-6 min-w-6;
 }
 .base-icon.lg {
-  @apply tw-h-10 tw-w-10 tw-min-w-10;
+  @apply h-10 w-10 min-w-10;
 }
 .base-icon.xl {
-  @apply tw-h-14 tw-w-14 tw-min-w-14;
+  @apply h-14 w-14 min-w-14;
 }

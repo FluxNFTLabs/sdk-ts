@@ -1,17 +1,17 @@
 .tabs {
-  @apply tw-flex tw-items-center tw-relative tw-h-[fit-content];
+  @apply flex items-center relative h-[fit-content];
 }
 .tabs.vertical {
-  @apply tw-flex-col tw-items-start;
+  @apply flex-col items-start;
 }
 .tabs .tabs_item {
-  @apply tw-p-4 tw-text-[16px] tw-font-bold tw-text-blueGray-500 dark:tw-text-blueGray-400 tw-cursor-pointer tw-border-b tw-border-blueGray-dark-200 dark:tw-border-blueGray-light-200;
+  @apply p-4 text-[16px] font-bold text-blueGray-500 dark:text-blueGray-400 cursor-pointer border-b border-blueGray-dark-200 dark:border-blueGray-light-200;
 }
 .tabs .tabs_item.active,
 .tabs .tabs_item:hover {
-  @apply tw-text-blueGray-900 dark:tw-text-blueGray-50;
+  @apply text-blueGray-900 dark:text-blueGray-50;
 }
 
 .tabs .active-border {
-  @apply tw-bg-blueGray-800 dark:tw-bg-blueGray-50 tw-absolute tw-bottom-0 tw-h-[2px];
+  @apply bg-blueGray-800 dark:bg-blueGray-50 absolute bottom-0 h-[2px];
 }

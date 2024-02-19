@@ -1,42 +1,42 @@
 .base-select .label {
-  @apply tw-text-[16px] tw-font-bold tw-text-black dark:tw-text-white tw-mb-2;
+  @apply text-[16px] font-bold text-black dark:text-white mb-2;
 }
 .base-select .select {
-  @apply tw-cursor-pointer tw-flex tw-items-center tw-border tw-border-solid tw-border-blueGray-dark-200 dark:tw-border-blueGray-light-200 tw-rounded-2xl tw-px-4 tw-py-2 tw-text-[16px] tw-font-[400] tw-min-h-[48px] tw-text-blueGray-900 dark:tw-text-blueGray-50;
+  @apply cursor-pointer flex items-center border border-solid border-blueGray-dark-200 dark:border-blueGray-light-200 rounded-2xl px-4 py-2 text-[16px] font-[400] min-h-[48px] text-blueGray-900 dark:text-blueGray-50;
   outline: none;
   transition: border-color 0.3s ease;
 }
 .base-select .select[disabled='true'] {
-  @apply tw-cursor-default !tw-border-blueGray-dark-200 dark:!tw-border-blueGray-light-200;
+  @apply cursor-default !border-blueGray-dark-200 dark:!border-blueGray-light-200;
 }
 
 .base-select .select:hover {
-  @apply dark:tw-border-blueGray-50 tw-border-blueGray-800;
+  @apply dark:border-blueGray-50 border-blueGray-800;
 }
 
 .base-select .select[data-popper-shown] {
-  @apply dark:tw-border-blueGray-50 dark:tw-bg-blueGray-light-100 tw-border-blueGray-800 tw-bg-blueGray-dark-100;
+  @apply dark:border-blueGray-50 dark:bg-blueGray-light-100 border-blueGray-800 bg-blueGray-dark-100;
   transition: background-color 0.3s ease;
 }
 .base-select__popover .v-popper__arrow-container {
   display: none;
 }
 .base-select__popover .v-popper__wrapper {
-  @apply tw-rounded-lg dark:tw-bg-blueGray-800;
+  @apply rounded-lg dark:bg-blueGray-800;
 }
 .base-select__popover .v-popper__wrapper .v-popper__inner {
-  @apply tw-rounded-lg dark:tw-bg-blueGray-dark-500 tw-p-2  dark:tw-text-blueGray-50;
+  @apply rounded-lg dark:bg-blueGray-dark-500 p-2  dark:text-blueGray-50;
   border: none !important;
 }
 .base-select__popover .content-popover__item.multiple {
-  @apply tw-w-full;
+  @apply w-full;
 }
 .base-select__popover .content-popover__item {
-  @apply tw-rounded-lg tw-px-4 tw-py-2;
+  @apply rounded-lg px-4 py-2;
 }
 .base-select__popover .content-popover__item:hover {
-  @apply dark:tw-bg-blueGray-light-200 tw-cursor-pointer;
+  @apply dark:bg-blueGray-light-200 cursor-pointer;
 }
 .base-select__popover .content-popover__item.content-popover__item--selected {
-  @apply dark:tw-bg-blueGray-light-200 tw-bg-blueGray-dark-100;
+  @apply dark:bg-blueGray-light-200 bg-blueGray-dark-100;
 }

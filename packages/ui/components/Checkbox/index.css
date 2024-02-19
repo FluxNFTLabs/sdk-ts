@@ -1,22 +1,22 @@
 .checkbox {
-  @apply tw-cursor-pointer tw-flex tw-items-center tw-justify-start tw-gap-2;
+  @apply cursor-pointer flex items-center justify-start gap-2;
 }
 .checkbox:hover .checkbox__box {
-  @apply tw-border-blueGray-900 dark:tw-border-blueGray-50;
+  @apply border-blueGray-900 dark:border-blueGray-50;
 }
 .checkbox.checked .checkbox__box {
-  @apply tw-bg-blueGray-900 tw-border-blueGray-500 dark:tw-bg-blueGray-50 dark:tw-border-blueGray-50;
+  @apply bg-blueGray-900 border-blueGray-500 dark:bg-blueGray-50 dark:border-blueGray-50;
 }
 
 .checkbox .checkbox__box {
-  @apply tw-h-6 tw-w-6 tw-rounded-md tw-flex tw-items-center tw-justify-center  tw-border tw-border-blueGray-dark-200 dark:tw-border-blueGray-light-200;
+  @apply h-6 w-6 rounded-md flex items-center justify-center  border border-blueGray-dark-200 dark:border-blueGray-light-200;
   transition: all 0.3s ease;
 }
 .checkbox .checkbox__box svg {
-  @apply tw-text-blueGray-50 dark:tw-text-blueGray-900;
+  @apply text-blueGray-50 dark:text-blueGray-900;
   transition: all 0.3s ease;
 }
 
 .checkbox .checkbox__label {
-  @apply tw-text-blueGray-900 dark:tw-text-blueGray-50;
+  @apply text-blueGray-900 dark:text-blueGray-50;
 }

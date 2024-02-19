@@ -24,7 +24,7 @@ const props = defineProps({
     :leave-to-class="'slide-leave-to-' + leaveTo"
     appear
   >
-    <div v-show="isOpen" class="slider-container tw-bg-inherit">
+    <div v-show="isOpen" class="slider-container bg-inherit">
       <div class="slider-content">
         <slot />
       </div>

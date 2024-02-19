@@ -28,7 +28,7 @@ provide('oldIndex', oldIndex)
 </script>
 
 <template>
-  <div class="tw-flex tw-relative tw-w-full tw-bg-inherit">
+  <div class="flex relative w-full bg-inherit">
     <slot :active-index="currentIndex"></slot>
   </div>
 </template>

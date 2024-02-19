@@ -1,74 +1,74 @@
 .btn {
-  @apply tw-px-6 tw-py-3 tw-rounded-2xl tw-font-bold tw-text-[16px] tw-relative tw-bg-transparent tw-text-blueGray-50 tw-flex tw-items-center tw-justify-center;
+  @apply px-6 py-3 rounded-2xl font-bold text-[16px] relative bg-transparent text-blueGray-50 flex items-center justify-center;
 }
 .btn:disabled {
-  @apply tw-opacity-[0.2] tw-cursor-not-allowed;
+  @apply opacity-[0.2] cursor-not-allowed;
 }
 
 .btn:not(:disabled):hover::before {
-  @apply tw-bg-blueGray-light-100 tw-absolute tw-top-0 tw-left-0 tw-rounded-2xl tw-w-full tw-h-full;
+  @apply bg-blueGray-light-100 absolute top-0 left-0 rounded-2xl w-full h-full;
   content: '';
 }
 .btn:not(:disabled):active::before {
-  @apply tw-bg-blueGray-light-200 tw-absolute tw-top-0 tw-left-0 tw-rounded-2xl tw-w-full tw-h-full;
+  @apply bg-blueGray-light-200 absolute top-0 left-0 rounded-2xl w-full h-full;
   content: '';
 }
 .btn.xs:not(.icon),
 .btn.x-small:not(.icon) {
-  @apply tw-px-3 tw-py-2 tw-text-[12px];
+  @apply px-3 py-2 text-[12px];
 }
 .btn.sm:not(.icon),
 .btn.small:not(.icon) {
-  @apply tw-px-5 tw-py-[10px] tw-text-[14px];
+  @apply px-5 py-[10px] text-[14px];
 }
 .btn.lg:not(.icon),
 .btn.large:not(.icon) {
-  @apply tw-px-8 tw-py-[14px] tw-text-[18px];
+  @apply px-8 py-[14px] text-[18px];
 }
 
 /* Primary */
 .btn.primary {
-  @apply tw-bg-gradient-to-r tw-from-orange-400 tw-to-pink-500 tw-text-blueGray-900;
+  @apply bg-gradient-to-r from-orange-400 to-pink-500 text-blueGray-900;
 }
 /* Secondary */
 .btn.secondary {
-  @apply tw-bg-blueGray-light-100 tw-text-blueGray-50;
+  @apply bg-blueGray-light-100 text-blueGray-50;
 }
 /* Tertiary */
 .btn.tertiary {
-  @apply tw-bg-blueGray-50 tw-text-blueGray-900;
+  @apply bg-blueGray-50 text-blueGray-900;
 }
 .btn.tertiary:not(:disabled):hover::before {
-  @apply tw-bg-blueGray-dark-100;
+  @apply bg-blueGray-dark-100;
   content: '';
 }
 .btn.tertiary:not(:disabled):active::before {
-  @apply tw-bg-blueGray-dark-200;
+  @apply bg-blueGray-dark-200;
   content: '';
 }
 /* Icon */
 .btn.icon.medium,
 .btn.icon.md {
-  @apply tw-min-w-12 tw-min-h-12 tw-px-3 tw-py-3 !tw-rounded-full;
+  @apply min-w-12 min-h-12 px-3 py-3 !rounded-full;
 }
 .btn.icon.x-small,
 .btn.icon.xs {
-  @apply tw-min-w-8 tw-min-h-8 tw-px-[6px] tw-py-[6px] !tw-rounded-full;
+  @apply min-w-8 min-h-8 px-[6px] py-[6px] !rounded-full;
 }
 .btn.icon.small,
 .btn.icon.sm {
-  @apply tw-min-w-10 tw-min-h-10 tw-px-[6px] tw-py-[6px] !tw-rounded-full;
+  @apply min-w-10 min-h-10 px-[6px] py-[6px] !rounded-full;
 }
 .btn.icon.large,
 .btn.icon.lg {
-  @apply tw-min-w-14 tw-min-h-14 tw-px-3 tw-py-3 !tw-rounded-full;
+  @apply min-w-14 min-h-14 px-3 py-3 !rounded-full;
 }
 
 .btn.icon:not(:disabled):hover::before {
-  @apply tw-rounded-full;
+  @apply rounded-full;
   content: '';
 }
 .btn.icon:not(:disabled):active::before {
-  @apply tw-rounded-full;
+  @apply rounded-full;
   content: '';
 }

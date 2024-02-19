@@ -19,11 +19,11 @@ const filteredAttrs = computed(() => {
   const classes = (filteredAttrs.class as string) || ''
   const defaultClasses: string[] = ['base-icon']
 
-  if (!classes.includes('tw-cursor-')) {
-    defaultClasses.push('tw-cursor-pointer')
+  if (!classes.includes('cursor-')) {
+    defaultClasses.push('cursor-pointer')
   }
 
-  if (!classes.includes('tw-w-') && !classes.includes('tw-h-') && !classes.includes('tw-min-w-')) {
+  if (!classes.includes('w-') && !classes.includes('h-') && !classes.includes('min-w-')) {
     defaultClasses.push(props.size)
   }
   return { ...attrs, class: [...defaultClasses, classes].join(' ') }

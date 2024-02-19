@@ -34,7 +34,7 @@ defineExpose({
 <template>
   <Dropdown
     v-bind="$attrs"
-    class="base-dropdown cursor-pointer tw-w-[fit-content]"
+    class="base-dropdown cursor-pointer w-[fit-content]"
     :shown="isOpen"
     @update:shown="onUpdate"
     @show="onOpenDropdown"

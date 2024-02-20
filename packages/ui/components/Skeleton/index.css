@@ -7,7 +7,7 @@
 }
 
 .skeleton-loader--avatar {
-  @apply rounded-full h-[50px] w-[50px];
+  @apply rounded-[8px] h-[50px] w-[50px];
 }
 
 .skeleton-loader--image {

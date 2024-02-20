@@ -1,0 +1,30 @@
+.base-avatar {
+  @apply relative overflow-hidden;
+}
+.base-avatar img {
+  @apply w-full h-full relative z-10 object-contain;
+}
+.base-avatar.sm {
+  @apply w-6 h-6 max-w-6 max-h-6 rounded-[8px];
+}
+.base-avatar.md {
+  @apply w-12 h-12 max-w-12 max-h-12 rounded-[16px];
+}
+.base-avatar.lg {
+  @apply w-[120px] h-[120px] max-w-[120px] max-h-[120px] rounded-[24px];
+}
+.base-avatar.background-0 {
+  @apply bg-gradient-to-b from-orange-100 to-orange-400;
+}
+.base-avatar.background-1 {
+  @apply bg-gradient-to-b from-teal-100 to-teal-400;
+}
+.base-avatar.background-2 {
+  @apply bg-gradient-to-b from-green-100 to-green-400;
+}
+.base-avatar.background-3 {
+  @apply bg-gradient-to-b from-pink-100 to-pink-400;
+}
+.base-avatar.background-4 {
+  @apply bg-gradient-to-b from-rose-100 to-rose-400;
+}

@@ -3,7 +3,6 @@
     <div v-if="type === 'text'" class="skeleton-loader__text"></div>
     <div v-if="type === 'avatar'" class="skeleton-loader__avatar"></div>
     <div v-if="type === 'image'" class="skeleton-loader__image"></div>
-    <!-- Bạn có thể mở rộng thêm nhiều loại khác tùy theo nhu cầu -->
   </div>
 </template>
 

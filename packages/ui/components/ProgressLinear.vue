@@ -20,7 +20,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: () => '#03a9f4' // Màu sắc mặc định
+    default: () => '#03a9f4'
   }
 })
 const width = computed(() => {

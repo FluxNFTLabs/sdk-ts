@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineProps } from 'vue'
 import BaseIcons from '../Icons/index.vue'
-type Color = 'primary' | 'secondary' | 'tertiary' | 'default' | 'icon'
+type Color = 'primary' | 'secondary' | 'tertiary' | 'default' | 'icon' | 'text' | 'textGradient'
 type Size = 'x-small' | 'small' | 'medium' | 'large' | 'xs' | 'sm' | 'md' | 'lg'
 
 defineProps({

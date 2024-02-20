@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-circular">
+  <div v-if="rotate" class="progress-circular">
     <svg viewBox="25 25 50 50" :width="width" :height="height">
       <circle
         class="progress-circular-path"
@@ -11,11 +11,32 @@
       />
     </svg>
   </div>
+  <div v-else class="progress-circular-2">
+    <svg viewBox="0 0 50 50" :width="width" :height="height">
+      <circle
+        class="progress-circular-background"
+        cx="25"
+        cy="25"
+        r="20"
+        fill="none"
+        :stroke-width="strokeWidth"
+      />
+      <circle
+        class="progress-circular-value"
+        cx="25"
+        cy="25"
+        r="20"
+        fill="none"
+        :stroke-width="strokeWidth"
+        :stroke="color"
+        :stroke-dasharray="circumference"
+        :stroke-dashoffset="circumference - (value / 100) * circumference"
+      />
+    </svg>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const props = defineProps({
   color: {
     type: String,
@@ -28,10 +49,22 @@ const props = defineProps({
   height: {
     type: Number,
     default: 24
+  },
+  value: {
+    type: Number,
+    default: 0
+  },
+  rotate: {
+    type: Boolean,
+    default: false
+  },
+  strokeWidth: {
+    type: Number,
+    default: 4
   }
 })
-
-const strokeWidth = ref(4)
+const radius = 20
+const circumference = computed(() => 2 * Math.PI * radius)
 </script>
 
 <style scoped>
@@ -76,5 +109,22 @@ const strokeWidth = ref(4)
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
   }
+}
+
+.progress-circular-2 {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-circular-background,
+.progress-circular-value {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-circular-background {
+  stroke: #f8fafc1a;
 }
 </style>

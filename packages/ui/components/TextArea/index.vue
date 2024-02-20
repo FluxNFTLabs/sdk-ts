@@ -20,6 +20,10 @@ const props = defineProps({
   labelClass: {
     type: String,
     default: ''
+  },
+  maxLength: {
+    type: Number,
+    default: 0
   }
 })
 const internalValue = ref(props.modalValue)
@@ -45,7 +49,10 @@ watch(
     <p class="label" :class="labelClass">
       {{ label }}
     </p>
-    <textarea class="input" type="text" v-bind="$attrs" v-model="internalValue" />
+    <div class="relative w-full">
+      <textarea class="input" type="text" v-bind="$attrs" v-model="internalValue" />
+      <p v-if="maxLength" class="max-length">{{ internalValue?.length || 0 }}/{{ maxLength }}</p>
+    </div>
     <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>
 </template>

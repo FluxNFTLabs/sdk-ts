@@ -12,10 +12,7 @@ defineProps({
 })
 </script>
 <template>
-  <div class="base-chip" :class="color">
+  <div class="base-badge" :class="color">
     <slot />
-    <button v-if="onDelete" @click="onDelete">
-      <BaseIcons name="close" width="24" height="24" />
-    </button>
   </div>
 </template>

@@ -26,21 +26,26 @@ const props = defineProps({
 const width = computed(() => {
   return `${Math.min(100, props.value)}%`
 })
+const height = computed(() => {
+  return `${props.height}px`
+})
 </script>
 
 <style>
 .progress-container {
   width: 100%;
-  height: 10px;
+  height: v-bind(height);
   overflow: hidden;
   position: relative;
+  border-radius: 12px;
 }
 .progress-bar-bg {
-  background-color: v-bind(color);
+  /* background-color: v-bind(color); */
+  background-color: #f8fafc1a;
   bottom: 0;
   left: 0;
   top: 0;
-  opacity: 0.2;
+  /* opacity: 0.2; */
   position: absolute;
   width: 100%;
 }
@@ -48,7 +53,7 @@ const width = computed(() => {
   height: 100%;
   width: v-bind(width);
   transition: width 0.5s ease;
-  animation: move 1s infinite linear;
+  /* animation: move 1s infinite linear;
   background-image: linear-gradient(
     135deg,
     hsla(0, 0%, 100%, 0.25) 25%,
@@ -60,7 +65,8 @@ const width = computed(() => {
     transparent
   );
   background-repeat: repeat;
-  background-size: 10px;
+  background-size: 10px; */
+  border-radius: 12px;
   background-color: v-bind(color);
 }
 @keyframes move {

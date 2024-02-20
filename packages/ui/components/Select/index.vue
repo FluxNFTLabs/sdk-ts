@@ -123,6 +123,7 @@ const isActive = (value: string) => {
               v-for="item in internalValue"
               :key="item.value"
               :onDelete="() => handleSelect(item)"
+              @click.stop
               >{{ item.title }}</BaseChip
             >
           </div>

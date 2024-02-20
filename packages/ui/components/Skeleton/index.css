@@ -17,8 +17,8 @@
 .skeleton-loader::before {
   content: '';
   display: block;
-  @apply w-full h-full bg-gradient-to-r from-blueGray-dark-50 via-blueGray-light-400 to-blueGray-dark-50;
-  animation: loadingShine 1.5s infinite;
+  @apply w-full opacity-[0.4] h-full bg-gradient-to-r from-blueGray-dark-50 via-blueGray-light-400 to-blueGray-dark-50;
+  animation: loadingShine 1s infinite;
 }
 
 @keyframes loadingShine {

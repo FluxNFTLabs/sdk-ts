@@ -10,6 +10,10 @@ const props = defineProps({
   type: {
     type: String as () => TabType,
     default: 'horizontal'
+  },
+  itemClass: {
+    type: String,
+    default: ''
   }
 })
 const emit = defineEmits(['update:modelValue'])
@@ -80,7 +84,7 @@ watch(props, (_props) => {
       v-for="(tab, index) in items"
       :key="(tab as string)"
       class="tabs_item"
-      :class="indexActive === index ? 'active' : ''"
+      :class="[indexActive === index ? 'active' : '', itemClass].join(' ')"
       @click="onActive(index)"
       :id="initId(index)"
     >

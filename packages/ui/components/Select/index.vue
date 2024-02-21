@@ -12,8 +12,7 @@ const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: String || Array,
   label: {
-    type: String,
-    required: true
+    type: String
   },
   placeholder: {
     type: String,
@@ -99,7 +98,7 @@ const isActive = (value: string) => {
 </script>
 <template>
   <div class="base-select" :class="[containerClass].join(' ')" ref="selectRef">
-    <p class="label" :class="labelClass">
+    <p class="label" :class="labelClass" v-if="label">
       {{ label }}
     </p>
     <Dropdown

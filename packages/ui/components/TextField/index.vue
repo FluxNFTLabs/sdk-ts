@@ -6,8 +6,7 @@ defineOptions({
 const props = defineProps({
   modalValue: String,
   label: {
-    type: String,
-    required: true
+    type: String
   },
   errorMessage: {
     type: String,
@@ -42,7 +41,7 @@ watch(
 </script>
 <template>
   <div class="base-text-field" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
-    <p class="label" :class="labelClass">
+    <p class="label" :class="labelClass" v-if="label">
       {{ label }}
     </p>
     <input class="input" type="text" v-bind="$attrs" v-model="internalValue" />

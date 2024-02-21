@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, useAttrs } from 'vue'
+import { computed, defineAsyncComponent, defineOptions, useAttrs } from 'vue'
 const attrs = useAttrs()
 const props = defineProps({
   name: {
@@ -43,12 +43,9 @@ const dynamicComponent = defineAsyncComponent<Record<string, unknown>>(() => {
     }
   })
 })
-</script>
-
-<script lang="ts">
-export default {
+defineOptions({
   inheritAttrs: false
-}
+})
 </script>
 
 <template>

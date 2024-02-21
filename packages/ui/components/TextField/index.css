@@ -2,9 +2,18 @@
   @apply text-[16px] font-bold text-black dark:text-white mb-2;
 }
 .base-text-field .input {
-  @apply bg-transparent border border-solid border-blueGray-dark-200 dark:border-blueGray-light-200 rounded-2xl px-4 py-2 text-[16px] font-[400] min-h-[48px] text-blueGray-900 dark:text-blueGray-50 w-full;
+  @apply bg-transparent border flex items-center justify-center border-solid border-blueGray-dark-200 dark:border-blueGray-light-200 rounded-2xl px-4 py-2 text-[16px] font-[400] min-h-[48px] text-blueGray-900 dark:text-blueGray-50 w-full;
   outline: none;
   transition: border-color 0.3s ease;
+}
+.base-text-field .prepend-icon {
+  @apply mr-1;
+}
+.base-text-field .append-icon {
+  @apply ml-1;
+}
+.base-text-field .input input {
+  @apply bg-transparent outline-none flex-1;
 }
 .base-text-field .input::placeholder {
   @apply dark:text-blueGray-light-500 text-blueGray-dark-400;
@@ -12,8 +21,8 @@
 .base-text-field .input:hover {
   @apply dark:border-blueGray-50 border-blueGray-800;
 }
-.base-text-field.invalid .input:focus,
-.base-text-field .input:focus {
+.base-text-field.invalid .input:focus-within,
+.base-text-field .input:focus-within {
   @apply dark:border-blueGray-50 dark:bg-blueGray-light-100 border-blueGray-800 bg-blueGray-dark-100;
   transition: background-color 0.3s ease;
 }

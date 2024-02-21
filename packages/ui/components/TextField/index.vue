@@ -19,6 +19,15 @@ const props = defineProps({
   labelClass: {
     type: String,
     default: ''
+  },
+
+  appendIcon: {
+    type: String,
+    default: ''
+  },
+  prependIcon: {
+    type: String,
+    default: ''
   }
 })
 const $attrs = useAttrs()
@@ -44,7 +53,14 @@ watch(
     <p class="label" :class="labelClass" v-if="label">
       {{ label }}
     </p>
-    <input class="input" type="text" v-bind="$attrs" v-model="internalValue" />
+    <div class="input">
+      <BaseIcons v-if="prependIcon" :name="prependIcon" class="prepend-icon" />
+      <slot v-else name="prependIcon" class="prepend-icon" />
+      <input type="text" v-bind="$attrs" v-model="internalValue" />
+
+      <BaseIcons v-if="appendIcon" :name="appendIcon" class="append-icon" />
+      <slot v-else name="appendIcon" class="append-icon" />
+    </div>
     <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>
 </template>

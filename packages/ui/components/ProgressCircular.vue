@@ -10,6 +10,9 @@
         :stroke-width="strokeWidth"
       />
     </svg>
+    <div class="content">
+      <slot />
+    </div>
   </div>
   <div v-else class="progress-circular-2">
     <svg viewBox="0 0 50 50" :width="width" :height="height">
@@ -70,9 +73,16 @@ const circumference = computed(() => 2 * Math.PI * radius)
 <style scoped>
 .progress-circular {
   display: inline-block;
-  transform: rotate(-90deg);
+  position: relative;
+  /* transform: rotate(-90deg); */
 }
-
+.progress-circular .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 .progress-circular svg {
   animation: rotate 2s linear infinite;
 }

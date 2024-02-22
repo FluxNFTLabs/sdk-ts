@@ -27,7 +27,7 @@ const onActive = (index: number) => {
   indexActive.value = index
   const element = document.getElementById(ids.value[index])
   if (!element) return
-  const rect = element.getBoundingClientRect()
+  const rect = element?.getBoundingClientRect()
   position.value = element.offsetLeft + 'px'
   width.value = rect.width + 'px'
   if (props.type === 'vertical') {

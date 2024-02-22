@@ -12,6 +12,7 @@ defineProps({
   type: {
     type: String,
     required: true,
+    default: 'text',
     validator: (value: string) => ['text', 'avatar', 'image'].includes(value) // Các loại được hỗ trợ
   }
 })

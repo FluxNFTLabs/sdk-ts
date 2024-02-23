@@ -101,7 +101,7 @@ export const blueGray = {
   light: {
     50: '#F8FAFC0D',
     100: '#F8FAFC1A',
-    200: '#F8FAFC33',
+    200: '#F8FAFC33', //border primary
     300: '#F8FAFC4D',
     400: '#F8FAFC66',
     500: '#F8FAFC99',
@@ -191,7 +191,6 @@ export const fontFamily = {
   Satoshi: ['Satoshi', 'sans-serif']
 }
 export const screens = {
-  mobile: '1024px',
   xl: '1440px',
   '2xl': '1920px'
 }

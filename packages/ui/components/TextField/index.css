@@ -13,7 +13,7 @@
   @apply ml-1;
 }
 .base-text-field .input input {
-  @apply bg-transparent outline-none flex-1;
+  @apply bg-transparent outline-none flex-1 min-w-[0px];
 }
 .base-text-field .input::placeholder {
   @apply dark:text-blueGray-light-500 text-blueGray-dark-400;
@@ -41,4 +41,10 @@
 
 .base-text-field .input:disabled {
   @apply !border-blueGray-dark-200 dark:!border-blueGray-light-200;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

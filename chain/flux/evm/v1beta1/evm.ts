@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 
 export interface Account {
@@ -28,6 +29,7 @@ export interface ContractInfo {
   sender: string;
   calldata: Uint8Array;
   value: Uint8Array;
+  number: string;
 }
 
 function createBaseAccount(): Account {
@@ -342,6 +344,7 @@ function createBaseContractInfo(): ContractInfo {
     sender: "",
     calldata: new Uint8Array(0),
     value: new Uint8Array(0),
+    number: "0",
   };
 }
 
@@ -366,6 +369,9 @@ export const ContractInfo = {
     }
     if (message.value.length !== 0) {
       writer.uint32(50).bytes(message.value);
+    }
+    if (message.number !== "0") {
+      writer.uint32(56).int64(message.number);
     }
     return writer;
   },
@@ -419,6 +425,13 @@ export const ContractInfo = {
 
           message.value = reader.bytes();
           continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.number = longToString(reader.int64() as Long);
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -436,6 +449,7 @@ export const ContractInfo = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       calldata: isSet(object.calldata) ? bytesFromBase64(object.calldata) : new Uint8Array(0),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
+      number: isSet(object.number) ? globalThis.String(object.number) : "0",
     };
   },
 
@@ -459,6 +473,9 @@ export const ContractInfo = {
     if (message.value.length !== 0) {
       obj.value = base64FromBytes(message.value);
     }
+    if (message.number !== "0") {
+      obj.number = message.number;
+    }
     return obj;
   },
 
@@ -473,6 +490,7 @@ export const ContractInfo = {
     message.sender = object.sender ?? "";
     message.calldata = object.calldata ?? new Uint8Array(0);
     message.value = object.value ?? new Uint8Array(0);
+    message.number = object.number ?? "0";
     return message;
   },
 };
@@ -509,6 +527,15 @@ type DeepPartial<T> = T extends Builtin ? T
   : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function longToString(long: Long) {
+  return long.toString();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

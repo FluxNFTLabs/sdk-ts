@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import { ref, defineProps } from 'vue'
 import { Dropdown } from 'floating-vue'
+defineProps({
+  popperClass: {
+    type: String,
+    default: ''
+  }
+})
 const emit = defineEmits<{
   'isOpen:change': [show: boolean]
   'update:isOpen': [show: boolean]
@@ -39,7 +45,7 @@ defineExpose({
     @update:shown="onUpdate"
     @show="onOpenDropdown"
     @hide="onCloseDropdown"
-    popperClass="base-dropdown__popover"
+    :popperClass="['base-dropdown__popover', popperClass].join(' ')"
   >
     <slot :is-open="isOpen" />
     <template #popper>

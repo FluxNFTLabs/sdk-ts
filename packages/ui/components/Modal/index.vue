@@ -25,6 +25,10 @@ defineProps({
   bodyClass: {
     type: String,
     default: ''
+  },
+  hideButtonClose: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
@@ -40,6 +44,7 @@ defineProps({
             </div>
 
             <BaseButton
+              v-if="!hideButtonClose"
               icon="close"
               size="small"
               class="base-modal__button-close"

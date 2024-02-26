@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { defineProps, ref, watch, useAttrs, defineOptions } from 'vue'
+import { defineProps, defineModel, useAttrs, defineOptions } from 'vue'
 defineOptions({
   inheritAttrs: false
 })
-const props = defineProps({
+defineProps({
   modalValue: String,
   label: {
     type: String,
@@ -24,25 +24,19 @@ const props = defineProps({
   maxLength: {
     type: Number,
     default: 0
+  },
+  inputClass: {
+    type: String,
+    default: ''
   }
 })
-const internalValue = ref(props.modalValue)
-const emit = defineEmits(['update:modelValue'])
 
+defineModel('modelValue')
 const $attrs = useAttrs()
-//watch internalValue and emit update:modelValue
-watch(internalValue, (value) => {
-  emit('update:modelValue', value)
-})
-//props modalValue if different from internalValue then update internalValue
-watch(
-  () => props.modalValue,
-  (value) => {
-    if (value !== internalValue.value) {
-      internalValue.value = value
-    }
-  }
-)
+const emit = defineEmits(['update:modelValue'])
+const inputChange = (e: any) => {
+  emit('update:modelValue', e.target.value)
+}
 </script>
 <template>
   <div class="base-text-area" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
@@ -50,8 +44,15 @@ watch(
       {{ label }}
     </p>
     <div class="relative w-full">
-      <textarea class="input" type="text" v-bind="$attrs" v-model="internalValue" />
-      <p v-if="maxLength" class="max-length">{{ internalValue?.length || 0 }}/{{ maxLength }}</p>
+      <textarea
+        class="input"
+        type="text"
+        v-bind="$attrs"
+        :class="inputClass"
+        :value="modelValue"
+        @input="inputChange"
+      />
+      <p v-if="maxLength" class="max-length">{{ modelValue?.length || 0 }}/{{ maxLength }}</p>
     </div>
     <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>

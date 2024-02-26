@@ -36,6 +36,9 @@
         :stroke-dashoffset="circumference - (value / 100) * circumference"
       />
     </svg>
+    <div class="content">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -76,7 +79,7 @@ const circumference = computed(() => 2 * Math.PI * radius)
   position: relative;
   /* transform: rotate(-90deg); */
 }
-.progress-circular .content {
+.content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -122,6 +125,7 @@ const circumference = computed(() => 2 * Math.PI * radius)
 }
 
 .progress-circular-2 {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;

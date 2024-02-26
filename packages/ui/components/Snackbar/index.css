@@ -1,8 +1,8 @@
 .snackbar {
-  @apply w-[90%] sm:w-[fit-content] sm:min-w-[300px] sm:max-w-[500px] fixed flex items-center justify-center rounded-[16px] pl-6 pr-4 py-2 text-[16px] font-bold;
+  @apply right-[5%] sm:right-[20px] w-[90%] sm:w-[fit-content] sm:min-w-[300px] sm:max-w-[500px] fixed flex items-center justify-center rounded-[16px] pl-6 pr-4 py-2 text-[16px] font-bold;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
   z-index: 1400;
 }
 

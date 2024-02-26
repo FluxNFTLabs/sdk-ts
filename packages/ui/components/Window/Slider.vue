@@ -48,26 +48,27 @@ const props = defineProps({
 .slide-leave-active {
   transition: all 0.4s ease;
   opacity: 1;
+  position: absolute !important;
 }
 
 .slide-enter-from-left {
   transform: translateX(-15%);
   opacity: 0;
-  position: absolute;
+  position: absolute !important;
 }
 .slide-leave-to-left {
   transform: translateX(-15%);
   opacity: 0;
-  position: absolute;
+  position: absolute !important;
 }
 .slide-enter-from-right {
   transform: translateX(15%);
   opacity: 0;
-  position: absolute;
+  position: absolute !important;
 }
 .slide-leave-to-right {
   transform: translateX(15%);
   opacity: 0;
-  position: absolute;
+  position: absolute !important;
 }
 </style>

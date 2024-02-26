@@ -35,6 +35,14 @@ defineProps({
   class: {
     type: String,
     default: ''
+  },
+  helperText: {
+    type: String,
+    default: ''
+  },
+  helperTextIcon: {
+    type: String,
+    default: null
   }
 })
 defineModel('modelValue')
@@ -46,12 +54,22 @@ const inputChange = (e: any) => {
 </script>
 <template>
   <div class="base-text-field" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
-    <p class="label" :class="labelClass" v-if="label">
+    <p class="label flex gap-1" :class="labelClass" v-if="label">
       {{ label }}
+      <BaseTooltip v-if="helperText && helperTextIcon">
+        <BaseIcons :name="helperTextIcon" />
+        <template #content>
+          {{ helperText }}
+        </template>
+      </BaseTooltip>
+    </p>
+    <p v-if="helperText && !helperTextIcon" class="text-[14px] mb-2 leading-[20px]">
+      {{ helperText }}
     </p>
     <div class="input" :class="class">
       <BaseIcons v-if="prependIcon" :name="prependIcon" class="prepend-icon" />
       <slot v-else name="prependIcon" class="prepend-icon" />
+
       <input
         type="text"
         v-bind="$attrs"

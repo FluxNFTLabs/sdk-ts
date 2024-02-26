@@ -19,9 +19,9 @@ const filteredAttrs = computed(() => {
   const classes = (filteredAttrs.class as string) || ''
   const defaultClasses: string[] = ['base-icon']
 
-  if (!classes.includes('cursor-')) {
-    defaultClasses.push('cursor-pointer')
-  }
+  // if (!classes.includes('cursor-')) {
+  //   defaultClasses.push('cursor-pointer')
+  // }
 
   if (!classes.includes('w-') && !classes.includes('h-') && !classes.includes('min-w-')) {
     defaultClasses.push(props.size)

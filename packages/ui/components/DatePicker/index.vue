@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 import Datepicker from '@vuepic/vue-datepicker'
-import { ref, watch } from 'vue'
+import { ref, watch, computed, useAttrs } from 'vue'
 import dayjs from 'dayjs'
 // Define props and emits
 const props = defineProps({
-  modelValue: String, // Changed to modelValue to work with v-model
-  buttonClass: {
+  modelValue: {
     type: String,
-    default: () => ({})
+    default: ''
+  }, // Changed to modelValue to work with v-model
+  inputClass: {
+    type: String,
+    default: ''
   },
   format: {
     type: String,
@@ -21,9 +24,9 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  errorMessages: {
+  errorMessage: {
     type: String,
-    default: () => []
+    default: ''
   },
   label: {
     type: String,
@@ -33,22 +36,21 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 const attrs = useAttrs()
 const internalValue = ref(props.modelValue)
-const internalTime = ref(
-  internalValue.value ? dayjs(internalValue.value).format('HH:mm:ss') : '00:00:00'
-)
-const internalDateTime = ref(internalValue.value)
 // Update internal value when the prop changes
 watch([() => internalValue.value], () => {
   const dateTime = dayjs(internalValue.value)
-  internalDateTime.value = dateTime.toISOString()
   emit('update:modelValue', dateTime)
 })
 
 // Compute attributes for v-date-picker
 const datePickerAttrs = computed(() => {
-  const { modelValue, buttonClass, format, errorMessages, ...otherAttrs } = { ...props, ...attrs }
+  const { modelValue, inputClass, format, errorMessage, ...otherAttrs } = { ...props, ...attrs }
   return otherAttrs
 })
+const inputDisplay = computed(() => {
+  return internalValue.value ? dayjs(internalValue.value).format(props.format) : props.format
+})
+console.log('dayjs(internalValue).format(format)', inputDisplay.value)
 </script>
 
 <template>
@@ -65,12 +67,12 @@ const datePickerAttrs = computed(() => {
     <template #trigger>
       <BaseTextField
         containerClass="w-full"
-        :class="buttonClass"
-        :value="internalValue ? dayjs(internalDateTime).format(format) : format"
-        v-bind="props"
-        readonly
-        :error-message="errorMessages"
+        :label="label"
+        :class="inputClass"
+        v-model="inputDisplay"
+        :error-message="errorMessage"
         :disabled="disabled"
+        readonly
       ></BaseTextField>
     </template>
     <template #input-icon>

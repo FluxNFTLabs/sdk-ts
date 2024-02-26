@@ -19,5 +19,5 @@
   @apply mt-4 text-[16px];
 }
 .description {
-  @apply text-[14px] text-blueGray-300;
+  @apply text-[14px] text-blueGray-300 text-center;
 }

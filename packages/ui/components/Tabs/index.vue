@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, watch, onMounted, ref, onBeforeUnmount } from 'vue'
+import { defineProps, watch, onMounted, ref, onBeforeUnmount, defineModel } from 'vue'
 type TabType = 'horizontal' | 'vertical'
 const props = defineProps({
   modelValue: Number,
@@ -16,11 +16,12 @@ const props = defineProps({
     default: ''
   }
 })
+defineModel('modalValue')
 const emit = defineEmits(['update:modelValue'])
 const position = ref('0px')
 const width = ref('0px')
 const top = ref('0px')
-const indexActive = ref(0)
+const indexActive = ref(props.modelValue || 0)
 const ids = ref<Array<string>>([])
 const onActive = (index: number) => {
   // if (index === indexActive.value) return

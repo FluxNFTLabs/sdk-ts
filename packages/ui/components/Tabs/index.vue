@@ -74,7 +74,7 @@ onBeforeUnmount(() => {
 })
 
 watch(props, (_props) => {
-  if (_props.modelValue && _props.modelValue !== indexActive.value) {
+  if ((_props.modelValue == 0 || _props.modelValue) && _props.modelValue !== indexActive.value) {
     onActive(_props.modelValue)
   }
 })

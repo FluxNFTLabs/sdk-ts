@@ -3,7 +3,7 @@ import { defineProps, defineModel, useAttrs, defineOptions } from 'vue'
 defineOptions({
   inheritAttrs: false
 })
-defineProps({
+const props = defineProps({
   modalValue: String,
   label: {
     type: String,
@@ -32,6 +32,7 @@ defineProps({
 })
 
 defineModel('modelValue')
+
 const $attrs = useAttrs()
 const emit = defineEmits(['update:modelValue'])
 const inputChange = (e: any) => {

@@ -1,0 +1,15 @@
+.base-icon.xs {
+  @apply h-4 w-4 min-w-4;
+}
+.base-icon.sm {
+  @apply h-5 w-5 min-w-5;
+}
+.base-icon.md {
+  @apply h-6 w-6 min-w-6;
+}
+.base-icon.lg {
+  @apply h-10 w-10 min-w-10;
+}
+.base-icon.xl {
+  @apply h-14 w-14 min-w-14;
+}

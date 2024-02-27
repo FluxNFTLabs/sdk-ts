@@ -1,0 +1,23 @@
+.base-drop-upload {
+  border: 2px dashed;
+  border-radius: 10px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  @apply border-blueGray-light-200 flex-col flex items-center justify-center;
+}
+.base-drop-upload.drag-over,
+.base-drop-upload:hover {
+  @apply bg-blueGray-light-50 border-blueGray-light-300;
+}
+
+.base-drop-upload .click-here {
+  text-decoration: underline;
+}
+
+.base-drop-upload .title {
+  @apply mt-4 text-[16px];
+}
+.description {
+  @apply text-[14px] text-blueGray-300 text-center;
+}

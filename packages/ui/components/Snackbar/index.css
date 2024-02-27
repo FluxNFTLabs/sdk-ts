@@ -1,0 +1,23 @@
+.snackbar {
+  @apply right-[5%] sm:right-[20px] w-[90%] sm:w-[fit-content] sm:min-w-[300px] sm:max-w-[500px] fixed flex items-center justify-center rounded-[16px] pl-6 pr-4 py-2 text-[16px] font-bold;
+  bottom: 20px;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  z-index: 1400;
+}
+
+.snackbar.info {
+  @apply bg-blueGray-50 text-blueGray-900;
+}
+.snackbar.success {
+  @apply bg-green-400 text-blueGray-900;
+}
+.snackbar.error {
+  @apply bg-rose-400 text-blueGray-900;
+}
+.snackbar.warning {
+  @apply bg-orange-400 text-blueGray-900;
+}
+.snackbar .snackbar_content {
+  @apply flex-1;
+}

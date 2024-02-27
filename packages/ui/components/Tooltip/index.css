@@ -1,0 +1,19 @@
+.base-tooltip[data-popper-placement='bottom'] {
+  @apply mt-[-8px];
+}
+.base-tooltip[data-popper-placement='top'] {
+  @apply mt-[8px];
+}
+.base-tooltip[data-popper-placement='right'] {
+  @apply ml-[-8px];
+}
+.base-tooltip[data-popper-placement='left'] {
+  @apply mr-[-8px];
+}
+.base-tooltip .v-popper__arrow-container {
+  display: none;
+}
+
+.base-tooltip .v-popper__inner {
+  @apply text-[16px] font-[400] !p-2 !bg-blueGray-50 !rounded-[16px];
+}

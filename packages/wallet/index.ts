@@ -1,5 +1,5 @@
 import { Wallet } from './types'
-import { ChainId } from '../utils'
+import { ChainId, getEthereumAddress } from '../utils'
 import { Keplr, Metamask } from './wallets'
 export * from './types'
 export default class WalletStrategy {
@@ -55,15 +55,17 @@ export default class WalletStrategy {
   }
   async signEip712TypedData(eip712json: string, address: string): Promise<string> {
     if (this.wallet === Wallet.Metamask) {
-      return this.provider.signEip712TypedData(eip712json, address)
+      let ethAddress = getEthereumAddress(address)
+      return this.provider.signEip712TypedData(eip712json, ethAddress)
     }
     throw new Error('This wallet does not support signEip712TypedData')
   }
   async signPersonal(address: string, message: any) {
     if (this.wallet === Wallet.Metamask) {
-      return this.provider.signPersonal(address, message)
+      let ethAddress = getEthereumAddress(address)
+      return this.provider.signPersonal(ethAddress, message)
     }
-    throw new Error('This wallet does not support signPersonal')
+    return this.provider.signEthereum(address, message)
   }
   async signEIP712CosmosTx(eip712: any, signDoc: string) {
     if (this.wallet === Wallet.Metamask) {

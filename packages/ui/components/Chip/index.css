@@ -1,0 +1,20 @@
+.base-chip {
+  @apply text-[16px] font-[400]  rounded-full flex items-center justify-center px-4 py-2;
+  box-shadow: 0px 8px 32px -4px rgba(0, 0, 0, 0.1), 0px 4px 16px -2px rgba(0, 0, 0, 0.06),
+    0px 0px 8px 0px rgba(0, 0, 0, 0.04);
+}
+.base-chip.default {
+  @apply dark:bg-blueGray-light-100 bg-blueGray-500;
+}
+.base-chip.success {
+  @apply bg-green-alpha-200 text-green-400;
+}
+.base-chip.error {
+  @apply bg-rose-alpha-200 text-rose-400;
+}
+.base-chip.info {
+  @apply bg-blue-400 bg-opacity-[0.2] text-blue-400;
+}
+.base-chip button {
+  @apply ml-2;
+}

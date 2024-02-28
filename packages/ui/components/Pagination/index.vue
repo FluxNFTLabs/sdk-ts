@@ -234,7 +234,7 @@ export default {
 
       <a
         v-else-if="page.disabled"
-        :key="page.index"
+        :key="page.index + 'disabled'"
         :class="[{ [activeClass]: page.selected }, disabledClass]"
         tabindex="0"
         >{{ page.content }}</a
@@ -242,7 +242,7 @@ export default {
 
       <a
         v-else
-        :key="page.index"
+        :key="page.index + 'enabled'"
         @click="handlePageSelected(page.index + 1)"
         @keyup.enter="handlePageSelected(page.index + 1)"
         :class="[pageClass, { [activeClass]: page.selected }]"

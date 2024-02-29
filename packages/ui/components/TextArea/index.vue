@@ -41,7 +41,7 @@ const inputChange = (e: any) => {
 </script>
 <template>
   <div class="base-text-area" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
-    <p class="label" :class="labelClass">
+    <p class="label" :class="labelClass" v-if="label">
       {{ label }}
     </p>
     <div class="relative w-full">

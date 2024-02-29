@@ -16,6 +16,7 @@ import BaseIcons from '../Icons/index.vue'
 interface Option {
   value: string
   title: string
+  disabled?: boolean
 }
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -134,14 +135,14 @@ watch(
       :popperClass="`base-select__popover`"
     >
       <div class="select" v-bind="dropdownAttrs">
-        <div class="flex-1">
+        <div class="flex-1 overflow-hidden">
           <p
             class="flex items-center"
             v-if="!internalValue || (Array.isArray(internalValue) && internalValue.length === 0)"
           >
             {{ placeholder }}
           </p>
-          <p class="flex items-center" v-else-if="!Array.isArray(internalValue)">
+          <p class="value" v-else-if="!Array.isArray(internalValue)">
             {{ internalValue?.title }}
           </p>
           <div v-else-if="Array.isArray(internalValue)" class="flex flex-wrap gap-2">
@@ -168,7 +169,10 @@ watch(
             @click="handleSelect(option)"
             :key="option.value"
             class="content-popover__item"
-            :class="isActive(option.value) ? 'content-popover__item--selected' : ''"
+            :class="[
+              { ['disabled']: option.disabled },
+              { ['content-popover__item--selected']: isActive(option.value) }
+            ]"
           >
             {{ option.title }}
           </div>
@@ -179,6 +183,7 @@ watch(
             :onChange="() => handleSelect(option)"
             :checked="isActive(option.value)"
             class="content-popover__item multiple"
+            :class="[{ ['disabled']: option.disabled }]"
           >
             {{ option.title }}
           </CheckBox>

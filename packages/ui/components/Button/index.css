@@ -54,6 +54,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+.btn.outlinePrimary {
+  @apply border border-orange-300 text-orange-300;
+}
+
 /* Color Variants */
 .btn.primary {
   @apply bg-orange-300 text-blueGray-900;

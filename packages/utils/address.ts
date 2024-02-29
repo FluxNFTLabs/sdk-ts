@@ -1,6 +1,5 @@
 import { Address } from 'ethereumjs-util'
 import { bech32 } from 'bech32'
-
 /**
  * Get flux address from Ethereum hex address
  *

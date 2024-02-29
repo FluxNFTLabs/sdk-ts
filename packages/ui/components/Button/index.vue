@@ -2,7 +2,15 @@
 import { defineProps } from 'vue'
 import BaseIcons from '../Icons/index.vue'
 import ProgressCircular from '../ProgressCircular.vue'
-type Color = 'primary' | 'secondary' | 'tertiary' | 'default' | 'icon' | 'text' | 'textGradient'
+type Color =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'default'
+  | 'icon'
+  | 'text'
+  | 'textGradient'
+  | 'outlinePrimary'
 type Size = 'x-small' | 'small' | 'medium' | 'large' | 'xs' | 'sm' | 'md' | 'lg'
 
 defineProps({
@@ -16,7 +24,16 @@ defineProps({
     type: String as () => Color,
     default: 'default',
     validator: (value: string) =>
-      ['default', 'secondary', 'primary', 'tertiary', 'icon'].includes(value)
+      [
+        'primary',
+        'secondary',
+        'tertiary',
+        'default',
+        'icon',
+        'text',
+        'textGradient',
+        'outlinePrimary'
+      ].includes(value)
   },
   icon: {
     type: String,

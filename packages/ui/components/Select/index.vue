@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, useAttrs, computed, onMounted, onBeforeUnmount } from 'vue'
+import {
+  defineProps,
+  watch,
+  defineEmits,
+  ref,
+  useAttrs,
+  computed,
+  onMounted,
+  onBeforeUnmount
+} from 'vue'
 import { Dropdown } from 'floating-vue'
 import BaseChip from '../Chip/index.vue'
 import CheckBox from '../Checkbox/index.vue'
@@ -66,7 +75,7 @@ onBeforeUnmount(() => {
   }
 })
 
-const internalValue = ref<Option | Option[] | null>(
+const internalValue = ref<Option | Array<Option> | null>(
   props.multiple
     ? Array.isArray(props.modelValue)
       ? props.options.filter((option) => props.modelValue?.includes(option.value))
@@ -80,7 +89,6 @@ const handleSelect = (option: any) => {
     } else {
       internalValue.value = [...internalValue.value, option]
     }
-    console.log(internalValue.value)
     return emit(
       'update:modelValue',
       internalValue.value.map((item) => item.value)
@@ -95,6 +103,25 @@ const isActive = (value: string) => {
     ? Boolean(internalValue.value?.find((item) => item.value === value))
     : internalValue.value?.value === value
 }
+watch(
+  () => props.modelValue,
+  (value) => {
+    // let _internalValue = props.modelValue
+    //   ? Array.isArray(internalValue.value)
+    //     ? internalValue.value.map((item) => item.value)
+    //     : []
+    //   : !Array.isArray(internalValue.value)
+    //   ? internalValue.value?.value
+    //   : null
+
+    // if (JSON.stringify(_internalValue) === JSON.stringify(value)) return
+    internalValue.value = props.multiple
+      ? Array.isArray(value)
+        ? props.options.filter((option) => props.modelValue?.includes(option.value))
+        : []
+      : props.options.find((option) => option.value === props.modelValue) || null
+  }
+)
 </script>
 <template>
   <div class="base-select" :class="[containerClass].join(' ')" ref="selectRef">

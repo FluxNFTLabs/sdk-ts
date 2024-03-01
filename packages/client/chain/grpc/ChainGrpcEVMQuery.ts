@@ -6,9 +6,16 @@ export class ChainGrpcEVMQuery extends BaseGrpc {
     super(endpoint)
     this.client = new evmQuery.QueryClientImpl(this.getGrpcWebImpl(endpoint))
   }
-  async contractQuery({ address }: { address?: string }): Promise<evmQuery.ContractQueryResponse> {
+  async contractQuery({
+    address,
+    calldata
+  }: {
+    address: string
+    calldata: Uint8Array
+  }): Promise<evmQuery.ContractQueryResponse> {
     const request = evmQuery.ContractQueryRequest.create({
-      address: address
+      address,
+      calldata
     })
     const response: evmQuery.ContractQueryResponse = await this.retry(() =>
       this.client.ContractQuery(request)

@@ -28,6 +28,10 @@ const props = defineProps({
   inputClass: {
     type: String,
     default: ''
+  },
+  value: {
+    type: String,
+    default: ''
   }
 })
 
@@ -50,7 +54,7 @@ const inputChange = (e: any) => {
         type="text"
         v-bind="$attrs"
         :class="inputClass"
-        :value="modelValue"
+        :value="modelValue ? modelValue : value"
         @input="inputChange"
       />
       <p v-if="maxLength" class="max-length">{{ modelValue?.length || 0 }}/{{ maxLength }}</p>

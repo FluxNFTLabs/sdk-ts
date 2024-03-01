@@ -50,8 +50,8 @@ onMounted(() => {
   resizeObserver = new ResizeObserver((entries) => {
     for (let entry of entries) {
       const { width } = entry.contentRect
-      if (width > 0 && entry.target.id === ids.value[index]) {
-        onActive(index)
+      if (width > 0 && entry.target.id === ids.value[indexActive.value]) {
+        onActive(indexActive.value)
       }
     }
   })

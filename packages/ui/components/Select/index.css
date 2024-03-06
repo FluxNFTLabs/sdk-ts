@@ -50,5 +50,5 @@
   @apply opacity-[0.3] pointer-events-none;
 }
 .base-select__popover .content-popover {
-  @apply overflow-hidden;
+  @apply overflow-x-hidden overflow-y-auto max-h-[300px];
 }

@@ -103,6 +103,9 @@ export interface MsgChannelOpenTryResponse {
 /**
  * MsgChannelOpenAck defines a msg sent by a Relayer to Chain A to acknowledge
  * the change of channel state to TRYOPEN on Chain B.
+ * WARNING: a channel upgrade MUST NOT initialize an upgrade for this channel
+ * in the same block as executing this message otherwise the counterparty will
+ * be incapable of opening.
  */
 export interface MsgChannelOpenAck {
   port_id: string;
@@ -228,7 +231,11 @@ export interface MsgAcknowledgementResponse {
   result: ResponseResultType;
 }
 
-/** MsgChannelUpgradeInit defines the request type for the ChannelUpgradeInit rpc */
+/**
+ * MsgChannelUpgradeInit defines the request type for the ChannelUpgradeInit rpc
+ * WARNING: Initializing a channel upgrade in the same block as opening the channel
+ * may result in the counterparty being incapable of opening.
+ */
 export interface MsgChannelUpgradeInit {
   port_id: string;
   channel_id: string;
@@ -300,6 +307,7 @@ export interface MsgChannelUpgradeOpen {
   port_id: string;
   channel_id: string;
   counterparty_channel_state: State;
+  counterparty_upgrade_sequence: string;
   proof_channel: Uint8Array;
   proof_height: Height | undefined;
   signer: string;
@@ -3206,6 +3214,7 @@ function createBaseMsgChannelUpgradeOpen(): MsgChannelUpgradeOpen {
     port_id: "",
     channel_id: "",
     counterparty_channel_state: 0,
+    counterparty_upgrade_sequence: "0",
     proof_channel: new Uint8Array(0),
     proof_height: undefined,
     signer: "",
@@ -3225,14 +3234,17 @@ export const MsgChannelUpgradeOpen = {
     if (message.counterparty_channel_state !== 0) {
       writer.uint32(24).int32(message.counterparty_channel_state);
     }
+    if (message.counterparty_upgrade_sequence !== "0") {
+      writer.uint32(32).uint64(message.counterparty_upgrade_sequence);
+    }
     if (message.proof_channel.length !== 0) {
-      writer.uint32(34).bytes(message.proof_channel);
+      writer.uint32(42).bytes(message.proof_channel);
     }
     if (message.proof_height !== undefined) {
-      Height.encode(message.proof_height, writer.uint32(42).fork()).ldelim();
+      Height.encode(message.proof_height, writer.uint32(50).fork()).ldelim();
     }
     if (message.signer !== "") {
-      writer.uint32(50).string(message.signer);
+      writer.uint32(58).string(message.signer);
     }
     return writer;
   },
@@ -3266,21 +3278,28 @@ export const MsgChannelUpgradeOpen = {
           message.counterparty_channel_state = reader.int32() as any;
           continue;
         case 4:
-          if (tag !== 34) {
+          if (tag !== 32) {
             break;
           }
 
-          message.proof_channel = reader.bytes();
+          message.counterparty_upgrade_sequence = longToString(reader.uint64() as Long);
           continue;
         case 5:
           if (tag !== 42) {
             break;
           }
 
-          message.proof_height = Height.decode(reader, reader.uint32());
+          message.proof_channel = reader.bytes();
           continue;
         case 6:
           if (tag !== 50) {
+            break;
+          }
+
+          message.proof_height = Height.decode(reader, reader.uint32());
+          continue;
+        case 7:
+          if (tag !== 58) {
             break;
           }
 
@@ -3302,6 +3321,9 @@ export const MsgChannelUpgradeOpen = {
       counterparty_channel_state: isSet(object.counterparty_channel_state)
         ? stateFromJSON(object.counterparty_channel_state)
         : 0,
+      counterparty_upgrade_sequence: isSet(object.counterparty_upgrade_sequence)
+        ? globalThis.String(object.counterparty_upgrade_sequence)
+        : "0",
       proof_channel: isSet(object.proof_channel) ? bytesFromBase64(object.proof_channel) : new Uint8Array(0),
       proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
       signer: isSet(object.signer) ? globalThis.String(object.signer) : "",
@@ -3318,6 +3340,9 @@ export const MsgChannelUpgradeOpen = {
     }
     if (message.counterparty_channel_state !== 0) {
       obj.counterparty_channel_state = stateToJSON(message.counterparty_channel_state);
+    }
+    if (message.counterparty_upgrade_sequence !== "0") {
+      obj.counterparty_upgrade_sequence = message.counterparty_upgrade_sequence;
     }
     if (message.proof_channel.length !== 0) {
       obj.proof_channel = base64FromBytes(message.proof_channel);
@@ -3339,6 +3364,7 @@ export const MsgChannelUpgradeOpen = {
     message.port_id = object.port_id ?? "";
     message.channel_id = object.channel_id ?? "";
     message.counterparty_channel_state = object.counterparty_channel_state ?? 0;
+    message.counterparty_upgrade_sequence = object.counterparty_upgrade_sequence ?? "0";
     message.proof_channel = object.proof_channel ?? new Uint8Array(0);
     message.proof_height = (object.proof_height !== undefined && object.proof_height !== null)
       ? Height.fromPartial(object.proof_height)
@@ -4839,7 +4865,7 @@ export class GrpcWebImpl {
 }
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
     const bin = globalThis.atob(b64);
@@ -4852,7 +4878,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];

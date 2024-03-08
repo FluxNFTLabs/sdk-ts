@@ -9,7 +9,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  $type: "flux.game.v1beta1.GenesisState" as const,
+  $type: "flux.domain.v1beta1.GenesisState" as const,
 
   encode(_: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;

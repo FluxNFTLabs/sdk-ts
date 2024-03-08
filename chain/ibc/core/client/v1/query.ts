@@ -5,6 +5,7 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { PageRequest, PageResponse } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any } from "../../../../google/protobuf/any";
+import { MerklePath } from "../../commitment/v1/commitment";
 import { ConsensusStateWithHeight, Height, IdentifiedClientState, Params } from "./client";
 
 /**
@@ -193,6 +194,34 @@ export interface QueryUpgradedConsensusStateRequest {
 export interface QueryUpgradedConsensusStateResponse {
   /** Consensus state associated with the request identifier */
   upgraded_consensus_state: Any | undefined;
+}
+
+/** QueryVerifyMembershipRequest is the request type for the Query/VerifyMembership RPC method */
+export interface QueryVerifyMembershipRequest {
+  /** client unique identifier. */
+  client_id: string;
+  /** the proof to be verified by the client. */
+  proof: Uint8Array;
+  /** the height of the commitment root at which the proof is verified. */
+  proof_height:
+    | Height
+    | undefined;
+  /** the commitment key path. */
+  merkle_path:
+    | MerklePath
+    | undefined;
+  /** the value which is proven. */
+  value: Uint8Array;
+  /** optional time delay */
+  time_delay: string;
+  /** optional block delay */
+  block_delay: string;
+}
+
+/** QueryVerifyMembershipResponse is the response type for the Query/VerifyMembership RPC method */
+export interface QueryVerifyMembershipResponse {
+  /** boolean indicating success or failure of proof verification. */
+  success: boolean;
 }
 
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
@@ -1453,6 +1482,228 @@ export const QueryUpgradedConsensusStateResponse = {
   },
 };
 
+function createBaseQueryVerifyMembershipRequest(): QueryVerifyMembershipRequest {
+  return {
+    client_id: "",
+    proof: new Uint8Array(0),
+    proof_height: undefined,
+    merkle_path: undefined,
+    value: new Uint8Array(0),
+    time_delay: "0",
+    block_delay: "0",
+  };
+}
+
+export const QueryVerifyMembershipRequest = {
+  $type: "ibc.core.client.v1.QueryVerifyMembershipRequest" as const,
+
+  encode(message: QueryVerifyMembershipRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.client_id !== "") {
+      writer.uint32(10).string(message.client_id);
+    }
+    if (message.proof.length !== 0) {
+      writer.uint32(18).bytes(message.proof);
+    }
+    if (message.proof_height !== undefined) {
+      Height.encode(message.proof_height, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.merkle_path !== undefined) {
+      MerklePath.encode(message.merkle_path, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.value.length !== 0) {
+      writer.uint32(42).bytes(message.value);
+    }
+    if (message.time_delay !== "0") {
+      writer.uint32(48).uint64(message.time_delay);
+    }
+    if (message.block_delay !== "0") {
+      writer.uint32(56).uint64(message.block_delay);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVerifyMembershipRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryVerifyMembershipRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.client_id = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.proof = reader.bytes();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.proof_height = Height.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.merkle_path = MerklePath.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.value = reader.bytes();
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.time_delay = longToString(reader.uint64() as Long);
+          continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.block_delay = longToString(reader.uint64() as Long);
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryVerifyMembershipRequest {
+    return {
+      client_id: isSet(object.client_id) ? globalThis.String(object.client_id) : "",
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(0),
+      proof_height: isSet(object.proof_height) ? Height.fromJSON(object.proof_height) : undefined,
+      merkle_path: isSet(object.merkle_path) ? MerklePath.fromJSON(object.merkle_path) : undefined,
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0),
+      time_delay: isSet(object.time_delay) ? globalThis.String(object.time_delay) : "0",
+      block_delay: isSet(object.block_delay) ? globalThis.String(object.block_delay) : "0",
+    };
+  },
+
+  toJSON(message: QueryVerifyMembershipRequest): unknown {
+    const obj: any = {};
+    if (message.client_id !== "") {
+      obj.client_id = message.client_id;
+    }
+    if (message.proof.length !== 0) {
+      obj.proof = base64FromBytes(message.proof);
+    }
+    if (message.proof_height !== undefined) {
+      obj.proof_height = Height.toJSON(message.proof_height);
+    }
+    if (message.merkle_path !== undefined) {
+      obj.merkle_path = MerklePath.toJSON(message.merkle_path);
+    }
+    if (message.value.length !== 0) {
+      obj.value = base64FromBytes(message.value);
+    }
+    if (message.time_delay !== "0") {
+      obj.time_delay = message.time_delay;
+    }
+    if (message.block_delay !== "0") {
+      obj.block_delay = message.block_delay;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryVerifyMembershipRequest>): QueryVerifyMembershipRequest {
+    return QueryVerifyMembershipRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryVerifyMembershipRequest>): QueryVerifyMembershipRequest {
+    const message = createBaseQueryVerifyMembershipRequest();
+    message.client_id = object.client_id ?? "";
+    message.proof = object.proof ?? new Uint8Array(0);
+    message.proof_height = (object.proof_height !== undefined && object.proof_height !== null)
+      ? Height.fromPartial(object.proof_height)
+      : undefined;
+    message.merkle_path = (object.merkle_path !== undefined && object.merkle_path !== null)
+      ? MerklePath.fromPartial(object.merkle_path)
+      : undefined;
+    message.value = object.value ?? new Uint8Array(0);
+    message.time_delay = object.time_delay ?? "0";
+    message.block_delay = object.block_delay ?? "0";
+    return message;
+  },
+};
+
+function createBaseQueryVerifyMembershipResponse(): QueryVerifyMembershipResponse {
+  return { success: false };
+}
+
+export const QueryVerifyMembershipResponse = {
+  $type: "ibc.core.client.v1.QueryVerifyMembershipResponse" as const,
+
+  encode(message: QueryVerifyMembershipResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.success === true) {
+      writer.uint32(8).bool(message.success);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVerifyMembershipResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryVerifyMembershipResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.success = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryVerifyMembershipResponse {
+    return { success: isSet(object.success) ? globalThis.Boolean(object.success) : false };
+  },
+
+  toJSON(message: QueryVerifyMembershipResponse): unknown {
+    const obj: any = {};
+    if (message.success === true) {
+      obj.success = message.success;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<QueryVerifyMembershipResponse>): QueryVerifyMembershipResponse {
+    return QueryVerifyMembershipResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<QueryVerifyMembershipResponse>): QueryVerifyMembershipResponse {
+    const message = createBaseQueryVerifyMembershipResponse();
+    message.success = object.success ?? false;
+    return message;
+  },
+};
+
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** ClientState queries an IBC light client. */
@@ -1506,6 +1757,11 @@ export interface Query {
     request: DeepPartial<QueryUpgradedConsensusStateRequest>,
     metadata?: grpc.Metadata,
   ): Promise<QueryUpgradedConsensusStateResponse>;
+  /** VerifyMembership queries an IBC light client for proof verification of a value at a given key path. */
+  VerifyMembership(
+    request: DeepPartial<QueryVerifyMembershipRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryVerifyMembershipResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1522,6 +1778,7 @@ export class QueryClientImpl implements Query {
     this.ClientParams = this.ClientParams.bind(this);
     this.UpgradedClientState = this.UpgradedClientState.bind(this);
     this.UpgradedConsensusState = this.UpgradedConsensusState.bind(this);
+    this.VerifyMembership = this.VerifyMembership.bind(this);
   }
 
   ClientState(
@@ -1593,6 +1850,13 @@ export class QueryClientImpl implements Query {
       QueryUpgradedConsensusStateRequest.fromPartial(request),
       metadata,
     );
+  }
+
+  VerifyMembership(
+    request: DeepPartial<QueryVerifyMembershipRequest>,
+    metadata?: grpc.Metadata,
+  ): Promise<QueryVerifyMembershipResponse> {
+    return this.rpc.unary(QueryVerifyMembershipDesc, QueryVerifyMembershipRequest.fromPartial(request), metadata);
   }
 }
 
@@ -1805,6 +2069,29 @@ export const QueryUpgradedConsensusStateDesc: UnaryMethodDefinitionish = {
   } as any,
 };
 
+export const QueryVerifyMembershipDesc: UnaryMethodDefinitionish = {
+  methodName: "VerifyMembership",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return QueryVerifyMembershipRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = QueryVerifyMembershipResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
 interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
   requestStream: any;
   responseStream: any;
@@ -1874,7 +2161,7 @@ export class GrpcWebImpl {
 }
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
     const bin = globalThis.atob(b64);
@@ -1887,7 +2174,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString("base64");
   } else {
     const bin: string[] = [];

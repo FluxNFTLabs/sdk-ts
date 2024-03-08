@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineModel, useAttrs, defineOptions } from 'vue'
+import { defineProps, ref, defineModel, useAttrs, defineOptions } from 'vue'
 defineOptions({
   inheritAttrs: false
 })
@@ -42,6 +42,10 @@ const emit = defineEmits(['update:modelValue'])
 const inputChange = (e: any) => {
   emit('update:modelValue', e.target.value)
 }
+const inputRef = ref<any>(null)
+const containerClick = () => {
+  inputRef.value?.focus()
+}
 </script>
 <template>
   <div class="base-text-area" :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')">
@@ -52,6 +56,7 @@ const inputChange = (e: any) => {
       <textarea
         class="input"
         type="text"
+        ref="inputRef"
         v-bind="$attrs"
         :class="inputClass"
         :value="modelValue ? modelValue : value"

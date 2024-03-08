@@ -45,11 +45,15 @@ defineProps({
     default: null
   }
 })
+const inputRef = ref<any>(null)
 defineModel('modelValue')
 const $attrs = useAttrs()
 const emit = defineEmits(['update:modelValue'])
 const inputChange = (e: any) => {
   emit('update:modelValue', e.target.value)
+}
+const containerClick = () => {
+  inputRef.value?.focus()
 }
 </script>
 <template>
@@ -66,13 +70,14 @@ const inputChange = (e: any) => {
     <p v-if="helperText && !helperTextIcon" class="text-[14px] mb-2 leading-[20px]">
       {{ helperText }}
     </p>
-    <div class="input" :class="class">
+    <div class="input" :class="class" @click="containerClick">
       <BaseIcons v-if="prependIcon" :name="prependIcon" class="prepend-icon" />
       <slot v-else name="prependIcon" class="prepend-icon" />
 
       <input
         type="text"
         v-bind="$attrs"
+        ref="inputRef"
         :class="inputClass"
         :value="modelValue"
         @input="inputChange"

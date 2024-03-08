@@ -21,6 +21,7 @@ import BaseDropUpload from './components/DropUpload/index.vue'
 import BaseAvatar from './components/Avatar/index.vue'
 import BasePagination from './components/Pagination/index.vue'
 import BaseProgressLinear from './components/ProgressLinear.vue'
+import BaseSwitch from './components/Switch/index.vue'
 import BaseProgressCircular from './components/ProgressCircular.vue'
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseButton', BaseButton)
@@ -45,4 +46,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('BaseDropUpload', BaseDropUpload)
   nuxtApp.vueApp.component('BaseAvatar', BaseAvatar)
   nuxtApp.vueApp.component('BasePagination', BasePagination)
+  nuxtApp.vueApp.component('BaseSwitch', BaseSwitch)
 })

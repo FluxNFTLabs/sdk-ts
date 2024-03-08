@@ -15,5 +15,6 @@
 @import 'components/Avatar/index.css';
 @import 'components/Pagination/index.css';
 @import 'components/DropUpload/index.css';
+@import 'components/Switch/index.css';
 @import 'floating-vue/dist/style.css';
 @import '@vuepic/vue-datepicker/dist/main.css';

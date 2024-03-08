@@ -36,4 +36,21 @@ export class ChainGrpcCosmwasmWasmQuery extends BaseGrpc {
     )
     return response
   }
+  //QuerySmartContractStateRequest
+  async querySmartContractState({
+    address,
+    query_data
+  }: {
+    address: string
+    query_data: Uint8Array
+  }): Promise<cosmwasmWasmV1Query.QuerySmartContractStateResponse> {
+    const request = cosmwasmWasmV1Query.QuerySmartContractStateRequest.create({
+      address,
+      query_data
+    })
+    const response: cosmwasmWasmV1Query.QuerySmartContractStateResponse = await this.retry(() =>
+      this.client.SmartContractState(request)
+    )
+    return response
+  }
 }

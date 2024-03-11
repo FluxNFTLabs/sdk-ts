@@ -4,7 +4,7 @@ type TabType = 'horizontal' | 'vertical'
 const props = defineProps({
   modelValue: Number,
   items: {
-    type: Array,
+    type: Array<any>,
     default: () => []
   },
   type: {
@@ -83,13 +83,21 @@ watch(props, (_props) => {
   <div class="tabs" :class="type">
     <div
       v-for="(tab, index) in items"
-      :key="(tab as string)"
+      :key="index"
       class="tabs_item"
       :class="[indexActive === index ? 'active' : '', itemClass].join(' ')"
       @click="onActive(index)"
       :id="initId(index)"
     >
-      {{ tab }}
+      <template v-if="typeof tab === 'object'">
+        <div class="icon">
+          <BaseIcons :name="tab?.icon" v-if="tab?.icon" />
+        </div>
+        {{ tab?.title }}
+      </template>
+      <template v-if="typeof tab === 'string'">
+        {{ tab }}
+      </template>
     </div>
     <div class="active-border" :class="type" />
   </div>

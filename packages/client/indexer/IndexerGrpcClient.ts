@@ -4,7 +4,8 @@ import {
   IndexerGrpcAccountQuery,
   IndexerGrpcFnftQuery,
   IndexerGrpcProviderQuery,
-  IndexerGrpcBazaarQuery
+  IndexerGrpcBazaarQuery,
+  IndexerGrpcExplorerQuery
 } from './grpc'
 
 export class IndexerGrpcClient {
@@ -14,6 +15,7 @@ export class IndexerGrpcClient {
   fnft: IndexerGrpcFnftQuery
   provider: IndexerGrpcProviderQuery
   bazaar: IndexerGrpcBazaarQuery
+  explorer: IndexerGrpcExplorerQuery
 
   constructor(endpoint: string) {
     this.web3gw = new IndexerGrpcWeb3gwQuery(endpoint)
@@ -22,6 +24,7 @@ export class IndexerGrpcClient {
     this.fnft = new IndexerGrpcFnftQuery(endpoint)
     this.provider = new IndexerGrpcProviderQuery(endpoint)
     this.bazaar = new IndexerGrpcBazaarQuery(endpoint)
+    this.explorer = new IndexerGrpcExplorerQuery(endpoint)
   }
 
   changeEndpoint(endpoint: string) {
@@ -31,5 +34,6 @@ export class IndexerGrpcClient {
     this.fnft = new IndexerGrpcFnftQuery(endpoint)
     this.provider = new IndexerGrpcProviderQuery(endpoint)
     this.bazaar = new IndexerGrpcBazaarQuery(endpoint)
+    this.explorer = new IndexerGrpcExplorerQuery(endpoint)
   }
 }

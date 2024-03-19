@@ -1,0 +1,107 @@
+/* Base Button Styles */
+.btn {
+  @apply relative px-6 py-3 rounded-2xl font-bold text-[16px] relative bg-transparent text-blueGray-50 flex items-center justify-center;
+}
+
+/* Disabled State */
+.btn:disabled {
+  @apply opacity-[0.2] cursor-not-allowed;
+}
+
+/* Hover and Active States */
+.btn:not(:disabled):hover::before,
+.btn:not(:disabled):active::before {
+  @apply absolute top-0 left-0 rounded-2xl w-full h-full content-[''];
+}
+.btn.icon:not(:disabled):hover::before {
+  @apply rounded-full;
+}
+.btn:not(:disabled):not(.text):not(.textGradient):hover::before {
+  @apply bg-blueGray-light-100;
+}
+
+.btn:not(:disabled):not(.text):not(.textGradient):active::before {
+  @apply bg-blueGray-light-200;
+}
+
+.btn.textGradient:not(:disabled):hover::before,
+.btn.text:not(:disabled):hover::before {
+  @apply bg-blueGray-dark-100;
+}
+.btn.textGradient:not(:disabled):active::before,
+.btn.text:not(:disabled):active::before {
+  @apply bg-blueGray-dark-200;
+}
+/* Size Variants */
+.btn.xs:not(.icon),
+.btn.x-small:not(.icon) {
+  @apply px-3 py-2 text-[12px];
+}
+
+.btn.sm:not(.icon),
+.btn.small:not(.icon) {
+  @apply px-5 py-[10px] text-[14px];
+}
+
+.btn.lg:not(.icon),
+.btn.large:not(.icon) {
+  @apply px-8 py-[14px] text-[18px];
+}
+
+.btn.textGradient {
+  @apply bg-gradient-to-r from-orange-400 to-pink-400 text-blueGray-900;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn.outlinePrimary {
+  @apply border border-orange-300 text-orange-300;
+}
+
+/* Color Variants */
+.btn.primary {
+  @apply bg-orange-300 text-blueGray-900;
+}
+
+.btn.secondary {
+  @apply bg-blueGray-light-100 text-blueGray-50;
+}
+
+.btn.tertiary {
+  @apply bg-blueGray-50 text-blueGray-900;
+}
+
+.btn.tertiary:not(:disabled):hover::before {
+  @apply bg-blueGray-dark-100 content-[''];
+}
+
+.btn.tertiary:not(:disabled):active::before {
+  @apply bg-blueGray-dark-200 content-[''];
+}
+
+/* Icon Button Variants */
+.btn.icon {
+  @apply !rounded-full content-[''];
+}
+
+.btn.icon.medium,
+.btn.icon.md {
+  @apply min-w-12 min-h-12 px-3 py-3;
+}
+
+.btn.icon.x-small,
+.btn.icon.xs {
+  @apply min-w-8 min-h-8 px-[6px] py-[6px];
+}
+
+.btn.icon.small,
+.btn.icon.sm {
+  @apply min-w-10 min-h-10 px-[6px] py-[6px];
+}
+
+.btn.icon.large,
+.btn.icon.lg {
+  @apply min-w-14 min-h-14 px-3 py-3;
+}

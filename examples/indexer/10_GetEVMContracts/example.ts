@@ -1,6 +1,6 @@
 import { IndexerGrpcExplorerQuery } from '../../../packages'
 const main = async () => {
-  const host = 'http://localhost:4474'
+  const host = 'http://localhost:4463'
   const client = new IndexerGrpcExplorerQuery(host)
   try {
     const res = await client.listEvmContracts({})

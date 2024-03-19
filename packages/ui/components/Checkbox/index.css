@@ -1,0 +1,22 @@
+.checkbox {
+  @apply cursor-pointer flex items-center justify-start gap-2;
+}
+.checkbox:hover .checkbox__box {
+  @apply border-blueGray-900 dark:border-blueGray-50;
+}
+.checkbox.checked .checkbox__box {
+  @apply bg-blueGray-900 border-blueGray-500 dark:bg-blueGray-50 dark:border-blueGray-50;
+}
+
+.checkbox .checkbox__box {
+  @apply h-6 w-6 rounded-md flex items-center justify-center  border border-blueGray-dark-200 dark:border-blueGray-light-200;
+  transition: all 0.3s ease;
+}
+.checkbox .checkbox__box svg {
+  @apply text-blueGray-50 dark:text-blueGray-900;
+  transition: all 0.3s ease;
+}
+
+.checkbox .checkbox__label {
+  @apply text-blueGray-900 dark:text-blueGray-50;
+}

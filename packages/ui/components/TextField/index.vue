@@ -3,7 +3,7 @@ import { defineProps, defineModel, ref, watch, useAttrs, defineOptions } from 'v
 defineOptions({
   inheritAttrs: false
 })
-defineProps({
+const props = defineProps({
   modalValue: String,
   label: {
     type: String

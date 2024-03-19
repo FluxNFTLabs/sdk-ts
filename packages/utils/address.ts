@@ -7,6 +7,9 @@ import { bech32 } from 'bech32'
  * @returns string
  */
 export const getFluxAddress = (ethAddress: string): string => {
+  if (!ethAddress.startsWith('0x')) {
+    return ethAddress
+  }
   const addressBuffer = Address.fromString(ethAddress.toString()).toBuffer()
 
   return bech32.encode('lux', bech32.toWords(addressBuffer))
@@ -22,6 +25,8 @@ export const getEthereumAddress = (luxAddress: string): string => {
   if (luxAddress.startsWith('0x')) {
     return luxAddress
   }
-
+  if (!luxAddress.startsWith('lux')) {
+    return luxAddress
+  }
   return `0x${Buffer.from(bech32.fromWords(bech32.decode(luxAddress).words)).toString('hex')}`
 }

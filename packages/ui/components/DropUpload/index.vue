@@ -57,7 +57,7 @@ function triggerFileInput() {
     @dragover.prevent="handleDragOver"
     @dragleave.prevent="handleDragLeave"
     @drop.prevent="handleDrop"
-    @click="triggerFileInput"
+    @click.stop="triggerFileInput"
   >
     <BaseIcons name="fileUpLoad" />
     <p v-if="title">{{ title }}</p>
@@ -65,6 +65,14 @@ function triggerFileInput() {
       Drag and drop an {{ type }}, or <span class="click-here">Browse</span>
     </p>
     <p v-if="description" class="description">{{ description }}</p>
-    <input type="file" :accept="accept" ref="fileInput" @change="handleFiles" multiple hidden />
+    <input
+      type="file"
+      @click.stop
+      :accept="accept"
+      ref="fileInput"
+      @change="handleFiles"
+      multiple
+      hidden
+    />
   </div>
 </template>

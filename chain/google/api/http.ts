@@ -432,7 +432,7 @@ export const Http = {
     if (message.rules?.length) {
       obj.rules = message.rules.map((e) => HttpRule.toJSON(e));
     }
-    if (message.fully_decode_reserved_expansion === true) {
+    if (message.fully_decode_reserved_expansion !== undefined) {
       obj.fully_decode_reserved_expansion = message.fully_decode_reserved_expansion;
     }
     return obj;
@@ -606,7 +606,7 @@ export const HttpRule = {
 
   toJSON(message: HttpRule): unknown {
     const obj: any = {};
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       obj.selector = message.selector;
     }
     if (message.get !== undefined) {
@@ -627,10 +627,10 @@ export const HttpRule = {
     if (message.custom !== undefined) {
       obj.custom = CustomHttpPattern.toJSON(message.custom);
     }
-    if (message.body !== "") {
+    if (message.body !== undefined) {
       obj.body = message.body;
     }
-    if (message.response_body !== "") {
+    if (message.response_body !== undefined) {
       obj.response_body = message.response_body;
     }
     if (message.additional_bindings?.length) {
@@ -716,10 +716,10 @@ export const CustomHttpPattern = {
 
   toJSON(message: CustomHttpPattern): unknown {
     const obj: any = {};
-    if (message.kind !== "") {
+    if (message.kind !== undefined) {
       obj.kind = message.kind;
     }
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       obj.path = message.path;
     }
     return obj;

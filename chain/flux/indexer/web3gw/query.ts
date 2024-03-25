@@ -162,16 +162,16 @@ export const GetMetaDataResponse = {
 
   toJSON(message: GetMetaDataResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.pubkey.length !== 0) {
+    if (message.pubkey !== undefined) {
       obj.pubkey = base64FromBytes(message.pubkey);
     }
-    if (message.max_gas_limit !== "0") {
+    if (message.max_gas_limit !== undefined) {
       obj.max_gas_limit = message.max_gas_limit;
     }
-    if (message.max_gas_price !== "") {
+    if (message.max_gas_price !== undefined) {
       obj.max_gas_price = message.max_gas_price;
     }
     return obj;
@@ -233,7 +233,7 @@ export const SignProtoRequest = {
 
   toJSON(message: SignProtoRequest): unknown {
     const obj: any = {};
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -305,10 +305,10 @@ export const SignProtoResponse = {
 
   toJSON(message: SignProtoResponse): unknown {
     const obj: any = {};
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     return obj;
@@ -368,7 +368,7 @@ export const SignJSONRequest = {
 
   toJSON(message: SignJSONRequest): unknown {
     const obj: any = {};
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -440,10 +440,10 @@ export const SignJSONResponse = {
 
   toJSON(message: SignJSONResponse): unknown {
     const obj: any = {};
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     return obj;
@@ -503,7 +503,7 @@ export const FaucetSendRequest = {
 
   toJSON(message: FaucetSendRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;

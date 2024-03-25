@@ -285,19 +285,19 @@ export const MsgSubmitProposal = {
     if (message.initial_deposit?.length) {
       obj.initial_deposit = message.initial_deposit.map((e) => Coin.toJSON(e));
     }
-    if (message.proposer !== "") {
+    if (message.proposer !== undefined) {
       obj.proposer = message.proposer;
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.summary !== "") {
+    if (message.summary !== undefined) {
       obj.summary = message.summary;
     }
-    if (message.expedited === true) {
+    if (message.expedited !== undefined) {
       obj.expedited = message.expedited;
     }
     return obj;
@@ -362,7 +362,7 @@ export const MsgSubmitProposalResponse = {
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -437,7 +437,7 @@ export const MsgExecLegacyContent = {
     if (message.content !== undefined) {
       obj.content = Any.toJSON(message.content);
     }
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     return obj;
@@ -579,16 +579,16 @@ export const MsgVote = {
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
-    if (message.option !== 0) {
+    if (message.option !== undefined) {
       obj.option = voteOptionToJSON(message.option);
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -732,16 +732,16 @@ export const MsgVoteWeighted = {
 
   toJSON(message: MsgVoteWeighted): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
     if (message.options?.length) {
       obj.options = message.options.map((e) => WeightedVoteOption.toJSON(e));
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -872,10 +872,10 @@ export const MsgDeposit = {
 
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       obj.depositor = message.depositor;
     }
     if (message.amount?.length) {
@@ -997,7 +997,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     if (message.params !== undefined) {
@@ -1120,10 +1120,10 @@ export const MsgCancelProposal = {
 
   toJSON(message: MsgCancelProposal): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.proposer !== "") {
+    if (message.proposer !== undefined) {
       obj.proposer = message.proposer;
     }
     return obj;
@@ -1207,13 +1207,13 @@ export const MsgCancelProposalResponse = {
 
   toJSON(message: MsgCancelProposalResponse): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     if (message.canceled_time !== undefined) {
       obj.canceled_time = message.canceled_time.toISOString();
     }
-    if (message.canceled_height !== "0") {
+    if (message.canceled_height !== undefined) {
       obj.canceled_height = message.canceled_height;
     }
     return obj;

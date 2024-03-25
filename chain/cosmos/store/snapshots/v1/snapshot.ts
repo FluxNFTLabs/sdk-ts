@@ -160,16 +160,16 @@ export const Snapshot = {
 
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       obj.format = Math.round(message.format);
     }
-    if (message.chunks !== 0) {
+    if (message.chunks !== undefined) {
       obj.chunks = Math.round(message.chunks);
     }
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
     if (message.metadata !== undefined) {
@@ -416,7 +416,7 @@ export const SnapshotStoreItem = {
 
   toJSON(message: SnapshotStoreItem): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     return obj;
@@ -510,16 +510,16 @@ export const SnapshotIAVLItem = {
 
   toJSON(message: SnapshotIAVLItem): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
-    if (message.version !== "0") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.height !== 0) {
+    if (message.height !== undefined) {
       obj.height = Math.round(message.height);
     }
     return obj;
@@ -594,10 +594,10 @@ export const SnapshotExtensionMeta = {
 
   toJSON(message: SnapshotExtensionMeta): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       obj.format = Math.round(message.format);
     }
     return obj;
@@ -657,7 +657,7 @@ export const SnapshotExtensionPayload = {
 
   toJSON(message: SnapshotExtensionPayload): unknown {
     const obj: any = {};
-    if (message.payload.length !== 0) {
+    if (message.payload !== undefined) {
       obj.payload = base64FromBytes(message.payload);
     }
     return obj;

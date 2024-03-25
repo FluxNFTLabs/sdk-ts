@@ -67,7 +67,7 @@ export const InterchainAccount = {
     if (message.base_account !== undefined) {
       obj.base_account = BaseAccount.toJSON(message.base_account);
     }
-    if (message.account_owner !== "") {
+    if (message.account_owner !== undefined) {
       obj.account_owner = message.account_owner;
     }
     return obj;

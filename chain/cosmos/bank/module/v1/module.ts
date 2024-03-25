@@ -74,7 +74,7 @@ export const Module = {
     if (message.blocked_module_accounts_override?.length) {
       obj.blocked_module_accounts_override = message.blocked_module_accounts_override;
     }
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     return obj;

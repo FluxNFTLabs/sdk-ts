@@ -263,7 +263,7 @@ export const QueryGroupInfoRequest = {
 
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     return obj;
@@ -381,7 +381,7 @@ export const QueryGroupPolicyInfoRequest = {
 
   toJSON(message: QueryGroupPolicyInfoRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -514,7 +514,7 @@ export const QueryGroupMembersRequest = {
 
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     if (message.pagination !== undefined) {
@@ -670,7 +670,7 @@ export const QueryGroupsByAdminRequest = {
 
   toJSON(message: QueryGroupsByAdminRequest): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
     if (message.pagination !== undefined) {
@@ -826,7 +826,7 @@ export const QueryGroupPoliciesByGroupRequest = {
 
   toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     if (message.pagination !== undefined) {
@@ -984,7 +984,7 @@ export const QueryGroupPoliciesByAdminRequest = {
 
   toJSON(message: QueryGroupPoliciesByAdminRequest): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
     if (message.pagination !== undefined) {
@@ -1129,7 +1129,7 @@ export const QueryProposalRequest = {
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -1262,7 +1262,7 @@ export const QueryProposalsByGroupPolicyRequest = {
 
   toJSON(message: QueryProposalsByGroupPolicyRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
@@ -1420,10 +1420,10 @@ export const QueryVoteByProposalVoterRequest = {
 
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
     return obj;
@@ -1555,7 +1555,7 @@ export const QueryVotesByProposalRequest = {
 
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     if (message.pagination !== undefined) {
@@ -1711,7 +1711,7 @@ export const QueryVotesByVoterRequest = {
 
   toJSON(message: QueryVotesByVoterRequest): unknown {
     const obj: any = {};
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
     if (message.pagination !== undefined) {
@@ -1867,7 +1867,7 @@ export const QueryGroupsByMemberRequest = {
 
   toJSON(message: QueryGroupsByMemberRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
@@ -2010,7 +2010,7 @@ export const QueryTallyResultRequest = {
 
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;

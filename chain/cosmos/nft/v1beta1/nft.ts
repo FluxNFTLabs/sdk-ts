@@ -145,22 +145,22 @@ export const Class = {
 
   toJSON(message: Class): unknown {
     const obj: any = {};
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.symbol !== "") {
+    if (message.symbol !== undefined) {
       obj.symbol = message.symbol;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.uri !== "") {
+    if (message.uri !== undefined) {
       obj.uri = message.uri;
     }
-    if (message.uri_hash !== "") {
+    if (message.uri_hash !== undefined) {
       obj.uri_hash = message.uri_hash;
     }
     if (message.data !== undefined) {
@@ -274,16 +274,16 @@ export const NFT = {
 
   toJSON(message: NFT): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.uri !== "") {
+    if (message.uri !== undefined) {
       obj.uri = message.uri;
     }
-    if (message.uri_hash !== "") {
+    if (message.uri_hash !== undefined) {
       obj.uri_hash = message.uri_hash;
     }
     if (message.data !== undefined) {

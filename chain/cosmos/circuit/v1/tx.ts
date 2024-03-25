@@ -129,10 +129,10 @@ export const MsgAuthorizeCircuitBreaker = {
 
   toJSON(message: MsgAuthorizeCircuitBreaker): unknown {
     const obj: any = {};
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       obj.granter = message.granter;
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       obj.grantee = message.grantee;
     }
     if (message.permissions !== undefined) {
@@ -198,7 +198,7 @@ export const MsgAuthorizeCircuitBreakerResponse = {
 
   toJSON(message: MsgAuthorizeCircuitBreakerResponse): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== undefined) {
       obj.success = message.success;
     }
     return obj;
@@ -272,7 +272,7 @@ export const MsgTripCircuitBreaker = {
 
   toJSON(message: MsgTripCircuitBreaker): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     if (message.msg_type_urls?.length) {
@@ -335,7 +335,7 @@ export const MsgTripCircuitBreakerResponse = {
 
   toJSON(message: MsgTripCircuitBreakerResponse): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== undefined) {
       obj.success = message.success;
     }
     return obj;
@@ -409,7 +409,7 @@ export const MsgResetCircuitBreaker = {
 
   toJSON(message: MsgResetCircuitBreaker): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     if (message.msg_type_urls?.length) {
@@ -472,7 +472,7 @@ export const MsgResetCircuitBreakerResponse = {
 
   toJSON(message: MsgResetCircuitBreakerResponse): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== undefined) {
       obj.success = message.success;
     }
     return obj;

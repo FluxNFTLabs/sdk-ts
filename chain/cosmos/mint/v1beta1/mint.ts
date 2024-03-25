@@ -82,10 +82,10 @@ export const Minter = {
 
   toJSON(message: Minter): unknown {
     const obj: any = {};
-    if (message.inflation !== "") {
+    if (message.inflation !== undefined) {
       obj.inflation = message.inflation;
     }
-    if (message.annual_provisions !== "") {
+    if (message.annual_provisions !== undefined) {
       obj.annual_provisions = message.annual_provisions;
     }
     return obj;
@@ -209,22 +209,22 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.mint_denom !== "") {
+    if (message.mint_denom !== undefined) {
       obj.mint_denom = message.mint_denom;
     }
-    if (message.inflation_rate_change !== "") {
+    if (message.inflation_rate_change !== undefined) {
       obj.inflation_rate_change = message.inflation_rate_change;
     }
-    if (message.inflation_max !== "") {
+    if (message.inflation_max !== undefined) {
       obj.inflation_max = message.inflation_max;
     }
-    if (message.inflation_min !== "") {
+    if (message.inflation_min !== undefined) {
       obj.inflation_min = message.inflation_min;
     }
-    if (message.goal_bonded !== "") {
+    if (message.goal_bonded !== undefined) {
       obj.goal_bonded = message.goal_bonded;
     }
-    if (message.blocks_per_year !== "0") {
+    if (message.blocks_per_year !== undefined) {
       obj.blocks_per_year = message.blocks_per_year;
     }
     return obj;

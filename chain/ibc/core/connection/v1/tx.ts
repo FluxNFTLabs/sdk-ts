@@ -219,7 +219,7 @@ export const MsgConnectionOpenInit = {
 
   toJSON(message: MsgConnectionOpenInit): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.counterparty !== undefined) {
@@ -228,10 +228,10 @@ export const MsgConnectionOpenInit = {
     if (message.version !== undefined) {
       obj.version = Version.toJSON(message.version);
     }
-    if (message.delay_period !== "0") {
+    if (message.delay_period !== undefined) {
       obj.delay_period = message.delay_period;
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -497,10 +497,10 @@ export const MsgConnectionOpenTry = {
 
   toJSON(message: MsgConnectionOpenTry): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
-    if (message.previous_connection_id !== "") {
+    if (message.previous_connection_id !== undefined) {
       obj.previous_connection_id = message.previous_connection_id;
     }
     if (message.client_state !== undefined) {
@@ -509,7 +509,7 @@ export const MsgConnectionOpenTry = {
     if (message.counterparty !== undefined) {
       obj.counterparty = Counterparty.toJSON(message.counterparty);
     }
-    if (message.delay_period !== "0") {
+    if (message.delay_period !== undefined) {
       obj.delay_period = message.delay_period;
     }
     if (message.counterparty_versions?.length) {
@@ -518,22 +518,22 @@ export const MsgConnectionOpenTry = {
     if (message.proof_height !== undefined) {
       obj.proof_height = Height.toJSON(message.proof_height);
     }
-    if (message.proof_init.length !== 0) {
+    if (message.proof_init !== undefined) {
       obj.proof_init = base64FromBytes(message.proof_init);
     }
-    if (message.proof_client.length !== 0) {
+    if (message.proof_client !== undefined) {
       obj.proof_client = base64FromBytes(message.proof_client);
     }
-    if (message.proof_consensus.length !== 0) {
+    if (message.proof_consensus !== undefined) {
       obj.proof_consensus = base64FromBytes(message.proof_consensus);
     }
     if (message.consensus_height !== undefined) {
       obj.consensus_height = Height.toJSON(message.consensus_height);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
-    if (message.host_consensus_state_proof.length !== 0) {
+    if (message.host_consensus_state_proof !== undefined) {
       obj.host_consensus_state_proof = base64FromBytes(message.host_consensus_state_proof);
     }
     return obj;
@@ -785,10 +785,10 @@ export const MsgConnectionOpenAck = {
 
   toJSON(message: MsgConnectionOpenAck): unknown {
     const obj: any = {};
-    if (message.connection_id !== "") {
+    if (message.connection_id !== undefined) {
       obj.connection_id = message.connection_id;
     }
-    if (message.counterparty_connection_id !== "") {
+    if (message.counterparty_connection_id !== undefined) {
       obj.counterparty_connection_id = message.counterparty_connection_id;
     }
     if (message.version !== undefined) {
@@ -800,22 +800,22 @@ export const MsgConnectionOpenAck = {
     if (message.proof_height !== undefined) {
       obj.proof_height = Height.toJSON(message.proof_height);
     }
-    if (message.proof_try.length !== 0) {
+    if (message.proof_try !== undefined) {
       obj.proof_try = base64FromBytes(message.proof_try);
     }
-    if (message.proof_client.length !== 0) {
+    if (message.proof_client !== undefined) {
       obj.proof_client = base64FromBytes(message.proof_client);
     }
-    if (message.proof_consensus.length !== 0) {
+    if (message.proof_consensus !== undefined) {
       obj.proof_consensus = base64FromBytes(message.proof_consensus);
     }
     if (message.consensus_height !== undefined) {
       obj.consensus_height = Height.toJSON(message.consensus_height);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
-    if (message.host_consensus_state_proof.length !== 0) {
+    if (message.host_consensus_state_proof !== undefined) {
       obj.host_consensus_state_proof = base64FromBytes(message.host_consensus_state_proof);
     }
     return obj;
@@ -972,16 +972,16 @@ export const MsgConnectionOpenConfirm = {
 
   toJSON(message: MsgConnectionOpenConfirm): unknown {
     const obj: any = {};
-    if (message.connection_id !== "") {
+    if (message.connection_id !== undefined) {
       obj.connection_id = message.connection_id;
     }
-    if (message.proof_ack.length !== 0) {
+    if (message.proof_ack !== undefined) {
       obj.proof_ack = base64FromBytes(message.proof_ack);
     }
     if (message.proof_height !== undefined) {
       obj.proof_height = Height.toJSON(message.proof_height);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -1103,7 +1103,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     if (message.params !== undefined) {

@@ -100,7 +100,7 @@ export const CommitInfo = {
 
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
-    if (message.version !== "0") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
     if (message.store_infos?.length) {
@@ -180,7 +180,7 @@ export const StoreInfo = {
 
   toJSON(message: StoreInfo): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.commit_id !== undefined) {
@@ -258,10 +258,10 @@ export const CommitID = {
 
   toJSON(message: CommitID): unknown {
     const obj: any = {};
-    if (message.version !== "0") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
     return obj;

@@ -301,7 +301,7 @@ export const ClientState = {
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.chain_id !== "") {
+    if (message.chain_id !== undefined) {
       obj.chain_id = message.chain_id;
     }
     if (message.trust_level !== undefined) {
@@ -328,10 +328,10 @@ export const ClientState = {
     if (message.upgrade_path?.length) {
       obj.upgrade_path = message.upgrade_path;
     }
-    if (message.allow_update_after_expiry === true) {
+    if (message.allow_update_after_expiry !== undefined) {
       obj.allow_update_after_expiry = message.allow_update_after_expiry;
     }
-    if (message.allow_update_after_misbehaviour === true) {
+    if (message.allow_update_after_misbehaviour !== undefined) {
       obj.allow_update_after_misbehaviour = message.allow_update_after_misbehaviour;
     }
     return obj;
@@ -444,7 +444,7 @@ export const ConsensusState = {
     if (message.root !== undefined) {
       obj.root = MerkleRoot.toJSON(message.root);
     }
-    if (message.next_validators_hash.length !== 0) {
+    if (message.next_validators_hash !== undefined) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
     return obj;
@@ -531,7 +531,7 @@ export const Misbehaviour = {
 
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.header_1 !== undefined) {
@@ -736,10 +736,10 @@ export const Fraction = {
 
   toJSON(message: Fraction): unknown {
     const obj: any = {};
-    if (message.numerator !== "0") {
+    if (message.numerator !== undefined) {
       obj.numerator = message.numerator;
     }
-    if (message.denominator !== "0") {
+    if (message.denominator !== undefined) {
       obj.denominator = message.denominator;
     }
     return obj;

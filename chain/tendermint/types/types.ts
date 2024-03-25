@@ -275,10 +275,10 @@ export const PartSetHeader = {
 
   toJSON(message: PartSetHeader): unknown {
     const obj: any = {};
-    if (message.total !== 0) {
+    if (message.total !== undefined) {
       obj.total = Math.round(message.total);
     }
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
     return obj;
@@ -362,10 +362,10 @@ export const Part = {
 
   toJSON(message: Part): unknown {
     const obj: any = {};
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       obj.index = Math.round(message.index);
     }
-    if (message.bytes.length !== 0) {
+    if (message.bytes !== undefined) {
       obj.bytes = base64FromBytes(message.bytes);
     }
     if (message.proof !== undefined) {
@@ -442,7 +442,7 @@ export const BlockID = {
 
   toJSON(message: BlockID): unknown {
     const obj: any = {};
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
     if (message.part_set_header !== undefined) {
@@ -674,10 +674,10 @@ export const Header = {
     if (message.version !== undefined) {
       obj.version = Consensus.toJSON(message.version);
     }
-    if (message.chain_id !== "") {
+    if (message.chain_id !== undefined) {
       obj.chain_id = message.chain_id;
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
@@ -686,31 +686,31 @@ export const Header = {
     if (message.last_block_id !== undefined) {
       obj.last_block_id = BlockID.toJSON(message.last_block_id);
     }
-    if (message.last_commit_hash.length !== 0) {
+    if (message.last_commit_hash !== undefined) {
       obj.last_commit_hash = base64FromBytes(message.last_commit_hash);
     }
-    if (message.data_hash.length !== 0) {
+    if (message.data_hash !== undefined) {
       obj.data_hash = base64FromBytes(message.data_hash);
     }
-    if (message.validators_hash.length !== 0) {
+    if (message.validators_hash !== undefined) {
       obj.validators_hash = base64FromBytes(message.validators_hash);
     }
-    if (message.next_validators_hash.length !== 0) {
+    if (message.next_validators_hash !== undefined) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.consensus_hash.length !== 0) {
+    if (message.consensus_hash !== undefined) {
       obj.consensus_hash = base64FromBytes(message.consensus_hash);
     }
-    if (message.app_hash.length !== 0) {
+    if (message.app_hash !== undefined) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
-    if (message.last_results_hash.length !== 0) {
+    if (message.last_results_hash !== undefined) {
       obj.last_results_hash = base64FromBytes(message.last_results_hash);
     }
-    if (message.evidence_hash.length !== 0) {
+    if (message.evidence_hash !== undefined) {
       obj.evidence_hash = base64FromBytes(message.evidence_hash);
     }
-    if (message.proposer_address.length !== 0) {
+    if (message.proposer_address !== undefined) {
       obj.proposer_address = base64FromBytes(message.proposer_address);
     }
     return obj;
@@ -961,13 +961,13 @@ export const Vote = {
 
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    if (message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = signedMsgTypeToJSON(message.type);
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       obj.round = Math.round(message.round);
     }
     if (message.block_id !== undefined) {
@@ -976,19 +976,19 @@ export const Vote = {
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
-    if (message.validator_address.length !== 0) {
+    if (message.validator_address !== undefined) {
       obj.validator_address = base64FromBytes(message.validator_address);
     }
-    if (message.validator_index !== 0) {
+    if (message.validator_index !== undefined) {
       obj.validator_index = Math.round(message.validator_index);
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.extension.length !== 0) {
+    if (message.extension !== undefined) {
       obj.extension = base64FromBytes(message.extension);
     }
-    if (message.extension_signature.length !== 0) {
+    if (message.extension_signature !== undefined) {
       obj.extension_signature = base64FromBytes(message.extension_signature);
     }
     return obj;
@@ -1095,10 +1095,10 @@ export const Commit = {
 
   toJSON(message: Commit): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       obj.round = Math.round(message.round);
     }
     if (message.block_id !== undefined) {
@@ -1205,16 +1205,16 @@ export const CommitSig = {
 
   toJSON(message: CommitSig): unknown {
     const obj: any = {};
-    if (message.block_id_flag !== 0) {
+    if (message.block_id_flag !== undefined) {
       obj.block_id_flag = blockIDFlagToJSON(message.block_id_flag);
     }
-    if (message.validator_address.length !== 0) {
+    if (message.validator_address !== undefined) {
       obj.validator_address = base64FromBytes(message.validator_address);
     }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     return obj;
@@ -1313,10 +1313,10 @@ export const ExtendedCommit = {
 
   toJSON(message: ExtendedCommit): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       obj.round = Math.round(message.round);
     }
     if (message.block_id !== undefined) {
@@ -1454,22 +1454,22 @@ export const ExtendedCommitSig = {
 
   toJSON(message: ExtendedCommitSig): unknown {
     const obj: any = {};
-    if (message.block_id_flag !== 0) {
+    if (message.block_id_flag !== undefined) {
       obj.block_id_flag = blockIDFlagToJSON(message.block_id_flag);
     }
-    if (message.validator_address.length !== 0) {
+    if (message.validator_address !== undefined) {
       obj.validator_address = base64FromBytes(message.validator_address);
     }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.extension.length !== 0) {
+    if (message.extension !== undefined) {
       obj.extension = base64FromBytes(message.extension);
     }
-    if (message.extension_signature.length !== 0) {
+    if (message.extension_signature !== undefined) {
       obj.extension_signature = base64FromBytes(message.extension_signature);
     }
     return obj;
@@ -1609,16 +1609,16 @@ export const Proposal = {
 
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    if (message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = signedMsgTypeToJSON(message.type);
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       obj.round = Math.round(message.round);
     }
-    if (message.pol_round !== 0) {
+    if (message.pol_round !== undefined) {
       obj.pol_round = Math.round(message.pol_round);
     }
     if (message.block_id !== undefined) {
@@ -1627,7 +1627,7 @@ export const Proposal = {
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     return obj;
@@ -1892,13 +1892,13 @@ export const BlockMeta = {
     if (message.block_id !== undefined) {
       obj.block_id = BlockID.toJSON(message.block_id);
     }
-    if (message.block_size !== "0") {
+    if (message.block_size !== undefined) {
       obj.block_size = message.block_size;
     }
     if (message.header !== undefined) {
       obj.header = Header.toJSON(message.header);
     }
-    if (message.num_txs !== "0") {
+    if (message.num_txs !== undefined) {
       obj.num_txs = message.num_txs;
     }
     return obj;
@@ -1988,10 +1988,10 @@ export const TxProof = {
 
   toJSON(message: TxProof): unknown {
     const obj: any = {};
-    if (message.root_hash.length !== 0) {
+    if (message.root_hash !== undefined) {
       obj.root_hash = base64FromBytes(message.root_hash);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     if (message.proof !== undefined) {

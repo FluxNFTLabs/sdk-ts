@@ -443,7 +443,7 @@ export const TxDescriptor = {
 
   toJSON(message: TxDescriptor): unknown {
     const obj: any = {};
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       obj.fullname = message.fullname;
     }
     if (message.msgs?.length) {
@@ -595,13 +595,13 @@ export const SigningModeDescriptor = {
 
   toJSON(message: SigningModeDescriptor): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       obj.number = Math.round(message.number);
     }
-    if (message.authn_info_provider_method_fullname !== "") {
+    if (message.authn_info_provider_method_fullname !== undefined) {
       obj.authn_info_provider_method_fullname = message.authn_info_provider_method_fullname;
     }
     return obj;
@@ -662,7 +662,7 @@ export const ChainDescriptor = {
 
   toJSON(message: ChainDescriptor): unknown {
     const obj: any = {};
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     return obj;
@@ -814,7 +814,7 @@ export const InterfaceDescriptor = {
 
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       obj.fullname = message.fullname;
     }
     if (message.interface_accepting_messages?.length) {
@@ -898,10 +898,10 @@ export const InterfaceImplementerDescriptor = {
 
   toJSON(message: InterfaceImplementerDescriptor): unknown {
     const obj: any = {};
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       obj.fullname = message.fullname;
     }
-    if (message.type_url !== "") {
+    if (message.type_url !== undefined) {
       obj.type_url = message.type_url;
     }
     return obj;
@@ -976,7 +976,7 @@ export const InterfaceAcceptingMessageDescriptor = {
 
   toJSON(message: InterfaceAcceptingMessageDescriptor): unknown {
     const obj: any = {};
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       obj.fullname = message.fullname;
     }
     if (message.field_descriptor_names?.length) {
@@ -1043,7 +1043,7 @@ export const ConfigurationDescriptor = {
 
   toJSON(message: ConfigurationDescriptor): unknown {
     const obj: any = {};
-    if (message.bech32_account_address_prefix !== "") {
+    if (message.bech32_account_address_prefix !== undefined) {
       obj.bech32_account_address_prefix = message.bech32_account_address_prefix;
     }
     return obj;
@@ -1102,7 +1102,7 @@ export const MsgDescriptor = {
 
   toJSON(message: MsgDescriptor): unknown {
     const obj: any = {};
-    if (message.msg_type_url !== "") {
+    if (message.msg_type_url !== undefined) {
       obj.msg_type_url = message.msg_type_url;
     }
     return obj;
@@ -1884,10 +1884,10 @@ export const QueryServiceDescriptor = {
 
   toJSON(message: QueryServiceDescriptor): unknown {
     const obj: any = {};
-    if (message.fullname !== "") {
+    if (message.fullname !== undefined) {
       obj.fullname = message.fullname;
     }
-    if (message.is_module === true) {
+    if (message.is_module !== undefined) {
       obj.is_module = message.is_module;
     }
     if (message.methods?.length) {
@@ -1964,10 +1964,10 @@ export const QueryMethodDescriptor = {
 
   toJSON(message: QueryMethodDescriptor): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.full_query_path !== "") {
+    if (message.full_query_path !== undefined) {
       obj.full_query_path = message.full_query_path;
     }
     return obj;

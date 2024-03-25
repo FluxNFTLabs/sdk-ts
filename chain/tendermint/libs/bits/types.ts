@@ -75,7 +75,7 @@ export const BitArray = {
 
   toJSON(message: BitArray): unknown {
     const obj: any = {};
-    if (message.bits !== "0") {
+    if (message.bits !== undefined) {
       obj.bits = message.bits;
     }
     if (message.elems?.length) {

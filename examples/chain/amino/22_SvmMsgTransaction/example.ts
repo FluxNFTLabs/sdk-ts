@@ -320,11 +320,11 @@ async function broadcastSvmTransactionMsg(
 	
   // create accounts
   let createProgramIx = web3.SystemProgram.createAccount({
-    fromPubkey: new web3.PublicKey(callerPubkey),
-    newAccountPubkey: new web3.PublicKey(programPubkey),
+    fromPubkey: callerPubkey,
+    newAccountPubkey: programPubkey,
     lamports: 0,
     space: 36,
-    programId: new web3.PublicKey(upgradableLoaderPubkey),
+    programId: upgradableLoaderPubkey,
   })
 
   let createInteractorIx = web3.SystemProgram.createAccount({
@@ -336,23 +336,23 @@ async function broadcastSvmTransactionMsg(
   })
 
   let createBufferAccountTx = web3.SystemProgram.createAccount({
-    fromPubkey: new web3.PublicKey(callerPubkey),
-    newAccountPubkey: new web3.PublicKey(programBufferPubkey),
+    fromPubkey: callerPubkey,
+    newAccountPubkey: programBufferPubkey,
     lamports: 0,
     space: programBinary.length + 48,
-    programId: new web3.PublicKey(upgradableLoaderPubkey),
+    programId: upgradableLoaderPubkey,
   })
 
   let initBufferIx = new web3.TransactionInstruction({
-    programId: new web3.PublicKey(upgradableLoaderPubkey),
+    programId: upgradableLoaderPubkey,
     keys: [
       {
-        pubkey: new web3.PublicKey(programBufferPubkey),
+        pubkey: programBufferPubkey,
         isSigner: true,
         isWritable: true,
       },
       {
-        pubkey: new web3.PublicKey(callerPubkey),
+        pubkey: callerPubkey,
         isSigner: true,
         isWritable: true,
       },
@@ -366,7 +366,7 @@ async function broadcastSvmTransactionMsg(
     .add(createBufferAccountTx)
     .add(createInteractorIx)
     .add(initBufferIx)
-  initAccountsTx.feePayer = new web3.PublicKey(callerPubkey)
+  initAccountsTx.feePayer = callerPubkey
 
   const msgCreateAccounts: svmtx.MsgTransaction = toFluxSvmTransaction(senderAddr, initAccountsTx, 1000000)
   let initAccountsResult = await broadcastSvmTransactionMsg(txClient, senderPubkeyAny, senderAccNum, senderAccSeq, msgCreateAccounts, senderPrivKey)
@@ -397,7 +397,7 @@ async function broadcastSvmTransactionMsg(
           isWritable: true,
         },
         {
-          pubkey: new web3.PublicKey(callerPubkey),
+          pubkey: callerPubkey,
           isSigner: true,
           isWritable: true,
         },
@@ -411,9 +411,9 @@ async function broadcastSvmTransactionMsg(
   let finalizeIxData = encodeData(UPGRADABLE_LOADER_LAYOUTS.DeployWithMaxDataLen, {
     maxLen: programBinary.length + 48,
   })
-  console.log('finalize ix data:', finalizeIxData)
+
   let finalizeIx = new web3.TransactionInstruction({
-    programId: new web3.PublicKey(upgradableLoaderPubkey),
+    programId: upgradableLoaderPubkey,
     keys: [
       {
 				pubkey:  callerPubkey,

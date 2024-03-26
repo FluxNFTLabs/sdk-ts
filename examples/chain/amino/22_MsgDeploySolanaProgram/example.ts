@@ -19,7 +19,34 @@ import * as ethcrypto from 'eth-crypto';
 
 import * as web3 from '@solana/web3.js'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
-import { makeSignDoc, StdFee, AminoMsg, Coin, serializeSignDoc } from '@cosmjs/amino'
+
+function toFluxSvmTransaction(senderAddr: string, solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
+  let message = solTx.compileMessage()
+  let accounts = message.accountKeys.map(x => x.toString())
+
+  return svmtx.MsgTransaction.create({
+    sender: senderAddr,
+    accounts: accounts,
+    instructions: solTx.instructions.map(ix => {
+      let ixKeys = ix.keys.map(k => k.pubkey)
+      let svmIx : svmtypes.Instruction = {
+        program_index: [accounts.indexOf(ix.programId.toString())],
+        accounts: ix.keys.map(k => svmtypes.InstructionAccount.create({
+          id_index: accounts.indexOf(k.pubkey.toString()),
+          caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
+          callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
+          is_signer: k.isSigner,
+          is_writable: k.isWritable,
+        })),
+        data: ix.data,
+      }
+
+      return svmIx
+    }),
+    compute_budget: budget.toString(), // budget for executing solana bytecode
+  })
+}
+
 (async () => {
   // init clients
   const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
@@ -74,35 +101,10 @@ import { makeSignDoc, StdFee, AminoMsg, Coin, serializeSignDoc } from '@cosmjs/a
   let createAccountsTx = new web3.Transaction()
     .add(createProgramIx)
     .add(createBufferAccountTx)
-
   createAccountsTx.recentBlockhash = '0x0'
   createAccountsTx.feePayer = new web3.PublicKey(callerPubkey)
-  let message = createAccountsTx.compileMessage()
-  // create accounts msg
-  let accounts = message.accountKeys.map(x => x.toString())
-
   // convert compiled message into flux-compatible msg
-  const msg: svmtx.MsgTransaction = {
-    sender: senderAddr,
-    accounts: accounts,
-    instructions: createAccountsTx.instructions.map(ix => {
-      let ixKeys = ix.keys.map(k => k.pubkey)
-      let svmIx : svmtypes.Instruction = {
-        program_index: [accounts.indexOf(ix.programId.toString())],
-        accounts: ix.keys.map(k => svmtypes.InstructionAccount.create({
-          id_index: accounts.indexOf(k.pubkey.toString()),
-          caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
-          callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
-          is_signer: k.isSigner,
-          is_writable: k.isWritable,
-        })),
-        data: ix.data,
-      }
-
-      return svmIx
-    }),
-    compute_budget: "1000000", // budget for executing solana bytecode
-  }
+  const msg: svmtx.MsgTransaction = toFluxSvmTransaction(senderAddr, createAccountsTx, 1000000)
 
   const msgAny: anytypes.Any = {
     type_url: `/${svmtx.MsgTransaction.$type}`,
@@ -155,7 +157,6 @@ import { makeSignDoc, StdFee, AminoMsg, Coin, serializeSignDoc } from '@cosmjs/a
   }
 
   let eip712SignDoc = getEIP712SignBytes(signDoc, [msgJSON], '')
-  console.log('eip712SignDoc json:', JSON.stringify(eip712SignDoc, null, '  '))
   const msgHash = Buffer.from(getMessage(eip712SignDoc, true, {verifyDomain: false}))
   
   const senderSign = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))

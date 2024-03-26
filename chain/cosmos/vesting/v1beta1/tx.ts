@@ -155,19 +155,19 @@ export const MsgCreateVestingAccount = {
 
   toJSON(message: MsgCreateVestingAccount): unknown {
     const obj: any = {};
-    if (message.from_address !== undefined) {
+    if (message.from_address !== "") {
       obj.from_address = message.from_address;
     }
-    if (message.to_address !== undefined) {
+    if (message.to_address !== "") {
       obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
     }
-    if (message.end_time !== undefined) {
+    if (message.end_time !== "0") {
       obj.end_time = message.end_time;
     }
-    if (message.delayed !== undefined) {
+    if (message.delayed === true) {
       obj.delayed = message.delayed;
     }
     return obj;
@@ -299,10 +299,10 @@ export const MsgCreatePermanentLockedAccount = {
 
   toJSON(message: MsgCreatePermanentLockedAccount): unknown {
     const obj: any = {};
-    if (message.from_address !== undefined) {
+    if (message.from_address !== "") {
       obj.from_address = message.from_address;
     }
-    if (message.to_address !== undefined) {
+    if (message.to_address !== "") {
       obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
@@ -448,13 +448,13 @@ export const MsgCreatePeriodicVestingAccount = {
 
   toJSON(message: MsgCreatePeriodicVestingAccount): unknown {
     const obj: any = {};
-    if (message.from_address !== undefined) {
+    if (message.from_address !== "") {
       obj.from_address = message.from_address;
     }
-    if (message.to_address !== undefined) {
+    if (message.to_address !== "") {
       obj.to_address = message.to_address;
     }
-    if (message.start_time !== undefined) {
+    if (message.start_time !== "0") {
       obj.start_time = message.start_time;
     }
     if (message.vesting_periods?.length) {

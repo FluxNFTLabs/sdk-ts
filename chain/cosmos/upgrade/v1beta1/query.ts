@@ -254,7 +254,7 @@ export const QueryAppliedPlanRequest = {
 
   toJSON(message: QueryAppliedPlanRequest): unknown {
     const obj: any = {};
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
     return obj;
@@ -313,7 +313,7 @@ export const QueryAppliedPlanResponse = {
 
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     return obj;
@@ -372,7 +372,7 @@ export const QueryUpgradedConsensusStateRequest = {
 
   toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
     const obj: any = {};
-    if (message.last_height !== undefined) {
+    if (message.last_height !== "0") {
       obj.last_height = message.last_height;
     }
     return obj;
@@ -435,7 +435,7 @@ export const QueryUpgradedConsensusStateResponse = {
 
   toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
     const obj: any = {};
-    if (message.upgraded_consensus_state !== undefined) {
+    if (message.upgraded_consensus_state.length !== 0) {
       obj.upgraded_consensus_state = base64FromBytes(message.upgraded_consensus_state);
     }
     return obj;
@@ -494,7 +494,7 @@ export const QueryModuleVersionsRequest = {
 
   toJSON(message: QueryModuleVersionsRequest): unknown {
     const obj: any = {};
-    if (message.module_name !== undefined) {
+    if (message.module_name !== "") {
       obj.module_name = message.module_name;
     }
     return obj;
@@ -661,7 +661,7 @@ export const QueryAuthorityResponse = {
 
   toJSON(message: QueryAuthorityResponse): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     return obj;

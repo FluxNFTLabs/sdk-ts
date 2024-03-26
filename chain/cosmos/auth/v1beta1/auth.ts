@@ -124,16 +124,16 @@ export const BaseAccount = {
 
   toJSON(message: BaseAccount): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.pub_key !== undefined) {
       obj.pub_key = Any.toJSON(message.pub_key);
     }
-    if (message.account_number !== undefined) {
+    if (message.account_number !== "0") {
       obj.account_number = message.account_number;
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -226,7 +226,7 @@ export const ModuleAccount = {
     if (message.base_account !== undefined) {
       obj.base_account = BaseAccount.toJSON(message.base_account);
     }
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
     if (message.permissions?.length) {
@@ -307,7 +307,7 @@ export const ModuleCredential = {
 
   toJSON(message: ModuleCredential): unknown {
     const obj: any = {};
-    if (message.module_name !== undefined) {
+    if (message.module_name !== "") {
       obj.module_name = message.module_name;
     }
     if (message.derivation_keys?.length) {
@@ -428,19 +428,19 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.max_memo_characters !== undefined) {
+    if (message.max_memo_characters !== "0") {
       obj.max_memo_characters = message.max_memo_characters;
     }
-    if (message.tx_sig_limit !== undefined) {
+    if (message.tx_sig_limit !== "0") {
       obj.tx_sig_limit = message.tx_sig_limit;
     }
-    if (message.tx_size_cost_per_byte !== undefined) {
+    if (message.tx_size_cost_per_byte !== "0") {
       obj.tx_size_cost_per_byte = message.tx_size_cost_per_byte;
     }
-    if (message.sig_verify_cost_ed25519 !== undefined) {
+    if (message.sig_verify_cost_ed25519 !== "0") {
       obj.sig_verify_cost_ed25519 = message.sig_verify_cost_ed25519;
     }
-    if (message.sig_verify_cost_secp256k1 !== undefined) {
+    if (message.sig_verify_cost_secp256k1 !== "0") {
       obj.sig_verify_cost_secp256k1 = message.sig_verify_cost_secp256k1;
     }
     return obj;

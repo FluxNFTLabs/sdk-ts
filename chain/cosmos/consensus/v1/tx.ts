@@ -122,7 +122,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.block !== undefined) {

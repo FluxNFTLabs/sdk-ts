@@ -194,10 +194,10 @@ export const MsgSetWithdrawAddress = {
 
   toJSON(message: MsgSetWithdrawAddress): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.withdraw_address !== undefined) {
+    if (message.withdraw_address !== "") {
       obj.withdraw_address = message.withdraw_address;
     }
     return obj;
@@ -315,10 +315,10 @@ export const MsgWithdrawDelegatorReward = {
 
   toJSON(message: MsgWithdrawDelegatorReward): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -437,7 +437,7 @@ export const MsgWithdrawValidatorCommission = {
 
   toJSON(message: MsgWithdrawValidatorCommission): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -571,7 +571,7 @@ export const MsgFundCommunityPool = {
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
     return obj;
@@ -689,7 +689,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.params !== undefined) {
@@ -823,10 +823,10 @@ export const MsgCommunityPoolSpend = {
 
   toJSON(message: MsgCommunityPoolSpend): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.recipient !== undefined) {
+    if (message.recipient !== "") {
       obj.recipient = message.recipient;
     }
     if (message.amount?.length) {
@@ -959,10 +959,10 @@ export const MsgDepositValidatorRewardsPool = {
 
   toJSON(message: MsgDepositValidatorRewardsPool): unknown {
     const obj: any = {};
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.amount?.length) {

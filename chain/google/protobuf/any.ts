@@ -175,10 +175,10 @@ export const Any = {
 
   toJSON(message: Any): unknown {
     const obj: any = {};
-    if (message.type_url !== undefined) {
+    if (message.type_url !== "") {
       obj.type_url = message.type_url;
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;

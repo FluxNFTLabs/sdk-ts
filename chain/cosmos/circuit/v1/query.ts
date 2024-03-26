@@ -80,7 +80,7 @@ export const QueryAccountRequest = {
 
   toJSON(message: QueryAccountRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     return obj;

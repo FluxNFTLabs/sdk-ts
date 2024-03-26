@@ -203,7 +203,7 @@ export const SigningInfo = {
 
   toJSON(message: SigningInfo): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.validator_signing_info !== undefined) {
@@ -284,7 +284,7 @@ export const ValidatorMissedBlocks = {
 
   toJSON(message: ValidatorMissedBlocks): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.missed_blocks?.length) {
@@ -360,10 +360,10 @@ export const MissedBlock = {
 
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
-    if (message.missed !== undefined) {
+    if (message.missed === true) {
       obj.missed = message.missed;
     }
     return obj;

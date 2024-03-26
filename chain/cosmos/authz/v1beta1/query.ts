@@ -133,13 +133,13 @@ export const QueryGrantsRequest = {
 
   toJSON(message: QueryGrantsRequest): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
-    if (message.msg_type_url !== undefined) {
+    if (message.msg_type_url !== "") {
       obj.msg_type_url = message.msg_type_url;
     }
     if (message.pagination !== undefined) {
@@ -297,7 +297,7 @@ export const QueryGranterGrantsRequest = {
 
   toJSON(message: QueryGranterGrantsRequest): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
     if (message.pagination !== undefined) {
@@ -455,7 +455,7 @@ export const QueryGranteeGrantsRequest = {
 
   toJSON(message: QueryGranteeGrantsRequest): unknown {
     const obj: any = {};
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.pagination !== undefined) {

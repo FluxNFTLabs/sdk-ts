@@ -169,13 +169,13 @@ export const Product = {
 
   toJSON(message: Product): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.product_id !== undefined) {
+    if (message.product_id !== "") {
       obj.product_id = message.product_id;
     }
     if (message.offerings?.length) {
@@ -187,10 +187,10 @@ export const Product = {
     if (message.tags?.length) {
       obj.tags = message.tags;
     }
-    if (message.verified !== undefined) {
+    if (message.verified === true) {
       obj.verified = message.verified;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;
@@ -282,13 +282,13 @@ export const Offering = {
 
   toJSON(message: Offering): unknown {
     const obj: any = {};
-    if (message.url !== undefined) {
+    if (message.url !== "") {
       obj.url = message.url;
     }
     if (message.price !== undefined) {
       obj.price = Coin.toJSON(message.price);
     }
-    if (message.purchase_count !== undefined) {
+    if (message.purchase_count !== "0") {
       obj.purchase_count = message.purchase_count;
     }
     return obj;
@@ -373,13 +373,13 @@ export const ClassCommission = {
 
   toJSON(message: ClassCommission): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.commission_mul !== undefined) {
+    if (message.commission_mul !== "0") {
       obj.commission_mul = message.commission_mul;
     }
-    if (message.commission_div !== undefined) {
+    if (message.commission_div !== "0") {
       obj.commission_div = message.commission_div;
     }
     return obj;

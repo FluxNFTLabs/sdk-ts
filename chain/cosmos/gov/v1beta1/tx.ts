@@ -153,7 +153,7 @@ export const MsgSubmitProposal = {
     if (message.initial_deposit?.length) {
       obj.initial_deposit = message.initial_deposit.map((e) => Coin.toJSON(e));
     }
-    if (message.proposer !== undefined) {
+    if (message.proposer !== "") {
       obj.proposer = message.proposer;
     }
     return obj;
@@ -216,7 +216,7 @@ export const MsgSubmitProposalResponse = {
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -299,13 +299,13 @@ export const MsgVote = {
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       obj.voter = message.voter;
     }
-    if (message.option !== undefined) {
+    if (message.option !== 0) {
       obj.option = voteOptionToJSON(message.option);
     }
     return obj;
@@ -437,10 +437,10 @@ export const MsgVoteWeighted = {
 
   toJSON(message: MsgVoteWeighted): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       obj.voter = message.voter;
     }
     if (message.options?.length) {
@@ -573,10 +573,10 @@ export const MsgDeposit = {
 
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
     if (message.amount?.length) {

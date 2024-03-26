@@ -174,7 +174,7 @@ export const Params = {
     if (message.send_enabled?.length) {
       obj.send_enabled = message.send_enabled.map((e) => SendEnabled.toJSON(e));
     }
-    if (message.default_send_enabled !== undefined) {
+    if (message.default_send_enabled === true) {
       obj.default_send_enabled = message.default_send_enabled;
     }
     return obj;
@@ -247,10 +247,10 @@ export const SendEnabled = {
 
   toJSON(message: SendEnabled): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
-    if (message.enabled !== undefined) {
+    if (message.enabled === true) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -323,7 +323,7 @@ export const Input = {
 
   toJSON(message: Input): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.coins?.length) {
@@ -399,7 +399,7 @@ export const Output = {
 
   toJSON(message: Output): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.coins?.length) {
@@ -545,10 +545,10 @@ export const DenomUnit = {
 
   toJSON(message: DenomUnit): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
-    if (message.exponent !== undefined) {
+    if (message.exponent !== 0) {
       obj.exponent = Math.round(message.exponent);
     }
     if (message.aliases?.length) {
@@ -693,28 +693,28 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       obj.description = message.description;
     }
     if (message.denom_units?.length) {
       obj.denom_units = message.denom_units.map((e) => DenomUnit.toJSON(e));
     }
-    if (message.base !== undefined) {
+    if (message.base !== "") {
       obj.base = message.base;
     }
-    if (message.display !== undefined) {
+    if (message.display !== "") {
       obj.display = message.display;
     }
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.symbol !== undefined) {
+    if (message.symbol !== "") {
       obj.symbol = message.symbol;
     }
-    if (message.uri !== undefined) {
+    if (message.uri !== "") {
       obj.uri = message.uri;
     }
-    if (message.uri_hash !== undefined) {
+    if (message.uri_hash !== "") {
       obj.uri_hash = message.uri_hash;
     }
     return obj;

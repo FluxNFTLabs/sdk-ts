@@ -251,19 +251,19 @@ export const ConnectionEnd = {
 
   toJSON(message: ConnectionEnd): unknown {
     const obj: any = {};
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
     if (message.versions?.length) {
       obj.versions = message.versions.map((e) => Version.toJSON(e));
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       obj.state = stateToJSON(message.state);
     }
     if (message.counterparty !== undefined) {
       obj.counterparty = Counterparty.toJSON(message.counterparty);
     }
-    if (message.delay_period !== undefined) {
+    if (message.delay_period !== "0") {
       obj.delay_period = message.delay_period;
     }
     return obj;
@@ -385,22 +385,22 @@ export const IdentifiedConnection = {
 
   toJSON(message: IdentifiedConnection): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
     if (message.versions?.length) {
       obj.versions = message.versions.map((e) => Version.toJSON(e));
     }
-    if (message.state !== undefined) {
+    if (message.state !== 0) {
       obj.state = stateToJSON(message.state);
     }
     if (message.counterparty !== undefined) {
       obj.counterparty = Counterparty.toJSON(message.counterparty);
     }
-    if (message.delay_period !== undefined) {
+    if (message.delay_period !== "0") {
       obj.delay_period = message.delay_period;
     }
     return obj;
@@ -490,10 +490,10 @@ export const Counterparty = {
 
   toJSON(message: Counterparty): unknown {
     const obj: any = {};
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
     if (message.prefix !== undefined) {
@@ -631,7 +631,7 @@ export const ConnectionPaths = {
 
   toJSON(message: ConnectionPaths): unknown {
     const obj: any = {};
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
     if (message.paths?.length) {
@@ -707,7 +707,7 @@ export const Version = {
 
   toJSON(message: Version): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined) {
+    if (message.identifier !== "") {
       obj.identifier = message.identifier;
     }
     if (message.features?.length) {
@@ -774,7 +774,7 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.max_expected_time_per_block !== undefined) {
+    if (message.max_expected_time_per_block !== "0") {
       obj.max_expected_time_per_block = message.max_expected_time_per_block;
     }
     return obj;

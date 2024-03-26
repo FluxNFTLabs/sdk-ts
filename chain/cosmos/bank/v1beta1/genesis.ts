@@ -220,7 +220,7 @@ export const Balance = {
 
   toJSON(message: Balance): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.coins?.length) {

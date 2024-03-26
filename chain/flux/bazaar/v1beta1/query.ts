@@ -86,10 +86,10 @@ export const QueryNFTProductsRequest = {
 
   toJSON(message: QueryNFTProductsRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
     return obj;
@@ -234,13 +234,13 @@ export const QueryNFTProductRequest = {
 
   toJSON(message: QueryNFTProductRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.product_id !== undefined) {
+    if (message.product_id !== "") {
       obj.product_id = message.product_id;
     }
     return obj;

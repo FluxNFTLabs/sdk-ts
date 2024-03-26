@@ -213,10 +213,10 @@ export const DuplicateVoteEvidence = {
     if (message.vote_b !== undefined) {
       obj.vote_b = Vote.toJSON(message.vote_b);
     }
-    if (message.total_voting_power !== undefined) {
+    if (message.total_voting_power !== "0") {
       obj.total_voting_power = message.total_voting_power;
     }
-    if (message.validator_power !== undefined) {
+    if (message.validator_power !== "0") {
       obj.validator_power = message.validator_power;
     }
     if (message.timestamp !== undefined) {
@@ -343,13 +343,13 @@ export const LightClientAttackEvidence = {
     if (message.conflicting_block !== undefined) {
       obj.conflicting_block = LightBlock.toJSON(message.conflicting_block);
     }
-    if (message.common_height !== undefined) {
+    if (message.common_height !== "0") {
       obj.common_height = message.common_height;
     }
     if (message.byzantine_validators?.length) {
       obj.byzantine_validators = message.byzantine_validators.map((e) => Validator.toJSON(e));
     }
-    if (message.total_voting_power !== undefined) {
+    if (message.total_voting_power !== "0") {
       obj.total_voting_power = message.total_voting_power;
     }
     if (message.timestamp !== undefined) {

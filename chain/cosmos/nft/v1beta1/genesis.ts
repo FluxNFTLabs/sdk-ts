@@ -150,7 +150,7 @@ export const Entry = {
 
   toJSON(message: Entry): unknown {
     const obj: any = {};
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     if (message.nfts?.length) {

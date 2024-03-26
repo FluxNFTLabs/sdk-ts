@@ -245,7 +245,7 @@ export const EventsRequest = {
 
   toJSON(message: EventsRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.modules?.length) {
@@ -371,10 +371,10 @@ export const EventsResponse = {
 
   toJSON(message: EventsResponse): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.time !== undefined) {
+    if (message.time !== "0") {
       obj.time = message.time;
     }
     if (message.modules?.length) {
@@ -537,10 +537,10 @@ export const EventOp = {
 
   toJSON(message: EventOp): unknown {
     const obj: any = {};
-    if (message.op !== undefined) {
+    if (message.op !== 0) {
       obj.op = opToJSON(message.op);
     }
-    if (message.module !== undefined) {
+    if (message.module !== "") {
       obj.module = message.module;
     }
     if (message.data !== undefined) {
@@ -639,16 +639,16 @@ export const SyncStatus = {
 
   toJSON(message: SyncStatus): unknown {
     const obj: any = {};
-    if (message.last_block !== undefined) {
+    if (message.last_block !== "0") {
       obj.last_block = message.last_block;
     }
-    if (message.last_block_time !== undefined) {
+    if (message.last_block_time !== "0") {
       obj.last_block_time = message.last_block_time;
     }
-    if (message.updated_at !== undefined) {
+    if (message.updated_at !== "0") {
       obj.updated_at = message.updated_at;
     }
-    if (message.current_version !== undefined) {
+    if (message.current_version !== "") {
       obj.current_version = message.current_version;
     }
     return obj;

@@ -111,7 +111,7 @@ export const Upgrade = {
     if (message.timeout !== undefined) {
       obj.timeout = Timeout.toJSON(message.timeout);
     }
-    if (message.next_sequence_send !== undefined) {
+    if (message.next_sequence_send !== "0") {
       obj.next_sequence_send = message.next_sequence_send;
     }
     return obj;
@@ -202,13 +202,13 @@ export const UpgradeFields = {
 
   toJSON(message: UpgradeFields): unknown {
     const obj: any = {};
-    if (message.ordering !== undefined) {
+    if (message.ordering !== 0) {
       obj.ordering = orderToJSON(message.ordering);
     }
     if (message.connection_hops?.length) {
       obj.connection_hops = message.connection_hops;
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
     return obj;
@@ -282,10 +282,10 @@ export const ErrorReceipt = {
 
   toJSON(message: ErrorReceipt): unknown {
     const obj: any = {};
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       obj.message = message.message;
     }
     return obj;

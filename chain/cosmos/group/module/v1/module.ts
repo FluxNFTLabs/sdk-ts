@@ -80,7 +80,7 @@ export const Module = {
     if (message.max_execution_period !== undefined) {
       obj.max_execution_period = Duration.toJSON(message.max_execution_period);
     }
-    if (message.max_metadata_len !== undefined) {
+    if (message.max_metadata_len !== "0") {
       obj.max_metadata_len = message.max_metadata_len;
     }
     return obj;

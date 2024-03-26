@@ -77,7 +77,7 @@ export const MsgSubmitEvidence = {
 
   toJSON(message: MsgSubmitEvidence): unknown {
     const obj: any = {};
-    if (message.submitter !== undefined) {
+    if (message.submitter !== "") {
       obj.submitter = message.submitter;
     }
     if (message.evidence !== undefined) {
@@ -142,7 +142,7 @@ export const MsgSubmitEvidenceResponse = {
 
   toJSON(message: MsgSubmitEvidenceResponse): unknown {
     const obj: any = {};
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
     return obj;

@@ -116,13 +116,13 @@ export const Proof = {
 
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    if (message.total !== undefined) {
+    if (message.total !== "0") {
       obj.total = message.total;
     }
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
-    if (message.leaf_hash !== undefined) {
+    if (message.leaf_hash.length !== 0) {
       obj.leaf_hash = base64FromBytes(message.leaf_hash);
     }
     if (message.aunts?.length) {
@@ -200,7 +200,7 @@ export const ValueOp = {
 
   toJSON(message: ValueOp): unknown {
     const obj: any = {};
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       obj.key = base64FromBytes(message.key);
     }
     if (message.proof !== undefined) {
@@ -287,13 +287,13 @@ export const DominoOp = {
 
   toJSON(message: DominoOp): unknown {
     const obj: any = {};
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       obj.key = message.key;
     }
-    if (message.input !== undefined) {
+    if (message.input !== "") {
       obj.input = message.input;
     }
-    if (message.output !== undefined) {
+    if (message.output !== "") {
       obj.output = message.output;
     }
     return obj;
@@ -378,13 +378,13 @@ export const ProofOp = {
 
   toJSON(message: ProofOp): unknown {
     const obj: any = {};
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       obj.type = message.type;
     }
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

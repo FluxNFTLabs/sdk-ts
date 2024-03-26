@@ -156,16 +156,16 @@ export const MsgRegisterPayee = {
 
   toJSON(message: MsgRegisterPayee): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== undefined) {
+    if (message.relayer !== "") {
       obj.relayer = message.relayer;
     }
-    if (message.payee !== undefined) {
+    if (message.payee !== "") {
       obj.payee = message.payee;
     }
     return obj;
@@ -307,16 +307,16 @@ export const MsgRegisterCounterpartyPayee = {
 
   toJSON(message: MsgRegisterCounterpartyPayee): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== undefined) {
+    if (message.relayer !== "") {
       obj.relayer = message.relayer;
     }
-    if (message.counterparty_payee !== undefined) {
+    if (message.counterparty_payee !== "") {
       obj.counterparty_payee = message.counterparty_payee;
     }
     return obj;
@@ -472,13 +472,13 @@ export const MsgPayPacketFee = {
     if (message.fee !== undefined) {
       obj.fee = Fee.toJSON(message.fee);
     }
-    if (message.source_port_id !== undefined) {
+    if (message.source_port_id !== "") {
       obj.source_port_id = message.source_port_id;
     }
-    if (message.source_channel_id !== undefined) {
+    if (message.source_channel_id !== "") {
       obj.source_channel_id = message.source_channel_id;
     }
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       obj.signer = message.signer;
     }
     if (message.relayers?.length) {

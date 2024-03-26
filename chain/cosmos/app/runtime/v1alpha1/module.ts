@@ -224,7 +224,7 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.app_name !== undefined) {
+    if (message.app_name !== "") {
       obj.app_name = message.app_name;
     }
     if (message.begin_blockers?.length) {
@@ -328,10 +328,10 @@ export const StoreKeyConfig = {
 
   toJSON(message: StoreKeyConfig): unknown {
     const obj: any = {};
-    if (message.module_name !== undefined) {
+    if (message.module_name !== "") {
       obj.module_name = message.module_name;
     }
-    if (message.kv_store_key !== undefined) {
+    if (message.kv_store_key !== "") {
       obj.kv_store_key = message.kv_store_key;
     }
     return obj;

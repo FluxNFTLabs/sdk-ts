@@ -111,16 +111,16 @@ export const EventSend = {
 
   toJSON(message: EventSend): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       obj.receiver = message.receiver;
     }
     return obj;
@@ -206,13 +206,13 @@ export const EventMint = {
 
   toJSON(message: EventMint): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;
@@ -297,13 +297,13 @@ export const EventBurn = {
 
   toJSON(message: EventBurn): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;

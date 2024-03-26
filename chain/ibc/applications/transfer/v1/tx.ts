@@ -197,28 +197,28 @@ export const MsgTransfer = {
 
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
-    if (message.source_port !== undefined) {
+    if (message.source_port !== "") {
       obj.source_port = message.source_port;
     }
-    if (message.source_channel !== undefined) {
+    if (message.source_channel !== "") {
       obj.source_channel = message.source_channel;
     }
     if (message.token !== undefined) {
       obj.token = Coin.toJSON(message.token);
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       obj.receiver = message.receiver;
     }
     if (message.timeout_height !== undefined) {
       obj.timeout_height = Height.toJSON(message.timeout_height);
     }
-    if (message.timeout_timestamp !== undefined) {
+    if (message.timeout_timestamp !== "0") {
       obj.timeout_timestamp = message.timeout_timestamp;
     }
-    if (message.memo !== undefined) {
+    if (message.memo !== "") {
       obj.memo = message.memo;
     }
     return obj;
@@ -286,7 +286,7 @@ export const MsgTransferResponse = {
 
   toJSON(message: MsgTransferResponse): unknown {
     const obj: any = {};
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -358,7 +358,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       obj.signer = message.signer;
     }
     if (message.params !== undefined) {

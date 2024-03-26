@@ -322,7 +322,7 @@ export const QueryValidatorsRequest = {
 
   toJSON(message: QueryValidatorsRequest): unknown {
     const obj: any = {};
-    if (message.status !== undefined) {
+    if (message.status !== "") {
       obj.status = message.status;
     }
     if (message.pagination !== undefined) {
@@ -467,7 +467,7 @@ export const QueryValidatorRequest = {
 
   toJSON(message: QueryValidatorRequest): unknown {
     const obj: any = {};
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     return obj;
@@ -600,7 +600,7 @@ export const QueryValidatorDelegationsRequest = {
 
   toJSON(message: QueryValidatorDelegationsRequest): unknown {
     const obj: any = {};
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     if (message.pagination !== undefined) {
@@ -758,7 +758,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
 
   toJSON(message: QueryValidatorUnbondingDelegationsRequest): unknown {
     const obj: any = {};
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     if (message.pagination !== undefined) {
@@ -920,10 +920,10 @@ export const QueryDelegationRequest = {
 
   toJSON(message: QueryDelegationRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     return obj;
@@ -1061,10 +1061,10 @@ export const QueryUnbondingDelegationRequest = {
 
   toJSON(message: QueryUnbondingDelegationRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     return obj;
@@ -1198,7 +1198,7 @@ export const QueryDelegatorDelegationsRequest = {
 
   toJSON(message: QueryDelegatorDelegationsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
     if (message.pagination !== undefined) {
@@ -1356,7 +1356,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
 
   toJSON(message: QueryDelegatorUnbondingDelegationsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
     if (message.pagination !== undefined) {
@@ -1540,13 +1540,13 @@ export const QueryRedelegationsRequest = {
 
   toJSON(message: QueryRedelegationsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
-    if (message.src_validator_addr !== undefined) {
+    if (message.src_validator_addr !== "") {
       obj.src_validator_addr = message.src_validator_addr;
     }
-    if (message.dst_validator_addr !== undefined) {
+    if (message.dst_validator_addr !== "") {
       obj.dst_validator_addr = message.dst_validator_addr;
     }
     if (message.pagination !== undefined) {
@@ -1707,7 +1707,7 @@ export const QueryDelegatorValidatorsRequest = {
 
   toJSON(message: QueryDelegatorValidatorsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
     if (message.pagination !== undefined) {
@@ -1865,10 +1865,10 @@ export const QueryDelegatorValidatorRequest = {
 
   toJSON(message: QueryDelegatorValidatorRequest): unknown {
     const obj: any = {};
-    if (message.delegator_addr !== undefined) {
+    if (message.delegator_addr !== "") {
       obj.delegator_addr = message.delegator_addr;
     }
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     return obj;
@@ -1989,7 +1989,7 @@ export const QueryHistoricalInfoRequest = {
 
   toJSON(message: QueryHistoricalInfoRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     return obj;

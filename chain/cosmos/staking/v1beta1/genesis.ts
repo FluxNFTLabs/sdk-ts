@@ -183,7 +183,7 @@ export const GenesisState = {
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
-    if (message.last_total_power !== undefined) {
+    if (message.last_total_power.length !== 0) {
       obj.last_total_power = base64FromBytes(message.last_total_power);
     }
     if (message.last_validator_powers?.length) {
@@ -201,7 +201,7 @@ export const GenesisState = {
     if (message.redelegations?.length) {
       obj.redelegations = message.redelegations.map((e) => Redelegation.toJSON(e));
     }
-    if (message.exported !== undefined) {
+    if (message.exported === true) {
       obj.exported = message.exported;
     }
     return obj;
@@ -282,10 +282,10 @@ export const LastValidatorPower = {
 
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.power !== undefined) {
+    if (message.power !== "0") {
       obj.power = message.power;
     }
     return obj;

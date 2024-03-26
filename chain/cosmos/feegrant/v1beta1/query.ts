@@ -115,10 +115,10 @@ export const QueryAllowanceRequest = {
 
   toJSON(message: QueryAllowanceRequest): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     return obj;
@@ -252,7 +252,7 @@ export const QueryAllowancesRequest = {
 
   toJSON(message: QueryAllowancesRequest): unknown {
     const obj: any = {};
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.pagination !== undefined) {
@@ -410,7 +410,7 @@ export const QueryAllowancesByGranterRequest = {
 
   toJSON(message: QueryAllowancesByGranterRequest): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
     if (message.pagination !== undefined) {

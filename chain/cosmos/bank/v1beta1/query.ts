@@ -319,10 +319,10 @@ export const QueryBalanceRequest = {
 
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;
@@ -467,13 +467,13 @@ export const QueryAllBalancesRequest = {
 
   toJSON(message: QueryAllBalancesRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
     }
-    if (message.resolve_denom !== undefined) {
+    if (message.resolve_denom === true) {
       obj.resolve_denom = message.resolve_denom;
     }
     return obj;
@@ -627,7 +627,7 @@ export const QuerySpendableBalancesRequest = {
 
   toJSON(message: QuerySpendableBalancesRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
@@ -783,10 +783,10 @@ export const QuerySpendableBalanceByDenomRequest = {
 
   toJSON(message: QuerySpendableBalanceByDenomRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;
@@ -1046,7 +1046,7 @@ export const QuerySupplyOfRequest = {
 
   toJSON(message: QuerySupplyOfRequest): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;
@@ -1413,7 +1413,7 @@ export const QueryDenomMetadataRequest = {
 
   toJSON(message: QueryDenomMetadataRequest): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;
@@ -1533,7 +1533,7 @@ export const QueryDenomMetadataByQueryStringRequest = {
 
   toJSON(message: QueryDenomMetadataByQueryStringRequest): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;
@@ -1666,7 +1666,7 @@ export const QueryDenomOwnersRequest = {
 
   toJSON(message: QueryDenomOwnersRequest): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     if (message.pagination !== undefined) {
@@ -1744,7 +1744,7 @@ export const DenomOwner = {
 
   toJSON(message: DenomOwner): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.balance !== undefined) {

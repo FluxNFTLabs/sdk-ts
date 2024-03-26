@@ -120,13 +120,13 @@ export const InterchainAccountPacketData = {
 
   toJSON(message: InterchainAccountPacketData): unknown {
     const obj: any = {};
-    if (message.type !== undefined) {
+    if (message.type !== 0) {
       obj.type = typeToJSON(message.type);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.memo !== undefined) {
+    if (message.memo !== "") {
       obj.memo = message.memo;
     }
     return obj;

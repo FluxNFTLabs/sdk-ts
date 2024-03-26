@@ -106,16 +106,16 @@ export const MsgDeployContract = {
 
   toJSON(message: MsgDeployContract): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.bytecode !== undefined) {
+    if (message.bytecode.length !== 0) {
       obj.bytecode = base64FromBytes(message.bytecode);
     }
-    if (message.calldata !== undefined) {
+    if (message.calldata.length !== 0) {
       obj.calldata = base64FromBytes(message.calldata);
     }
-    if (message.input_amount !== undefined) {
+    if (message.input_amount.length !== 0) {
       obj.input_amount = base64FromBytes(message.input_amount);
     }
     return obj;
@@ -179,7 +179,7 @@ export const MsgDeployContractResponse = {
 
   toJSON(message: MsgDeployContractResponse): unknown {
     const obj: any = {};
-    if (message.contract_address !== undefined) {
+    if (message.contract_address.length !== 0) {
       obj.contract_address = base64FromBytes(message.contract_address);
     }
     return obj;
@@ -278,16 +278,16 @@ export const MsgExecuteContract = {
 
   toJSON(message: MsgExecuteContract): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.contract_address !== undefined) {
+    if (message.contract_address.length !== 0) {
       obj.contract_address = base64FromBytes(message.contract_address);
     }
-    if (message.calldata !== undefined) {
+    if (message.calldata.length !== 0) {
       obj.calldata = base64FromBytes(message.calldata);
     }
-    if (message.input_amount !== undefined) {
+    if (message.input_amount.length !== 0) {
       obj.input_amount = base64FromBytes(message.input_amount);
     }
     return obj;
@@ -362,10 +362,10 @@ export const MsgExecuteContractResponse = {
 
   toJSON(message: MsgExecuteContractResponse): unknown {
     const obj: any = {};
-    if (message.output !== undefined) {
+    if (message.output.length !== 0) {
       obj.output = base64FromBytes(message.output);
     }
-    if (message.status_code !== undefined) {
+    if (message.status_code !== "") {
       obj.status_code = message.status_code;
     }
     return obj;

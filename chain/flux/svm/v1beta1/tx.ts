@@ -80,10 +80,10 @@ export const MsgCreateAccount = {
 
   toJSON(message: MsgCreateAccount): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;
@@ -225,7 +225,7 @@ export const MsgTransaction = {
 
   toJSON(message: MsgTransaction): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
     if (message.accounts?.length) {
@@ -234,7 +234,7 @@ export const MsgTransaction = {
     if (message.instructions?.length) {
       obj.instructions = message.instructions.map((e) => Instruction.toJSON(e));
     }
-    if (message.compute_budget !== undefined) {
+    if (message.compute_budget !== "0") {
       obj.compute_budget = message.compute_budget;
     }
     return obj;

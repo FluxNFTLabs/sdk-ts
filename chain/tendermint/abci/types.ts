@@ -1105,7 +1105,7 @@ export const RequestEcho = {
 
   toJSON(message: RequestEcho): unknown {
     const obj: any = {};
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       obj.message = message.message;
     }
     return obj;
@@ -1244,16 +1244,16 @@ export const RequestInfo = {
 
   toJSON(message: RequestInfo): unknown {
     const obj: any = {};
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.block_version !== undefined) {
+    if (message.block_version !== "0") {
       obj.block_version = message.block_version;
     }
-    if (message.p2p_version !== undefined) {
+    if (message.p2p_version !== "0") {
       obj.p2p_version = message.p2p_version;
     }
-    if (message.abci_version !== undefined) {
+    if (message.abci_version !== "") {
       obj.abci_version = message.abci_version;
     }
     return obj;
@@ -1384,7 +1384,7 @@ export const RequestInitChain = {
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.chain_id !== undefined) {
+    if (message.chain_id !== "") {
       obj.chain_id = message.chain_id;
     }
     if (message.consensus_params !== undefined) {
@@ -1393,10 +1393,10 @@ export const RequestInitChain = {
     if (message.validators?.length) {
       obj.validators = message.validators.map((e) => ValidatorUpdate.toJSON(e));
     }
-    if (message.app_state_bytes !== undefined) {
+    if (message.app_state_bytes.length !== 0) {
       obj.app_state_bytes = base64FromBytes(message.app_state_bytes);
     }
-    if (message.initial_height !== undefined) {
+    if (message.initial_height !== "0") {
       obj.initial_height = message.initial_height;
     }
     return obj;
@@ -1497,16 +1497,16 @@ export const RequestQuery = {
 
   toJSON(message: RequestQuery): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.path !== undefined) {
+    if (message.path !== "") {
       obj.path = message.path;
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.prove !== undefined) {
+    if (message.prove === true) {
       obj.prove = message.prove;
     }
     return obj;
@@ -1581,10 +1581,10 @@ export const RequestCheckTx = {
 
   toJSON(message: RequestCheckTx): unknown {
     const obj: any = {};
-    if (message.tx !== undefined) {
+    if (message.tx.length !== 0) {
       obj.tx = base64FromBytes(message.tx);
     }
-    if (message.type !== undefined) {
+    if (message.type !== 0) {
       obj.type = checkTxTypeToJSON(message.type);
     }
     return obj;
@@ -1750,7 +1750,7 @@ export const RequestOfferSnapshot = {
     if (message.snapshot !== undefined) {
       obj.snapshot = Snapshot.toJSON(message.snapshot);
     }
-    if (message.app_hash !== undefined) {
+    if (message.app_hash.length !== 0) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
     return obj;
@@ -1836,13 +1836,13 @@ export const RequestLoadSnapshotChunk = {
 
   toJSON(message: RequestLoadSnapshotChunk): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.format !== undefined) {
+    if (message.format !== 0) {
       obj.format = Math.round(message.format);
     }
-    if (message.chunk !== undefined) {
+    if (message.chunk !== 0) {
       obj.chunk = Math.round(message.chunk);
     }
     return obj;
@@ -1927,13 +1927,13 @@ export const RequestApplySnapshotChunk = {
 
   toJSON(message: RequestApplySnapshotChunk): unknown {
     const obj: any = {};
-    if (message.index !== undefined) {
+    if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.chunk !== undefined) {
+    if (message.chunk.length !== 0) {
       obj.chunk = base64FromBytes(message.chunk);
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
     return obj;
@@ -2088,7 +2088,7 @@ export const RequestPrepareProposal = {
 
   toJSON(message: RequestPrepareProposal): unknown {
     const obj: any = {};
-    if (message.max_tx_bytes !== undefined) {
+    if (message.max_tx_bytes !== "0") {
       obj.max_tx_bytes = message.max_tx_bytes;
     }
     if (message.txs?.length) {
@@ -2100,16 +2100,16 @@ export const RequestPrepareProposal = {
     if (message.misbehavior?.length) {
       obj.misbehavior = message.misbehavior.map((e) => Misbehavior.toJSON(e));
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.next_validators_hash !== undefined) {
+    if (message.next_validators_hash.length !== 0) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.proposer_address !== undefined) {
+    if (message.proposer_address.length !== 0) {
       obj.proposer_address = base64FromBytes(message.proposer_address);
     }
     return obj;
@@ -2280,19 +2280,19 @@ export const RequestProcessProposal = {
     if (message.misbehavior?.length) {
       obj.misbehavior = message.misbehavior.map((e) => Misbehavior.toJSON(e));
     }
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.next_validators_hash !== undefined) {
+    if (message.next_validators_hash.length !== 0) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.proposer_address !== undefined) {
+    if (message.proposer_address.length !== 0) {
       obj.proposer_address = base64FromBytes(message.proposer_address);
     }
     return obj;
@@ -2454,10 +2454,10 @@ export const RequestExtendVote = {
 
   toJSON(message: RequestExtendVote): unknown {
     const obj: any = {};
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
@@ -2472,10 +2472,10 @@ export const RequestExtendVote = {
     if (message.misbehavior?.length) {
       obj.misbehavior = message.misbehavior.map((e) => Misbehavior.toJSON(e));
     }
-    if (message.next_validators_hash !== undefined) {
+    if (message.next_validators_hash.length !== 0) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.proposer_address !== undefined) {
+    if (message.proposer_address.length !== 0) {
       obj.proposer_address = base64FromBytes(message.proposer_address);
     }
     return obj;
@@ -2585,16 +2585,16 @@ export const RequestVerifyVoteExtension = {
 
   toJSON(message: RequestVerifyVoteExtension): unknown {
     const obj: any = {};
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address.length !== 0) {
       obj.validator_address = base64FromBytes(message.validator_address);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.vote_extension !== undefined) {
+    if (message.vote_extension.length !== 0) {
       obj.vote_extension = base64FromBytes(message.vote_extension);
     }
     return obj;
@@ -2759,19 +2759,19 @@ export const RequestFinalizeBlock = {
     if (message.misbehavior?.length) {
       obj.misbehavior = message.misbehavior.map((e) => Misbehavior.toJSON(e));
     }
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.next_validators_hash !== undefined) {
+    if (message.next_validators_hash.length !== 0) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.proposer_address !== undefined) {
+    if (message.proposer_address.length !== 0) {
       obj.proposer_address = base64FromBytes(message.proposer_address);
     }
     return obj;
@@ -3203,7 +3203,7 @@ export const ResponseException = {
 
   toJSON(message: ResponseException): unknown {
     const obj: any = {};
-    if (message.error !== undefined) {
+    if (message.error !== "") {
       obj.error = message.error;
     }
     return obj;
@@ -3262,7 +3262,7 @@ export const ResponseEcho = {
 
   toJSON(message: ResponseEcho): unknown {
     const obj: any = {};
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       obj.message = message.message;
     }
     return obj;
@@ -3414,19 +3414,19 @@ export const ResponseInfo = {
 
   toJSON(message: ResponseInfo): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data !== "") {
       obj.data = message.data;
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.app_version !== undefined) {
+    if (message.app_version !== "0") {
       obj.app_version = message.app_version;
     }
-    if (message.last_block_height !== undefined) {
+    if (message.last_block_height !== "0") {
       obj.last_block_height = message.last_block_height;
     }
-    if (message.last_block_app_hash !== undefined) {
+    if (message.last_block_app_hash.length !== 0) {
       obj.last_block_app_hash = base64FromBytes(message.last_block_app_hash);
     }
     return obj;
@@ -3521,7 +3521,7 @@ export const ResponseInitChain = {
     if (message.validators?.length) {
       obj.validators = message.validators.map((e) => ValidatorUpdate.toJSON(e));
     }
-    if (message.app_hash !== undefined) {
+    if (message.app_hash.length !== 0) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
     return obj;
@@ -3684,31 +3684,31 @@ export const ResponseQuery = {
 
   toJSON(message: ResponseQuery): unknown {
     const obj: any = {};
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       obj.code = Math.round(message.code);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       obj.log = message.log;
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       obj.info = message.info;
     }
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       obj.value = base64FromBytes(message.value);
     }
     if (message.proof_ops !== undefined) {
       obj.proof_ops = ProofOps.toJSON(message.proof_ops);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.codespace !== undefined) {
+    if (message.codespace !== "") {
       obj.codespace = message.codespace;
     }
     return obj;
@@ -3865,28 +3865,28 @@ export const ResponseCheckTx = {
 
   toJSON(message: ResponseCheckTx): unknown {
     const obj: any = {};
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       obj.code = Math.round(message.code);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       obj.log = message.log;
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       obj.info = message.info;
     }
-    if (message.gas_wanted !== undefined) {
+    if (message.gas_wanted !== "0") {
       obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gas_used !== undefined) {
+    if (message.gas_used !== "0") {
       obj.gas_used = message.gas_used;
     }
     if (message.events?.length) {
       obj.events = message.events.map((e) => Event.toJSON(e));
     }
-    if (message.codespace !== undefined) {
+    if (message.codespace !== "") {
       obj.codespace = message.codespace;
     }
     return obj;
@@ -3952,7 +3952,7 @@ export const ResponseCommit = {
 
   toJSON(message: ResponseCommit): unknown {
     const obj: any = {};
-    if (message.retain_height !== undefined) {
+    if (message.retain_height !== "0") {
       obj.retain_height = message.retain_height;
     }
     return obj;
@@ -4074,7 +4074,7 @@ export const ResponseOfferSnapshot = {
 
   toJSON(message: ResponseOfferSnapshot): unknown {
     const obj: any = {};
-    if (message.result !== undefined) {
+    if (message.result !== 0) {
       obj.result = responseOfferSnapshot_ResultToJSON(message.result);
     }
     return obj;
@@ -4133,7 +4133,7 @@ export const ResponseLoadSnapshotChunk = {
 
   toJSON(message: ResponseLoadSnapshotChunk): unknown {
     const obj: any = {};
-    if (message.chunk !== undefined) {
+    if (message.chunk.length !== 0) {
       obj.chunk = base64FromBytes(message.chunk);
     }
     return obj;
@@ -4232,7 +4232,7 @@ export const ResponseApplySnapshotChunk = {
 
   toJSON(message: ResponseApplySnapshotChunk): unknown {
     const obj: any = {};
-    if (message.result !== undefined) {
+    if (message.result !== 0) {
       obj.result = responseApplySnapshotChunk_ResultToJSON(message.result);
     }
     if (message.refetch_chunks?.length) {
@@ -4358,7 +4358,7 @@ export const ResponseProcessProposal = {
 
   toJSON(message: ResponseProcessProposal): unknown {
     const obj: any = {};
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       obj.status = responseProcessProposal_ProposalStatusToJSON(message.status);
     }
     return obj;
@@ -4419,7 +4419,7 @@ export const ResponseExtendVote = {
 
   toJSON(message: ResponseExtendVote): unknown {
     const obj: any = {};
-    if (message.vote_extension !== undefined) {
+    if (message.vote_extension.length !== 0) {
       obj.vote_extension = base64FromBytes(message.vote_extension);
     }
     return obj;
@@ -4478,7 +4478,7 @@ export const ResponseVerifyVoteExtension = {
 
   toJSON(message: ResponseVerifyVoteExtension): unknown {
     const obj: any = {};
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       obj.status = responseVerifyVoteExtension_VerifyStatusToJSON(message.status);
     }
     return obj;
@@ -4607,7 +4607,7 @@ export const ResponseFinalizeBlock = {
     if (message.consensus_param_updates !== undefined) {
       obj.consensus_param_updates = ConsensusParams.toJSON(message.consensus_param_updates);
     }
-    if (message.app_hash !== undefined) {
+    if (message.app_hash.length !== 0) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
     return obj;
@@ -4686,7 +4686,7 @@ export const CommitInfo = {
 
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
-    if (message.round !== undefined) {
+    if (message.round !== 0) {
       obj.round = Math.round(message.round);
     }
     if (message.votes?.length) {
@@ -4762,7 +4762,7 @@ export const ExtendedCommitInfo = {
 
   toJSON(message: ExtendedCommitInfo): unknown {
     const obj: any = {};
-    if (message.round !== undefined) {
+    if (message.round !== 0) {
       obj.round = Math.round(message.round);
     }
     if (message.votes?.length) {
@@ -4840,7 +4840,7 @@ export const Event = {
 
   toJSON(message: Event): unknown {
     const obj: any = {};
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       obj.type = message.type;
     }
     if (message.attributes?.length) {
@@ -4927,13 +4927,13 @@ export const EventAttribute = {
 
   toJSON(message: EventAttribute): unknown {
     const obj: any = {};
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       obj.key = message.key;
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       obj.value = message.value;
     }
-    if (message.index !== undefined) {
+    if (message.index === true) {
       obj.index = message.index;
     }
     return obj;
@@ -5082,28 +5082,28 @@ export const ExecTxResult = {
 
   toJSON(message: ExecTxResult): unknown {
     const obj: any = {};
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       obj.code = Math.round(message.code);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       obj.log = message.log;
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       obj.info = message.info;
     }
-    if (message.gas_wanted !== undefined) {
+    if (message.gas_wanted !== "0") {
       obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gas_used !== undefined) {
+    if (message.gas_used !== "0") {
       obj.gas_used = message.gas_used;
     }
     if (message.events?.length) {
       obj.events = message.events.map((e) => Event.toJSON(e));
     }
-    if (message.codespace !== undefined) {
+    if (message.codespace !== "") {
       obj.codespace = message.codespace;
     }
     return obj;
@@ -5204,13 +5204,13 @@ export const TxResult = {
 
   toJSON(message: TxResult): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.index !== undefined) {
+    if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.tx !== undefined) {
+    if (message.tx.length !== 0) {
       obj.tx = base64FromBytes(message.tx);
     }
     if (message.result !== undefined) {
@@ -5290,10 +5290,10 @@ export const Validator = {
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address.length !== 0) {
       obj.address = base64FromBytes(message.address);
     }
-    if (message.power !== undefined) {
+    if (message.power !== "0") {
       obj.power = message.power;
     }
     return obj;
@@ -5369,7 +5369,7 @@ export const ValidatorUpdate = {
     if (message.pub_key !== undefined) {
       obj.pub_key = PublicKey.toJSON(message.pub_key);
     }
-    if (message.power !== undefined) {
+    if (message.power !== "0") {
       obj.power = message.power;
     }
     return obj;
@@ -5447,7 +5447,7 @@ export const VoteInfo = {
     if (message.validator !== undefined) {
       obj.validator = Validator.toJSON(message.validator);
     }
-    if (message.block_id_flag !== undefined) {
+    if (message.block_id_flag !== 0) {
       obj.block_id_flag = blockIDFlagToJSON(message.block_id_flag);
     }
     return obj;
@@ -5554,13 +5554,13 @@ export const ExtendedVoteInfo = {
     if (message.validator !== undefined) {
       obj.validator = Validator.toJSON(message.validator);
     }
-    if (message.vote_extension !== undefined) {
+    if (message.vote_extension.length !== 0) {
       obj.vote_extension = base64FromBytes(message.vote_extension);
     }
-    if (message.extension_signature !== undefined) {
+    if (message.extension_signature.length !== 0) {
       obj.extension_signature = base64FromBytes(message.extension_signature);
     }
-    if (message.block_id_flag !== undefined) {
+    if (message.block_id_flag !== 0) {
       obj.block_id_flag = blockIDFlagToJSON(message.block_id_flag);
     }
     return obj;
@@ -5670,19 +5670,19 @@ export const Misbehavior = {
 
   toJSON(message: Misbehavior): unknown {
     const obj: any = {};
-    if (message.type !== undefined) {
+    if (message.type !== 0) {
       obj.type = misbehaviorTypeToJSON(message.type);
     }
     if (message.validator !== undefined) {
       obj.validator = Validator.toJSON(message.validator);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.total_voting_power !== undefined) {
+    if (message.total_voting_power !== "0") {
       obj.total_voting_power = message.total_voting_power;
     }
     return obj;
@@ -5793,19 +5793,19 @@ export const Snapshot = {
 
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.format !== undefined) {
+    if (message.format !== 0) {
       obj.format = Math.round(message.format);
     }
-    if (message.chunks !== undefined) {
+    if (message.chunks !== 0) {
       obj.chunks = Math.round(message.chunks);
     }
-    if (message.hash !== undefined) {
+    if (message.hash.length !== 0) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata.length !== 0) {
       obj.metadata = base64FromBytes(message.metadata);
     }
     return obj;

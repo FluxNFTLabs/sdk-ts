@@ -204,7 +204,7 @@ export const PacketFee = {
     if (message.fee !== undefined) {
       obj.fee = Fee.toJSON(message.fee);
     }
-    if (message.refund_address !== undefined) {
+    if (message.refund_address !== "") {
       obj.refund_address = message.refund_address;
     }
     if (message.relayers?.length) {

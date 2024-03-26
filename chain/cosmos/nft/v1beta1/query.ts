@@ -160,10 +160,10 @@ export const QueryBalanceRequest = {
 
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;
@@ -223,7 +223,7 @@ export const QueryBalanceResponse = {
 
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    if (message.amount !== undefined) {
+    if (message.amount !== "0") {
       obj.amount = message.amount;
     }
     return obj;
@@ -295,10 +295,10 @@ export const QueryOwnerRequest = {
 
   toJSON(message: QueryOwnerRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
     return obj;
@@ -358,7 +358,7 @@ export const QueryOwnerResponse = {
 
   toJSON(message: QueryOwnerResponse): unknown {
     const obj: any = {};
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     return obj;
@@ -417,7 +417,7 @@ export const QuerySupplyRequest = {
 
   toJSON(message: QuerySupplyRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
     return obj;
@@ -476,7 +476,7 @@ export const QuerySupplyResponse = {
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    if (message.amount !== undefined) {
+    if (message.amount !== "0") {
       obj.amount = message.amount;
     }
     return obj;
@@ -559,10 +559,10 @@ export const QueryNFTsRequest = {
 
   toJSON(message: QueryNFTsRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
     if (message.pagination !== undefined) {
@@ -719,10 +719,10 @@ export const QueryNFTRequest = {
 
   toJSON(message: QueryNFTRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
     return obj;
@@ -841,7 +841,7 @@ export const QueryClassRequest = {
 
   toJSON(message: QueryClassRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
     return obj;

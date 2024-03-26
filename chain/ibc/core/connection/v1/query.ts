@@ -183,7 +183,7 @@ export const QueryConnectionRequest = {
 
   toJSON(message: QueryConnectionRequest): unknown {
     const obj: any = {};
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
     return obj;
@@ -269,7 +269,7 @@ export const QueryConnectionResponse = {
     if (message.connection !== undefined) {
       obj.connection = ConnectionEnd.toJSON(message.connection);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -495,7 +495,7 @@ export const QueryClientConnectionsRequest = {
 
   toJSON(message: QueryClientConnectionsRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
     return obj;
@@ -583,7 +583,7 @@ export const QueryClientConnectionsResponse = {
     if (message.connection_paths?.length) {
       obj.connection_paths = message.connection_paths;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -649,7 +649,7 @@ export const QueryConnectionClientStateRequest = {
 
   toJSON(message: QueryConnectionClientStateRequest): unknown {
     const obj: any = {};
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
     return obj;
@@ -737,7 +737,7 @@ export const QueryConnectionClientStateResponse = {
     if (message.identified_client_state !== undefined) {
       obj.identified_client_state = IdentifiedClientState.toJSON(message.identified_client_state);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -830,13 +830,13 @@ export const QueryConnectionConsensusStateRequest = {
 
   toJSON(message: QueryConnectionConsensusStateRequest): unknown {
     const obj: any = {};
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
-    if (message.revision_number !== undefined) {
+    if (message.revision_number !== "0") {
       obj.revision_number = message.revision_number;
     }
-    if (message.revision_height !== undefined) {
+    if (message.revision_height !== "0") {
       obj.revision_height = message.revision_height;
     }
     return obj;
@@ -935,10 +935,10 @@ export const QueryConnectionConsensusStateResponse = {
     if (message.consensus_state !== undefined) {
       obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {

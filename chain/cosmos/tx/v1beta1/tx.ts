@@ -475,10 +475,10 @@ export const TxRaw = {
 
   toJSON(message: TxRaw): unknown {
     const obj: any = {};
-    if (message.body_bytes !== undefined) {
+    if (message.body_bytes.length !== 0) {
       obj.body_bytes = base64FromBytes(message.body_bytes);
     }
-    if (message.auth_info_bytes !== undefined) {
+    if (message.auth_info_bytes.length !== 0) {
       obj.auth_info_bytes = base64FromBytes(message.auth_info_bytes);
     }
     if (message.signatures?.length) {
@@ -577,16 +577,16 @@ export const SignDoc = {
 
   toJSON(message: SignDoc): unknown {
     const obj: any = {};
-    if (message.body_bytes !== undefined) {
+    if (message.body_bytes.length !== 0) {
       obj.body_bytes = base64FromBytes(message.body_bytes);
     }
-    if (message.auth_info_bytes !== undefined) {
+    if (message.auth_info_bytes.length !== 0) {
       obj.auth_info_bytes = base64FromBytes(message.auth_info_bytes);
     }
-    if (message.chain_id !== undefined) {
+    if (message.chain_id !== "") {
       obj.chain_id = message.chain_id;
     }
-    if (message.account_number !== undefined) {
+    if (message.account_number !== "0") {
       obj.account_number = message.account_number;
     }
     return obj;
@@ -712,19 +712,19 @@ export const SignDocDirectAux = {
 
   toJSON(message: SignDocDirectAux): unknown {
     const obj: any = {};
-    if (message.body_bytes !== undefined) {
+    if (message.body_bytes.length !== 0) {
       obj.body_bytes = base64FromBytes(message.body_bytes);
     }
     if (message.public_key !== undefined) {
       obj.public_key = Any.toJSON(message.public_key);
     }
-    if (message.chain_id !== undefined) {
+    if (message.chain_id !== "") {
       obj.chain_id = message.chain_id;
     }
-    if (message.account_number !== undefined) {
+    if (message.account_number !== "0") {
       obj.account_number = message.account_number;
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     if (message.tip !== undefined) {
@@ -846,10 +846,10 @@ export const TxBody = {
     if (message.messages?.length) {
       obj.messages = message.messages.map((e) => Any.toJSON(e));
     }
-    if (message.memo !== undefined) {
+    if (message.memo !== "") {
       obj.memo = message.memo;
     }
-    if (message.timeout_height !== undefined) {
+    if (message.timeout_height !== "0") {
       obj.timeout_height = message.timeout_height;
     }
     if (message.extension_options?.length) {
@@ -1042,7 +1042,7 @@ export const SignerInfo = {
     if (message.mode_info !== undefined) {
       obj.mode_info = ModeInfo.toJSON(message.mode_info);
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -1187,7 +1187,7 @@ export const ModeInfo_Single = {
 
   toJSON(message: ModeInfo_Single): unknown {
     const obj: any = {};
-    if (message.mode !== undefined) {
+    if (message.mode !== 0) {
       obj.mode = signModeToJSON(message.mode);
     }
     return obj;
@@ -1364,13 +1364,13 @@ export const Fee = {
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
     }
-    if (message.gas_limit !== undefined) {
+    if (message.gas_limit !== "0") {
       obj.gas_limit = message.gas_limit;
     }
-    if (message.payer !== undefined) {
+    if (message.payer !== "") {
       obj.payer = message.payer;
     }
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
     return obj;
@@ -1448,7 +1448,7 @@ export const Tip = {
     if (message.amount?.length) {
       obj.amount = message.amount.map((e) => Coin.toJSON(e));
     }
-    if (message.tipper !== undefined) {
+    if (message.tipper !== "") {
       obj.tipper = message.tipper;
     }
     return obj;
@@ -1543,16 +1543,16 @@ export const AuxSignerData = {
 
   toJSON(message: AuxSignerData): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.sign_doc !== undefined) {
       obj.sign_doc = SignDocDirectAux.toJSON(message.sign_doc);
     }
-    if (message.mode !== undefined) {
+    if (message.mode !== 0) {
       obj.mode = signModeToJSON(message.mode);
     }
-    if (message.sig !== undefined) {
+    if (message.sig.length !== 0) {
       obj.sig = base64FromBytes(message.sig);
     }
     return obj;

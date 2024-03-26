@@ -108,19 +108,19 @@ export const FungibleTokenPacketData = {
 
   toJSON(message: FungibleTokenPacketData): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
-    if (message.amount !== undefined) {
+    if (message.amount !== "") {
       obj.amount = message.amount;
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       obj.receiver = message.receiver;
     }
-    if (message.memo !== undefined) {
+    if (message.memo !== "") {
       obj.memo = message.memo;
     }
     return obj;

@@ -101,10 +101,10 @@ export const MsgStoreCode = {
 
   toJSON(message: MsgStoreCode): unknown {
     const obj: any = {};
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       obj.signer = message.signer;
     }
-    if (message.wasm_byte_code !== undefined) {
+    if (message.wasm_byte_code.length !== 0) {
       obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
     return obj;
@@ -164,7 +164,7 @@ export const MsgStoreCodeResponse = {
 
   toJSON(message: MsgStoreCodeResponse): unknown {
     const obj: any = {};
-    if (message.checksum !== undefined) {
+    if (message.checksum.length !== 0) {
       obj.checksum = base64FromBytes(message.checksum);
     }
     return obj;
@@ -236,10 +236,10 @@ export const MsgRemoveChecksum = {
 
   toJSON(message: MsgRemoveChecksum): unknown {
     const obj: any = {};
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       obj.signer = message.signer;
     }
-    if (message.checksum !== undefined) {
+    if (message.checksum.length !== 0) {
       obj.checksum = base64FromBytes(message.checksum);
     }
     return obj;
@@ -379,16 +379,16 @@ export const MsgMigrateContract = {
 
   toJSON(message: MsgMigrateContract): unknown {
     const obj: any = {};
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       obj.signer = message.signer;
     }
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
-    if (message.checksum !== undefined) {
+    if (message.checksum.length !== 0) {
       obj.checksum = base64FromBytes(message.checksum);
     }
-    if (message.msg !== undefined) {
+    if (message.msg.length !== 0) {
       obj.msg = base64FromBytes(message.msg);
     }
     return obj;

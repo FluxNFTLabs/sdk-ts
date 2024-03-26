@@ -366,7 +366,7 @@ export const QueryAccountRequest = {
 
   toJSON(message: QueryAccountRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     return obj;
@@ -698,7 +698,7 @@ export const QueryModuleAccountByNameRequest = {
 
   toJSON(message: QueryModuleAccountByNameRequest): unknown {
     const obj: any = {};
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
     return obj;
@@ -863,7 +863,7 @@ export const Bech32PrefixResponse = {
 
   toJSON(message: Bech32PrefixResponse): unknown {
     const obj: any = {};
-    if (message.bech32_prefix !== undefined) {
+    if (message.bech32_prefix !== "") {
       obj.bech32_prefix = message.bech32_prefix;
     }
     return obj;
@@ -922,7 +922,7 @@ export const AddressBytesToStringRequest = {
 
   toJSON(message: AddressBytesToStringRequest): unknown {
     const obj: any = {};
-    if (message.address_bytes !== undefined) {
+    if (message.address_bytes.length !== 0) {
       obj.address_bytes = base64FromBytes(message.address_bytes);
     }
     return obj;
@@ -981,7 +981,7 @@ export const AddressBytesToStringResponse = {
 
   toJSON(message: AddressBytesToStringResponse): unknown {
     const obj: any = {};
-    if (message.address_string !== undefined) {
+    if (message.address_string !== "") {
       obj.address_string = message.address_string;
     }
     return obj;
@@ -1040,7 +1040,7 @@ export const AddressStringToBytesRequest = {
 
   toJSON(message: AddressStringToBytesRequest): unknown {
     const obj: any = {};
-    if (message.address_string !== undefined) {
+    if (message.address_string !== "") {
       obj.address_string = message.address_string;
     }
     return obj;
@@ -1099,7 +1099,7 @@ export const AddressStringToBytesResponse = {
 
   toJSON(message: AddressStringToBytesResponse): unknown {
     const obj: any = {};
-    if (message.address_bytes !== undefined) {
+    if (message.address_bytes.length !== 0) {
       obj.address_bytes = base64FromBytes(message.address_bytes);
     }
     return obj;
@@ -1171,10 +1171,10 @@ export const QueryAccountAddressByIDRequest = {
 
   toJSON(message: QueryAccountAddressByIDRequest): unknown {
     const obj: any = {};
-    if (message.id !== undefined) {
+    if (message.id !== "0") {
       obj.id = message.id;
     }
-    if (message.account_id !== undefined) {
+    if (message.account_id !== "0") {
       obj.account_id = message.account_id;
     }
     return obj;
@@ -1234,7 +1234,7 @@ export const QueryAccountAddressByIDResponse = {
 
   toJSON(message: QueryAccountAddressByIDResponse): unknown {
     const obj: any = {};
-    if (message.account_address !== undefined) {
+    if (message.account_address !== "") {
       obj.account_address = message.account_address;
     }
     return obj;
@@ -1293,7 +1293,7 @@ export const QueryAccountInfoRequest = {
 
   toJSON(message: QueryAccountInfoRequest): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     return obj;

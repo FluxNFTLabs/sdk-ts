@@ -125,22 +125,22 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.controller_connection_id !== undefined) {
+    if (message.controller_connection_id !== "") {
       obj.controller_connection_id = message.controller_connection_id;
     }
-    if (message.host_connection_id !== undefined) {
+    if (message.host_connection_id !== "") {
       obj.host_connection_id = message.host_connection_id;
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
-    if (message.encoding !== undefined) {
+    if (message.encoding !== "") {
       obj.encoding = message.encoding;
     }
-    if (message.tx_type !== undefined) {
+    if (message.tx_type !== "") {
       obj.tx_type = message.tx_type;
     }
     return obj;

@@ -81,7 +81,7 @@ export const MsgUnjail = {
 
   toJSON(message: MsgUnjail): unknown {
     const obj: any = {};
-    if (message.validator_addr !== undefined) {
+    if (message.validator_addr !== "") {
       obj.validator_addr = message.validator_addr;
     }
     return obj;
@@ -198,7 +198,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.params !== undefined) {

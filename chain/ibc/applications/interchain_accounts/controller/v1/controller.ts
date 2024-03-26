@@ -55,7 +55,7 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.controller_enabled !== undefined) {
+    if (message.controller_enabled === true) {
       obj.controller_enabled = message.controller_enabled;
     }
     return obj;

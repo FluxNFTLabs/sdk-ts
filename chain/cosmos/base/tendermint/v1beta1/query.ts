@@ -230,7 +230,7 @@ export const GetValidatorSetByHeightRequest = {
 
   toJSON(message: GetValidatorSetByHeightRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.pagination !== undefined) {
@@ -321,7 +321,7 @@ export const GetValidatorSetByHeightResponse = {
 
   toJSON(message: GetValidatorSetByHeightResponse): unknown {
     const obj: any = {};
-    if (message.block_height !== undefined) {
+    if (message.block_height !== "0") {
       obj.block_height = message.block_height;
     }
     if (message.validators?.length) {
@@ -477,7 +477,7 @@ export const GetLatestValidatorSetResponse = {
 
   toJSON(message: GetLatestValidatorSetResponse): unknown {
     const obj: any = {};
-    if (message.block_height !== undefined) {
+    if (message.block_height !== "0") {
       obj.block_height = message.block_height;
     }
     if (message.validators?.length) {
@@ -581,16 +581,16 @@ export const Validator = {
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.pub_key !== undefined) {
       obj.pub_key = Any.toJSON(message.pub_key);
     }
-    if (message.voting_power !== undefined) {
+    if (message.voting_power !== "0") {
       obj.voting_power = message.voting_power;
     }
-    if (message.proposer_priority !== undefined) {
+    if (message.proposer_priority !== "0") {
       obj.proposer_priority = message.proposer_priority;
     }
     return obj;
@@ -654,7 +654,7 @@ export const GetBlockByHeightRequest = {
 
   toJSON(message: GetBlockByHeightRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     return obj;
@@ -993,7 +993,7 @@ export const GetSyncingResponse = {
 
   toJSON(message: GetSyncingResponse): unknown {
     const obj: any = {};
-    if (message.syncing !== undefined) {
+    if (message.syncing === true) {
       obj.syncing = message.syncing;
     }
     return obj;
@@ -1271,28 +1271,28 @@ export const VersionInfo = {
 
   toJSON(message: VersionInfo): unknown {
     const obj: any = {};
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
-    if (message.app_name !== undefined) {
+    if (message.app_name !== "") {
       obj.app_name = message.app_name;
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.git_commit !== undefined) {
+    if (message.git_commit !== "") {
       obj.git_commit = message.git_commit;
     }
-    if (message.build_tags !== undefined) {
+    if (message.build_tags !== "") {
       obj.build_tags = message.build_tags;
     }
-    if (message.go_version !== undefined) {
+    if (message.go_version !== "") {
       obj.go_version = message.go_version;
     }
     if (message.build_deps?.length) {
       obj.build_deps = message.build_deps.map((e) => Module.toJSON(e));
     }
-    if (message.cosmos_sdk_version !== undefined) {
+    if (message.cosmos_sdk_version !== "") {
       obj.cosmos_sdk_version = message.cosmos_sdk_version;
     }
     return obj;
@@ -1382,13 +1382,13 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.path !== undefined) {
+    if (message.path !== "") {
       obj.path = message.path;
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       obj.version = message.version;
     }
-    if (message.sum !== undefined) {
+    if (message.sum !== "") {
       obj.sum = message.sum;
     }
     return obj;
@@ -1484,16 +1484,16 @@ export const ABCIQueryRequest = {
 
   toJSON(message: ABCIQueryRequest): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.path !== undefined) {
+    if (message.path !== "") {
       obj.path = message.path;
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.prove !== undefined) {
+    if (message.prove === true) {
       obj.prove = message.prove;
     }
     return obj;
@@ -1655,31 +1655,31 @@ export const ABCIQueryResponse = {
 
   toJSON(message: ABCIQueryResponse): unknown {
     const obj: any = {};
-    if (message.code !== undefined) {
+    if (message.code !== 0) {
       obj.code = Math.round(message.code);
     }
-    if (message.log !== undefined) {
+    if (message.log !== "") {
       obj.log = message.log;
     }
-    if (message.info !== undefined) {
+    if (message.info !== "") {
       obj.info = message.info;
     }
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value.length !== 0) {
       obj.value = base64FromBytes(message.value);
     }
     if (message.proof_ops !== undefined) {
       obj.proof_ops = ProofOps.toJSON(message.proof_ops);
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.codespace !== undefined) {
+    if (message.codespace !== "") {
       obj.codespace = message.codespace;
     }
     return obj;
@@ -1772,13 +1772,13 @@ export const ProofOp = {
 
   toJSON(message: ProofOp): unknown {
     const obj: any = {};
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       obj.type = message.type;
     }
-    if (message.key !== undefined) {
+    if (message.key.length !== 0) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

@@ -150,7 +150,7 @@ export const Permissions = {
 
   toJSON(message: Permissions): unknown {
     const obj: any = {};
-    if (message.level !== undefined) {
+    if (message.level !== 0) {
       obj.level = permissions_LevelToJSON(message.level);
     }
     if (message.limit_type_urls?.length) {
@@ -226,7 +226,7 @@ export const GenesisAccountPermissions = {
 
   toJSON(message: GenesisAccountPermissions): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.permissions !== undefined) {

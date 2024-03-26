@@ -74,7 +74,7 @@ export const ProviderBlockRequest = {
 
   toJSON(message: ProviderBlockRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     return obj;
@@ -179,19 +179,19 @@ export const ProviderBlockResponse = {
 
   toJSON(message: ProviderBlockResponse): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.time !== undefined) {
+    if (message.time !== "0") {
       obj.time = message.time;
     }
-    if (message.block !== undefined) {
+    if (message.block !== "") {
       obj.block = message.block;
     }
-    if (message.block_results !== undefined) {
+    if (message.block_results !== "") {
       obj.block_results = message.block_results;
     }
-    if (message.validators !== undefined) {
+    if (message.validators !== "") {
       obj.validators = message.validators;
     }
     return obj;
@@ -267,7 +267,7 @@ export const ProviderEventsRequest = {
 
   toJSON(message: ProviderEventsRequest): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.modules?.length) {
@@ -365,10 +365,10 @@ export const ProviderEventsResponse = {
 
   toJSON(message: ProviderEventsResponse): unknown {
     const obj: any = {};
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.time !== undefined) {
+    if (message.time !== "0") {
       obj.time = message.time;
     }
     if (message.modules?.length) {

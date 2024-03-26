@@ -213,7 +213,7 @@ export const QueryCodeRequest = {
 
   toJSON(message: QueryCodeRequest): unknown {
     const obj: any = {};
-    if (message.checksum !== undefined) {
+    if (message.checksum !== "") {
       obj.checksum = message.checksum;
     }
     return obj;
@@ -272,7 +272,7 @@ export const QueryCodeResponse = {
 
   toJSON(message: QueryCodeResponse): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

@@ -154,16 +154,16 @@ export const DenomLink = {
 
   toJSON(message: DenomLink): unknown {
     const obj: any = {};
-    if (message.src_plane !== undefined) {
+    if (message.src_plane !== 0) {
       obj.src_plane = planeToJSON(message.src_plane);
     }
-    if (message.dst_plane !== undefined) {
+    if (message.dst_plane !== 0) {
       obj.dst_plane = planeToJSON(message.dst_plane);
     }
-    if (message.src_addr !== undefined) {
+    if (message.src_addr !== "") {
       obj.src_addr = message.src_addr;
     }
-    if (message.dst_addr !== undefined) {
+    if (message.dst_addr !== "") {
       obj.dst_addr = message.dst_addr;
     }
     return obj;

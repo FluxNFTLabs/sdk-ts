@@ -252,10 +252,10 @@ export const FeeEnabledChannel = {
 
   toJSON(message: FeeEnabledChannel): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -339,13 +339,13 @@ export const RegisteredPayee = {
 
   toJSON(message: RegisteredPayee): unknown {
     const obj: any = {};
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== undefined) {
+    if (message.relayer !== "") {
       obj.relayer = message.relayer;
     }
-    if (message.payee !== undefined) {
+    if (message.payee !== "") {
       obj.payee = message.payee;
     }
     return obj;
@@ -430,13 +430,13 @@ export const RegisteredCounterpartyPayee = {
 
   toJSON(message: RegisteredCounterpartyPayee): unknown {
     const obj: any = {};
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== undefined) {
+    if (message.relayer !== "") {
       obj.relayer = message.relayer;
     }
-    if (message.counterparty_payee !== undefined) {
+    if (message.counterparty_payee !== "") {
       obj.counterparty_payee = message.counterparty_payee;
     }
     return obj;
@@ -510,7 +510,7 @@ export const ForwardRelayerAddress = {
 
   toJSON(message: ForwardRelayerAddress): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       obj.address = message.address;
     }
     if (message.packet_id !== undefined) {

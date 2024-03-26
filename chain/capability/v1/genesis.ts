@@ -78,7 +78,7 @@ export const GenesisOwners = {
 
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
     if (message.index_owners !== undefined) {
@@ -156,7 +156,7 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.index !== undefined) {
+    if (message.index !== "0") {
       obj.index = message.index;
     }
     if (message.owners?.length) {

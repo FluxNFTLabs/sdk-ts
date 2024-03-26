@@ -206,7 +206,7 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.starting_proposal_id !== undefined) {
+    if (message.starting_proposal_id !== "0") {
       obj.starting_proposal_id = message.starting_proposal_id;
     }
     if (message.deposits?.length) {
@@ -230,7 +230,7 @@ export const GenesisState = {
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
-    if (message.constitution !== undefined) {
+    if (message.constitution !== "") {
       obj.constitution = message.constitution;
     }
     return obj;

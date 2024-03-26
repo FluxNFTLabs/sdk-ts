@@ -69,10 +69,10 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.max_metadata_len !== undefined) {
+    if (message.max_metadata_len !== "0") {
       obj.max_metadata_len = message.max_metadata_len;
     }
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     return obj;

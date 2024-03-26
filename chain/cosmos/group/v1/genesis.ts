@@ -171,7 +171,7 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.group_seq !== undefined) {
+    if (message.group_seq !== "0") {
       obj.group_seq = message.group_seq;
     }
     if (message.groups?.length) {
@@ -180,13 +180,13 @@ export const GenesisState = {
     if (message.group_members?.length) {
       obj.group_members = message.group_members.map((e) => GroupMember.toJSON(e));
     }
-    if (message.group_policy_seq !== undefined) {
+    if (message.group_policy_seq !== "0") {
       obj.group_policy_seq = message.group_policy_seq;
     }
     if (message.group_policies?.length) {
       obj.group_policies = message.group_policies.map((e) => GroupPolicyInfo.toJSON(e));
     }
-    if (message.proposal_seq !== undefined) {
+    if (message.proposal_seq !== "0") {
       obj.proposal_seq = message.proposal_seq;
     }
     if (message.proposals?.length) {

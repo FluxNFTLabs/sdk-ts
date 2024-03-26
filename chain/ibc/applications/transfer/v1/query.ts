@@ -139,7 +139,7 @@ export const QueryDenomTraceRequest = {
 
   toJSON(message: QueryDenomTraceRequest): unknown {
     const obj: any = {};
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       obj.hash = message.hash;
     }
     return obj;
@@ -506,7 +506,7 @@ export const QueryDenomHashRequest = {
 
   toJSON(message: QueryDenomHashRequest): unknown {
     const obj: any = {};
-    if (message.trace !== undefined) {
+    if (message.trace !== "") {
       obj.trace = message.trace;
     }
     return obj;
@@ -565,7 +565,7 @@ export const QueryDenomHashResponse = {
 
   toJSON(message: QueryDenomHashResponse): unknown {
     const obj: any = {};
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       obj.hash = message.hash;
     }
     return obj;
@@ -637,10 +637,10 @@ export const QueryEscrowAddressRequest = {
 
   toJSON(message: QueryEscrowAddressRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -700,7 +700,7 @@ export const QueryEscrowAddressResponse = {
 
   toJSON(message: QueryEscrowAddressResponse): unknown {
     const obj: any = {};
-    if (message.escrow_address !== undefined) {
+    if (message.escrow_address !== "") {
       obj.escrow_address = message.escrow_address;
     }
     return obj;
@@ -759,7 +759,7 @@ export const QueryTotalEscrowForDenomRequest = {
 
   toJSON(message: QueryTotalEscrowForDenomRequest): unknown {
     const obj: any = {};
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       obj.denom = message.denom;
     }
     return obj;

@@ -209,7 +209,7 @@ export const ModuleConfig = {
 
   toJSON(message: ModuleConfig): unknown {
     const obj: any = {};
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       obj.name = message.name;
     }
     if (message.config !== undefined) {
@@ -291,10 +291,10 @@ export const GolangBinding = {
 
   toJSON(message: GolangBinding): unknown {
     const obj: any = {};
-    if (message.interface_type !== undefined) {
+    if (message.interface_type !== "") {
       obj.interface_type = message.interface_type;
     }
-    if (message.implementation !== undefined) {
+    if (message.implementation !== "") {
       obj.implementation = message.implementation;
     }
     return obj;

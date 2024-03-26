@@ -140,10 +140,10 @@ export const CompactBitArray = {
 
   toJSON(message: CompactBitArray): unknown {
     const obj: any = {};
-    if (message.extra_bits_stored !== undefined) {
+    if (message.extra_bits_stored !== 0) {
       obj.extra_bits_stored = Math.round(message.extra_bits_stored);
     }
-    if (message.elems !== undefined) {
+    if (message.elems.length !== 0) {
       obj.elems = base64FromBytes(message.elems);
     }
     return obj;

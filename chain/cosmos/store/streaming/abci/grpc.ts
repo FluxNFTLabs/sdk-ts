@@ -222,7 +222,7 @@ export const ListenCommitRequest = {
 
   toJSON(message: ListenCommitRequest): unknown {
     const obj: any = {};
-    if (message.block_height !== undefined) {
+    if (message.block_height !== "0") {
       obj.block_height = message.block_height;
     }
     if (message.res !== undefined) {

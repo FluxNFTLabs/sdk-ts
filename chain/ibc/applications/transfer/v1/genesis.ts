@@ -99,7 +99,7 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
     if (message.denom_traces?.length) {

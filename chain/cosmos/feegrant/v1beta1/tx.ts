@@ -120,10 +120,10 @@ export const MsgGrantAllowance = {
 
   toJSON(message: MsgGrantAllowance): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.allowance !== undefined) {
@@ -247,10 +247,10 @@ export const MsgRevokeAllowance = {
 
   toJSON(message: MsgRevokeAllowance): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     return obj;
@@ -355,7 +355,7 @@ export const MsgPruneAllowances = {
 
   toJSON(message: MsgPruneAllowances): unknown {
     const obj: any = {};
-    if (message.pruner !== undefined) {
+    if (message.pruner !== "") {
       obj.pruner = message.pruner;
     }
     return obj;

@@ -427,10 +427,10 @@ export const Grant = {
 
   toJSON(message: Grant): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.allowance !== undefined) {

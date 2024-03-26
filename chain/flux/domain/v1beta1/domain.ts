@@ -87,16 +87,16 @@ export const Domain = {
 
   toJSON(message: Domain): unknown {
     const obj: any = {};
-    if (message.alias !== undefined) {
+    if (message.alias !== "") {
       obj.alias = message.alias;
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       obj.owner = message.owner;
     }
-    if (message.expiry !== undefined) {
+    if (message.expiry !== "0") {
       obj.expiry = message.expiry;
     }
-    if (message.price !== undefined) {
+    if (message.price !== "") {
       obj.price = message.price;
     }
     return obj;

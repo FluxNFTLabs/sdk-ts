@@ -146,7 +146,7 @@ export const ValidatorSet = {
     if (message.proposer !== undefined) {
       obj.proposer = Validator.toJSON(message.proposer);
     }
-    if (message.total_voting_power !== undefined) {
+    if (message.total_voting_power !== "0") {
       obj.total_voting_power = message.total_voting_power;
     }
     return obj;
@@ -244,16 +244,16 @@ export const Validator = {
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    if (message.address !== undefined) {
+    if (message.address.length !== 0) {
       obj.address = base64FromBytes(message.address);
     }
     if (message.pub_key !== undefined) {
       obj.pub_key = PublicKey.toJSON(message.pub_key);
     }
-    if (message.voting_power !== undefined) {
+    if (message.voting_power !== "0") {
       obj.voting_power = message.voting_power;
     }
-    if (message.proposer_priority !== undefined) {
+    if (message.proposer_priority !== "0") {
       obj.proposer_priority = message.proposer_priority;
     }
     return obj;
@@ -333,7 +333,7 @@ export const SimpleValidator = {
     if (message.pub_key !== undefined) {
       obj.pub_key = PublicKey.toJSON(message.pub_key);
     }
-    if (message.voting_power !== undefined) {
+    if (message.voting_power !== "0") {
       obj.voting_power = message.voting_power;
     }
     return obj;

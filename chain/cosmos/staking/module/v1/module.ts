@@ -104,13 +104,13 @@ export const Module = {
     if (message.hooks_order?.length) {
       obj.hooks_order = message.hooks_order;
     }
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
-    if (message.bech32_prefix_validator !== undefined) {
+    if (message.bech32_prefix_validator !== "") {
       obj.bech32_prefix_validator = message.bech32_prefix_validator;
     }
-    if (message.bech32_prefix_consensus !== undefined) {
+    if (message.bech32_prefix_consensus !== "") {
       obj.bech32_prefix_consensus = message.bech32_prefix_consensus;
     }
     return obj;

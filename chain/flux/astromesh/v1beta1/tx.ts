@@ -144,16 +144,16 @@ export const MsgAstroTransfer = {
 
   toJSON(message: MsgAstroTransfer): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       obj.receiver = message.receiver;
     }
-    if (message.src_plane !== undefined) {
+    if (message.src_plane !== 0) {
       obj.src_plane = planeToJSON(message.src_plane);
     }
-    if (message.dst_plane !== undefined) {
+    if (message.dst_plane !== 0) {
       obj.dst_plane = planeToJSON(message.dst_plane);
     }
     if (message.coin !== undefined) {
@@ -223,7 +223,7 @@ export const MsgAstroTransferResponse = {
 
   toJSON(message: MsgAstroTransferResponse): unknown {
     const obj: any = {};
-    if (message.interacted_contract !== undefined) {
+    if (message.interacted_contract.length !== 0) {
       obj.interacted_contract = base64FromBytes(message.interacted_contract);
     }
     return obj;

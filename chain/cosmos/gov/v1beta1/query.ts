@@ -189,7 +189,7 @@ export const QueryProposalRequest = {
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -344,13 +344,13 @@ export const QueryProposalsRequest = {
 
   toJSON(message: QueryProposalsRequest): unknown {
     const obj: any = {};
-    if (message.proposal_status !== undefined) {
+    if (message.proposal_status !== 0) {
       obj.proposal_status = proposalStatusToJSON(message.proposal_status);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       obj.voter = message.voter;
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
     if (message.pagination !== undefined) {
@@ -510,10 +510,10 @@ export const QueryVoteRequest = {
 
   toJSON(message: QueryVoteRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       obj.voter = message.voter;
     }
     return obj;
@@ -645,7 +645,7 @@ export const QueryVotesRequest = {
 
   toJSON(message: QueryVotesRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     if (message.pagination !== undefined) {
@@ -788,7 +788,7 @@ export const QueryParamsRequest = {
 
   toJSON(message: QueryParamsRequest): unknown {
     const obj: any = {};
-    if (message.params_type !== undefined) {
+    if (message.params_type !== "") {
       obj.params_type = message.params_type;
     }
     return obj;
@@ -957,10 +957,10 @@ export const QueryDepositRequest = {
 
   toJSON(message: QueryDepositRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
     return obj;
@@ -1094,7 +1094,7 @@ export const QueryDepositsRequest = {
 
   toJSON(message: QueryDepositsRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     if (message.pagination !== undefined) {
@@ -1237,7 +1237,7 @@ export const QueryTallyResultRequest = {
 
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     return obj;

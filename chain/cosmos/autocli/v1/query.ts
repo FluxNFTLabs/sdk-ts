@@ -203,7 +203,7 @@ export const AppOptionsResponse_ModuleOptionsEntry = {
 
   toJSON(message: AppOptionsResponse_ModuleOptionsEntry): unknown {
     const obj: any = {};
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       obj.key = message.key;
     }
     if (message.value !== undefined) {

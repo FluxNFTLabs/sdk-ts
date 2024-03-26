@@ -183,7 +183,7 @@ export const StakeAuthorization = {
     if (message.deny_list !== undefined) {
       obj.deny_list = StakeAuthorization_Validators.toJSON(message.deny_list);
     }
-    if (message.authorization_type !== undefined) {
+    if (message.authorization_type !== 0) {
       obj.authorization_type = authorizationTypeToJSON(message.authorization_type);
     }
     return obj;

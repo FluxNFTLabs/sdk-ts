@@ -106,10 +106,10 @@ export const ClientState = {
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.checksum !== undefined) {
+    if (message.checksum.length !== 0) {
       obj.checksum = base64FromBytes(message.checksum);
     }
     if (message.latest_height !== undefined) {
@@ -175,7 +175,7 @@ export const ConsensusState = {
 
   toJSON(message: ConsensusState): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -234,7 +234,7 @@ export const ClientMessage = {
 
   toJSON(message: ClientMessage): unknown {
     const obj: any = {};
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

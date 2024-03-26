@@ -84,13 +84,13 @@ export const IncentivizedAcknowledgement = {
 
   toJSON(message: IncentivizedAcknowledgement): unknown {
     const obj: any = {};
-    if (message.app_acknowledgement !== undefined) {
+    if (message.app_acknowledgement.length !== 0) {
       obj.app_acknowledgement = base64FromBytes(message.app_acknowledgement);
     }
-    if (message.forward_relayer_address !== undefined) {
+    if (message.forward_relayer_address !== "") {
       obj.forward_relayer_address = message.forward_relayer_address;
     }
-    if (message.underlying_app_success !== undefined) {
+    if (message.underlying_app_success === true) {
       obj.underlying_app_success = message.underlying_app_success;
     }
     return obj;

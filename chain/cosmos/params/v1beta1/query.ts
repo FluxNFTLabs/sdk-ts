@@ -104,10 +104,10 @@ export const QueryParamsRequest = {
 
   toJSON(message: QueryParamsRequest): unknown {
     const obj: any = {};
-    if (message.subspace !== undefined) {
+    if (message.subspace !== "") {
       obj.subspace = message.subspace;
     }
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       obj.key = message.key;
     }
     return obj;
@@ -349,7 +349,7 @@ export const Subspace = {
 
   toJSON(message: Subspace): unknown {
     const obj: any = {};
-    if (message.subspace !== undefined) {
+    if (message.subspace !== "") {
       obj.subspace = message.subspace;
     }
     if (message.keys?.length) {

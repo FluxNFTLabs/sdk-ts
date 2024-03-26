@@ -139,7 +139,7 @@ import { makeSignDoc, StdFee, AminoMsg, Coin, serializeSignDoc } from '@cosmjs/a
       amount: [
         {denom: 'lux', amount: '100000000000000'}
       ],
-      gas_limit: '200000',
+      gas_limit: '4000000',
       payer: '',
       granter: ''
     },
@@ -155,6 +155,7 @@ import { makeSignDoc, StdFee, AminoMsg, Coin, serializeSignDoc } from '@cosmjs/a
   }
 
   let eip712SignDoc = getEIP712SignBytes(signDoc, [msgJSON], '')
+  console.log('eip712SignDoc json:', JSON.stringify(eip712SignDoc, null, '  '))
   const msgHash = Buffer.from(getMessage(eip712SignDoc, true, {verifyDomain: false}))
   
   const senderSign = ethutil.ecsign(msgHash, Buffer.from(senderPrivKey.key))

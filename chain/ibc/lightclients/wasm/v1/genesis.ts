@@ -119,7 +119,7 @@ export const Contract = {
 
   toJSON(message: Contract): unknown {
     const obj: any = {};
-    if (message.code_bytes !== undefined) {
+    if (message.code_bytes.length !== 0) {
       obj.code_bytes = base64FromBytes(message.code_bytes);
     }
     return obj;

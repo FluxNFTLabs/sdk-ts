@@ -129,13 +129,13 @@ export const MsgCreateProduct = {
 
   toJSON(message: MsgCreateProduct): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
     if (message.offerings?.length) {
@@ -334,16 +334,16 @@ export const MsgPurchaseOffering = {
 
   toJSON(message: MsgPurchaseOffering): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.product_id !== undefined) {
+    if (message.product_id !== "") {
       obj.product_id = message.product_id;
     }
     if (message.offering_idx?.length) {
@@ -493,16 +493,16 @@ export const MsgVerifyProduct = {
 
   toJSON(message: MsgVerifyProduct): unknown {
     const obj: any = {};
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       obj.sender = message.sender;
     }
-    if (message.class_id !== undefined) {
+    if (message.class_id !== "") {
       obj.class_id = message.class_id;
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       obj.id = message.id;
     }
-    if (message.product_id !== undefined) {
+    if (message.product_id !== "") {
       obj.product_id = message.product_id;
     }
     return obj;

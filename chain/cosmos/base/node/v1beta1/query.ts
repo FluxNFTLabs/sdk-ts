@@ -149,13 +149,13 @@ export const ConfigResponse = {
 
   toJSON(message: ConfigResponse): unknown {
     const obj: any = {};
-    if (message.minimum_gas_price !== undefined) {
+    if (message.minimum_gas_price !== "") {
       obj.minimum_gas_price = message.minimum_gas_price;
     }
-    if (message.pruning_keep_recent !== undefined) {
+    if (message.pruning_keep_recent !== "") {
       obj.pruning_keep_recent = message.pruning_keep_recent;
     }
-    if (message.pruning_interval !== undefined) {
+    if (message.pruning_interval !== "") {
       obj.pruning_interval = message.pruning_interval;
     }
     return obj;
@@ -315,19 +315,19 @@ export const StatusResponse = {
 
   toJSON(message: StatusResponse): unknown {
     const obj: any = {};
-    if (message.earliest_store_height !== undefined) {
+    if (message.earliest_store_height !== "0") {
       obj.earliest_store_height = message.earliest_store_height;
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
-    if (message.app_hash !== undefined) {
+    if (message.app_hash.length !== 0) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
-    if (message.validator_hash !== undefined) {
+    if (message.validator_hash.length !== 0) {
       obj.validator_hash = base64FromBytes(message.validator_hash);
     }
     return obj;

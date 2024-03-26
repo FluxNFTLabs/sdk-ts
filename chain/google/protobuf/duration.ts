@@ -136,10 +136,10 @@ export const Duration = {
 
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    if (message.seconds !== undefined) {
+    if (message.seconds !== "0") {
       obj.seconds = message.seconds;
     }
-    if (message.nanos !== undefined) {
+    if (message.nanos !== 0) {
       obj.nanos = Math.round(message.nanos);
     }
     return obj;

@@ -329,7 +329,7 @@ export const HostGenesisState = {
     if (message.interchain_accounts?.length) {
       obj.interchain_accounts = message.interchain_accounts.map((e) => RegisteredInterchainAccount.toJSON(e));
     }
-    if (message.port !== undefined) {
+    if (message.port !== "") {
       obj.port = message.port;
     }
     if (message.params !== undefined) {
@@ -434,16 +434,16 @@ export const ActiveChannel = {
 
   toJSON(message: ActiveChannel): unknown {
     const obj: any = {};
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.is_middleware_enabled !== undefined) {
+    if (message.is_middleware_enabled === true) {
       obj.is_middleware_enabled = message.is_middleware_enabled;
     }
     return obj;
@@ -529,13 +529,13 @@ export const RegisteredInterchainAccount = {
 
   toJSON(message: RegisteredInterchainAccount): unknown {
     const obj: any = {};
-    if (message.connection_id !== undefined) {
+    if (message.connection_id !== "") {
       obj.connection_id = message.connection_id;
     }
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.account_address !== undefined) {
+    if (message.account_address !== "") {
       obj.account_address = message.account_address;
     }
     return obj;

@@ -340,10 +340,10 @@ export const WeightedVoteOption = {
 
   toJSON(message: WeightedVoteOption): unknown {
     const obj: any = {};
-    if (message.option !== undefined) {
+    if (message.option !== 0) {
       obj.option = voteOptionToJSON(message.option);
     }
-    if (message.weight !== undefined) {
+    if (message.weight !== "") {
       obj.weight = message.weight;
     }
     return obj;
@@ -416,10 +416,10 @@ export const TextProposal = {
 
   toJSON(message: TextProposal): unknown {
     const obj: any = {};
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       obj.title = message.title;
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       obj.description = message.description;
     }
     return obj;
@@ -503,10 +503,10 @@ export const Deposit = {
 
   toJSON(message: Deposit): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.depositor !== undefined) {
+    if (message.depositor !== "") {
       obj.depositor = message.depositor;
     }
     if (message.amount?.length) {
@@ -674,13 +674,13 @@ export const Proposal = {
 
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
     if (message.content !== undefined) {
       obj.content = Any.toJSON(message.content);
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       obj.status = proposalStatusToJSON(message.status);
     }
     if (message.final_tally_result !== undefined) {
@@ -804,16 +804,16 @@ export const TallyResult = {
 
   toJSON(message: TallyResult): unknown {
     const obj: any = {};
-    if (message.yes !== undefined) {
+    if (message.yes !== "") {
       obj.yes = message.yes;
     }
-    if (message.abstain !== undefined) {
+    if (message.abstain !== "") {
       obj.abstain = message.abstain;
     }
-    if (message.no !== undefined) {
+    if (message.no !== "") {
       obj.no = message.no;
     }
-    if (message.no_with_veto !== undefined) {
+    if (message.no_with_veto !== "") {
       obj.no_with_veto = message.no_with_veto;
     }
     return obj;
@@ -912,13 +912,13 @@ export const Vote = {
 
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== undefined) {
+    if (message.proposal_id !== "0") {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       obj.voter = message.voter;
     }
-    if (message.option !== undefined) {
+    if (message.option !== 0) {
       obj.option = voteOptionToJSON(message.option);
     }
     if (message.options?.length) {
@@ -1148,13 +1148,13 @@ export const TallyParams = {
 
   toJSON(message: TallyParams): unknown {
     const obj: any = {};
-    if (message.quorum !== undefined) {
+    if (message.quorum.length !== 0) {
       obj.quorum = base64FromBytes(message.quorum);
     }
-    if (message.threshold !== undefined) {
+    if (message.threshold.length !== 0) {
       obj.threshold = base64FromBytes(message.threshold);
     }
-    if (message.veto_threshold !== undefined) {
+    if (message.veto_threshold.length !== 0) {
       obj.veto_threshold = base64FromBytes(message.veto_threshold);
     }
     return obj;

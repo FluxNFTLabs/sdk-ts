@@ -275,13 +275,13 @@ export const MsgCreateValidator = {
     if (message.commission !== undefined) {
       obj.commission = CommissionRates.toJSON(message.commission);
     }
-    if (message.min_self_delegation !== undefined) {
+    if (message.min_self_delegation !== "") {
       obj.min_self_delegation = message.min_self_delegation;
     }
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.pubkey !== undefined) {
@@ -441,13 +441,13 @@ export const MsgEditValidator = {
     if (message.description !== undefined) {
       obj.description = Description.toJSON(message.description);
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
-    if (message.commission_rate !== undefined) {
+    if (message.commission_rate !== "") {
       obj.commission_rate = message.commission_rate;
     }
-    if (message.min_self_delegation !== undefined) {
+    if (message.min_self_delegation !== "") {
       obj.min_self_delegation = message.min_self_delegation;
     }
     return obj;
@@ -580,10 +580,10 @@ export const MsgDelegate = {
 
   toJSON(message: MsgDelegate): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.amount !== undefined) {
@@ -729,13 +729,13 @@ export const MsgBeginRedelegate = {
 
   toJSON(message: MsgBeginRedelegate): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_src_address !== undefined) {
+    if (message.validator_src_address !== "") {
       obj.validator_src_address = message.validator_src_address;
     }
-    if (message.validator_dst_address !== undefined) {
+    if (message.validator_dst_address !== "") {
       obj.validator_dst_address = message.validator_dst_address;
     }
     if (message.amount !== undefined) {
@@ -885,10 +885,10 @@ export const MsgUndelegate = {
 
   toJSON(message: MsgUndelegate): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.amount !== undefined) {
@@ -1067,16 +1067,16 @@ export const MsgCancelUnbondingDelegation = {
 
   toJSON(message: MsgCancelUnbondingDelegation): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.amount !== undefined) {
       obj.amount = Coin.toJSON(message.amount);
     }
-    if (message.creation_height !== undefined) {
+    if (message.creation_height !== "0") {
       obj.creation_height = message.creation_height;
     }
     return obj;
@@ -1198,7 +1198,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.params !== undefined) {

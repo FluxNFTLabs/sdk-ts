@@ -104,10 +104,10 @@ export const QueryEvidenceRequest = {
 
   toJSON(message: QueryEvidenceRequest): unknown {
     const obj: any = {};
-    if (message.evidence_hash !== undefined) {
+    if (message.evidence_hash.length !== 0) {
       obj.evidence_hash = base64FromBytes(message.evidence_hash);
     }
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       obj.hash = message.hash;
     }
     return obj;

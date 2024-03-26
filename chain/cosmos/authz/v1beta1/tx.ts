@@ -122,10 +122,10 @@ export const MsgGrant = {
 
   toJSON(message: MsgGrant): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.grant !== undefined) {
@@ -247,7 +247,7 @@ export const MsgExec = {
 
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
     if (message.msgs?.length) {
@@ -395,13 +395,13 @@ export const MsgRevoke = {
 
   toJSON(message: MsgRevoke): unknown {
     const obj: any = {};
-    if (message.granter !== undefined) {
+    if (message.granter !== "") {
       obj.granter = message.granter;
     }
-    if (message.grantee !== undefined) {
+    if (message.grantee !== "") {
       obj.grantee = message.grantee;
     }
-    if (message.msg_type_url !== undefined) {
+    if (message.msg_type_url !== "") {
       obj.msg_type_url = message.msg_type_url;
     }
     return obj;

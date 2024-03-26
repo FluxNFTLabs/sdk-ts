@@ -70,7 +70,7 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.host_enabled !== undefined) {
+    if (message.host_enabled === true) {
       obj.host_enabled = message.host_enabled;
     }
     if (message.allow_messages?.length) {

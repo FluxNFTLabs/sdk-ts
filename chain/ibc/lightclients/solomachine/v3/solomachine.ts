@@ -163,10 +163,10 @@ export const ClientState = {
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
-    if (message.is_frozen !== undefined) {
+    if (message.is_frozen === true) {
       obj.is_frozen = message.is_frozen;
     }
     if (message.consensus_state !== undefined) {
@@ -259,10 +259,10 @@ export const ConsensusState = {
     if (message.public_key !== undefined) {
       obj.public_key = Any.toJSON(message.public_key);
     }
-    if (message.diversifier !== undefined) {
+    if (message.diversifier !== "") {
       obj.diversifier = message.diversifier;
     }
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -360,16 +360,16 @@ export const Header = {
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
     }
-    if (message.signature !== undefined) {
+    if (message.signature.length !== 0) {
       obj.signature = base64FromBytes(message.signature);
     }
     if (message.new_public_key !== undefined) {
       obj.new_public_key = Any.toJSON(message.new_public_key);
     }
-    if (message.new_diversifier !== undefined) {
+    if (message.new_diversifier !== "") {
       obj.new_diversifier = message.new_diversifier;
     }
     return obj;
@@ -457,7 +457,7 @@ export const Misbehaviour = {
 
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     if (message.signature_one !== undefined) {
@@ -563,16 +563,16 @@ export const SignatureAndData = {
 
   toJSON(message: SignatureAndData): unknown {
     const obj: any = {};
-    if (message.signature !== undefined) {
+    if (message.signature.length !== 0) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.path !== undefined) {
+    if (message.path.length !== 0) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -647,10 +647,10 @@ export const TimestampedSignatureData = {
 
   toJSON(message: TimestampedSignatureData): unknown {
     const obj: any = {};
-    if (message.signature_data !== undefined) {
+    if (message.signature_data.length !== 0) {
       obj.signature_data = base64FromBytes(message.signature_data);
     }
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -756,19 +756,19 @@ export const SignBytes = {
 
   toJSON(message: SignBytes): unknown {
     const obj: any = {};
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
-    if (message.timestamp !== undefined) {
+    if (message.timestamp !== "0") {
       obj.timestamp = message.timestamp;
     }
-    if (message.diversifier !== undefined) {
+    if (message.diversifier !== "") {
       obj.diversifier = message.diversifier;
     }
-    if (message.path !== undefined) {
+    if (message.path.length !== 0) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -847,7 +847,7 @@ export const HeaderData = {
     if (message.new_pub_key !== undefined) {
       obj.new_pub_key = Any.toJSON(message.new_pub_key);
     }
-    if (message.new_diversifier !== undefined) {
+    if (message.new_diversifier !== "") {
       obj.new_diversifier = message.new_diversifier;
     }
     return obj;

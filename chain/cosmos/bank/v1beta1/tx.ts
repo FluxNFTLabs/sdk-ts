@@ -153,10 +153,10 @@ export const MsgSend = {
 
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
-    if (message.from_address !== undefined) {
+    if (message.from_address !== "") {
       obj.from_address = message.from_address;
     }
-    if (message.to_address !== undefined) {
+    if (message.to_address !== "") {
       obj.to_address = message.to_address;
     }
     if (message.amount?.length) {
@@ -399,7 +399,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.params !== undefined) {
@@ -537,7 +537,7 @@ export const MsgSetSendEnabled = {
 
   toJSON(message: MsgSetSendEnabled): unknown {
     const obj: any = {};
-    if (message.authority !== undefined) {
+    if (message.authority !== "") {
       obj.authority = message.authority;
     }
     if (message.send_enabled?.length) {

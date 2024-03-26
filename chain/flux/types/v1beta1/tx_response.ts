@@ -71,10 +71,10 @@ export const TxResponseGenericMessage = {
 
   toJSON(message: TxResponseGenericMessage): unknown {
     const obj: any = {};
-    if (message.header !== undefined) {
+    if (message.header !== "") {
       obj.header = message.header;
     }
-    if (message.data !== undefined) {
+    if (message.data.length !== 0) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

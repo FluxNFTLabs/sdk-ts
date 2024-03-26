@@ -170,10 +170,10 @@ export const DelegatorWithdrawInfo = {
 
   toJSON(message: DelegatorWithdrawInfo): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.withdraw_address !== undefined) {
+    if (message.withdraw_address !== "") {
       obj.withdraw_address = message.withdraw_address;
     }
     return obj;
@@ -248,7 +248,7 @@ export const ValidatorOutstandingRewardsRecord = {
 
   toJSON(message: ValidatorOutstandingRewardsRecord): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.outstanding_rewards?.length) {
@@ -324,7 +324,7 @@ export const ValidatorAccumulatedCommissionRecord = {
 
   toJSON(message: ValidatorAccumulatedCommissionRecord): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.accumulated !== undefined) {
@@ -413,10 +413,10 @@ export const ValidatorHistoricalRewardsRecord = {
 
   toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
-    if (message.period !== undefined) {
+    if (message.period !== "0") {
       obj.period = message.period;
     }
     if (message.rewards !== undefined) {
@@ -495,7 +495,7 @@ export const ValidatorCurrentRewardsRecord = {
 
   toJSON(message: ValidatorCurrentRewardsRecord): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.rewards !== undefined) {
@@ -584,10 +584,10 @@ export const DelegatorStartingInfoRecord = {
 
   toJSON(message: DelegatorStartingInfoRecord): unknown {
     const obj: any = {};
-    if (message.delegator_address !== undefined) {
+    if (message.delegator_address !== "") {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
     if (message.starting_info !== undefined) {
@@ -690,13 +690,13 @@ export const ValidatorSlashEventRecord = {
 
   toJSON(message: ValidatorSlashEventRecord): unknown {
     const obj: any = {};
-    if (message.validator_address !== undefined) {
+    if (message.validator_address !== "") {
       obj.validator_address = message.validator_address;
     }
-    if (message.height !== undefined) {
+    if (message.height !== "0") {
       obj.height = message.height;
     }
-    if (message.period !== undefined) {
+    if (message.period !== "0") {
       obj.period = message.period;
     }
     if (message.validator_slash_event !== undefined) {
@@ -901,7 +901,7 @@ export const GenesisState = {
     if (message.delegator_withdraw_infos?.length) {
       obj.delegator_withdraw_infos = message.delegator_withdraw_infos.map((e) => DelegatorWithdrawInfo.toJSON(e));
     }
-    if (message.previous_proposer !== undefined) {
+    if (message.previous_proposer !== "") {
       obj.previous_proposer = message.previous_proposer;
     }
     if (message.outstanding_rewards?.length) {

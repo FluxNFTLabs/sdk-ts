@@ -470,10 +470,10 @@ export const QueryChannelRequest = {
 
   toJSON(message: QueryChannelRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -560,7 +560,7 @@ export const QueryChannelResponse = {
     if (message.channel !== undefined) {
       obj.channel = Channel.toJSON(message.channel);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -799,7 +799,7 @@ export const QueryConnectionChannelsRequest = {
 
   toJSON(message: QueryConnectionChannelsRequest): unknown {
     const obj: any = {};
-    if (message.connection !== undefined) {
+    if (message.connection !== "") {
       obj.connection = message.connection;
     }
     if (message.pagination !== undefined) {
@@ -974,10 +974,10 @@ export const QueryChannelClientStateRequest = {
 
   toJSON(message: QueryChannelClientStateRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -1066,7 +1066,7 @@ export const QueryChannelClientStateResponse = {
     if (message.identified_client_state !== undefined) {
       obj.identified_client_state = IdentifiedClientState.toJSON(message.identified_client_state);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -1170,16 +1170,16 @@ export const QueryChannelConsensusStateRequest = {
 
   toJSON(message: QueryChannelConsensusStateRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.revision_number !== undefined) {
+    if (message.revision_number !== "0") {
       obj.revision_number = message.revision_number;
     }
-    if (message.revision_height !== undefined) {
+    if (message.revision_height !== "0") {
       obj.revision_height = message.revision_height;
     }
     return obj;
@@ -1279,10 +1279,10 @@ export const QueryChannelConsensusStateResponse = {
     if (message.consensus_state !== undefined) {
       obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.client_id !== undefined) {
+    if (message.client_id !== "") {
       obj.client_id = message.client_id;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -1375,13 +1375,13 @@ export const QueryPacketCommitmentRequest = {
 
   toJSON(message: QueryPacketCommitmentRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -1466,10 +1466,10 @@ export const QueryPacketCommitmentResponse = {
 
   toJSON(message: QueryPacketCommitmentResponse): unknown {
     const obj: any = {};
-    if (message.commitment !== undefined) {
+    if (message.commitment.length !== 0) {
       obj.commitment = base64FromBytes(message.commitment);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -1559,10 +1559,10 @@ export const QueryPacketCommitmentsRequest = {
 
   toJSON(message: QueryPacketCommitmentsRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     if (message.pagination !== undefined) {
@@ -1749,13 +1749,13 @@ export const QueryPacketReceiptRequest = {
 
   toJSON(message: QueryPacketReceiptRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -1840,10 +1840,10 @@ export const QueryPacketReceiptResponse = {
 
   toJSON(message: QueryPacketReceiptResponse): unknown {
     const obj: any = {};
-    if (message.received !== undefined) {
+    if (message.received === true) {
       obj.received = message.received;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -1933,13 +1933,13 @@ export const QueryPacketAcknowledgementRequest = {
 
   toJSON(message: QueryPacketAcknowledgementRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== "0") {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -2024,10 +2024,10 @@ export const QueryPacketAcknowledgementResponse = {
 
   toJSON(message: QueryPacketAcknowledgementResponse): unknown {
     const obj: any = {};
-    if (message.acknowledgement !== undefined) {
+    if (message.acknowledgement.length !== 0) {
       obj.acknowledgement = base64FromBytes(message.acknowledgement);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -2142,10 +2142,10 @@ export const QueryPacketAcknowledgementsRequest = {
 
   toJSON(message: QueryPacketAcknowledgementsRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     if (message.pagination !== undefined) {
@@ -2350,10 +2350,10 @@ export const QueryUnreceivedPacketsRequest = {
 
   toJSON(message: QueryUnreceivedPacketsRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     if (message.packet_commitment_sequences?.length) {
@@ -2547,10 +2547,10 @@ export const QueryUnreceivedAcksRequest = {
 
   toJSON(message: QueryUnreceivedAcksRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     if (message.packet_ack_sequences?.length) {
@@ -2719,10 +2719,10 @@ export const QueryNextSequenceReceiveRequest = {
 
   toJSON(message: QueryNextSequenceReceiveRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -2808,10 +2808,10 @@ export const QueryNextSequenceReceiveResponse = {
 
   toJSON(message: QueryNextSequenceReceiveResponse): unknown {
     const obj: any = {};
-    if (message.next_sequence_receive !== undefined) {
+    if (message.next_sequence_receive !== "0") {
       obj.next_sequence_receive = message.next_sequence_receive;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -2890,10 +2890,10 @@ export const QueryNextSequenceSendRequest = {
 
   toJSON(message: QueryNextSequenceSendRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -2977,10 +2977,10 @@ export const QueryNextSequenceSendResponse = {
 
   toJSON(message: QueryNextSequenceSendResponse): unknown {
     const obj: any = {};
-    if (message.next_sequence_send !== undefined) {
+    if (message.next_sequence_send !== "0") {
       obj.next_sequence_send = message.next_sequence_send;
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -3059,10 +3059,10 @@ export const QueryUpgradeErrorRequest = {
 
   toJSON(message: QueryUpgradeErrorRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -3149,7 +3149,7 @@ export const QueryUpgradeErrorResponse = {
     if (message.error_receipt !== undefined) {
       obj.error_receipt = ErrorReceipt.toJSON(message.error_receipt);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -3230,10 +3230,10 @@ export const QueryUpgradeRequest = {
 
   toJSON(message: QueryUpgradeRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== undefined) {
+    if (message.port_id !== "") {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== undefined) {
+    if (message.channel_id !== "") {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -3320,7 +3320,7 @@ export const QueryUpgradeResponse = {
     if (message.upgrade !== undefined) {
       obj.upgrade = Upgrade.toJSON(message.upgrade);
     }
-    if (message.proof !== undefined) {
+    if (message.proof.length !== 0) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {

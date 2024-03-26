@@ -5,6 +5,10 @@ defineProps({
   popperClass: {
     type: String,
     default: ''
+  },
+  hideOnClick: {
+    type: Boolean,
+    default: true
   }
 })
 const emit = defineEmits<{
@@ -46,6 +50,7 @@ defineExpose({
     @show="onOpenDropdown"
     @hide="onCloseDropdown"
     :popperClass="['base-dropdown__popover', popperClass].join(' ')"
+    :popperHideTriggers="(triggers) => (!hideOnClick ? triggers : [...triggers, 'click'])"
   >
     <slot :is-open="isOpen" />
     <template #popper>

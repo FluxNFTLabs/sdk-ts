@@ -68,6 +68,19 @@ function deepSortObject (obj: any): any {
   return sortedObj;
 }
 
+function getPrimitiveEthType(some: any): string {
+  let type = typeof some
+  if (type == 'number') {
+    return 'int32'
+  }
+
+  if (type == 'boolean') {
+    return 'bool'
+  }
+
+  return type
+}
+
 function walkNestedJSON(rootTypes: Eip712Types, jsonObj: any, parentKey: string = ''): void {
   // iterate json object
   for (const key in jsonObj) {
@@ -78,7 +91,7 @@ function walkNestedJSON(rootTypes: Eip712Types, jsonObj: any, parentKey: string 
       if (isPrimitive[typeof value[0]]) {
         rootTypes[parentKey].push({
           name: key,
-          type: typeof value[0] + '[]',
+          type: getPrimitiveEthType(value[0]) + '[]',
         })
         continue
       }
@@ -108,7 +121,7 @@ function walkNestedJSON(rootTypes: Eip712Types, jsonObj: any, parentKey: string 
     // handle primary field
     rootTypes[parentKey].push({
       name: key,
-      type: typeof value,
+      type: getPrimitiveEthType(value),
     })
   }
 }

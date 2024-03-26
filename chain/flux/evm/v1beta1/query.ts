@@ -1,414 +1,401 @@
 /* eslint-disable */
-import { grpc } from '@improbable-eng/grpc-web'
-import { BrowserHeaders } from 'browser-headers'
-import _m0 from 'protobufjs/minimal'
+import { grpc } from "@improbable-eng/grpc-web";
+import { BrowserHeaders } from "browser-headers";
+import _m0 from "protobufjs/minimal";
 
 export interface BalanceRequest {
-  address: string
+  address: string;
 }
 
-export interface BalanceResponse {}
+export interface BalanceResponse {
+}
 
 export interface ContractQueryRequest {
-  address: string
-  calldata: Uint8Array
+  address: string;
+  calldata: Uint8Array;
 }
 
 export interface ContractQueryResponse {
-  output: Uint8Array
+  output: Uint8Array;
   /** status code of smart query execution */
-  status_code: string
+  status_code: string;
 }
 
 function createBaseBalanceRequest(): BalanceRequest {
-  return { address: '' }
+  return { address: "" };
 }
 
 export const BalanceRequest = {
-  $type: 'flux.evm.v1beta1.BalanceRequest' as const,
+  $type: "flux.evm.v1beta1.BalanceRequest" as const,
 
   encode(message: BalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.address !== '') {
-      writer.uint32(10).string(message.address)
+    if (message.address !== "") {
+      writer.uint32(10).string(message.address);
     }
-    return writer
+    return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): BalanceRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input)
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseBalanceRequest()
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBalanceRequest();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.address = reader.string()
-          continue
+          message.address = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      reader.skipType(tag & 7)
+      reader.skipType(tag & 7);
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): BalanceRequest {
-    return { address: isSet(object.address) ? globalThis.String(object.address) : '' }
+    return { address: isSet(object.address) ? globalThis.String(object.address) : "" };
   },
 
   toJSON(message: BalanceRequest): unknown {
-    const obj: any = {}
-    if (message.address !== '') {
-      obj.address = message.address
+    const obj: any = {};
+    if (message.address !== "") {
+      obj.address = message.address;
     }
-    return obj
+    return obj;
   },
 
   create(base?: DeepPartial<BalanceRequest>): BalanceRequest {
-    return BalanceRequest.fromPartial(base ?? {})
+    return BalanceRequest.fromPartial(base ?? {});
   },
   fromPartial(object: DeepPartial<BalanceRequest>): BalanceRequest {
-    const message = createBaseBalanceRequest()
-    message.address = object.address ?? ''
-    return message
-  }
-}
+    const message = createBaseBalanceRequest();
+    message.address = object.address ?? "";
+    return message;
+  },
+};
 
 function createBaseBalanceResponse(): BalanceResponse {
-  return {}
+  return {};
 }
 
 export const BalanceResponse = {
-  $type: 'flux.evm.v1beta1.BalanceResponse' as const,
+  $type: "flux.evm.v1beta1.BalanceResponse" as const,
 
   encode(_: BalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    return writer
+    return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): BalanceResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input)
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseBalanceResponse()
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBalanceResponse();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      reader.skipType(tag & 7)
+      reader.skipType(tag & 7);
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): BalanceResponse {
-    return {}
+    return {};
   },
 
   toJSON(_: BalanceResponse): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create(base?: DeepPartial<BalanceResponse>): BalanceResponse {
-    return BalanceResponse.fromPartial(base ?? {})
+    return BalanceResponse.fromPartial(base ?? {});
   },
   fromPartial(_: DeepPartial<BalanceResponse>): BalanceResponse {
-    const message = createBaseBalanceResponse()
-    return message
-  }
-}
+    const message = createBaseBalanceResponse();
+    return message;
+  },
+};
 
 function createBaseContractQueryRequest(): ContractQueryRequest {
-  return { address: '', calldata: new Uint8Array(0) }
+  return { address: "", calldata: new Uint8Array(0) };
 }
 
 export const ContractQueryRequest = {
-  $type: 'flux.evm.v1beta1.ContractQueryRequest' as const,
+  $type: "flux.evm.v1beta1.ContractQueryRequest" as const,
 
   encode(message: ContractQueryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.address !== '') {
-      writer.uint32(10).string(message.address)
+    if (message.address !== "") {
+      writer.uint32(10).string(message.address);
     }
     if (message.calldata.length !== 0) {
-      writer.uint32(18).bytes(message.calldata)
+      writer.uint32(18).bytes(message.calldata);
     }
-    return writer
+    return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ContractQueryRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input)
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseContractQueryRequest()
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseContractQueryRequest();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.address = reader.string()
-          continue
+          message.address = reader.string();
+          continue;
         case 2:
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.calldata = reader.bytes()
-          continue
+          message.calldata = reader.bytes();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      reader.skipType(tag & 7)
+      reader.skipType(tag & 7);
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): ContractQueryRequest {
     return {
-      address: isSet(object.address) ? globalThis.String(object.address) : '',
-      calldata: isSet(object.calldata) ? bytesFromBase64(object.calldata) : new Uint8Array(0)
-    }
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+      calldata: isSet(object.calldata) ? bytesFromBase64(object.calldata) : new Uint8Array(0),
+    };
   },
 
   toJSON(message: ContractQueryRequest): unknown {
-    const obj: any = {}
-    if (message.address !== '') {
-      obj.address = message.address
+    const obj: any = {};
+    if (message.address !== "") {
+      obj.address = message.address;
     }
     if (message.calldata.length !== 0) {
-      obj.calldata = base64FromBytes(message.calldata)
+      obj.calldata = base64FromBytes(message.calldata);
     }
-    return obj
+    return obj;
   },
 
   create(base?: DeepPartial<ContractQueryRequest>): ContractQueryRequest {
-    return ContractQueryRequest.fromPartial(base ?? {})
+    return ContractQueryRequest.fromPartial(base ?? {});
   },
   fromPartial(object: DeepPartial<ContractQueryRequest>): ContractQueryRequest {
-    const message = createBaseContractQueryRequest()
-    message.address = object.address ?? ''
-    message.calldata = object.calldata ?? new Uint8Array(0)
-    return message
-  }
-}
+    const message = createBaseContractQueryRequest();
+    message.address = object.address ?? "";
+    message.calldata = object.calldata ?? new Uint8Array(0);
+    return message;
+  },
+};
 
 function createBaseContractQueryResponse(): ContractQueryResponse {
-  return { output: new Uint8Array(0), status_code: '' }
+  return { output: new Uint8Array(0), status_code: "" };
 }
 
 export const ContractQueryResponse = {
-  $type: 'flux.evm.v1beta1.ContractQueryResponse' as const,
+  $type: "flux.evm.v1beta1.ContractQueryResponse" as const,
 
   encode(message: ContractQueryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.output.length !== 0) {
-      writer.uint32(10).bytes(message.output)
+      writer.uint32(10).bytes(message.output);
     }
-    if (message.status_code !== '') {
-      writer.uint32(18).string(message.status_code)
+    if (message.status_code !== "") {
+      writer.uint32(18).string(message.status_code);
     }
-    return writer
+    return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ContractQueryResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input)
-    let end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseContractQueryResponse()
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseContractQueryResponse();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.output = reader.bytes()
-          continue
+          message.output = reader.bytes();
+          continue;
         case 2:
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.status_code = reader.string()
-          continue
+          message.status_code = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      reader.skipType(tag & 7)
+      reader.skipType(tag & 7);
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): ContractQueryResponse {
     return {
       output: isSet(object.output) ? bytesFromBase64(object.output) : new Uint8Array(0),
-      status_code: isSet(object.status_code) ? globalThis.String(object.status_code) : ''
-    }
+      status_code: isSet(object.status_code) ? globalThis.String(object.status_code) : "",
+    };
   },
 
   toJSON(message: ContractQueryResponse): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.output.length !== 0) {
-      obj.output = base64FromBytes(message.output)
+      obj.output = base64FromBytes(message.output);
     }
-    if (message.status_code !== '') {
-      obj.status_code = message.status_code
+    if (message.status_code !== "") {
+      obj.status_code = message.status_code;
     }
-    return obj
+    return obj;
   },
 
   create(base?: DeepPartial<ContractQueryResponse>): ContractQueryResponse {
-    return ContractQueryResponse.fromPartial(base ?? {})
+    return ContractQueryResponse.fromPartial(base ?? {});
   },
   fromPartial(object: DeepPartial<ContractQueryResponse>): ContractQueryResponse {
-    const message = createBaseContractQueryResponse()
-    message.output = object.output ?? new Uint8Array(0)
-    message.status_code = object.status_code ?? ''
-    return message
-  }
-}
+    const message = createBaseContractQueryResponse();
+    message.output = object.output ?? new Uint8Array(0);
+    message.status_code = object.status_code ?? "";
+    return message;
+  },
+};
 
 export interface Query {
-  Balance(request: DeepPartial<BalanceRequest>, metadata?: grpc.Metadata): Promise<BalanceResponse>
-  ContractQuery(
-    request: DeepPartial<ContractQueryRequest>,
-    metadata?: grpc.Metadata
-  ): Promise<ContractQueryResponse>
+  Balance(request: DeepPartial<BalanceRequest>, metadata?: grpc.Metadata): Promise<BalanceResponse>;
+  ContractQuery(request: DeepPartial<ContractQueryRequest>, metadata?: grpc.Metadata): Promise<ContractQueryResponse>;
 }
 
 export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc
+  private readonly rpc: Rpc;
 
   constructor(rpc: Rpc) {
-    this.rpc = rpc
-    this.Balance = this.Balance.bind(this)
-    this.ContractQuery = this.ContractQuery.bind(this)
+    this.rpc = rpc;
+    this.Balance = this.Balance.bind(this);
+    this.ContractQuery = this.ContractQuery.bind(this);
   }
 
-  Balance(
-    request: DeepPartial<BalanceRequest>,
-    metadata?: grpc.Metadata
-  ): Promise<BalanceResponse> {
-    return this.rpc.unary(QueryBalanceDesc, BalanceRequest.fromPartial(request), metadata)
+  Balance(request: DeepPartial<BalanceRequest>, metadata?: grpc.Metadata): Promise<BalanceResponse> {
+    return this.rpc.unary(QueryBalanceDesc, BalanceRequest.fromPartial(request), metadata);
   }
 
-  ContractQuery(
-    request: DeepPartial<ContractQueryRequest>,
-    metadata?: grpc.Metadata
-  ): Promise<ContractQueryResponse> {
-    return this.rpc.unary(
-      QueryContractQueryDesc,
-      ContractQueryRequest.fromPartial(request),
-      metadata
-    )
+  ContractQuery(request: DeepPartial<ContractQueryRequest>, metadata?: grpc.Metadata): Promise<ContractQueryResponse> {
+    return this.rpc.unary(QueryContractQueryDesc, ContractQueryRequest.fromPartial(request), metadata);
   }
 }
 
-export const QueryDesc = { serviceName: 'flux.evm.v1beta1.Query' }
+export const QueryDesc = { serviceName: "flux.evm.v1beta1.Query" };
 
 export const QueryBalanceDesc: UnaryMethodDefinitionish = {
-  methodName: 'Balance',
+  methodName: "Balance",
   service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return BalanceRequest.encode(this).finish()
-    }
+      return BalanceRequest.encode(this).finish();
+    },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = BalanceResponse.decode(data)
+      const value = BalanceResponse.decode(data);
       return {
         ...value,
         toObject() {
-          return value
-        }
-      }
-    }
-  } as any
-}
+          return value;
+        },
+      };
+    },
+  } as any,
+};
 
 export const QueryContractQueryDesc: UnaryMethodDefinitionish = {
-  methodName: 'ContractQuery',
+  methodName: "ContractQuery",
   service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return ContractQueryRequest.encode(this).finish()
-    }
+      return ContractQueryRequest.encode(this).finish();
+    },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = ContractQueryResponse.decode(data)
+      const value = ContractQueryResponse.decode(data);
       return {
         ...value,
         toObject() {
-          return value
-        }
-      }
-    }
-  } as any
-}
+          return value;
+        },
+      };
+    },
+  } as any,
+};
 
 interface UnaryMethodDefinitionishR extends grpc.UnaryMethodDefinition<any, any> {
-  requestStream: any
-  responseStream: any
+  requestStream: any;
+  responseStream: any;
 }
 
-type UnaryMethodDefinitionish = UnaryMethodDefinitionishR
+type UnaryMethodDefinitionish = UnaryMethodDefinitionishR;
 
 interface Rpc {
   unary<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     request: any,
-    metadata: grpc.Metadata | undefined
-  ): Promise<any>
+    metadata: grpc.Metadata | undefined,
+  ): Promise<any>;
 }
 
 export class GrpcWebImpl {
-  private host: string
+  private host: string;
   private options: {
-    transport?: grpc.TransportFactory
+    transport?: grpc.TransportFactory;
 
-    debug?: boolean
-    metadata?: grpc.Metadata
-    upStreamRetryCodes?: number[]
-  }
+    debug?: boolean;
+    metadata?: grpc.Metadata;
+    upStreamRetryCodes?: number[];
+  };
 
   constructor(
     host: string,
     options: {
-      transport?: grpc.TransportFactory
+      transport?: grpc.TransportFactory;
 
-      debug?: boolean
-      metadata?: grpc.Metadata
-      upStreamRetryCodes?: number[]
-    }
+      debug?: boolean;
+      metadata?: grpc.Metadata;
+      upStreamRetryCodes?: number[];
+    },
   ) {
-    this.host = host
-    this.options = options
+    this.host = host;
+    this.options = options;
   }
 
   unary<T extends UnaryMethodDefinitionish>(
     methodDesc: T,
     _request: any,
-    metadata: grpc.Metadata | undefined
+    metadata: grpc.Metadata | undefined,
   ): Promise<any> {
-    const request = { ..._request, ...methodDesc.requestType }
-    const maybeCombinedMetadata =
-      metadata && this.options.metadata
-        ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
-        : metadata ?? this.options.metadata
+    const request = { ..._request, ...methodDesc.requestType };
+    const maybeCombinedMetadata = metadata && this.options.metadata
+      ? new BrowserHeaders({ ...this.options?.metadata.headersMap, ...metadata?.headersMap })
+      : metadata ?? this.options.metadata;
     return new Promise((resolve, reject) => {
       grpc.unary(methodDesc, {
         request,
@@ -418,60 +405,56 @@ export class GrpcWebImpl {
         debug: this.options.debug ?? false,
         onEnd: function (response) {
           if (response.status === grpc.Code.OK) {
-            resolve(response.message!.toObject())
+            resolve(response.message!.toObject());
           } else {
-            const err = new GrpcWebError(response.statusMessage, response.status, response.trailers)
-            reject(err)
+            const err = new GrpcWebError(response.statusMessage, response.status, response.trailers);
+            reject(err);
           }
-        }
-      })
-    })
+        },
+      });
+    });
   }
 }
 
 function bytesFromBase64(b64: string): Uint8Array {
   if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
   } else {
-    const bin = globalThis.atob(b64)
-    const arr = new Uint8Array(bin.length)
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i)
+      arr[i] = bin.charCodeAt(i);
     }
-    return arr
+    return arr;
   }
 }
 
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
-    return globalThis.Buffer.from(arr).toString('base64')
+    return globalThis.Buffer.from(arr).toString("base64");
   } else {
-    const bin: string[] = []
+    const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(globalThis.String.fromCharCode(byte))
-    })
-    return globalThis.btoa(bin.join(''))
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends globalThis.Array<infer U>
-  ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export class GrpcWebError extends globalThis.Error {
   constructor(message: string, public code: grpc.Code, public metadata: grpc.Metadata) {
-    super(message)
+    super(message);
   }
 }

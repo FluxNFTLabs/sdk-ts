@@ -11,7 +11,7 @@ type InstructionType<TInputData extends IInstructionInputData> = {
     index: number;
     layout: BufferLayout.Layout<TInputData>;
 };
-  
+
 function getAlloc(type: any, fields: any): number {
     const getItemAlloc = (item: any): number => {
         if (item.span >= 0) {
@@ -50,7 +50,7 @@ export function encodeData<TInputData extends IInstructionInputData>(
     type.layout.encode(layoutFields, data);
     return data;
 }
-  
+
 /*
 export function decodeData<TInputData extends IInstructionInputData>(
     type: InstructionType<TInputData>,
@@ -72,7 +72,6 @@ export function decodeData<TInputData extends IInstructionInputData>(
     return data;
   }
   */
-  
 export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> => {
     const bs = BufferLayout.struct<Readonly<Uint8Array>>(
       [
@@ -107,9 +106,9 @@ export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> =
     };
   
     return bs
-  }
+}
   
-  export type UpgradableLoaderInstructionData = {
+export type UpgradableLoaderInstructionData = {
     InitializeBuffer: IInstructionInputData,
     Write: IInstructionInputData & {
       offset: number,
@@ -118,7 +117,7 @@ export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> =
     DeployWithMaxDataLen: IInstructionInputData & {
       maxLen: number,
     }
-  }
+}
   
 // UPGRADABLE_LOADER: native program 
 export const UPGRADABLE_LOADER_LAYOUTS = {
@@ -146,7 +145,7 @@ export const UPGRADABLE_LOADER_LAYOUTS = {
       ])
     },
 }
-  
+
 export function toFluxSvmTransaction(senderAddr: string, solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
     // we don't use recent blockhash in flux so just let it be zero
     solTx.recentBlockhash = '0x0'

@@ -120,7 +120,8 @@ export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> =
     }
   }
   
-  export const UPGRADABLE_LOADER_LAYOUTS = {
+// UPGRADABLE_LOADER: native program 
+export const UPGRADABLE_LOADER_LAYOUTS = {
     InitializeBuffer: {
       index: 0,
       layout: BufferLayout.struct<UpgradableLoaderInstructionData['InitializeBuffer']>([
@@ -144,9 +145,9 @@ export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> =
         BufferLayout.nu64('maxLen'), // usize in RUST = u64
       ])
     },
-  }
+}
   
-  export function toFluxSvmTransaction(senderAddr: string, solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
+export function toFluxSvmTransaction(senderAddr: string, solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
     // we don't use recent blockhash in flux so just let it be zero
     solTx.recentBlockhash = '0x0'
     let message = solTx.compileMessage()

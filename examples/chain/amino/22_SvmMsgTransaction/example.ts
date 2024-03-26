@@ -202,6 +202,7 @@ async function broadcastSvmTransactionMsg(
   // upload program and finalize the deployments
   const chunkSize = 1200
   let solUploadTransaction = new web3.Transaction()
+  // 1 tx = n instructions (IX)
   for(let i = 0; i < programBinary.length; i += chunkSize) {
     let next = i + chunkSize
     if (next > programBinary.length) {
@@ -294,10 +295,10 @@ async function broadcastSvmTransactionMsg(
   
   // interact with the program
   let executeIx = new web3.TransactionInstruction({
-    programId: programPubkey,
+    programId: programPubkey, // program ID = contract address
     keys: [
       {
-				pubkey:  programInteractor,
+				pubkey:  programInteractor, // account that interacts
 				isWritable: true,
 				isSigner:   true,
 			},

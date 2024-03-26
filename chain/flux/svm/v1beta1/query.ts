@@ -63,7 +63,7 @@ export const AccountRequest = {
 
   toJSON(message: AccountRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -183,7 +183,7 @@ export const ProgramAccountsRequest = {
 
   toJSON(message: ProgramAccountsRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;

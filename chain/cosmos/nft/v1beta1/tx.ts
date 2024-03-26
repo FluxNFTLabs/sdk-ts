@@ -97,16 +97,16 @@ export const MsgSend = {
 
   toJSON(message: MsgSend): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       obj.receiver = message.receiver;
     }
     return obj;

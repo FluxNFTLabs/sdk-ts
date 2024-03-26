@@ -109,19 +109,19 @@ export const BIP44Params = {
 
   toJSON(message: BIP44Params): unknown {
     const obj: any = {};
-    if (message.purpose !== 0) {
+    if (message.purpose !== undefined) {
       obj.purpose = Math.round(message.purpose);
     }
-    if (message.coin_type !== 0) {
+    if (message.coin_type !== undefined) {
       obj.coin_type = Math.round(message.coin_type);
     }
-    if (message.account !== 0) {
+    if (message.account !== undefined) {
       obj.account = Math.round(message.account);
     }
-    if (message.change === true) {
+    if (message.change !== undefined) {
       obj.change = message.change;
     }
-    if (message.address_index !== 0) {
+    if (message.address_index !== undefined) {
       obj.address_index = Math.round(message.address_index);
     }
     return obj;

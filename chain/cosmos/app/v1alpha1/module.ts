@@ -155,7 +155,7 @@ export const ModuleDescriptor = {
 
   toJSON(message: ModuleDescriptor): unknown {
     const obj: any = {};
-    if (message.go_import !== "") {
+    if (message.go_import !== undefined) {
       obj.go_import = message.go_import;
     }
     if (message.use_package?.length) {
@@ -235,10 +235,10 @@ export const PackageReference = {
 
   toJSON(message: PackageReference): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.revision !== 0) {
+    if (message.revision !== undefined) {
       obj.revision = Math.round(message.revision);
     }
     return obj;
@@ -298,7 +298,7 @@ export const MigrateFromInfo = {
 
   toJSON(message: MigrateFromInfo): unknown {
     const obj: any = {};
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       obj.module = message.module;
     }
     return obj;

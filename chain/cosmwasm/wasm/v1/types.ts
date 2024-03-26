@@ -225,7 +225,7 @@ export const AccessTypeParam = {
 
   toJSON(message: AccessTypeParam): unknown {
     const obj: any = {};
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       obj.value = accessTypeToJSON(message.value);
     }
     return obj;
@@ -299,7 +299,7 @@ export const AccessConfig = {
 
   toJSON(message: AccessConfig): unknown {
     const obj: any = {};
-    if (message.permission !== 0) {
+    if (message.permission !== undefined) {
       obj.permission = accessTypeToJSON(message.permission);
     }
     if (message.addresses?.length) {
@@ -382,7 +382,7 @@ export const Params = {
     if (message.code_upload_access !== undefined) {
       obj.code_upload_access = AccessConfig.toJSON(message.code_upload_access);
     }
-    if (message.instantiate_default_permission !== 0) {
+    if (message.instantiate_default_permission !== undefined) {
       obj.instantiate_default_permission = accessTypeToJSON(message.instantiate_default_permission);
     }
     return obj;
@@ -470,10 +470,10 @@ export const CodeInfo = {
 
   toJSON(message: CodeInfo): unknown {
     const obj: any = {};
-    if (message.code_hash.length !== 0) {
+    if (message.code_hash !== undefined) {
       obj.code_hash = base64FromBytes(message.code_hash);
     }
-    if (message.creator !== "") {
+    if (message.creator !== undefined) {
       obj.creator = message.creator;
     }
     if (message.instantiate_config !== undefined) {
@@ -607,22 +607,22 @@ export const ContractInfo = {
 
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
-    if (message.creator !== "") {
+    if (message.creator !== undefined) {
       obj.creator = message.creator;
     }
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.label !== "") {
+    if (message.label !== undefined) {
       obj.label = message.label;
     }
     if (message.created !== undefined) {
       obj.created = AbsoluteTxPosition.toJSON(message.created);
     }
-    if (message.ibc_port_id !== "") {
+    if (message.ibc_port_id !== undefined) {
       obj.ibc_port_id = message.ibc_port_id;
     }
     if (message.extension !== undefined) {
@@ -729,16 +729,16 @@ export const ContractCodeHistoryEntry = {
 
   toJSON(message: ContractCodeHistoryEntry): unknown {
     const obj: any = {};
-    if (message.operation !== 0) {
+    if (message.operation !== undefined) {
       obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation);
     }
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
     if (message.updated !== undefined) {
       obj.updated = AbsoluteTxPosition.toJSON(message.updated);
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     return obj;
@@ -815,10 +815,10 @@ export const AbsoluteTxPosition = {
 
   toJSON(message: AbsoluteTxPosition): unknown {
     const obj: any = {};
-    if (message.block_height !== "0") {
+    if (message.block_height !== undefined) {
       obj.block_height = message.block_height;
     }
-    if (message.tx_index !== "0") {
+    if (message.tx_index !== undefined) {
       obj.tx_index = message.tx_index;
     }
     return obj;
@@ -891,10 +891,10 @@ export const Model = {
 
   toJSON(message: Model): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;

@@ -83,10 +83,10 @@ export const ClassCommissionsProposal = {
 
   toJSON(message: ClassCommissionsProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.class_commissions?.length) {
@@ -176,10 +176,10 @@ export const VerifiersProposal = {
 
   toJSON(message: VerifiersProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.verifiers?.length) {

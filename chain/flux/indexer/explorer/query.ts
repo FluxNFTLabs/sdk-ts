@@ -71,7 +71,7 @@ export const ListEvmContractsRequest = {
 
   toJSON(message: ListEvmContractsRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {

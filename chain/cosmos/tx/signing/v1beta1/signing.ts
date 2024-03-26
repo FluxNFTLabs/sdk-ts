@@ -299,7 +299,7 @@ export const SignatureDescriptor = {
     if (message.data !== undefined) {
       obj.data = SignatureDescriptor_Data.toJSON(message.data);
     }
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -457,10 +457,10 @@ export const SignatureDescriptor_Data_Single = {
 
   toJSON(message: SignatureDescriptor_Data_Single): unknown {
     const obj: any = {};
-    if (message.mode !== 0) {
+    if (message.mode !== undefined) {
       obj.mode = signModeToJSON(message.mode);
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     return obj;

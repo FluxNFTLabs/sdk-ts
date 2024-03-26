@@ -1414,10 +1414,10 @@ export const FileDescriptorProto = {
 
   toJSON(message: FileDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.package !== "") {
+    if (message.package !== undefined) {
       obj.package = message.package;
     }
     if (message.dependency?.length) {
@@ -1447,7 +1447,7 @@ export const FileDescriptorProto = {
     if (message.source_code_info !== undefined) {
       obj.source_code_info = SourceCodeInfo.toJSON(message.source_code_info);
     }
-    if (message.syntax !== "") {
+    if (message.syntax !== undefined) {
       obj.syntax = message.syntax;
     }
     return obj;
@@ -1649,7 +1649,7 @@ export const DescriptorProto = {
 
   toJSON(message: DescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.field?.length) {
@@ -1770,10 +1770,10 @@ export const DescriptorProto_ExtensionRange = {
 
   toJSON(message: DescriptorProto_ExtensionRange): unknown {
     const obj: any = {};
-    if (message.start !== 0) {
+    if (message.start !== undefined) {
       obj.start = Math.round(message.start);
     }
-    if (message.end !== 0) {
+    if (message.end !== undefined) {
       obj.end = Math.round(message.end);
     }
     if (message.options !== undefined) {
@@ -1852,10 +1852,10 @@ export const DescriptorProto_ReservedRange = {
 
   toJSON(message: DescriptorProto_ReservedRange): unknown {
     const obj: any = {};
-    if (message.start !== 0) {
+    if (message.start !== undefined) {
       obj.start = Math.round(message.start);
     }
-    if (message.end !== 0) {
+    if (message.end !== undefined) {
       obj.end = Math.round(message.end);
     }
     return obj;
@@ -2102,37 +2102,37 @@ export const FieldDescriptorProto = {
 
   toJSON(message: FieldDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       obj.number = Math.round(message.number);
     }
-    if (message.label !== 1) {
+    if (message.label !== undefined) {
       obj.label = fieldDescriptorProto_LabelToJSON(message.label);
     }
-    if (message.type !== 1) {
+    if (message.type !== undefined) {
       obj.type = fieldDescriptorProto_TypeToJSON(message.type);
     }
-    if (message.type_name !== "") {
+    if (message.type_name !== undefined) {
       obj.type_name = message.type_name;
     }
-    if (message.extendee !== "") {
+    if (message.extendee !== undefined) {
       obj.extendee = message.extendee;
     }
-    if (message.default_value !== "") {
+    if (message.default_value !== undefined) {
       obj.default_value = message.default_value;
     }
-    if (message.oneof_index !== 0) {
+    if (message.oneof_index !== undefined) {
       obj.oneof_index = Math.round(message.oneof_index);
     }
-    if (message.json_name !== "") {
+    if (message.json_name !== undefined) {
       obj.json_name = message.json_name;
     }
     if (message.options !== undefined) {
       obj.options = FieldOptions.toJSON(message.options);
     }
-    if (message.proto3_optional === true) {
+    if (message.proto3_optional !== undefined) {
       obj.proto3_optional = message.proto3_optional;
     }
     return obj;
@@ -2216,7 +2216,7 @@ export const OneofDescriptorProto = {
 
   toJSON(message: OneofDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.options !== undefined) {
@@ -2333,7 +2333,7 @@ export const EnumDescriptorProto = {
 
   toJSON(message: EnumDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.value?.length) {
@@ -2424,10 +2424,10 @@ export const EnumDescriptorProto_EnumReservedRange = {
 
   toJSON(message: EnumDescriptorProto_EnumReservedRange): unknown {
     const obj: any = {};
-    if (message.start !== 0) {
+    if (message.start !== undefined) {
       obj.start = Math.round(message.start);
     }
-    if (message.end !== 0) {
+    if (message.end !== undefined) {
       obj.end = Math.round(message.end);
     }
     return obj;
@@ -2511,10 +2511,10 @@ export const EnumValueDescriptorProto = {
 
   toJSON(message: EnumValueDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       obj.number = Math.round(message.number);
     }
     if (message.options !== undefined) {
@@ -2606,7 +2606,7 @@ export const ServiceDescriptorProto = {
 
   toJSON(message: ServiceDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.method?.length) {
@@ -2739,22 +2739,22 @@ export const MethodDescriptorProto = {
 
   toJSON(message: MethodDescriptorProto): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.input_type !== "") {
+    if (message.input_type !== undefined) {
       obj.input_type = message.input_type;
     }
-    if (message.output_type !== "") {
+    if (message.output_type !== undefined) {
       obj.output_type = message.output_type;
     }
     if (message.options !== undefined) {
       obj.options = MethodOptions.toJSON(message.options);
     }
-    if (message.client_streaming === true) {
+    if (message.client_streaming !== undefined) {
       obj.client_streaming = message.client_streaming;
     }
-    if (message.server_streaming === true) {
+    if (message.server_streaming !== undefined) {
       obj.server_streaming = message.server_streaming;
     }
     return obj;
@@ -3076,64 +3076,64 @@ export const FileOptions = {
 
   toJSON(message: FileOptions): unknown {
     const obj: any = {};
-    if (message.java_package !== "") {
+    if (message.java_package !== undefined) {
       obj.java_package = message.java_package;
     }
-    if (message.java_outer_classname !== "") {
+    if (message.java_outer_classname !== undefined) {
       obj.java_outer_classname = message.java_outer_classname;
     }
-    if (message.java_multiple_files === true) {
+    if (message.java_multiple_files !== undefined) {
       obj.java_multiple_files = message.java_multiple_files;
     }
-    if (message.java_generate_equals_and_hash === true) {
+    if (message.java_generate_equals_and_hash !== undefined) {
       obj.java_generate_equals_and_hash = message.java_generate_equals_and_hash;
     }
-    if (message.java_string_check_utf8 === true) {
+    if (message.java_string_check_utf8 !== undefined) {
       obj.java_string_check_utf8 = message.java_string_check_utf8;
     }
-    if (message.optimize_for !== 1) {
+    if (message.optimize_for !== undefined) {
       obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimize_for);
     }
-    if (message.go_package !== "") {
+    if (message.go_package !== undefined) {
       obj.go_package = message.go_package;
     }
-    if (message.cc_generic_services === true) {
+    if (message.cc_generic_services !== undefined) {
       obj.cc_generic_services = message.cc_generic_services;
     }
-    if (message.java_generic_services === true) {
+    if (message.java_generic_services !== undefined) {
       obj.java_generic_services = message.java_generic_services;
     }
-    if (message.py_generic_services === true) {
+    if (message.py_generic_services !== undefined) {
       obj.py_generic_services = message.py_generic_services;
     }
-    if (message.php_generic_services === true) {
+    if (message.php_generic_services !== undefined) {
       obj.php_generic_services = message.php_generic_services;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.cc_enable_arenas === true) {
+    if (message.cc_enable_arenas !== undefined) {
       obj.cc_enable_arenas = message.cc_enable_arenas;
     }
-    if (message.objc_class_prefix !== "") {
+    if (message.objc_class_prefix !== undefined) {
       obj.objc_class_prefix = message.objc_class_prefix;
     }
-    if (message.csharp_namespace !== "") {
+    if (message.csharp_namespace !== undefined) {
       obj.csharp_namespace = message.csharp_namespace;
     }
-    if (message.swift_prefix !== "") {
+    if (message.swift_prefix !== undefined) {
       obj.swift_prefix = message.swift_prefix;
     }
-    if (message.php_class_prefix !== "") {
+    if (message.php_class_prefix !== undefined) {
       obj.php_class_prefix = message.php_class_prefix;
     }
-    if (message.php_namespace !== "") {
+    if (message.php_namespace !== undefined) {
       obj.php_namespace = message.php_namespace;
     }
-    if (message.php_metadata_namespace !== "") {
+    if (message.php_metadata_namespace !== undefined) {
       obj.php_metadata_namespace = message.php_metadata_namespace;
     }
-    if (message.ruby_package !== "") {
+    if (message.ruby_package !== undefined) {
       obj.ruby_package = message.ruby_package;
     }
     if (message.uninterpreted_option?.length) {
@@ -3273,16 +3273,16 @@ export const MessageOptions = {
 
   toJSON(message: MessageOptions): unknown {
     const obj: any = {};
-    if (message.message_set_wire_format === true) {
+    if (message.message_set_wire_format !== undefined) {
       obj.message_set_wire_format = message.message_set_wire_format;
     }
-    if (message.no_standard_descriptor_accessor === true) {
+    if (message.no_standard_descriptor_accessor !== undefined) {
       obj.no_standard_descriptor_accessor = message.no_standard_descriptor_accessor;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.map_entry === true) {
+    if (message.map_entry !== undefined) {
       obj.map_entry = message.map_entry;
     }
     if (message.uninterpreted_option?.length) {
@@ -3438,25 +3438,25 @@ export const FieldOptions = {
 
   toJSON(message: FieldOptions): unknown {
     const obj: any = {};
-    if (message.ctype !== 0) {
+    if (message.ctype !== undefined) {
       obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
     }
-    if (message.packed === true) {
+    if (message.packed !== undefined) {
       obj.packed = message.packed;
     }
-    if (message.jstype !== 0) {
+    if (message.jstype !== undefined) {
       obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
     }
-    if (message.lazy === true) {
+    if (message.lazy !== undefined) {
       obj.lazy = message.lazy;
     }
-    if (message.unverified_lazy === true) {
+    if (message.unverified_lazy !== undefined) {
       obj.unverified_lazy = message.unverified_lazy;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.weak === true) {
+    if (message.weak !== undefined) {
       obj.weak = message.weak;
     }
     if (message.uninterpreted_option?.length) {
@@ -3614,10 +3614,10 @@ export const EnumOptions = {
 
   toJSON(message: EnumOptions): unknown {
     const obj: any = {};
-    if (message.allow_alias === true) {
+    if (message.allow_alias !== undefined) {
       obj.allow_alias = message.allow_alias;
     }
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
     if (message.uninterpreted_option?.length) {
@@ -3696,7 +3696,7 @@ export const EnumValueOptions = {
 
   toJSON(message: EnumValueOptions): unknown {
     const obj: any = {};
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
     if (message.uninterpreted_option?.length) {
@@ -3774,7 +3774,7 @@ export const ServiceOptions = {
 
   toJSON(message: ServiceOptions): unknown {
     const obj: any = {};
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
     if (message.uninterpreted_option?.length) {
@@ -3865,10 +3865,10 @@ export const MethodOptions = {
 
   toJSON(message: MethodOptions): unknown {
     const obj: any = {};
-    if (message.deprecated === true) {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.idempotency_level !== 0) {
+    if (message.idempotency_level !== undefined) {
       obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotency_level);
     }
     if (message.uninterpreted_option?.length) {
@@ -4013,22 +4013,22 @@ export const UninterpretedOption = {
     if (message.name?.length) {
       obj.name = message.name.map((e) => UninterpretedOption_NamePart.toJSON(e));
     }
-    if (message.identifier_value !== "") {
+    if (message.identifier_value !== undefined) {
       obj.identifier_value = message.identifier_value;
     }
-    if (message.positive_int_value !== "0") {
+    if (message.positive_int_value !== undefined) {
       obj.positive_int_value = message.positive_int_value;
     }
-    if (message.negative_int_value !== "0") {
+    if (message.negative_int_value !== undefined) {
       obj.negative_int_value = message.negative_int_value;
     }
-    if (message.double_value !== 0) {
+    if (message.double_value !== undefined) {
       obj.double_value = message.double_value;
     }
-    if (message.string_value.length !== 0) {
+    if (message.string_value !== undefined) {
       obj.string_value = base64FromBytes(message.string_value);
     }
-    if (message.aggregate_value !== "") {
+    if (message.aggregate_value !== undefined) {
       obj.aggregate_value = message.aggregate_value;
     }
     return obj;
@@ -4106,10 +4106,10 @@ export const UninterpretedOption_NamePart = {
 
   toJSON(message: UninterpretedOption_NamePart): unknown {
     const obj: any = {};
-    if (message.name_part !== "") {
+    if (message.name_part !== undefined) {
       obj.name_part = message.name_part;
     }
-    if (message.is_extension === true) {
+    if (message.is_extension !== undefined) {
       obj.is_extension = message.is_extension;
     }
     return obj;
@@ -4310,10 +4310,10 @@ export const SourceCodeInfo_Location = {
     if (message.span?.length) {
       obj.span = message.span.map((e) => Math.round(e));
     }
-    if (message.leading_comments !== "") {
+    if (message.leading_comments !== undefined) {
       obj.leading_comments = message.leading_comments;
     }
-    if (message.trailing_comments !== "") {
+    if (message.trailing_comments !== undefined) {
       obj.trailing_comments = message.trailing_comments;
     }
     if (message.leading_detached_comments?.length) {
@@ -4492,13 +4492,13 @@ export const GeneratedCodeInfo_Annotation = {
     if (message.path?.length) {
       obj.path = message.path.map((e) => Math.round(e));
     }
-    if (message.source_file !== "") {
+    if (message.source_file !== undefined) {
       obj.source_file = message.source_file;
     }
-    if (message.begin !== 0) {
+    if (message.begin !== undefined) {
       obj.begin = Math.round(message.begin);
     }
-    if (message.end !== 0) {
+    if (message.end !== undefined) {
       obj.end = Math.round(message.end);
     }
     return obj;

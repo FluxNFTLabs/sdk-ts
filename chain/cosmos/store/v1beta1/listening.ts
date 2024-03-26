@@ -109,16 +109,16 @@ export const StoreKVPair = {
 
   toJSON(message: StoreKVPair): unknown {
     const obj: any = {};
-    if (message.store_key !== "") {
+    if (message.store_key !== undefined) {
       obj.store_key = message.store_key;
     }
-    if (message.delete === true) {
+    if (message.delete !== undefined) {
       obj.delete = message.delete;
     }
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;

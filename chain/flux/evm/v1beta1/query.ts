@@ -64,7 +64,7 @@ export const BalanceRequest = {
 
   toJSON(message: BalanceRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -181,10 +181,10 @@ export const ContractQueryRequest = {
 
   toJSON(message: ContractQueryRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.calldata.length !== 0) {
+    if (message.calldata !== undefined) {
       obj.calldata = base64FromBytes(message.calldata);
     }
     return obj;
@@ -257,10 +257,10 @@ export const ContractQueryResponse = {
 
   toJSON(message: ContractQueryResponse): unknown {
     const obj: any = {};
-    if (message.output.length !== 0) {
+    if (message.output !== undefined) {
       obj.output = base64FromBytes(message.output);
     }
-    if (message.status_code !== "") {
+    if (message.status_code !== undefined) {
       obj.status_code = message.status_code;
     }
     return obj;

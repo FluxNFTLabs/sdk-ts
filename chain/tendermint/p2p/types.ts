@@ -97,13 +97,13 @@ export const NetAddress = {
 
   toJSON(message: NetAddress): unknown {
     const obj: any = {};
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.ip !== "") {
+    if (message.ip !== undefined) {
       obj.ip = message.ip;
     }
-    if (message.port !== 0) {
+    if (message.port !== undefined) {
       obj.port = Math.round(message.port);
     }
     return obj;
@@ -188,13 +188,13 @@ export const ProtocolVersion = {
 
   toJSON(message: ProtocolVersion): unknown {
     const obj: any = {};
-    if (message.p2p !== "0") {
+    if (message.p2p !== undefined) {
       obj.p2p = message.p2p;
     }
-    if (message.block !== "0") {
+    if (message.block !== undefined) {
       obj.block = message.block;
     }
-    if (message.app !== "0") {
+    if (message.app !== undefined) {
       obj.app = message.app;
     }
     return obj;
@@ -346,22 +346,22 @@ export const DefaultNodeInfo = {
     if (message.protocol_version !== undefined) {
       obj.protocol_version = ProtocolVersion.toJSON(message.protocol_version);
     }
-    if (message.default_node_id !== "") {
+    if (message.default_node_id !== undefined) {
       obj.default_node_id = message.default_node_id;
     }
-    if (message.listen_addr !== "") {
+    if (message.listen_addr !== undefined) {
       obj.listen_addr = message.listen_addr;
     }
-    if (message.network !== "") {
+    if (message.network !== undefined) {
       obj.network = message.network;
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.channels.length !== 0) {
+    if (message.channels !== undefined) {
       obj.channels = base64FromBytes(message.channels);
     }
-    if (message.moniker !== "") {
+    if (message.moniker !== undefined) {
       obj.moniker = message.moniker;
     }
     if (message.other !== undefined) {
@@ -447,10 +447,10 @@ export const DefaultNodeInfoOther = {
 
   toJSON(message: DefaultNodeInfoOther): unknown {
     const obj: any = {};
-    if (message.tx_index !== "") {
+    if (message.tx_index !== undefined) {
       obj.tx_index = message.tx_index;
     }
-    if (message.rpc_address !== "") {
+    if (message.rpc_address !== undefined) {
       obj.rpc_address = message.rpc_address;
     }
     return obj;

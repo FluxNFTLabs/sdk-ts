@@ -70,7 +70,7 @@ export const EthAccount = {
     if (message.base_account !== undefined) {
       obj.base_account = BaseAccount.toJSON(message.base_account);
     }
-    if (message.code_hash.length !== 0) {
+    if (message.code_hash !== undefined) {
       obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;

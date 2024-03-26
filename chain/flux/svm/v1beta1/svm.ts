@@ -132,22 +132,22 @@ export const Account = {
 
   toJSON(message: Account): unknown {
     const obj: any = {};
-    if (message.pubkey.length !== 0) {
+    if (message.pubkey !== undefined) {
       obj.pubkey = base64FromBytes(message.pubkey);
     }
-    if (message.owner.length !== 0) {
+    if (message.owner !== undefined) {
       obj.owner = base64FromBytes(message.owner);
     }
-    if (message.lamports !== "0") {
+    if (message.lamports !== undefined) {
       obj.lamports = message.lamports;
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.executable === true) {
+    if (message.executable !== undefined) {
       obj.executable = message.executable;
     }
-    if (message.rent_epoch !== "0") {
+    if (message.rent_epoch !== undefined) {
       obj.rent_epoch = message.rent_epoch;
     }
     return obj;
@@ -257,19 +257,19 @@ export const InstructionAccount = {
 
   toJSON(message: InstructionAccount): unknown {
     const obj: any = {};
-    if (message.id_index !== 0) {
+    if (message.id_index !== undefined) {
       obj.id_index = Math.round(message.id_index);
     }
-    if (message.caller_index !== 0) {
+    if (message.caller_index !== undefined) {
       obj.caller_index = Math.round(message.caller_index);
     }
-    if (message.callee_index !== 0) {
+    if (message.callee_index !== undefined) {
       obj.callee_index = Math.round(message.callee_index);
     }
-    if (message.is_signer === true) {
+    if (message.is_signer !== undefined) {
       obj.is_signer = message.is_signer;
     }
-    if (message.is_writable === true) {
+    if (message.is_writable !== undefined) {
       obj.is_writable = message.is_writable;
     }
     return obj;
@@ -378,7 +378,7 @@ export const Instruction = {
     if (message.accounts?.length) {
       obj.accounts = message.accounts.map((e) => InstructionAccount.toJSON(e));
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

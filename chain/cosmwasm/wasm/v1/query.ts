@@ -283,7 +283,7 @@ export const QueryContractInfoRequest = {
 
   toJSON(message: QueryContractInfoRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -355,7 +355,7 @@ export const QueryContractInfoResponse = {
 
   toJSON(message: QueryContractInfoResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.contract_info !== undefined) {
@@ -433,7 +433,7 @@ export const QueryContractHistoryRequest = {
 
   toJSON(message: QueryContractHistoryRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
@@ -591,7 +591,7 @@ export const QueryContractsByCodeRequest = {
 
   toJSON(message: QueryContractsByCodeRequest): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
     if (message.pagination !== undefined) {
@@ -749,7 +749,7 @@ export const QueryAllContractStateRequest = {
 
   toJSON(message: QueryAllContractStateRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.pagination !== undefined) {
@@ -905,10 +905,10 @@ export const QueryRawContractStateRequest = {
 
   toJSON(message: QueryRawContractStateRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.query_data.length !== 0) {
+    if (message.query_data !== undefined) {
       obj.query_data = base64FromBytes(message.query_data);
     }
     return obj;
@@ -968,7 +968,7 @@ export const QueryRawContractStateResponse = {
 
   toJSON(message: QueryRawContractStateResponse): unknown {
     const obj: any = {};
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1040,10 +1040,10 @@ export const QuerySmartContractStateRequest = {
 
   toJSON(message: QuerySmartContractStateRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.query_data.length !== 0) {
+    if (message.query_data !== undefined) {
       obj.query_data = base64FromBytes(message.query_data);
     }
     return obj;
@@ -1103,7 +1103,7 @@ export const QuerySmartContractStateResponse = {
 
   toJSON(message: QuerySmartContractStateResponse): unknown {
     const obj: any = {};
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1162,7 +1162,7 @@ export const QueryCodeRequest = {
 
   toJSON(message: QueryCodeRequest): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
     return obj;
@@ -1258,13 +1258,13 @@ export const CodeInfoResponse = {
 
   toJSON(message: CodeInfoResponse): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
-    if (message.creator !== "") {
+    if (message.creator !== undefined) {
       obj.creator = message.creator;
     }
-    if (message.data_hash.length !== 0) {
+    if (message.data_hash !== undefined) {
       obj.data_hash = base64FromBytes(message.data_hash);
     }
     if (message.instantiate_permission !== undefined) {
@@ -1348,7 +1348,7 @@ export const QueryCodeResponse = {
     if (message.code_info !== undefined) {
       obj.code_info = CodeInfoResponse.toJSON(message.code_info);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1821,7 +1821,7 @@ export const QueryContractsByCreatorRequest = {
 
   toJSON(message: QueryContractsByCreatorRequest): unknown {
     const obj: any = {};
-    if (message.creator_address !== "") {
+    if (message.creator_address !== undefined) {
       obj.creator_address = message.creator_address;
     }
     if (message.pagination !== undefined) {
@@ -2001,16 +2001,16 @@ export const QueryBuildAddressRequest = {
 
   toJSON(message: QueryBuildAddressRequest): unknown {
     const obj: any = {};
-    if (message.code_hash !== "") {
+    if (message.code_hash !== undefined) {
       obj.code_hash = message.code_hash;
     }
-    if (message.creator_address !== "") {
+    if (message.creator_address !== undefined) {
       obj.creator_address = message.creator_address;
     }
-    if (message.salt !== "") {
+    if (message.salt !== undefined) {
       obj.salt = message.salt;
     }
-    if (message.init_args.length !== 0) {
+    if (message.init_args !== undefined) {
       obj.init_args = base64FromBytes(message.init_args);
     }
     return obj;
@@ -2072,7 +2072,7 @@ export const QueryBuildAddressResponse = {
 
   toJSON(message: QueryBuildAddressResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;

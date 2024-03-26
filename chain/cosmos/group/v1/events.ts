@@ -126,7 +126,7 @@ export const EventCreateGroup = {
 
   toJSON(message: EventCreateGroup): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     return obj;
@@ -185,7 +185,7 @@ export const EventUpdateGroup = {
 
   toJSON(message: EventUpdateGroup): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     return obj;
@@ -244,7 +244,7 @@ export const EventCreateGroupPolicy = {
 
   toJSON(message: EventCreateGroupPolicy): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -303,7 +303,7 @@ export const EventUpdateGroupPolicy = {
 
   toJSON(message: EventUpdateGroupPolicy): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -362,7 +362,7 @@ export const EventSubmitProposal = {
 
   toJSON(message: EventSubmitProposal): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -421,7 +421,7 @@ export const EventWithdrawProposal = {
 
   toJSON(message: EventWithdrawProposal): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -480,7 +480,7 @@ export const EventVote = {
 
   toJSON(message: EventVote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -563,13 +563,13 @@ export const EventExec = {
 
   toJSON(message: EventExec): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.result !== 0) {
+    if (message.result !== undefined) {
       obj.result = proposalExecutorResultToJSON(message.result);
     }
-    if (message.logs !== "") {
+    if (message.logs !== undefined) {
       obj.logs = message.logs;
     }
     return obj;
@@ -643,10 +643,10 @@ export const EventLeaveGroup = {
 
   toJSON(message: EventLeaveGroup): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -730,10 +730,10 @@ export const EventProposalPruned = {
 
   toJSON(message: EventProposalPruned): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       obj.status = proposalStatusToJSON(message.status);
     }
     if (message.tally_result !== undefined) {

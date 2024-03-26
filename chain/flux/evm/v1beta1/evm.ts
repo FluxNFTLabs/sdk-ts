@@ -88,10 +88,10 @@ export const Account = {
 
   toJSON(message: Account): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.balance.length !== 0) {
+    if (message.balance !== undefined) {
       obj.balance = base64FromBytes(message.balance);
     }
     return obj;
@@ -164,10 +164,10 @@ export const Code = {
 
   toJSON(message: Code): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.bytecode.length !== 0) {
+    if (message.bytecode !== undefined) {
       obj.bytecode = base64FromBytes(message.bytecode);
     }
     return obj;
@@ -240,7 +240,7 @@ export const ContractStorage = {
 
   toJSON(message: ContractStorage): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.storages?.length) {
@@ -316,10 +316,10 @@ export const Storage = {
 
   toJSON(message: Storage): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;
@@ -455,25 +455,25 @@ export const ContractInfo = {
 
   toJSON(message: ContractInfo): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.bytecode.length !== 0) {
+    if (message.bytecode !== undefined) {
       obj.bytecode = base64FromBytes(message.bytecode);
     }
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.calldata.length !== 0) {
+    if (message.calldata !== undefined) {
       obj.calldata = base64FromBytes(message.calldata);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
-    if (message.number !== "0") {
+    if (message.number !== undefined) {
       obj.number = message.number;
     }
     return obj;

@@ -64,7 +64,7 @@ export const GetAccountRequest = {
 
   toJSON(message: GetAccountRequest): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -147,13 +147,13 @@ export const Account = {
 
   toJSON(message: Account): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.alias !== "") {
+    if (message.alias !== undefined) {
       obj.alias = message.alias;
     }
-    if (message.nonce !== "0") {
+    if (message.nonce !== undefined) {
       obj.nonce = message.nonce;
     }
     return obj;
@@ -214,7 +214,7 @@ export const SetAccountAliasRequest = {
 
   toJSON(message: SetAccountAliasRequest): unknown {
     const obj: any = {};
-    if (message.alias !== "") {
+    if (message.alias !== undefined) {
       obj.alias = message.alias;
     }
     return obj;

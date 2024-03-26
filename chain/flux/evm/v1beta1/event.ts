@@ -120,7 +120,7 @@ export const EventExecute = {
 
   toJSON(message: EventExecute): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -203,13 +203,13 @@ export const EventEmitLog = {
 
   toJSON(message: EventEmitLog): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.topics?.length) {
       obj.topics = message.topics.map((e) => base64FromBytes(e));
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;

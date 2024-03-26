@@ -82,7 +82,7 @@ export const MerkleRoot = {
 
   toJSON(message: MerkleRoot): unknown {
     const obj: any = {};
-    if (message.hash.length !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = base64FromBytes(message.hash);
     }
     return obj;
@@ -141,7 +141,7 @@ export const MerklePrefix = {
 
   toJSON(message: MerklePrefix): unknown {
     const obj: any = {};
-    if (message.key_prefix.length !== 0) {
+    if (message.key_prefix !== undefined) {
       obj.key_prefix = base64FromBytes(message.key_prefix);
     }
     return obj;

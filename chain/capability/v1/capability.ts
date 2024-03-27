@@ -70,7 +70,7 @@ export const Capability = {
 
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    if (message.index !== "0") {
+    if (message.index !== undefined) {
       obj.index = message.index;
     }
     return obj;
@@ -142,10 +142,10 @@ export const Owner = {
 
   toJSON(message: Owner): unknown {
     const obj: any = {};
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       obj.module = message.module;
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     return obj;

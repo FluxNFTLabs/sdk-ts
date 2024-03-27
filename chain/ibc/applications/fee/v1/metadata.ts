@@ -68,10 +68,10 @@ export const Metadata = {
 
   toJSON(message: Metadata): unknown {
     const obj: any = {};
-    if (message.fee_version !== "") {
+    if (message.fee_version !== undefined) {
       obj.fee_version = message.fee_version;
     }
-    if (message.app_version !== "") {
+    if (message.app_version !== undefined) {
       obj.app_version = message.app_version;
     }
     return obj;

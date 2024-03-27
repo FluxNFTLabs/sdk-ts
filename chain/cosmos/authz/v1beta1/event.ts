@@ -90,13 +90,13 @@ export const EventGrant = {
 
   toJSON(message: EventGrant): unknown {
     const obj: any = {};
-    if (message.msg_type_url !== "") {
+    if (message.msg_type_url !== undefined) {
       obj.msg_type_url = message.msg_type_url;
     }
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       obj.granter = message.granter;
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       obj.grantee = message.grantee;
     }
     return obj;
@@ -181,13 +181,13 @@ export const EventRevoke = {
 
   toJSON(message: EventRevoke): unknown {
     const obj: any = {};
-    if (message.msg_type_url !== "") {
+    if (message.msg_type_url !== undefined) {
       obj.msg_type_url = message.msg_type_url;
     }
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       obj.granter = message.granter;
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       obj.grantee = message.grantee;
     }
     return obj;

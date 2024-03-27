@@ -233,7 +233,7 @@ export const MsgCreateClient = {
     if (message.consensus_state !== undefined) {
       obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -367,13 +367,13 @@ export const MsgUpdateClient = {
 
   toJSON(message: MsgUpdateClient): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.client_message !== undefined) {
       obj.client_message = Any.toJSON(message.client_message);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -549,7 +549,7 @@ export const MsgUpgradeClient = {
 
   toJSON(message: MsgUpgradeClient): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.client_state !== undefined) {
@@ -558,13 +558,13 @@ export const MsgUpgradeClient = {
     if (message.consensus_state !== undefined) {
       obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.proof_upgrade_client.length !== 0) {
+    if (message.proof_upgrade_client !== undefined) {
       obj.proof_upgrade_client = base64FromBytes(message.proof_upgrade_client);
     }
-    if (message.proof_upgrade_consensus_state.length !== 0) {
+    if (message.proof_upgrade_consensus_state !== undefined) {
       obj.proof_upgrade_consensus_state = base64FromBytes(message.proof_upgrade_consensus_state);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -701,13 +701,13 @@ export const MsgSubmitMisbehaviour = {
 
   toJSON(message: MsgSubmitMisbehaviour): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.misbehaviour !== undefined) {
       obj.misbehaviour = Any.toJSON(message.misbehaviour);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -839,13 +839,13 @@ export const MsgRecoverClient = {
 
   toJSON(message: MsgRecoverClient): unknown {
     const obj: any = {};
-    if (message.subject_client_id !== "") {
+    if (message.subject_client_id !== undefined) {
       obj.subject_client_id = message.subject_client_id;
     }
-    if (message.substitute_client_id !== "") {
+    if (message.substitute_client_id !== undefined) {
       obj.substitute_client_id = message.substitute_client_id;
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -983,7 +983,7 @@ export const MsgIBCSoftwareUpgrade = {
     if (message.upgraded_client_state !== undefined) {
       obj.upgraded_client_state = Any.toJSON(message.upgraded_client_state);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     return obj;
@@ -1105,7 +1105,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     if (message.params !== undefined) {

@@ -237,7 +237,7 @@ export const QueryInflationResponse = {
 
   toJSON(message: QueryInflationResponse): unknown {
     const obj: any = {};
-    if (message.inflation.length !== 0) {
+    if (message.inflation !== undefined) {
       obj.inflation = base64FromBytes(message.inflation);
     }
     return obj;
@@ -345,7 +345,7 @@ export const QueryAnnualProvisionsResponse = {
 
   toJSON(message: QueryAnnualProvisionsResponse): unknown {
     const obj: any = {};
-    if (message.annual_provisions.length !== 0) {
+    if (message.annual_provisions !== undefined) {
       obj.annual_provisions = base64FromBytes(message.annual_provisions);
     }
     return obj;

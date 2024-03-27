@@ -170,10 +170,10 @@ export const GenesisState = {
     if (message.params !== undefined) {
       obj.params = Params.toJSON(message.params);
     }
-    if (message.create_localhost === true) {
+    if (message.create_localhost !== undefined) {
       obj.create_localhost = message.create_localhost;
     }
-    if (message.next_client_sequence !== "0") {
+    if (message.next_client_sequence !== undefined) {
       obj.next_client_sequence = message.next_client_sequence;
     }
     return obj;
@@ -252,10 +252,10 @@ export const GenesisMetadata = {
 
   toJSON(message: GenesisMetadata): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;
@@ -330,7 +330,7 @@ export const IdentifiedGenesisMetadata = {
 
   toJSON(message: IdentifiedGenesisMetadata): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.client_metadata?.length) {

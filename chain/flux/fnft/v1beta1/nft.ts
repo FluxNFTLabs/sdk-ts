@@ -220,19 +220,19 @@ export const Class = {
 
   toJSON(message: Class): unknown {
     const obj: any = {};
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.symbol !== "") {
+    if (message.symbol !== undefined) {
       obj.symbol = message.symbol;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       obj.url = message.url;
     }
     if (message.data !== undefined) {
@@ -525,34 +525,34 @@ export const NFT = {
 
   toJSON(message: NFT): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       obj.url = message.url;
     }
-    if (message.supply !== "") {
+    if (message.supply !== undefined) {
       obj.supply = message.supply;
     }
-    if (message.owner_equity_percent !== "") {
+    if (message.owner_equity_percent !== undefined) {
       obj.owner_equity_percent = message.owner_equity_percent;
     }
-    if (message.available_shares !== "") {
+    if (message.available_shares !== undefined) {
       obj.available_shares = message.available_shares;
     }
     if (message.initial_price !== undefined) {
       obj.initial_price = Coin.toJSON(message.initial_price);
     }
-    if (message.ISO_timestamp !== "0") {
+    if (message.ISO_timestamp !== undefined) {
       obj.ISO_timestamp = message.ISO_timestamp;
     }
-    if (message.ISO_success_percent !== "0") {
+    if (message.ISO_success_percent !== undefined) {
       obj.ISO_success_percent = message.ISO_success_percent;
     }
-    if (message.accepted_payment_denom !== "") {
+    if (message.accepted_payment_denom !== undefined) {
       obj.accepted_payment_denom = message.accepted_payment_denom;
     }
     if (message.sponsorships?.length) {
@@ -561,22 +561,22 @@ export const NFT = {
     if (message.revenue !== undefined) {
       obj.revenue = Coin.toJSON(message.revenue);
     }
-    if (message.dividend_interval !== "0") {
+    if (message.dividend_interval !== undefined) {
       obj.dividend_interval = message.dividend_interval;
     }
-    if (message.last_dividend_timestamp !== "0") {
+    if (message.last_dividend_timestamp !== undefined) {
       obj.last_dividend_timestamp = message.last_dividend_timestamp;
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
-    if (message.product_count !== "0") {
+    if (message.product_count !== undefined) {
       obj.product_count = message.product_count;
     }
-    if (message.holder_count !== "0") {
+    if (message.holder_count !== undefined) {
       obj.holder_count = message.holder_count;
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       obj.status = nFTStatusToJSON(message.status);
     }
     if (message.data !== undefined) {
@@ -673,10 +673,10 @@ export const Sponsorship = {
 
   toJSON(message: Sponsorship): unknown {
     const obj: any = {};
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       obj.url = message.url;
     }
     return obj;
@@ -771,16 +771,16 @@ export const Holder = {
 
   toJSON(message: Holder): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;

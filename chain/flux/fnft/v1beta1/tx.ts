@@ -290,31 +290,31 @@ export const MsgCreate = {
 
   toJSON(message: MsgCreate): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.supply !== "") {
+    if (message.supply !== undefined) {
       obj.supply = message.supply;
     }
-    if (message.owner_equity_percent !== "") {
+    if (message.owner_equity_percent !== undefined) {
       obj.owner_equity_percent = message.owner_equity_percent;
     }
     if (message.initial_price !== undefined) {
       obj.initial_price = Coin.toJSON(message.initial_price);
     }
-    if (message.ISO_timestamp !== "0") {
+    if (message.ISO_timestamp !== undefined) {
       obj.ISO_timestamp = message.ISO_timestamp;
     }
-    if (message.ISO_success_percent !== "0") {
+    if (message.ISO_success_percent !== undefined) {
       obj.ISO_success_percent = message.ISO_success_percent;
     }
-    if (message.accepted_payment_denom !== "") {
+    if (message.accepted_payment_denom !== undefined) {
       obj.accepted_payment_denom = message.accepted_payment_denom;
     }
-    if (message.dividend_interval !== "0") {
+    if (message.dividend_interval !== undefined) {
       obj.dividend_interval = message.dividend_interval;
     }
     return obj;
@@ -463,16 +463,16 @@ export const MsgPurchaseShares = {
 
   toJSON(message: MsgPurchaseShares): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;
@@ -625,19 +625,19 @@ export const MsgTransferShares = {
 
   toJSON(message: MsgTransferShares): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       obj.receiver = message.receiver;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;
@@ -780,16 +780,16 @@ export const MsgDepositShares = {
 
   toJSON(message: MsgDepositShares): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;
@@ -931,16 +931,16 @@ export const MsgWithdrawShares = {
 
   toJSON(message: MsgWithdrawShares): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;
@@ -1093,19 +1093,19 @@ export const MsgSponsor = {
 
   toJSON(message: MsgSponsor): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     if (message.coin !== undefined) {
       obj.coin = Coin.toJSON(message.coin);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     return obj;

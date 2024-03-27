@@ -81,13 +81,13 @@ export const QueryDenomLinkRequest = {
 
   toJSON(message: QueryDenomLinkRequest): unknown {
     const obj: any = {};
-    if (message.src_plane !== 0) {
+    if (message.src_plane !== undefined) {
       obj.src_plane = planeToJSON(message.src_plane);
     }
-    if (message.dst_plane !== 0) {
+    if (message.dst_plane !== undefined) {
       obj.dst_plane = planeToJSON(message.dst_plane);
     }
-    if (message.src_addr !== "") {
+    if (message.src_addr !== undefined) {
       obj.src_addr = message.src_addr;
     }
     return obj;
@@ -148,7 +148,7 @@ export const QueryDenomLinkResponse = {
 
   toJSON(message: QueryDenomLinkResponse): unknown {
     const obj: any = {};
-    if (message.dst_addr !== "") {
+    if (message.dst_addr !== undefined) {
       obj.dst_addr = message.dst_addr;
     }
     return obj;

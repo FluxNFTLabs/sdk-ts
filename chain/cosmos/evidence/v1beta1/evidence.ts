@@ -98,16 +98,16 @@ export const Equivocation = {
 
   toJSON(message: Equivocation): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.power !== "0") {
+    if (message.power !== undefined) {
       obj.power = message.power;
     }
-    if (message.consensus_address !== "") {
+    if (message.consensus_address !== undefined) {
       obj.consensus_address = message.consensus_address;
     }
     return obj;

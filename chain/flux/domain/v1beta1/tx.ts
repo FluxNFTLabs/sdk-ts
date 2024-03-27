@@ -114,10 +114,10 @@ export const MsgClaim = {
 
   toJSON(message: MsgClaim): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.alias !== "") {
+    if (message.alias !== undefined) {
       obj.alias = message.alias;
     }
     if (message.amount !== undefined) {
@@ -252,10 +252,10 @@ export const MsgExtend = {
 
   toJSON(message: MsgExtend): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.alias !== "") {
+    if (message.alias !== undefined) {
       obj.alias = message.alias;
     }
     if (message.amount !== undefined) {
@@ -390,10 +390,10 @@ export const MsgTransfer = {
 
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       obj.receiver = message.receiver;
     }
     if (message.domains?.length) {
@@ -515,7 +515,7 @@ export const MsgWithdraw = {
 
   toJSON(message: MsgWithdraw): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
     if (message.domains?.length) {
@@ -636,7 +636,7 @@ export const MsgDeposit = {
 
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
     if (message.domains?.length) {

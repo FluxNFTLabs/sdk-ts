@@ -112,16 +112,16 @@ export const MsgIBCSend = {
 
   toJSON(message: MsgIBCSend): unknown {
     const obj: any = {};
-    if (message.channel !== "") {
+    if (message.channel !== undefined) {
       obj.channel = message.channel;
     }
-    if (message.timeout_height !== "0") {
+    if (message.timeout_height !== undefined) {
       obj.timeout_height = message.timeout_height;
     }
-    if (message.timeout_timestamp !== "0") {
+    if (message.timeout_timestamp !== undefined) {
       obj.timeout_timestamp = message.timeout_timestamp;
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -183,7 +183,7 @@ export const MsgIBCSendResponse = {
 
   toJSON(message: MsgIBCSendResponse): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -242,7 +242,7 @@ export const MsgIBCCloseChannel = {
 
   toJSON(message: MsgIBCCloseChannel): unknown {
     const obj: any = {};
-    if (message.channel !== "") {
+    if (message.channel !== undefined) {
       obj.channel = message.channel;
     }
     return obj;

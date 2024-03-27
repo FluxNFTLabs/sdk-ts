@@ -293,7 +293,7 @@ export const ServiceCommandDescriptor = {
 
   toJSON(message: ServiceCommandDescriptor): unknown {
     const obj: any = {};
-    if (message.service !== "") {
+    if (message.service !== undefined) {
       obj.service = message.service;
     }
     if (message.rpc_command_options?.length) {
@@ -386,7 +386,7 @@ export const ServiceCommandDescriptor_SubCommandsEntry = {
 
   toJSON(message: ServiceCommandDescriptor_SubCommandsEntry): unknown {
     const obj: any = {};
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
     if (message.value !== undefined) {
@@ -601,19 +601,19 @@ export const RpcCommandOptions = {
 
   toJSON(message: RpcCommandOptions): unknown {
     const obj: any = {};
-    if (message.rpc_method !== "") {
+    if (message.rpc_method !== undefined) {
       obj.rpc_method = message.rpc_method;
     }
-    if (message.use !== "") {
+    if (message.use !== undefined) {
       obj.use = message.use;
     }
-    if (message.long !== "") {
+    if (message.long !== undefined) {
       obj.long = message.long;
     }
-    if (message.short !== "") {
+    if (message.short !== undefined) {
       obj.short = message.short;
     }
-    if (message.example !== "") {
+    if (message.example !== undefined) {
       obj.example = message.example;
     }
     if (message.alias?.length) {
@@ -622,10 +622,10 @@ export const RpcCommandOptions = {
     if (message.suggest_for?.length) {
       obj.suggest_for = message.suggest_for;
     }
-    if (message.deprecated !== "") {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
     if (message.flag_options) {
@@ -640,7 +640,7 @@ export const RpcCommandOptions = {
     if (message.positional_args?.length) {
       obj.positional_args = message.positional_args.map((e) => PositionalArgDescriptor.toJSON(e));
     }
-    if (message.skip === true) {
+    if (message.skip !== undefined) {
       obj.skip = message.skip;
     }
     return obj;
@@ -731,7 +731,7 @@ export const RpcCommandOptions_FlagOptionsEntry = {
 
   toJSON(message: RpcCommandOptions_FlagOptionsEntry): unknown {
     const obj: any = {};
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
     if (message.value !== undefined) {
@@ -872,25 +872,25 @@ export const FlagOptions = {
 
   toJSON(message: FlagOptions): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.shorthand !== "") {
+    if (message.shorthand !== undefined) {
       obj.shorthand = message.shorthand;
     }
-    if (message.usage !== "") {
+    if (message.usage !== undefined) {
       obj.usage = message.usage;
     }
-    if (message.default_value !== "") {
+    if (message.default_value !== undefined) {
       obj.default_value = message.default_value;
     }
-    if (message.deprecated !== "") {
+    if (message.deprecated !== undefined) {
       obj.deprecated = message.deprecated;
     }
-    if (message.shorthand_deprecated !== "") {
+    if (message.shorthand_deprecated !== undefined) {
       obj.shorthand_deprecated = message.shorthand_deprecated;
     }
-    if (message.hidden === true) {
+    if (message.hidden !== undefined) {
       obj.hidden = message.hidden;
     }
     return obj;
@@ -968,10 +968,10 @@ export const PositionalArgDescriptor = {
 
   toJSON(message: PositionalArgDescriptor): unknown {
     const obj: any = {};
-    if (message.proto_field !== "") {
+    if (message.proto_field !== undefined) {
       obj.proto_field = message.proto_field;
     }
-    if (message.varargs === true) {
+    if (message.varargs !== undefined) {
       obj.varargs = message.varargs;
     }
     return obj;

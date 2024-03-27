@@ -223,16 +223,16 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.community_tax !== "") {
+    if (message.community_tax !== undefined) {
       obj.community_tax = message.community_tax;
     }
-    if (message.base_proposer_reward !== "") {
+    if (message.base_proposer_reward !== undefined) {
       obj.base_proposer_reward = message.base_proposer_reward;
     }
-    if (message.bonus_proposer_reward !== "") {
+    if (message.bonus_proposer_reward !== undefined) {
       obj.bonus_proposer_reward = message.bonus_proposer_reward;
     }
-    if (message.withdraw_addr_enabled === true) {
+    if (message.withdraw_addr_enabled !== undefined) {
       obj.withdraw_addr_enabled = message.withdraw_addr_enabled;
     }
     return obj;
@@ -312,7 +312,7 @@ export const ValidatorHistoricalRewards = {
     if (message.cumulative_reward_ratio?.length) {
       obj.cumulative_reward_ratio = message.cumulative_reward_ratio.map((e) => DecCoin.toJSON(e));
     }
-    if (message.reference_count !== 0) {
+    if (message.reference_count !== undefined) {
       obj.reference_count = Math.round(message.reference_count);
     }
     return obj;
@@ -388,7 +388,7 @@ export const ValidatorCurrentRewards = {
     if (message.rewards?.length) {
       obj.rewards = message.rewards.map((e) => DecCoin.toJSON(e));
     }
-    if (message.period !== "0") {
+    if (message.period !== undefined) {
       obj.period = message.period;
     }
     return obj;
@@ -585,10 +585,10 @@ export const ValidatorSlashEvent = {
 
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
-    if (message.validator_period !== "0") {
+    if (message.validator_period !== undefined) {
       obj.validator_period = message.validator_period;
     }
-    if (message.fraction !== "") {
+    if (message.fraction !== undefined) {
       obj.fraction = message.fraction;
     }
     return obj;
@@ -810,13 +810,13 @@ export const CommunityPoolSpendProposal = {
 
   toJSON(message: CommunityPoolSpendProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.recipient !== "") {
+    if (message.recipient !== undefined) {
       obj.recipient = message.recipient;
     }
     if (message.amount?.length) {
@@ -905,13 +905,13 @@ export const DelegatorStartingInfo = {
 
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
-    if (message.previous_period !== "0") {
+    if (message.previous_period !== undefined) {
       obj.previous_period = message.previous_period;
     }
-    if (message.stake !== "") {
+    if (message.stake !== undefined) {
       obj.stake = message.stake;
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
     return obj;
@@ -985,7 +985,7 @@ export const DelegationDelegatorReward = {
 
   toJSON(message: DelegationDelegatorReward): unknown {
     const obj: any = {};
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     if (message.reward?.length) {
@@ -1094,19 +1094,19 @@ export const CommunityPoolSpendProposalWithDeposit = {
 
   toJSON(message: CommunityPoolSpendProposalWithDeposit): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.recipient !== "") {
+    if (message.recipient !== undefined) {
       obj.recipient = message.recipient;
     }
-    if (message.amount !== "") {
+    if (message.amount !== undefined) {
       obj.amount = message.amount;
     }
-    if (message.deposit !== "") {
+    if (message.deposit !== undefined) {
       obj.deposit = message.deposit;
     }
     return obj;

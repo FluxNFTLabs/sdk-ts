@@ -123,10 +123,10 @@ export const Allocation = {
 
   toJSON(message: Allocation): unknown {
     const obj: any = {};
-    if (message.source_port !== "") {
+    if (message.source_port !== undefined) {
       obj.source_port = message.source_port;
     }
-    if (message.source_channel !== "") {
+    if (message.source_channel !== undefined) {
       obj.source_channel = message.source_channel;
     }
     if (message.spend_limit?.length) {

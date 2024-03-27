@@ -379,40 +379,40 @@ export const TxResponse = {
 
   toJSON(message: TxResponse): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.txhash !== "") {
+    if (message.txhash !== undefined) {
       obj.txhash = message.txhash;
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       obj.codespace = message.codespace;
     }
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       obj.code = Math.round(message.code);
     }
-    if (message.data !== "") {
+    if (message.data !== undefined) {
       obj.data = message.data;
     }
-    if (message.raw_log !== "") {
+    if (message.raw_log !== undefined) {
       obj.raw_log = message.raw_log;
     }
     if (message.logs?.length) {
       obj.logs = message.logs.map((e) => ABCIMessageLog.toJSON(e));
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       obj.info = message.info;
     }
-    if (message.gas_wanted !== "0") {
+    if (message.gas_wanted !== undefined) {
       obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gas_used !== "0") {
+    if (message.gas_used !== undefined) {
       obj.gas_used = message.gas_used;
     }
     if (message.tx !== undefined) {
       obj.tx = Any.toJSON(message.tx);
     }
-    if (message.timestamp !== "") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
     if (message.events?.length) {
@@ -510,10 +510,10 @@ export const ABCIMessageLog = {
 
   toJSON(message: ABCIMessageLog): unknown {
     const obj: any = {};
-    if (message.msg_index !== 0) {
+    if (message.msg_index !== undefined) {
       obj.msg_index = Math.round(message.msg_index);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       obj.log = message.log;
     }
     if (message.events?.length) {
@@ -592,7 +592,7 @@ export const StringEvent = {
 
   toJSON(message: StringEvent): unknown {
     const obj: any = {};
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       obj.type = message.type;
     }
     if (message.attributes?.length) {
@@ -668,10 +668,10 @@ export const Attribute = {
 
   toJSON(message: Attribute): unknown {
     const obj: any = {};
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       obj.value = message.value;
     }
     return obj;
@@ -744,10 +744,10 @@ export const GasInfo = {
 
   toJSON(message: GasInfo): unknown {
     const obj: any = {};
-    if (message.gas_wanted !== "0") {
+    if (message.gas_wanted !== undefined) {
       obj.gas_wanted = message.gas_wanted;
     }
-    if (message.gas_used !== "0") {
+    if (message.gas_used !== undefined) {
       obj.gas_used = message.gas_used;
     }
     return obj;
@@ -844,10 +844,10 @@ export const Result = {
 
   toJSON(message: Result): unknown {
     const obj: any = {};
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       obj.log = message.log;
     }
     if (message.events?.length) {
@@ -1008,10 +1008,10 @@ export const MsgData = {
 
   toJSON(message: MsgData): unknown {
     const obj: any = {};
-    if (message.msg_type !== "") {
+    if (message.msg_type !== undefined) {
       obj.msg_type = message.msg_type;
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1206,19 +1206,19 @@ export const SearchTxsResult = {
 
   toJSON(message: SearchTxsResult): unknown {
     const obj: any = {};
-    if (message.total_count !== "0") {
+    if (message.total_count !== undefined) {
       obj.total_count = message.total_count;
     }
-    if (message.count !== "0") {
+    if (message.count !== undefined) {
       obj.count = message.count;
     }
-    if (message.page_number !== "0") {
+    if (message.page_number !== undefined) {
       obj.page_number = message.page_number;
     }
-    if (message.page_total !== "0") {
+    if (message.page_total !== undefined) {
       obj.page_total = message.page_total;
     }
-    if (message.limit !== "0") {
+    if (message.limit !== undefined) {
       obj.limit = message.limit;
     }
     if (message.txs?.length) {
@@ -1342,19 +1342,19 @@ export const SearchBlocksResult = {
 
   toJSON(message: SearchBlocksResult): unknown {
     const obj: any = {};
-    if (message.total_count !== "0") {
+    if (message.total_count !== undefined) {
       obj.total_count = message.total_count;
     }
-    if (message.count !== "0") {
+    if (message.count !== undefined) {
       obj.count = message.count;
     }
-    if (message.page_number !== "0") {
+    if (message.page_number !== undefined) {
       obj.page_number = message.page_number;
     }
-    if (message.page_total !== "0") {
+    if (message.page_total !== undefined) {
       obj.page_total = message.page_total;
     }
-    if (message.limit !== "0") {
+    if (message.limit !== undefined) {
       obj.limit = message.limit;
     }
     if (message.blocks?.length) {

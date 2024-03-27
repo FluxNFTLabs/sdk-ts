@@ -149,7 +149,7 @@ export const ModuleSchemaDescriptor = {
     if (message.schema_file?.length) {
       obj.schema_file = message.schema_file.map((e) => ModuleSchemaDescriptor_FileEntry.toJSON(e));
     }
-    if (message.prefix.length !== 0) {
+    if (message.prefix !== undefined) {
       obj.prefix = base64FromBytes(message.prefix);
     }
     return obj;
@@ -233,13 +233,13 @@ export const ModuleSchemaDescriptor_FileEntry = {
 
   toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown {
     const obj: any = {};
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       obj.id = Math.round(message.id);
     }
-    if (message.proto_file_name !== "") {
+    if (message.proto_file_name !== undefined) {
       obj.proto_file_name = message.proto_file_name;
     }
-    if (message.storage_type !== 0) {
+    if (message.storage_type !== undefined) {
       obj.storage_type = storageTypeToJSON(message.storage_type);
     }
     return obj;

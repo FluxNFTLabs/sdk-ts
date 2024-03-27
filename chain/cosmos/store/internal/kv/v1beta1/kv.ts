@@ -127,10 +127,10 @@ export const Pair = {
 
   toJSON(message: Pair): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;

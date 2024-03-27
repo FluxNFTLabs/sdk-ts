@@ -87,13 +87,13 @@ export const ExtensionOptionsWeb3Tx = {
 
   toJSON(message: ExtensionOptionsWeb3Tx): unknown {
     const obj: any = {};
-    if (message.typedDataChainID !== "0") {
+    if (message.typedDataChainID !== undefined) {
       obj.typedDataChainID = message.typedDataChainID;
     }
-    if (message.feePayer !== "") {
+    if (message.feePayer !== undefined) {
       obj.feePayer = message.feePayer;
     }
-    if (message.feePayerSig.length !== 0) {
+    if (message.feePayerSig !== undefined) {
       obj.feePayerSig = base64FromBytes(message.feePayerSig);
     }
     return obj;

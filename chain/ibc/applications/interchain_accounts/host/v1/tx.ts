@@ -76,7 +76,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     if (message.params !== undefined) {

@@ -74,7 +74,7 @@ export const QueryDomainInfoRequest = {
 
   toJSON(message: QueryDomainInfoRequest): unknown {
     const obj: any = {};
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       obj.domain = message.domain;
     }
     return obj;
@@ -157,13 +157,13 @@ export const QueryDomainInfoResponse = {
 
   toJSON(message: QueryDomainInfoResponse): unknown {
     const obj: any = {};
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       obj.domain = message.domain;
     }
-    if (message.available === true) {
+    if (message.available !== undefined) {
       obj.available = message.available;
     }
-    if (message.price !== "") {
+    if (message.price !== undefined) {
       obj.price = message.price;
     }
     return obj;
@@ -224,7 +224,7 @@ export const QueryOwnerDomains = {
 
   toJSON(message: QueryOwnerDomains): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -296,7 +296,7 @@ export const QueryOwnerDomainsResponse = {
 
   toJSON(message: QueryOwnerDomainsResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     if (message.domains?.length) {
@@ -359,7 +359,7 @@ export const QueryDomainOwner = {
 
   toJSON(message: QueryDomainOwner): unknown {
     const obj: any = {};
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       obj.domain = message.domain;
     }
     return obj;
@@ -431,10 +431,10 @@ export const QueryDomainOwnerResponse = {
 
   toJSON(message: QueryDomainOwnerResponse): unknown {
     const obj: any = {};
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       obj.domain = message.domain;
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
     return obj;

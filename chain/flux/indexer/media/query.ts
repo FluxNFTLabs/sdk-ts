@@ -108,10 +108,10 @@ export const S3Obj = {
 
   toJSON(message: S3Obj): unknown {
     const obj: any = {};
-    if (message.op !== 0) {
+    if (message.op !== undefined) {
       obj.op = s3OperationToJSON(message.op);
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
     return obj;
@@ -184,7 +184,7 @@ export const PresignedURLRequest = {
 
   toJSON(message: PresignedURLRequest): unknown {
     const obj: any = {};
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       obj.path = message.path;
     }
     if (message.objs?.length) {
@@ -271,7 +271,7 @@ export const PresignedURLResponse = {
 
   toJSON(message: PresignedURLResponse): unknown {
     const obj: any = {};
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       obj.path = message.path;
     }
     if (message.keys?.length) {

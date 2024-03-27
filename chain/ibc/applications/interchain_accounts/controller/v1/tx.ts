@@ -134,16 +134,16 @@ export const MsgRegisterInterchainAccount = {
 
   toJSON(message: MsgRegisterInterchainAccount): unknown {
     const obj: any = {};
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
-    if (message.connection_id !== "") {
+    if (message.connection_id !== undefined) {
       obj.connection_id = message.connection_id;
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.ordering !== 0) {
+    if (message.ordering !== undefined) {
       obj.ordering = orderToJSON(message.ordering);
     }
     return obj;
@@ -218,10 +218,10 @@ export const MsgRegisterInterchainAccountResponse = {
 
   toJSON(message: MsgRegisterInterchainAccountResponse): unknown {
     const obj: any = {};
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
     return obj;
@@ -316,16 +316,16 @@ export const MsgSendTx = {
 
   toJSON(message: MsgSendTx): unknown {
     const obj: any = {};
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
-    if (message.connection_id !== "") {
+    if (message.connection_id !== undefined) {
       obj.connection_id = message.connection_id;
     }
     if (message.packet_data !== undefined) {
       obj.packet_data = InterchainAccountPacketData.toJSON(message.packet_data);
     }
-    if (message.relative_timeout !== "0") {
+    if (message.relative_timeout !== undefined) {
       obj.relative_timeout = message.relative_timeout;
     }
     return obj;
@@ -389,7 +389,7 @@ export const MsgSendTxResponse = {
 
   toJSON(message: MsgSendTxResponse): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -461,7 +461,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       obj.signer = message.signer;
     }
     if (message.params !== undefined) {

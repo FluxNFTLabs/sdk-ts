@@ -282,10 +282,10 @@ export const BlockParams = {
 
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    if (message.max_bytes !== "0") {
+    if (message.max_bytes !== undefined) {
       obj.max_bytes = message.max_bytes;
     }
-    if (message.max_gas !== "0") {
+    if (message.max_gas !== undefined) {
       obj.max_gas = message.max_gas;
     }
     return obj;
@@ -369,13 +369,13 @@ export const EvidenceParams = {
 
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
-    if (message.max_age_num_blocks !== "0") {
+    if (message.max_age_num_blocks !== undefined) {
       obj.max_age_num_blocks = message.max_age_num_blocks;
     }
     if (message.max_age_duration !== undefined) {
       obj.max_age_duration = Duration.toJSON(message.max_age_duration);
     }
-    if (message.max_bytes !== "0") {
+    if (message.max_bytes !== undefined) {
       obj.max_bytes = message.max_bytes;
     }
     return obj;
@@ -501,7 +501,7 @@ export const VersionParams = {
 
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
-    if (message.app !== "0") {
+    if (message.app !== undefined) {
       obj.app = message.app;
     }
     return obj;
@@ -573,10 +573,10 @@ export const HashedParams = {
 
   toJSON(message: HashedParams): unknown {
     const obj: any = {};
-    if (message.block_max_bytes !== "0") {
+    if (message.block_max_bytes !== undefined) {
       obj.block_max_bytes = message.block_max_bytes;
     }
-    if (message.block_max_gas !== "0") {
+    if (message.block_max_gas !== undefined) {
       obj.block_max_gas = message.block_max_gas;
     }
     return obj;
@@ -640,7 +640,7 @@ export const ABCIParams = {
 
   toJSON(message: ABCIParams): unknown {
     const obj: any = {};
-    if (message.vote_extensions_enable_height !== "0") {
+    if (message.vote_extensions_enable_height !== undefined) {
       obj.vote_extensions_enable_height = message.vote_extensions_enable_height;
     }
     return obj;

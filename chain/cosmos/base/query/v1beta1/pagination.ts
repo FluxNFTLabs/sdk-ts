@@ -156,19 +156,19 @@ export const PageRequest = {
 
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.offset !== "0") {
+    if (message.offset !== undefined) {
       obj.offset = message.offset;
     }
-    if (message.limit !== "0") {
+    if (message.limit !== undefined) {
       obj.limit = message.limit;
     }
-    if (message.count_total === true) {
+    if (message.count_total !== undefined) {
       obj.count_total = message.count_total;
     }
-    if (message.reverse === true) {
+    if (message.reverse !== undefined) {
       obj.reverse = message.reverse;
     }
     return obj;
@@ -244,10 +244,10 @@ export const PageResponse = {
 
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
-    if (message.next_key.length !== 0) {
+    if (message.next_key !== undefined) {
       obj.next_key = base64FromBytes(message.next_key);
     }
-    if (message.total !== "0") {
+    if (message.total !== undefined) {
       obj.total = message.total;
     }
     return obj;

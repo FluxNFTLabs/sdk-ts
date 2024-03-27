@@ -150,7 +150,7 @@ export const Record = {
 
   toJSON(message: Record): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.pub_key !== undefined) {

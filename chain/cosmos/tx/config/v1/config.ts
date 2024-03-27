@@ -71,10 +71,10 @@ export const Config = {
 
   toJSON(message: Config): unknown {
     const obj: any = {};
-    if (message.skip_ante_handler === true) {
+    if (message.skip_ante_handler !== undefined) {
       obj.skip_ante_handler = message.skip_ante_handler;
     }
-    if (message.skip_post_handler === true) {
+    if (message.skip_post_handler !== undefined) {
       obj.skip_post_handler = message.skip_post_handler;
     }
     return obj;

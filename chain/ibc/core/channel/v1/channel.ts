@@ -389,10 +389,10 @@ export const Channel = {
 
   toJSON(message: Channel): unknown {
     const obj: any = {};
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       obj.state = stateToJSON(message.state);
     }
-    if (message.ordering !== 0) {
+    if (message.ordering !== undefined) {
       obj.ordering = orderToJSON(message.ordering);
     }
     if (message.counterparty !== undefined) {
@@ -401,10 +401,10 @@ export const Channel = {
     if (message.connection_hops?.length) {
       obj.connection_hops = message.connection_hops;
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.upgrade_sequence !== "0") {
+    if (message.upgrade_sequence !== undefined) {
       obj.upgrade_sequence = message.upgrade_sequence;
     }
     return obj;
@@ -560,10 +560,10 @@ export const IdentifiedChannel = {
 
   toJSON(message: IdentifiedChannel): unknown {
     const obj: any = {};
-    if (message.state !== 0) {
+    if (message.state !== undefined) {
       obj.state = stateToJSON(message.state);
     }
-    if (message.ordering !== 0) {
+    if (message.ordering !== undefined) {
       obj.ordering = orderToJSON(message.ordering);
     }
     if (message.counterparty !== undefined) {
@@ -572,16 +572,16 @@ export const IdentifiedChannel = {
     if (message.connection_hops?.length) {
       obj.connection_hops = message.connection_hops;
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.upgrade_sequence !== "0") {
+    if (message.upgrade_sequence !== undefined) {
       obj.upgrade_sequence = message.upgrade_sequence;
     }
     return obj;
@@ -662,10 +662,10 @@ export const Counterparty = {
 
   toJSON(message: Counterparty): unknown {
     const obj: any = {};
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -813,28 +813,28 @@ export const Packet = {
 
   toJSON(message: Packet): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
-    if (message.source_port !== "") {
+    if (message.source_port !== undefined) {
       obj.source_port = message.source_port;
     }
-    if (message.source_channel !== "") {
+    if (message.source_channel !== undefined) {
       obj.source_channel = message.source_channel;
     }
-    if (message.destination_port !== "") {
+    if (message.destination_port !== undefined) {
       obj.destination_port = message.destination_port;
     }
-    if (message.destination_channel !== "") {
+    if (message.destination_channel !== undefined) {
       obj.destination_channel = message.destination_channel;
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     if (message.timeout_height !== undefined) {
       obj.timeout_height = Height.toJSON(message.timeout_height);
     }
-    if (message.timeout_timestamp !== "0") {
+    if (message.timeout_timestamp !== undefined) {
       obj.timeout_timestamp = message.timeout_timestamp;
     }
     return obj;
@@ -937,16 +937,16 @@ export const PacketState = {
 
   toJSON(message: PacketState): unknown {
     const obj: any = {};
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1032,13 +1032,13 @@ export const PacketId = {
 
   toJSON(message: PacketId): unknown {
     const obj: any = {};
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     return obj;
@@ -1191,7 +1191,7 @@ export const Timeout = {
     if (message.height !== undefined) {
       obj.height = Height.toJSON(message.height);
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
     return obj;

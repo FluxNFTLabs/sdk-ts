@@ -153,10 +153,10 @@ export const ClassesResponse = {
 
   toJSON(message: ClassesResponse): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.deleted !== "0") {
+    if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
     }
     if (message.classes?.length) {
@@ -255,16 +255,16 @@ export const NFTsRequest = {
 
   toJSON(message: NFTsRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
-    if (message.status !== "") {
+    if (message.status !== undefined) {
       obj.status = message.status;
     }
     return obj;
@@ -350,10 +350,10 @@ export const NFTsResponse = {
 
   toJSON(message: NFTsResponse): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.deleted !== "0") {
+    if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
     }
     if (message.nfts?.length) {
@@ -441,13 +441,13 @@ export const HoldersRequest = {
 
   toJSON(message: HoldersRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -532,10 +532,10 @@ export const HoldersResponse = {
 
   toJSON(message: HoldersResponse): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.deleted !== "0") {
+    if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
     }
     if (message.holders?.length) {

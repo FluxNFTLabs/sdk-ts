@@ -267,7 +267,7 @@ export const QueryClientStateRequest = {
 
   toJSON(message: QueryClientStateRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     return obj;
@@ -353,7 +353,7 @@ export const QueryClientStateResponse = {
     if (message.client_state !== undefined) {
       obj.client_state = Any.toJSON(message.client_state);
     }
-    if (message.proof.length !== 0) {
+    if (message.proof !== undefined) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -597,16 +597,16 @@ export const QueryConsensusStateRequest = {
 
   toJSON(message: QueryConsensusStateRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
-    if (message.revision_number !== "0") {
+    if (message.revision_number !== undefined) {
       obj.revision_number = message.revision_number;
     }
-    if (message.revision_height !== "0") {
+    if (message.revision_height !== undefined) {
       obj.revision_height = message.revision_height;
     }
-    if (message.latest_height === true) {
+    if (message.latest_height !== undefined) {
       obj.latest_height = message.latest_height;
     }
     return obj;
@@ -695,7 +695,7 @@ export const QueryConsensusStateResponse = {
     if (message.consensus_state !== undefined) {
       obj.consensus_state = Any.toJSON(message.consensus_state);
     }
-    if (message.proof.length !== 0) {
+    if (message.proof !== undefined) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -776,7 +776,7 @@ export const QueryConsensusStatesRequest = {
 
   toJSON(message: QueryConsensusStatesRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.pagination !== undefined) {
@@ -934,7 +934,7 @@ export const QueryConsensusStateHeightsRequest = {
 
   toJSON(message: QueryConsensusStateHeightsRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.pagination !== undefined) {
@@ -1079,7 +1079,7 @@ export const QueryClientStatusRequest = {
 
   toJSON(message: QueryClientStatusRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     return obj;
@@ -1138,7 +1138,7 @@ export const QueryClientStatusResponse = {
 
   toJSON(message: QueryClientStatusResponse): unknown {
     const obj: any = {};
-    if (message.status !== "") {
+    if (message.status !== undefined) {
       obj.status = message.status;
     }
     return obj;
@@ -1601,10 +1601,10 @@ export const QueryVerifyMembershipRequest = {
 
   toJSON(message: QueryVerifyMembershipRequest): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
-    if (message.proof.length !== 0) {
+    if (message.proof !== undefined) {
       obj.proof = base64FromBytes(message.proof);
     }
     if (message.proof_height !== undefined) {
@@ -1613,13 +1613,13 @@ export const QueryVerifyMembershipRequest = {
     if (message.merkle_path !== undefined) {
       obj.merkle_path = MerklePath.toJSON(message.merkle_path);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
-    if (message.time_delay !== "0") {
+    if (message.time_delay !== undefined) {
       obj.time_delay = message.time_delay;
     }
-    if (message.block_delay !== "0") {
+    if (message.block_delay !== undefined) {
       obj.block_delay = message.block_delay;
     }
     return obj;
@@ -1688,7 +1688,7 @@ export const QueryVerifyMembershipResponse = {
 
   toJSON(message: QueryVerifyMembershipResponse): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== undefined) {
       obj.success = message.success;
     }
     return obj;

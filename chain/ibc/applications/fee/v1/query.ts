@@ -219,7 +219,7 @@ export const QueryIncentivizedPacketsRequest = {
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
     }
-    if (message.query_height !== "0") {
+    if (message.query_height !== undefined) {
       obj.query_height = message.query_height;
     }
     return obj;
@@ -377,7 +377,7 @@ export const QueryIncentivizedPacketRequest = {
     if (message.packet_id !== undefined) {
       obj.packet_id = PacketId.toJSON(message.packet_id);
     }
-    if (message.query_height !== "0") {
+    if (message.query_height !== undefined) {
       obj.query_height = message.query_height;
     }
     return obj;
@@ -542,13 +542,13 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
     }
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.query_height !== "0") {
+    if (message.query_height !== undefined) {
       obj.query_height = message.query_height;
     }
     return obj;
@@ -1077,10 +1077,10 @@ export const QueryPayeeRequest = {
 
   toJSON(message: QueryPayeeRequest): unknown {
     const obj: any = {};
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== "") {
+    if (message.relayer !== undefined) {
       obj.relayer = message.relayer;
     }
     return obj;
@@ -1140,7 +1140,7 @@ export const QueryPayeeResponse = {
 
   toJSON(message: QueryPayeeResponse): unknown {
     const obj: any = {};
-    if (message.payee_address !== "") {
+    if (message.payee_address !== undefined) {
       obj.payee_address = message.payee_address;
     }
     return obj;
@@ -1212,10 +1212,10 @@ export const QueryCounterpartyPayeeRequest = {
 
   toJSON(message: QueryCounterpartyPayeeRequest): unknown {
     const obj: any = {};
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.relayer !== "") {
+    if (message.relayer !== undefined) {
       obj.relayer = message.relayer;
     }
     return obj;
@@ -1275,7 +1275,7 @@ export const QueryCounterpartyPayeeResponse = {
 
   toJSON(message: QueryCounterpartyPayeeResponse): unknown {
     const obj: any = {};
-    if (message.counterparty_payee !== "") {
+    if (message.counterparty_payee !== undefined) {
       obj.counterparty_payee = message.counterparty_payee;
     }
     return obj;
@@ -1350,7 +1350,7 @@ export const QueryFeeEnabledChannelsRequest = {
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
     }
-    if (message.query_height !== "0") {
+    if (message.query_height !== undefined) {
       obj.query_height = message.query_height;
     }
     return obj;
@@ -1505,10 +1505,10 @@ export const QueryFeeEnabledChannelRequest = {
 
   toJSON(message: QueryFeeEnabledChannelRequest): unknown {
     const obj: any = {};
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
     return obj;
@@ -1568,7 +1568,7 @@ export const QueryFeeEnabledChannelResponse = {
 
   toJSON(message: QueryFeeEnabledChannelResponse): unknown {
     const obj: any = {};
-    if (message.fee_enabled === true) {
+    if (message.fee_enabled !== undefined) {
       obj.fee_enabled = message.fee_enabled;
     }
     return obj;

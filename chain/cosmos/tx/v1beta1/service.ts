@@ -474,16 +474,16 @@ export const GetTxsEventRequest = {
     if (message.pagination !== undefined) {
       obj.pagination = PageRequest.toJSON(message.pagination);
     }
-    if (message.order_by !== 0) {
+    if (message.order_by !== undefined) {
       obj.order_by = orderByToJSON(message.order_by);
     }
-    if (message.page !== "0") {
+    if (message.page !== undefined) {
       obj.page = message.page;
     }
-    if (message.limit !== "0") {
+    if (message.limit !== undefined) {
       obj.limit = message.limit;
     }
-    if (message.query !== "") {
+    if (message.query !== undefined) {
       obj.query = message.query;
     }
     return obj;
@@ -595,7 +595,7 @@ export const GetTxsEventResponse = {
     if (message.pagination !== undefined) {
       obj.pagination = PageResponse.toJSON(message.pagination);
     }
-    if (message.total !== "0") {
+    if (message.total !== undefined) {
       obj.total = message.total;
     }
     return obj;
@@ -672,10 +672,10 @@ export const BroadcastTxRequest = {
 
   toJSON(message: BroadcastTxRequest): unknown {
     const obj: any = {};
-    if (message.tx_bytes.length !== 0) {
+    if (message.tx_bytes !== undefined) {
       obj.tx_bytes = base64FromBytes(message.tx_bytes);
     }
-    if (message.mode !== 0) {
+    if (message.mode !== undefined) {
       obj.mode = broadcastModeToJSON(message.mode);
     }
     return obj;
@@ -812,7 +812,7 @@ export const SimulateRequest = {
     if (message.tx !== undefined) {
       obj.tx = Tx.toJSON(message.tx);
     }
-    if (message.tx_bytes.length !== 0) {
+    if (message.tx_bytes !== undefined) {
       obj.tx_bytes = base64FromBytes(message.tx_bytes);
     }
     return obj;
@@ -952,7 +952,7 @@ export const GetTxRequest = {
 
   toJSON(message: GetTxRequest): unknown {
     const obj: any = {};
-    if (message.hash !== "") {
+    if (message.hash !== undefined) {
       obj.hash = message.hash;
     }
     return obj;
@@ -1102,7 +1102,7 @@ export const GetBlockWithTxsRequest = {
 
   toJSON(message: GetBlockWithTxsRequest): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
     if (message.pagination !== undefined) {
@@ -1277,7 +1277,7 @@ export const TxDecodeRequest = {
 
   toJSON(message: TxDecodeRequest): unknown {
     const obj: any = {};
-    if (message.tx_bytes.length !== 0) {
+    if (message.tx_bytes !== undefined) {
       obj.tx_bytes = base64FromBytes(message.tx_bytes);
     }
     return obj;
@@ -1454,7 +1454,7 @@ export const TxEncodeResponse = {
 
   toJSON(message: TxEncodeResponse): unknown {
     const obj: any = {};
-    if (message.tx_bytes.length !== 0) {
+    if (message.tx_bytes !== undefined) {
       obj.tx_bytes = base64FromBytes(message.tx_bytes);
     }
     return obj;
@@ -1513,7 +1513,7 @@ export const TxEncodeAminoRequest = {
 
   toJSON(message: TxEncodeAminoRequest): unknown {
     const obj: any = {};
-    if (message.amino_json !== "") {
+    if (message.amino_json !== undefined) {
       obj.amino_json = message.amino_json;
     }
     return obj;
@@ -1572,7 +1572,7 @@ export const TxEncodeAminoResponse = {
 
   toJSON(message: TxEncodeAminoResponse): unknown {
     const obj: any = {};
-    if (message.amino_binary.length !== 0) {
+    if (message.amino_binary !== undefined) {
       obj.amino_binary = base64FromBytes(message.amino_binary);
     }
     return obj;
@@ -1631,7 +1631,7 @@ export const TxDecodeAminoRequest = {
 
   toJSON(message: TxDecodeAminoRequest): unknown {
     const obj: any = {};
-    if (message.amino_binary.length !== 0) {
+    if (message.amino_binary !== undefined) {
       obj.amino_binary = base64FromBytes(message.amino_binary);
     }
     return obj;
@@ -1690,7 +1690,7 @@ export const TxDecodeAminoResponse = {
 
   toJSON(message: TxDecodeAminoResponse): unknown {
     const obj: any = {};
-    if (message.amino_json !== "") {
+    if (message.amino_json !== undefined) {
       obj.amino_json = message.amino_json;
     }
     return obj;

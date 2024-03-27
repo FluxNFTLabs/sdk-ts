@@ -65,10 +65,10 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.fee_collector_name !== "") {
+    if (message.fee_collector_name !== undefined) {
       obj.fee_collector_name = message.fee_collector_name;
     }
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     return obj;

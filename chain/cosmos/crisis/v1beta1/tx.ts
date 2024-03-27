@@ -106,13 +106,13 @@ export const MsgVerifyInvariant = {
 
   toJSON(message: MsgVerifyInvariant): unknown {
     const obj: any = {};
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       obj.sender = message.sender;
     }
-    if (message.invariant_module_name !== "") {
+    if (message.invariant_module_name !== undefined) {
       obj.invariant_module_name = message.invariant_module_name;
     }
-    if (message.invariant_route !== "") {
+    if (message.invariant_route !== undefined) {
       obj.invariant_route = message.invariant_route;
     }
     return obj;
@@ -231,7 +231,7 @@ export const MsgUpdateParams = {
 
   toJSON(message: MsgUpdateParams): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     if (message.constant_fee !== undefined) {

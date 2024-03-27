@@ -197,10 +197,10 @@ export const GetRequest = {
 
   toJSON(message: GetRequest): unknown {
     const obj: any = {};
-    if (message.message_name !== "") {
+    if (message.message_name !== undefined) {
       obj.message_name = message.message_name;
     }
-    if (message.index !== "") {
+    if (message.index !== undefined) {
       obj.index = message.index;
     }
     if (message.values?.length) {
@@ -371,10 +371,10 @@ export const ListRequest = {
 
   toJSON(message: ListRequest): unknown {
     const obj: any = {};
-    if (message.message_name !== "") {
+    if (message.message_name !== undefined) {
       obj.message_name = message.message_name;
     }
-    if (message.index !== "") {
+    if (message.index !== undefined) {
       obj.index = message.index;
     }
     if (message.prefix !== undefined) {

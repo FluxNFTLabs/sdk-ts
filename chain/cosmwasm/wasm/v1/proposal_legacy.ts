@@ -456,31 +456,31 @@ export const StoreCodeProposal = {
 
   toJSON(message: StoreCodeProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.run_as !== "") {
+    if (message.run_as !== undefined) {
       obj.run_as = message.run_as;
     }
-    if (message.wasm_byte_code.length !== 0) {
+    if (message.wasm_byte_code !== undefined) {
       obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
     if (message.instantiate_permission !== undefined) {
       obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
-    if (message.unpin_code === true) {
+    if (message.unpin_code !== undefined) {
       obj.unpin_code = message.unpin_code;
     }
-    if (message.source !== "") {
+    if (message.source !== undefined) {
       obj.source = message.source;
     }
-    if (message.builder !== "") {
+    if (message.builder !== undefined) {
       obj.builder = message.builder;
     }
-    if (message.code_hash.length !== 0) {
+    if (message.code_hash !== undefined) {
       obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;
@@ -638,25 +638,25 @@ export const InstantiateContractProposal = {
 
   toJSON(message: InstantiateContractProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.run_as !== "") {
+    if (message.run_as !== undefined) {
       obj.run_as = message.run_as;
     }
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
-    if (message.label !== "") {
+    if (message.label !== undefined) {
       obj.label = message.label;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     if (message.funds?.length) {
@@ -837,34 +837,34 @@ export const InstantiateContract2Proposal = {
 
   toJSON(message: InstantiateContract2Proposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.run_as !== "") {
+    if (message.run_as !== undefined) {
       obj.run_as = message.run_as;
     }
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
-    if (message.label !== "") {
+    if (message.label !== undefined) {
       obj.label = message.label;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     if (message.funds?.length) {
       obj.funds = message.funds.map((e) => Coin.toJSON(e));
     }
-    if (message.salt.length !== 0) {
+    if (message.salt !== undefined) {
       obj.salt = base64FromBytes(message.salt);
     }
-    if (message.fix_msg === true) {
+    if (message.fix_msg !== undefined) {
       obj.fix_msg = message.fix_msg;
     }
     return obj;
@@ -978,19 +978,19 @@ export const MigrateContractProposal = {
 
   toJSON(message: MigrateContractProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     return obj;
@@ -1088,16 +1088,16 @@ export const SudoContractProposal = {
 
   toJSON(message: SudoContractProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     return obj;
@@ -1216,19 +1216,19 @@ export const ExecuteContractProposal = {
 
   toJSON(message: ExecuteContractProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.run_as !== "") {
+    if (message.run_as !== undefined) {
       obj.run_as = message.run_as;
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     if (message.funds?.length) {
@@ -1330,16 +1330,16 @@ export const UpdateAdminProposal = {
 
   toJSON(message: UpdateAdminProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.new_admin !== "") {
+    if (message.new_admin !== undefined) {
       obj.new_admin = message.new_admin;
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
     return obj;
@@ -1425,13 +1425,13 @@ export const ClearAdminProposal = {
 
   toJSON(message: ClearAdminProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
     return obj;
@@ -1528,10 +1528,10 @@ export const PinCodesProposal = {
 
   toJSON(message: PinCodesProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.code_ids?.length) {
@@ -1631,10 +1631,10 @@ export const UnpinCodesProposal = {
 
   toJSON(message: UnpinCodesProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.code_ids?.length) {
@@ -1713,7 +1713,7 @@ export const AccessConfigUpdate = {
 
   toJSON(message: AccessConfigUpdate): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
     if (message.instantiate_permission !== undefined) {
@@ -1805,10 +1805,10 @@ export const UpdateInstantiateConfigProposal = {
 
   toJSON(message: UpdateInstantiateConfigProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.access_config_updates?.length) {
@@ -2022,43 +2022,43 @@ export const StoreAndInstantiateContractProposal = {
 
   toJSON(message: StoreAndInstantiateContractProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.run_as !== "") {
+    if (message.run_as !== undefined) {
       obj.run_as = message.run_as;
     }
-    if (message.wasm_byte_code.length !== 0) {
+    if (message.wasm_byte_code !== undefined) {
       obj.wasm_byte_code = base64FromBytes(message.wasm_byte_code);
     }
     if (message.instantiate_permission !== undefined) {
       obj.instantiate_permission = AccessConfig.toJSON(message.instantiate_permission);
     }
-    if (message.unpin_code === true) {
+    if (message.unpin_code !== undefined) {
       obj.unpin_code = message.unpin_code;
     }
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.label !== "") {
+    if (message.label !== undefined) {
       obj.label = message.label;
     }
-    if (message.msg.length !== 0) {
+    if (message.msg !== undefined) {
       obj.msg = base64FromBytes(message.msg);
     }
     if (message.funds?.length) {
       obj.funds = message.funds.map((e) => Coin.toJSON(e));
     }
-    if (message.source !== "") {
+    if (message.source !== undefined) {
       obj.source = message.source;
     }
-    if (message.builder !== "") {
+    if (message.builder !== undefined) {
       obj.builder = message.builder;
     }
-    if (message.code_hash.length !== 0) {
+    if (message.code_hash !== undefined) {
       obj.code_hash = base64FromBytes(message.code_hash);
     }
     return obj;

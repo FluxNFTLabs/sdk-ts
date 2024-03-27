@@ -199,7 +199,7 @@ export const QuerySigningInfoRequest = {
 
   toJSON(message: QuerySigningInfoRequest): unknown {
     const obj: any = {};
-    if (message.cons_address !== "") {
+    if (message.cons_address !== undefined) {
       obj.cons_address = message.cons_address;
     }
     return obj;

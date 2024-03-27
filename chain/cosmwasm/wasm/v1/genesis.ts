@@ -224,16 +224,16 @@ export const Code = {
 
   toJSON(message: Code): unknown {
     const obj: any = {};
-    if (message.code_id !== "0") {
+    if (message.code_id !== undefined) {
       obj.code_id = message.code_id;
     }
     if (message.code_info !== undefined) {
       obj.code_info = CodeInfo.toJSON(message.code_info);
     }
-    if (message.code_bytes.length !== 0) {
+    if (message.code_bytes !== undefined) {
       obj.code_bytes = base64FromBytes(message.code_bytes);
     }
-    if (message.pinned === true) {
+    if (message.pinned !== undefined) {
       obj.pinned = message.pinned;
     }
     return obj;
@@ -336,7 +336,7 @@ export const Contract = {
 
   toJSON(message: Contract): unknown {
     const obj: any = {};
-    if (message.contract_address !== "") {
+    if (message.contract_address !== undefined) {
       obj.contract_address = message.contract_address;
     }
     if (message.contract_info !== undefined) {
@@ -423,10 +423,10 @@ export const Sequence = {
 
   toJSON(message: Sequence): unknown {
     const obj: any = {};
-    if (message.id_key.length !== 0) {
+    if (message.id_key !== undefined) {
       obj.id_key = base64FromBytes(message.id_key);
     }
-    if (message.value !== "0") {
+    if (message.value !== undefined) {
       obj.value = message.value;
     }
     return obj;

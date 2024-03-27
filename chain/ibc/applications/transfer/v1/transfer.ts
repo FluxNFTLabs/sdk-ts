@@ -90,10 +90,10 @@ export const DenomTrace = {
 
   toJSON(message: DenomTrace): unknown {
     const obj: any = {};
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       obj.path = message.path;
     }
-    if (message.base_denom !== "") {
+    if (message.base_denom !== undefined) {
       obj.base_denom = message.base_denom;
     }
     return obj;
@@ -166,10 +166,10 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.send_enabled === true) {
+    if (message.send_enabled !== undefined) {
       obj.send_enabled = message.send_enabled;
     }
-    if (message.receive_enabled === true) {
+    if (message.receive_enabled !== undefined) {
       obj.receive_enabled = message.receive_enabled;
     }
     return obj;

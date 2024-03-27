@@ -375,13 +375,13 @@ export const MsgCreateGroup = {
 
   toJSON(message: MsgCreateGroup): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
     if (message.members?.length) {
       obj.members = message.members.map((e) => MemberRequest.toJSON(e));
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -442,7 +442,7 @@ export const MsgCreateGroupResponse = {
 
   toJSON(message: MsgCreateGroupResponse): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     return obj;
@@ -527,10 +527,10 @@ export const MsgUpdateGroupMembers = {
 
   toJSON(message: MsgUpdateGroupMembers): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     if (message.member_updates?.length) {
@@ -663,13 +663,13 @@ export const MsgUpdateGroupAdmin = {
 
   toJSON(message: MsgUpdateGroupAdmin): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
-    if (message.new_admin !== "") {
+    if (message.new_admin !== undefined) {
       obj.new_admin = message.new_admin;
     }
     return obj;
@@ -799,13 +799,13 @@ export const MsgUpdateGroupMetadata = {
 
   toJSON(message: MsgUpdateGroupMetadata): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -946,13 +946,13 @@ export const MsgCreateGroupPolicy = {
 
   toJSON(message: MsgCreateGroupPolicy): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     if (message.decision_policy !== undefined) {
@@ -1019,7 +1019,7 @@ export const MsgCreateGroupPolicyResponse = {
 
   toJSON(message: MsgCreateGroupPolicyResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -1102,13 +1102,13 @@ export const MsgUpdateGroupPolicyAdmin = {
 
   toJSON(message: MsgUpdateGroupPolicyAdmin): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_policy_address !== "") {
+    if (message.group_policy_address !== undefined) {
       obj.group_policy_address = message.group_policy_address;
     }
-    if (message.new_admin !== "") {
+    if (message.new_admin !== undefined) {
       obj.new_admin = message.new_admin;
     }
     return obj;
@@ -1282,19 +1282,19 @@ export const MsgCreateGroupWithPolicy = {
 
   toJSON(message: MsgCreateGroupWithPolicy): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
     if (message.members?.length) {
       obj.members = message.members.map((e) => MemberRequest.toJSON(e));
     }
-    if (message.group_metadata !== "") {
+    if (message.group_metadata !== undefined) {
       obj.group_metadata = message.group_metadata;
     }
-    if (message.group_policy_metadata !== "") {
+    if (message.group_policy_metadata !== undefined) {
       obj.group_policy_metadata = message.group_policy_metadata;
     }
-    if (message.group_policy_as_admin === true) {
+    if (message.group_policy_as_admin !== undefined) {
       obj.group_policy_as_admin = message.group_policy_as_admin;
     }
     if (message.decision_policy !== undefined) {
@@ -1376,10 +1376,10 @@ export const MsgCreateGroupWithPolicyResponse = {
 
   toJSON(message: MsgCreateGroupWithPolicyResponse): unknown {
     const obj: any = {};
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
-    if (message.group_policy_address !== "") {
+    if (message.group_policy_address !== undefined) {
       obj.group_policy_address = message.group_policy_address;
     }
     return obj;
@@ -1463,10 +1463,10 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
 
   toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_policy_address !== "") {
+    if (message.group_policy_address !== undefined) {
       obj.group_policy_address = message.group_policy_address;
     }
     if (message.decision_policy !== undefined) {
@@ -1601,13 +1601,13 @@ export const MsgUpdateGroupPolicyMetadata = {
 
   toJSON(message: MsgUpdateGroupPolicyMetadata): unknown {
     const obj: any = {};
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       obj.admin = message.admin;
     }
-    if (message.group_policy_address !== "") {
+    if (message.group_policy_address !== undefined) {
       obj.group_policy_address = message.group_policy_address;
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -1783,25 +1783,25 @@ export const MsgSubmitProposal = {
 
   toJSON(message: MsgSubmitProposal): unknown {
     const obj: any = {};
-    if (message.group_policy_address !== "") {
+    if (message.group_policy_address !== undefined) {
       obj.group_policy_address = message.group_policy_address;
     }
     if (message.proposers?.length) {
       obj.proposers = message.proposers;
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     if (message.messages?.length) {
       obj.messages = message.messages.map((e) => Any.toJSON(e));
     }
-    if (message.exec !== 0) {
+    if (message.exec !== undefined) {
       obj.exec = execToJSON(message.exec);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.summary !== "") {
+    if (message.summary !== undefined) {
       obj.summary = message.summary;
     }
     return obj;
@@ -1866,7 +1866,7 @@ export const MsgSubmitProposalResponse = {
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
     return obj;
@@ -1938,10 +1938,10 @@ export const MsgWithdrawProposal = {
 
   toJSON(message: MsgWithdrawProposal): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -2092,19 +2092,19 @@ export const MsgVote = {
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
-    if (message.option !== 0) {
+    if (message.option !== undefined) {
       obj.option = voteOptionToJSON(message.option);
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
-    if (message.exec !== 0) {
+    if (message.exec !== undefined) {
       obj.exec = execToJSON(message.exec);
     }
     return obj;
@@ -2225,10 +2225,10 @@ export const MsgExec = {
 
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.executor !== "") {
+    if (message.executor !== undefined) {
       obj.executor = message.executor;
     }
     return obj;
@@ -2288,7 +2288,7 @@ export const MsgExecResponse = {
 
   toJSON(message: MsgExecResponse): unknown {
     const obj: any = {};
-    if (message.result !== 0) {
+    if (message.result !== undefined) {
       obj.result = proposalExecutorResultToJSON(message.result);
     }
     return obj;
@@ -2360,10 +2360,10 @@ export const MsgLeaveGroup = {
 
   toJSON(message: MsgLeaveGroup): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.group_id !== "0") {
+    if (message.group_id !== undefined) {
       obj.group_id = message.group_id;
     }
     return obj;

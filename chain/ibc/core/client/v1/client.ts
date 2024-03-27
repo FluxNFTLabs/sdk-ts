@@ -173,7 +173,7 @@ export const IdentifiedClientState = {
 
   toJSON(message: IdentifiedClientState): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.client_state !== undefined) {
@@ -333,7 +333,7 @@ export const ClientConsensusStates = {
 
   toJSON(message: ClientConsensusStates): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
     if (message.consensus_states?.length) {
@@ -409,10 +409,10 @@ export const Height = {
 
   toJSON(message: Height): unknown {
     const obj: any = {};
-    if (message.revision_number !== "0") {
+    if (message.revision_number !== undefined) {
       obj.revision_number = message.revision_number;
     }
-    if (message.revision_height !== "0") {
+    if (message.revision_height !== undefined) {
       obj.revision_height = message.revision_height;
     }
     return obj;
@@ -570,16 +570,16 @@ export const ClientUpdateProposal = {
 
   toJSON(message: ClientUpdateProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
-    if (message.subject_client_id !== "") {
+    if (message.subject_client_id !== undefined) {
       obj.subject_client_id = message.subject_client_id;
     }
-    if (message.substitute_client_id !== "") {
+    if (message.substitute_client_id !== undefined) {
       obj.substitute_client_id = message.substitute_client_id;
     }
     return obj;
@@ -678,10 +678,10 @@ export const UpgradeProposal = {
 
   toJSON(message: UpgradeProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.plan !== undefined) {

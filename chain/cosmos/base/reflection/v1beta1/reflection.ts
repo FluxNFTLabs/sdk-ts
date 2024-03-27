@@ -181,7 +181,7 @@ export const ListImplementationsRequest = {
 
   toJSON(message: ListImplementationsRequest): unknown {
     const obj: any = {};
-    if (message.interface_name !== "") {
+    if (message.interface_name !== undefined) {
       obj.interface_name = message.interface_name;
     }
     return obj;

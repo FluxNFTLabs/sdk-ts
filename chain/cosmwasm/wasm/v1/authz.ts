@@ -368,7 +368,7 @@ export const CodeGrant = {
 
   toJSON(message: CodeGrant): unknown {
     const obj: any = {};
-    if (message.code_hash.length !== 0) {
+    if (message.code_hash !== undefined) {
       obj.code_hash = base64FromBytes(message.code_hash);
     }
     if (message.instantiate_permission !== undefined) {
@@ -458,7 +458,7 @@ export const ContractGrant = {
 
   toJSON(message: ContractGrant): unknown {
     const obj: any = {};
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       obj.contract = message.contract;
     }
     if (message.limit !== undefined) {
@@ -527,7 +527,7 @@ export const MaxCallsLimit = {
 
   toJSON(message: MaxCallsLimit): unknown {
     const obj: any = {};
-    if (message.remaining !== "0") {
+    if (message.remaining !== undefined) {
       obj.remaining = message.remaining;
     }
     return obj;
@@ -660,7 +660,7 @@ export const CombinedLimit = {
 
   toJSON(message: CombinedLimit): unknown {
     const obj: any = {};
-    if (message.calls_remaining !== "0") {
+    if (message.calls_remaining !== undefined) {
       obj.calls_remaining = message.calls_remaining;
     }
     if (message.amounts?.length) {

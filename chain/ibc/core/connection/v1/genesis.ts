@@ -102,7 +102,7 @@ export const GenesisState = {
     if (message.client_connection_paths?.length) {
       obj.client_connection_paths = message.client_connection_paths.map((e) => ConnectionPaths.toJSON(e));
     }
-    if (message.next_connection_sequence !== "0") {
+    if (message.next_connection_sequence !== undefined) {
       obj.next_connection_sequence = message.next_connection_sequence;
     }
     if (message.params !== undefined) {

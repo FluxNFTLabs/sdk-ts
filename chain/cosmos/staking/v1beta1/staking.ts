@@ -524,13 +524,13 @@ export const CommissionRates = {
 
   toJSON(message: CommissionRates): unknown {
     const obj: any = {};
-    if (message.rate !== "") {
+    if (message.rate !== undefined) {
       obj.rate = message.rate;
     }
-    if (message.max_rate !== "") {
+    if (message.max_rate !== undefined) {
       obj.max_rate = message.max_rate;
     }
-    if (message.max_change_rate !== "") {
+    if (message.max_change_rate !== undefined) {
       obj.max_change_rate = message.max_change_rate;
     }
     return obj;
@@ -715,19 +715,19 @@ export const Description = {
 
   toJSON(message: Description): unknown {
     const obj: any = {};
-    if (message.moniker !== "") {
+    if (message.moniker !== undefined) {
       obj.moniker = message.moniker;
     }
-    if (message.identity !== "") {
+    if (message.identity !== undefined) {
       obj.identity = message.identity;
     }
-    if (message.website !== "") {
+    if (message.website !== undefined) {
       obj.website = message.website;
     }
-    if (message.security_contact !== "") {
+    if (message.security_contact !== undefined) {
       obj.security_contact = message.security_contact;
     }
-    if (message.details !== "") {
+    if (message.details !== undefined) {
       obj.details = message.details;
     }
     return obj;
@@ -954,28 +954,28 @@ export const Validator = {
 
   toJSON(message: Validator): unknown {
     const obj: any = {};
-    if (message.operator_address !== "") {
+    if (message.operator_address !== undefined) {
       obj.operator_address = message.operator_address;
     }
     if (message.consensus_pubkey !== undefined) {
       obj.consensus_pubkey = Any.toJSON(message.consensus_pubkey);
     }
-    if (message.jailed === true) {
+    if (message.jailed !== undefined) {
       obj.jailed = message.jailed;
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       obj.status = bondStatusToJSON(message.status);
     }
-    if (message.tokens !== "") {
+    if (message.tokens !== undefined) {
       obj.tokens = message.tokens;
     }
-    if (message.delegator_shares !== "") {
+    if (message.delegator_shares !== undefined) {
       obj.delegator_shares = message.delegator_shares;
     }
     if (message.description !== undefined) {
       obj.description = Description.toJSON(message.description);
     }
-    if (message.unbonding_height !== "0") {
+    if (message.unbonding_height !== undefined) {
       obj.unbonding_height = message.unbonding_height;
     }
     if (message.unbonding_time !== undefined) {
@@ -984,10 +984,10 @@ export const Validator = {
     if (message.commission !== undefined) {
       obj.commission = Commission.toJSON(message.commission);
     }
-    if (message.min_self_delegation !== "") {
+    if (message.min_self_delegation !== undefined) {
       obj.min_self_delegation = message.min_self_delegation;
     }
-    if (message.unbonding_on_hold_ref_count !== "0") {
+    if (message.unbonding_on_hold_ref_count !== undefined) {
       obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
     if (message.unbonding_ids?.length) {
@@ -1143,10 +1143,10 @@ export const DVPair = {
 
   toJSON(message: DVPair): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -1289,13 +1289,13 @@ export const DVVTriplet = {
 
   toJSON(message: DVVTriplet): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_src_address !== "") {
+    if (message.validator_src_address !== undefined) {
       obj.validator_src_address = message.validator_src_address;
     }
-    if (message.validator_dst_address !== "") {
+    if (message.validator_dst_address !== undefined) {
       obj.validator_dst_address = message.validator_dst_address;
     }
     return obj;
@@ -1443,13 +1443,13 @@ export const Delegation = {
 
   toJSON(message: Delegation): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
-    if (message.shares !== "") {
+    if (message.shares !== undefined) {
       obj.shares = message.shares;
     }
     return obj;
@@ -1536,10 +1536,10 @@ export const UnbondingDelegation = {
 
   toJSON(message: UnbondingDelegation): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     if (message.entries?.length) {
@@ -1669,22 +1669,22 @@ export const UnbondingDelegationEntry = {
 
   toJSON(message: UnbondingDelegationEntry): unknown {
     const obj: any = {};
-    if (message.creation_height !== "0") {
+    if (message.creation_height !== undefined) {
       obj.creation_height = message.creation_height;
     }
     if (message.completion_time !== undefined) {
       obj.completion_time = message.completion_time.toISOString();
     }
-    if (message.initial_balance !== "") {
+    if (message.initial_balance !== undefined) {
       obj.initial_balance = message.initial_balance;
     }
-    if (message.balance !== "") {
+    if (message.balance !== undefined) {
       obj.balance = message.balance;
     }
-    if (message.unbonding_id !== "0") {
+    if (message.unbonding_id !== undefined) {
       obj.unbonding_id = message.unbonding_id;
     }
-    if (message.unbonding_on_hold_ref_count !== "0") {
+    if (message.unbonding_on_hold_ref_count !== undefined) {
       obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
     return obj;
@@ -1814,22 +1814,22 @@ export const RedelegationEntry = {
 
   toJSON(message: RedelegationEntry): unknown {
     const obj: any = {};
-    if (message.creation_height !== "0") {
+    if (message.creation_height !== undefined) {
       obj.creation_height = message.creation_height;
     }
     if (message.completion_time !== undefined) {
       obj.completion_time = message.completion_time.toISOString();
     }
-    if (message.initial_balance !== "") {
+    if (message.initial_balance !== undefined) {
       obj.initial_balance = message.initial_balance;
     }
-    if (message.shares_dst !== "") {
+    if (message.shares_dst !== undefined) {
       obj.shares_dst = message.shares_dst;
     }
-    if (message.unbonding_id !== "0") {
+    if (message.unbonding_id !== undefined) {
       obj.unbonding_id = message.unbonding_id;
     }
-    if (message.unbonding_on_hold_ref_count !== "0") {
+    if (message.unbonding_on_hold_ref_count !== undefined) {
       obj.unbonding_on_hold_ref_count = message.unbonding_on_hold_ref_count;
     }
     return obj;
@@ -1930,13 +1930,13 @@ export const Redelegation = {
 
   toJSON(message: Redelegation): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_src_address !== "") {
+    if (message.validator_src_address !== undefined) {
       obj.validator_src_address = message.validator_src_address;
     }
-    if (message.validator_dst_address !== "") {
+    if (message.validator_dst_address !== undefined) {
       obj.validator_dst_address = message.validator_dst_address;
     }
     if (message.entries?.length) {
@@ -2068,19 +2068,19 @@ export const Params = {
     if (message.unbonding_time !== undefined) {
       obj.unbonding_time = Duration.toJSON(message.unbonding_time);
     }
-    if (message.max_validators !== 0) {
+    if (message.max_validators !== undefined) {
       obj.max_validators = Math.round(message.max_validators);
     }
-    if (message.max_entries !== 0) {
+    if (message.max_entries !== undefined) {
       obj.max_entries = Math.round(message.max_entries);
     }
-    if (message.historical_entries !== 0) {
+    if (message.historical_entries !== undefined) {
       obj.historical_entries = Math.round(message.historical_entries);
     }
-    if (message.bond_denom !== "") {
+    if (message.bond_denom !== undefined) {
       obj.bond_denom = message.bond_denom;
     }
-    if (message.min_commission_rate !== "") {
+    if (message.min_commission_rate !== undefined) {
       obj.min_commission_rate = message.min_commission_rate;
     }
     return obj;
@@ -2244,7 +2244,7 @@ export const RedelegationEntryResponse = {
     if (message.redelegation_entry !== undefined) {
       obj.redelegation_entry = RedelegationEntry.toJSON(message.redelegation_entry);
     }
-    if (message.balance !== "") {
+    if (message.balance !== undefined) {
       obj.balance = message.balance;
     }
     return obj;
@@ -2399,10 +2399,10 @@ export const Pool = {
 
   toJSON(message: Pool): unknown {
     const obj: any = {};
-    if (message.not_bonded_tokens !== "") {
+    if (message.not_bonded_tokens !== undefined) {
       obj.not_bonded_tokens = message.not_bonded_tokens;
     }
-    if (message.bonded_tokens !== "") {
+    if (message.bonded_tokens !== undefined) {
       obj.bonded_tokens = message.bonded_tokens;
     }
     return obj;

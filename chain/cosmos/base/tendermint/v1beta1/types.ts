@@ -376,10 +376,10 @@ export const Header = {
     if (message.version !== undefined) {
       obj.version = Consensus.toJSON(message.version);
     }
-    if (message.chain_id !== "") {
+    if (message.chain_id !== undefined) {
       obj.chain_id = message.chain_id;
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
     if (message.time !== undefined) {
@@ -388,31 +388,31 @@ export const Header = {
     if (message.last_block_id !== undefined) {
       obj.last_block_id = BlockID.toJSON(message.last_block_id);
     }
-    if (message.last_commit_hash.length !== 0) {
+    if (message.last_commit_hash !== undefined) {
       obj.last_commit_hash = base64FromBytes(message.last_commit_hash);
     }
-    if (message.data_hash.length !== 0) {
+    if (message.data_hash !== undefined) {
       obj.data_hash = base64FromBytes(message.data_hash);
     }
-    if (message.validators_hash.length !== 0) {
+    if (message.validators_hash !== undefined) {
       obj.validators_hash = base64FromBytes(message.validators_hash);
     }
-    if (message.next_validators_hash.length !== 0) {
+    if (message.next_validators_hash !== undefined) {
       obj.next_validators_hash = base64FromBytes(message.next_validators_hash);
     }
-    if (message.consensus_hash.length !== 0) {
+    if (message.consensus_hash !== undefined) {
       obj.consensus_hash = base64FromBytes(message.consensus_hash);
     }
-    if (message.app_hash.length !== 0) {
+    if (message.app_hash !== undefined) {
       obj.app_hash = base64FromBytes(message.app_hash);
     }
-    if (message.last_results_hash.length !== 0) {
+    if (message.last_results_hash !== undefined) {
       obj.last_results_hash = base64FromBytes(message.last_results_hash);
     }
-    if (message.evidence_hash.length !== 0) {
+    if (message.evidence_hash !== undefined) {
       obj.evidence_hash = base64FromBytes(message.evidence_hash);
     }
-    if (message.proposer_address !== "") {
+    if (message.proposer_address !== undefined) {
       obj.proposer_address = message.proposer_address;
     }
     return obj;

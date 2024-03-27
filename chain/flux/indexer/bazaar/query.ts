@@ -86,13 +86,13 @@ export const ProductsRequest = {
 
   toJSON(message: ProductsRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.product_id !== "") {
+    if (message.product_id !== undefined) {
       obj.product_id = message.product_id;
     }
     return obj;
@@ -177,10 +177,10 @@ export const ProductsResponse = {
 
   toJSON(message: ProductsResponse): unknown {
     const obj: any = {};
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.deleted !== "0") {
+    if (message.deleted !== undefined) {
       obj.deleted = message.deleted;
     }
     if (message.products?.length) {

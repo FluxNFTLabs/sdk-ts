@@ -61,7 +61,7 @@ export const PubKey = {
 
   toJSON(message: PubKey): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
     return obj;
@@ -120,7 +120,7 @@ export const PrivKey = {
 
   toJSON(message: PrivKey): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
     return obj;

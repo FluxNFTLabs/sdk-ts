@@ -446,10 +446,10 @@ export const WeightedVoteOption = {
 
   toJSON(message: WeightedVoteOption): unknown {
     const obj: any = {};
-    if (message.option !== 0) {
+    if (message.option !== undefined) {
       obj.option = voteOptionToJSON(message.option);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       obj.weight = message.weight;
     }
     return obj;
@@ -533,10 +533,10 @@ export const Deposit = {
 
   toJSON(message: Deposit): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.depositor !== "") {
+    if (message.depositor !== undefined) {
       obj.depositor = message.depositor;
     }
     if (message.amount?.length) {
@@ -776,13 +776,13 @@ export const Proposal = {
 
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    if (message.id !== "0") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     if (message.messages?.length) {
       obj.messages = message.messages.map((e) => Any.toJSON(e));
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       obj.status = proposalStatusToJSON(message.status);
     }
     if (message.final_tally_result !== undefined) {
@@ -803,22 +803,22 @@ export const Proposal = {
     if (message.voting_end_time !== undefined) {
       obj.voting_end_time = message.voting_end_time.toISOString();
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.summary !== "") {
+    if (message.summary !== undefined) {
       obj.summary = message.summary;
     }
-    if (message.proposer !== "") {
+    if (message.proposer !== undefined) {
       obj.proposer = message.proposer;
     }
-    if (message.expedited === true) {
+    if (message.expedited !== undefined) {
       obj.expedited = message.expedited;
     }
-    if (message.failed_reason !== "") {
+    if (message.failed_reason !== undefined) {
       obj.failed_reason = message.failed_reason;
     }
     return obj;
@@ -928,16 +928,16 @@ export const TallyResult = {
 
   toJSON(message: TallyResult): unknown {
     const obj: any = {};
-    if (message.yes_count !== "") {
+    if (message.yes_count !== undefined) {
       obj.yes_count = message.yes_count;
     }
-    if (message.abstain_count !== "") {
+    if (message.abstain_count !== undefined) {
       obj.abstain_count = message.abstain_count;
     }
-    if (message.no_count !== "") {
+    if (message.no_count !== undefined) {
       obj.no_count = message.no_count;
     }
-    if (message.no_with_veto_count !== "") {
+    if (message.no_with_veto_count !== undefined) {
       obj.no_with_veto_count = message.no_with_veto_count;
     }
     return obj;
@@ -1036,16 +1036,16 @@ export const Vote = {
 
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    if (message.proposal_id !== "0") {
+    if (message.proposal_id !== undefined) {
       obj.proposal_id = message.proposal_id;
     }
-    if (message.voter !== "") {
+    if (message.voter !== undefined) {
       obj.voter = message.voter;
     }
     if (message.options?.length) {
       obj.options = message.options.map((e) => WeightedVoteOption.toJSON(e));
     }
-    if (message.metadata !== "") {
+    if (message.metadata !== undefined) {
       obj.metadata = message.metadata;
     }
     return obj;
@@ -1272,13 +1272,13 @@ export const TallyParams = {
 
   toJSON(message: TallyParams): unknown {
     const obj: any = {};
-    if (message.quorum !== "") {
+    if (message.quorum !== undefined) {
       obj.quorum = message.quorum;
     }
-    if (message.threshold !== "") {
+    if (message.threshold !== undefined) {
       obj.threshold = message.threshold;
     }
-    if (message.veto_threshold !== "") {
+    if (message.veto_threshold !== undefined) {
       obj.veto_threshold = message.veto_threshold;
     }
     return obj;
@@ -1542,43 +1542,43 @@ export const Params = {
     if (message.voting_period !== undefined) {
       obj.voting_period = Duration.toJSON(message.voting_period);
     }
-    if (message.quorum !== "") {
+    if (message.quorum !== undefined) {
       obj.quorum = message.quorum;
     }
-    if (message.threshold !== "") {
+    if (message.threshold !== undefined) {
       obj.threshold = message.threshold;
     }
-    if (message.veto_threshold !== "") {
+    if (message.veto_threshold !== undefined) {
       obj.veto_threshold = message.veto_threshold;
     }
-    if (message.min_initial_deposit_ratio !== "") {
+    if (message.min_initial_deposit_ratio !== undefined) {
       obj.min_initial_deposit_ratio = message.min_initial_deposit_ratio;
     }
-    if (message.proposal_cancel_ratio !== "") {
+    if (message.proposal_cancel_ratio !== undefined) {
       obj.proposal_cancel_ratio = message.proposal_cancel_ratio;
     }
-    if (message.proposal_cancel_dest !== "") {
+    if (message.proposal_cancel_dest !== undefined) {
       obj.proposal_cancel_dest = message.proposal_cancel_dest;
     }
     if (message.expedited_voting_period !== undefined) {
       obj.expedited_voting_period = Duration.toJSON(message.expedited_voting_period);
     }
-    if (message.expedited_threshold !== "") {
+    if (message.expedited_threshold !== undefined) {
       obj.expedited_threshold = message.expedited_threshold;
     }
     if (message.expedited_min_deposit?.length) {
       obj.expedited_min_deposit = message.expedited_min_deposit.map((e) => Coin.toJSON(e));
     }
-    if (message.burn_vote_quorum === true) {
+    if (message.burn_vote_quorum !== undefined) {
       obj.burn_vote_quorum = message.burn_vote_quorum;
     }
-    if (message.burn_proposal_deposit_prevote === true) {
+    if (message.burn_proposal_deposit_prevote !== undefined) {
       obj.burn_proposal_deposit_prevote = message.burn_proposal_deposit_prevote;
     }
-    if (message.burn_vote_veto === true) {
+    if (message.burn_vote_veto !== undefined) {
       obj.burn_vote_veto = message.burn_vote_veto;
     }
-    if (message.min_deposit_ratio !== "") {
+    if (message.min_deposit_ratio !== undefined) {
       obj.min_deposit_ratio = message.min_deposit_ratio;
     }
     return obj;

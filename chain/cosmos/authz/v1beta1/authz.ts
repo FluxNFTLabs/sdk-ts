@@ -90,7 +90,7 @@ export const GenericAuthorization = {
 
   toJSON(message: GenericAuthorization): unknown {
     const obj: any = {};
-    if (message.msg !== "") {
+    if (message.msg !== undefined) {
       obj.msg = message.msg;
     }
     return obj;
@@ -262,10 +262,10 @@ export const GrantAuthorization = {
 
   toJSON(message: GrantAuthorization): unknown {
     const obj: any = {};
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       obj.granter = message.granter;
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       obj.grantee = message.grantee;
     }
     if (message.authorization !== undefined) {

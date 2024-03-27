@@ -183,10 +183,10 @@ export const QueryBalanceRequest = {
 
   toJSON(message: QueryBalanceRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
     return obj;
@@ -246,7 +246,7 @@ export const QueryBalanceResponse = {
 
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    if (message.amount !== "0") {
+    if (message.amount !== undefined) {
       obj.amount = message.amount;
     }
     return obj;
@@ -318,10 +318,10 @@ export const QueryOwnerRequest = {
 
   toJSON(message: QueryOwnerRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     return obj;
@@ -381,7 +381,7 @@ export const QueryOwnerResponse = {
 
   toJSON(message: QueryOwnerResponse): unknown {
     const obj: any = {};
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
     return obj;
@@ -440,7 +440,7 @@ export const QuerySupplyRequest = {
 
   toJSON(message: QuerySupplyRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
     return obj;
@@ -499,7 +499,7 @@ export const QuerySupplyResponse = {
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    if (message.amount !== "0") {
+    if (message.amount !== undefined) {
       obj.amount = message.amount;
     }
     return obj;
@@ -582,13 +582,13 @@ export const QueryHolderRequest = {
 
   toJSON(message: QueryHolderRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;
@@ -723,10 +723,10 @@ export const QueryHoldersRequest = {
 
   toJSON(message: QueryHoldersRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     return obj;
@@ -871,10 +871,10 @@ export const QueryNFTsRequest = {
 
   toJSON(message: QueryNFTsRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
     if (message.pagination !== undefined) {
@@ -1031,10 +1031,10 @@ export const QueryNFTRequest = {
 
   toJSON(message: QueryNFTRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       obj.id = message.id;
     }
     return obj;
@@ -1153,7 +1153,7 @@ export const QueryClassRequest = {
 
   toJSON(message: QueryClassRequest): unknown {
     const obj: any = {};
-    if (message.class_id !== "") {
+    if (message.class_id !== undefined) {
       obj.class_id = message.class_id;
     }
     return obj;

@@ -81,10 +81,10 @@ export const QueryInterchainAccountRequest = {
 
   toJSON(message: QueryInterchainAccountRequest): unknown {
     const obj: any = {};
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
-    if (message.connection_id !== "") {
+    if (message.connection_id !== undefined) {
       obj.connection_id = message.connection_id;
     }
     return obj;
@@ -144,7 +144,7 @@ export const QueryInterchainAccountResponse = {
 
   toJSON(message: QueryInterchainAccountResponse): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
     return obj;

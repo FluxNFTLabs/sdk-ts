@@ -85,10 +85,10 @@ export const ParameterChangeProposal = {
 
   toJSON(message: ParameterChangeProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.changes?.length) {
@@ -176,13 +176,13 @@ export const ParamChange = {
 
   toJSON(message: ParamChange): unknown {
     const obj: any = {};
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       obj.subspace = message.subspace;
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       obj.value = message.value;
     }
     return obj;

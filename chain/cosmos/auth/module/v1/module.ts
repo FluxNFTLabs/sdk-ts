@@ -91,13 +91,13 @@ export const Module = {
 
   toJSON(message: Module): unknown {
     const obj: any = {};
-    if (message.bech32_prefix !== "") {
+    if (message.bech32_prefix !== undefined) {
       obj.bech32_prefix = message.bech32_prefix;
     }
     if (message.module_account_permissions?.length) {
       obj.module_account_permissions = message.module_account_permissions.map((e) => ModuleAccountPermission.toJSON(e));
     }
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     return obj;
@@ -174,7 +174,7 @@ export const ModuleAccountPermission = {
 
   toJSON(message: ModuleAccountPermission): unknown {
     const obj: any = {};
-    if (message.account !== "") {
+    if (message.account !== undefined) {
       obj.account = message.account;
     }
     if (message.permissions?.length) {

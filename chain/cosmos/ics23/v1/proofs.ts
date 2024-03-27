@@ -449,10 +449,10 @@ export const ExistenceProof = {
 
   toJSON(message: ExistenceProof): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     if (message.leaf !== undefined) {
@@ -544,7 +544,7 @@ export const NonExistenceProof = {
 
   toJSON(message: NonExistenceProof): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
     if (message.left !== undefined) {
@@ -775,19 +775,19 @@ export const LeafOp = {
 
   toJSON(message: LeafOp): unknown {
     const obj: any = {};
-    if (message.hash !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = hashOpToJSON(message.hash);
     }
-    if (message.prehash_key !== 0) {
+    if (message.prehash_key !== undefined) {
       obj.prehash_key = hashOpToJSON(message.prehash_key);
     }
-    if (message.prehash_value !== 0) {
+    if (message.prehash_value !== undefined) {
       obj.prehash_value = hashOpToJSON(message.prehash_value);
     }
-    if (message.length !== 0) {
+    if (message.length !== undefined) {
       obj.length = lengthOpToJSON(message.length);
     }
-    if (message.prefix.length !== 0) {
+    if (message.prefix !== undefined) {
       obj.prefix = base64FromBytes(message.prefix);
     }
     return obj;
@@ -874,13 +874,13 @@ export const InnerOp = {
 
   toJSON(message: InnerOp): unknown {
     const obj: any = {};
-    if (message.hash !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = hashOpToJSON(message.hash);
     }
-    if (message.prefix.length !== 0) {
+    if (message.prefix !== undefined) {
       obj.prefix = base64FromBytes(message.prefix);
     }
-    if (message.suffix.length !== 0) {
+    if (message.suffix !== undefined) {
       obj.suffix = base64FromBytes(message.suffix);
     }
     return obj;
@@ -1001,13 +1001,13 @@ export const ProofSpec = {
     if (message.inner_spec !== undefined) {
       obj.inner_spec = InnerSpec.toJSON(message.inner_spec);
     }
-    if (message.max_depth !== 0) {
+    if (message.max_depth !== undefined) {
       obj.max_depth = Math.round(message.max_depth);
     }
-    if (message.min_depth !== 0) {
+    if (message.min_depth !== undefined) {
       obj.min_depth = Math.round(message.min_depth);
     }
-    if (message.prehash_key_before_comparison === true) {
+    if (message.prehash_key_before_comparison !== undefined) {
       obj.prehash_key_before_comparison = message.prehash_key_before_comparison;
     }
     return obj;
@@ -1155,19 +1155,19 @@ export const InnerSpec = {
     if (message.child_order?.length) {
       obj.child_order = message.child_order.map((e) => Math.round(e));
     }
-    if (message.child_size !== 0) {
+    if (message.child_size !== undefined) {
       obj.child_size = Math.round(message.child_size);
     }
-    if (message.min_prefix_length !== 0) {
+    if (message.min_prefix_length !== undefined) {
       obj.min_prefix_length = Math.round(message.min_prefix_length);
     }
-    if (message.max_prefix_length !== 0) {
+    if (message.max_prefix_length !== undefined) {
       obj.max_prefix_length = Math.round(message.max_prefix_length);
     }
-    if (message.empty_child.length !== 0) {
+    if (message.empty_child !== undefined) {
       obj.empty_child = base64FromBytes(message.empty_child);
     }
-    if (message.hash !== 0) {
+    if (message.hash !== undefined) {
       obj.hash = hashOpToJSON(message.hash);
     }
     return obj;
@@ -1579,10 +1579,10 @@ export const CompressedExistenceProof = {
 
   toJSON(message: CompressedExistenceProof): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
-    if (message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     if (message.leaf !== undefined) {
@@ -1674,7 +1674,7 @@ export const CompressedNonExistenceProof = {
 
   toJSON(message: CompressedNonExistenceProof): unknown {
     const obj: any = {};
-    if (message.key.length !== 0) {
+    if (message.key !== undefined) {
       obj.key = base64FromBytes(message.key);
     }
     if (message.left !== undefined) {

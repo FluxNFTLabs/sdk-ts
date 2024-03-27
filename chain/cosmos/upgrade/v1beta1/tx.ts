@@ -100,7 +100,7 @@ export const MsgSoftwareUpgrade = {
 
   toJSON(message: MsgSoftwareUpgrade): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     if (message.plan !== undefined) {
@@ -208,7 +208,7 @@ export const MsgCancelUpgrade = {
 
   toJSON(message: MsgCancelUpgrade): unknown {
     const obj: any = {};
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       obj.authority = message.authority;
     }
     return obj;

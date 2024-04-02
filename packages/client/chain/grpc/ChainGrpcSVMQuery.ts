@@ -1,6 +1,6 @@
 import BaseGrpc from '../../BaseGrpc'
 import * as svmQuery from '../../../../chain/flux/svm/v1beta1/query'
-import * as web3 from '@solana/web3.js'
+
 export class ChainGrpcSVMQuery extends BaseGrpc {
   protected client: svmQuery.QueryClientImpl
   constructor(endpoint: string) {
@@ -13,11 +13,19 @@ export class ChainGrpcSVMQuery extends BaseGrpc {
     address: string
   }): Promise<svmQuery.ProgramAccountsResponse> {
     const request = svmQuery.ProgramAccountsRequest.create({
-      address: ''
+      address
     })
     const response: svmQuery.ProgramAccountsResponse = await this.retry(() =>
       this.client.ProgramAccounts(request)
     )
+    return response
+  }
+  //Account
+  async account({ address }: { address: string }): Promise<svmQuery.AccountResponse> {
+    const request = svmQuery.AccountRequest.create({
+      address
+    })
+    const response: svmQuery.AccountResponse = await this.retry(() => this.client.Account(request))
     return response
   }
 }

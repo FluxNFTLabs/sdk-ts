@@ -20,6 +20,8 @@ import * as web3 from '@solana/web3.js'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { encodeData, UPGRADABLE_LOADER_LAYOUTS, toFluxSvmTransaction } from '../../../../packages/utils'
 
+import * as nobleEd25519 from '@noble/ed25519';
+
 async function broadcastSvmTransactionMsg(
   txClient: txservice.ServiceClientImpl,
   senderPubkeyAny: anytypes.Any,
@@ -136,6 +138,7 @@ async function broadcastSvmTransactionMsg(
   // create accounts
   const callerPubkey        = new web3.PublicKey("5u3ScQH8YNWoWgjuyV2218d4V1HtQSoKf65JpuXXwXVK") // TODO: generate this one from secp256k1
 	const programPubkey       = new web3.PublicKey("8BTVbEdAFbqsEsjngmaMByn1m9j8jDFtEFFusEwGeMZY") // TODO: generate this one randomly
+
 	const programDataPubkey   = new web3.PublicKey("352wrxS8WU7mmyWiJsSD4Z7c4YvGb42YcVohUmb61Lj7") // TODO: generate this one randomly
 	const programBufferPubkey = new web3.PublicKey("DsY77sff3seYYPDQoqMb7mzMzuXwvQ1Mw8ou6r5o2nyW") // TODO: generate this one randomly
 	const systemPubkey        = new web3.PublicKey("11111111111111111111111111111111") // constant
@@ -144,7 +147,7 @@ async function broadcastSvmTransactionMsg(
 	const sysvarRentPubkey       = new web3.PublicKey("SysvarRent111111111111111111111111111111111") // constant
 	const programInteractor      = new web3.PublicKey("CHtHn3aTHBt244rxsjgebLc7qZodMMBGK5vzPKvPPirc") // TODO: generate this one randomly
   const programBinary          = fs.readFileSync('example.so')
-	
+
   // create accounts
   let createProgramIx = web3.SystemProgram.createAccount({
     fromPubkey: callerPubkey,
@@ -301,11 +304,6 @@ async function broadcastSvmTransactionMsg(
 				pubkey:  programInteractor, // account that interacts
 				isWritable: true,
 				isSigner:   true,
-			},
-			{
-				pubkey:  programDataPubkey,
-				isWritable: false,
-				isSigner:   false,
 			},
     ],
     data: Buffer.from([0]),

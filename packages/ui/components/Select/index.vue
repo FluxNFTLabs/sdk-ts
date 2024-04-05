@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  defineProps,
-  watch,
-  defineEmits,
-  ref,
-  useAttrs,
-  computed,
-  onMounted,
-  onBeforeUnmount
-} from 'vue'
+import { watch, ref, useAttrs, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Dropdown } from 'floating-vue'
 import BaseChip from '../Chip/index.vue'
 import CheckBox from '../Checkbox/index.vue'

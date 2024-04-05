@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue'
 import BaseIcons from '../Icons/index.vue'
 import ProgressCircular from '../ProgressCircular.vue'
 type Color =

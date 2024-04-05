@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, watch, onMounted, ref, onBeforeUnmount, defineModel } from 'vue'
+import { watch, onMounted, ref, onBeforeUnmount } from 'vue'
 type TabType = 'horizontal' | 'vertical'
 const props = defineProps({
   modelValue: Number,

@@ -15,7 +15,8 @@ export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
     value: EthCryptoSecp256k1Keys.PubKey.encode({ key: Buffer.from(key, 'hex') }).finish()
   }
 }
-export const getPublicKey = ({ key }: { key: string | GoogleProtobufAny.Any }) => {
+type KeyType = string | GoogleProtobufAny.Any
+export const getPublicKey = ({ key }: { key: any }) => {
   if (typeof key !== 'string') {
     return key
   }

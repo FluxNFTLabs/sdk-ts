@@ -10,7 +10,7 @@ export class IndexerGrpcWeb3gwQuery extends BaseGrpc {
     try {
       let request = web3gwQuery.FaucetSendRequest.create({ address })
       let response = await this.retry(() => this.client.FaucetSend(request))
-      return response
+      return response as web3gwQuery.FaucetSendResponse
     } catch (e) {
       throw e
     }

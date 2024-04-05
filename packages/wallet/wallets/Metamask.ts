@@ -31,7 +31,7 @@ export default class Metamask {
     }
 
     if (window.providers) {
-      return window.providers.find((p) => p.isMetaMask)
+      return window.providers.find((p: any) => p.isMetaMask)
     }
   }
   async getEthereumChainId(): Promise<string> {

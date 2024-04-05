@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import BaseButton from '../Button/index.vue'
 const props = defineProps({
   isOpen: {

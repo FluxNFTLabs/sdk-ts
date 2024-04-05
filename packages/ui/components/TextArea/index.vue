@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, defineModel, useAttrs, defineOptions } from 'vue'
+import { ref, useAttrs } from 'vue'
 defineOptions({
   inheritAttrs: false
 })

@@ -18,7 +18,7 @@ const main = async () => {
       validator_address: 'luxvaloper1vvupy62qn5pug4vyuctl7x3vcfa7fl7xq0h82c'
     })
     console.log(JSON.stringify(res.rewards, null, 2))
-  } catch (err) {
+  } catch (err: any) {
     console.log(err.message)
   }
 }

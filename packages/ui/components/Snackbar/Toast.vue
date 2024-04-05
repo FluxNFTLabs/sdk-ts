@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import BaseIcons from '../Icons/index.vue'
 const props = defineProps({
   modelValue: Boolean,

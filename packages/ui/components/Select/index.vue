@@ -126,9 +126,9 @@ watch(
 </script>
 <template>
   <div class="base-select" :class="[containerClass].join(' ')" ref="selectRef">
-    <p class="label" :class="labelClass" v-if="label">
-      {{ label }}
-    </p>
+    <div class="label flex gap-2 items-center" :class="labelClass" v-if="label">
+      {{ label }} <slot name="appendLabel" />
+    </div>
     <Dropdown
       :disabled="disabled"
       :popperHideTriggers="(triggers) => (multiple ? triggers : [...triggers, 'click'])"

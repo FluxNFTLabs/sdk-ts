@@ -139,15 +139,15 @@ async function broadcastSvmTransactionMsg(
   const callerPubkey        = new web3.PublicKey("5u3ScQH8YNWoWgjuyV2218d4V1HtQSoKf65JpuXXwXVK") // TODO: generate this one from secp256k1
 	const programPubkey       = new web3.PublicKey("8BTVbEdAFbqsEsjngmaMByn1m9j8jDFtEFFusEwGeMZY") // TODO: generate this one randomly
 
-	const programDataPubkey   = new web3.PublicKey("352wrxS8WU7mmyWiJsSD4Z7c4YvGb42YcVohUmb61Lj7") // TODO: generate this one randomly
 	const programBufferPubkey = new web3.PublicKey("DsY77sff3seYYPDQoqMb7mzMzuXwvQ1Mw8ou6r5o2nyW") // TODO: generate this one randomly
 	const systemPubkey        = new web3.PublicKey("11111111111111111111111111111111") // constant
 	const upgradableLoaderPubkey = new web3.PublicKey("BPFLoaderUpgradeab1e11111111111111111111111") // constant
 	const sysvarClockPubkey      = new web3.PublicKey("SysvarC1ock11111111111111111111111111111111") // constant
 	const sysvarRentPubkey       = new web3.PublicKey("SysvarRent111111111111111111111111111111111") // constant
-	const programInteractor      = new web3.PublicKey("CHtHn3aTHBt244rxsjgebLc7qZodMMBGK5vzPKvPPirc") // TODO: generate this one randomly
+	const programUserDataPubkey  = new web3.PublicKey("CHtHn3aTHBt244rxsjgebLc7qZodMMBGK5vzPKvPPirc") // TODO: generate this one randomly
   const programBinary          = fs.readFileSync('example.so')
 
+  const programExecutableDataPubkey   = web3.PublicKey.findProgramAddressSync([programUserDataPubkey.toBuffer()], upgradableLoaderPubkey)[0]
   // create accounts
   let createProgramIx = web3.SystemProgram.createAccount({
     fromPubkey: callerPubkey,
@@ -159,7 +159,7 @@ async function broadcastSvmTransactionMsg(
 
   let createInteractorIx = web3.SystemProgram.createAccount({
     fromPubkey: callerPubkey,
-    newAccountPubkey: programInteractor,
+    newAccountPubkey: programUserDataPubkey,
     lamports: 0,
     space: 4,
     programId: programPubkey,
@@ -248,7 +248,7 @@ async function broadcastSvmTransactionMsg(
 				isSigner:   true,
 			},
 			{
-				pubkey:  programDataPubkey,
+				pubkey:  programExecutableDataPubkey,
 				isWritable: true,
 				isSigner:   false,
 			},
@@ -301,7 +301,7 @@ async function broadcastSvmTransactionMsg(
     programId: programPubkey, // program ID = contract address
     keys: [
       {
-				pubkey:  programInteractor, // account that interacts
+				pubkey:  programUserDataPubkey, // account that interacts
 				isWritable: true,
 				isSigner:   true,
 			},
@@ -310,7 +310,7 @@ async function broadcastSvmTransactionMsg(
   })
 
   let executeTransaction = new web3.Transaction().add(executeIx)
-  executeTransaction.feePayer = programInteractor
+  executeTransaction.feePayer = callerPubkey
 
   let fluxExecuteTx = toFluxSvmTransaction(senderAddr, executeTransaction, 1000000)
   let executeResult = await broadcastSvmTransactionMsg(txClient, senderPubkeyAny, senderAccNum, senderAccSeq + 2, fluxExecuteTx, senderPrivKey)

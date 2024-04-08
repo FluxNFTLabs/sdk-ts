@@ -147,7 +147,7 @@ async function broadcastSvmTransactionMsg(
 	const programUserDataPubkey  = new web3.PublicKey("CHtHn3aTHBt244rxsjgebLc7qZodMMBGK5vzPKvPPirc") // TODO: generate this one randomly
   const programBinary          = fs.readFileSync('example.so')
 
-  const programExecutableDataPubkey   = web3.PublicKey.findProgramAddressSync([programUserDataPubkey.toBuffer()], upgradableLoaderPubkey)[0]
+  const programExecutableDataPubkey   = web3.PublicKey.findProgramAddressSync([programPubkey.toBuffer()], upgradableLoaderPubkey)[0]
   // create accounts
   let createProgramIx = web3.SystemProgram.createAccount({
     fromPubkey: callerPubkey,

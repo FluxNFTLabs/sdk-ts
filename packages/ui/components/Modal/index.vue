@@ -56,7 +56,7 @@ watch(
             <BaseButton
               v-if="!hideButtonClose"
               icon="close"
-              size="small"
+              size="sm"
               class="base-modal__button-close"
               @click="onClose"
             />

@@ -13,7 +13,7 @@ const props = defineProps({
   },
   createAt: {
     type: Number,
-    default: ''
+    default: 0
   }
 })
 const _timeout = ref<any>('')
@@ -42,7 +42,7 @@ watchEffect(() => {
         <slot />
       </div>
       <div>
-        <BaseButton size="small" icon @click="hide">
+        <BaseButton size="sm" icon @click="hide">
           <span class="text-blueGray-900">
             <BaseIcons name="close" />
           </span>

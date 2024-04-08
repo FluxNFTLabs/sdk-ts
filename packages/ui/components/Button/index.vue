@@ -15,7 +15,7 @@ type Size = 'x-small' | 'small' | 'medium' | 'large' | 'xs' | 'sm' | 'md' | 'lg'
 defineProps({
   size: {
     type: String as () => Size,
-    default: 'medium',
+    default: () => 'md',
     validator: (value: string) =>
       ['x-small', 'small', 'medium', 'large', 'xs', 'sm', 'md', 'lg'].includes(value)
   },

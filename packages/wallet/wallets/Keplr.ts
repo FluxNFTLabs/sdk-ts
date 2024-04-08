@@ -30,8 +30,14 @@ export default class KeplrWallet {
       },
       bip44: { coinType: 60 },
       currencies: [{ coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 }],
-      feeCurrencies: [{ coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 }],
-      gasPriceStep: { low: 10000000000, average: 10000000000, high: 10000000000 }
+      feeCurrencies: [
+        {
+          coinDenom: 'lux',
+          coinMinimalDenom: 'lux',
+          coinDecimals: 18,
+          gasPriceStep: { low: 10000000000, average: 10000000000, high: 10000000000 }
+        }
+      ]
     })
   }
   async getAddresses(): Promise<string[]> {

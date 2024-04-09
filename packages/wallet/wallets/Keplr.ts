@@ -2,7 +2,7 @@
 import type { Keplr, StdSignDoc, AminoSignResponse } from '@keplr-wallet/types'
 import { EthSignType } from '@keplr-wallet/types'
 import { ChainId } from '../../utils'
-
+import { networkEndpoints } from '../../networks'
 export default class KeplrWallet {
   private chainId: ChainId
 
@@ -14,9 +14,10 @@ export default class KeplrWallet {
     if (!window || !window.keplr) {
       throw new Error('Please install the Keplr wallet extension')
     }
+    //todo: add the rest endpoint
     await window.keplr.experimentalSuggestChain({
-      rpc: 'https://tm.localhost',
-      rest: 'https://lcd.localhost',
+      rpc: networkEndpoints.devnet.tm,
+      rest: networkEndpoints.devnet.lcd,
       chainId: ChainId.Testnet,
       chainName: 'Flux',
       stakeCurrency: { coinDenom: 'lux', coinMinimalDenom: 'lux', coinDecimals: 18 },

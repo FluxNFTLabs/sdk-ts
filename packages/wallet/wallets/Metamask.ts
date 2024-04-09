@@ -26,13 +26,17 @@ export default class Metamask {
     )
   }
   async getEthereum() {
-    if (window.ethereum.isMetaMask) {
+    if (window?.ethereum?.isMetaMask) {
       return window.ethereum
     }
 
     if (window.providers) {
-      return window.providers.find((p: any) => p.isMetaMask)
+      let metamask = window.providers.find((p: any) => p?.isMetaMask)
+      if (metamask) {
+        return metamask
+      }
     }
+    throw new Error('Please install the Metamask wallet extension')
   }
   async getEthereumChainId(): Promise<string> {
     const ethereum = await this.getEthereum()

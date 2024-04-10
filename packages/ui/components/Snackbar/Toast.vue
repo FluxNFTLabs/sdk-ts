@@ -5,7 +5,7 @@ const props = defineProps({
   modelValue: Boolean,
   timeout: {
     type: Number,
-    default: 5000
+    default: 8000
   },
   color: {
     type: String,

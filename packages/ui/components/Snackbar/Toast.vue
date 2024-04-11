@@ -42,7 +42,7 @@ watchEffect(() => {
         <slot />
       </div>
       <div>
-        <BaseButton size="sm" icon @click="hide">
+        <BaseButton size="sm icon ml-2" @click="hide">
           <span class="text-blueGray-900">
             <BaseIcons name="close" />
           </span>

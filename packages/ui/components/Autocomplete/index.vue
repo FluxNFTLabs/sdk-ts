@@ -43,7 +43,6 @@ const _suggestions = computed(() => {
 })
 
 const focus = () => {
-  console.log('focus')
   show.value = true
 }
 const blur = () => {
@@ -62,9 +61,9 @@ onMounted(() => {
   internalValue.value = props.value
 })
 watch(
-  () => props.value,
+  () => props,
   (value) => {
-    if (value !== internalValue.value) {
+    if (props.value !== internalValue.value) {
       internalValue.value = props.value
     }
   },

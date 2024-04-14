@@ -6,7 +6,7 @@ interface Suggestion {
 }
 const props = defineProps({
   suggestions: {
-    type: Array as Array<Suggestion>,
+    type: Array as any,
     required: true
   },
   modalValue: String,
@@ -37,6 +37,10 @@ const props = defineProps({
   containerClass: {
     type: String,
     default: ''
+  },
+  class: {
+    type: String,
+    default: ''
   }
 })
 const inputRef = ref<any>(null)
@@ -47,7 +51,7 @@ defineModel('modelValue')
 const inputChange = (e: any) => {
   internalValue.value = e.target.value
 }
-const _suggestions = computed(() => {
+const _suggestions = computed((): Array<Suggestion> => {
   return props.suggestions.filter((suggestion: any) => {
     return suggestion.value.toLowerCase().includes(internalValue.value.toLowerCase())
   })
@@ -112,7 +116,7 @@ watch(
         <li
           class="cursor-pointer hover:bg-blueGray-light-300 p-2"
           v-for="suggestion in _suggestions"
-          :key="suggestion"
+          :key="suggestion.value"
           :title="suggestion.title"
           @click="select(suggestion.value)"
         >

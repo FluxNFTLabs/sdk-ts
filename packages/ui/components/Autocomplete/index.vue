@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, watch, computed, onMounted } from 'vue'
-
+interface Suggestion {
+  title: string
+  value: string
+}
 const props = defineProps({
   suggestions: {
-    type: Array as any,
+    type: Array as Array<Suggestion>,
     required: true
   },
   modalValue: String,
@@ -24,6 +27,14 @@ const props = defineProps({
     default: ''
   },
   label: {
+    type: String,
+    default: ''
+  },
+  errorMessage: {
+    type: String,
+    default: ''
+  },
+  containerClass: {
     type: String,
     default: ''
   }
@@ -73,7 +84,10 @@ watch(
 )
 </script>
 <template>
-  <div class="base-text-field relative">
+  <div
+    class="base-text-field relative"
+    :class="[errorMessage ? 'invalid' : '', containerClass].join(' ')"
+  >
     <p class="label flex gap-1" :class="labelClass" v-if="label">
       {{ label }}
     </p>
@@ -99,11 +113,13 @@ watch(
           class="cursor-pointer hover:bg-blueGray-light-300 p-2"
           v-for="suggestion in _suggestions"
           :key="suggestion"
+          :title="suggestion.title"
           @click="select(suggestion.value)"
         >
-          {{ suggestion.value }}
+          {{ suggestion.title }}
         </li>
       </ul>
     </div>
+    <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>
 </template>

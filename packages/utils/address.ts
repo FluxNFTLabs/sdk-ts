@@ -1,5 +1,7 @@
 import { Address } from 'ethereumjs-util'
 import { bech32 } from 'bech32'
+import { PublicKey } from '@solana/web3.js'
+import keccak256 from 'keccak256'
 /**
  * Get flux address from Ethereum hex address
  *
@@ -13,6 +15,32 @@ export const getFluxAddress = (ethAddress: string): string => {
   const addressBuffer = Address.fromString(ethAddress.toString()).toBuffer()
 
   return bech32.encode('lux', bech32.toWords(addressBuffer))
+}
+
+/**
+ * Get flux svm address from buffer byte array
+ *
+ * @param cosmosAddressBuffer string
+ * @returns string
+ */
+export const getSvmAddress = (cosmosAddressBuffer: Buffer): PublicKey => {
+  return new PublicKey(keccak256(cosmosAddressBuffer))
+}
+
+/**
+ * Get flux svm address from lux cosmos address
+ *
+ * @param luxBech32 string
+ * @returns string
+ */
+export const getSvmAddressFromLux = (luxBech32: string): PublicKey => {
+  if (!luxBech32.startsWith('lux')) {
+    throw `${luxBech32} is not a valid lux addresss`
+  }
+
+  return new PublicKey(
+    getSvmAddress(Buffer.from(bech32.fromWords(bech32.decode(luxBech32).words)))
+  )
 }
 
 /**

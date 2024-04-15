@@ -7,7 +7,8 @@ interface Suggestion {
 const props = defineProps({
   suggestions: {
     type: Array as any,
-    required: true
+    required: true,
+    default: () => []
   },
   modalValue: String,
   inputClass: {
@@ -109,7 +110,7 @@ watch(
       />
     </div>
     <div
-      v-if="show"
+      v-if="show && _suggestions.length"
       class="absolute max-h-[300px] overflow-auto z-[2] bg-blueGray-800 w-full shadow-lg border border-blueGray-light-100 border-t-0 p-2 rounded-xl"
     >
       <ul>

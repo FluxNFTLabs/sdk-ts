@@ -5,7 +5,7 @@
 
 /* Disabled State */
 .btn:disabled {
-  @apply opacity-[0.2] cursor-not-allowed;
+  @apply opacity-[0.6] cursor-not-allowed;
 }
 
 /* Hover and Active States */

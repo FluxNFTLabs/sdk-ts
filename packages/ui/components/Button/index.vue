@@ -56,7 +56,16 @@ defineProps({
     >
       <ProgressCircular rotate />
     </div>
-    <BaseIcons v-if="icon" :name="icon" :size="size" />
-    <slot />
+    <div class="flex items-center justify-center" :class="isLoading ? 'opacity-0' : ''">
+      <BaseIcons v-if="icon" :name="icon" :size="size" />
+
+      <slot />
+    </div>
   </button>
 </template>
+
+<style scoped>
+.opacity-0 {
+  opacity: 0;
+}
+</style>

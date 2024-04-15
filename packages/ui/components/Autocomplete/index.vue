@@ -122,7 +122,7 @@ watch(
     >
       <ul>
         <li
-          class="cursor-pointer hover:bg-blueGray-light-300 p-2"
+          class="cursor-pointer hover:bg-blueGray-light-300 p-2 w-fit"
           v-for="suggestion in _suggestions"
           :key="suggestion.value"
           :title="suggestion.title"

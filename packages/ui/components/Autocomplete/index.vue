@@ -108,6 +108,13 @@ watch(
         @focus="focus"
         @blur="blur"
       />
+      <BaseButton
+        v-if="internalValue"
+        size="xs"
+        icon="close"
+        @click="inputChange({ target: { value: '' } })"
+        class="mr-[2px]"
+      />
     </div>
     <div
       v-if="show && _suggestions.length"

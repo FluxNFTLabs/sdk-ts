@@ -113,7 +113,7 @@ watch(
         size="xs"
         icon="close"
         @click="inputChange({ target: { value: '' } })"
-        class="mr-[2px]"
+        style="right: 0.5rem"
       />
     </div>
     <div

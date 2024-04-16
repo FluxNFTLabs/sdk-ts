@@ -390,7 +390,8 @@ export const createTxRawFromSigResponse = (
 
 /**
  * simulate the transaction 
- * often to get back estimated gas limit (as reference) to apply into real tx broadcasting
+ * often used to get back estimated gas limit (as reference) to apply into real tx broadcasting
+ * NOTE: simulate doesn't need signers' signature
  * @returns Promise<txservice.SimulateResponse>
  */
 export const simulate = async (

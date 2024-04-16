@@ -411,7 +411,7 @@ async function broadcastFluxMsg(
   let userDataAccSeq = accSeqs[3] + 1
   let userDataPubkeyAny = signerPubKeys[3]
   let executeIx = new web3.TransactionInstruction({
-    programId: programPubkey, // program ID = contract address
+    programId: programPubkey, // program ID
     keys: [
       {
 				pubkey:  userDataPubkey,
@@ -425,6 +425,10 @@ async function broadcastFluxMsg(
   let executeTransaction = new web3.Transaction().add(executeIx)
   executeTransaction.feePayer = userDataPubkey
 
+  await new Promise((resolve, _) => {
+    setInterval(() => resolve(null), 2000)
+  })
+  
   let fluxExecuteTx = toFluxSvmTransaction([userDataAddr], executeTransaction, 1000000)
   let executeResult = await broadcastFluxMsg(
     txClient, 

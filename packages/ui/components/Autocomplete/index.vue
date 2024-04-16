@@ -118,20 +118,28 @@ watch(
     </div>
     <div
       v-if="show && _suggestions.length"
-      class="absolute max-h-[300px] overflow-auto z-[2] bg-blueGray-800 w-full shadow-lg border border-blueGray-light-100 border-t-0 p-2 rounded-xl"
+      class="list bg-blueGray-800 shadow-lg border border-blueGray-light-100 border-t-0 p-2 rounded-xl"
     >
-      <ul>
-        <li
-          class="cursor-pointer hover:bg-blueGray-light-300 p-2 w-fit"
-          v-for="suggestion in _suggestions"
-          :key="suggestion.value"
-          :title="suggestion.title"
-          @click="select(suggestion.value)"
-        >
-          {{ suggestion.title }}
-        </li>
-      </ul>
+      <div
+        class="cursor-pointer hover:bg-blueGray-light-300 p-2 w-fit"
+        v-for="suggestion in _suggestions"
+        :key="suggestion.value"
+        :title="suggestion.title"
+        @click="select(suggestion.value)"
+      >
+        {{ suggestion.title }}
+      </div>
     </div>
     <p v-if="errorMessage" class="message">{{ errorMessage }}</p>
   </div>
 </template>
+
+<style scoped>
+.list {
+  max-height: 250px;
+  position: absolute;
+  overflow: auto;
+  z-index: 2;
+  width: 100%;
+}
+</style>

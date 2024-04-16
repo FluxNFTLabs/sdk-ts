@@ -8,13 +8,19 @@ import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import { EthereumChainId, DEFAULT_STD_FEE } from '../utils'
 import * as FluxTypesV1TxExt from '../../chain/flux/types/v1beta1/tx_ext'
 import { DirectSignResponse } from '@cosmjs/proto-signing'
+import * as txtypes from '../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../chain/cosmos/tx/v1beta1/service'
+import * as anytypes from '../../chain/google/protobuf/any'
+import * as signingtypes from '../../chain/cosmos/tx/signing/v1beta1/signing'
 import keccak256 from 'keccak256'
+
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
     type_url: '/' + EthCryptoSecp256k1Keys.PubKey.$type,
     value: EthCryptoSecp256k1Keys.PubKey.encode({ key: Buffer.from(key, 'hex') }).finish()
   }
 }
+
 export const getPublicKey = ({ key }: { key: string | GoogleProtobufAny.Any }) => {
   if (typeof key !== 'string') {
     return key
@@ -380,4 +386,60 @@ export const createTxRawFromSigResponse = (
   txRaw.signatures = [Buffer.from(directSignResponse.signature.signature, 'base64')]
 
   return txRaw
+}
+
+/**
+ * simulate the transaction 
+ * often to get back estimated gas limit (as reference) to apply into real tx broadcasting
+ * @returns Promise<txservice.SimulateResponse>
+ */
+export const simulate = async (
+  txClient: txservice.ServiceClientImpl,
+  txBody: txtypes.TxBody,
+  signerPubkeys: anytypes.Any[],
+  signerAccSeqs: string[],
+): Promise<txservice.SimulateResponse> => {
+  if (signerPubkeys.length != signerAccSeqs.length) {
+    throw `sender pubkeys length should match sequence length (${signerPubkeys.length} != ${signerAccSeqs.length})`
+  }
+
+  let signerInfos : txtypes.SignerInfo[] = []
+  let simSignatures = []
+  
+  for(let i = 0; i < signerPubkeys.length; i++) {
+    signerInfos.push(
+      {
+        public_key: signerPubkeys[i],
+        mode_info: {
+          single: {
+            mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
+          },
+        },
+        sequence: signerAccSeqs[i],
+      },
+    )
+    simSignatures.push(Buffer.alloc(65))
+  }
+
+  const authInfo = txtypes.AuthInfo.create({
+    signer_infos: signerInfos,
+    fee: {
+      amount: [
+        {denom: 'lux', amount: '0'}
+      ],
+      gas_limit: '100000',
+      payer: '',
+      granter: ''
+    }
+  })
+
+  const txRaw: txtypes.TxRaw = {
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    signatures: simSignatures,
+  }
+
+  return await txClient.Simulate(txservice.SimulateRequest.create({
+    tx_bytes: txtypes.TxRaw.encode(txRaw).finish()
+  }))
 }

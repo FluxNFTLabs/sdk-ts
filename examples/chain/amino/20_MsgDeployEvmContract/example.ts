@@ -17,6 +17,7 @@ import * as codectypemap from '../../../../chain/codec_type_map.json'
 import * as ethcrypto from 'eth-crypto';
 
 import {getEIP712SignBytes} from '../../../../eip712/eip712';
+import { simulate } from '../../../../packages';
 
 const main = async () => {
   // init clients
@@ -35,6 +36,7 @@ const main = async () => {
     type_url: '/' + ethsecp256k1.PubKey.$type,
     value: ethsecp256k1.PubKey.encode(senderPubkey).finish()
   }
+
   const senderAddr = bech32.encode('lux', bech32.toWords(wallet.getAddress()))
   // fetch account num, seq
   const senderInfo = await authClient.AccountInfo({address: senderAddr})
@@ -85,6 +87,11 @@ const main = async () => {
     non_critical_extension_options: []
   }
 
+  // Simulate to estimate gas 
+  let simulateRes = await simulate(txClient, txBody, [senderPubkeyAny], [senderAccSeq])
+  let gasLimit = Math.ceil(Number(simulateRes.gas_info.gas_used) * 1.5)
+
+  // assign gas and other info to get real tx and broadcast
   const authInfo: txtypes.AuthInfo = {
     signer_infos: [
       {
@@ -101,7 +108,7 @@ const main = async () => {
       amount: [
         {denom: 'lux', amount: '100000000000000'}
       ],
-      gas_limit: '200000',
+      gas_limit: gasLimit.toString(),
       payer: '',
       granter: ''
     },

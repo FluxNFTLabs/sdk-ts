@@ -207,7 +207,7 @@ export const GenesisState = {
     if (message.ack_sequences?.length) {
       obj.ack_sequences = message.ack_sequences.map((e) => PacketSequence.toJSON(e));
     }
-    if (message.next_channel_sequence !== "0") {
+    if (message.next_channel_sequence !== undefined) {
       obj.next_channel_sequence = message.next_channel_sequence;
     }
     if (message.params !== undefined) {
@@ -303,13 +303,13 @@ export const PacketSequence = {
 
   toJSON(message: PacketSequence): unknown {
     const obj: any = {};
-    if (message.port_id !== "") {
+    if (message.port_id !== undefined) {
       obj.port_id = message.port_id;
     }
-    if (message.channel_id !== "") {
+    if (message.channel_id !== undefined) {
       obj.channel_id = message.channel_id;
     }
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     return obj;

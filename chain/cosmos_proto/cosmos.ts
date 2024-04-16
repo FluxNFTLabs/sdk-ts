@@ -147,10 +147,10 @@ export const InterfaceDescriptor = {
 
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     return obj;
@@ -248,10 +248,10 @@ export const ScalarDescriptor = {
 
   toJSON(message: ScalarDescriptor): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.field_type?.length) {

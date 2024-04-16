@@ -173,7 +173,7 @@ export const BaseVestingAccount = {
     if (message.delegated_vesting?.length) {
       obj.delegated_vesting = message.delegated_vesting.map((e) => Coin.toJSON(e));
     }
-    if (message.end_time !== "0") {
+    if (message.end_time !== undefined) {
       obj.end_time = message.end_time;
     }
     return obj;
@@ -256,7 +256,7 @@ export const ContinuousVestingAccount = {
     if (message.base_vesting_account !== undefined) {
       obj.base_vesting_account = BaseVestingAccount.toJSON(message.base_vesting_account);
     }
-    if (message.start_time !== "0") {
+    if (message.start_time !== undefined) {
       obj.start_time = message.start_time;
     }
     return obj;
@@ -396,7 +396,7 @@ export const Period = {
 
   toJSON(message: Period): unknown {
     const obj: any = {};
-    if (message.length !== "0") {
+    if (message.length !== undefined) {
       obj.length = message.length;
     }
     if (message.amount?.length) {
@@ -490,7 +490,7 @@ export const PeriodicVestingAccount = {
     if (message.base_vesting_account !== undefined) {
       obj.base_vesting_account = BaseVestingAccount.toJSON(message.base_vesting_account);
     }
-    if (message.start_time !== "0") {
+    if (message.start_time !== undefined) {
       obj.start_time = message.start_time;
     }
     if (message.vesting_periods?.length) {

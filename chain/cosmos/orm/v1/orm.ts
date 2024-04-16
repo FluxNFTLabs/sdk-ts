@@ -172,7 +172,7 @@ export const TableDescriptor = {
     if (message.index?.length) {
       obj.index = message.index.map((e) => SecondaryIndexDescriptor.toJSON(e));
     }
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       obj.id = Math.round(message.id);
     }
     return obj;
@@ -248,10 +248,10 @@ export const PrimaryKeyDescriptor = {
 
   toJSON(message: PrimaryKeyDescriptor): unknown {
     const obj: any = {};
-    if (message.fields !== "") {
+    if (message.fields !== undefined) {
       obj.fields = message.fields;
     }
-    if (message.auto_increment === true) {
+    if (message.auto_increment !== undefined) {
       obj.auto_increment = message.auto_increment;
     }
     return obj;
@@ -335,13 +335,13 @@ export const SecondaryIndexDescriptor = {
 
   toJSON(message: SecondaryIndexDescriptor): unknown {
     const obj: any = {};
-    if (message.fields !== "") {
+    if (message.fields !== undefined) {
       obj.fields = message.fields;
     }
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       obj.id = Math.round(message.id);
     }
-    if (message.unique === true) {
+    if (message.unique !== undefined) {
       obj.unique = message.unique;
     }
     return obj;
@@ -402,7 +402,7 @@ export const SingletonDescriptor = {
 
   toJSON(message: SingletonDescriptor): unknown {
     const obj: any = {};
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       obj.id = Math.round(message.id);
     }
     return obj;

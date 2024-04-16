@@ -70,7 +70,7 @@ export const LegacyAminoPubKey = {
 
   toJSON(message: LegacyAminoPubKey): unknown {
     const obj: any = {};
-    if (message.threshold !== 0) {
+    if (message.threshold !== undefined) {
       obj.threshold = Math.round(message.threshold);
     }
     if (message.public_keys?.length) {

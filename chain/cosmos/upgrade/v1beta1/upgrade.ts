@@ -178,16 +178,16 @@ export const Plan = {
 
   toJSON(message: Plan): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
     if (message.time !== undefined) {
       obj.time = message.time.toISOString();
     }
-    if (message.height !== "0") {
+    if (message.height !== undefined) {
       obj.height = message.height;
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       obj.info = message.info;
     }
     if (message.upgraded_client_state !== undefined) {
@@ -280,10 +280,10 @@ export const SoftwareUpgradeProposal = {
 
   toJSON(message: SoftwareUpgradeProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     if (message.plan !== undefined) {
@@ -360,10 +360,10 @@ export const CancelSoftwareUpgradeProposal = {
 
   toJSON(message: CancelSoftwareUpgradeProposal): unknown {
     const obj: any = {};
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       obj.description = message.description;
     }
     return obj;
@@ -436,10 +436,10 @@ export const ModuleVersion = {
 
   toJSON(message: ModuleVersion): unknown {
     const obj: any = {};
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.version !== "0") {
+    if (message.version !== undefined) {
       obj.version = message.version;
     }
     return obj;

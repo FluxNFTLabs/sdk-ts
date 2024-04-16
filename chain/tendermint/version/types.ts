@@ -78,10 +78,10 @@ export const App = {
 
   toJSON(message: App): unknown {
     const obj: any = {};
-    if (message.protocol !== "0") {
+    if (message.protocol !== undefined) {
       obj.protocol = message.protocol;
     }
-    if (message.software !== "") {
+    if (message.software !== undefined) {
       obj.software = message.software;
     }
     return obj;
@@ -154,10 +154,10 @@ export const Consensus = {
 
   toJSON(message: Consensus): unknown {
     const obj: any = {};
-    if (message.block !== "0") {
+    if (message.block !== undefined) {
       obj.block = message.block;
     }
-    if (message.app !== "0") {
+    if (message.app !== undefined) {
       obj.app = message.app;
     }
     return obj;

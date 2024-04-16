@@ -341,7 +341,7 @@ export const QueryValidatorDistributionInfoRequest = {
 
   toJSON(message: QueryValidatorDistributionInfoRequest): unknown {
     const obj: any = {};
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -428,7 +428,7 @@ export const QueryValidatorDistributionInfoResponse = {
 
   toJSON(message: QueryValidatorDistributionInfoResponse): unknown {
     const obj: any = {};
-    if (message.operator_address !== "") {
+    if (message.operator_address !== undefined) {
       obj.operator_address = message.operator_address;
     }
     if (message.self_bond_rewards?.length) {
@@ -495,7 +495,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
 
   toJSON(message: QueryValidatorOutstandingRewardsRequest): unknown {
     const obj: any = {};
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -615,7 +615,7 @@ export const QueryValidatorCommissionRequest = {
 
   toJSON(message: QueryValidatorCommissionRequest): unknown {
     const obj: any = {};
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -772,13 +772,13 @@ export const QueryValidatorSlashesRequest = {
 
   toJSON(message: QueryValidatorSlashesRequest): unknown {
     const obj: any = {};
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
-    if (message.starting_height !== "0") {
+    if (message.starting_height !== undefined) {
       obj.starting_height = message.starting_height;
     }
-    if (message.ending_height !== "0") {
+    if (message.ending_height !== undefined) {
       obj.ending_height = message.ending_height;
     }
     if (message.pagination !== undefined) {
@@ -938,10 +938,10 @@ export const QueryDelegationRewardsRequest = {
 
   toJSON(message: QueryDelegationRewardsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
-    if (message.validator_address !== "") {
+    if (message.validator_address !== undefined) {
       obj.validator_address = message.validator_address;
     }
     return obj;
@@ -1062,7 +1062,7 @@ export const QueryDelegationTotalRewardsRequest = {
 
   toJSON(message: QueryDelegationTotalRewardsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
     return obj;
@@ -1199,7 +1199,7 @@ export const QueryDelegatorValidatorsRequest = {
 
   toJSON(message: QueryDelegatorValidatorsRequest): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
     return obj;
@@ -1321,7 +1321,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
 
   toJSON(message: QueryDelegatorWithdrawAddressRequest): unknown {
     const obj: any = {};
-    if (message.delegator_address !== "") {
+    if (message.delegator_address !== undefined) {
       obj.delegator_address = message.delegator_address;
     }
     return obj;
@@ -1380,7 +1380,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
 
   toJSON(message: QueryDelegatorWithdrawAddressResponse): unknown {
     const obj: any = {};
-    if (message.withdraw_address !== "") {
+    if (message.withdraw_address !== undefined) {
       obj.withdraw_address = message.withdraw_address;
     }
     return obj;

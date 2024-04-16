@@ -153,22 +153,22 @@ export const ValidatorSigningInfo = {
 
   toJSON(message: ValidatorSigningInfo): unknown {
     const obj: any = {};
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       obj.address = message.address;
     }
-    if (message.start_height !== "0") {
+    if (message.start_height !== undefined) {
       obj.start_height = message.start_height;
     }
-    if (message.index_offset !== "0") {
+    if (message.index_offset !== undefined) {
       obj.index_offset = message.index_offset;
     }
     if (message.jailed_until !== undefined) {
       obj.jailed_until = message.jailed_until.toISOString();
     }
-    if (message.tombstoned === true) {
+    if (message.tombstoned !== undefined) {
       obj.tombstoned = message.tombstoned;
     }
-    if (message.missed_blocks_counter !== "0") {
+    if (message.missed_blocks_counter !== undefined) {
       obj.missed_blocks_counter = message.missed_blocks_counter;
     }
     return obj;
@@ -292,19 +292,19 @@ export const Params = {
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    if (message.signed_blocks_window !== "0") {
+    if (message.signed_blocks_window !== undefined) {
       obj.signed_blocks_window = message.signed_blocks_window;
     }
-    if (message.min_signed_per_window.length !== 0) {
+    if (message.min_signed_per_window !== undefined) {
       obj.min_signed_per_window = base64FromBytes(message.min_signed_per_window);
     }
     if (message.downtime_jail_duration !== undefined) {
       obj.downtime_jail_duration = Duration.toJSON(message.downtime_jail_duration);
     }
-    if (message.slash_fraction_double_sign.length !== 0) {
+    if (message.slash_fraction_double_sign !== undefined) {
       obj.slash_fraction_double_sign = base64FromBytes(message.slash_fraction_double_sign);
     }
-    if (message.slash_fraction_downtime.length !== 0) {
+    if (message.slash_fraction_downtime !== undefined) {
       obj.slash_fraction_downtime = base64FromBytes(message.slash_fraction_downtime);
     }
     return obj;

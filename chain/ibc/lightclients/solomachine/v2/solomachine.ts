@@ -348,16 +348,16 @@ export const ClientState = {
 
   toJSON(message: ClientState): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
-    if (message.is_frozen === true) {
+    if (message.is_frozen !== undefined) {
       obj.is_frozen = message.is_frozen;
     }
     if (message.consensus_state !== undefined) {
       obj.consensus_state = ConsensusState.toJSON(message.consensus_state);
     }
-    if (message.allow_update_after_proposal === true) {
+    if (message.allow_update_after_proposal !== undefined) {
       obj.allow_update_after_proposal = message.allow_update_after_proposal;
     }
     return obj;
@@ -448,10 +448,10 @@ export const ConsensusState = {
     if (message.public_key !== undefined) {
       obj.public_key = Any.toJSON(message.public_key);
     }
-    if (message.diversifier !== "") {
+    if (message.diversifier !== undefined) {
       obj.diversifier = message.diversifier;
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -566,19 +566,19 @@ export const Header = {
 
   toJSON(message: Header): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
     if (message.new_public_key !== undefined) {
       obj.new_public_key = Any.toJSON(message.new_public_key);
     }
-    if (message.new_diversifier !== "") {
+    if (message.new_diversifier !== undefined) {
       obj.new_diversifier = message.new_diversifier;
     }
     return obj;
@@ -678,10 +678,10 @@ export const Misbehaviour = {
 
   toJSON(message: Misbehaviour): unknown {
     const obj: any = {};
-    if (message.client_id !== "") {
+    if (message.client_id !== undefined) {
       obj.client_id = message.client_id;
     }
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
     if (message.signature_one !== undefined) {
@@ -788,16 +788,16 @@ export const SignatureAndData = {
 
   toJSON(message: SignatureAndData): unknown {
     const obj: any = {};
-    if (message.signature.length !== 0) {
+    if (message.signature !== undefined) {
       obj.signature = base64FromBytes(message.signature);
     }
-    if (message.data_type !== 0) {
+    if (message.data_type !== undefined) {
       obj.data_type = dataTypeToJSON(message.data_type);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -872,10 +872,10 @@ export const TimestampedSignatureData = {
 
   toJSON(message: TimestampedSignatureData): unknown {
     const obj: any = {};
-    if (message.signature_data.length !== 0) {
+    if (message.signature_data !== undefined) {
       obj.signature_data = base64FromBytes(message.signature_data);
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
     return obj;
@@ -981,19 +981,19 @@ export const SignBytes = {
 
   toJSON(message: SignBytes): unknown {
     const obj: any = {};
-    if (message.sequence !== "0") {
+    if (message.sequence !== undefined) {
       obj.sequence = message.sequence;
     }
-    if (message.timestamp !== "0") {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.diversifier !== "") {
+    if (message.diversifier !== undefined) {
       obj.diversifier = message.diversifier;
     }
-    if (message.data_type !== 0) {
+    if (message.data_type !== undefined) {
       obj.data_type = dataTypeToJSON(message.data_type);
     }
-    if (message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -1072,7 +1072,7 @@ export const HeaderData = {
     if (message.new_pub_key !== undefined) {
       obj.new_pub_key = Any.toJSON(message.new_pub_key);
     }
-    if (message.new_diversifier !== "") {
+    if (message.new_diversifier !== undefined) {
       obj.new_diversifier = message.new_diversifier;
     }
     return obj;
@@ -1147,7 +1147,7 @@ export const ClientStateData = {
 
   toJSON(message: ClientStateData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
     if (message.client_state !== undefined) {
@@ -1225,7 +1225,7 @@ export const ConsensusStateData = {
 
   toJSON(message: ConsensusStateData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
     if (message.consensus_state !== undefined) {
@@ -1303,7 +1303,7 @@ export const ConnectionStateData = {
 
   toJSON(message: ConnectionStateData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
     if (message.connection !== undefined) {
@@ -1381,7 +1381,7 @@ export const ChannelStateData = {
 
   toJSON(message: ChannelStateData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
     if (message.channel !== undefined) {
@@ -1459,10 +1459,10 @@ export const PacketCommitmentData = {
 
   toJSON(message: PacketCommitmentData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.commitment.length !== 0) {
+    if (message.commitment !== undefined) {
       obj.commitment = base64FromBytes(message.commitment);
     }
     return obj;
@@ -1535,10 +1535,10 @@ export const PacketAcknowledgementData = {
 
   toJSON(message: PacketAcknowledgementData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.acknowledgement.length !== 0) {
+    if (message.acknowledgement !== undefined) {
       obj.acknowledgement = base64FromBytes(message.acknowledgement);
     }
     return obj;
@@ -1598,7 +1598,7 @@ export const PacketReceiptAbsenceData = {
 
   toJSON(message: PacketReceiptAbsenceData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
     return obj;
@@ -1670,10 +1670,10 @@ export const NextSequenceRecvData = {
 
   toJSON(message: NextSequenceRecvData): unknown {
     const obj: any = {};
-    if (message.path.length !== 0) {
+    if (message.path !== undefined) {
       obj.path = base64FromBytes(message.path);
     }
-    if (message.next_seq_recv !== "0") {
+    if (message.next_seq_recv !== undefined) {
       obj.next_seq_recv = message.next_seq_recv;
     }
     return obj;

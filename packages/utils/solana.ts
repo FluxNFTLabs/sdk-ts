@@ -155,7 +155,6 @@ export function toFluxSvmTransaction(senderAddrs: string[], solTx: web3.Transact
     solTx.recentBlockhash = '0x0'
     let message = solTx.compileMessage()
     let accounts = message.accountKeys.map(x => x.toString())
-    let seenSigners = {}
     return svmtx.MsgTransaction.create({
       cosmos_signers: senderAddrs,
       accounts: accounts,
@@ -163,20 +162,15 @@ export function toFluxSvmTransaction(senderAddrs: string[], solTx: web3.Transact
         let ixKeys = ix.keys.map(k => k.pubkey)
         let svmIx : svmtypes.Instruction = {
           program_index: [accounts.indexOf(ix.programId.toString())],
-          accounts: ix.keys.map(k => {
-            
-            if (k.isSigner && !seenSigners[k.pubkey.toString()]) {
-              console.log('signer:', k.pubkey.toString())
-              seenSigners[k.pubkey.toString()] = true
-            }
-            return svmtypes.InstructionAccount.create({
+          accounts: ix.keys.map(k => 
+            svmtypes.InstructionAccount.create({
               id_index: accounts.indexOf(k.pubkey.toString()),
               caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
               callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
               is_signer: k.isSigner,
               is_writable: k.isWritable,
             })
-          }),
+          ),
           data: ix.data,
         }
         return svmIx

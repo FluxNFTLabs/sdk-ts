@@ -20,17 +20,18 @@ import * as web3 from '@solana/web3.js'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { encodeData, UPGRADABLE_LOADER_LAYOUTS, toFluxSvmTransaction, getSvmAddress } from '../../../../packages/utils'
 
-async function broadcastBankMultiSend(
+async function broadcastFluxMsg(
   txClient: txservice.ServiceClientImpl,
-  msg: banktypes.MsgMultiSend, 
+  protoType: any,
+  msg: any, 
   signerPubkeys: anytypes.Any[],
   signerAccNums: number[],
   signerAccSeqs: number[],
   signerPrivKeys: any[],
 ) {
   const msgAny: anytypes.Any = {
-    type_url: `/${banktypes.MsgMultiSend.$type}`,
-    value: banktypes.MsgMultiSend.encode(msg).finish(),
+    type_url: `/${protoType.$type}`,
+    value: protoType.encode(msg).finish(),
   }
   
   const msgJSON = {
@@ -121,106 +122,6 @@ async function broadcastBankMultiSend(
   return await txClient.BroadcastTx(broadcastReq)
 }
 
-async function broadcastSvmTransactionMsg(
-  txClient: txservice.ServiceClientImpl,
-  msg: svmtx.MsgTransaction, 
-  signerPubkeys: anytypes.Any[],
-  signerAccNums: number[],
-  signerAccSeqs: number[],
-  signerPrivKeys: any[],
-) {
-  const msgAny: anytypes.Any = {
-    type_url: `/${svmtx.MsgTransaction.$type}`,
-    value: svmtx.MsgTransaction.encode(msg).finish(),
-  }
-  
-  const msgJSON = {
-    type: codectypemap[`/${svmtx.MsgTransaction.$type}`],
-    value: svmtx.MsgTransaction.toJSON(msg)
-  }
-
-  // prep tx data
-  const txBody: txtypes.TxBody = {
-    messages: [msgAny],
-    memo: '',
-    timeout_height: '119000',
-    extension_options: [],
-    non_critical_extension_options: []
-  }
-
-  const signerInfos = []
-  for(let i = 0; i < signerPubkeys.length; i++) {
-    signerInfos.push({
-      public_key: signerPubkeys[i],
-      mode_info: {
-        single: {
-          mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-        },
-      },
-      sequence: signerAccSeqs[i].toString(),
-    })
-  }
-
-  const authInfo: txtypes.AuthInfo = {
-    signer_infos: signerInfos,
-    fee: {
-      amount: [
-        {denom: 'lux', amount: '2000000000000000'}
-      ],
-      gas_limit: '4000000',
-      payer: '',
-      granter: ''
-    },
-    tip: undefined,
-  }
-
-  const txBodyBytes = txtypes.TxBody.encode(txBody).finish()
-  const authInfoBytes = txtypes.AuthInfo.encode(authInfo).finish()
-  const sigs = []
-  for(let i = 0; i < signerPrivKeys.length; i++) {
-    // get signatures
-    let signDoc: txtypes.SignDoc = {
-      body_bytes: txBodyBytes,
-      auth_info_bytes: authInfoBytes,
-      chain_id: 'flux-1',
-      account_number: signerAccNums[i].toString(),
-    }
-
-    let eip712SignDoc = getEIP712SignBytes(signDoc, [msgJSON], '')
-    const msgHash = Buffer.from(getMessage(eip712SignDoc, true, {verifyDomain: false}))
-    
-    const privKey = signerPrivKeys[i]
-    const senderSign = ethutil.ecsign(msgHash, Buffer.from(privKey.key))
-    const sig = Uint8Array.from(Buffer.concat([senderSign.r, senderSign.s, Buffer.from([0])]))
-    sigs.push(sig)
-  }
-  
-  // broadcast tx
-  const extOpts: chaintypes.ExtensionOptionsWeb3Tx = {
-    typedDataChainID: '1',
-    feePayer:         '',
-    feePayerSig:      Uint8Array.from([]),
-  }
-  const extOptsAny: anytypes.Any = {
-    type_url: '/' + chaintypes.ExtensionOptionsWeb3Tx.$type,
-    value: chaintypes.ExtensionOptionsWeb3Tx.encode(extOpts).finish()
-  }
-  txBody.extension_options = [extOptsAny]
-
-  const txRaw: txtypes.TxRaw = {
-    body_bytes: txtypes.TxBody.encode(txBody).finish(),
-    auth_info_bytes: authInfoBytes,
-    signatures: sigs,
-  }
-
-  const broadcastReq: txservice.BroadcastTxRequest = {
-    tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
-    mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC,
-  }
-  
-  return await txClient.BroadcastTx(broadcastReq)
-}
-
 (async () => {
   // init clients
   const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
@@ -297,11 +198,11 @@ async function broadcastSvmTransactionMsg(
     ]
   })
 
-  let multiSendRes = await broadcastBankMultiSend(txClient, multisendMsg, [signerPubKeys[0]], [accNum], [accSeq], [senderPrivKey])
-  console.log('multisend res:', multiSendRes, "waiting for tx being included...")
+  let multiSendRes = await broadcastFluxMsg(txClient, banktypes.MsgMultiSend, multisendMsg, [signerPubKeys[0]], [accNum], [accSeq], [senderPrivKey])
+  console.log('multisend res:', multiSendRes, "waiting for tx to be included in a block")
 
   // sleep for 2 seconds
-  await new Promise((resolve, reject) => {
+  await new Promise((resolve, _) => {
     setInterval(() => resolve(null), 2000)
   })
   
@@ -385,8 +286,9 @@ async function broadcastSvmTransactionMsg(
     userDataAddr,
   ], initAccountsTx, 1000000)
 
-  let initAccountsResult = await broadcastSvmTransactionMsg(
+  let initAccountsResult = await broadcastFluxMsg(
     txClient, 
+    svmtx.MsgTransaction,
     msgCreateAccounts,
     signerPubKeys,
     accNums,
@@ -400,7 +302,6 @@ async function broadcastSvmTransactionMsg(
   // 
   const chunkSize = 1200
   let solUploadTransaction = new web3.Transaction()
-  // 1 tx = n instructions (IX)
   for(let i = 0; i < programBinary.length; i += chunkSize) {
     let next = i + chunkSize
     if (next > programBinary.length) {
@@ -490,8 +391,9 @@ async function broadcastSvmTransactionMsg(
   let senderAccNum = accNums[0] // accNums[0] was previously the sender's account number
   let senderAccSeq = accSeqs[0] + 1 // accSeqs[0] was previously the sender's account number
   let fluxUploadTx = toFluxSvmTransaction([senderAddr], solUploadTransaction, 1000000)
-  let uploadResult = await broadcastSvmTransactionMsg(
+  let uploadResult = await broadcastFluxMsg(
     txClient, 
+    svmtx.MsgTransaction,
     fluxUploadTx,
     [signerPubKeys[0]],
     [senderAccNum],
@@ -499,8 +401,12 @@ async function broadcastSvmTransactionMsg(
     [senderPrivKey],
   )
   console.log('upload result:', uploadResult)
-  
-  // execute tx with the user program data account
+  console.log('program pubkey:', programPubkey.toBase58())
+  console.log('program user data account:', userDataPubkey.toBase58())
+
+  //
+  // execute tx with the user program data account, created in previous step
+  // 
   let userDataAccNum = accNums[3]
   let userDataAccSeq = accSeqs[3] + 1
   let userDataPubkeyAny = signerPubKeys[3]
@@ -508,20 +414,21 @@ async function broadcastSvmTransactionMsg(
     programId: programPubkey, // program ID = contract address
     keys: [
       {
-				pubkey:  userDataPubkey, // account that interacts
+				pubkey:  userDataPubkey,
 				isWritable: true,
 				isSigner:   true,
 			},
     ],
     data: Buffer.from([]),
   })
-  console.log('program pubkey:', programPubkey.toBase58())
+
   let executeTransaction = new web3.Transaction().add(executeIx)
   executeTransaction.feePayer = userDataPubkey
 
   let fluxExecuteTx = toFluxSvmTransaction([userDataAddr], executeTransaction, 1000000)
-  let executeResult = await broadcastSvmTransactionMsg(
+  let executeResult = await broadcastFluxMsg(
     txClient, 
+    svmtx.MsgTransaction,
     fluxExecuteTx, 
     [userDataPubkeyAny],
     [userDataAccNum], 

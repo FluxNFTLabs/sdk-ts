@@ -319,7 +319,7 @@ export const createTransactionWithSigners = async ({
     [signer.sequence]
   )
 
-  const gasMultiplier = 2
+  const gasMultiplier = 1.8
   let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
   const feeMessage = createFee({
     fee: fee.amount[0],

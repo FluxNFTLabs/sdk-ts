@@ -312,15 +312,19 @@ export const createTransactionWithSigners = async ({
   let fee: any = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
 
-  let simulateRes = await simulate(
-    txClient,
-    body,
-    [getPublicKeyAny(signer.pubKey)],
-    [signer.sequence]
-  )
-
+  let simulateRes
+  try {
+    simulateRes = await simulate(
+      txClient,
+      body,
+      [getPublicKeyAny(signer.pubKey)],
+      [signer.sequence]
+    )
+  } catch (e) {}
   const gasMultiplier = 1.8
-  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
+  let gasLimit = simulateRes
+    ? Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
+    : fee.gas
   const feeMessage = createFee({
     fee: fee.amount[0],
     payer: fee.payer,

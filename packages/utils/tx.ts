@@ -309,27 +309,25 @@ export const createTransactionWithSigners = async ({
 }: CreateTransactionWithSignersArgs): Promise<CreateTransactionResult> => {
   const actualSigners = Array.isArray(signers) ? signers : [signers]
   const [signer] = actualSigners
-  let fee: any = DEFAULT_STD_FEE
+  let fee = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
 
-  let simulateRes
-  try {
-    simulateRes = await simulate(
-      txClient,
-      body,
-      [getPublicKeyAny(signer.pubKey)],
-      [signer.sequence]
-    )
-  } catch (e) {}
+  let simulateRes = await simulate(
+    txClient,
+    body,
+    [getPublicKeyAny(signer.pubKey)],
+    [signer.sequence]
+  )
+
   const gasMultiplier = 1.8
   let gasLimit = simulateRes
     ? Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
     : fee.gas
   const feeMessage = createFee({
     fee: fee.amount[0],
-    payer: fee.payer,
-    granter: fee.granter,
-    gasLimit
+    payer: '',
+    granter: '',
+    gasLimit: Number(gasLimit)
   })
 
   const signInfo = createSigners({

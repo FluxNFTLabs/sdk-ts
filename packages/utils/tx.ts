@@ -428,7 +428,7 @@ export const simulate = async (
       amount: [
         {denom: 'lux', amount: '0'}
       ],
-      gas_limit: '100000',
+      gas_limit: '0',
       payer: '',
       granter: ''
     }

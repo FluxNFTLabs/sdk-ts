@@ -15,16 +15,14 @@ import * as ethsecp256k1 from '../../../../chain/cosmos/crypto/ethsecp256k1/keys
 import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as codectypemap from '../../../../chain/codec_type_map.json'
 import * as ethcrypto from 'eth-crypto'
-
+import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClient'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
+import { simulate } from '../../../../packages'
 
 const main = async () => {
-  // init clients
-  const cc = new txservice.GrpcWebImpl('http://localhost:10337', {
-    transport: NodeHttpTransport()
-  })
-  const txClient = new txservice.ServiceClientImpl(cc)
-  const authClient = new authservice.QueryClientImpl(cc)
+  const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
+  const txClient = chainGrpcClient.transaction
+  const authClient = chainGrpcClient.auth
 
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
@@ -41,9 +39,10 @@ const main = async () => {
     type_url: '/' + ethsecp256k1.PubKey.$type,
     value: ethsecp256k1.PubKey.encode(senderPubkey).finish()
   }
+
   const senderAddr = bech32.encode('lux', bech32.toWords(wallet.getAddress()))
   // fetch account num, seq
-  const senderInfo = await authClient.AccountInfo({ address: senderAddr })
+  const senderInfo = await authClient.getAccount(senderAddr)
   const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
@@ -92,6 +91,10 @@ const main = async () => {
     non_critical_extension_options: []
   }
 
+  // Simulate to estimate gas
+  let simulateRes = await simulate(txClient, txBody, [senderPubkeyAny], [senderAccSeq])
+  let gasLimit = Math.ceil(Number(simulateRes.gas_info.gas_used) * 1.5)
+  // assign gas and other info to get real tx and broadcast
   const authInfo: txtypes.AuthInfo = {
     signer_infos: [
       {
@@ -106,7 +109,7 @@ const main = async () => {
     ],
     fee: {
       amount: [{ denom: 'lux', amount: '100000000000000' }],
-      gas_limit: '200000',
+      gas_limit: gasLimit.toString(),
       payer: '',
       granter: ''
     },
@@ -147,12 +150,8 @@ const main = async () => {
     signatures: [senderCosmosSig]
   }
 
-  const broadcastReq: txservice.BroadcastTxRequest = {
-    tx_bytes: txtypes.TxRaw.encode(txRaw).finish(),
-    mode: txservice.BroadcastMode.BROADCAST_MODE_SYNC
-  }
   try {
-    const res = await txClient.BroadcastTx(broadcastReq)
+    const res = await txClient.broadcastTx(txtypes.TxRaw.encode(txRaw).finish())
     console.log(res)
   } catch (err: any) {
     console.log(err)

@@ -8,15 +8,21 @@ import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx'
 import { EthereumChainId, DEFAULT_STD_FEE } from '../utils'
 import * as FluxTypesV1TxExt from '../../chain/flux/types/v1beta1/tx_ext'
 import { DirectSignResponse } from '@cosmjs/proto-signing'
+import * as txtypes from '../../chain/cosmos/tx/v1beta1/tx'
+import * as txservice from '../../chain/cosmos/tx/v1beta1/service'
+import * as anytypes from '../../chain/google/protobuf/any'
+import * as signingtypes from '../../chain/cosmos/tx/signing/v1beta1/signing'
 import keccak256 from 'keccak256'
+import { ChainGrpcTxService } from '../client/chain/grpc/ChainGrpcTxService'
+
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
     type_url: '/' + EthCryptoSecp256k1Keys.PubKey.$type,
     value: EthCryptoSecp256k1Keys.PubKey.encode({ key: Buffer.from(key, 'hex') }).finish()
   }
 }
-type KeyType = string | GoogleProtobufAny.Any
-export const getPublicKey = ({ key }: { key: any }) => {
+
+export const getPublicKey = ({ key }: { key: string | GoogleProtobufAny.Any }) => {
   if (typeof key !== 'string') {
     return key
   }
@@ -249,11 +255,11 @@ interface CreateTransactionArgs {
   chainId: string
   timeoutHeight?: number
   memo?: string
-  fee?: any
   signMode?: CosmosTxSigningV1Beta1Signing.SignMode
   pubKey: string | any
   accountNumber: string
   messageWrapper: any
+  txClient: ChainGrpcTxService
 }
 interface CreateTransactionResult {
   txRaw: CosmosTxV1Beta1Tx.TxRaw
@@ -267,7 +273,9 @@ interface CreateTransactionResult {
   authInfo: CosmosTxV1Beta1Tx.AuthInfo
   txBody: CosmosTxV1Beta1Tx.TxBody
 }
-export const createTransaction = (args: CreateTransactionArgs): CreateTransactionResult => {
+export const createTransaction = (
+  args: CreateTransactionArgs
+): Promise<CreateTransactionResult> => {
   return createTransactionWithSigners({
     ...args,
     signers: {
@@ -284,30 +292,42 @@ interface CreateTransactionWithSignersArgs {
   message: any
   timeoutHeight?: number
   memo?: string
-  fee?: any
   signMode?: CosmosTxSigningV1Beta1Signing.SignMode
   messageWrapper: any
+  txClient: ChainGrpcTxService
 }
 
-export const createTransactionWithSigners = ({
+export const createTransactionWithSigners = async ({
   signers,
   chainId,
   message,
   timeoutHeight,
   memo = '',
-  fee = DEFAULT_STD_FEE,
   signMode = CosmosTxSigningV1Beta1Signing.SignMode.SIGN_MODE_DIRECT,
-  messageWrapper
-}: CreateTransactionWithSignersArgs): CreateTransactionResult => {
+  messageWrapper,
+  txClient
+}: CreateTransactionWithSignersArgs): Promise<CreateTransactionResult> => {
   const actualSigners = Array.isArray(signers) ? signers : [signers]
   const [signer] = actualSigners
-
+  let fee = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
+
+  let simulateRes = await simulate(
+    txClient,
+    body,
+    [getPublicKeyAny(signer.pubKey)],
+    [signer.sequence]
+  )
+
+  const gasMultiplier = 1.8
+  let gasLimit = simulateRes
+    ? Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
+    : fee.gas
   const feeMessage = createFee({
     fee: fee.amount[0],
-    payer: fee.payer,
-    granter: fee.granter,
-    gasLimit: parseInt(fee.gas, 10)
+    payer: '',
+    granter: '',
+    gasLimit: Number(gasLimit)
   })
 
   const signInfo = createSigners({
@@ -381,4 +401,54 @@ export const createTxRawFromSigResponse = (
   txRaw.signatures = [Buffer.from(directSignResponse.signature.signature, 'base64')]
 
   return txRaw
+}
+
+/**
+ * simulate the transaction
+ * often used to get back estimated gas limit (as reference) to apply into real tx broadcasting
+ * NOTE: simulate doesn't need signers' signature
+ * @returns Promise<txservice.SimulateResponse>
+ */
+export const simulate = async (
+  txClient: ChainGrpcTxService,
+  txBody: txtypes.TxBody,
+  signerPubkeys: anytypes.Any[],
+  signerAccSeqs: string[]
+): Promise<txservice.SimulateResponse> => {
+  if (signerPubkeys.length != signerAccSeqs.length) {
+    throw `sender pubkeys length should match sequence length (${signerPubkeys.length} != ${signerAccSeqs.length})`
+  }
+  let signerInfos: txtypes.SignerInfo[] = []
+  let simSignatures = []
+
+  for (let i = 0; i < signerPubkeys.length; i++) {
+    signerInfos.push({
+      public_key: signerPubkeys[i],
+      mode_info: {
+        single: {
+          mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON
+        }
+      },
+      sequence: signerAccSeqs[i]
+    })
+    simSignatures.push(Buffer.alloc(65))
+  }
+
+  const authInfo = txtypes.AuthInfo.create({
+    signer_infos: signerInfos,
+    fee: {
+      amount: [{ denom: 'lux', amount: '0' }],
+      gas_limit: '100000',
+      payer: '',
+      granter: ''
+    }
+  })
+
+  const txRaw: txtypes.TxRaw = {
+    body_bytes: txtypes.TxBody.encode(txBody).finish(),
+    auth_info_bytes: txtypes.AuthInfo.encode(authInfo).finish(),
+    signatures: simSignatures
+  }
+
+  return await txClient.simulate(txtypes.TxRaw.encode(txRaw).finish())
 }

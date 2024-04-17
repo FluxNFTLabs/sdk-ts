@@ -285,9 +285,13 @@ export const createTransaction = (
     }
   })
 }
-
+interface signer {
+  pubKey: string | any
+  accountNumber: string
+  sequence: string
+}
 interface CreateTransactionWithSignersArgs {
-  signers: any
+  signers: signer | Array<signer>
   chainId: string
   message: any
   timeoutHeight?: number

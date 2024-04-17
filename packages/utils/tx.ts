@@ -13,6 +13,7 @@ import * as txservice from '../../chain/cosmos/tx/v1beta1/service'
 import * as anytypes from '../../chain/google/protobuf/any'
 import * as signingtypes from '../../chain/cosmos/tx/signing/v1beta1/signing'
 import keccak256 from 'keccak256'
+import { ChainGrpcTxService } from '../client/chain/grpc/ChainGrpcTxService'
 
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
@@ -254,11 +255,11 @@ interface CreateTransactionArgs {
   chainId: string
   timeoutHeight?: number
   memo?: string
-  fee?: any
   signMode?: CosmosTxSigningV1Beta1Signing.SignMode
   pubKey: string | any
   accountNumber: string
   messageWrapper: any
+  txClient: ChainGrpcTxService
 }
 interface CreateTransactionResult {
   txRaw: CosmosTxV1Beta1Tx.TxRaw
@@ -272,7 +273,9 @@ interface CreateTransactionResult {
   authInfo: CosmosTxV1Beta1Tx.AuthInfo
   txBody: CosmosTxV1Beta1Tx.TxBody
 }
-export const createTransaction = (args: CreateTransactionArgs): CreateTransactionResult => {
+export const createTransaction = (
+  args: CreateTransactionArgs
+): Promise<CreateTransactionResult> => {
   return createTransactionWithSigners({
     ...args,
     signers: {
@@ -289,30 +292,39 @@ interface CreateTransactionWithSignersArgs {
   message: any
   timeoutHeight?: number
   memo?: string
-  fee?: any
   signMode?: CosmosTxSigningV1Beta1Signing.SignMode
   messageWrapper: any
+  txClient: ChainGrpcTxService
 }
 
-export const createTransactionWithSigners = ({
+export const createTransactionWithSigners = async ({
   signers,
   chainId,
   message,
   timeoutHeight,
   memo = '',
-  fee = DEFAULT_STD_FEE,
   signMode = CosmosTxSigningV1Beta1Signing.SignMode.SIGN_MODE_DIRECT,
-  messageWrapper
-}: CreateTransactionWithSignersArgs): CreateTransactionResult => {
+  messageWrapper,
+  txClient
+}: CreateTransactionWithSignersArgs): Promise<CreateTransactionResult> => {
   const actualSigners = Array.isArray(signers) ? signers : [signers]
   const [signer] = actualSigners
-
+  let fee: any = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
+
+  let simulateRes = await simulate(
+    txClient,
+    body,
+    [getPublicKeyAny(signer.pubKey)],
+    [signer.sequence]
+  )
+
+  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 1.5)
   const feeMessage = createFee({
     fee: fee.amount[0],
     payer: fee.payer,
     granter: fee.granter,
-    gasLimit: parseInt(fee.gas, 10)
+    gasLimit
   })
 
   const signInfo = createSigners({
@@ -395,7 +407,7 @@ export const createTxRawFromSigResponse = (
  * @returns Promise<txservice.SimulateResponse>
  */
 export const simulate = async (
-  txClient: txservice.ServiceClientImpl,
+  txClient: ChainGrpcTxService,
   txBody: txtypes.TxBody,
   signerPubkeys: anytypes.Any[],
   signerAccSeqs: string[]
@@ -403,7 +415,6 @@ export const simulate = async (
   if (signerPubkeys.length != signerAccSeqs.length) {
     throw `sender pubkeys length should match sequence length (${signerPubkeys.length} != ${signerAccSeqs.length})`
   }
-
   let signerInfos: txtypes.SignerInfo[] = []
   let simSignatures = []
 
@@ -436,9 +447,5 @@ export const simulate = async (
     signatures: simSignatures
   }
 
-  return await txClient.Simulate(
-    txservice.SimulateRequest.create({
-      tx_bytes: txtypes.TxRaw.encode(txRaw).finish()
-    })
-  )
+  return await txClient.simulate(txtypes.TxRaw.encode(txRaw).finish())
 }

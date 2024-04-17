@@ -50,7 +50,6 @@ const datePickerAttrs = computed(() => {
 const inputDisplay = computed(() => {
   return internalValue.value ? dayjs(internalValue.value).format(props.format) : props.format
 })
-console.log('dayjs(internalValue).format(format)', inputDisplay.value)
 </script>
 
 <template>

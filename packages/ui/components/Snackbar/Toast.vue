@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import BaseIcons from '../Icons/index.vue'
 const props = defineProps({
   modelValue: Boolean,
   timeout: {
     type: Number,
-    default: 5000
+    default: 8000
   },
   color: {
     type: String,
@@ -13,7 +13,7 @@ const props = defineProps({
   },
   createAt: {
     type: Number,
-    default: ''
+    default: 0
   }
 })
 const _timeout = ref<any>('')
@@ -42,7 +42,7 @@ watchEffect(() => {
         <slot />
       </div>
       <div>
-        <BaseButton size="small" icon @click="hide">
+        <BaseButton size="sm icon ml-2" @click="hide">
           <span class="text-blueGray-900">
             <BaseIcons name="close" />
           </span>

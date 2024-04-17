@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-  defineProps,
-  watch,
-  defineEmits,
-  ref,
-  useAttrs,
-  computed,
-  onMounted,
-  onBeforeUnmount
-} from 'vue'
+import { watch, ref, useAttrs, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Dropdown } from 'floating-vue'
 import BaseChip from '../Chip/index.vue'
 import CheckBox from '../Checkbox/index.vue'
@@ -126,9 +117,9 @@ watch(
 </script>
 <template>
   <div class="base-select" :class="[containerClass].join(' ')" ref="selectRef">
-    <p class="label" :class="labelClass" v-if="label">
-      {{ label }}
-    </p>
+    <div class="label flex gap-2 items-center" :class="labelClass" v-if="label">
+      {{ label }} <slot name="appendLabel" />
+    </div>
     <Dropdown
       :disabled="disabled"
       :popperHideTriggers="(triggers) => (multiple ? triggers : [...triggers, 'click'])"

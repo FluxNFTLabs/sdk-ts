@@ -1,7 +1,6 @@
 <script setup>
-import { defineProps } from 'vue'
 import BaseButton from '../Button/index.vue'
-defineProps({
+const props = defineProps({
   isOpen: {
     type: Boolean,
     default: false
@@ -31,6 +30,17 @@ defineProps({
     default: false
   }
 })
+//watch open = true, get body element disabled scroll
+watch(
+  () => props.isOpen,
+  (value) => {
+    if (value) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }
+)
 </script>
 <template>
   <teleport to="body">
@@ -46,7 +56,7 @@ defineProps({
             <BaseButton
               v-if="!hideButtonClose"
               icon="close"
-              size="small"
+              size="sm"
               class="base-modal__button-close"
               @click="onClose"
             />

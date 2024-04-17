@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue'
+import { ref, computed } from 'vue'
 import BaseSkeleton from '../Skeleton/index.vue'
 const props = defineProps({
   src: {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { defineProps, defineModel, ref, watch, useAttrs, defineOptions } from 'vue'
+import { ref, useAttrs } from 'vue'
 defineOptions({
   inheritAttrs: false
 })
-const props = defineProps({
+defineProps({
   modalValue: String,
   label: {
     type: String
@@ -70,6 +70,7 @@ const containerClick = () => {
     <p v-if="helperText && !helperTextIcon" class="text-[14px] mb-2 leading-[20px]">
       {{ helperText }}
     </p>
+    <slot name="label" class="label" />
     <div class="input" :class="class" @click="containerClick">
       <BaseIcons v-if="prependIcon" :name="prependIcon" class="prepend-icon" />
       <slot v-else name="prependIcon" class="prepend-icon" />

@@ -1,7 +1,11 @@
+/*
+ * This example will show how to interact with fluxd svm to upload a program
+ */
 import * as svmtypes from '../../chain/flux/svm/v1beta1/svm'
 import * as BufferLayout from '@solana/buffer-layout'
 import * as svmtx from '../../chain/flux/svm/v1beta1/tx'
 import * as web3 from '@solana/web3.js'
+import { getSvmAddressFromLux } from './address';
 
 interface IInstructionInputData {
     readonly instruction: number;
@@ -146,29 +150,29 @@ export const UPGRADABLE_LOADER_LAYOUTS = {
     },
 }
 
-export function toFluxSvmTransaction(senderAddr: string, solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
+export function toFluxSvmTransaction(senderAddrs: string[], solTx: web3.Transaction, budget: Number): svmtx.MsgTransaction {
     // we don't use recent blockhash in flux so just let it be zero
     solTx.recentBlockhash = '0x0'
     let message = solTx.compileMessage()
     let accounts = message.accountKeys.map(x => x.toString())
-  
     return svmtx.MsgTransaction.create({
-      sender: senderAddr,
+      cosmos_signers: senderAddrs,
       accounts: accounts,
       instructions: solTx.instructions.map(ix => {
         let ixKeys = ix.keys.map(k => k.pubkey)
         let svmIx : svmtypes.Instruction = {
           program_index: [accounts.indexOf(ix.programId.toString())],
-          accounts: ix.keys.map(k => svmtypes.InstructionAccount.create({
-            id_index: accounts.indexOf(k.pubkey.toString()),
-            caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
-            callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
-            is_signer: k.isSigner,
-            is_writable: k.isWritable,
-          })),
+          accounts: ix.keys.map(k => 
+            svmtypes.InstructionAccount.create({
+              id_index: accounts.indexOf(k.pubkey.toString()),
+              caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
+              callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
+              is_signer: k.isSigner,
+              is_writable: k.isWritable,
+            })
+          ),
           data: ix.data,
         }
-  
         return svmIx
       }),
       compute_budget: budget.toString(), // budget for executing solana bytecode

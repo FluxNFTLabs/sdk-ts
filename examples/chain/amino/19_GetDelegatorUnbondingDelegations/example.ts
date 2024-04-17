@@ -17,7 +17,7 @@ const main = async () => {
       delegator_addr: luxAddress
     })
     console.log(JSON.stringify(res.unbonding_responses, null, 2))
-  } catch (err) {
+  } catch (err: any) {
     console.log(err.message)
   }
 }

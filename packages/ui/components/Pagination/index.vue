@@ -79,7 +79,6 @@ export default {
     const pages = computed(() => {
       const items = {}
       const { pageCount, pageRange, marginPages } = props
-
       if (pageCount <= pageRange) {
         for (let index = 0; index < pageCount; index++) {
           const page = {

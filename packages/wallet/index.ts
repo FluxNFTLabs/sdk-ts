@@ -11,21 +11,21 @@ export default class WalletStrategy {
   constructor(wallet: Wallet, chainId: ChainId) {
     this.chainId = chainId
     this.wallet = wallet
-
-    switch (wallet) {
-      case Wallet.Keplr:
-        this.provider = new Keplr({ chainId })
-        break
-      case Wallet.Metamask:
-        this.provider = new Metamask({ chainId })
-        break
-      case Wallet.Phantom:
-        this.provider = new Phantom({ chainId })
-        break
-      default:
-        this.provider = new Keplr({ chainId })
-        break
-    }
+    try {
+      switch (wallet) {
+        case Wallet.Keplr:
+          this.provider = new Keplr({ chainId })
+          break
+        case Wallet.Metamask:
+          this.provider = new Metamask({ chainId })
+          break
+        case Wallet.Phantom:
+          this.provider = new Phantom({ chainId })
+          break
+        default:
+          break
+      }
+    } catch (e) {}
   }
   async setWallet(wallet: Wallet) {
     this.wallet = wallet

@@ -146,7 +146,7 @@ const main = async () => {
   try {
     const res = await txClient.broadcastTx(broadcastReq.tx_bytes, broadcastReq.mode)
     console.log(res)
-  } catch (err) {
+  } catch (err: any) {
     console.log(err)
   }
 }

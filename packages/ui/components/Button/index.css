@@ -1,17 +1,17 @@
 /* Base Button Styles */
 .btn {
-  @apply relative px-6 py-3 rounded-2xl font-bold text-[16px] relative bg-transparent text-blueGray-50 flex items-center justify-center;
+  @apply relative px-6 py-3 rounded-2xl font-bold text-[16px] relative bg-transparent text-blueGray-50 flex items-center justify-center overflow-hidden;
 }
 
 /* Disabled State */
 .btn:disabled {
-  @apply opacity-[0.2] cursor-not-allowed;
+  @apply opacity-[0.6] cursor-not-allowed;
 }
 
 /* Hover and Active States */
 .btn:not(:disabled):hover::before,
 .btn:not(:disabled):active::before {
-  @apply absolute top-0 left-0 rounded-2xl w-full h-full content-[''];
+  @apply absolute top-0 left-0 rounded-[inherit] w-full h-full content-[''];
 }
 .btn.icon:not(:disabled):hover::before {
   @apply rounded-full;

@@ -18,6 +18,6 @@
 .base-drop-upload .title {
   @apply mt-4 text-[16px];
 }
-.description {
+.base-drop-upload .description {
   @apply text-[14px] text-blueGray-300 text-center;
 }

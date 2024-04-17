@@ -13,11 +13,11 @@ export default class Phantom {
   }
   async getAddresses(): Promise<Array<string>> {
     const provider = await this.connect()
-    return [provider.publicKey?.toString()]
+    return [provider.publicKey?.toString() || '']
   }
 
   async getPubKey(): Promise<string> {
     const provider = await this.connect()
-    return provider.publicKey?.toString()
+    return provider.publicKey?.toString() || ''
   }
 }

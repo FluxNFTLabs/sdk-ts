@@ -11,12 +11,12 @@ export interface SnackbarStoreType {
 export const useSnackbarStore = defineStore('SnackbarStore', () => {
   const store = ref<SnackbarStoreType>({
     message: '',
-    timeout: 3000,
+    timeout: 8000,
     color: 'success',
     show: false
   })
 
-  const show = ({ message, color = 'success', timeout = 3000 }: SnackbarStoreType) => {
+  const show = ({ message, color = 'success', timeout = 8000 }: SnackbarStoreType) => {
     store.value = {
       ...store.value,
       message,

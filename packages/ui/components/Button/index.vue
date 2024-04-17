@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps } from 'vue'
 import BaseIcons from '../Icons/index.vue'
 import ProgressCircular from '../ProgressCircular.vue'
 type Color =
@@ -16,7 +15,7 @@ type Size = 'x-small' | 'small' | 'medium' | 'large' | 'xs' | 'sm' | 'md' | 'lg'
 defineProps({
   size: {
     type: String as () => Size,
-    default: 'medium',
+    default: () => 'md',
     validator: (value: string) =>
       ['x-small', 'small', 'medium', 'large', 'xs', 'sm', 'md', 'lg'].includes(value)
   },
@@ -57,7 +56,16 @@ defineProps({
     >
       <ProgressCircular rotate />
     </div>
-    <BaseIcons v-if="icon" :name="icon" :size="size" />
-    <slot />
+    <div class="flex items-center justify-center" :class="isLoading ? 'opacity-0' : ''">
+      <BaseIcons v-if="icon" :name="icon" :size="size" />
+
+      <slot />
+    </div>
   </button>
 </template>
+
+<style scoped>
+.opacity-0 {
+  opacity: 0;
+}
+</style>

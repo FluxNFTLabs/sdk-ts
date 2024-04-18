@@ -115,7 +115,7 @@ watch(
         @click="
           () => {
             inputChange({ target: { value: '' } })
-            onChange && onChange(internalValue, accountSelected)
+            onChange && onChange(internalValue)
           }
         "
         style="right: 0.5rem"

@@ -16,12 +16,10 @@ import keccak256 from 'keccak256'
 import { ChainGrpcTxService } from '../client/chain/grpc/ChainGrpcTxService'
 import * as ethsecp256k1 from '../../chain/cosmos/crypto/ethsecp256k1/keys'
 
-export const defaultSecp256k1Pubkey = ethsecp256k1.PubKey.create({ 
-  key: Buffer.concat([
-    Buffer.from([2]),
-    Buffer.alloc(32, 0),
-  ]) 
-})
+export const defaultSecp256k1Pubkey = () =>
+  ethsecp256k1.PubKey.create({
+    key: Buffer.concat([Buffer.from([2]), Buffer.alloc(32, 0)])
+  })
 
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
@@ -320,11 +318,7 @@ export const createTransactionWithSigners = async ({
   let fee = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
 
-  let simulateRes = await simulate(
-    txClient,
-    body,
-    [signer.sequence],
-  )
+  let simulateRes = await simulate(txClient, body, [signer.sequence])
 
   const gasMultiplier = 1.8
   let gasLimit = simulateRes
@@ -429,7 +423,7 @@ export const simulate = async (
     signerInfos.push({
       public_key: anytypes.Any.create({
         type_url: '/' + ethsecp256k1.PubKey.$type,
-        value: ethsecp256k1.PubKey.encode(defaultSecp256k1Pubkey).finish()
+        value: ethsecp256k1.PubKey.encode(defaultSecp256k1Pubkey()).finish()
       }),
       mode_info: {
         single: {

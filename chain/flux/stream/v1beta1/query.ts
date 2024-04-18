@@ -30,12 +30,10 @@ export enum Op {
   BazaarCreateProduct = 200,
   BazaarPurchaseOffering = 201,
   BazaarVerifyProduct = 202,
-  /** EvmDeployContract - EVM */
-  EvmDeployContract = 3000,
-  EvmExecute = 3001,
-  EvmEmitLog = 3002,
-  /** SvmExecute - SVM */
-  SvmExecute = 4000,
+  /** EvmDeployContract - Evm */
+  EvmDeployContract = 3001,
+  EvmExecute = 3002,
+  EvmEmitLog = 3003,
   UNRECOGNIZED = -1,
 }
 
@@ -86,18 +84,15 @@ export function opFromJSON(object: any): Op {
     case 202:
     case "BazaarVerifyProduct":
       return Op.BazaarVerifyProduct;
-    case 3000:
+    case 3001:
     case "EvmDeployContract":
       return Op.EvmDeployContract;
-    case 3001:
+    case 3002:
     case "EvmExecute":
       return Op.EvmExecute;
-    case 3002:
+    case 3003:
     case "EvmEmitLog":
       return Op.EvmEmitLog;
-    case 4000:
-    case "SvmExecute":
-      return Op.SvmExecute;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -143,8 +138,6 @@ export function opToJSON(object: Op): string {
       return "EvmExecute";
     case Op.EvmEmitLog:
       return "EvmEmitLog";
-    case Op.SvmExecute:
-      return "SvmExecute";
     case Op.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

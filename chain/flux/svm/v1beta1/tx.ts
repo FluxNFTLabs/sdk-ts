@@ -5,28 +5,156 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Instruction } from "./svm";
 
+export interface MsgCreateAccount {
+  sender: string;
+  owner: string;
+}
+
+export interface MsgCreateAccountResponse {
+}
+
 export interface MsgTransaction {
-  /** signers are cosmos addresses that signs this message */
-  cosmos_signers: string[];
+  /** sender is the address of the owner of nft */
+  sender: string;
   accounts: string[];
   instructions: Instruction[];
   compute_budget: string;
 }
 
 export interface MsgTransactionResponse {
-  unit_consumed: string;
 }
 
+function createBaseMsgCreateAccount(): MsgCreateAccount {
+  return { sender: "", owner: "" };
+}
+
+export const MsgCreateAccount = {
+  $type: "flux.svm.v1beta1.MsgCreateAccount" as const,
+
+  encode(message: MsgCreateAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
+    }
+    if (message.owner !== "") {
+      writer.uint32(18).string(message.owner);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateAccount {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateAccount();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sender = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.owner = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateAccount {
+    return {
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+    };
+  },
+
+  toJSON(message: MsgCreateAccount): unknown {
+    const obj: any = {};
+    if (message.sender !== undefined) {
+      obj.sender = message.sender;
+    }
+    if (message.owner !== undefined) {
+      obj.owner = message.owner;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgCreateAccount>): MsgCreateAccount {
+    return MsgCreateAccount.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<MsgCreateAccount>): MsgCreateAccount {
+    const message = createBaseMsgCreateAccount();
+    message.sender = object.sender ?? "";
+    message.owner = object.owner ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgCreateAccountResponse(): MsgCreateAccountResponse {
+  return {};
+}
+
+export const MsgCreateAccountResponse = {
+  $type: "flux.svm.v1beta1.MsgCreateAccountResponse" as const,
+
+  encode(_: MsgCreateAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateAccountResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateAccountResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgCreateAccountResponse {
+    return {};
+  },
+
+  toJSON(_: MsgCreateAccountResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create(base?: DeepPartial<MsgCreateAccountResponse>): MsgCreateAccountResponse {
+    return MsgCreateAccountResponse.fromPartial(base ?? {});
+  },
+  fromPartial(_: DeepPartial<MsgCreateAccountResponse>): MsgCreateAccountResponse {
+    const message = createBaseMsgCreateAccountResponse();
+    return message;
+  },
+};
+
 function createBaseMsgTransaction(): MsgTransaction {
-  return { cosmos_signers: [], accounts: [], instructions: [], compute_budget: "0" };
+  return { sender: "", accounts: [], instructions: [], compute_budget: "0" };
 }
 
 export const MsgTransaction = {
   $type: "flux.svm.v1beta1.MsgTransaction" as const,
 
   encode(message: MsgTransaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.cosmos_signers) {
-      writer.uint32(10).string(v!);
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
     }
     for (const v of message.accounts) {
       writer.uint32(18).string(v!);
@@ -52,7 +180,7 @@ export const MsgTransaction = {
             break;
           }
 
-          message.cosmos_signers.push(reader.string());
+          message.sender = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -86,9 +214,7 @@ export const MsgTransaction = {
 
   fromJSON(object: any): MsgTransaction {
     return {
-      cosmos_signers: globalThis.Array.isArray(object?.cosmos_signers)
-        ? object.cosmos_signers.map((e: any) => globalThis.String(e))
-        : [],
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       accounts: globalThis.Array.isArray(object?.accounts) ? object.accounts.map((e: any) => globalThis.String(e)) : [],
       instructions: globalThis.Array.isArray(object?.instructions)
         ? object.instructions.map((e: any) => Instruction.fromJSON(e))
@@ -99,8 +225,8 @@ export const MsgTransaction = {
 
   toJSON(message: MsgTransaction): unknown {
     const obj: any = {};
-    if (message.cosmos_signers?.length) {
-      obj.cosmos_signers = message.cosmos_signers;
+    if (message.sender !== undefined) {
+      obj.sender = message.sender;
     }
     if (message.accounts?.length) {
       obj.accounts = message.accounts;
@@ -119,7 +245,7 @@ export const MsgTransaction = {
   },
   fromPartial(object: DeepPartial<MsgTransaction>): MsgTransaction {
     const message = createBaseMsgTransaction();
-    message.cosmos_signers = object.cosmos_signers?.map((e) => e) || [];
+    message.sender = object.sender ?? "";
     message.accounts = object.accounts?.map((e) => e) || [];
     message.instructions = object.instructions?.map((e) => Instruction.fromPartial(e)) || [];
     message.compute_budget = object.compute_budget ?? "0";
@@ -128,16 +254,13 @@ export const MsgTransaction = {
 };
 
 function createBaseMsgTransactionResponse(): MsgTransactionResponse {
-  return { unit_consumed: "0" };
+  return {};
 }
 
 export const MsgTransactionResponse = {
   $type: "flux.svm.v1beta1.MsgTransactionResponse" as const,
 
-  encode(message: MsgTransactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.unit_consumed !== "0") {
-      writer.uint32(8).uint64(message.unit_consumed);
-    }
+  encode(_: MsgTransactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -148,13 +271,6 @@ export const MsgTransactionResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.unit_consumed = longToString(reader.uint64() as Long);
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -164,29 +280,26 @@ export const MsgTransactionResponse = {
     return message;
   },
 
-  fromJSON(object: any): MsgTransactionResponse {
-    return { unit_consumed: isSet(object.unit_consumed) ? globalThis.String(object.unit_consumed) : "0" };
+  fromJSON(_: any): MsgTransactionResponse {
+    return {};
   },
 
-  toJSON(message: MsgTransactionResponse): unknown {
+  toJSON(_: MsgTransactionResponse): unknown {
     const obj: any = {};
-    if (message.unit_consumed !== undefined) {
-      obj.unit_consumed = message.unit_consumed;
-    }
     return obj;
   },
 
   create(base?: DeepPartial<MsgTransactionResponse>): MsgTransactionResponse {
     return MsgTransactionResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<MsgTransactionResponse>): MsgTransactionResponse {
+  fromPartial(_: DeepPartial<MsgTransactionResponse>): MsgTransactionResponse {
     const message = createBaseMsgTransactionResponse();
-    message.unit_consumed = object.unit_consumed ?? "0";
     return message;
   },
 };
 
 export interface Msg {
+  CreateAccount(request: DeepPartial<MsgCreateAccount>, metadata?: grpc.Metadata): Promise<MsgCreateAccountResponse>;
   Transact(request: DeepPartial<MsgTransaction>, metadata?: grpc.Metadata): Promise<MsgTransactionResponse>;
 }
 
@@ -195,7 +308,12 @@ export class MsgClientImpl implements Msg {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
+    this.CreateAccount = this.CreateAccount.bind(this);
     this.Transact = this.Transact.bind(this);
+  }
+
+  CreateAccount(request: DeepPartial<MsgCreateAccount>, metadata?: grpc.Metadata): Promise<MsgCreateAccountResponse> {
+    return this.rpc.unary(MsgCreateAccountDesc, MsgCreateAccount.fromPartial(request), metadata);
   }
 
   Transact(request: DeepPartial<MsgTransaction>, metadata?: grpc.Metadata): Promise<MsgTransactionResponse> {
@@ -204,6 +322,29 @@ export class MsgClientImpl implements Msg {
 }
 
 export const MsgDesc = { serviceName: "flux.svm.v1beta1.Msg" };
+
+export const MsgCreateAccountDesc: UnaryMethodDefinitionish = {
+  methodName: "CreateAccount",
+  service: MsgDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return MsgCreateAccount.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = MsgCreateAccountResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
 
 export const MsgTransactDesc: UnaryMethodDefinitionish = {
   methodName: "Transact",

@@ -14,6 +14,14 @@ import * as anytypes from '../../chain/google/protobuf/any'
 import * as signingtypes from '../../chain/cosmos/tx/signing/v1beta1/signing'
 import keccak256 from 'keccak256'
 import { ChainGrpcTxService } from '../client/chain/grpc/ChainGrpcTxService'
+import * as ethsecp256k1 from '../../chain/cosmos/crypto/ethsecp256k1/keys'
+
+export const defaultSecp256k1Pubkey = ethsecp256k1.PubKey.create({ 
+  key: Buffer.concat([
+    Buffer.from([2]),
+    Buffer.alloc(32, 0),
+  ]) 
+})
 
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
@@ -315,8 +323,7 @@ export const createTransactionWithSigners = async ({
   let simulateRes = await simulate(
     txClient,
     body,
-    [getPublicKeyAny(signer.pubKey)],
-    [signer.sequence]
+    [signer.sequence],
   )
 
   const gasMultiplier = 1.8
@@ -412,18 +419,18 @@ export const createTxRawFromSigResponse = (
 export const simulate = async (
   txClient: ChainGrpcTxService,
   txBody: txtypes.TxBody,
-  signerPubkeys: anytypes.Any[],
   signerAccSeqs: string[]
 ): Promise<txservice.SimulateResponse> => {
-  if (signerPubkeys.length != signerAccSeqs.length) {
-    throw `sender pubkeys length should match sequence length (${signerPubkeys.length} != ${signerAccSeqs.length})`
-  }
   let signerInfos: txtypes.SignerInfo[] = []
   let simSignatures = []
+  // simulate doesn't check pubkey, just need to add a placeholder for it
 
-  for (let i = 0; i < signerPubkeys.length; i++) {
+  for (let i = 0; i < signerAccSeqs.length; i++) {
     signerInfos.push({
-      public_key: signerPubkeys[i],
+      public_key: anytypes.Any.create({
+        type_url: '/' + ethsecp256k1.PubKey.$type,
+        value: ethsecp256k1.PubKey.encode(defaultSecp256k1Pubkey).finish()
+      }),
       mode_info: {
         single: {
           mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON

@@ -112,7 +112,12 @@ watch(
         v-if="internalValue"
         size="xs"
         icon="close"
-        @click="inputChange({ target: { value: '' } })"
+        @click="
+          () => {
+            inputChange({ target: { value: '' } })
+            onChange && onChange(internalValue, accountSelected)
+          }
+        "
         style="right: 0.5rem"
       />
     </div>

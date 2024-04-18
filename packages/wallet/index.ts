@@ -51,10 +51,7 @@ export default class WalletStrategy {
     return this.provider.confirm(address)
   }
   async getPubKey(): Promise<string> {
-    if ([Wallet.Keplr, Wallet.Phantom].includes(this.wallet)) {
-      return this.provider.getPubKey()
-    }
-    throw new Error('This wallet does not support getPubKey')
+    return this.provider.getPubKey()
   }
   async getPubkeyFromSignature(message: string, signature: string): Promise<string> {
     if (this.wallet === Wallet.Metamask) {

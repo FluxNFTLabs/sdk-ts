@@ -110,6 +110,7 @@ watch(
       />
       <BaseButton
         v-if="internalValue"
+        :disabled="$attrs.disabled"
         size="xs"
         icon="close"
         @click="

@@ -38,9 +38,7 @@ export const getSvmAddressFromLux = (luxBech32: string): PublicKey => {
     throw `${luxBech32} is not a valid lux addresss`
   }
 
-  return new PublicKey(
-    getSvmAddress(Buffer.from(bech32.fromWords(bech32.decode(luxBech32).words)))
-  )
+  return new PublicKey(getSvmAddress(Buffer.from(bech32.fromWords(bech32.decode(luxBech32).words))))
 }
 
 /**
@@ -57,4 +55,11 @@ export const getEthereumAddress = (luxAddress: string): string => {
     return luxAddress
   }
   return `0x${Buffer.from(bech32.fromWords(bech32.decode(luxAddress).words)).toString('hex')}`
+}
+
+export const getFluxAddressFromHex = (hex: string): string => {
+  if (hex.startsWith('lux')) {
+    return hex
+  }
+  return bech32.encode('lux', bech32.toWords(Buffer.from(hex, 'hex')))
 }

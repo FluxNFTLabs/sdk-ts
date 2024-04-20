@@ -126,7 +126,7 @@ watch(
       class="list bg-blueGray-800 shadow-lg border border-blueGray-light-100 border-t-0 p-2 rounded-xl"
     >
       <div
-        class="cursor-pointer hover:bg-blueGray-light-300 p-2 w-fit"
+        class="item cursor-pointer hover:bg-blueGray-light-300 p-2 w-fit"
         v-for="suggestion in _suggestions"
         :key="suggestion.value"
         :title="suggestion.title"
@@ -146,5 +146,8 @@ watch(
   overflow: auto;
   z-index: 2;
   width: 100%;
+}
+.item {
+  min-width: 100%;
 }
 </style>

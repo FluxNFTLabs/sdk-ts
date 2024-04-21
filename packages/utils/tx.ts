@@ -49,12 +49,14 @@ export const createBody = ({
   messageWrapper?: any
 }) => {
   const messages = Array.isArray(message) ? message : [message]
-
+  const messageWrappers = Array.isArray(messageWrapper)
+    ? messageWrapper
+    : messages.map(() => messageWrapper)
   const txBody = CosmosTxV1Beta1Tx.TxBody.create()
-  txBody.messages = messages.map((msg) =>
+  txBody.messages = messages.map((msg, index) =>
     createAnyMessage({
-      value: messageWrapper.encode(msg).finish(),
-      type: messageWrapper.$type
+      value: messageWrappers[index].encode(msg).finish(),
+      type: messageWrappers[index].$type
     })
   )
   txBody.memo = memo
@@ -216,10 +218,12 @@ export const getTransactionPartsFromTxRaw = (
 
 export const createMessageJSON = (message: any, messageWrapper: any) => {
   const msgs = Array.isArray(message) ? message : [message]
-
-  return msgs.map((msg) => ({
-    type: `/${messageWrapper.$type}`,
-    value: messageWrapper.toJSON(msg)
+  const messageWrappers = Array.isArray(messageWrapper)
+    ? messageWrapper
+    : msgs.map(() => messageWrapper)
+  return msgs.map((msg, index) => ({
+    type: `/${messageWrappers[index].$type}`,
+    value: messageWrappers[index].toJSON(msg)
   }))
 }
 export const createWeb3Extension = ({

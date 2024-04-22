@@ -127,7 +127,7 @@ export const createSignerInfo = ({
   sequence: string
   mode: CosmosTxSigningV1Beta1Signing.SignMode
 }) => {
-  const pubKey = getPublicKey({ key: publicKey })
+  const pubKey = getPublicKey({ key: publicKey ?? "invalid pubkey" })
   const single = CosmosTxV1Beta1Tx.ModeInfo_Single.create()
   single.mode = mode
 

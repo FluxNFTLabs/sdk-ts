@@ -97,7 +97,6 @@ export const uint8Array = (fieldName: string): BufferLayout.Layout<Uint8Array> =
     b.set(arr, offset + 8)
     return offset + 8 + arr.length
   }
-
   ;(bs as any).alloc = (a: Uint8Array) => {
     return 8 + a.length
   }
@@ -157,21 +156,26 @@ export function toFluxSvmTransaction(
     sender: senderAddr,
     accounts: accounts,
     instructions: solTx.instructions.map((ix) => {
-      let ixKeys = ix.keys.map((k) => k.pubkey)
+      let ixKeys = []
+      ix.keys.forEach((k) => {
+        const key = k.pubkey.toString()
+        if (!ixKeys.includes(key)) {
+          ixKeys.push(key)
+        }
+      })
       let svmIx: svmtypes.Instruction = {
         program_index: [accounts.indexOf(ix.programId.toString())],
         accounts: ix.keys.map((k) =>
           svmtypes.InstructionAccount.create({
             id_index: accounts.indexOf(k.pubkey.toString()),
             caller_index: accounts.indexOf(k.pubkey.toString()), // index in transaction
-            callee_index: ixKeys.indexOf(k.pubkey), // index in instructions
+            callee_index: ixKeys.indexOf(k.pubkey.toString()), // index in instructions
             is_signer: k.isSigner,
             is_writable: k.isWritable
           })
         ),
         data: ix.data
       }
-
       return svmIx
     }),
     compute_budget: budget.toString() // budget for executing solana bytecode

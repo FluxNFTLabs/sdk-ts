@@ -156,7 +156,7 @@ export function toFluxSvmTransaction(
     sender: senderAddr,
     accounts: accounts,
     instructions: solTx.instructions.map((ix) => {
-      let ixKeys = []
+      let ixKeys: Array<string> = []
       ix.keys.forEach((k) => {
         const key = k.pubkey.toString()
         if (!ixKeys.includes(key)) {

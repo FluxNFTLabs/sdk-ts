@@ -36,6 +36,8 @@ export enum Op {
   EvmEmitLog = 3002,
   /** SvmExecute - SVM */
   SvmExecute = 4000,
+  /** BankUpdate - astromesh */
+  BankUpdate = 5000,
   UNRECOGNIZED = -1,
 }
 
@@ -98,6 +100,9 @@ export function opFromJSON(object: any): Op {
     case 4000:
     case "SvmExecute":
       return Op.SvmExecute;
+    case 5000:
+    case "BankUpdate":
+      return Op.BankUpdate;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -145,6 +150,8 @@ export function opToJSON(object: Op): string {
       return "EvmEmitLog";
     case Op.SvmExecute:
       return "SvmExecute";
+    case Op.BankUpdate:
+      return "BankUpdate";
     case Op.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

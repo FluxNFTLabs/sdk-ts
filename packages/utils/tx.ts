@@ -14,6 +14,12 @@ import * as anytypes from '../../chain/google/protobuf/any'
 import * as signingtypes from '../../chain/cosmos/tx/signing/v1beta1/signing'
 import keccak256 from 'keccak256'
 import { ChainGrpcTxService } from '../client/chain/grpc/ChainGrpcTxService'
+import * as ethsecp256k1 from '../../chain/cosmos/crypto/ethsecp256k1/keys'
+
+export const defaultSecp256k1Pubkey = () =>
+  ethsecp256k1.PubKey.create({
+    key: Buffer.concat([Buffer.from([2]), Buffer.alloc(32, 0)])
+  })
 
 export const getPublicKeyAny = (key: string): GoogleProtobufAny.Any => {
   return {
@@ -49,12 +55,14 @@ export const createBody = ({
   messageWrapper?: any
 }) => {
   const messages = Array.isArray(message) ? message : [message]
-
+  const messageWrappers = Array.isArray(messageWrapper)
+    ? messageWrapper
+    : messages.map(() => messageWrapper)
   const txBody = CosmosTxV1Beta1Tx.TxBody.create()
-  txBody.messages = messages.map((msg) =>
+  txBody.messages = messages.map((msg, index) =>
     createAnyMessage({
-      value: messageWrapper.encode(msg).finish(),
-      type: messageWrapper.$type
+      value: messageWrappers[index].encode(msg).finish(),
+      type: messageWrappers[index].$type
     })
   )
   txBody.memo = memo
@@ -125,7 +133,7 @@ export const createSignerInfo = ({
   sequence: string
   mode: CosmosTxSigningV1Beta1Signing.SignMode
 }) => {
-  const pubKey = getPublicKey({ key: publicKey })
+  const pubKey = getPublicKey({ key: publicKey ?? 'invalid pubkey' })
   const single = CosmosTxV1Beta1Tx.ModeInfo_Single.create()
   single.mode = mode
 
@@ -216,10 +224,12 @@ export const getTransactionPartsFromTxRaw = (
 
 export const createMessageJSON = (message: any, messageWrapper: any) => {
   const msgs = Array.isArray(message) ? message : [message]
-
-  return msgs.map((msg) => ({
-    type: `/${messageWrapper.$type}`,
-    value: messageWrapper.toJSON(msg)
+  const messageWrappers = Array.isArray(messageWrapper)
+    ? messageWrapper
+    : msgs.map(() => messageWrapper)
+  return msgs.map((msg, index) => ({
+    type: `/${messageWrappers[index].$type}`,
+    value: messageWrappers[index].toJSON(msg)
   }))
 }
 export const createWeb3Extension = ({
@@ -316,24 +326,17 @@ export const createTransactionWithSigners = async ({
   let fee: any = DEFAULT_STD_FEE
   const body = createBody({ message, memo, timeoutHeight, messageWrapper })
 
-  let simulateRes
-  try {
-    simulateRes = await simulate(
-      txClient,
-      body,
-      [getPublicKeyAny(signer.pubKey)],
-      [signer.sequence]
-    )
-  } catch (e) {}
+  let simulateRes = await simulate(txClient, body, [signer.sequence])
+
   const gasMultiplier = 1.8
   let gasLimit = simulateRes
     ? Math.ceil(Number(simulateRes?.gas_info?.gas_used) * gasMultiplier)
     : fee.gas
   const feeMessage = createFee({
     fee: fee.amount[0],
-    payer: fee.payer,
-    granter: fee.granter,
-    gasLimit
+    payer: '',
+    granter: '',
+    gasLimit: Number(gasLimit)
   })
 
   const signInfo = createSigners({
@@ -418,18 +421,18 @@ export const createTxRawFromSigResponse = (
 export const simulate = async (
   txClient: ChainGrpcTxService,
   txBody: txtypes.TxBody,
-  signerPubkeys: anytypes.Any[],
   signerAccSeqs: string[]
 ): Promise<txservice.SimulateResponse> => {
-  if (signerPubkeys.length != signerAccSeqs.length) {
-    throw `sender pubkeys length should match sequence length (${signerPubkeys.length} != ${signerAccSeqs.length})`
-  }
   let signerInfos: txtypes.SignerInfo[] = []
   let simSignatures = []
+  // simulate doesn't check pubkey, just need to add a placeholder for it
 
-  for (let i = 0; i < signerPubkeys.length; i++) {
+  for (let i = 0; i < signerAccSeqs.length; i++) {
     signerInfos.push({
-      public_key: signerPubkeys[i],
+      public_key: anytypes.Any.create({
+        type_url: '/' + ethsecp256k1.PubKey.$type,
+        value: ethsecp256k1.PubKey.encode(defaultSecp256k1Pubkey()).finish()
+      }),
       mode_info: {
         single: {
           mode: signingtypes.SignMode.SIGN_MODE_LEGACY_AMINO_JSON

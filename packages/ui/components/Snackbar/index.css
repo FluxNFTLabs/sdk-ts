@@ -19,5 +19,5 @@
   @apply bg-orange-400 text-blueGray-900;
 }
 .snackbar .snackbar_content {
-  @apply flex-1;
+  @apply flex-1 overflow-hidden break-words;
 }

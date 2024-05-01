@@ -92,8 +92,9 @@ const main = async () => {
   }
 
   // Simulate to estimate gas
-  let simulateRes = await simulate(txClient, txBody, [senderPubkeyAny], [senderAccSeq])
-  let gasLimit = Math.ceil(Number(simulateRes.gas_info.gas_used) * 1.5)
+  let simulateRes = await simulate(txClient, txBody, [senderAccSeq])
+  console.log('simulate:', simulateRes.gas_info)
+  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 1.5)
   // assign gas and other info to get real tx and broadcast
   const authInfo: txtypes.AuthInfo = {
     signer_infos: [

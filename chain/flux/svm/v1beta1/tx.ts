@@ -6,8 +6,8 @@ import _m0 from "protobufjs/minimal";
 import { Instruction } from "./svm";
 
 export interface MsgTransaction {
-  /** signers are cosmos addresses that signs this message */
-  cosmos_signers: string[];
+  /** sender is the address of the owner of nft */
+  sender: string;
   accounts: string[];
   instructions: Instruction[];
   compute_budget: string;
@@ -18,15 +18,15 @@ export interface MsgTransactionResponse {
 }
 
 function createBaseMsgTransaction(): MsgTransaction {
-  return { cosmos_signers: [], accounts: [], instructions: [], compute_budget: "0" };
+  return { sender: "", accounts: [], instructions: [], compute_budget: "0" };
 }
 
 export const MsgTransaction = {
   $type: "flux.svm.v1beta1.MsgTransaction" as const,
 
   encode(message: MsgTransaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    for (const v of message.cosmos_signers) {
-      writer.uint32(10).string(v!);
+    if (message.sender !== "") {
+      writer.uint32(10).string(message.sender);
     }
     for (const v of message.accounts) {
       writer.uint32(18).string(v!);
@@ -52,7 +52,7 @@ export const MsgTransaction = {
             break;
           }
 
-          message.cosmos_signers.push(reader.string());
+          message.sender = reader.string();
           continue;
         case 2:
           if (tag !== 18) {
@@ -86,9 +86,7 @@ export const MsgTransaction = {
 
   fromJSON(object: any): MsgTransaction {
     return {
-      cosmos_signers: globalThis.Array.isArray(object?.cosmos_signers)
-        ? object.cosmos_signers.map((e: any) => globalThis.String(e))
-        : [],
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       accounts: globalThis.Array.isArray(object?.accounts) ? object.accounts.map((e: any) => globalThis.String(e)) : [],
       instructions: globalThis.Array.isArray(object?.instructions)
         ? object.instructions.map((e: any) => Instruction.fromJSON(e))
@@ -99,8 +97,8 @@ export const MsgTransaction = {
 
   toJSON(message: MsgTransaction): unknown {
     const obj: any = {};
-    if (message.cosmos_signers?.length) {
-      obj.cosmos_signers = message.cosmos_signers;
+    if (message.sender !== undefined) {
+      obj.sender = message.sender;
     }
     if (message.accounts?.length) {
       obj.accounts = message.accounts;
@@ -119,7 +117,7 @@ export const MsgTransaction = {
   },
   fromPartial(object: DeepPartial<MsgTransaction>): MsgTransaction {
     const message = createBaseMsgTransaction();
-    message.cosmos_signers = object.cosmos_signers?.map((e) => e) || [];
+    message.sender = object.sender ?? "";
     message.accounts = object.accounts?.map((e) => e) || [];
     message.instructions = object.instructions?.map((e) => Instruction.fromPartial(e)) || [];
     message.compute_budget = object.compute_budget ?? "0";

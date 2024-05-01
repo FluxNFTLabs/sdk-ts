@@ -76,6 +76,7 @@ export interface MsgAstroTransfer {
 
 export interface MsgAstroTransferResponse {
   destination_denom: Uint8Array;
+  source_denom: Uint8Array;
 }
 
 function createBaseMsgChargeVmAccount(): MsgChargeVmAccount {
@@ -459,7 +460,7 @@ export const MsgAstroTransfer = {
 };
 
 function createBaseMsgAstroTransferResponse(): MsgAstroTransferResponse {
-  return { destination_denom: new Uint8Array(0) };
+  return { destination_denom: new Uint8Array(0), source_denom: new Uint8Array(0) };
 }
 
 export const MsgAstroTransferResponse = {
@@ -468,6 +469,9 @@ export const MsgAstroTransferResponse = {
   encode(message: MsgAstroTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.destination_denom.length !== 0) {
       writer.uint32(10).bytes(message.destination_denom);
+    }
+    if (message.source_denom.length !== 0) {
+      writer.uint32(18).bytes(message.source_denom);
     }
     return writer;
   },
@@ -486,6 +490,13 @@ export const MsgAstroTransferResponse = {
 
           message.destination_denom = reader.bytes();
           continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.source_denom = reader.bytes();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -500,6 +511,7 @@ export const MsgAstroTransferResponse = {
       destination_denom: isSet(object.destination_denom)
         ? bytesFromBase64(object.destination_denom)
         : new Uint8Array(0),
+      source_denom: isSet(object.source_denom) ? bytesFromBase64(object.source_denom) : new Uint8Array(0),
     };
   },
 
@@ -507,6 +519,9 @@ export const MsgAstroTransferResponse = {
     const obj: any = {};
     if (message.destination_denom !== undefined) {
       obj.destination_denom = base64FromBytes(message.destination_denom);
+    }
+    if (message.source_denom !== undefined) {
+      obj.source_denom = base64FromBytes(message.source_denom);
     }
     return obj;
   },
@@ -517,6 +532,7 @@ export const MsgAstroTransferResponse = {
   fromPartial(object: DeepPartial<MsgAstroTransferResponse>): MsgAstroTransferResponse {
     const message = createBaseMsgAstroTransferResponse();
     message.destination_denom = object.destination_denom ?? new Uint8Array(0);
+    message.source_denom = object.source_denom ?? new Uint8Array(0);
     return message;
   },
 };

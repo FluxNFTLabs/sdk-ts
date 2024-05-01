@@ -21,7 +21,7 @@ export const SimpleEntry = {
       writer.uint32(10).string(message.symbol);
     }
     if (message.decimal !== "0") {
-      writer.uint32(16).uint64(message.decimal);
+      writer.uint32(16).int64(message.decimal);
     }
     if (message.value !== "") {
       writer.uint32(26).string(message.value);
@@ -51,7 +51,7 @@ export const SimpleEntry = {
             break;
           }
 
-          message.decimal = longToString(reader.uint64() as Long);
+          message.decimal = longToString(reader.int64() as Long);
           continue;
         case 3:
           if (tag !== 26) {

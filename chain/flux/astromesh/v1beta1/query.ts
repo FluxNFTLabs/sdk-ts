@@ -12,6 +12,18 @@ export interface QueryDenomLinkRequest {
 
 export interface QueryDenomLinkResponse {
   dst_addr: string;
+  src_decimals: number;
+  dst_decimals: number;
+}
+
+export interface BalanceRequest {
+  plane: string;
+  denom: string;
+  address: string;
+}
+
+export interface BalanceResponse {
+  balance: string;
 }
 
 function createBaseQueryDenomLinkRequest(): QueryDenomLinkRequest {
@@ -106,7 +118,7 @@ export const QueryDenomLinkRequest = {
 };
 
 function createBaseQueryDenomLinkResponse(): QueryDenomLinkResponse {
-  return { dst_addr: "" };
+  return { dst_addr: "", src_decimals: 0, dst_decimals: 0 };
 }
 
 export const QueryDenomLinkResponse = {
@@ -115,6 +127,12 @@ export const QueryDenomLinkResponse = {
   encode(message: QueryDenomLinkResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dst_addr !== "") {
       writer.uint32(10).string(message.dst_addr);
+    }
+    if (message.src_decimals !== 0) {
+      writer.uint32(16).int32(message.src_decimals);
+    }
+    if (message.dst_decimals !== 0) {
+      writer.uint32(24).int32(message.dst_decimals);
     }
     return writer;
   },
@@ -133,6 +151,20 @@ export const QueryDenomLinkResponse = {
 
           message.dst_addr = reader.string();
           continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.src_decimals = reader.int32();
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.dst_decimals = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -143,13 +175,23 @@ export const QueryDenomLinkResponse = {
   },
 
   fromJSON(object: any): QueryDenomLinkResponse {
-    return { dst_addr: isSet(object.dst_addr) ? globalThis.String(object.dst_addr) : "" };
+    return {
+      dst_addr: isSet(object.dst_addr) ? globalThis.String(object.dst_addr) : "",
+      src_decimals: isSet(object.src_decimals) ? globalThis.Number(object.src_decimals) : 0,
+      dst_decimals: isSet(object.dst_decimals) ? globalThis.Number(object.dst_decimals) : 0,
+    };
   },
 
   toJSON(message: QueryDenomLinkResponse): unknown {
     const obj: any = {};
     if (message.dst_addr !== undefined) {
       obj.dst_addr = message.dst_addr;
+    }
+    if (message.src_decimals !== undefined) {
+      obj.src_decimals = Math.round(message.src_decimals);
+    }
+    if (message.dst_decimals !== undefined) {
+      obj.dst_decimals = Math.round(message.dst_decimals);
     }
     return obj;
   },
@@ -160,12 +202,165 @@ export const QueryDenomLinkResponse = {
   fromPartial(object: DeepPartial<QueryDenomLinkResponse>): QueryDenomLinkResponse {
     const message = createBaseQueryDenomLinkResponse();
     message.dst_addr = object.dst_addr ?? "";
+    message.src_decimals = object.src_decimals ?? 0;
+    message.dst_decimals = object.dst_decimals ?? 0;
+    return message;
+  },
+};
+
+function createBaseBalanceRequest(): BalanceRequest {
+  return { plane: "", denom: "", address: "" };
+}
+
+export const BalanceRequest = {
+  $type: "flux.astromesh.v1beta1.BalanceRequest" as const,
+
+  encode(message: BalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.plane !== "") {
+      writer.uint32(10).string(message.plane);
+    }
+    if (message.denom !== "") {
+      writer.uint32(18).string(message.denom);
+    }
+    if (message.address !== "") {
+      writer.uint32(26).string(message.address);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BalanceRequest {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBalanceRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.plane = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.denom = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.address = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BalanceRequest {
+    return {
+      plane: isSet(object.plane) ? globalThis.String(object.plane) : "",
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      address: isSet(object.address) ? globalThis.String(object.address) : "",
+    };
+  },
+
+  toJSON(message: BalanceRequest): unknown {
+    const obj: any = {};
+    if (message.plane !== undefined) {
+      obj.plane = message.plane;
+    }
+    if (message.denom !== undefined) {
+      obj.denom = message.denom;
+    }
+    if (message.address !== undefined) {
+      obj.address = message.address;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<BalanceRequest>): BalanceRequest {
+    return BalanceRequest.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<BalanceRequest>): BalanceRequest {
+    const message = createBaseBalanceRequest();
+    message.plane = object.plane ?? "";
+    message.denom = object.denom ?? "";
+    message.address = object.address ?? "";
+    return message;
+  },
+};
+
+function createBaseBalanceResponse(): BalanceResponse {
+  return { balance: "" };
+}
+
+export const BalanceResponse = {
+  $type: "flux.astromesh.v1beta1.BalanceResponse" as const,
+
+  encode(message: BalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.balance !== "") {
+      writer.uint32(10).string(message.balance);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BalanceResponse {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBalanceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.balance = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BalanceResponse {
+    return { balance: isSet(object.balance) ? globalThis.String(object.balance) : "" };
+  },
+
+  toJSON(message: BalanceResponse): unknown {
+    const obj: any = {};
+    if (message.balance !== undefined) {
+      obj.balance = message.balance;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<BalanceResponse>): BalanceResponse {
+    return BalanceResponse.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<BalanceResponse>): BalanceResponse {
+    const message = createBaseBalanceResponse();
+    message.balance = object.balance ?? "";
     return message;
   },
 };
 
 export interface Query {
   DenomLink(request: DeepPartial<QueryDenomLinkRequest>, metadata?: grpc.Metadata): Promise<QueryDenomLinkResponse>;
+  Balance(request: DeepPartial<BalanceRequest>, metadata?: grpc.Metadata): Promise<BalanceResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -174,10 +369,15 @@ export class QueryClientImpl implements Query {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.DenomLink = this.DenomLink.bind(this);
+    this.Balance = this.Balance.bind(this);
   }
 
   DenomLink(request: DeepPartial<QueryDenomLinkRequest>, metadata?: grpc.Metadata): Promise<QueryDenomLinkResponse> {
     return this.rpc.unary(QueryDenomLinkDesc, QueryDenomLinkRequest.fromPartial(request), metadata);
+  }
+
+  Balance(request: DeepPartial<BalanceRequest>, metadata?: grpc.Metadata): Promise<BalanceResponse> {
+    return this.rpc.unary(QueryBalanceDesc, BalanceRequest.fromPartial(request), metadata);
   }
 }
 
@@ -196,6 +396,29 @@ export const QueryDenomLinkDesc: UnaryMethodDefinitionish = {
   responseType: {
     deserializeBinary(data: Uint8Array) {
       const value = QueryDenomLinkResponse.decode(data);
+      return {
+        ...value,
+        toObject() {
+          return value;
+        },
+      };
+    },
+  } as any,
+};
+
+export const QueryBalanceDesc: UnaryMethodDefinitionish = {
+  methodName: "Balance",
+  service: QueryDesc,
+  requestStream: false,
+  responseStream: false,
+  requestType: {
+    serializeBinary() {
+      return BalanceRequest.encode(this).finish();
+    },
+  } as any,
+  responseType: {
+    deserializeBinary(data: Uint8Array) {
+      const value = BalanceResponse.decode(data);
       return {
         ...value,
         toObject() {

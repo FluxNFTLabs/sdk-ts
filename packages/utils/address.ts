@@ -2,6 +2,17 @@ import { Address } from 'ethereumjs-util'
 import { bech32 } from 'bech32'
 import { PublicKey } from '@solana/web3.js'
 import keccak256 from 'keccak256'
+
+/**
+ * Get flux address from Unit8Array hex address
+ *
+ * @param addressBuffer [20]bytes
+ * @returns string
+ */
+export const getFluxAddressFromBuffer = (addressBuffer: ArrayLike<number>): string => {
+  return bech32.encode('lux', bech32.toWords(addressBuffer))
+}
+
 /**
  * Get flux address from Ethereum hex address
  *

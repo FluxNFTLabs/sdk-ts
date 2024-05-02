@@ -52,9 +52,9 @@ const containerClick = () => {
     <p class="label" :class="labelClass" v-if="label">
       {{ label }}
     </p>
-    <div class="relative w-full">
+    <div class="relative w-full h-full">
       <textarea
-        class="input"
+        class="input h-full"
         type="text"
         ref="inputRef"
         v-bind="$attrs"

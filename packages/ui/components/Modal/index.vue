@@ -35,12 +35,19 @@ watch(
   () => props.isOpen,
   (value) => {
     if (value) {
+      document.addEventListener('keydown', closeOnEsc)
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      document.removeEventListener('keydown', closeOnEsc)
     }
   }
 )
+const closeOnEsc = (event) => {
+  if (event.key === 'Escape') {
+    props.onClose()
+  }
+}
 </script>
 <template>
   <teleport to="body">

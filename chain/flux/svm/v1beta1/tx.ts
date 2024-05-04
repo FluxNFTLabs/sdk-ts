@@ -6,7 +6,7 @@ import _m0 from "protobufjs/minimal";
 import { Instruction } from "./svm";
 
 export interface MsgTransaction {
-  /** sender is the address of the owner of nft */
+  /** sender is cosmos address who signs this message */
   sender: string;
   accounts: string[];
   instructions: Instruction[];

@@ -11,6 +11,8 @@ export interface DenomLink {
   dst_plane: Plane;
   src_addr: string;
   dst_addr: string;
+  src_decimals: number;
+  dst_decimals: number;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -77,7 +79,7 @@ export const GenesisState = {
 };
 
 function createBaseDenomLink(): DenomLink {
-  return { src_plane: 0, dst_plane: 0, src_addr: "", dst_addr: "" };
+  return { src_plane: 0, dst_plane: 0, src_addr: "", dst_addr: "", src_decimals: 0, dst_decimals: 0 };
 }
 
 export const DenomLink = {
@@ -95,6 +97,12 @@ export const DenomLink = {
     }
     if (message.dst_addr !== "") {
       writer.uint32(34).string(message.dst_addr);
+    }
+    if (message.src_decimals !== 0) {
+      writer.uint32(40).int32(message.src_decimals);
+    }
+    if (message.dst_decimals !== 0) {
+      writer.uint32(48).int32(message.dst_decimals);
     }
     return writer;
   },
@@ -134,6 +142,20 @@ export const DenomLink = {
 
           message.dst_addr = reader.string();
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.src_decimals = reader.int32();
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.dst_decimals = reader.int32();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -149,6 +171,8 @@ export const DenomLink = {
       dst_plane: isSet(object.dst_plane) ? planeFromJSON(object.dst_plane) : 0,
       src_addr: isSet(object.src_addr) ? globalThis.String(object.src_addr) : "",
       dst_addr: isSet(object.dst_addr) ? globalThis.String(object.dst_addr) : "",
+      src_decimals: isSet(object.src_decimals) ? globalThis.Number(object.src_decimals) : 0,
+      dst_decimals: isSet(object.dst_decimals) ? globalThis.Number(object.dst_decimals) : 0,
     };
   },
 
@@ -166,6 +190,12 @@ export const DenomLink = {
     if (message.dst_addr !== undefined) {
       obj.dst_addr = message.dst_addr;
     }
+    if (message.src_decimals !== undefined) {
+      obj.src_decimals = Math.round(message.src_decimals);
+    }
+    if (message.dst_decimals !== undefined) {
+      obj.dst_decimals = Math.round(message.dst_decimals);
+    }
     return obj;
   },
 
@@ -178,6 +208,8 @@ export const DenomLink = {
     message.dst_plane = object.dst_plane ?? 0;
     message.src_addr = object.src_addr ?? "";
     message.dst_addr = object.dst_addr ?? "";
+    message.src_decimals = object.src_decimals ?? 0;
+    message.dst_decimals = object.dst_decimals ?? 0;
     return message;
   },
 };

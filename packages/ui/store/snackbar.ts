@@ -7,6 +7,7 @@ export interface SnackbarStoreType {
   color?: SnackbarColor
   show?: boolean
   createAt?: number
+  action?: any
 }
 export const useSnackbarStore = defineStore('SnackbarStore', () => {
   const store = ref<SnackbarStoreType>({
@@ -16,20 +17,22 @@ export const useSnackbarStore = defineStore('SnackbarStore', () => {
     show: false
   })
 
-  const show = ({ message, color = 'success', timeout = 8000 }: SnackbarStoreType) => {
+  const show = ({ message, color = 'success', action, timeout = 8000 }: SnackbarStoreType) => {
     store.value = {
       ...store.value,
       message,
       color,
       timeout,
       show: true,
-      createAt: Date.now()
+      createAt: Date.now(),
+      action: action
     }
   }
 
   const hide = () => {
     store.value = {
       ...store.value,
+      action: null,
       show: false
     }
   }

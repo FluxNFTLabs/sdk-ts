@@ -13,8 +13,8 @@ export interface Allocation {
   /** allow list of receivers, an empty allow list permits any receiver address */
   allow_list: string[];
   /**
-   * allow list of packet data keys, an empty list prohibits all packet data keys;
-   * a list only with "*" permits any packet data key
+   * allow list of memo strings, an empty list prohibits all memo strings;
+   * a list only with "*" permits any memo string
    */
   allowed_packet_data: string[];
 }

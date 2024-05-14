@@ -63,7 +63,7 @@ export interface FISQueryInstruction {
   plane: Plane;
   action: QueryAction;
   address: Uint8Array;
-  input: Uint8Array[];
+  input: Uint8Array;
 }
 
 export interface FISQueryInstructionResponse {
@@ -412,7 +412,7 @@ export const BalanceResponse = {
 };
 
 function createBaseFISQueryInstruction(): FISQueryInstruction {
-  return { plane: 0, action: 0, address: new Uint8Array(0), input: [] };
+  return { plane: 0, action: 0, address: new Uint8Array(0), input: new Uint8Array(0) };
 }
 
 export const FISQueryInstruction = {
@@ -428,8 +428,8 @@ export const FISQueryInstruction = {
     if (message.address.length !== 0) {
       writer.uint32(26).bytes(message.address);
     }
-    for (const v of message.input) {
-      writer.uint32(34).bytes(v!);
+    if (message.input.length !== 0) {
+      writer.uint32(34).bytes(message.input);
     }
     return writer;
   },
@@ -467,7 +467,7 @@ export const FISQueryInstruction = {
             break;
           }
 
-          message.input.push(reader.bytes());
+          message.input = reader.bytes();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -483,7 +483,7 @@ export const FISQueryInstruction = {
       plane: isSet(object.plane) ? planeFromJSON(object.plane) : 0,
       action: isSet(object.action) ? queryActionFromJSON(object.action) : 0,
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(0),
-      input: globalThis.Array.isArray(object?.input) ? object.input.map((e: any) => bytesFromBase64(e)) : [],
+      input: isSet(object.input) ? bytesFromBase64(object.input) : new Uint8Array(0),
     };
   },
 
@@ -498,8 +498,8 @@ export const FISQueryInstruction = {
     if (message.address !== undefined) {
       obj.address = base64FromBytes(message.address);
     }
-    if (message.input?.length) {
-      obj.input = message.input.map((e) => base64FromBytes(e));
+    if (message.input !== undefined) {
+      obj.input = base64FromBytes(message.input);
     }
     return obj;
   },
@@ -512,7 +512,7 @@ export const FISQueryInstruction = {
     message.plane = object.plane ?? 0;
     message.action = object.action ?? 0;
     message.address = object.address ?? new Uint8Array(0);
-    message.input = object.input?.map((e) => e) || [];
+    message.input = object.input ?? new Uint8Array(0);
     return message;
   },
 };

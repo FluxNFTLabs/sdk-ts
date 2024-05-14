@@ -1,10 +1,21 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
+import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstruction } from "../../astromesh/v1beta1/tx";
 
 export interface Strategy {
   id: Uint8Array;
   owner: string;
+  query:
+    | FISQueryRequest
+    | undefined;
+  /** query hash stores hash(query), so that msg server don't need to calculate all the time */
+  query_hash: Uint8Array;
+}
+
+export interface StrategyInput {
+  msg: Uint8Array;
+  fis_input: Uint8Array[];
 }
 
 export interface StrategyOutput {
@@ -12,7 +23,7 @@ export interface StrategyOutput {
 }
 
 function createBaseStrategy(): Strategy {
-  return { id: new Uint8Array(0), owner: "" };
+  return { id: new Uint8Array(0), owner: "", query: undefined, query_hash: new Uint8Array(0) };
 }
 
 export const Strategy = {
@@ -24,6 +35,12 @@ export const Strategy = {
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
+    }
+    if (message.query !== undefined) {
+      FISQueryRequest.encode(message.query, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.query_hash.length !== 0) {
+      writer.uint32(34).bytes(message.query_hash);
     }
     return writer;
   },
@@ -49,6 +66,20 @@ export const Strategy = {
 
           message.owner = reader.string();
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.query = FISQueryRequest.decode(reader, reader.uint32());
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.query_hash = reader.bytes();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -62,6 +93,8 @@ export const Strategy = {
     return {
       id: isSet(object.id) ? bytesFromBase64(object.id) : new Uint8Array(0),
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
+      query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
+      query_hash: isSet(object.query_hash) ? bytesFromBase64(object.query_hash) : new Uint8Array(0),
     };
   },
 
@@ -73,6 +106,12 @@ export const Strategy = {
     if (message.owner !== undefined) {
       obj.owner = message.owner;
     }
+    if (message.query !== undefined) {
+      obj.query = FISQueryRequest.toJSON(message.query);
+    }
+    if (message.query_hash !== undefined) {
+      obj.query_hash = base64FromBytes(message.query_hash);
+    }
     return obj;
   },
 
@@ -83,6 +122,88 @@ export const Strategy = {
     const message = createBaseStrategy();
     message.id = object.id ?? new Uint8Array(0);
     message.owner = object.owner ?? "";
+    message.query = (object.query !== undefined && object.query !== null)
+      ? FISQueryRequest.fromPartial(object.query)
+      : undefined;
+    message.query_hash = object.query_hash ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseStrategyInput(): StrategyInput {
+  return { msg: new Uint8Array(0), fis_input: [] };
+}
+
+export const StrategyInput = {
+  $type: "flux.strategy.v1beta1.StrategyInput" as const,
+
+  encode(message: StrategyInput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.msg.length !== 0) {
+      writer.uint32(10).bytes(message.msg);
+    }
+    for (const v of message.fis_input) {
+      writer.uint32(18).bytes(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): StrategyInput {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseStrategyInput();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.msg = reader.bytes();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.fis_input.push(reader.bytes());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): StrategyInput {
+    return {
+      msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
+      fis_input: globalThis.Array.isArray(object?.fis_input)
+        ? object.fis_input.map((e: any) => bytesFromBase64(e))
+        : [],
+    };
+  },
+
+  toJSON(message: StrategyInput): unknown {
+    const obj: any = {};
+    if (message.msg !== undefined) {
+      obj.msg = base64FromBytes(message.msg);
+    }
+    if (message.fis_input?.length) {
+      obj.fis_input = message.fis_input.map((e) => base64FromBytes(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<StrategyInput>): StrategyInput {
+    return StrategyInput.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<StrategyInput>): StrategyInput {
+    const message = createBaseStrategyInput();
+    message.msg = object.msg ?? new Uint8Array(0);
+    message.fis_input = object.fis_input?.map((e) => e) || [];
     return message;
   },
 };

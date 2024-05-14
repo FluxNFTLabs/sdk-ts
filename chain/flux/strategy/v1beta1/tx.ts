@@ -2,6 +2,7 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
+import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstructionResponse } from "../../astromesh/v1beta1/tx";
 
 export enum Config {
@@ -54,6 +55,7 @@ export interface MsgConfigStrategy {
   config: Config;
   id: string;
   strategy: Uint8Array;
+  query: FISQueryRequest | undefined;
 }
 
 export interface MsgConfigStrategyResponse {
@@ -76,7 +78,7 @@ export interface MsgTriggerStrategiesResponse {
 }
 
 function createBaseMsgConfigStrategy(): MsgConfigStrategy {
-  return { sender: "", config: 0, id: "", strategy: new Uint8Array(0) };
+  return { sender: "", config: 0, id: "", strategy: new Uint8Array(0), query: undefined };
 }
 
 export const MsgConfigStrategy = {
@@ -94,6 +96,9 @@ export const MsgConfigStrategy = {
     }
     if (message.strategy.length !== 0) {
       writer.uint32(34).bytes(message.strategy);
+    }
+    if (message.query !== undefined) {
+      FISQueryRequest.encode(message.query, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -133,6 +138,13 @@ export const MsgConfigStrategy = {
 
           message.strategy = reader.bytes();
           continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.query = FISQueryRequest.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -148,6 +160,7 @@ export const MsgConfigStrategy = {
       config: isSet(object.config) ? configFromJSON(object.config) : 0,
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       strategy: isSet(object.strategy) ? bytesFromBase64(object.strategy) : new Uint8Array(0),
+      query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
     };
   },
 
@@ -165,6 +178,9 @@ export const MsgConfigStrategy = {
     if (message.strategy !== undefined) {
       obj.strategy = base64FromBytes(message.strategy);
     }
+    if (message.query !== undefined) {
+      obj.query = FISQueryRequest.toJSON(message.query);
+    }
     return obj;
   },
 
@@ -177,6 +193,9 @@ export const MsgConfigStrategy = {
     message.config = object.config ?? 0;
     message.id = object.id ?? "";
     message.strategy = object.strategy ?? new Uint8Array(0);
+    message.query = (object.query !== undefined && object.query !== null)
+      ? FISQueryRequest.fromPartial(object.query)
+      : undefined;
     return message;
   },
 };

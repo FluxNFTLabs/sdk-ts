@@ -15,7 +15,11 @@ export interface Strategy {
 
 export interface StrategyInput {
   msg: Uint8Array;
-  fis_input: Uint8Array[];
+  fis_input: FISInput[];
+}
+
+export interface FISInput {
+  data: Uint8Array[];
 }
 
 export interface StrategyOutput {
@@ -142,7 +146,7 @@ export const StrategyInput = {
       writer.uint32(10).bytes(message.msg);
     }
     for (const v of message.fis_input) {
-      writer.uint32(18).bytes(v!);
+      FISInput.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -166,7 +170,7 @@ export const StrategyInput = {
             break;
           }
 
-          message.fis_input.push(reader.bytes());
+          message.fis_input.push(FISInput.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -181,7 +185,7 @@ export const StrategyInput = {
     return {
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array(0),
       fis_input: globalThis.Array.isArray(object?.fis_input)
-        ? object.fis_input.map((e: any) => bytesFromBase64(e))
+        ? object.fis_input.map((e: any) => FISInput.fromJSON(e))
         : [],
     };
   },
@@ -192,7 +196,7 @@ export const StrategyInput = {
       obj.msg = base64FromBytes(message.msg);
     }
     if (message.fis_input?.length) {
-      obj.fis_input = message.fis_input.map((e) => base64FromBytes(e));
+      obj.fis_input = message.fis_input.map((e) => FISInput.toJSON(e));
     }
     return obj;
   },
@@ -203,7 +207,66 @@ export const StrategyInput = {
   fromPartial(object: DeepPartial<StrategyInput>): StrategyInput {
     const message = createBaseStrategyInput();
     message.msg = object.msg ?? new Uint8Array(0);
-    message.fis_input = object.fis_input?.map((e) => e) || [];
+    message.fis_input = object.fis_input?.map((e) => FISInput.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseFISInput(): FISInput {
+  return { data: [] };
+}
+
+export const FISInput = {
+  $type: "flux.strategy.v1beta1.FISInput" as const,
+
+  encode(message: FISInput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.data) {
+      writer.uint32(26).bytes(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FISInput {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFISInput();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.data.push(reader.bytes());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FISInput {
+    return { data: globalThis.Array.isArray(object?.data) ? object.data.map((e: any) => bytesFromBase64(e)) : [] };
+  },
+
+  toJSON(message: FISInput): unknown {
+    const obj: any = {};
+    if (message.data?.length) {
+      obj.data = message.data.map((e) => base64FromBytes(e));
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<FISInput>): FISInput {
+    return FISInput.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<FISInput>): FISInput {
+    const message = createBaseFISInput();
+    message.data = object.data?.map((e) => e) || [];
     return message;
   },
 };

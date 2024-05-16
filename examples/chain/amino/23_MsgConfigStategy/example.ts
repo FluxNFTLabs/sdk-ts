@@ -51,15 +51,15 @@ const main = async () => {
     sender: senderAddr,
     config: strategytypes.Config.deploy,
     id: '',
-    strategy: fs.readFileSync('bank_strategy.wasm'),
+    strategy: fs.readFileSync('plane_solver.wasm'),
     query: astromeshquery.FISQueryRequest.create({
       instructions: [{
         plane: Plane.COSMOS,
-        action: astromeshquery.QueryAction.COSMOS_BANK_BALANCE,
+        action: astromeshquery.QueryAction.COSMOS_ASTROMESH_BALANCE,
         address: new Uint8Array(),
         input: [
-          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx,lux1kmmz47pr8h46wcyxw8h3k8s85x0ncykqp0xmgj')),
-          Uint8Array.from(Buffer.from('lux,lux')),
+          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx')),
+          Uint8Array.from(Buffer.from('usdt')),
         ],
       }],
     })

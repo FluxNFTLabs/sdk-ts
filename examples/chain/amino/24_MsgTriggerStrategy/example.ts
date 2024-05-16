@@ -22,7 +22,7 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
     Uint8Array.from(
-      Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')
+      Buffer.from('741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544', 'hex')
     )
   )
   const senderPrivKey: ethsecp256k1.PrivKey = { key: wallet.getPrivateKey() }
@@ -44,9 +44,9 @@ const main = async () => {
   console.log('sender addr:', senderAddr)
   const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    ids: ['2846b9a22623787805c8240a3267f2a3e3e59f14dcf942dcb6bfc6c2a008e2f4'],
+    ids: ['49f87234006b9f99c4e7f7bd17f78dc24ec1b4bd2f5ce714a3f3ce6198d2f822'],
     inputs: [
-      Uint8Array.from(Buffer.from(`{"receivers":["lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","lux1kmmz47pr8h46wcyxw8h3k8s85x0ncykqp0xmgj"]}`))
+      Uint8Array.from(Buffer.from(`{"action":"withdraw","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx"}`))
     ],
   }
 

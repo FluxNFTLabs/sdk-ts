@@ -28,7 +28,7 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
     Uint8Array.from(
-      Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')
+      Buffer.from('741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544', 'hex')
     )
   )
   const senderPrivKey: ethsecp256k1.PrivKey = { key: wallet.getPrivateKey() }

@@ -44,9 +44,9 @@ const main = async () => {
   console.log('sender addr:', senderAddr)
   const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    ids: ['49f87234006b9f99c4e7f7bd17f78dc24ec1b4bd2f5ce714a3f3ce6198d2f822'],
+    ids: ['63548ab455d04e64fce590088cfa4fe9f05f3bbfd4262e44300c8caae1537fb7'],
     inputs: [
-      Uint8Array.from(Buffer.from(`{"action":"withdraw","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx"}`))
+      Uint8Array.from(Buffer.from(`{"action":"deposit","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","deposit_amount":"30"}`))
     ],
   }
 

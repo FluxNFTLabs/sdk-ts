@@ -52,6 +52,7 @@ export function planeToJSON(object: Plane): string {
 export enum TxAction {
   VM_INVOKE = 0,
   COSMOS_BANK_SEND = 1,
+  COSMOS_ASTROMESH_TRANSFER = 2,
   UNRECOGNIZED = -1,
 }
 
@@ -63,6 +64,9 @@ export function txActionFromJSON(object: any): TxAction {
     case 1:
     case "COSMOS_BANK_SEND":
       return TxAction.COSMOS_BANK_SEND;
+    case 2:
+    case "COSMOS_ASTROMESH_TRANSFER":
+      return TxAction.COSMOS_ASTROMESH_TRANSFER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -76,6 +80,8 @@ export function txActionToJSON(object: TxAction): string {
       return "VM_INVOKE";
     case TxAction.COSMOS_BANK_SEND:
       return "COSMOS_BANK_SEND";
+    case TxAction.COSMOS_ASTROMESH_TRANSFER:
+      return "COSMOS_ASTROMESH_TRANSFER";
     case TxAction.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

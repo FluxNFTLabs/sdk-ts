@@ -7,6 +7,7 @@ import { Plane, planeFromJSON, planeToJSON } from "./tx";
 export enum QueryAction {
   VM_QUERY = 0,
   COSMOS_BANK_BALANCE = 1,
+  COSMOS_ASTROMESH_BALANCE = 2,
   UNRECOGNIZED = -1,
 }
 
@@ -18,6 +19,9 @@ export function queryActionFromJSON(object: any): QueryAction {
     case 1:
     case "COSMOS_BANK_BALANCE":
       return QueryAction.COSMOS_BANK_BALANCE;
+    case 2:
+    case "COSMOS_ASTROMESH_BALANCE":
+      return QueryAction.COSMOS_ASTROMESH_BALANCE;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -31,6 +35,8 @@ export function queryActionToJSON(object: QueryAction): string {
       return "VM_QUERY";
     case QueryAction.COSMOS_BANK_BALANCE:
       return "COSMOS_BANK_BALANCE";
+    case QueryAction.COSMOS_ASTROMESH_BALANCE:
+      return "COSMOS_ASTROMESH_BALANCE";
     case QueryAction.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -56,19 +62,20 @@ export interface BalanceRequest {
 }
 
 export interface BalanceResponse {
-  balance: string;
+  denom: string;
+  amount: string;
 }
 
 export interface FISQueryInstruction {
   plane: Plane;
   action: QueryAction;
   address: Uint8Array;
-  input: Uint8Array;
+  input: Uint8Array[];
 }
 
 export interface FISQueryInstructionResponse {
   plane: Plane;
-  output: Uint8Array;
+  output: Uint8Array[];
 }
 
 export interface FISQueryRequest {
@@ -353,15 +360,18 @@ export const BalanceRequest = {
 };
 
 function createBaseBalanceResponse(): BalanceResponse {
-  return { balance: "" };
+  return { denom: "", amount: "" };
 }
 
 export const BalanceResponse = {
   $type: "flux.astromesh.v1beta1.BalanceResponse" as const,
 
   encode(message: BalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.balance !== "") {
-      writer.uint32(10).string(message.balance);
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+    if (message.amount !== "") {
+      writer.uint32(18).string(message.amount);
     }
     return writer;
   },
@@ -378,7 +388,14 @@ export const BalanceResponse = {
             break;
           }
 
-          message.balance = reader.string();
+          message.denom = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.amount = reader.string();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -390,13 +407,19 @@ export const BalanceResponse = {
   },
 
   fromJSON(object: any): BalanceResponse {
-    return { balance: isSet(object.balance) ? globalThis.String(object.balance) : "" };
+    return {
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+    };
   },
 
   toJSON(message: BalanceResponse): unknown {
     const obj: any = {};
-    if (message.balance !== undefined) {
-      obj.balance = message.balance;
+    if (message.denom !== undefined) {
+      obj.denom = message.denom;
+    }
+    if (message.amount !== undefined) {
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -406,13 +429,14 @@ export const BalanceResponse = {
   },
   fromPartial(object: DeepPartial<BalanceResponse>): BalanceResponse {
     const message = createBaseBalanceResponse();
-    message.balance = object.balance ?? "";
+    message.denom = object.denom ?? "";
+    message.amount = object.amount ?? "";
     return message;
   },
 };
 
 function createBaseFISQueryInstruction(): FISQueryInstruction {
-  return { plane: 0, action: 0, address: new Uint8Array(0), input: new Uint8Array(0) };
+  return { plane: 0, action: 0, address: new Uint8Array(0), input: [] };
 }
 
 export const FISQueryInstruction = {
@@ -428,8 +452,8 @@ export const FISQueryInstruction = {
     if (message.address.length !== 0) {
       writer.uint32(26).bytes(message.address);
     }
-    if (message.input.length !== 0) {
-      writer.uint32(34).bytes(message.input);
+    for (const v of message.input) {
+      writer.uint32(34).bytes(v!);
     }
     return writer;
   },
@@ -467,7 +491,7 @@ export const FISQueryInstruction = {
             break;
           }
 
-          message.input = reader.bytes();
+          message.input.push(reader.bytes());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -483,7 +507,7 @@ export const FISQueryInstruction = {
       plane: isSet(object.plane) ? planeFromJSON(object.plane) : 0,
       action: isSet(object.action) ? queryActionFromJSON(object.action) : 0,
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(0),
-      input: isSet(object.input) ? bytesFromBase64(object.input) : new Uint8Array(0),
+      input: globalThis.Array.isArray(object?.input) ? object.input.map((e: any) => bytesFromBase64(e)) : [],
     };
   },
 
@@ -498,8 +522,8 @@ export const FISQueryInstruction = {
     if (message.address !== undefined) {
       obj.address = base64FromBytes(message.address);
     }
-    if (message.input !== undefined) {
-      obj.input = base64FromBytes(message.input);
+    if (message.input?.length) {
+      obj.input = message.input.map((e) => base64FromBytes(e));
     }
     return obj;
   },
@@ -512,13 +536,13 @@ export const FISQueryInstruction = {
     message.plane = object.plane ?? 0;
     message.action = object.action ?? 0;
     message.address = object.address ?? new Uint8Array(0);
-    message.input = object.input ?? new Uint8Array(0);
+    message.input = object.input?.map((e) => e) || [];
     return message;
   },
 };
 
 function createBaseFISQueryInstructionResponse(): FISQueryInstructionResponse {
-  return { plane: 0, output: new Uint8Array(0) };
+  return { plane: 0, output: [] };
 }
 
 export const FISQueryInstructionResponse = {
@@ -528,8 +552,8 @@ export const FISQueryInstructionResponse = {
     if (message.plane !== 0) {
       writer.uint32(8).int32(message.plane);
     }
-    if (message.output.length !== 0) {
-      writer.uint32(18).bytes(message.output);
+    for (const v of message.output) {
+      writer.uint32(18).bytes(v!);
     }
     return writer;
   },
@@ -553,7 +577,7 @@ export const FISQueryInstructionResponse = {
             break;
           }
 
-          message.output = reader.bytes();
+          message.output.push(reader.bytes());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -567,7 +591,7 @@ export const FISQueryInstructionResponse = {
   fromJSON(object: any): FISQueryInstructionResponse {
     return {
       plane: isSet(object.plane) ? planeFromJSON(object.plane) : 0,
-      output: isSet(object.output) ? bytesFromBase64(object.output) : new Uint8Array(0),
+      output: globalThis.Array.isArray(object?.output) ? object.output.map((e: any) => bytesFromBase64(e)) : [],
     };
   },
 
@@ -576,8 +600,8 @@ export const FISQueryInstructionResponse = {
     if (message.plane !== undefined) {
       obj.plane = planeToJSON(message.plane);
     }
-    if (message.output !== undefined) {
-      obj.output = base64FromBytes(message.output);
+    if (message.output?.length) {
+      obj.output = message.output.map((e) => base64FromBytes(e));
     }
     return obj;
   },
@@ -588,7 +612,7 @@ export const FISQueryInstructionResponse = {
   fromPartial(object: DeepPartial<FISQueryInstructionResponse>): FISQueryInstructionResponse {
     const message = createBaseFISQueryInstructionResponse();
     message.plane = object.plane ?? 0;
-    message.output = object.output ?? new Uint8Array(0);
+    message.output = object.output?.map((e) => e) || [];
     return message;
   },
 };

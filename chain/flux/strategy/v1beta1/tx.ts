@@ -10,6 +10,7 @@ import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
 import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstructionResponse } from "../../astromesh/v1beta1/tx";
+import { StrategyType, strategyTypeFromJSON, strategyTypeToJSON } from "./strategy";
 
 export enum Config {
   deploy = 0,
@@ -62,6 +63,8 @@ export interface MsgConfigStrategy {
   id: string;
   strategy: Uint8Array;
   query: FISQueryRequest | undefined;
+  type: StrategyType;
+  description: string;
 }
 
 export interface MsgConfigStrategyResponse {
@@ -72,7 +75,7 @@ export interface MsgTriggerStrategies {
   sender: string;
   ids: string[];
   inputs: Uint8Array[];
-  fis_requests: FISQueryRequest[];
+  queries: FISQueryRequest[];
 }
 
 export interface StrategyResponse {
@@ -85,7 +88,7 @@ export interface MsgTriggerStrategiesResponse {
 }
 
 function createBaseMsgConfigStrategy(): MsgConfigStrategy {
-  return { sender: "", config: 0, id: "", strategy: new Uint8Array(0), query: undefined };
+  return { sender: "", config: 0, id: "", strategy: new Uint8Array(0), query: undefined, type: 0, description: "" };
 }
 
 export const MsgConfigStrategy = {
@@ -106,6 +109,12 @@ export const MsgConfigStrategy = {
     }
     if (message.query !== undefined) {
       FISQueryRequest.encode(message.query, writer.uint32(42).fork()).ldelim();
+    }
+    if (message.type !== 0) {
+      writer.uint32(48).int32(message.type);
+    }
+    if (message.description !== "") {
+      writer.uint32(58).string(message.description);
     }
     return writer;
   },
@@ -152,6 +161,20 @@ export const MsgConfigStrategy = {
 
           message.query = FISQueryRequest.decode(reader, reader.uint32());
           continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.type = reader.int32() as any;
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -168,6 +191,8 @@ export const MsgConfigStrategy = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       strategy: isSet(object.strategy) ? bytesFromBase64(object.strategy) : new Uint8Array(0),
       query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
+      type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -188,6 +213,12 @@ export const MsgConfigStrategy = {
     if (message.query !== undefined) {
       obj.query = FISQueryRequest.toJSON(message.query);
     }
+    if (message.type !== undefined) {
+      obj.type = strategyTypeToJSON(message.type);
+    }
+    if (message.description !== undefined) {
+      obj.description = message.description;
+    }
     return obj;
   },
 
@@ -203,6 +234,8 @@ export const MsgConfigStrategy = {
     message.query = (object.query !== undefined && object.query !== null)
       ? FISQueryRequest.fromPartial(object.query)
       : undefined;
+    message.type = object.type ?? 0;
+    message.description = object.description ?? "";
     return message;
   },
 };
@@ -267,7 +300,7 @@ export const MsgConfigStrategyResponse = {
 };
 
 function createBaseMsgTriggerStrategies(): MsgTriggerStrategies {
-  return { sender: "", ids: [], inputs: [], fis_requests: [] };
+  return { sender: "", ids: [], inputs: [], queries: [] };
 }
 
 export const MsgTriggerStrategies = {
@@ -283,7 +316,7 @@ export const MsgTriggerStrategies = {
     for (const v of message.inputs) {
       writer.uint32(26).bytes(v!);
     }
-    for (const v of message.fis_requests) {
+    for (const v of message.queries) {
       FISQueryRequest.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
@@ -322,7 +355,7 @@ export const MsgTriggerStrategies = {
             break;
           }
 
-          message.fis_requests.push(FISQueryRequest.decode(reader, reader.uint32()));
+          message.queries.push(FISQueryRequest.decode(reader, reader.uint32()));
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -338,8 +371,8 @@ export const MsgTriggerStrategies = {
       sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
       ids: globalThis.Array.isArray(object?.ids) ? object.ids.map((e: any) => globalThis.String(e)) : [],
       inputs: globalThis.Array.isArray(object?.inputs) ? object.inputs.map((e: any) => bytesFromBase64(e)) : [],
-      fis_requests: globalThis.Array.isArray(object?.fis_requests)
-        ? object.fis_requests.map((e: any) => FISQueryRequest.fromJSON(e))
+      queries: globalThis.Array.isArray(object?.queries)
+        ? object.queries.map((e: any) => FISQueryRequest.fromJSON(e))
         : [],
     };
   },
@@ -355,8 +388,8 @@ export const MsgTriggerStrategies = {
     if (message.inputs?.length) {
       obj.inputs = message.inputs.map((e) => base64FromBytes(e));
     }
-    if (message.fis_requests?.length) {
-      obj.fis_requests = message.fis_requests.map((e) => FISQueryRequest.toJSON(e));
+    if (message.queries?.length) {
+      obj.queries = message.queries.map((e) => FISQueryRequest.toJSON(e));
     }
     return obj;
   },
@@ -369,7 +402,7 @@ export const MsgTriggerStrategies = {
     message.sender = object.sender ?? "";
     message.ids = object.ids?.map((e) => e) || [];
     message.inputs = object.inputs?.map((e) => e) || [];
-    message.fis_requests = object.fis_requests?.map((e) => FISQueryRequest.fromPartial(e)) || [];
+    message.queries = object.queries?.map((e) => FISQueryRequest.fromPartial(e)) || [];
     return message;
   },
 };

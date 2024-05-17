@@ -9,6 +9,39 @@ import _m0 from "protobufjs/minimal";
 import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstruction } from "../../astromesh/v1beta1/tx";
 
+export enum StrategyType {
+  GENERIC = 0,
+  INTENT_SOLVER = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function strategyTypeFromJSON(object: any): StrategyType {
+  switch (object) {
+    case 0:
+    case "GENERIC":
+      return StrategyType.GENERIC;
+    case 1:
+    case "INTENT_SOLVER":
+      return StrategyType.INTENT_SOLVER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return StrategyType.UNRECOGNIZED;
+  }
+}
+
+export function strategyTypeToJSON(object: StrategyType): string {
+  switch (object) {
+    case StrategyType.GENERIC:
+      return "GENERIC";
+    case StrategyType.INTENT_SOLVER:
+      return "INTENT_SOLVER";
+    case StrategyType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface Strategy {
   id: Uint8Array;
   code_checksum: Uint8Array;
@@ -18,6 +51,8 @@ export interface Strategy {
     | undefined;
   /** query hash stores hash(query), so that msg server don't need to calculate all the time */
   query_hash: Uint8Array;
+  type: StrategyType;
+  description: string;
 }
 
 export interface StrategyInput {
@@ -40,6 +75,8 @@ function createBaseStrategy(): Strategy {
     owner: "",
     query: undefined,
     query_hash: new Uint8Array(0),
+    type: 0,
+    description: "",
   };
 }
 
@@ -61,6 +98,12 @@ export const Strategy = {
     }
     if (message.query_hash.length !== 0) {
       writer.uint32(42).bytes(message.query_hash);
+    }
+    if (message.type !== 0) {
+      writer.uint32(48).int32(message.type);
+    }
+    if (message.description !== "") {
+      writer.uint32(58).string(message.description);
     }
     return writer;
   },
@@ -107,6 +150,20 @@ export const Strategy = {
 
           message.query_hash = reader.bytes();
           continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.type = reader.int32() as any;
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -123,6 +180,8 @@ export const Strategy = {
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
       query_hash: isSet(object.query_hash) ? bytesFromBase64(object.query_hash) : new Uint8Array(0),
+      type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
+      description: isSet(object.description) ? globalThis.String(object.description) : "",
     };
   },
 
@@ -143,6 +202,12 @@ export const Strategy = {
     if (message.query_hash !== undefined) {
       obj.query_hash = base64FromBytes(message.query_hash);
     }
+    if (message.type !== undefined) {
+      obj.type = strategyTypeToJSON(message.type);
+    }
+    if (message.description !== undefined) {
+      obj.description = message.description;
+    }
     return obj;
   },
 
@@ -158,6 +223,8 @@ export const Strategy = {
       ? FISQueryRequest.fromPartial(object.query)
       : undefined;
     message.query_hash = object.query_hash ?? new Uint8Array(0);
+    message.type = object.type ?? 0;
+    message.description = object.description ?? "";
     return message;
   },
 };

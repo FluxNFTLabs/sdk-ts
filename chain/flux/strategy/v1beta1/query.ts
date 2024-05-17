@@ -8,28 +8,30 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
+import { Strategy } from "./strategy";
 
-export interface QueryFoo {
+export interface ListStrategyRequest {
 }
 
-export interface QueryFooResponse {
+export interface ListStrategyResponse {
+  strategies: Strategy[];
 }
 
-function createBaseQueryFoo(): QueryFoo {
+function createBaseListStrategyRequest(): ListStrategyRequest {
   return {};
 }
 
-export const QueryFoo = {
-  $type: "flux.strategy.v1beta1.QueryFoo" as const,
+export const ListStrategyRequest = {
+  $type: "flux.strategy.v1beta1.ListStrategyRequest" as const,
 
-  encode(_: QueryFoo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(_: ListStrategyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFoo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListStrategyRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFoo();
+    const message = createBaseListStrategyRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -42,42 +44,52 @@ export const QueryFoo = {
     return message;
   },
 
-  fromJSON(_: any): QueryFoo {
+  fromJSON(_: any): ListStrategyRequest {
     return {};
   },
 
-  toJSON(_: QueryFoo): unknown {
+  toJSON(_: ListStrategyRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create(base?: DeepPartial<QueryFoo>): QueryFoo {
-    return QueryFoo.fromPartial(base ?? {});
+  create(base?: DeepPartial<ListStrategyRequest>): ListStrategyRequest {
+    return ListStrategyRequest.fromPartial(base ?? {});
   },
-  fromPartial(_: DeepPartial<QueryFoo>): QueryFoo {
-    const message = createBaseQueryFoo();
+  fromPartial(_: DeepPartial<ListStrategyRequest>): ListStrategyRequest {
+    const message = createBaseListStrategyRequest();
     return message;
   },
 };
 
-function createBaseQueryFooResponse(): QueryFooResponse {
-  return {};
+function createBaseListStrategyResponse(): ListStrategyResponse {
+  return { strategies: [] };
 }
 
-export const QueryFooResponse = {
-  $type: "flux.strategy.v1beta1.QueryFooResponse" as const,
+export const ListStrategyResponse = {
+  $type: "flux.strategy.v1beta1.ListStrategyResponse" as const,
 
-  encode(_: QueryFooResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(message: ListStrategyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.strategies) {
+      Strategy.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryFooResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ListStrategyResponse {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryFooResponse();
+    const message = createBaseListStrategyResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.strategies.push(Strategy.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -87,26 +99,34 @@ export const QueryFooResponse = {
     return message;
   },
 
-  fromJSON(_: any): QueryFooResponse {
-    return {};
+  fromJSON(object: any): ListStrategyResponse {
+    return {
+      strategies: globalThis.Array.isArray(object?.strategies)
+        ? object.strategies.map((e: any) => Strategy.fromJSON(e))
+        : [],
+    };
   },
 
-  toJSON(_: QueryFooResponse): unknown {
+  toJSON(message: ListStrategyResponse): unknown {
     const obj: any = {};
+    if (message.strategies?.length) {
+      obj.strategies = message.strategies.map((e) => Strategy.toJSON(e));
+    }
     return obj;
   },
 
-  create(base?: DeepPartial<QueryFooResponse>): QueryFooResponse {
-    return QueryFooResponse.fromPartial(base ?? {});
+  create(base?: DeepPartial<ListStrategyResponse>): ListStrategyResponse {
+    return ListStrategyResponse.fromPartial(base ?? {});
   },
-  fromPartial(_: DeepPartial<QueryFooResponse>): QueryFooResponse {
-    const message = createBaseQueryFooResponse();
+  fromPartial(object: DeepPartial<ListStrategyResponse>): ListStrategyResponse {
+    const message = createBaseListStrategyResponse();
+    message.strategies = object.strategies?.map((e) => Strategy.fromPartial(e)) || [];
     return message;
   },
 };
 
 export interface Query {
-  Foo(request: DeepPartial<QueryFoo>, metadata?: grpc.Metadata): Promise<QueryFooResponse>;
+  ListStrategy(request: DeepPartial<ListStrategyRequest>, metadata?: grpc.Metadata): Promise<ListStrategyResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -114,29 +134,29 @@ export class QueryClientImpl implements Query {
 
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.Foo = this.Foo.bind(this);
+    this.ListStrategy = this.ListStrategy.bind(this);
   }
 
-  Foo(request: DeepPartial<QueryFoo>, metadata?: grpc.Metadata): Promise<QueryFooResponse> {
-    return this.rpc.unary(QueryFooDesc, QueryFoo.fromPartial(request), metadata);
+  ListStrategy(request: DeepPartial<ListStrategyRequest>, metadata?: grpc.Metadata): Promise<ListStrategyResponse> {
+    return this.rpc.unary(QueryListStrategyDesc, ListStrategyRequest.fromPartial(request), metadata);
   }
 }
 
 export const QueryDesc = { serviceName: "flux.strategy.v1beta1.Query" };
 
-export const QueryFooDesc: UnaryMethodDefinitionish = {
-  methodName: "Foo",
+export const QueryListStrategyDesc: UnaryMethodDefinitionish = {
+  methodName: "ListStrategy",
   service: QueryDesc,
   requestStream: false,
   responseStream: false,
   requestType: {
     serializeBinary() {
-      return QueryFoo.encode(this).finish();
+      return ListStrategyRequest.encode(this).finish();
     },
   } as any,
   responseType: {
     deserializeBinary(data: Uint8Array) {
-      const value = QueryFooResponse.decode(data);
+      const value = ListStrategyResponse.decode(data);
       return {
         ...value,
         toObject() {

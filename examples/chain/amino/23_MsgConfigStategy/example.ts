@@ -19,6 +19,7 @@ import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClie
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
 import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
+import { StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -54,7 +55,9 @@ const main = async () => {
     strategy: fs.readFileSync('plane_solver.wasm'),
     query: astromeshquery.FISQueryRequest.create({
       instructions: [],
-    })
+    }),
+    type: StrategyType.GENERIC,
+    description: 'astromesh transfer helper'
   }
 
   const msgAny: anytypes.Any = {

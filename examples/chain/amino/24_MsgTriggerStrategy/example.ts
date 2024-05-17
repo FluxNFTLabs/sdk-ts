@@ -49,7 +49,7 @@ const main = async () => {
     inputs: [
       Uint8Array.from(Buffer.from(`{"action":"deposit_equally","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","deposit_amount":"30"}`))
     ],
-    fis_requests: [
+    queries: [
       astromeshquery.FISQueryRequest.create({
         instructions: [{
         plane: Plane.COSMOS,

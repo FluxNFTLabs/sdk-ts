@@ -19,6 +19,7 @@ import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClie
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
 import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
+import { StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -51,18 +52,12 @@ const main = async () => {
     sender: senderAddr,
     config: strategytypes.Config.deploy,
     id: '',
-    strategy: fs.readFileSync('bank_strategy.wasm'),
+    strategy: fs.readFileSync('plane_solver.wasm'),
     query: astromeshquery.FISQueryRequest.create({
-      instructions: [{
-        plane: Plane.COSMOS,
-        action: astromeshquery.QueryAction.COSMOS_BANK_BALANCE,
-        address: new Uint8Array(),
-        input: [
-          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx,lux1kmmz47pr8h46wcyxw8h3k8s85x0ncykqp0xmgj')),
-          Uint8Array.from(Buffer.from('lux,lux')),
-        ],
-      }],
-    })
+      instructions: [],
+    }),
+    type: StrategyType.GENERIC,
+    description: 'astromesh transfer helper'
   }
 
   const msgAny: anytypes.Any = {

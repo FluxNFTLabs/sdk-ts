@@ -13,6 +13,8 @@ import * as ethcrypto from 'eth-crypto'
 import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClient'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
+import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
+import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -22,7 +24,7 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
     Uint8Array.from(
-      Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')
+      Buffer.from('741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544', 'hex')
     )
   )
   const senderPrivKey: ethsecp256k1.PrivKey = { key: wallet.getPrivateKey() }
@@ -41,13 +43,24 @@ const main = async () => {
   const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
-  console.log('sender addr:', senderAddr)
   const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    ids: ['2846b9a22623787805c8240a3267f2a3e3e59f14dcf942dcb6bfc6c2a008e2f4'],
+    ids: ['9eb83888b44a71f3a1630676aa1f3052deb142bb7661e64a71b7b77938088dd7'],
     inputs: [
-      Uint8Array.from(Buffer.from(`{"receivers":["lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","lux1kmmz47pr8h46wcyxw8h3k8s85x0ncykqp0xmgj"]}`))
+      Uint8Array.from(Buffer.from(`{"action":"deposit_equally","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","deposit_amount":"30"}`))
     ],
+    queries: [
+      astromeshquery.FISQueryRequest.create({
+        instructions: [{
+        plane: Plane.COSMOS,
+        action: astromeshquery.QueryAction.COSMOS_ASTROMESH_BALANCE,
+        address: new Uint8Array(),
+        input: [
+          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx')),
+          Uint8Array.from(Buffer.from('usdt')),
+        ],
+      }],
+    })],
   }
 
   const msgAny: anytypes.Any = {

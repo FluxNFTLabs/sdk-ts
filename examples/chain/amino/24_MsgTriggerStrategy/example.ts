@@ -13,6 +13,8 @@ import * as ethcrypto from 'eth-crypto'
 import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClient'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
+import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
+import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -41,13 +43,24 @@ const main = async () => {
   const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
-  console.log('sender addr:', senderAddr)
   const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    ids: ['b99c17fa9e440f028a6211831c92afcd3f7daca1fcca19d1f692f75d29e5b59a'],
+    ids: ['9eb83888b44a71f3a1630676aa1f3052deb142bb7661e64a71b7b77938088dd7'],
     inputs: [
-      Uint8Array.from(Buffer.from(`{"action":"deposit","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","deposit_amount":"30"}`))
+      Uint8Array.from(Buffer.from(`{"action":"deposit_equally","denom":"usdt","sender":"lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","deposit_amount":"30"}`))
     ],
+    fis_requests: [
+      astromeshquery.FISQueryRequest.create({
+        instructions: [{
+        plane: Plane.COSMOS,
+        action: astromeshquery.QueryAction.COSMOS_ASTROMESH_BALANCE,
+        address: new Uint8Array(),
+        input: [
+          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx')),
+          Uint8Array.from(Buffer.from('usdt')),
+        ],
+      }],
+    })],
   }
 
   const msgAny: anytypes.Any = {

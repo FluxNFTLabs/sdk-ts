@@ -28,7 +28,7 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
     Uint8Array.from(
-      Buffer.from('741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544', 'hex')
+      Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')
     )
   )
   const senderPrivKey: ethsecp256k1.PrivKey = { key: wallet.getPrivateKey() }
@@ -53,15 +53,7 @@ const main = async () => {
     id: '',
     strategy: fs.readFileSync('plane_solver.wasm'),
     query: astromeshquery.FISQueryRequest.create({
-      instructions: [{
-        plane: Plane.COSMOS,
-        action: astromeshquery.QueryAction.COSMOS_ASTROMESH_BALANCE,
-        address: new Uint8Array(),
-        input: [
-          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx')),
-          Uint8Array.from(Buffer.from('usdt')),
-        ],
-      }],
+      instructions: [],
     })
   }
 

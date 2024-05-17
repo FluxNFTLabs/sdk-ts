@@ -87,6 +87,11 @@ c2 22 1 40 -2 40 -3 0 -20 -10 -38 -21z"
 .icon {
   position: relative;
   border-radius: 50%;
+  z-index: 1;
+  svg {
+    position: relative;
+    z-index: 1;
+  }
 }
 .bg {
   position: absolute;
@@ -96,6 +101,6 @@ c2 22 1 40 -2 40 -3 0 -20 -10 -38 -21z"
   height: 90%;
   background: white;
   border-radius: 50%;
-  z-index: -1;
+  z-index: 0;
 }
 </style>

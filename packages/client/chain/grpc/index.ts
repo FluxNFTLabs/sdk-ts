@@ -1,3 +1,5 @@
+import exp from 'constants'
+
 export { ChainGrpcAuthQuery } from './ChainGrpcAuthQuery'
 export { ChainGrpcBankQuery } from './ChainGrpcBankQuery'
 export { ChainGrpcFnftQuery } from './ChainGrpcFnftQuery'
@@ -8,3 +10,4 @@ export { ChainGrpcStakingQuery } from './ChainGrpcStakingQuery'
 export { ChainGrpcEVMQuery } from './ChainGrpcEVMQuery'
 export { ChainGrpcCosmwasmWasmQuery } from './ChainGrpcCosmwasmWasmQuery'
 export { ChainGrpcSVMQuery } from './ChainGrpcSVMQuery'
+export { ChainGrpcStrategyQuery } from './ChainGrpcStrategyQuery'

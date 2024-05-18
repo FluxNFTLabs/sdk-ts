@@ -7,7 +7,10 @@ export interface SnackbarStoreType {
   color?: SnackbarColor
   show?: boolean
   createAt?: number
-  action?: any
+  action?: {
+    click: () => void
+    icon: string
+  }
 }
 export const useSnackbarStore = defineStore('SnackbarStore', () => {
   const store = ref<SnackbarStoreType>({
@@ -32,7 +35,7 @@ export const useSnackbarStore = defineStore('SnackbarStore', () => {
   const hide = () => {
     store.value = {
       ...store.value,
-      action: null,
+      action: undefined,
       show: false
     }
   }

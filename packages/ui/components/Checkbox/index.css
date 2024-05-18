@@ -9,7 +9,7 @@
 }
 
 .checkbox .checkbox__box {
-  @apply h-6 w-6 rounded-md flex items-center justify-center  border border-blueGray-dark-200 dark:border-blueGray-light-200;
+  @apply h-6 w-6 min-w-6 rounded-md flex items-center justify-center  border border-blueGray-dark-200 dark:border-blueGray-light-200;
   transition: all 0.3s ease;
 }
 .checkbox .checkbox__box svg {

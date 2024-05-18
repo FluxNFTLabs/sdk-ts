@@ -6,7 +6,8 @@ import {
   ChainGrpcTxService,
   ChainGrpcEVMQuery,
   ChainGrpcCosmwasmWasmQuery,
-  ChainGrpcSVMQuery
+  ChainGrpcSVMQuery,
+  ChainGrpcStrategyQuery
 } from './grpc'
 export class ChainGrpcClient {
   transaction: ChainGrpcTxService
@@ -17,6 +18,7 @@ export class ChainGrpcClient {
   evm: ChainGrpcEVMQuery
   cosmwasmWasm: ChainGrpcCosmwasmWasmQuery
   svm: ChainGrpcSVMQuery
+  strategy: ChainGrpcStrategyQuery
   constructor(endpoint: string) {
     this.transaction = new ChainGrpcTxService(endpoint)
     this.auth = new ChainGrpcAuthQuery(endpoint)
@@ -26,6 +28,7 @@ export class ChainGrpcClient {
     this.evm = new ChainGrpcEVMQuery(endpoint)
     this.cosmwasmWasm = new ChainGrpcCosmwasmWasmQuery(endpoint)
     this.svm = new ChainGrpcSVMQuery(endpoint)
+    this.strategy = new ChainGrpcStrategyQuery(endpoint)
   }
   changeEndpoint(endpoint: string) {
     this.transaction = new ChainGrpcTxService(endpoint)
@@ -36,5 +39,6 @@ export class ChainGrpcClient {
     this.evm = new ChainGrpcEVMQuery(endpoint)
     this.cosmwasmWasm = new ChainGrpcCosmwasmWasmQuery(endpoint)
     this.svm = new ChainGrpcSVMQuery(endpoint)
+    this.strategy = new ChainGrpcStrategyQuery(endpoint)
   }
 }

@@ -41,7 +41,7 @@ watchEffect(() => {
       <div class="snackbar_content">
         <slot />
       </div>
-      <div>
+      <div class="max-h-[100%] overflow-auto">
         <BaseButton size="sm icon ml-2" @click="hide">
           <span class="text-blueGray-900">
             <BaseIcons name="close" />

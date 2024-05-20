@@ -42,6 +42,44 @@ export function strategyTypeToJSON(object: StrategyType): string {
   }
 }
 
+export enum AccessType {
+  anyone = 0,
+  only_addresses = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function accessTypeFromJSON(object: any): AccessType {
+  switch (object) {
+    case 0:
+    case "anyone":
+      return AccessType.anyone;
+    case 1:
+    case "only_addresses":
+      return AccessType.only_addresses;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AccessType.UNRECOGNIZED;
+  }
+}
+
+export function accessTypeToJSON(object: AccessType): string {
+  switch (object) {
+    case AccessType.anyone:
+      return "anyone";
+    case AccessType.only_addresses:
+      return "only_addresses";
+    case AccessType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface PermissionConfig {
+  type: AccessType;
+  addresses: string[];
+}
+
 export interface Strategy {
   id: Uint8Array;
   code_checksum: Uint8Array;
@@ -53,6 +91,8 @@ export interface Strategy {
   query_hash: Uint8Array;
   type: StrategyType;
   description: string;
+  is_enabled: boolean;
+  trigger_permission: PermissionConfig | undefined;
 }
 
 export interface StrategyInput {
@@ -68,6 +108,84 @@ export interface StrategyOutput {
   instructions: FISInstruction[];
 }
 
+function createBasePermissionConfig(): PermissionConfig {
+  return { type: 0, addresses: [] };
+}
+
+export const PermissionConfig = {
+  $type: "flux.strategy.v1beta1.PermissionConfig" as const,
+
+  encode(message: PermissionConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.type !== 0) {
+      writer.uint32(8).int32(message.type);
+    }
+    for (const v of message.addresses) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PermissionConfig {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePermissionConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.type = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.addresses.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PermissionConfig {
+    return {
+      type: isSet(object.type) ? accessTypeFromJSON(object.type) : 0,
+      addresses: globalThis.Array.isArray(object?.addresses)
+        ? object.addresses.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: PermissionConfig): unknown {
+    const obj: any = {};
+    if (message.type !== undefined) {
+      obj.type = accessTypeToJSON(message.type);
+    }
+    if (message.addresses?.length) {
+      obj.addresses = message.addresses;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<PermissionConfig>): PermissionConfig {
+    return PermissionConfig.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<PermissionConfig>): PermissionConfig {
+    const message = createBasePermissionConfig();
+    message.type = object.type ?? 0;
+    message.addresses = object.addresses?.map((e) => e) || [];
+    return message;
+  },
+};
+
 function createBaseStrategy(): Strategy {
   return {
     id: new Uint8Array(0),
@@ -77,6 +195,8 @@ function createBaseStrategy(): Strategy {
     query_hash: new Uint8Array(0),
     type: 0,
     description: "",
+    is_enabled: false,
+    trigger_permission: undefined,
   };
 }
 
@@ -104,6 +224,12 @@ export const Strategy = {
     }
     if (message.description !== "") {
       writer.uint32(58).string(message.description);
+    }
+    if (message.is_enabled !== false) {
+      writer.uint32(64).bool(message.is_enabled);
+    }
+    if (message.trigger_permission !== undefined) {
+      PermissionConfig.encode(message.trigger_permission, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -164,6 +290,20 @@ export const Strategy = {
 
           message.description = reader.string();
           continue;
+        case 8:
+          if (tag !== 64) {
+            break;
+          }
+
+          message.is_enabled = reader.bool();
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.trigger_permission = PermissionConfig.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -182,6 +322,10 @@ export const Strategy = {
       query_hash: isSet(object.query_hash) ? bytesFromBase64(object.query_hash) : new Uint8Array(0),
       type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
+      is_enabled: isSet(object.is_enabled) ? globalThis.Boolean(object.is_enabled) : false,
+      trigger_permission: isSet(object.trigger_permission)
+        ? PermissionConfig.fromJSON(object.trigger_permission)
+        : undefined,
     };
   },
 
@@ -208,6 +352,12 @@ export const Strategy = {
     if (message.description !== undefined) {
       obj.description = message.description;
     }
+    if (message.is_enabled !== undefined) {
+      obj.is_enabled = message.is_enabled;
+    }
+    if (message.trigger_permission !== undefined) {
+      obj.trigger_permission = PermissionConfig.toJSON(message.trigger_permission);
+    }
     return obj;
   },
 
@@ -225,6 +375,10 @@ export const Strategy = {
     message.query_hash = object.query_hash ?? new Uint8Array(0);
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
+    message.is_enabled = object.is_enabled ?? false;
+    message.trigger_permission = (object.trigger_permission !== undefined && object.trigger_permission !== null)
+      ? PermissionConfig.fromPartial(object.trigger_permission)
+      : undefined;
     return message;
   },
 };

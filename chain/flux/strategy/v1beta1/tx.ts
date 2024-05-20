@@ -16,8 +16,8 @@ export enum Config {
   deploy = 0,
   update = 1,
   disable = 2,
-  enable = 4,
-  revoke = 5,
+  enable = 3,
+  revoke = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -32,10 +32,10 @@ export function configFromJSON(object: any): Config {
     case 2:
     case "disable":
       return Config.disable;
-    case 4:
+    case 3:
     case "enable":
       return Config.enable;
-    case 5:
+    case 4:
     case "revoke":
       return Config.revoke;
     case -1:

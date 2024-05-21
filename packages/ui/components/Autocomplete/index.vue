@@ -6,7 +6,7 @@ interface Suggestion {
 }
 const props = defineProps({
   suggestions: {
-    type: Array as any,
+    type: Array as () => Array<Suggestion>,
     required: true,
     default: () => []
   },
@@ -79,7 +79,7 @@ onMounted(() => {
 watch(
   () => props,
   (value) => {
-    if (props.value !== internalValue.value) {
+    if (props.value && props.value !== internalValue.value) {
       internalValue.value = props.value
     }
   },
@@ -122,6 +122,7 @@ watch(
         style="right: 0.5rem"
       />
     </div>
+
     <div
       v-if="show && _suggestions.length"
       class="list bg-blueGray-800 shadow-lg border border-blueGray-light-100 border-t-0 p-2 rounded-xl"

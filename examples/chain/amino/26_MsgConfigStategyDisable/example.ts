@@ -44,7 +44,7 @@ const main = async () => {
 
   const msg: strategytypes.MsgConfigStrategy = {
     sender: senderAddr,
-    config: strategytypes.Config.enable,
+    config: strategytypes.Config.disable,
     id: '52e119efac640d1698ed5369ca027e74591f5260d71b71435007d10ffdc44cc9',
     strategy: new Uint8Array(),
     query: undefined,

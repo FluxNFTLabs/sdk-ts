@@ -11,7 +11,7 @@ export class ChainGrpcBankQuery extends BaseGrpc {
       const request = bankQuery.QueryAllBalancesRequest.create({
         address: address,
         pagination: undefined,
-        resolve_denom: true
+        resolve_denom: false
       })
       let response = await this.retry(() => this.client.AllBalances(request))
       return response as bankQuery.QueryAllBalancesResponse

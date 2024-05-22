@@ -53,7 +53,7 @@ const main = async () => {
     query: astromeshquery.FISQueryRequest.create({
       instructions: [],
     }),
-    type: StrategyType.GENERIC,
+    type: StrategyType.INTENT_SOLVER,
     description: 'astromesh transfer intent solver',
     trigger_permission: undefined,
   }

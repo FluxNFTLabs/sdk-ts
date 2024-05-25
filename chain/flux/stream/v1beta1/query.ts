@@ -44,6 +44,9 @@ export enum Op {
   SvmExecute = 4000,
   /** BankUpdate - astromesh */
   BankUpdate = 5000,
+  /** StrategyDeploy - strategy */
+  StrategyDeploy = 6000,
+  StrategyUpdate = 6001,
   UNRECOGNIZED = -1,
 }
 
@@ -109,6 +112,12 @@ export function opFromJSON(object: any): Op {
     case 5000:
     case "BankUpdate":
       return Op.BankUpdate;
+    case 6000:
+    case "StrategyDeploy":
+      return Op.StrategyDeploy;
+    case 6001:
+    case "StrategyUpdate":
+      return Op.StrategyUpdate;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -158,6 +167,10 @@ export function opToJSON(object: Op): string {
       return "SvmExecute";
     case Op.BankUpdate:
       return "BankUpdate";
+    case Op.StrategyDeploy:
+      return "StrategyDeploy";
+    case Op.StrategyUpdate:
+      return "StrategyUpdate";
     case Op.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

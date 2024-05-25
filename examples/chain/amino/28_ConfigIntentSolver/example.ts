@@ -49,7 +49,7 @@ const main = async () => {
     sender: senderAddr,
     config: strategytypes.Config.deploy,
     id: '',
-    strategy: fs.readFileSync('plane_solver.wasm'),
+    strategy: fs.readFileSync('plane_util.wasm'),
     query: astromeshquery.FISQueryRequest.create({
       instructions: [],
     }),

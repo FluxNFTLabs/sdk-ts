@@ -10,13 +10,14 @@ import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
 import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstructionResponse } from "../../astromesh/v1beta1/tx";
-import { StrategyType, strategyTypeFromJSON, strategyTypeToJSON } from "./strategy";
+import { PermissionConfig, StrategyType, strategyTypeFromJSON, strategyTypeToJSON } from "./strategy";
 
 export enum Config {
   deploy = 0,
   update = 1,
   disable = 2,
-  revoke = 3,
+  enable = 3,
+  revoke = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -32,6 +33,9 @@ export function configFromJSON(object: any): Config {
     case "disable":
       return Config.disable;
     case 3:
+    case "enable":
+      return Config.enable;
+    case 4:
     case "revoke":
       return Config.revoke;
     case -1:
@@ -49,6 +53,8 @@ export function configToJSON(object: Config): string {
       return "update";
     case Config.disable:
       return "disable";
+    case Config.enable:
+      return "enable";
     case Config.revoke:
       return "revoke";
     case Config.UNRECOGNIZED:
@@ -65,6 +71,7 @@ export interface MsgConfigStrategy {
   query: FISQueryRequest | undefined;
   type: StrategyType;
   description: string;
+  trigger_permission: PermissionConfig | undefined;
 }
 
 export interface MsgConfigStrategyResponse {
@@ -88,7 +95,16 @@ export interface MsgTriggerStrategiesResponse {
 }
 
 function createBaseMsgConfigStrategy(): MsgConfigStrategy {
-  return { sender: "", config: 0, id: "", strategy: new Uint8Array(0), query: undefined, type: 0, description: "" };
+  return {
+    sender: "",
+    config: 0,
+    id: "",
+    strategy: new Uint8Array(0),
+    query: undefined,
+    type: 0,
+    description: "",
+    trigger_permission: undefined,
+  };
 }
 
 export const MsgConfigStrategy = {
@@ -115,6 +131,9 @@ export const MsgConfigStrategy = {
     }
     if (message.description !== "") {
       writer.uint32(58).string(message.description);
+    }
+    if (message.trigger_permission !== undefined) {
+      PermissionConfig.encode(message.trigger_permission, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -175,6 +194,13 @@ export const MsgConfigStrategy = {
 
           message.description = reader.string();
           continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.trigger_permission = PermissionConfig.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -193,6 +219,9 @@ export const MsgConfigStrategy = {
       query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
       type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
       description: isSet(object.description) ? globalThis.String(object.description) : "",
+      trigger_permission: isSet(object.trigger_permission)
+        ? PermissionConfig.fromJSON(object.trigger_permission)
+        : undefined,
     };
   },
 
@@ -219,6 +248,9 @@ export const MsgConfigStrategy = {
     if (message.description !== undefined) {
       obj.description = message.description;
     }
+    if (message.trigger_permission !== undefined) {
+      obj.trigger_permission = PermissionConfig.toJSON(message.trigger_permission);
+    }
     return obj;
   },
 
@@ -236,6 +268,9 @@ export const MsgConfigStrategy = {
       : undefined;
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
+    message.trigger_permission = (object.trigger_permission !== undefined && object.trigger_permission !== null)
+      ? PermissionConfig.fromPartial(object.trigger_permission)
+      : undefined;
     return message;
   },
 };

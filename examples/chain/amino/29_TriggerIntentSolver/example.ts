@@ -2,15 +2,10 @@ import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712'
 import { bech32 } from 'bech32'
-import * as fs from 'fs'
-import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport'
 import * as anytypes from '../../../../chain/google/protobuf/any'
 import * as chaintypes from '../../../../chain/flux/types/v1beta1/tx_ext'
 import * as strategytypes from '../../../../chain/flux/strategy/v1beta1/tx'
-import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
 import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
-import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
-import * as authservice from '../../../../chain/cosmos/auth/v1beta1/query'
 import * as ethsecp256k1 from '../../../../chain/cosmos/crypto/ethsecp256k1/keys'
 import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as codectypemap from '../../../../chain/codec_type_map.json'
@@ -19,7 +14,7 @@ import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClie
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
 import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
-import { StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
+import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -29,7 +24,7 @@ const main = async () => {
   // init accounts
   const wallet = ethwallet.Wallet.fromPrivateKey(
     Uint8Array.from(
-      Buffer.from('88CBEAD91AEE890D27BF06E003ADE3D4E952427E88F88D31D61D3EF5E5D54305', 'hex')
+      Buffer.from('741de4f8988ea941d3ff0287911ca4074e62b7d45c991a51186455366f10b544', 'hex')
     )
   )
   const senderPrivKey: ethsecp256k1.PrivKey = { key: wallet.getPrivateKey() }
@@ -48,25 +43,33 @@ const main = async () => {
   const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
-  const msg: strategytypes.MsgConfigStrategy = {
+  const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    config: strategytypes.Config.deploy,
-    id: '',
-    strategy: fs.readFileSync('plane_solver.wasm'),
-    query: astromeshquery.FISQueryRequest.create({
-      instructions: [],
-    }),
-    type: StrategyType.GENERIC,
-    description: 'astromesh transfer helper'
+    ids: ['f03be7c54c3b01dfa36118ef104ae8c4fcd82c32cac6e6d0d23d832aa207bddb'],
+    inputs: [
+      Uint8Array.from(Buffer.from(`{"deposit_equally":{"denom":"usdt","amount":"30000000"}}`))
+    ],
+    queries: [
+      astromeshquery.FISQueryRequest.create({
+        instructions: [{
+        plane: Plane.COSMOS,
+        action: astromeshquery.QueryAction.COSMOS_ASTROMESH_BALANCE,
+        address: new Uint8Array(),
+        input: [
+          Uint8Array.from(Buffer.from('lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx')),
+          Uint8Array.from(Buffer.from('usdt')),
+        ],
+      }],
+    })],
   }
 
   const msgAny: anytypes.Any = {
-    type_url: `/${strategytypes.MsgConfigStrategy.$type}`,
-    value: strategytypes.MsgConfigStrategy.encode(msg).finish()
+    type_url: `/${strategytypes.MsgTriggerStrategies.$type}`,
+    value: strategytypes.MsgTriggerStrategies.encode(msg).finish()
   }
   const msgJSON = {
-    type: codectypemap[`/${strategytypes.MsgConfigStrategy.$type}`],
-    value: strategytypes.MsgConfigStrategy.toJSON(msg)
+    type: codectypemap[`/${strategytypes.MsgTriggerStrategies.$type}`],
+    value: strategytypes.MsgTriggerStrategies.toJSON(msg)
   }
 
   // prep tx data
@@ -80,7 +83,7 @@ const main = async () => {
 
   // Simulate to estimate gas
   let simulateRes = await simulate(txClient, txBody, [senderAccSeq])
-  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 1.5)
+  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 2.0)
   // assign gas and other info to get real tx and broadcast
   const authInfo: txtypes.AuthInfo = {
     signer_infos: [

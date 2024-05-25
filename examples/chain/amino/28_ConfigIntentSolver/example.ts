@@ -2,18 +2,21 @@ import * as ethwallet from '@ethereumjs/wallet'
 import * as ethutil from '@ethereumjs/util'
 import { getMessage } from 'eip-712'
 import { bech32 } from 'bech32'
+import * as fs from 'fs'
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport'
 import * as anytypes from '../../../../chain/google/protobuf/any'
 import * as chaintypes from '../../../../chain/flux/types/v1beta1/tx_ext'
 import * as strategytypes from '../../../../chain/flux/strategy/v1beta1/tx'
+import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
 import * as txtypes from '../../../../chain/cosmos/tx/v1beta1/tx'
 import * as ethsecp256k1 from '../../../../chain/cosmos/crypto/ethsecp256k1/keys'
 import * as signingtypes from '../../../../chain/cosmos/tx/signing/v1beta1/signing'
 import * as codectypemap from '../../../../chain/codec_type_map.json'
 import * as ethcrypto from 'eth-crypto'
-import * as astromeshtypes from '../../../../chain/flux/astromesh/v1beta1/query'
 import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClient'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
+import { StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -42,31 +45,32 @@ const main = async () => {
   const senderAccNum = senderInfo.info!.account_number!
   const senderAccSeq = senderInfo.info!.sequence!
 
-  console.log('sender addr:', senderAddr)
-  const msg: strategytypes.MsgTriggerStrategies = {
+  const msg: strategytypes.MsgConfigStrategy = {
     sender: senderAddr,
-    ids: ['52e119efac640d1698ed5369ca027e74591f5260d71b71435007d10ffdc44cc9'],
-    inputs: [
-      Uint8Array.from(Buffer.from(`{"receivers":["lux1jcltmuhplrdcwp7stlr4hlhlhgd4htqhu86cqx","lux1kmmz47pr8h46wcyxw8h3k8s85x0ncykqp0xmgj"]}`))
-    ],
-    queries: [astromeshtypes.FISQueryRequest.create({
+    config: strategytypes.Config.deploy,
+    id: '',
+    strategy: fs.readFileSync('plane_util.wasm'),
+    query: astromeshquery.FISQueryRequest.create({
       instructions: [],
-    })],
+    }),
+    type: StrategyType.INTENT_SOLVER,
+    description: 'astromesh transfer intent solver',
+    trigger_permission: undefined,
   }
 
   const msgAny: anytypes.Any = {
-    type_url: `/${strategytypes.MsgTriggerStrategies.$type}`,
-    value: strategytypes.MsgTriggerStrategies.encode(msg).finish()
+    type_url: `/${strategytypes.MsgConfigStrategy.$type}`,
+    value: strategytypes.MsgConfigStrategy.encode(msg).finish()
   }
   const msgJSON = {
-    type: codectypemap[`/${strategytypes.MsgTriggerStrategies.$type}`],
-    value: strategytypes.MsgTriggerStrategies.toJSON(msg)
+    type: codectypemap[`/${strategytypes.MsgConfigStrategy.$type}`],
+    value: strategytypes.MsgConfigStrategy.toJSON(msg)
   }
 
   // prep tx data
   const txBody: txtypes.TxBody = {
     messages: [msgAny],
-    memo: 'abc',
+    memo: '',
     timeout_height: '119000',
     extension_options: [],
     non_critical_extension_options: []
@@ -74,7 +78,7 @@ const main = async () => {
 
   // Simulate to estimate gas
   let simulateRes = await simulate(txClient, txBody, [senderAccSeq])
-  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 2.0)
+  let gasLimit = Math.ceil(Number(simulateRes?.gas_info?.gas_used) * 1.5)
   // assign gas and other info to get real tx and broadcast
   const authInfo: txtypes.AuthInfo = {
     signer_infos: [

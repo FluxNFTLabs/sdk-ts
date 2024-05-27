@@ -87,7 +87,10 @@ export interface Strategy {
   query:
     | FISQueryRequest
     | undefined;
-  /** query hash stores hash(query), so that msg server don't need to calculate all the time */
+  /**
+   * query hash stores hash(query), so that msg server don't need to calculate
+   * all the time
+   */
   query_hash: Uint8Array;
   is_enabled: boolean;
   trigger_permission: PermissionConfig | undefined;
@@ -135,11 +138,19 @@ export interface Schema {
 }
 
 export interface StrategyMetadata {
+  /** Strategy name */
   name: string;
+  /** Description, meaningful for strategy/intent's usage */
   description: string;
+  /** URL of the logo, owner should host their own logo file */
   logo: string;
+  /** Strategy website for user references or documentations */
+  website: string;
+  /** Strategy type */
   type: StrategyType;
+  /** Meaningful tags for searching, categorizing */
   tags: string[];
+  /** Strategy schema, usually used for intent's instructions display on FE */
   schema: Schema | undefined;
 }
 
@@ -1015,7 +1026,7 @@ export const Schema = {
 };
 
 function createBaseStrategyMetadata(): StrategyMetadata {
-  return { name: "", description: "", logo: "", type: 0, tags: [], schema: undefined };
+  return { name: "", description: "", logo: "", website: "", type: 0, tags: [], schema: undefined };
 }
 
 export const StrategyMetadata = {
@@ -1031,14 +1042,17 @@ export const StrategyMetadata = {
     if (message.logo !== "") {
       writer.uint32(26).string(message.logo);
     }
+    if (message.website !== "") {
+      writer.uint32(34).string(message.website);
+    }
     if (message.type !== 0) {
-      writer.uint32(32).int32(message.type);
+      writer.uint32(40).int32(message.type);
     }
     for (const v of message.tags) {
-      writer.uint32(42).string(v!);
+      writer.uint32(50).string(v!);
     }
     if (message.schema !== undefined) {
-      Schema.encode(message.schema, writer.uint32(50).fork()).ldelim();
+      Schema.encode(message.schema, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -1072,21 +1086,28 @@ export const StrategyMetadata = {
           message.logo = reader.string();
           continue;
         case 4:
-          if (tag !== 32) {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.website = reader.string();
+          continue;
+        case 5:
+          if (tag !== 40) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
-        case 5:
-          if (tag !== 42) {
+        case 6:
+          if (tag !== 50) {
             break;
           }
 
           message.tags.push(reader.string());
           continue;
-        case 6:
-          if (tag !== 50) {
+        case 7:
+          if (tag !== 58) {
             break;
           }
 
@@ -1106,6 +1127,7 @@ export const StrategyMetadata = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       logo: isSet(object.logo) ? globalThis.String(object.logo) : "",
+      website: isSet(object.website) ? globalThis.String(object.website) : "",
       type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
       tags: globalThis.Array.isArray(object?.tags) ? object.tags.map((e: any) => globalThis.String(e)) : [],
       schema: isSet(object.schema) ? Schema.fromJSON(object.schema) : undefined,
@@ -1122,6 +1144,9 @@ export const StrategyMetadata = {
     }
     if (message.logo !== undefined) {
       obj.logo = message.logo;
+    }
+    if (message.website !== undefined) {
+      obj.website = message.website;
     }
     if (message.type !== undefined) {
       obj.type = strategyTypeToJSON(message.type);
@@ -1143,6 +1168,7 @@ export const StrategyMetadata = {
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     message.logo = object.logo ?? "";
+    message.website = object.website ?? "";
     message.type = object.type ?? 0;
     message.tags = object.tags?.map((e) => e) || [];
     message.schema = (object.schema !== undefined && object.schema !== null)

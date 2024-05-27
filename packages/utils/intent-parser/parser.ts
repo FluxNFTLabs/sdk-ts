@@ -1,7 +1,7 @@
-import { FISQueryInstruction, FISQueryRequest, queryActionFromJSON } from "../chain/flux/astromesh/v1beta1/query";
-import { Plane, planeFromJSON, planeToJSON } from "../chain/flux/astromesh/v1beta1/tx";
-import { Schema, SchemaFISQuery, SchemaPrompt, StrategyMetadata } from "../chain/flux/strategy/v1beta1/strategy";
-import { MsgTriggerStrategies } from "../chain/flux/strategy/v1beta1/tx";
+import { FISQueryInstruction, FISQueryRequest, queryActionFromJSON } from "../../../chain/flux/astromesh/v1beta1/query";
+import { Plane, planeFromJSON, planeToJSON } from "../../../chain/flux/astromesh/v1beta1/tx";
+import { Schema, SchemaFISQuery, SchemaPrompt, StrategyMetadata } from "../../../chain/flux/strategy/v1beta1/strategy";
+import { MsgTriggerStrategies } from "../../../chain/flux/strategy/v1beta1/tx";
 
 function replacePlaceholders(template, values) {
     return template.replace(/\${(\w+)}/g, (_, key: string) => values[key] || '');

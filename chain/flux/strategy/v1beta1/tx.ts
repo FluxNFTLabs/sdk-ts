@@ -10,7 +10,7 @@ import { BrowserHeaders } from "browser-headers";
 import _m0 from "protobufjs/minimal";
 import { FISQueryRequest } from "../../astromesh/v1beta1/query";
 import { FISInstructionResponse } from "../../astromesh/v1beta1/tx";
-import { PermissionConfig, StrategyType, strategyTypeFromJSON, strategyTypeToJSON } from "./strategy";
+import { PermissionConfig, StrategyMetadata } from "./strategy";
 
 export enum Config {
   deploy = 0,
@@ -69,9 +69,8 @@ export interface MsgConfigStrategy {
   id: string;
   strategy: Uint8Array;
   query: FISQueryRequest | undefined;
-  type: StrategyType;
-  description: string;
   trigger_permission: PermissionConfig | undefined;
+  metadata: StrategyMetadata | undefined;
 }
 
 export interface MsgConfigStrategyResponse {
@@ -101,9 +100,8 @@ function createBaseMsgConfigStrategy(): MsgConfigStrategy {
     id: "",
     strategy: new Uint8Array(0),
     query: undefined,
-    type: 0,
-    description: "",
     trigger_permission: undefined,
+    metadata: undefined,
   };
 }
 
@@ -126,14 +124,11 @@ export const MsgConfigStrategy = {
     if (message.query !== undefined) {
       FISQueryRequest.encode(message.query, writer.uint32(42).fork()).ldelim();
     }
-    if (message.type !== 0) {
-      writer.uint32(48).int32(message.type);
-    }
-    if (message.description !== "") {
-      writer.uint32(58).string(message.description);
-    }
     if (message.trigger_permission !== undefined) {
-      PermissionConfig.encode(message.trigger_permission, writer.uint32(66).fork()).ldelim();
+      PermissionConfig.encode(message.trigger_permission, writer.uint32(50).fork()).ldelim();
+    }
+    if (message.metadata !== undefined) {
+      StrategyMetadata.encode(message.metadata, writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -181,25 +176,18 @@ export const MsgConfigStrategy = {
           message.query = FISQueryRequest.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag !== 48) {
+          if (tag !== 50) {
             break;
           }
 
-          message.type = reader.int32() as any;
+          message.trigger_permission = PermissionConfig.decode(reader, reader.uint32());
           continue;
         case 7:
           if (tag !== 58) {
             break;
           }
 
-          message.description = reader.string();
-          continue;
-        case 8:
-          if (tag !== 66) {
-            break;
-          }
-
-          message.trigger_permission = PermissionConfig.decode(reader, reader.uint32());
+          message.metadata = StrategyMetadata.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -217,11 +205,10 @@ export const MsgConfigStrategy = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       strategy: isSet(object.strategy) ? bytesFromBase64(object.strategy) : new Uint8Array(0),
       query: isSet(object.query) ? FISQueryRequest.fromJSON(object.query) : undefined,
-      type: isSet(object.type) ? strategyTypeFromJSON(object.type) : 0,
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
       trigger_permission: isSet(object.trigger_permission)
         ? PermissionConfig.fromJSON(object.trigger_permission)
         : undefined,
+      metadata: isSet(object.metadata) ? StrategyMetadata.fromJSON(object.metadata) : undefined,
     };
   },
 
@@ -242,14 +229,11 @@ export const MsgConfigStrategy = {
     if (message.query !== undefined) {
       obj.query = FISQueryRequest.toJSON(message.query);
     }
-    if (message.type !== undefined) {
-      obj.type = strategyTypeToJSON(message.type);
-    }
-    if (message.description !== undefined) {
-      obj.description = message.description;
-    }
     if (message.trigger_permission !== undefined) {
       obj.trigger_permission = PermissionConfig.toJSON(message.trigger_permission);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = StrategyMetadata.toJSON(message.metadata);
     }
     return obj;
   },
@@ -266,10 +250,11 @@ export const MsgConfigStrategy = {
     message.query = (object.query !== undefined && object.query !== null)
       ? FISQueryRequest.fromPartial(object.query)
       : undefined;
-    message.type = object.type ?? 0;
-    message.description = object.description ?? "";
     message.trigger_permission = (object.trigger_permission !== undefined && object.trigger_permission !== null)
       ? PermissionConfig.fromPartial(object.trigger_permission)
+      : undefined;
+    message.metadata = (object.metadata !== undefined && object.metadata !== null)
+      ? StrategyMetadata.fromPartial(object.metadata)
       : undefined;
     return message;
   },

@@ -16,7 +16,8 @@ import * as ethcrypto from 'eth-crypto'
 import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClient'
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
-import { StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
+import { StrategyType, StrategyMetadata, SchemaFISQuery } from '../../../../chain/flux/strategy/v1beta1/strategy'
+import { Schema } from '../../../../chain/flux/strategy/v1beta1/strategy'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -53,9 +54,37 @@ const main = async () => {
     query: astromeshquery.FISQueryRequest.create({
       instructions: [],
     }),
-    type: StrategyType.INTENT_SOLVER,
-    description: 'astromesh transfer intent solver',
     trigger_permission: undefined,
+    metadata: StrategyMetadata.create({
+      name: 'intent solver',
+      type: StrategyType.GENERIC,
+      schema: JSON.stringify(Schema.toJSON({
+        groups: [
+          {
+            name: 'transfer helper',
+            prompts: {
+              'withdraw_all_planes': {
+                template: 'withdraw ${denom:string} from planes to cosmos',
+                query: SchemaFISQuery.create({
+                  instructions: [
+                    {
+                      plane: "COSMOS",
+                      action: "COSMOS_ASTROMESH_BALANCE",
+                      address: null,
+                      input: [
+                        new Uint8Array(Buffer.from("${wallet}")),
+                        new Uint8Array(Buffer.from("${denom}")),
+                      ],
+                    },
+                  ]
+                }),
+                extensions: undefined,
+              }
+            },
+          }
+        ]
+      }))
+    })
   }
 
   const msgAny: anytypes.Any = {

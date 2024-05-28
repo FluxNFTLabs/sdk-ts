@@ -45,6 +45,8 @@ export interface MsgTransfer {
   timeout_timestamp: string;
   /** optional memo */
   memo: string;
+  /** tokens to be transferred */
+  tokens: Coin[];
 }
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
@@ -82,6 +84,7 @@ function createBaseMsgTransfer(): MsgTransfer {
     timeout_height: undefined,
     timeout_timestamp: "0",
     memo: "",
+    tokens: [],
   };
 }
 
@@ -112,6 +115,9 @@ export const MsgTransfer = {
     }
     if (message.memo !== "") {
       writer.uint32(66).string(message.memo);
+    }
+    for (const v of message.tokens) {
+      Coin.encode(v!, writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -179,6 +185,13 @@ export const MsgTransfer = {
 
           message.memo = reader.string();
           continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.tokens.push(Coin.decode(reader, reader.uint32()));
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -198,6 +211,7 @@ export const MsgTransfer = {
       timeout_height: isSet(object.timeout_height) ? Height.fromJSON(object.timeout_height) : undefined,
       timeout_timestamp: isSet(object.timeout_timestamp) ? globalThis.String(object.timeout_timestamp) : "0",
       memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
+      tokens: globalThis.Array.isArray(object?.tokens) ? object.tokens.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
@@ -227,6 +241,9 @@ export const MsgTransfer = {
     if (message.memo !== undefined) {
       obj.memo = message.memo;
     }
+    if (message.tokens?.length) {
+      obj.tokens = message.tokens.map((e) => Coin.toJSON(e));
+    }
     return obj;
   },
 
@@ -245,6 +262,7 @@ export const MsgTransfer = {
       : undefined;
     message.timeout_timestamp = object.timeout_timestamp ?? "0";
     message.memo = object.memo ?? "";
+    message.tokens = object.tokens?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
 };

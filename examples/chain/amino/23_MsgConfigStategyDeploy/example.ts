@@ -16,7 +16,7 @@ import { ChainGrpcClient } from '../../../../packages/client/chain/ChainGrpcClie
 import { getEIP712SignBytes } from '../../../../eip712/eip712'
 import { simulate } from '../../../../packages'
 import { Plane } from '../../../../chain/flux/astromesh/v1beta1/tx'
-import { Strategy, StrategyType } from '../../../../chain/flux/strategy/v1beta1/strategy'
+import { Strategy, StrategyType, StrategyMetadata } from '../../../../chain/flux/strategy/v1beta1/strategy'
 
 const main = async () => {
   const chainGrpcClient = new ChainGrpcClient('http://localhost:10337')
@@ -61,9 +61,11 @@ const main = async () => {
         ],
       }],
     }),
-    description: 'bank strategy helper',
-    type: StrategyType.GENERIC,
     trigger_permission: undefined,
+    metadata: StrategyMetadata.create({
+      name: 'strategy mm',
+      type: StrategyType.GENERIC,
+    })
   }
 
   const msgAny: anytypes.Any = {

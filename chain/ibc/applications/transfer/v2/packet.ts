@@ -25,6 +25,32 @@ export interface FungibleTokenPacketData {
   memo: string;
 }
 
+/**
+ * FungibleTokenPacketDataV2 defines a struct for the packet payload
+ * See FungibleTokenPacketDataV2 spec:
+ * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ */
+export interface FungibleTokenPacketDataV2 {
+  /** the tokens to be transferred */
+  tokens: Token[];
+  /** the sender address */
+  sender: string;
+  /** the recipient address on the destination chain */
+  receiver: string;
+  /** optional memo */
+  memo: string;
+}
+
+/** Token defines a struct which represents a token to be transferred. */
+export interface Token {
+  /** the base token denomination to be transferred */
+  denom: string;
+  /** the token amount to be transferred */
+  amount: string;
+  /** the trace of the token */
+  trace: string[];
+}
+
 function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
   return { denom: "", amount: "", sender: "", receiver: "", memo: "" };
 }
@@ -142,6 +168,203 @@ export const FungibleTokenPacketData = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     message.memo = object.memo ?? "";
+    return message;
+  },
+};
+
+function createBaseFungibleTokenPacketDataV2(): FungibleTokenPacketDataV2 {
+  return { tokens: [], sender: "", receiver: "", memo: "" };
+}
+
+export const FungibleTokenPacketDataV2 = {
+  $type: "ibc.applications.transfer.v2.FungibleTokenPacketDataV2" as const,
+
+  encode(message: FungibleTokenPacketDataV2, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    for (const v of message.tokens) {
+      Token.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.sender !== "") {
+      writer.uint32(18).string(message.sender);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(26).string(message.receiver);
+    }
+    if (message.memo !== "") {
+      writer.uint32(34).string(message.memo);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): FungibleTokenPacketDataV2 {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFungibleTokenPacketDataV2();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.tokens.push(Token.decode(reader, reader.uint32()));
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.sender = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.receiver = reader.string();
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.memo = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FungibleTokenPacketDataV2 {
+    return {
+      tokens: globalThis.Array.isArray(object?.tokens) ? object.tokens.map((e: any) => Token.fromJSON(e)) : [],
+      sender: isSet(object.sender) ? globalThis.String(object.sender) : "",
+      receiver: isSet(object.receiver) ? globalThis.String(object.receiver) : "",
+      memo: isSet(object.memo) ? globalThis.String(object.memo) : "",
+    };
+  },
+
+  toJSON(message: FungibleTokenPacketDataV2): unknown {
+    const obj: any = {};
+    if (message.tokens?.length) {
+      obj.tokens = message.tokens.map((e) => Token.toJSON(e));
+    }
+    if (message.sender !== undefined) {
+      obj.sender = message.sender;
+    }
+    if (message.receiver !== undefined) {
+      obj.receiver = message.receiver;
+    }
+    if (message.memo !== undefined) {
+      obj.memo = message.memo;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<FungibleTokenPacketDataV2>): FungibleTokenPacketDataV2 {
+    return FungibleTokenPacketDataV2.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<FungibleTokenPacketDataV2>): FungibleTokenPacketDataV2 {
+    const message = createBaseFungibleTokenPacketDataV2();
+    message.tokens = object.tokens?.map((e) => Token.fromPartial(e)) || [];
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    message.memo = object.memo ?? "";
+    return message;
+  },
+};
+
+function createBaseToken(): Token {
+  return { denom: "", amount: "", trace: [] };
+}
+
+export const Token = {
+  $type: "ibc.applications.transfer.v2.Token" as const,
+
+  encode(message: Token, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+    if (message.amount !== "") {
+      writer.uint32(18).string(message.amount);
+    }
+    for (const v of message.trace) {
+      writer.uint32(26).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Token {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseToken();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.denom = reader.string();
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.amount = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.trace.push(reader.string());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Token {
+    return {
+      denom: isSet(object.denom) ? globalThis.String(object.denom) : "",
+      amount: isSet(object.amount) ? globalThis.String(object.amount) : "",
+      trace: globalThis.Array.isArray(object?.trace) ? object.trace.map((e: any) => globalThis.String(e)) : [],
+    };
+  },
+
+  toJSON(message: Token): unknown {
+    const obj: any = {};
+    if (message.denom !== undefined) {
+      obj.denom = message.denom;
+    }
+    if (message.amount !== undefined) {
+      obj.amount = message.amount;
+    }
+    if (message.trace?.length) {
+      obj.trace = message.trace;
+    }
+    return obj;
+  },
+
+  create(base?: DeepPartial<Token>): Token {
+    return Token.fromPartial(base ?? {});
+  },
+  fromPartial(object: DeepPartial<Token>): Token {
+    const message = createBaseToken();
+    message.denom = object.denom ?? "";
+    message.amount = object.amount ?? "";
+    message.trace = object.trace?.map((e) => e) || [];
     return message;
   },
 };

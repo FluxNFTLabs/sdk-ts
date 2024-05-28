@@ -1391,8 +1391,8 @@ export interface Query {
    */
   Supply(request: DeepPartial<QuerySupplyRequest>, metadata?: grpc.Metadata): Promise<QuerySupplyResponse>;
   /**
-   * Holders queries single share holders from the given class, class id, address
-   * of ERC721.
+   * Holders queries single share holders from the given class, class id,
+   * address of ERC721.
    */
   Holder(request: DeepPartial<QueryHolderRequest>, metadata?: grpc.Metadata): Promise<QueryHolderResponse>;
   /**

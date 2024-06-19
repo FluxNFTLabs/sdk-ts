@@ -11,6 +11,10 @@ const props = defineProps({
   leaveTo: {
     type: String,
     default: 'left'
+  },
+  contentClass: {
+    type: String,
+    default: ''
   }
 })
 </script>
@@ -25,7 +29,7 @@ const props = defineProps({
     appear
   >
     <div v-show="isOpen" class="slider-container bg-inherit">
-      <div class="slider-content">
+      <div class="slider-content" :class="contentClass">
         <slot />
       </div>
     </div>

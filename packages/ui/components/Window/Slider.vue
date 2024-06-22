@@ -51,6 +51,7 @@ const props = defineProps({
 .slide-leave-active {
   transition: all 0.4s ease;
   opacity: 1;
+  z-index: 3;
   position: absolute !important;
 }
 

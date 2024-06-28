@@ -31,4 +31,15 @@ export class ChainGrpcBankQuery extends BaseGrpc {
       throw e
     }
   }
+  async getSupplyOf(denom: string): Promise<bankQuery.QuerySupplyOfResponse> {
+    try {
+      const request = bankQuery.QuerySupplyOfRequest.create({
+        denom: denom
+      })
+      let response = await this.retry(() => this.client.SupplyOf(request))
+      return response as bankQuery.QuerySupplyOfResponse
+    } catch (e) {
+      throw e
+    }
+  }
 }

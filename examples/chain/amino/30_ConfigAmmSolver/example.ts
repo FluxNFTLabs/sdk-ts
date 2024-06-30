@@ -49,14 +49,14 @@ const main = async () => {
     sender: senderAddr,
     config: strategytypes.Config.deploy,
     id: '',
-    strategy: fs.readFileSync('arbitrage_demo.wasm'),
+    strategy: fs.readFileSync('amm_solver.wasm'),
     query: astromeshquery.FISQueryRequest.create({
       instructions: [],
     }),
     trigger_permission: undefined,
     metadata: {
-      name: "arbitrage bot beta",
-      description: "Arbitrage bot beta version",
+      name: "Amm swap wizard",
+      description: "Abstracting out swaps and unleashing arbitrage opportunities. It supports basic swaps as well as arbitrage across pools of the same pair",
       logo: "",
       website: "https://www.astromesh.xyz",
       type: StrategyType.INTENT_SOLVER,

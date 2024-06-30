@@ -16,8 +16,10 @@ import { ChainGrpcTxService, getSvmAddressFromLux, simulate, toFluxSvmTransactio
 import { Plane, TxAction } from '../../../../chain/flux/astromesh/v1beta1/tx'
 import * as svmtx from '../../../../chain/flux/svm/v1beta1/tx'
 import * as astromeshquery from '../../../../chain/flux/astromesh/v1beta1/query'
+import * as astromeshtypes from '../../../../chain/flux/astromesh/v1beta1/tx'
 import * as web3 from '@solana/web3.js'
 import * as txservice from '../../../../chain/cosmos/tx/v1beta1/service'
+import { Coin } from '../../../../chain/cosmos/base/v1beta1/coin'
 
 async function broadcastMsg(
   txClient: ChainGrpcTxService,
@@ -143,9 +145,9 @@ const main = async () => {
   try {
     console.log(`checking if ${senderSvmAccount.toBase58()} is created or not...`)
     let res = await svmClient.account({address: senderSvmAccount.toString()})
-    console.log('res:', res)
+    console.log("sender svm account created!")
   } catch(e) {
-    if (!e.toString().contains("Account not existed")) {
+    if (!e.toString().includes("Account not existed")) {
       throw e
     }
     needCreateAccount = true
@@ -153,6 +155,8 @@ const main = async () => {
 
   // create account 
   if (needCreateAccount) {
+    console.log("creating sender svm account...")
+  
     let ix = web3.SystemProgram.createAccount({
       fromPubkey: senderSvmAccount,
       newAccountPubkey: senderSvmAccount,
@@ -179,18 +183,44 @@ const main = async () => {
     senderAccSeq++
   }
 
+  let arbitrageAmount = '100000000'
+  // transfer to svm
+  let transferSvmMsg = astromeshtypes.MsgAstroTransfer.create({
+    sender: senderAddr,
+    receiver: senderAddr,
+    src_plane: Plane.COSMOS,
+    dst_plane: Plane.SVM,
+    coin: {
+      amount: arbitrageAmount,
+      denom: 'usdt',
+    }
+  })
+
+  let transferSvmRes = await broadcastMsg(
+    txClient, 
+    senderPubkeyAny, 
+    senderAccNum, 
+    senderAccSeq, 
+    8000000, 
+    astromeshtypes.MsgAstroTransfer, 
+    transferSvmMsg,
+    senderPrivKey
+  )
+  console.log('transfer svm tx broadcast result:', transferSvmRes)
+  senderAccSeq++
+  
   const msg: strategytypes.MsgTriggerStrategies = {
     sender: senderAddr,
-    ids: ['35B219B9954E34E26B14907E37634C895471109482EF18083265F06A3B9A8616'],
+    ids: ['C707C128D260C536701D4A843A5194B66BDCB40A7D602445680AF2A53FDC70DF'],
     inputs: [
-      Uint8Array.from(Buffer.from(`{"arbitrage":{"pair":"btc-usdt","amount":"100000","min_profit":"1000000"}}`))
+      Uint8Array.from(Buffer.from(`{"arbitrage":{"pair":"eth-usdt","amount":"${arbitrageAmount}","min_profit":"500000"}}`))
     ],
     queries: [
       astromeshquery.FISQueryRequest.create({
           instructions: [{
           plane: Plane.WASM,
           action: astromeshquery.QueryAction.VM_QUERY,
-          address: Buffer.from(bech32.fromWords(bech32.decode('lux1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqhywrts').words)), 
+          address: Buffer.from(bech32.fromWords(bech32.decode('lux1aakfpghcanxtc45gpqlx8j3rq0zcpyf49qmhm9mdjrfx036h4z5sdltq0m').words)), 
           input: [
             Uint8Array.from(Buffer.from('{"pool":{}}')),
           ],
@@ -200,8 +230,9 @@ const main = async () => {
           action: astromeshquery.QueryAction.VM_QUERY,
           address: new Uint8Array(),
           input: [
-            new web3.PublicKey('9U5Lpfmc6u1rCRAfzGe883KnK5Avm76zX4te6sexvCEk').toBytes(),
-            new web3.PublicKey('UURmKznoUTh8Dt9wgyusq6u1ETuY8Zj79NFAtfQJ7HB').toBytes()
+            new web3.PublicKey('CP9w46ipnMBBQP2Nqg8DceobmnTFeb9Pri5W2RX1CiSV').toBytes(),
+            new web3.PublicKey('DCJQyrGYeHWocMxpBBWCSJEgtMFZXgwMuXxZnkrHtuvW').toBytes(),
+            new web3.PublicKey('GASMVGvEguNjicG1UhaTiYDPib4geFQBXjtbqAG1HPLH').toBytes(),
           ],
         }],
       }),

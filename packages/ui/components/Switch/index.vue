@@ -4,7 +4,8 @@ import { defineEmits } from 'vue'
 
 const props = defineProps({
   modelValue: Boolean,
-  label: String
+  label: String,
+  click: Function
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -18,6 +19,9 @@ watch(
 )
 
 function toggleSwitch() {
+  if (props.click) {
+    return props.click()
+  }
   const newValue = !isOn.value
   isOn.value = newValue
   emit('update:modelValue', newValue)
